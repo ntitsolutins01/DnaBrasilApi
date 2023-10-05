@@ -7,4 +7,5 @@ public class TipoLaudo : BaseAuditableEntity
     public int IdadeInicial { get; set; }
     public int IdadeFinal { get; set; }
     public int ScoreTotal { get; set; }
+    public bool Status  { get; set; } = true;
 }

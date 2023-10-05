@@ -10,15 +10,23 @@ public class TipoLaudoConfiguration : IEntityTypeConfiguration<TipoLaudo>
     {
         builder.Property(t => t.Nome)
             .HasMaxLength(50)
-            .IsRequired();
+            .IsRequired()
+            .HasColumnOrder(1);
         builder.Property(t => t.Descricao)
             .HasMaxLength(150)
-            .IsRequired();
+            .IsRequired()
+            .HasColumnOrder(2);
         builder.Property(t => t.IdadeInicial)
-            .IsRequired();
+            .IsRequired()
+            .HasColumnOrder(3);
         builder.Property(t => t.IdadeFinal)
-            .IsRequired();
+            .IsRequired()
+            .HasColumnOrder(4);
         builder.Property(t => t.ScoreTotal)
-            .IsRequired();
+            .IsRequired()
+            .HasColumnOrder(5);
+        builder.Property(t => t.Status)
+            .IsRequired()
+            .HasColumnOrder(6);
     }
 }
