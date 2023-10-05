@@ -15,6 +15,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<TodoItem> TodoItems => Set<TodoItem>();
     public DbSet<TipoLaudo> TipoLaudos => Set<TipoLaudo>();
     public DbSet<Serie> Series => Set<Serie>();
+    public DbSet<Local> Locais => Set<Local>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
