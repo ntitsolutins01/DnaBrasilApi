@@ -8,6 +8,7 @@ public interface IApplicationDbContext
     DbSet<TodoItem> TodoItems { get; }
     DbSet<TipoLaudo> TipoLaudos { get; }
     DbSet<Serie> Series { get; }
+    DbSet<Local> Locais { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }
