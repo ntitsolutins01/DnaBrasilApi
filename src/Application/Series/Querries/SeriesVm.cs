@@ -8,5 +8,5 @@ using DnaBrasil.Application.TipoLaudos.Queries.GetTipoLaudos;
 namespace DnaBrasil.Application.Series.Querries;
 public class SeriesVm
 {
-    public IReadOnlyCollection<SeriesDto> Lists { get; init; } = Array.Empty<SeriesDto>();
+    public IReadOnlyCollection<SerieDto> Lists { get; init; } = Array.Empty<SerieDto>();
 }
