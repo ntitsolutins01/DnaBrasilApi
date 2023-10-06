@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DnaBrasil.Infrastructure.Data.Configurations;
 
-public class SeriesConfiguration : IEntityTypeConfiguration<Serie>
+public class SerieConfiguration : IEntityTypeConfiguration<Serie>
 {
     public void Configure(EntityTypeBuilder<Serie> builder)
     {

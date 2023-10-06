@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 
 namespace DnaBrasil.Infrastructure.Data.Configurations;
-public class LocaisConfiguration : IEntityTypeConfiguration<Local>
+public class LocalConfiguration : IEntityTypeConfiguration<Local>
 {
     public void Configure(EntityTypeBuilder<Local> builder)
     {
@@ -18,11 +18,7 @@ public class LocaisConfiguration : IEntityTypeConfiguration<Local>
         builder.Property(t => t.Descricao)
             .HasMaxLength(150)
             .IsRequired();
-        builder.Property(t => t.EstadoId)
-            .HasMaxLength(150)
-            .IsRequired();
-        builder.Property(t => t.CidadeId)
-            .HasMaxLength(150)
+        builder.Property(t => t.IdMunicipio)
             .IsRequired();
     }
 }

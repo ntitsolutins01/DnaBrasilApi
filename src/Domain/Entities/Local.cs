@@ -9,6 +9,5 @@ public class Local : BaseAuditableEntity
 {
     public string? Nome { get; set; }
     public string? Descricao { get; set; }
-    public int EstadoId { get; set; }
-    public int CidadeId { get; set; }
+    public int IdMunicipio { get; set; }
 }
