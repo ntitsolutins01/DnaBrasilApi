@@ -11,6 +11,7 @@ public interface IApplicationDbContext
     DbSet<Estado> Estados { get; }
     DbSet<Municipio> Municipios { get; }
     DbSet<Localidade> Localidades { get; }
+    DbSet<Profissional> Profissionais { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }
