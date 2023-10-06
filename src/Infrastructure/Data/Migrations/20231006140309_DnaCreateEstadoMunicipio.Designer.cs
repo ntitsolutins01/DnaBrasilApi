@@ -4,6 +4,7 @@ using DnaBrasil.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DnaBrasil.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231006140309_DnaCreateEstadoMunicipio")]
+    partial class DnaCreateEstadoMunicipio
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,7 +60,7 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
                     b.ToTable("Estado");
                 });
 
-            modelBuilder.Entity("DnaBrasil.Domain.Entities.Localidade", b =>
+            modelBuilder.Entity("DnaBrasil.Domain.Entities.Local", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -76,28 +79,23 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
+                    b.Property<int>("IdMunicipio")
+                        .HasColumnType("int");
+
                     b.Property<DateTimeOffset>("LastModified")
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("MunicipioId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("MunicipioId");
-
-                    b.ToTable("Localidades");
+                    b.ToTable("Locais");
                 });
 
             modelBuilder.Entity("DnaBrasil.Domain.Entities.Municipio", b =>
@@ -118,6 +116,9 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("EstadoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdEstado")
                         .HasColumnType("int");
 
                     b.Property<DateTimeOffset>("LastModified")
@@ -499,15 +500,6 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
-                });
-
-            modelBuilder.Entity("DnaBrasil.Domain.Entities.Localidade", b =>
-                {
-                    b.HasOne("DnaBrasil.Domain.Entities.Municipio", "Municipio")
-                        .WithMany()
-                        .HasForeignKey("MunicipioId");
-
-                    b.Navigation("Municipio");
                 });
 
             modelBuilder.Entity("DnaBrasil.Domain.Entities.Municipio", b =>
