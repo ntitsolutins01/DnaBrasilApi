@@ -4,6 +4,7 @@ using DnaBrasil.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DnaBrasil.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231003200044_DnaCreateTipoLaudo")]
+    partial class DnaCreateTipoLaudo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,79 +24,6 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("DnaBrasil.Domain.Entities.Local", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTimeOffset>("Created")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Descricao")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
-
-                    b.Property<int>("IdMunicipio")
-                        .HasColumnType("int");
-
-                    b.Property<DateTimeOffset>("LastModified")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Locais");
-                });
-
-            modelBuilder.Entity("DnaBrasil.Domain.Entities.Serie", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTimeOffset>("Created")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Descricao")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
-
-                    b.Property<DateTimeOffset>("LastModified")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Series");
-                });
 
             modelBuilder.Entity("DnaBrasil.Domain.Entities.TipoLaudo", b =>
                 {
@@ -112,16 +42,13 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
                     b.Property<string>("Descricao")
                         .IsRequired()
                         .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)")
-                        .HasColumnOrder(2);
+                        .HasColumnType("nvarchar(150)");
 
                     b.Property<int>("IdadeFinal")
-                        .HasColumnType("int")
-                        .HasColumnOrder(4);
+                        .HasColumnType("int");
 
                     b.Property<int>("IdadeInicial")
-                        .HasColumnType("int")
-                        .HasColumnOrder(3);
+                        .HasColumnType("int");
 
                     b.Property<DateTimeOffset>("LastModified")
                         .HasColumnType("datetimeoffset");
@@ -132,16 +59,10 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
-                        .HasColumnOrder(1);
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("ScoreTotal")
-                        .HasColumnType("int")
-                        .HasColumnOrder(5);
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit")
-                        .HasColumnOrder(6);
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

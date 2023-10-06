@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DnaBrasil.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231003181843_dna-create-tipo-laudo")]
-    partial class dnacreatetipolaudo
+    [Migration("20231006000351_DnaUpdateLocal2")]
+    partial class DnaUpdateLocal2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("DnaBrasil.Domain.Entities.TipoLaudo", b =>
+            modelBuilder.Entity("DnaBrasil.Domain.Entities.Local", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -44,10 +44,7 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
-                    b.Property<int>("IdadeFinal")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdadeInicial")
+                    b.Property<int>("IdMunicipio")
                         .HasColumnType("int");
 
                     b.Property<DateTimeOffset>("LastModified")
@@ -61,8 +58,93 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("ScoreTotal")
+                    b.HasKey("Id");
+
+                    b.ToTable("Locais");
+                });
+
+            modelBuilder.Entity("DnaBrasil.Domain.Entities.Serie", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTimeOffset>("Created")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<DateTimeOffset>("LastModified")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Series");
+                });
+
+            modelBuilder.Entity("DnaBrasil.Domain.Entities.TipoLaudo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTimeOffset>("Created")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)")
+                        .HasColumnOrder(2);
+
+                    b.Property<int>("IdadeFinal")
+                        .HasColumnType("int")
+                        .HasColumnOrder(4);
+
+                    b.Property<int>("IdadeInicial")
+                        .HasColumnType("int")
+                        .HasColumnOrder(3);
+
+                    b.Property<DateTimeOffset>("LastModified")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnOrder(1);
+
+                    b.Property<int>("ScoreTotal")
+                        .HasColumnType("int")
+                        .HasColumnOrder(5);
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit")
+                        .HasColumnOrder(6);
 
                     b.HasKey("Id");
 
