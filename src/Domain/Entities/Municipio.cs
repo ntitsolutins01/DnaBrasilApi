@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace DnaBrasil.Domain.Entities;
 public class Municipio
 {
-    public int IdUf { get; set; }
+    public int IdEstado { get; set; }
+    public int Codigo { get; set; }
     public string? Nome { get; set; }
 }

@@ -8,14 +8,15 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 
 namespace DnaBrasil.Infrastructure.Data.Configurations;
-public class MunicipiosConfiguration : IEntityTypeConfiguration<Municipio>
+public class EstadoConfigurations : IEntityTypeConfiguration<Estado>
 {
-    public void Configure(EntityTypeBuilder<Municipio> builder)
+    public void Configure(EntityTypeBuilder<Estado> builder)
     {
-        builder.Property(t => t.Nome)
-            .HasMaxLength(50)
+        builder.Property(t => t.Sigla)
+            .HasMaxLength(2)
             .IsRequired();
-        builder.Property(t => t.IdUf)
+        builder.Property(t => t.Nome)
+            .HasMaxLength(150)
             .IsRequired();
     }
 }

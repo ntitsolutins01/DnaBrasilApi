@@ -6,20 +6,20 @@ using System.Threading.Tasks;
 using DnaBrasil.Domain.Entities;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
+using System.Reflection.Emit;
 
 namespace DnaBrasil.Infrastructure.Data.Configurations;
-public class EstadosConfigurations : IEntityTypeConfiguration<Estado>
+public class MunicipioConfiguration : IEntityTypeConfiguration<Municipio>
 {
-    public void Configure(EntityTypeBuilder<Estado> builder)
+    public void Configure(EntityTypeBuilder<Municipio> builder)
     {
-        builder.Property(t => t.Uf)
-            .HasMaxLength(50)
-            .IsRequired();
-        builder.Property(t => t.Sigla)
-            .HasMaxLength(2)
-            .IsRequired();
         builder.Property(t => t.Nome)
             .HasMaxLength(150)
+            .IsRequired();
+        builder.Property(t => t.IdEstado)
+            .IsRequired();
+        builder.Property(t => t.Codigo)
             .IsRequired();
     }
 }
