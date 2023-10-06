@@ -1,0 +1,2 @@
+﻿set identity_insert Profissionais on;
+insert into Profissionais(Id, Nome, Endereco, Email, Sexo, Cpf, Numero, [Status], DtNascimento, Created, LastModified) VALUES(0, 'nenhum', 'nenhum', 'nenhum@nenhum.com', 'M', '00000000000000', 0, 1, GETDATE(), GETDATE(), GETDATE());
