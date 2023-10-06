@@ -1,0 +1,16 @@
+﻿insert into Ambientes(Nome, [Status], Created, LastModified) values('Atletismo',0, GETDATE(), GETDATE());
+insert into Ambientes(Nome, [Status], Created, LastModified) values('Natação',0, GETDATE(), GETDATE());
+insert into Ambientes(Nome, [Status], Created, LastModified) values('Basquete',0, GETDATE(), GETDATE());
+insert into Ambientes(Nome, [Status], Created, LastModified) values('Futebol de Salão',0, GETDATE(), GETDATE());
+insert into Ambientes(Nome, [Status], Created, LastModified) values('Jiu-Jitsu',0, GETDATE(), GETDATE());
+insert into Ambientes(Nome, [Status], Created, LastModified) values('Futebol',0, GETDATE(), GETDATE());
+insert into Ambientes(Nome, [Status], Created, LastModified) values('Karatê',0, GETDATE(), GETDATE());
+insert into Ambientes(Nome, [Status], Created, LastModified) values('Vôlei',0, GETDATE(), GETDATE());
+insert into Ambientes(Nome, [Status], Created, LastModified) values('Ginástica Rítmica',0, GETDATE(), GETDATE());
+insert into Ambientes(Nome, [Status], Created, LastModified) values('Judô',0, GETDATE(), GETDATE());
+insert into Ambientes(Nome, [Status], Created, LastModified) values('Tênis',0, GETDATE(), GETDATE());
+insert into Ambientes(Nome, [Status], Created, LastModified) values('Oficina Profissionalizante',0, GETDATE(), GETDATE());
+insert into Ambientes(Nome, [Status], Created, LastModified) values('Saltos Ornamentais',0, GETDATE(), GETDATE());
+insert into Ambientes(Nome, [Status], Created, LastModified) values('Bocha',0, GETDATE(), GETDATE());
+insert into Ambientes(Nome, [Status], Created, LastModified) values('Ginástica Artística',0, GETDATE(), GETDATE());
+insert into Ambientes(Nome, [Status], Created, LastModified) values('Handebol',0, GETDATE(), GETDATE());

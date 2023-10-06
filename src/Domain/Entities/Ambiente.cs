@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DnaBrasil.Domain.Entities;
-public class Deficiencia : BaseAuditableEntity
+public class Ambiente : BaseAuditableEntity
 {
     public string? Nome { get; set; }
     public bool Status { get; set; }
