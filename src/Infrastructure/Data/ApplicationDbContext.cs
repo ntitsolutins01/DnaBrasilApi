@@ -18,6 +18,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<Estado> Estados => Set<Estado>();
     public DbSet<Municipio> Municipios => Set<Municipio>();
     public DbSet<Localidade> Localidades => Set<Localidade>();
+    public DbSet<Deficiencia> Deficiencias => Set<Deficiencia>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
