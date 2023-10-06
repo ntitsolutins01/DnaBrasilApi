@@ -23,6 +23,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<Ambiente> Ambientes => Set<Ambiente>();
     public DbSet<TalentoEsportivo> TalentoEsportivo => Set<TalentoEsportivo>();
     public DbSet<Saude> Saude => Set<Saude>();
+    public DbSet<QualidadeDeVida> QualidadeDeVida => Set<QualidadeDeVida>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
