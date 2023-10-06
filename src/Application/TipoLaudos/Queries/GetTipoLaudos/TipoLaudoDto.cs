@@ -5,11 +5,11 @@ namespace DnaBrasil.Application.TipoLaudos.Queries.GetTipoLaudos;
 public class TipoLaudoDto
 {
     public int Id { get; init; }
-    public string? Nome { get; set; }
-    public string? Descricao { get; set; }
-    public int IdadeInicial { get; set; }
-    public int IdadeFinal { get; set; }
-    public int ScoreTotal { get; set; }
+    public string? Nome { get; init; }
+    public string? Descricao { get; init; }
+    public int IdadeInicial { get; init; }
+    public int IdadeFinal { get; init; }
+    public int ScoreTotal { get; init; }
 
     private class Mapping : Profile
     {

@@ -34,8 +34,6 @@ public class CreateSeriesCommandHandler : IRequestHandler<CreateSeriesCommand, i
             Descricao = request.Descricao
         };
 
-        entity.AddDomainEvent(new SeriesCreatedEvent(entity));
-
         _context.Series.Add(entity);
 
         await _context.SaveChangesAsync(cancellationToken);

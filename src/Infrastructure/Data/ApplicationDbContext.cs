@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using DnaBrasil.Application.Common.Interfaces;
 using DnaBrasil.Domain.Entities;
 using DnaBrasil.Infrastructure.Identity;
@@ -15,7 +15,10 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<TodoItem> TodoItems => Set<TodoItem>();
     public DbSet<TipoLaudo> TipoLaudos => Set<TipoLaudo>();
     public DbSet<Serie> Series => Set<Serie>();
-    public DbSet<Local> Locais => Set<Local>();
+    public DbSet<Estado> Estados => Set<Estado>();
+    public DbSet<Municipio> Municipios => Set<Municipio>();
+    public DbSet<Localidade> Localidades => Set<Localidade>();
+    public DbSet<Deficiencia> Deficiencias => Set<Deficiencia>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

@@ -1,4 +1,4 @@
-﻿using DnaBrasil.Domain.Entities;
+using DnaBrasil.Domain.Entities;
 
 namespace DnaBrasil.Application.Common.Interfaces;
 
@@ -8,7 +8,10 @@ public interface IApplicationDbContext
     DbSet<TodoItem> TodoItems { get; }
     DbSet<TipoLaudo> TipoLaudos { get; }
     DbSet<Serie> Series { get; }
-    DbSet<Local> Locais { get; }
+    DbSet<Estado> Estados { get; }
+    DbSet<Municipio> Municipios { get; }
+    DbSet<Localidade> Localidades { get; }
+    DbSet<Deficiencia> Deficiencias { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

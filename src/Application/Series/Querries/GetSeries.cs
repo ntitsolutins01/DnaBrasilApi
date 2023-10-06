@@ -27,7 +27,7 @@ public class GetSeriesQueryHandler : IRequestHandler<GetSeriesQuery, SeriesVm>
         {
             Lists = await _context.Series
                 .AsNoTracking()
-                .ProjectTo<SeriesDto>(_mapper.ConfigurationProvider)
+                .ProjectTo<SerieDto>(_mapper.ConfigurationProvider)
                 .OrderBy(t => t.Id)
                 .ToListAsync(cancellationToken)
         };
