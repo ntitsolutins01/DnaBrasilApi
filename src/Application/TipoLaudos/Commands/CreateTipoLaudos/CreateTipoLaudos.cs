@@ -37,8 +37,6 @@ public class CreateTipoLaudosCommandHandler : IRequestHandler<CreateTipoLaudosCo
             ScoreTotal = request.ScoreTotal
         };
 
-        entity.AddDomainEvent(new TipoLaudosCreatedEvent(entity));
-
         _context.TipoLaudos.Add(entity);
 
         await _context.SaveChangesAsync(cancellationToken);

@@ -1,17 +1,17 @@
 ﻿using DnaBrasil.Domain.Entities;
 
 namespace DnaBrasil.Application.Series.Querries;
-public class SeriesDto
+public class SerieDto
 {
     public int Id { get; init; }
-    public string? Nome { get; set; }
-    public string? Descricao { get; set; }
+    public string? Nome { get; init; }
+    public string? Descricao { get; init; }
 
     private class Mapping : Profile
     {
         public Mapping()
         {
-            CreateMap<Serie, SeriesDto>();
+            CreateMap<Serie, SerieDto>();
         }
     }
 }
