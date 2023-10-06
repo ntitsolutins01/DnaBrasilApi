@@ -1,33 +1,28 @@
-
-SET IDENTITY_INSERT [dbo].[Estado] ON;
-
-
-
-
-INSERT INTO [dbo].[Estado](Id,[Nome],[Sigla],[Created],[CreatedBy] ,[LastModified],[LastModifiedBy])values('35','São Paulo','SP', getdate(), 'ntitsolutions01@gmail.com', getdate(), null);
-INSERT INTO [dbo].[Estado](Id,[Nome],[Sigla],[Created],[CreatedBy] ,[LastModified],[LastModifiedBy])values('41','Paraná','PR', getdate(), 'ntitsolutions01@gmail.com', getdate(), null);
-INSERT INTO [dbo].[Estado](Id,[Nome],[Sigla],[Created],[CreatedBy] ,[LastModified],[LastModifiedBy])values('42','Santa Catarina','SC', getdate(), 'ntitsolutions01@gmail.com', getdate(), null);
-INSERT INTO [dbo].[Estado](Id,[Nome],[Sigla],[Created],[CreatedBy] ,[LastModified],[LastModifiedBy])values('43','Rio Grande do Sul','RS', getdate(), 'ntitsolutions01@gmail.com', getdate(), null);
-INSERT INTO [dbo].[Estado](Id,[Nome],[Sigla],[Created],[CreatedBy] ,[LastModified],[LastModifiedBy])values('50','Mato Grosso do Sul','MS', getdate(), 'ntitsolutions01@gmail.com', getdate(), null);
-INSERT INTO [dbo].[Estado](Id,[Nome],[Sigla],[Created],[CreatedBy] ,[LastModified],[LastModifiedBy])values('11','Rondônia','RO', getdate(), 'ntitsolutions01@gmail.com', getdate(), null);
-INSERT INTO [dbo].[Estado](Id,[Nome],[Sigla],[Created],[CreatedBy] ,[LastModified],[LastModifiedBy])values('12','Acre','AC', getdate(), 'ntitsolutions01@gmail.com', getdate(), null);
-INSERT INTO [dbo].[Estado](Id,[Nome],[Sigla],[Created],[CreatedBy] ,[LastModified],[LastModifiedBy])values('13','Amazonas','AM', getdate(), 'ntitsolutions01@gmail.com', getdate(), null);
-INSERT INTO [dbo].[Estado](Id,[Nome],[Sigla],[Created],[CreatedBy] ,[LastModified],[LastModifiedBy])values('14','Roraima','RR', getdate(), 'ntitsolutions01@gmail.com', getdate(), null);
-INSERT INTO [dbo].[Estado](Id,[Nome],[Sigla],[Created],[CreatedBy] ,[LastModified],[LastModifiedBy])values('15','Pará','PA', getdate(), 'ntitsolutions01@gmail.com', getdate(), null);
-INSERT INTO [dbo].[Estado](Id,[Nome],[Sigla],[Created],[CreatedBy] ,[LastModified],[LastModifiedBy])values('16','Amapá','AP', getdate(), 'ntitsolutions01@gmail.com', getdate(), null);
-INSERT INTO [dbo].[Estado](Id,[Nome],[Sigla],[Created],[CreatedBy] ,[LastModified],[LastModifiedBy])values('17','Tocantins','TO', getdate(), 'ntitsolutions01@gmail.com', getdate(), null);
-INSERT INTO [dbo].[Estado](Id,[Nome],[Sigla],[Created],[CreatedBy] ,[LastModified],[LastModifiedBy])values('21','Maranhão','MA', getdate(), 'ntitsolutions01@gmail.com', getdate(), null);
-INSERT INTO [dbo].[Estado](Id,[Nome],[Sigla],[Created],[CreatedBy] ,[LastModified],[LastModifiedBy])values('24','Rio Grande do Norte','RN', getdate(), 'ntitsolutions01@gmail.com', getdate(), null);
-INSERT INTO [dbo].[Estado](Id,[Nome],[Sigla],[Created],[CreatedBy] ,[LastModified],[LastModifiedBy])values('25','Paraíba','PB', getdate(), 'ntitsolutions01@gmail.com', getdate(), null);
-INSERT INTO [dbo].[Estado](Id,[Nome],[Sigla],[Created],[CreatedBy] ,[LastModified],[LastModifiedBy])values('26','Pernambuco','PE', getdate(), 'ntitsolutions01@gmail.com', getdate(), null);
-INSERT INTO [dbo].[Estado](Id,[Nome],[Sigla],[Created],[CreatedBy] ,[LastModified],[LastModifiedBy])values('27','Alagoas','AL', getdate(), 'ntitsolutions01@gmail.com', getdate(), null);
-INSERT INTO [dbo].[Estado](Id,[Nome],[Sigla],[Created],[CreatedBy] ,[LastModified],[LastModifiedBy])values('28','Sergipe','SE', getdate(), 'ntitsolutions01@gmail.com', getdate(), null);
-INSERT INTO [dbo].[Estado](Id,[Nome],[Sigla],[Created],[CreatedBy] ,[LastModified],[LastModifiedBy])values('29','Bahia','BA', getdate(), 'ntitsolutions01@gmail.com', getdate(), null);
-INSERT INTO [dbo].[Estado](Id,[Nome],[Sigla],[Created],[CreatedBy] ,[LastModified],[LastModifiedBy])values('31','Minas Gerais','MG', getdate(), 'ntitsolutions01@gmail.com', getdate(), null);
-INSERT INTO [dbo].[Estado](Id,[Nome],[Sigla],[Created],[CreatedBy] ,[LastModified],[LastModifiedBy])values('33','Rio de Janeiro','RJ', getdate(), 'ntitsolutions01@gmail.com', getdate(), null);
-INSERT INTO [dbo].[Estado](Id,[Nome],[Sigla],[Created],[CreatedBy] ,[LastModified],[LastModifiedBy])values('51','Mato Grosso','MT', getdate(), 'ntitsolutions01@gmail.com', getdate(), null);
-INSERT INTO [dbo].[Estado](Id,[Nome],[Sigla],[Created],[CreatedBy] ,[LastModified],[LastModifiedBy])values('52','Goiás','GO', getdate(), 'ntitsolutions01@gmail.com', getdate(), null);
-INSERT INTO [dbo].[Estado](Id,[Nome],[Sigla],[Created],[CreatedBy] ,[LastModified],[LastModifiedBy])values('53','Distrito Federal','DF', getdate(), 'ntitsolutions01@gmail.com', getdate(), null);
-INSERT INTO [dbo].[Estado](Id,[Nome],[Sigla],[Created],[CreatedBy] ,[LastModified],[LastModifiedBy])values('22','Piauí','PI', getdate(), 'ntitsolutions01@gmail.com', getdate(), null);
-INSERT INTO [dbo].[Estado](Id,[Nome],[Sigla],[Created],[CreatedBy] ,[LastModified],[LastModifiedBy])values('23','Ceará','CE', getdate(), 'ntitsolutions01@gmail.com', getdate(), null);
-INSERT INTO [dbo].[Estado](Id,[Nome],[Sigla],[Created],[CreatedBy] ,[LastModified],[LastModifiedBy])values('32','Espírito Santo','ES', getdate(), 'ntitsolutions01@gmail.com', getdate(), null);
+set identity_insert Estado on;
+insert into Estado(Id, Nome, Sigla, Created, LastModified) values('35','São Paulo','SP', GETDATE(), GETDATE());
+insert into Estado(Id, Nome, Sigla, Created, LastModified) values('41','Paraná','PR', GETDATE(), GETDATE());
+insert into Estado(Id, Nome, Sigla, Created, LastModified) values('42','Santa Catarina','SC', GETDATE(), GETDATE());
+insert into Estado(Id, Nome, Sigla, Created, LastModified) values('43','Rio Grande do Sul','RS', GETDATE(), GETDATE());
+insert into Estado(Id, Nome, Sigla, Created, LastModified) values('50','Mato Grosso do Sul','MS', GETDATE(), GETDATE());
+insert into Estado(Id, Nome, Sigla, Created, LastModified) values('11','Rondônia','RO', GETDATE(), GETDATE());
+insert into Estado(Id, Nome, Sigla, Created, LastModified) values('12','Acre','AC', GETDATE(), GETDATE());
+insert into Estado(Id, Nome, Sigla, Created, LastModified) values('13','Amazonas','AM', GETDATE(), GETDATE());
+insert into Estado(Id, Nome, Sigla, Created, LastModified) values('14','Roraima','RR', GETDATE(), GETDATE());
+insert into Estado(Id, Nome, Sigla, Created, LastModified) values('15','Pará','PA', GETDATE(), GETDATE());
+insert into Estado(Id, Nome, Sigla, Created, LastModified) values('16','Amapá','AP', GETDATE(), GETDATE());
+insert into Estado(Id, Nome, Sigla, Created, LastModified) values('17','Tocantins','TO', GETDATE(), GETDATE());
+insert into Estado(Id, Nome, Sigla, Created, LastModified) values('21','Maranhão','MA', GETDATE(), GETDATE());
+insert into Estado(Id, Nome, Sigla, Created, LastModified) values('24','Rio Grande do Norte','RN', GETDATE(), GETDATE());
+insert into Estado(Id, Nome, Sigla, Created, LastModified) values('25','Paraíba','PB', GETDATE(), GETDATE());
+insert into Estado(Id, Nome, Sigla, Created, LastModified) values('26','Pernambuco','PE', GETDATE(), GETDATE());
+insert into Estado(Id, Nome, Sigla, Created, LastModified) values('27','Alagoas','AL', GETDATE(), GETDATE());
+insert into Estado(Id, Nome, Sigla, Created, LastModified) values('28','Sergipe','SE', GETDATE(), GETDATE());
+insert into Estado(Id, Nome, Sigla, Created, LastModified) values('29','Bahia','BA', GETDATE(), GETDATE());
+insert into Estado(Id, Nome, Sigla, Created, LastModified) values('31','Minas Gerais','MG', GETDATE(), GETDATE());
+insert into Estado(Id, Nome, Sigla, Created, LastModified) values('33','Rio de Janeiro','RJ', GETDATE(), GETDATE());
+insert into Estado(Id, Nome, Sigla, Created, LastModified) values('51','Mato Grosso','MT', GETDATE(), GETDATE());
+insert into Estado(Id, Nome, Sigla, Created, LastModified) values('52','Goiás','GO', GETDATE(), GETDATE());
+insert into Estado(Id, Nome, Sigla, Created, LastModified) values('53','Distrito Federal','DF', GETDATE(), GETDATE());
+insert into Estado(Id, Nome, Sigla, Created, LastModified) values('22','Piauí','PI', GETDATE(), GETDATE());
+insert into Estado(Id, Nome, Sigla, Created, LastModified) values('23','Ceará','CE', GETDATE(), GETDATE());
+insert into Estado(Id, Nome, Sigla, Created, LastModified) values('32','Espírito Santo','ES', GETDATE(), GETDATE());
