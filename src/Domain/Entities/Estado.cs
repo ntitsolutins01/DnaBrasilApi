@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DnaBrasil.Domain.Entities;
-public class Estado
+public class Estado : BaseAuditableEntity
 {
     public string? Sigla { get; set;}
     public string? Nome { get; set; }

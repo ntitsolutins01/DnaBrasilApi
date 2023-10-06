@@ -17,9 +17,8 @@ public class MunicipioConfiguration : IEntityTypeConfiguration<Municipio>
         builder.Property(t => t.Nome)
             .HasMaxLength(150)
             .IsRequired();
-        builder.Property(t => t.IdEstado)
-            .IsRequired();
         builder.Property(t => t.Codigo)
-            .IsRequired();
+            .IsRequired();   
+            
     }
 }
