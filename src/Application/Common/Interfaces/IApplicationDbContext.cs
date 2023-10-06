@@ -15,6 +15,7 @@ public interface IApplicationDbContext
     DbSet<Deficiencia> Deficiencias { get; }
     DbSet<Ambiente> Ambientes { get; }
     DbSet<TalentoEsportivo> TalentoEsportivo { get; }
+    DbSet<Saude> Saude { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }
