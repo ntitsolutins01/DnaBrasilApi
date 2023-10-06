@@ -3,6 +3,7 @@
   <PropertyGroup>
     <RootNamespace>DnaBrasil.Application</RootNamespace>
     <AssemblyName>DnaBrasil.Application</AssemblyName>
+    <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
