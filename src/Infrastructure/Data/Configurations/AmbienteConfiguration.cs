@@ -8,9 +8,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 
 namespace DnaBrasil.Infrastructure.Data.Configurations;
-public class DeficienciaConfiguration : IEntityTypeConfiguration<Deficiencia>
+public class AmbienteConfiguration : IEntityTypeConfiguration<Ambiente>
 {
-    public void Configure(EntityTypeBuilder<Deficiencia> builder)
+    public void Configure(EntityTypeBuilder<Ambiente> builder)
     {
         builder.Property(t => t.Nome)
             .HasMaxLength(80)
