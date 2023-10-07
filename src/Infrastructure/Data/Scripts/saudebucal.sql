@@ -1,0 +1,14 @@
+﻿insert into SaudeBucal(ProfissionalId, Descricao, Resposta, Created, LastModified) values(0,'Escova os dentes todos os dias?','não', GETDATE(), GETDATE());
+insert into SaudeBucal(ProfissionalId, Descricao, Resposta, Created, LastModified) values(0,'Quantas vezes ao dia escova os dentes?','não', GETDATE(), GETDATE());
+insert into SaudeBucal(ProfissionalId, Descricao, Resposta, Created, LastModified) values(0,'Como escova os dentes?','não', GETDATE(), GETDATE());
+insert into SaudeBucal(ProfissionalId, Descricao, Resposta, Created, LastModified) values(0,'Considera importante escovar os dentes após as refeições?','não', GETDATE(), GETDATE());
+insert into SaudeBucal(ProfissionalId, Descricao, Resposta, Created, LastModified) values(0,'Escova a língua durante a higiene bucal?','não', GETDATE(), GETDATE());
+insert into SaudeBucal(ProfissionalId, Descricao, Resposta, Created, LastModified) values(0,'Costuma ir ao dentista com que frequência?','não', GETDATE(), GETDATE());
+insert into SaudeBucal(ProfissionalId, Descricao, Resposta, Created, LastModified) values(0,'Apresentou dor de dente no último ano?','não', GETDATE(), GETDATE());
+insert into SaudeBucal(ProfissionalId, Descricao, Resposta, Created, LastModified) values(0,'Já deixou de ir para a escola por causa de dor de dente?','não', GETDATE(), GETDATE());
+insert into SaudeBucal(ProfissionalId, Descricao, Resposta, Created, LastModified) values(0,'Come doce entre as refeições?','não', GETDATE(), GETDATE());
+insert into SaudeBucal(ProfissionalId, Descricao, Resposta, Created, LastModified) values(0,'Já teve algum trauma dentário?','não', GETDATE(), GETDATE());
+insert into SaudeBucal(ProfissionalId, Descricao, Resposta, Created, LastModified) values(0,'Já sentiu vergonha de sorrir?','não', GETDATE(), GETDATE());
+insert into SaudeBucal(ProfissionalId, Descricao, Resposta, Created, LastModified) values(0,'Possui dificuldade para mastigar?','não', GETDATE(), GETDATE());
+insert into SaudeBucal(ProfissionalId, Descricao, Resposta, Created, LastModified) values(0,'É respirador bucal?','não', GETDATE(), GETDATE());
+insert into SaudeBucal(ProfissionalId, Descricao, Resposta, Created, LastModified) values(0,'Considera seu sorriso bonito?','não', GETDATE(), GETDATE());
