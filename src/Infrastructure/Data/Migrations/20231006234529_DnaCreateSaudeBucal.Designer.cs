@@ -4,6 +4,7 @@ using DnaBrasil.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DnaBrasil.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231006234529_DnaCreateSaudeBucal")]
+    partial class DnaCreateSaudeBucal
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -53,46 +56,6 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Ambientes");
-                });
-
-            modelBuilder.Entity("DnaBrasil.Domain.Entities.ConsumoAlimentar", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTimeOffset>("Created")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Descricao")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
-
-                    b.Property<DateTimeOffset>("LastModified")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ProfissionalId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Resposta")
-                        .IsRequired()
-                        .HasMaxLength(80)
-                        .HasColumnType("nvarchar(80)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProfissionalId");
-
-                    b.ToTable("ConsumoAlimentar");
                 });
 
             modelBuilder.Entity("DnaBrasil.Domain.Entities.Deficiencia", b =>
@@ -652,46 +615,6 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
                     b.ToTable("TodoLists");
                 });
 
-            modelBuilder.Entity("DnaBrasil.Domain.Entities.Vocacional", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTimeOffset>("Created")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Descricao")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
-
-                    b.Property<DateTimeOffset>("LastModified")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ProfissionalId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Resposta")
-                        .IsRequired()
-                        .HasMaxLength(80)
-                        .HasColumnType("nvarchar(80)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProfissionalId");
-
-                    b.ToTable("Vocacional");
-                });
-
             modelBuilder.Entity("DnaBrasil.Infrastructure.Identity.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
@@ -890,17 +813,6 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("DnaBrasil.Domain.Entities.ConsumoAlimentar", b =>
-                {
-                    b.HasOne("DnaBrasil.Domain.Entities.Profissional", "Profissional")
-                        .WithMany()
-                        .HasForeignKey("ProfissionalId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Profissional");
-                });
-
             modelBuilder.Entity("DnaBrasil.Domain.Entities.Localidade", b =>
                 {
                     b.HasOne("DnaBrasil.Domain.Entities.Municipio", "Municipio")
@@ -1004,17 +916,6 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
 
                     b.Navigation("Colour")
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("DnaBrasil.Domain.Entities.Vocacional", b =>
-                {
-                    b.HasOne("DnaBrasil.Domain.Entities.Profissional", "Profissional")
-                        .WithMany()
-                        .HasForeignKey("ProfissionalId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Profissional");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

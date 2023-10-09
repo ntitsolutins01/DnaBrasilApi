@@ -1,0 +1,24 @@
+﻿insert into QualidadeDeVida(Descricao, Resposta, Created, LastModified) values('Durante a semana passada: me senti mal','Nunca', GETDATE(), GETDATE());
+insert into QualidadeDeVida(Descricao, Resposta, Created, LastModified) values('Durante a semana passada: tive alguma dor','Nunca', GETDATE(), GETDATE());
+insert into QualidadeDeVida(Descricao, Resposta, Created, LastModified) values('Durante a semana passada: fiquei cansado e esgotado','Nunca', GETDATE(), GETDATE())
+insert into QualidadeDeVida(Descricao, Resposta, Created, LastModified) values('Durante a semana passada: me senti forte e cheio de energia','Nunca', GETDATE(), GETDATE());
+insert into QualidadeDeVida(Descricao, Resposta, Created, LastModified) values('Durante a semana passada: me diverti e ri muito','Nunca', GETDATE(), GETDATE());
+insert into QualidadeDeVida(Descricao, Resposta, Created, LastModified) values('Durante a semana passada: não tive nada para fazer','Nunca', GETDATE(), GETDATE());
+insert into QualidadeDeVida(Descricao, Resposta, Created, LastModified) values('Durante a semana passada: me senti sozinho','Nunca', GETDATE(), GETDATE());
+insert into QualidadeDeVida(Descricao, Resposta, Created, LastModified) values('Durante a semana passada: fiquei com medo ou inseguro','Nunca', GETDATE(), GETDATE());
+insert into QualidadeDeVida(Descricao, Resposta, Created, LastModified) values('Durante a semana passada: me orgulhei de mim mesmo','Nunca', GETDATE(), GETDATE());
+insert into QualidadeDeVida(Descricao, Resposta, Created, LastModified) values('Durante a semana passada: me senti no topo do mundo','Nunca', GETDATE(), GETDATE());
+insert into QualidadeDeVida(Descricao, Resposta, Created, LastModified) values('Durante a semana passada: me senti satisfeito comigo mesmo','Nunca', GETDATE(), GETDATE());
+insert into QualidadeDeVida(Descricao, Resposta, Created, LastModified) values('Durante a semana passada: tive muitas idéias boas','Nunca', GETDATE(), GETDATE());
+insert into QualidadeDeVida(Descricao, Resposta, Created, LastModified) values('Durante a semana passada: me dei bem com meus pais','Nunca', GETDATE(), GETDATE());
+insert into QualidadeDeVida(Descricao, Resposta, Created, LastModified) values('Durante a semana passada: me senti bem em casa','Nunca', GETDATE(), GETDATE());
+insert into QualidadeDeVida(Descricao, Resposta, Created, LastModified) values('Durante a semana passada: brigamos em casa','Nunca', GETDATE(), GETDATE());
+insert into QualidadeDeVida(Descricao, Resposta, Created, LastModified) values('Durante a semana passada: me senti limitado por meus pais','Nunca', GETDATE(), GETDATE());
+insert into QualidadeDeVida(Descricao, Resposta, Created, LastModified) values('Durante a semana passada: passei tempo com os meus amigos','Nunca', GETDATE(), GETDATE());
+insert into QualidadeDeVida(Descricao, Resposta, Created, LastModified) values('Durante a semana passada: fui um "sucesso" com os meus amigos','Nunca', GETDATE(), GETDATE());
+insert into QualidadeDeVida(Descricao, Resposta, Created, LastModified) values('Durante a semana passada: me dei bem com meus amigos','Nunca', GETDATE(), GETDATE());
+insert into QualidadeDeVida(Descricao, Resposta, Created, LastModified) values('Durante a semana passada: me senti diferente das outras pessoas','Nunca', GETDATE(), GETDATE());
+insert into QualidadeDeVida(Descricao, Resposta, Created, LastModified) values('Durante a semana passada: foi fácil fazer as atividades escolares','Nunca', GETDATE(), GETDATE());
+insert into QualidadeDeVida(Descricao, Resposta, Created, LastModified) values('Durante a semana passada: achei as minhas aulas interessantes','Nunca', GETDATE(), GETDATE());
+insert into QualidadeDeVida(Descricao, Resposta, Created, LastModified) values('Durante a semana passada: me preocupei com meu futuro','Nunca', GETDATE(), GETDATE());
+insert into QualidadeDeVida(Descricao, Resposta, Created, LastModified) values('Durante a semana passada: tive medo de tirar notas baixas','Nunca', GETDATE(), GETDATE());
