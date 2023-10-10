@@ -20,5 +20,6 @@ public class Profissional : BaseAuditableEntity
     public string? Bairro { get; set; }
     public bool Status { get; set; } = true; 
     public Municipio? Municipio { get; set; }
+    public int AspNetUserId { get; set; }
 
 }
