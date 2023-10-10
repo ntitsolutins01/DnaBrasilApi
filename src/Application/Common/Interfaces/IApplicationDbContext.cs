@@ -22,6 +22,7 @@ public interface IApplicationDbContext
     DbSet<Vocacional> Vocacional { get; }
     DbSet<AlunoDados> AlunoDados { get; }
     DbSet<AlunoComplementos> AlunoComplementos { get; }
+    DbSet<AlunoMatriculas> AlunoMatriculas { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }
