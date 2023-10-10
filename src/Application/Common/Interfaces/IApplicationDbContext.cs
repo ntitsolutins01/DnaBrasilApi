@@ -20,6 +20,12 @@ public interface IApplicationDbContext
     DbSet<SaudeBucal> SaudeBucal { get; }
     DbSet<ConsumoAlimentar> ConsumoAlimentar { get; }
     DbSet<Vocacional> Vocacional { get; }
+    DbSet<AlunoDados> AlunoDados { get; }
+    DbSet<AlunoComplementos> AlunoComplementos { get; }
+    DbSet<AlunoMatriculas> AlunoMatriculas { get; }
+    DbSet<AlunoAmbientes> AlunoAmbientes { get; }
+    DbSet<AlunoDeficiencias> AlunoDeficiencias { get; }
+    DbSet<AlunoVouchers> AlunoVouchers { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }
