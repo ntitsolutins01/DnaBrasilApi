@@ -23,6 +23,7 @@ public interface IApplicationDbContext
     DbSet<AlunoDados> AlunoDados { get; }
     DbSet<AlunoComplementos> AlunoComplementos { get; }
     DbSet<AlunoMatriculas> AlunoMatriculas { get; }
+    DbSet<AlunoAmbientes> AlunoAmbientes { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }
