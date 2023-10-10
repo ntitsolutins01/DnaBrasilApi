@@ -31,6 +31,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<AlunoComplementos> AlunoComplementos => Set<AlunoComplementos>();
     public DbSet<AlunoMatriculas> AlunoMatriculas => Set<AlunoMatriculas>();
     public DbSet<AlunoAmbientes> AlunoAmbientes => Set<AlunoAmbientes>();
+    public DbSet<AlunoDeficiencias> AlunoDeficiencias => Set<AlunoDeficiencias>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
