@@ -28,6 +28,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<ConsumoAlimentar> ConsumoAlimentar => Set<ConsumoAlimentar>();
     public DbSet<Vocacional> Vocacional => Set<Vocacional>();
     public DbSet<AlunoDados> AlunoDados => Set<AlunoDados>();
+    public DbSet<AlunoComplementos> AlunoComplementos => Set<AlunoComplementos>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
