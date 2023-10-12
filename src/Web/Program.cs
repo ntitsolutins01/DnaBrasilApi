@@ -1,5 +1,7 @@
 using DnaBrasil.Application;
+using DnaBrasil.Infrastructure;
 using DnaBrasil.Infrastructure.Data;
+using DnaBrasil.Web;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -49,4 +51,7 @@ app.MapEndpoints();
 
 app.Run();
 
-public partial class Program { }
+namespace DnaBrasil.Web
+{
+    public partial class Program { }
+}

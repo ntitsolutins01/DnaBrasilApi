@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DnaBrasil.Domain.Entities;
+﻿using DnaBrasil.Domain.Entities;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 
 namespace DnaBrasil.Infrastructure.Data.Configurations;
-internal class AlunoDadosConfiguration : IEntityTypeConfiguration<AlunoDados>
+internal class AlunoConfiguration : IEntityTypeConfiguration<Aluno>
 {
-    public void Configure(EntityTypeBuilder<AlunoDados> builder)
+    public void Configure(EntityTypeBuilder<Aluno> builder)
     {
         builder.Property(t => t.Nome)
             .HasMaxLength(80)
@@ -52,7 +47,7 @@ internal class AlunoDadosConfiguration : IEntityTypeConfiguration<AlunoDados>
             .IsRequired();
         builder.Property(t => t.Social)
             .HasMaxLength(100);
-        builder.Property(t => t.Ativo)
+        builder.Property(t => t.Status)
             .IsRequired();
         builder.Property(t => t.Habilitado)
             .IsRequired();

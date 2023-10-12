@@ -17,27 +17,44 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<Serie> Series => Set<Serie>();
     public DbSet<Estado> Estados => Set<Estado>();
     public DbSet<Municipio> Municipios => Set<Municipio>();
-    public DbSet<Localidade> Localidades => Set<Localidade>();
+    public DbSet<Local> Locais => Set<Local>();
     public DbSet<Profissional> Profissionais => Set<Profissional>();
     public DbSet<Deficiencia> Deficiencias => Set<Deficiencia>();
     public DbSet<Ambiente> Ambientes => Set<Ambiente>();
-    public DbSet<TalentoEsportivo> TalentoEsportivo => Set<TalentoEsportivo>();
-    public DbSet<Saude> Saude => Set<Saude>();
-    public DbSet<QualidadeDeVida> QualidadeDeVida => Set<QualidadeDeVida>();
-    public DbSet<SaudeBucal> SaudeBucal => Set<SaudeBucal>();
-    public DbSet<ConsumoAlimentar> ConsumoAlimentar => Set<ConsumoAlimentar>();
-    public DbSet<Vocacional> Vocacional => Set<Vocacional>();
-    public DbSet<AlunoDados> AlunoDados => Set<AlunoDados>();
-    public DbSet<AlunoComplementos> AlunoComplementos => Set<AlunoComplementos>();
-    public DbSet<AlunoMatriculas> AlunoMatriculas => Set<AlunoMatriculas>();
-    public DbSet<AlunoAmbientes> AlunoAmbientes => Set<AlunoAmbientes>();
-    public DbSet<AlunoDeficiencias> AlunoDeficiencias => Set<AlunoDeficiencias>();
-    public DbSet<AlunoVouchers> AlunoVouchers => Set<AlunoVouchers>();
+    public DbSet<TalentoEsportivo> TalentosEsportivos => Set<TalentoEsportivo>();
+    public DbSet<Saude> Saudes => Set<Saude>();
+    public DbSet<QualidadeDeVida> QualidadeDeVidas => Set<QualidadeDeVida>();
+    public DbSet<SaudeBucal> SaudeBucais => Set<SaudeBucal>();
+    public DbSet<ConsumoAlimentar> ConsumoAlimentares => Set<ConsumoAlimentar>();
+    public DbSet<Vocacional> Vocacionais => Set<Vocacional>();
+    public DbSet<Aluno> Alunos => Set<Aluno>();
+    public DbSet<Dependencia> Dependencias => Set<Dependencia>();
+    public DbSet<Matricula> Matriculas => Set<Matricula>();
+    public DbSet<Voucher> AlunoVouchers => Set<Voucher>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
         base.OnModelCreating(builder);
+            
+            builder.Entity<Aluno>()
+            .HasMany(e => e.Deficiencias)
+            .WithMany(e => e.Alunos)
+            .UsingEntity(
+                "AlunosDeficiencias",
+                r => r.HasOne(typeof(Deficiencia)).WithMany().HasForeignKey("DeficienciaId").HasPrincipalKey(nameof(Deficiencia.Id)),
+                l => l.HasOne(typeof(Aluno)).WithMany().HasForeignKey("AlunoId").HasPrincipalKey(nameof(Aluno.Id)),
+                j => j.HasKey("AlunoId", "DeficienciaId"));
+
+            builder.Entity<Aluno>()
+            .HasMany(e => e.Ambientes)
+            .WithMany(e => e.Alunos)
+            .UsingEntity(
+                "AlunosAmbientes",
+                r => r.HasOne(typeof(Ambiente)).WithMany().HasForeignKey("AmbienteId").HasPrincipalKey(nameof(Ambiente.Id)),
+                l => l.HasOne(typeof(Aluno)).WithMany().HasForeignKey("AlunoId").HasPrincipalKey(nameof(Aluno.Id)),
+                j => j.HasKey("AlunoId", "AmbienteId"));
+
     }
 }

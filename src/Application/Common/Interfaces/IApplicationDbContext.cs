@@ -10,22 +10,20 @@ public interface IApplicationDbContext
     DbSet<Serie> Series { get; }
     DbSet<Estado> Estados { get; }
     DbSet<Municipio> Municipios { get; }
-    DbSet<Localidade> Localidades { get; }
+    DbSet<Local> Locais { get; }
     DbSet<Profissional> Profissionais { get; }
     DbSet<Deficiencia> Deficiencias { get; }
     DbSet<Ambiente> Ambientes { get; }
-    DbSet<TalentoEsportivo> TalentoEsportivo { get; }
-    DbSet<Saude> Saude { get; }
-    DbSet<QualidadeDeVida> QualidadeDeVida { get; }
-    DbSet<SaudeBucal> SaudeBucal { get; }
-    DbSet<ConsumoAlimentar> ConsumoAlimentar { get; }
-    DbSet<Vocacional> Vocacional { get; }
-    DbSet<AlunoDados> AlunoDados { get; }
-    DbSet<AlunoComplementos> AlunoComplementos { get; }
-    DbSet<AlunoMatriculas> AlunoMatriculas { get; }
-    DbSet<AlunoAmbientes> AlunoAmbientes { get; }
-    DbSet<AlunoDeficiencias> AlunoDeficiencias { get; }
-    DbSet<AlunoVouchers> AlunoVouchers { get; }
+    DbSet<TalentoEsportivo> TalentosEsportivos { get; }
+    DbSet<Saude> Saudes { get; }
+    DbSet<QualidadeDeVida> QualidadeDeVidas { get; }
+    DbSet<SaudeBucal> SaudeBucais { get; }
+    DbSet<ConsumoAlimentar> ConsumoAlimentares { get; }
+    DbSet<Vocacional> Vocacionais { get; }
+    DbSet<Aluno> Alunos { get; }
+    DbSet<Dependencia> Dependencias { get; }
+    DbSet<Matricula> Matriculas { get; }
+    DbSet<Voucher> AlunoVouchers { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

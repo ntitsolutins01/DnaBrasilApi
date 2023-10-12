@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DnaBrasil.Domain.Entities;
-public class AlunoDados : BaseAuditableEntity
+﻿namespace DnaBrasil.Domain.Entities;
+public class Aluno : BaseAuditableEntity
 {
     public int AspNetUserId { get; set; }
     public required Estado Estado { get; set; }
@@ -24,6 +18,8 @@ public class AlunoDados : BaseAuditableEntity
     public string? EnderecoNumero { get; set; }
     public string? Bairro { get; set; }
     public string? Social { get; set; }
-    public bool Ativo { get; set; }
+    public bool Status { get; set; }
     public bool Habilitado { get; set; }
+    public List<Deficiencia> Deficiencias { get; } = new();
+    public List<Ambiente> Ambientes { get; } = new();
 }
