@@ -3,12 +3,11 @@ using DnaBrasil.Application.Common.Interfaces;
 using DnaBrasil.Infrastructure.Data;
 using DnaBrasil.Web.Services;
 using Microsoft.AspNetCore.Mvc;
-
 using NSwag;
 using NSwag.Generation.Processors.Security;
 using ZymLabs.NSwag.FluentValidation;
 
-namespace Microsoft.Extensions.DependencyInjection;
+namespace DnaBrasil.Web;
 
 public static class DependencyInjection
 {

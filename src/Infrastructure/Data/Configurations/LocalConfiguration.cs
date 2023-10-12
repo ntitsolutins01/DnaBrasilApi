@@ -1,22 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DnaBrasil.Domain.Entities;
+﻿using DnaBrasil.Domain.Entities;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 
 namespace DnaBrasil.Infrastructure.Data.Configurations;
-public class LocalidadeConfiguration : IEntityTypeConfiguration<Localidade>
+public class LocalConfiguration : IEntityTypeConfiguration<Local>
 {
-    public void Configure(EntityTypeBuilder<Localidade> builder)
+    public void Configure(EntityTypeBuilder<Local> builder)
     {
         builder.Property(t => t.Nome)
-            .HasMaxLength(50)
+            .HasMaxLength(150)
             .IsRequired();
         builder.Property(t => t.Descricao)
-            .HasMaxLength(150)
+            .HasMaxLength(300)
             .IsRequired();
         builder.Property(t => t.Status)
             .IsRequired();
