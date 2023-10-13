@@ -4,6 +4,7 @@ using DnaBrasil.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DnaBrasil.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231013193907_DnaUpdateTabelas2")]
+    partial class DnaUpdateTabelas2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -629,7 +632,7 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
                     b.ToTable("Parceiros");
                 });
 
-            modelBuilder.Entity("DnaBrasil.Domain.Entities.PlanoAulas", b =>
+            modelBuilder.Entity("DnaBrasil.Domain.Entities.PlanoAula", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -666,7 +669,7 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PlanoAulas");
+                    b.ToTable("PlanoAula");
                 });
 
             modelBuilder.Entity("DnaBrasil.Domain.Entities.Profissional", b =>
