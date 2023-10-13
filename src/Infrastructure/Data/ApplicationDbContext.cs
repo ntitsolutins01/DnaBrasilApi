@@ -30,8 +30,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<Aluno> Alunos => Set<Aluno>();
     public DbSet<Dependencia> Dependencias => Set<Dependencia>();
     public DbSet<Matricula> Matriculas => Set<Matricula>();
-    public DbSet<Voucher> AlunoVouchers => Set<Voucher>();
-    public DbSet<SistemaSocioeconomico> SistemaSocioeconomico => Set<SistemaSocioeconomico>();
+    public DbSet<Voucher> Vouchers => Set<Voucher>();
+    public DbSet<Parceiro> Parceiros => Set<Parceiro>();
     public DbSet<PlanoAula> PlanoAula => Set<PlanoAula>();
 
     protected override void OnModelCreating(ModelBuilder builder)

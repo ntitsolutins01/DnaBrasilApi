@@ -8,9 +8,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 
 namespace DnaBrasil.Infrastructure.Data.Configurations;
-internal class SistemaSocioeconomicoConfiguration : IEntityTypeConfiguration<SistemaSocioeconomico>
+internal class ParceiroConfiguration : IEntityTypeConfiguration<Parceiro>
 {
-    public void Configure(EntityTypeBuilder<SistemaSocioeconomico> builder)
+    public void Configure(EntityTypeBuilder<Parceiro> builder)
     {
         builder.Property(t => t.Nome)
             .HasMaxLength(150)
@@ -19,7 +19,6 @@ internal class SistemaSocioeconomicoConfiguration : IEntityTypeConfiguration<Sis
             .HasMaxLength(150)
             .IsRequired();
         builder.Property(t => t.TipoPessoa)
-            .HasMaxLength(150)
             .IsRequired();
         builder.Property(t => t.CpfCnpj)
             .HasMaxLength(18)
@@ -29,9 +28,9 @@ internal class SistemaSocioeconomicoConfiguration : IEntityTypeConfiguration<Sis
         builder.Property(t => t.Celular)
             .HasMaxLength(11);
         builder.Property(t => t.CEP)
-            .HasMaxLength(8);
+            .HasMaxLength(9);
         builder.Property(t => t.Endereco)
-            .HasMaxLength(80);
+            .HasMaxLength(200);
         builder.Property(t => t.Numero)
             .HasMaxLength(80);
         builder.Property(t => t.Bairro)

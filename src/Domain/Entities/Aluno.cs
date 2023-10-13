@@ -2,22 +2,22 @@
 public class Aluno : BaseAuditableEntity
 {
     public int AspNetUserId { get; set; }
-    public required Estado Estado { get; set; }
     public required Municipio Municipio { get; set; }
-    public string? Nome { get; set; }
-    public string? Email { get; set; }
-    public string? Senha { get; set; }
-    public DateTime DtNascimento { get; set; }
-    public string? NomeMae { get; set; }
-    public string? NomePai { get; set; }
-    public string? CPF { get; set; }
-    public string? Telefone { get; set; }
-    public string? Celular { get; set; }
-    public string? CEP { get; set; }
-    public string? Endereco { get; set; }
-    public string? EnderecoNumero { get; set; }
-    public string? Bairro { get; set; }
-    public string? Social { get; set; }
+    public required string Nome { get; set; }
+    public required string Email { get; set; }
+    public required string Sexo { get; set; }
+    public required DateTime DtNascimento { get; set; }
+    public string NomeMae { get; set; } = null!;
+    public string NomePai { get; set; } = null!;
+    public string Cpf { get; set; } = null!;
+    public string Telefone { get; set; } = null!;
+    public string Celular { get; set; } = null!;
+    public string Cep { get; set; } = null!;
+    public string Endereco { get; set; } = null!;
+    public string Numero { get; set; } = null!;
+    public string Bairro { get; set; } = null!;
+    public string RedeSocial { get; set; } = null!;
+    public string Url { get; set; } = null!;
     public bool Status { get; set; }
     public bool Habilitado { get; set; }
     public List<Deficiencia> Deficiencias { get; } = new();
