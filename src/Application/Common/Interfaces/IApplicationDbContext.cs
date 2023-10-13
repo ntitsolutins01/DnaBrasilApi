@@ -25,6 +25,7 @@ public interface IApplicationDbContext
     DbSet<Matricula> Matriculas { get; }
     DbSet<Voucher> AlunoVouchers { get; }
     DbSet<SistemaSocioeconomico> SistemaSocioeconomico { get; }
+    DbSet<PlanoAula> PlanoAula { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }
