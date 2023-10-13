@@ -23,8 +23,8 @@ public interface IApplicationDbContext
     DbSet<Aluno> Alunos { get; }
     DbSet<Dependencia> Dependencias { get; }
     DbSet<Matricula> Matriculas { get; }
-    DbSet<Voucher> AlunoVouchers { get; }
-    DbSet<SistemaSocioeconomico> SistemaSocioeconomico { get; }
+    DbSet<Voucher> Vouchers { get; }
+    DbSet<Parceiro> Parceiros { get; }
     DbSet<PlanoAula> PlanoAula { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
