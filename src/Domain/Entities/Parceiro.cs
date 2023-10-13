@@ -22,4 +22,5 @@ public class Parceiro : BaseAuditableEntity
     public string Bairro { get; set; } = null!;
     public bool Status { get; set; }
     public bool Habilitado { get; set; }
+    public ICollection<Aluno> Alunos { get; } = new List<Aluno>();
 }

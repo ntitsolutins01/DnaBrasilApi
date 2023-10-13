@@ -58,5 +58,10 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
                 l => l.HasOne(typeof(Aluno)).WithMany().HasForeignKey("AlunoId").HasPrincipalKey(nameof(Aluno.Id)),
                 j => j.HasKey("AlunoId", "AmbienteId"));
 
+            builder.Entity<Parceiro>()
+                .HasMany(e => e.Alunos)
+                .WithOne(e => e.Parceiro)
+                .OnDelete(DeleteBehavior.NoAction);
+
     }
 }
