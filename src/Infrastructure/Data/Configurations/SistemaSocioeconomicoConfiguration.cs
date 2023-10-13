@@ -13,38 +13,28 @@ internal class SistemaSocioeconomicoConfiguration : IEntityTypeConfiguration<Sis
     public void Configure(EntityTypeBuilder<SistemaSocioeconomico> builder)
     {
         builder.Property(t => t.Nome)
-            .HasMaxLength(80)
+            .HasMaxLength(150)
             .IsRequired();
         builder.Property(t => t.Email)
-            .HasMaxLength(80)
+            .HasMaxLength(150)
             .IsRequired();
-        builder.Property(t => t.Senha)
-            .HasMaxLength(80)
+        builder.Property(t => t.TipoPessoa)
+            .HasMaxLength(150)
             .IsRequired();
-        builder.Property(t => t.CPF)
-            .HasMaxLength(13)
+        builder.Property(t => t.CpfCnpj)
+            .HasMaxLength(18)
             .IsRequired();
         builder.Property(t => t.Telefone)
-            .HasMaxLength(11)
-            .IsRequired();
+            .HasMaxLength(11);
         builder.Property(t => t.Celular)
-            .HasMaxLength(11)
-            .IsRequired();
+            .HasMaxLength(11);
         builder.Property(t => t.CEP)
-            .HasMaxLength(8)
-            .IsRequired();
+            .HasMaxLength(8);
         builder.Property(t => t.Endereco)
-            .HasMaxLength(80)
-            .IsRequired();
-        builder.Property(t => t.EnderecoNumero)
-            .HasMaxLength(80)
-            .IsRequired();
+            .HasMaxLength(80);
+        builder.Property(t => t.Numero)
+            .HasMaxLength(80);
         builder.Property(t => t.Bairro)
-            .HasMaxLength(80)
-            .IsRequired();
-        builder.Property(t => t.Status)
-            .IsRequired();
-        builder.Property(t => t.Habilitado)
-            .IsRequired();
+            .HasMaxLength(80);
     }
 }
