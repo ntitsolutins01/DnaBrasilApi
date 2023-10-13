@@ -16,7 +16,7 @@ internal class ParceiroConfiguration : IEntityTypeConfiguration<Parceiro>
             .HasMaxLength(150)
             .IsRequired();
         builder.Property(t => t.Email)
-            .HasMaxLength(150)
+            .HasMaxLength(100)
             .IsRequired();
         builder.Property(t => t.TipoPessoa)
             .IsRequired();
@@ -24,16 +24,14 @@ internal class ParceiroConfiguration : IEntityTypeConfiguration<Parceiro>
             .HasMaxLength(18)
             .IsRequired();
         builder.Property(t => t.Telefone)
-            .HasMaxLength(11);
+            .HasMaxLength(13);
         builder.Property(t => t.Celular)
-            .HasMaxLength(11);
-        builder.Property(t => t.CEP)
+            .HasMaxLength(13);
+        builder.Property(t => t.Cep)
             .HasMaxLength(9);
         builder.Property(t => t.Endereco)
             .HasMaxLength(200);
-        builder.Property(t => t.Numero)
-            .HasMaxLength(80);
         builder.Property(t => t.Bairro)
-            .HasMaxLength(80);
+            .HasMaxLength(50);
     }
 }
