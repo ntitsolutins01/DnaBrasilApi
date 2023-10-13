@@ -32,7 +32,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<Matricula> Matriculas => Set<Matricula>();
     public DbSet<Voucher> Vouchers => Set<Voucher>();
     public DbSet<Parceiro> Parceiros => Set<Parceiro>();
-    public DbSet<PlanoAulas> PlanoAulas => Set<PlanoAulas>();
+    public DbSet<PlanoAula> PlanosAulas => Set<PlanoAula>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

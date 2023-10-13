@@ -8,9 +8,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 
 namespace DnaBrasil.Infrastructure.Data.Configurations;
-internal class PlanoAulasConfiguration : IEntityTypeConfiguration<PlanoAulas>
+internal class PlanoAulaConfiguration : IEntityTypeConfiguration<PlanoAula>
 {
-    public void Configure(EntityTypeBuilder<PlanoAulas> builder)
+    public void Configure(EntityTypeBuilder<PlanoAula> builder)
     {
         builder.Property(t => t.Nome)
             .HasMaxLength(150)
