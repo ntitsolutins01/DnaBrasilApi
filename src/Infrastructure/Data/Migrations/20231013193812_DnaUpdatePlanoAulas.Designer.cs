@@ -4,6 +4,7 @@ using DnaBrasil.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DnaBrasil.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231013193812_DnaUpdatePlanoAulas")]
+    partial class DnaUpdatePlanoAulas
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -64,18 +67,22 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Bairro")
+                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Celular")
+                        .IsRequired()
                         .HasMaxLength(13)
                         .HasColumnType("nvarchar(13)");
 
                     b.Property<string>("Cep")
+                        .IsRequired()
                         .HasMaxLength(8)
                         .HasColumnType("nvarchar(8)");
 
                     b.Property<string>("Cpf")
+                        .IsRequired()
                         .HasMaxLength(14)
                         .HasColumnType("nvarchar(14)");
 
@@ -94,6 +101,7 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Endereco")
+                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
@@ -115,20 +123,21 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
                         .HasColumnType("nvarchar(150)");
 
                     b.Property<string>("NomeMae")
+                        .IsRequired()
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
                     b.Property<string>("NomePai")
+                        .IsRequired()
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
                     b.Property<string>("Numero")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ParceiroId")
-                        .HasColumnType("int");
-
                     b.Property<string>("RedeSocial")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -141,18 +150,18 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Telefone")
+                        .IsRequired()
                         .HasMaxLength(13)
                         .HasColumnType("nvarchar(13)");
 
                     b.Property<string>("Url")
+                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("MunicipioId");
-
-                    b.HasIndex("ParceiroId");
 
                     b.ToTable("Alunos");
                 });
@@ -425,14 +434,17 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CpfResponsavel1")
+                        .IsRequired()
                         .HasMaxLength(14)
                         .HasColumnType("nvarchar(14)");
 
                     b.Property<string>("CpfResponsavel2")
+                        .IsRequired()
                         .HasMaxLength(14)
                         .HasColumnType("nvarchar(14)");
 
                     b.Property<string>("CpfResponsavel3")
+                        .IsRequired()
                         .HasMaxLength(14)
                         .HasColumnType("nvarchar(14)");
 
@@ -454,30 +466,36 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("LocalId")
+                    b.Property<int>("LocalId")
                         .HasColumnType("int");
 
                     b.Property<string>("NomeResponsavel1")
+                        .IsRequired()
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
                     b.Property<string>("NomeResponsavel2")
+                        .IsRequired()
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
                     b.Property<string>("NomeResponsavel3")
+                        .IsRequired()
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
                     b.Property<string>("ParentescoResponsavel1")
+                        .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("ParentescoResponsavel2")
+                        .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("ParentescoResponsavel3")
+                        .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
@@ -538,21 +556,23 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Bairro")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .IsRequired()
+                        .HasMaxLength(80)
+                        .HasColumnType("nvarchar(80)");
 
-                    b.Property<string>("Celular")
-                        .HasMaxLength(13)
-                        .HasColumnType("nvarchar(13)");
-
-                    b.Property<string>("Cep")
+                    b.Property<string>("CEP")
+                        .IsRequired()
                         .HasMaxLength(9)
                         .HasColumnType("nvarchar(9)");
 
-                    b.Property<string>("CpfCnpj")
+                    b.Property<string>("Celular")
                         .IsRequired()
+                        .HasMaxLength(11)
+                        .HasColumnType("nvarchar(11)");
+
+                    b.Property<int>("CpfCnpj")
                         .HasMaxLength(18)
-                        .HasColumnType("nvarchar(18)");
+                        .HasColumnType("int");
 
                     b.Property<DateTimeOffset>("Created")
                         .HasColumnType("datetimeoffset");
@@ -562,12 +582,16 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
 
                     b.Property<string>("Endereco")
+                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
+
+                    b.Property<int>("EstadoId")
+                        .HasColumnType("int");
 
                     b.Property<bool>("Habilitado")
                         .HasColumnType("bit");
@@ -578,7 +602,7 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("MunicipioId")
+                    b.Property<int>("MunicipioId")
                         .HasColumnType("int");
 
                     b.Property<string>("Nome")
@@ -587,14 +611,16 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
                         .HasColumnType("nvarchar(150)");
 
                     b.Property<int>("Numero")
+                        .HasMaxLength(80)
                         .HasColumnType("int");
 
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
 
                     b.Property<string>("Telefone")
-                        .HasMaxLength(13)
-                        .HasColumnType("nvarchar(13)");
+                        .IsRequired()
+                        .HasMaxLength(11)
+                        .HasColumnType("nvarchar(11)");
 
                     b.Property<int>("TipoParceria")
                         .HasColumnType("int");
@@ -605,12 +631,14 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("EstadoId");
+
                     b.HasIndex("MunicipioId");
 
                     b.ToTable("Parceiros");
                 });
 
-            modelBuilder.Entity("DnaBrasil.Domain.Entities.PlanoAula", b =>
+            modelBuilder.Entity("DnaBrasil.Domain.Entities.PlanoAulas", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -647,7 +675,7 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PlanosAulas");
+                    b.ToTable("PlanoAulas");
                 });
 
             modelBuilder.Entity("DnaBrasil.Domain.Entities.Profissional", b =>
@@ -1116,6 +1144,7 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Descricao")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -1125,14 +1154,16 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("LocalId")
+                    b.Property<int>("LocalId")
                         .HasColumnType("int");
 
                     b.Property<string>("Serie")
+                        .IsRequired()
                         .HasMaxLength(15)
                         .HasColumnType("nvarchar(15)");
 
                     b.Property<string>("Turma")
+                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
@@ -1379,14 +1410,7 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DnaBrasil.Domain.Entities.Parceiro", "Parceiro")
-                        .WithMany("Alunos")
-                        .HasForeignKey("ParceiroId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
                     b.Navigation("Municipio");
-
-                    b.Navigation("Parceiro");
                 });
 
             modelBuilder.Entity("DnaBrasil.Domain.Entities.ConsumoAlimentar", b =>
@@ -1413,7 +1437,9 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
                 {
                     b.HasOne("DnaBrasil.Domain.Entities.Local", "Local")
                         .WithMany()
-                        .HasForeignKey("LocalId");
+                        .HasForeignKey("LocalId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Local");
                 });
@@ -1429,9 +1455,19 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("DnaBrasil.Domain.Entities.Parceiro", b =>
                 {
+                    b.HasOne("DnaBrasil.Domain.Entities.Estado", "Estado")
+                        .WithMany()
+                        .HasForeignKey("EstadoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("DnaBrasil.Domain.Entities.Municipio", "Municipio")
                         .WithMany()
-                        .HasForeignKey("MunicipioId");
+                        .HasForeignKey("MunicipioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Estado");
 
                     b.Navigation("Municipio");
                 });
@@ -1538,7 +1574,9 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
                 {
                     b.HasOne("DnaBrasil.Domain.Entities.Local", "Local")
                         .WithMany()
-                        .HasForeignKey("LocalId");
+                        .HasForeignKey("LocalId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Local");
                 });
@@ -1592,11 +1630,6 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("DnaBrasil.Domain.Entities.Parceiro", b =>
-                {
-                    b.Navigation("Alunos");
                 });
 
             modelBuilder.Entity("DnaBrasil.Domain.Entities.TodoList", b =>
