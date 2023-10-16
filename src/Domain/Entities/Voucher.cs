@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 namespace DnaBrasil.Domain.Entities;
 public class Voucher : BaseAuditableEntity
 {
-    public Local Local { get; set; } = null!;
-    public string Descricao { get; set; } = null!;
-    public string Turma { get; set; } = null!;
-    public string Serie { get; set; } = null!;
+    public Local? Local { get; set; }
+    public string? Descricao { get; set; }
+    public string? Turma { get; set; }
+    public string? Serie { get; set; }
 }

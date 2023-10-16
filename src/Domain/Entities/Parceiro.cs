@@ -8,18 +8,18 @@ namespace DnaBrasil.Domain.Entities;
 public class Parceiro : BaseAuditableEntity
 {
     public int AspNetUserId { get; set; }
-    public required Municipio Municipio { get; set; }
-    public string Nome { get; set; } = null!;
-    public string Email { get; set; } = null!;      
-    public int TipoParceria { get; set; }
-    public string TipoPessoa { get; set; } = null!;
-    public int CpfCnpj { get; set; }
-    public string Telefone { get; set; } = null!;
-    public string Celular { get; set; } = null!;
-    public string Cep { get; set; } = null!;
-    public string Endereco { get; set; } = null!;
+    public Municipio? Municipio { get; set; }
+    public required string Nome { get; set; }
+    public required string Email { get; set; }      
+    public required int TipoParceria { get; set; }
+    public required string TipoPessoa { get; set; }
+    public required string CpfCnpj { get; set; }
+    public string? Telefone { get; set; }
+    public string? Celular { get; set; }
+    public string? Cep { get; set; }
+    public string? Endereco { get; set; }
     public int Numero { get; set; }
-    public string Bairro { get; set; } = null!;
+    public string? Bairro { get; set; }
     public bool Status { get; set; }
     public bool Habilitado { get; set; }
     public ICollection<Aluno> Alunos { get; } = new List<Aluno>();
