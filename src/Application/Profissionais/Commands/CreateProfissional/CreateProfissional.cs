@@ -18,6 +18,7 @@ public record CreateProfissionalCommand : IRequest<int>
     public bool Status { get; init; } = true;
     public Municipio? Municipio { get; init; }
     public int AspNetUserId { get; init; }
+    public List<Ambiente>? Ambientes { get; init; }
 }
 
 public class CreateProfissionalCommandHandler : IRequestHandler<CreateProfissionalCommand, int>
@@ -45,7 +46,8 @@ public class CreateProfissionalCommandHandler : IRequestHandler<CreateProfission
             Cep = request.Cep,
             Bairro = request.Bairro,
             Municipio = request.Municipio,
-            AspNetUserId = request.AspNetUserId
+            AspNetUserId = request.AspNetUserId,
+            Ambientes = request.Ambientes!
         };
 
         _context.Profissionais.Add(entity);
