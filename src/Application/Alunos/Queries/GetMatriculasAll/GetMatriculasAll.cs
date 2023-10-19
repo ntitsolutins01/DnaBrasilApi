@@ -22,7 +22,7 @@ public class GetMatriculasAllQueryHandler : IRequestHandler<GetMatriculasAllQuer
         _context = context;
     }
 
-    public async Task<MatriculaDto> Handle(GetMatriculasAllQuery request, CancellationToken cancellationToken)
+    public Task<MatriculaDto> Handle(GetMatriculasAllQuery request, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }

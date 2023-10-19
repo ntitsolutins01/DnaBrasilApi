@@ -22,7 +22,7 @@ public class GetAmbientesAllQueryHandler : IRequestHandler<GetAmbientesAllQuery,
         _context = context;
     }
 
-    public async Task<AmbienteDto> Handle(GetAmbientesAllQuery request, CancellationToken cancellationToken)
+    public  Task<AmbienteDto> Handle(GetAmbientesAllQuery request, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }

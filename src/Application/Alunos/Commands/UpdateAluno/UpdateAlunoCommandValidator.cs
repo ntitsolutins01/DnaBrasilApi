@@ -22,7 +22,7 @@ public class UpdateAlunoCommandValidatorCommandHandler : IRequestHandler<UpdateA
         _context = context;
     }
 
-    public async Task<object> Handle(UpdateAlunoCommandValidatorCommand request, CancellationToken cancellationToken)
+    public Task<object> Handle(UpdateAlunoCommandValidatorCommand request, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }

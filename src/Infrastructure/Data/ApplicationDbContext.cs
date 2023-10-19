@@ -58,6 +58,15 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
                 l => l.HasOne(typeof(Aluno)).WithMany().HasForeignKey("AlunoId").HasPrincipalKey(nameof(Aluno.Id)),
                 j => j.HasKey("AlunoId", "AmbienteId"));
 
+            builder.Entity<Profissional>()
+            .HasMany(e => e.Ambientes)
+            .WithMany(e => e.Profissionais)
+            .UsingEntity(
+                "ProfissionaisAmbientes",
+                r => r.HasOne(typeof(Ambiente)).WithMany().HasForeignKey("AmbienteId").HasPrincipalKey(nameof(Ambiente.Id)),
+                l => l.HasOne(typeof(Profissional)).WithMany().HasForeignKey("ProfissionalId").HasPrincipalKey(nameof(Profissional.Id)),
+                j => j.HasKey("ProfissionalId", "AmbienteId"));
+
             builder.Entity<Parceiro>()
                 .HasMany(e => e.Alunos)
                 .WithOne(e => e.Parceiro)

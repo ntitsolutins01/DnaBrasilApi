@@ -22,7 +22,7 @@ public class DeleteSaudeBucalCommandHandler : IRequestHandler<DeleteSaudeBucalCo
         _context = context;
     }
 
-    public async Task<int> Handle(DeleteSaudeBucalCommand request, CancellationToken cancellationToken)
+    public Task<int> Handle(DeleteSaudeBucalCommand request, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }

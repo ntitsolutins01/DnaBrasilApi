@@ -1,4 +1,5 @@
 ﻿using DnaBrasil.Application.Common.Interfaces;
+using DnaBrasil.Application.Deficiencias.Queries.GetDeficienciasAll;
 
 namespace DnaBrasil.Application.Alunos.Queries.GetDeficienciasByAluno;
 
@@ -22,7 +23,7 @@ public class GetDeficienciasByAlunoQueryHandler : IRequestHandler<GetDeficiencia
         _context = context;
     }
 
-    public async Task<DeficienciaDto> Handle(GetDeficienciasByAlunoQuery request, CancellationToken cancellationToken)
+    public Task<DeficienciaDto> Handle(GetDeficienciasByAlunoQuery request, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }

@@ -22,7 +22,7 @@ public class UpdateSaudeBucalCommandHandler : IRequestHandler<UpdateSaudeBucalCo
         _context = context;
     }
 
-    public async Task<int> Handle(UpdateSaudeBucalCommand request, CancellationToken cancellationToken)
+    public Task<int> Handle(UpdateSaudeBucalCommand request, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }

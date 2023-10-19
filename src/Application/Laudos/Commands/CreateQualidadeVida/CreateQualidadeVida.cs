@@ -22,7 +22,7 @@ public class CreateQualidadeVidaCommandHandler : IRequestHandler<CreateQualidade
         _context = context;
     }
 
-    public async Task<int> Handle(CreateQualidadeVidaCommand request, CancellationToken cancellationToken)
+    public Task<int> Handle(CreateQualidadeVidaCommand request, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }

@@ -22,7 +22,7 @@ public class UpdateVocacionalCommandHandler : IRequestHandler<UpdateVocacionalCo
         _context = context;
     }
 
-    public async Task<int> Handle(UpdateVocacionalCommand request, CancellationToken cancellationToken)
+    public Task<int> Handle(UpdateVocacionalCommand request, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
