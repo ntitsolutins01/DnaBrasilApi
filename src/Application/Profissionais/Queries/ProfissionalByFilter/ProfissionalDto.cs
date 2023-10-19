@@ -1,8 +1,10 @@
-﻿using DnaBrasil.Domain.Entities;
+﻿using DnaBrasil.Application.Municipios.Queries;
+using DnaBrasil.Domain.Entities;
 
-namespace DnaBrasil.Application.Profissionais.Queries.ProfissionalByAluno;
+namespace DnaBrasil.Application.Profissionais.Queries.ProfissionalByFilter;
 public class ProfissionalDto
 {
+    public int Id { get; set; }
     public required string Nome { get; set; }
     public DateTime DtNascimento { get; set; }
     public required string Email { get; set; }
@@ -14,8 +16,9 @@ public class ProfissionalDto
     public int Numero { get; set; }
     public string? Cep { get; set; }
     public string? Bairro { get; set; }
-    public bool Status { get; set; } = true;
-    public Municipio? Municipio { get; set; }
+    public bool Status { get; set; } = true; 
+    public bool Habilitado { get; set; } 
+    public MunicipioDto? Municipio { get; set; }
     public int AspNetUserId { get; set; }
     private class Mapping : Profile
     {
