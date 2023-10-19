@@ -8,30 +8,33 @@ using DnaBrasil.Domain.Entities;
 using DnaBrasil.Domain.Events;
 
 namespace DnaBrasil.Application.Series.Commands;
-public record CreateSeriesCommand : IRequest<int>
+public record CreateSerieCommand : IRequest<int>
 {
-    public string? Nome { get; init; }
-    public string? Descricao { get; init; }
+    public required string Nome { get; init; }
+    public required string Descricao { get; init; }
     public int IdadeInicial { get; init; }
     public int IdadeFinal { get; init; }
     public int ScoreTotal { get; init; }
 }
 
-public class CreateSeriesCommandHandler : IRequestHandler<CreateSeriesCommand, int>
+public class CreateSerieCommandHandler : IRequestHandler<CreateSerieCommand, int>
 {
     private readonly IApplicationDbContext _context;
 
-    public CreateSeriesCommandHandler(IApplicationDbContext context)
+    public CreateSerieCommandHandler(IApplicationDbContext context)
     {
         _context = context;
     }
 
-    public async Task<int> Handle(CreateSeriesCommand request, CancellationToken cancellationToken)
+    public async Task<int> Handle(CreateSerieCommand request, CancellationToken cancellationToken)
     {
         var entity = new Serie
         {
             Nome = request.Nome,
-            Descricao = request.Descricao
+            Descricao = request.Descricao,
+            IdadeInicial = request.IdadeInicial,
+            IdadeFinal = request.IdadeFinal,
+            ScoreTotal = request.ScoreTotal
         };
 
         _context.Series.Add(entity);

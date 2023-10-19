@@ -5,7 +5,6 @@ namespace DnaBrasil.Application.Profissionais.Commands.UpdateProfissionalAmbient
 public record UpdateProfissionalAmbientesCommand : IRequest
 {
     public int Id { get; init; }
-
     public List<Ambiente>? Ambientes { get; init; }
 }
 
