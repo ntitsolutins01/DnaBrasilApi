@@ -5,8 +5,8 @@ namespace DnaBrasil.Application.Estados.Queries.GetEstadosAll;
 public class EstadoDto
 {
     public int Id { get; init; }
-    public string? Sigla { get; set; }
-    public string? Nome { get; set; }
+    public string? Sigla { get; init; }
+    public string? Nome { get; init; }
 
     private class Mapping : Profile
     {

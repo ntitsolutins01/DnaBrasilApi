@@ -1,29 +1,30 @@
 ﻿using DnaBrasil.Application.Common.Interfaces;
+using DnaBrasil.Application.Municipios.Queries.GetMunicipiosAll;
 
 namespace DnaBrasil.Application.Municipios.Queries.GetMunicipiosAll;
+//[Authorize]
+public record GetMunicipiosQuery : IRequest<List<MunicipioDto>>;
 
-public record GetMunicipiosAllQuery : IRequest<MunicipioDto>
-{
-}
-
-public class GetMunicipiosAllQueryValidator : AbstractValidator<GetMunicipiosAllQuery>
-{
-    public GetMunicipiosAllQueryValidator()
-    {
-    }
-}
-
-public class GetMunicipiosAllQueryHandler : IRequestHandler<GetMunicipiosAllQuery, MunicipioDto>
+public class GetMunicipiosQueryHandler : IRequestHandler<GetMunicipiosQuery, List<MunicipioDto>>
 {
     private readonly IApplicationDbContext _context;
+    private readonly IMapper _mapper;
 
-    public GetMunicipiosAllQueryHandler(IApplicationDbContext context)
+    public GetMunicipiosQueryHandler(IApplicationDbContext context, IMapper mapper)
     {
         _context = context;
+        _mapper = mapper;
     }
 
-    public async Task<MunicipioDto> Handle(GetMunicipiosAllQuery request, CancellationToken cancellationToken)
+    public async Task<List<MunicipioDto>> Handle(GetMunicipiosQuery request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var result = await _context.Municipios
+            .AsNoTracking()
+            .ProjectTo<MunicipioDto>(_mapper.ConfigurationProvider)
+            .OrderBy(t => t.Id)
+            .ToListAsync(cancellationToken);
+
+        return result == null ? throw new ArgumentNullException(nameof(result)) : result;
     }
 }
+
