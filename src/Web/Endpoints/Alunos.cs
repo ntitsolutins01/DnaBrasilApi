@@ -1,5 +1,6 @@
 ﻿using DnaBrasil.Application.Common.Models;
 using DnaBrasil.Application.Alunos.Commands.CreateAluno;
+using DnaBrasil.Application.Alunos.Commands.CreateAlunoDeficiencias;
 using DnaBrasil.Application.Alunos.Commands.DeleteAluno;
 using DnaBrasil.Application.Alunos.Commands.UpdateAluno;
 
@@ -12,11 +13,16 @@ public class Alunos : EndpointGroupBase
         app.MapGroup(this)
             .RequireAuthorization()
             .MapPost(CreateAluno)
+            .MapPost(CreateAlunoDeficiencias)
             .MapPut(UpdateAluno, "{id}")
             .MapDelete(DeleteAluno, "{id}");
     }
 
     public async Task<int> CreateAluno(ISender sender, CreateAlunoCommand command)
+    {
+        return await sender.Send(command);
+    }
+    public async Task<int> CreateAlunoDeficiencias(ISender sender, CreateAlunoDeficienciasCommand command)
     {
         return await sender.Send(command);
     }
