@@ -1365,7 +1365,8 @@
                 "type": "boolean"
               },
               "habilitado": {
-                "type": "boolean"
+                "type": "boolean",
+                "nullable": true
               },
               "alunos": {
                 "type": "array",
