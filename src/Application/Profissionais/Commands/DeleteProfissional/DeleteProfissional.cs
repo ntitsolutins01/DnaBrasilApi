@@ -1,19 +1,10 @@
 ﻿using DnaBrasil.Application.Common.Interfaces;
+using DnaBrasil.Domain.Events;
 
 namespace DnaBrasil.Application.Profissionais.Commands.DeleteProfissional;
+public record DeleteProfissionalCommand(int Id) : IRequest;
 
-public record DeleteProfissionalCommand : IRequest<int>
-{
-}
-
-public class DeleteProfissionalCommandValidator : AbstractValidator<DeleteProfissionalCommand>
-{
-    public DeleteProfissionalCommandValidator()
-    {
-    }
-}
-
-public class DeleteProfissionalCommandHandler : IRequestHandler<DeleteProfissionalCommand, int>
+public class DeleteProfissionalCommandHandler : IRequestHandler<DeleteProfissionalCommand>
 {
     private readonly IApplicationDbContext _context;
 
@@ -22,8 +13,18 @@ public class DeleteProfissionalCommandHandler : IRequestHandler<DeleteProfission
         _context = context;
     }
 
-    public Task<int> Handle(DeleteProfissionalCommand request, CancellationToken cancellationToken)
+    public async Task Handle(DeleteProfissionalCommand request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var entity = await _context.TodoItems
+            .FindAsync(new object[] { request.Id }, cancellationToken);
+
+        Guard.Against.NotFound(request.Id, entity);
+
+        _context.TodoItems.Remove(entity);
+
+        //entity.AddDomainEvent(new ProfissionalDeletedEvent(entity));
+
+        await _context.SaveChangesAsync(cancellationToken);
     }
+
 }
