@@ -22,7 +22,7 @@ public class DeleteTalentoEsportivoCommandHandler : IRequestHandler<DeleteTalent
         _context = context;
     }
 
-    public async Task<int> Handle(DeleteTalentoEsportivoCommand request, CancellationToken cancellationToken)
+    public Task<int> Handle(DeleteTalentoEsportivoCommand request, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }

@@ -22,7 +22,7 @@ public class VocacionalByAlunoQueryHandler : IRequestHandler<VocacionalByAlunoQu
         _context = context;
     }
 
-    public async Task<VocacionalDto> Handle(VocacionalByAlunoQuery request, CancellationToken cancellationToken)
+    public Task<VocacionalDto> Handle(VocacionalByAlunoQuery request, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }

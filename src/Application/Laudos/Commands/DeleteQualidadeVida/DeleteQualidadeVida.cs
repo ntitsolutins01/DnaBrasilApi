@@ -22,7 +22,7 @@ public class DeleteQualidadeVidaCommandHandler : IRequestHandler<DeleteQualidade
         _context = context;
     }
 
-    public async Task<int> Handle(DeleteQualidadeVidaCommand request, CancellationToken cancellationToken)
+    public Task<int> Handle(DeleteQualidadeVidaCommand request, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }

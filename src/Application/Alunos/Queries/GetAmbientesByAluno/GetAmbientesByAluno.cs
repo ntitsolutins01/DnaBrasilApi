@@ -1,4 +1,5 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
+﻿using DnaBrasil.Application.Ambientes.Queries.GetAmbientesAll;
+using DnaBrasil.Application.Common.Interfaces;
 
 namespace DnaBrasil.Application.Alunos.Queries.GetAmbientesByAluno;
 
@@ -22,7 +23,7 @@ public class GetAmbientesByAlunoQueryHandler : IRequestHandler<GetAmbientesByAlu
         _context = context;
     }
 
-    public async Task<AmbienteDto> Handle(GetAmbientesByAlunoQuery request, CancellationToken cancellationToken)
+    public Task<AmbienteDto> Handle(GetAmbientesByAlunoQuery request, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }

@@ -22,7 +22,7 @@ public class SaudeBucalByAlunoQueryHandler : IRequestHandler<SaudeBucalByAlunoQu
         _context = context;
     }
 
-    public async Task<SaudeBucalDto> Handle(SaudeBucalByAlunoQuery request, CancellationToken cancellationToken)
+    public Task<SaudeBucalDto> Handle(SaudeBucalByAlunoQuery request, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }

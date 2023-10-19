@@ -22,7 +22,7 @@ public class UpdateMatriculaCommandHandler : IRequestHandler<UpdateMatriculaComm
         _context = context;
     }
 
-    public async Task<int> Handle(UpdateMatriculaCommand request, CancellationToken cancellationToken)
+    public Task<int> Handle(UpdateMatriculaCommand request, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }

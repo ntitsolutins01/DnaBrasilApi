@@ -22,7 +22,7 @@ public class UpdateTalentoEsportivoCommandHandler : IRequestHandler<UpdateTalent
         _context = context;
     }
 
-    public async Task<int> Handle(UpdateTalentoEsportivoCommand request, CancellationToken cancellationToken)
+    public Task<int> Handle(UpdateTalentoEsportivoCommand request, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }

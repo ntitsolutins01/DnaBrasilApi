@@ -22,7 +22,7 @@ public class ConsumoAlimentarByAlunoQueryHandler : IRequestHandler<ConsumoAlimen
         _context = context;
     }
 
-    public async Task<ConsumoAlimentarDto> Handle(ConsumoAlimentarByAlunoQuery request, CancellationToken cancellationToken)
+    public Task<ConsumoAlimentarDto> Handle(ConsumoAlimentarByAlunoQuery request, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }

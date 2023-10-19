@@ -22,7 +22,7 @@ public class QualidadeVidaByAlunoQueryHandler : IRequestHandler<QualidadeVidaByA
         _context = context;
     }
 
-    public async Task<QualidadeVidaDto> Handle(QualidadeVidaByAlunoQuery request, CancellationToken cancellationToken)
+    public Task<QualidadeVidaDto> Handle(QualidadeVidaByAlunoQuery request, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
