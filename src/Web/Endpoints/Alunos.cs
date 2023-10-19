@@ -11,7 +11,9 @@ public class Alunos : EndpointGroupBase
     {
         app.MapGroup(this)
             .RequireAuthorization()
-            .MapPost(CreateAluno);
+            .MapPost(CreateAluno)
+            .MapPut(UpdateAluno, "{id}")
+            .MapDelete(DeleteAluno, "{id}");
     }
 
     public async Task<int> CreateAluno(ISender sender, CreateAlunoCommand command)
@@ -26,4 +28,9 @@ public class Alunos : EndpointGroupBase
         return Results.NoContent();
     }
 
+    public async Task<IResult> DeleteAluno(ISender sender, int id)
+    {
+        await sender.Send(new DeleteAlunoCommand(id));
+        return Results.NoContent();
+    }
 }
