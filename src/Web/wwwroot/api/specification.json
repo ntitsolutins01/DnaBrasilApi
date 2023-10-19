@@ -847,6 +847,10 @@
             "minLength": 1,
             "nullable": false
           },
+          "etnia": {
+            "type": "integer",
+            "format": "int32"
+          },
           "nomeMae": {
             "type": "string",
             "maxLength": 150,
@@ -1000,6 +1004,10 @@
               "dtNascimento": {
                 "type": "string",
                 "format": "date-time"
+              },
+              "etnia": {
+                "type": "integer",
+                "format": "int32"
               },
               "nomeMae": {
                 "type": "string",
