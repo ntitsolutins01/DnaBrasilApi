@@ -1,8 +1,8 @@
 ﻿namespace DnaBrasil.Domain.Entities;
 public class Aluno : BaseAuditableEntity
 {
-    public int AspNetUserId { get; set; }
-    public required Municipio Municipio { get; set; }
+    public required int AspNetUserId { get; set; }
+    public Municipio? Municipio { get; set; }
     public required string Nome { get; set; }
     public required string Email { get; set; }
     public required string Sexo { get; set; }

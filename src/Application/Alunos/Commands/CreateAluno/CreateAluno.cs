@@ -7,10 +7,11 @@ namespace DnaBrasil.Application.Alunos.Commands.CreateAluno;
 
 public record CreateAlunoCommand : IRequest<int>
 {
-    public string? Nome { get; init; }
-    public string? Email { get; init; }
-    public string? Sexo { get; init; }
-    public DateTime DtNascimento { get; init; }
+    public required int AspNetUserId { get; init; }
+    public required string Nome { get; init; }
+    public required string Email { get; init; }
+    public required string Sexo { get; init; }
+    public required DateTime DtNascimento { get; init; }
     public string? NomeMae { get; init; }
     public string? NomePai { get; init; }
     public string? Cpf { get; init; }
@@ -24,6 +25,9 @@ public record CreateAlunoCommand : IRequest<int>
     public string? Url { get; init;}
     public bool Status { get; init;}
     public bool Habilitado { get; init;}
+    public List<Deficiencia>? Deficiencias { get; init; }
+    public List<Ambiente>? Ambientes { get; init; }
+    public Parceiro? Parceiro { get; init; }
 }
 
 public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int>
@@ -39,6 +43,7 @@ public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int
     {
         var entity = new Aluno
         {
+            AspNetUserId = request.AspNetUserId,
             Nome = request.Nome,
             Email = request.Email,
             Sexo = request.Sexo,
