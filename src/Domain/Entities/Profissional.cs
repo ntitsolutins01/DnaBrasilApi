@@ -9,7 +9,7 @@ public class Profissional : BaseAuditableEntity
 {
     public required int AspNetUserId { get; set; }
     public required string Nome { get; set; }
-    public DateTime DtNascimento { get; set; }
+    public required DateTime DtNascimento { get; set; }
     public required string Email { get; set; }
     public required string Sexo { get; set; }
     public required string Cpf { get; set; }

@@ -12,7 +12,6 @@ public class SaudeConfiguration : IEntityTypeConfiguration<Saude>
 {
     public void Configure(EntityTypeBuilder<Saude> builder)
     {
-        builder.Property(t => t.Envergadura)
-            .IsRequired();
+        
     }
 }
