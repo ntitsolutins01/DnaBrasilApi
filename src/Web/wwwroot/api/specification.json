@@ -938,6 +938,11 @@
                 "$ref": "#/components/schemas/Parceiro"
               }
             ]
+          },
+          "etnia": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
           }
         }
       },
@@ -1050,6 +1055,11 @@
               },
               "habilitado": {
                 "type": "boolean"
+              },
+              "etnia": {
+                "type": "integer",
+                "format": "int32",
+                "nullable": true
               },
               "deficiencias": {
                 "type": "array",
@@ -1268,7 +1278,8 @@
                 "type": "boolean"
               },
               "habilitado": {
-                "type": "boolean"
+                "type": "boolean",
+                "nullable": true
               },
               "municipio": {
                 "nullable": true,
