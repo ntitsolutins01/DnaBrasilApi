@@ -1,4 +1,4 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
+using DnaBrasil.Application.Common.Interfaces;
 using DnaBrasil.Application.TodoItems.Commands.CreateTodoItem;
 using DnaBrasil.Domain.Entities;
 using DnaBrasil.Domain.Events;
@@ -29,6 +29,7 @@ public record CreateAlunoCommand : IRequest<int>
     public List<Deficiencia>? Deficiencias { get; init; }
     public List<Ambiente>? Ambientes { get; init; }
     public Parceiro? Parceiro { get; init; }
+    public int? Etnia { get; set; }
 }
 
 public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int>
@@ -62,7 +63,8 @@ public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int
             Url = request.Url,
             Status = request.Status,
             Habilitado = request.Habilitado,
-            Parceiro = request.Parceiro
+            Parceiro = request.Parceiro,
+            Etnia = request.Etnia
         };
 
         entity.AddDomainEvent(new AlunoCreatedEvent(entity));
