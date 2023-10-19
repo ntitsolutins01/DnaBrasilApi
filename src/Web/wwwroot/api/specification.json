@@ -1053,12 +1053,14 @@
               },
               "deficiencias": {
                 "type": "array",
+                "nullable": true,
                 "items": {
                   "$ref": "#/components/schemas/Deficiencia"
                 }
               },
               "ambientes": {
                 "type": "array",
+                "nullable": true,
                 "items": {
                   "$ref": "#/components/schemas/Ambiente"
                 }
@@ -1275,6 +1277,7 @@
               },
               "ambientes": {
                 "type": "array",
+                "nullable": true,
                 "items": {
                   "$ref": "#/components/schemas/Ambiente"
                 }
