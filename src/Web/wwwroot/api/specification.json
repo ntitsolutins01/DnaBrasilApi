@@ -1267,6 +1267,9 @@
               "status": {
                 "type": "boolean"
               },
+              "habilitado": {
+                "type": "boolean"
+              },
               "municipio": {
                 "nullable": true,
                 "oneOf": [
