@@ -22,7 +22,7 @@ public class GetAlunosAllQueryHandler : IRequestHandler<GetAlunosAllQuery, Aluno
         _context = context;
     }
 
-    public async Task<AlunoDto> Handle(GetAlunosAllQuery request, CancellationToken cancellationToken)
+    public Task<AlunoDto> Handle(GetAlunosAllQuery request, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }

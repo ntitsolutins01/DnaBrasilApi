@@ -22,7 +22,7 @@ public class GetAlunosByFilterQueryHandler : IRequestHandler<GetAlunosByFilterQu
         _context = context;
     }
 
-    public async Task<AlunoDto> Handle(GetAlunosByFilterQuery request, CancellationToken cancellationToken)
+    public Task<AlunoDto> Handle(GetAlunosByFilterQuery request, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }

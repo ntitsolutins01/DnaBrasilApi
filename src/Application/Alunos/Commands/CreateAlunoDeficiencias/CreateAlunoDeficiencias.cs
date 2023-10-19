@@ -22,7 +22,7 @@ public class CreateAlunoDeficienciasCommandHandler : IRequestHandler<CreateAluno
         _context = context;
     }
 
-    public async Task<int> Handle(CreateAlunoDeficienciasCommand request, CancellationToken cancellationToken)
+    public Task<int> Handle(CreateAlunoDeficienciasCommand request, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }

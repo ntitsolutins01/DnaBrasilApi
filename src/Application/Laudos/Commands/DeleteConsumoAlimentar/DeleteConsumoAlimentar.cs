@@ -22,7 +22,7 @@ public class DeleteConsumoAlimentarCommandHandler : IRequestHandler<DeleteConsum
         _context = context;
     }
 
-    public async Task<int> Handle(DeleteConsumoAlimentarCommand request, CancellationToken cancellationToken)
+    public Task<int> Handle(DeleteConsumoAlimentarCommand request, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }

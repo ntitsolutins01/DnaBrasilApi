@@ -22,7 +22,7 @@ public class CreateSaudeCommandHandler : IRequestHandler<CreateSaudeCommand, int
         _context = context;
     }
 
-    public async Task<int> Handle(CreateSaudeCommand request, CancellationToken cancellationToken)
+    public Task<int> Handle(CreateSaudeCommand request, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }

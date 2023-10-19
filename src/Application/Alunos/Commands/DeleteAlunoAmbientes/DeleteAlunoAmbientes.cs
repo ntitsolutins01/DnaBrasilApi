@@ -22,7 +22,7 @@ public class DeleteAlunoAmbientesCommandHandler : IRequestHandler<DeleteAlunoAmb
         _context = context;
     }
 
-    public async Task<int> Handle(DeleteAlunoAmbientesCommand request, CancellationToken cancellationToken)
+    public Task<int> Handle(DeleteAlunoAmbientesCommand request, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }

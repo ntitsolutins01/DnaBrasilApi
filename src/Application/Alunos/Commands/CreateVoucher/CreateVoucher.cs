@@ -22,7 +22,7 @@ public class CreateVoucherCommandHandler : IRequestHandler<CreateVoucherCommand,
         _context = context;
     }
 
-    public async Task<int> Handle(CreateVoucherCommand request, CancellationToken cancellationToken)
+    public Task<int> Handle(CreateVoucherCommand request, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }

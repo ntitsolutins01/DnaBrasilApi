@@ -22,7 +22,7 @@ public class GetVoucherByAlunoQueryHandler : IRequestHandler<GetVoucherByAlunoQu
         _context = context;
     }
 
-    public async Task<VoucherDto> Handle(GetVoucherByAlunoQuery request, CancellationToken cancellationToken)
+    public Task<VoucherDto> Handle(GetVoucherByAlunoQuery request, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }

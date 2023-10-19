@@ -10,4 +10,5 @@ public class Ambiente : BaseAuditableEntity
     public string? Nome { get; set; }
     public bool Status { get; set; }
     public List<Aluno> Alunos { get; } = new();
+    public List<Profissional> Profissionais { get; } = new();
 }

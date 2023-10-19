@@ -22,7 +22,7 @@ public class GetTalentoEsportivoByAlunoQueryHandler : IRequestHandler<GetTalento
         _context = context;
     }
 
-    public async Task<TalentoEsportivoDto> Handle(GetTalentoEsportivoByAlunoQuery request, CancellationToken cancellationToken)
+    public Task<TalentoEsportivoDto> Handle(GetTalentoEsportivoByAlunoQuery request, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }

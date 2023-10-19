@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace DnaBrasil.Domain.Entities;
 public class Profissional : BaseAuditableEntity
 {
+    public required int AspNetUserId { get; set; }
     public required string Nome { get; set; }
     public DateTime DtNascimento { get; set; }
     public required string Email { get; set; }
@@ -20,6 +21,6 @@ public class Profissional : BaseAuditableEntity
     public string? Bairro { get; set; }
     public bool Status { get; set; } = true; 
     public Municipio? Municipio { get; set; }
-    public int AspNetUserId { get; set; }
+    public List<Ambiente>? Ambientes { get; init; } = new();
 
 }
