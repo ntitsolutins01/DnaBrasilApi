@@ -5,6 +5,7 @@ namespace DnaBrasil.Application.Alunos.Commands.UpdateAluno;
 
 public record UpdateAlunoCommand : IRequest
 {
+    public int Id { get; init; }
     public required int AspNetUserId { get; init; }
     public required string Nome { get; init; }
     public required string Email { get; init; }
