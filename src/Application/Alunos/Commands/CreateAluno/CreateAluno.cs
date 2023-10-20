@@ -29,7 +29,6 @@ public record CreateAlunoCommand : IRequest<int>
     public List<Deficiencia>? Deficiencias { get; init; }
     public List<Ambiente>? Ambientes { get; init; }
     public Parceiro? Parceiro { get; init; }
-    public int? Etnia { get; set; }
 }
 
 public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int>
@@ -64,7 +63,6 @@ public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int
             Status = request.Status,
             Habilitado = request.Habilitado,
             Parceiro = request.Parceiro,
-            Etnia = request.Etnia
         };
 
         entity.AddDomainEvent(new AlunoCreatedEvent(entity));
