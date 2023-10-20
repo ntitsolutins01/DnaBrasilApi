@@ -21,7 +21,6 @@ public class Aluno : BaseAuditableEntity
     public string? Url { get; set; }
     public bool Status { get; set; }
     public bool Habilitado { get; set; }
-    public int? Etnia { get; set; }
     public List<Deficiencia>? Deficiencias { get; set; } = new();
     public List<Ambiente>? Ambientes { get; set; } = new();
     public Parceiro? Parceiro { get; set; }
