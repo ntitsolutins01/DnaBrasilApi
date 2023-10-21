@@ -30,8 +30,6 @@ public class UpdateAlunoCommandValidator : AbstractValidator<UpdateAlunoCommand>
             .NotEmpty().WithMessage("É necessário um endereço de e-mail")
             .EmailAddress().WithMessage("É necessário um e-mail válido");
 
-        RuleFor(v => v.Etnia)
-            .NotNull().NotEmpty();
 
         RuleFor(v => v.Cpf)
             .NotEmpty()
