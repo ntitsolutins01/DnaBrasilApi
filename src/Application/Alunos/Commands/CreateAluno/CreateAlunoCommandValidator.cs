@@ -1,8 +1,7 @@
 ﻿using System.Text.RegularExpressions;
-using DnaBrasil.Application.Alunos.Commands.CreateAluno;
 using DnaBrasil.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.TodoItems.Commands.CreateTodoItem;
+namespace DnaBrasil.Application.Alunos.Commands.CreateAluno;
 
 public class CreateAlunoCommandValidator : AbstractValidator<CreateAlunoCommand>
 {
