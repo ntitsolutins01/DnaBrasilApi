@@ -12,7 +12,6 @@ public record CreateAlunoCommand : IRequest<int>
     public required string Email { get; init; }
     public required string Sexo { get; init; }
     public required DateTime DtNascimento { get; init; }
-    public required int Etnia { get; init; }
     public string? NomeMae { get; init; }
     public string? NomePai { get; init; }
     public string? Cpf { get; init; }
@@ -49,7 +48,6 @@ public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int
             Email = request.Email,
             Sexo = request.Sexo,
             DtNascimento = request.DtNascimento,
-            Etnia = request.Etnia,
             NomeMae = request.NomeMae,
             NomePai = request.NomePai,
             Cpf = request.Cpf,
@@ -62,7 +60,7 @@ public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int
             Url = request.Url,
             Status = request.Status,
             Habilitado = request.Habilitado,
-            Parceiro = request.Parceiro,
+            Parceiro = request.Parceiro
         };
 
         entity.AddDomainEvent(new AlunoCreatedEvent(entity));
