@@ -1,6 +1,7 @@
 ﻿using DnaBrasil.Application.Common.Interfaces;
-namespace DnaBrasil.Application.Alunos.Commands.DeleteAluno;
+using DnaBrasil.Domain.Events;
 
+namespace DnaBrasil.Application.Profissionais.Commands.DeleteAluno;
 public record DeleteAlunoCommand(int Id) : IRequest;
 
 public class DeleteAlunoCommandHandler : IRequestHandler<DeleteAlunoCommand>

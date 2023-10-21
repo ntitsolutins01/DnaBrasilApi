@@ -1,14 +1,14 @@
 ﻿using System.Text.RegularExpressions;
-using DnaBrasil.Application.Alunos.Commands.CreateAluno;
 using DnaBrasil.Application.Common.Interfaces;
+using DnaBrasil.Application.Alunos.Commands.UpdateAluno;
 
-namespace DnaBrasil.Application.TodoItems.Commands.CreateTodoItem;
+namespace DnaBrasil.Application.Alunos.Commands.UpdateAluno;
 
-public class CreateAlunoCommandValidator : AbstractValidator<CreateAlunoCommand>
+public class UpdateAlunoCommandValidator : AbstractValidator<UpdateAlunoCommand>
 {
     private readonly IApplicationDbContext _context;
 
-    public CreateAlunoCommandValidator(IApplicationDbContext context)
+    public UpdateAlunoCommandValidator(IApplicationDbContext context)
     {
         _context = context;
 
