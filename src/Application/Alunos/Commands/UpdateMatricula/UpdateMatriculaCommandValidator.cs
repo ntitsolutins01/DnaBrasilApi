@@ -1,7 +1,6 @@
-﻿using DnaBrasil.Application.Alunos.Commands.UpdateMatricula;
-using DnaBrasil.Application.Common.Interfaces;
+﻿using DnaBrasil.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.Matriculas.Commands.UpdateMatricula;
+namespace DnaBrasil.Application.Alunos.Commands.UpdateMatricula;
 
 public class UpdateMatriculaCommandValidator : AbstractValidator<UpdateMatriculaCommand>
 {
