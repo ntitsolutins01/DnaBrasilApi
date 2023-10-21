@@ -10,7 +10,6 @@ public record UpdateAlunoCommand : IRequest
     public required string Email { get; init; }
     public required string Sexo { get; init; }
     public required DateTime DtNascimento { get; init; }
-    public required int Etnia { get; init; }
     public string? NomeMae { get; init; }
     public string? NomePai { get; init; }
     public string? Cpf { get; init; }
@@ -50,7 +49,6 @@ public class UpdateAlunoCommandHandler : IRequestHandler<UpdateAlunoCommand>
         entity.Email = request.Email;
         entity.Sexo = request.Sexo;
         entity.DtNascimento = request.DtNascimento;
-        entity.Etnia = request.Etnia;
         entity.NomeMae = request.NomeMae;
         entity.NomePai = request.NomePai;
         entity.Cpf = request.Cpf;
