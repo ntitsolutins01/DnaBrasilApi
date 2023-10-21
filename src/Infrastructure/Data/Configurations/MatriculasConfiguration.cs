@@ -31,5 +31,8 @@ internal class MatriculasConfiguration : IEntityTypeConfiguration<Matricula>
             .HasMaxLength(10);
         builder.Property(t => t.CpfResponsavel3)
             .HasMaxLength(14);
+        builder.Property(t => t.DtVencimentoParq);
+        builder.Property(t => t.DtVencimentoAtestadoMedico);
+
     }
 }

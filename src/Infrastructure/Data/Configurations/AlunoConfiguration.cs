@@ -18,6 +18,8 @@ internal class AlunoConfiguration : IEntityTypeConfiguration<Aluno>
         builder.Property(t => t.Sexo)
             .HasMaxLength(1)
             .IsRequired();
+        builder.Property(t => t.Etnia)
+            .IsRequired();
         builder.Property(t => t.NomePai)
             .HasMaxLength(150);
         builder.Property(t => t.NomeMae)

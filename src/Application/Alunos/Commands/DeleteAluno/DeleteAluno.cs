@@ -1,19 +1,10 @@
 ﻿using DnaBrasil.Application.Common.Interfaces;
+using DnaBrasil.Domain.Events;
 
-namespace DnaBrasil.Application.Alunos.Commands.DeleteAluno;
+namespace DnaBrasil.Application.Profissionais.Commands.DeleteAluno;
+public record DeleteAlunoCommand(int Id) : IRequest;
 
-public record DeleteAlunoCommand : IRequest<int>
-{
-}
-
-public class DeleteAlunoCommandValidator : AbstractValidator<DeleteAlunoCommand>
-{
-    public DeleteAlunoCommandValidator()
-    {
-    }
-}
-
-public class DeleteAlunoCommandHandler : IRequestHandler<DeleteAlunoCommand, int>
+public class DeleteAlunoCommandHandler : IRequestHandler<DeleteAlunoCommand>
 {
     private readonly IApplicationDbContext _context;
 
@@ -22,8 +13,18 @@ public class DeleteAlunoCommandHandler : IRequestHandler<DeleteAlunoCommand, int
         _context = context;
     }
 
-    public Task<int> Handle(DeleteAlunoCommand request, CancellationToken cancellationToken)
+    public async Task Handle(DeleteAlunoCommand request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var entity = await _context.TodoItems
+            .FindAsync(new object[] { request.Id }, cancellationToken);
+
+        Guard.Against.NotFound(request.Id, entity);
+
+        _context.TodoItems.Remove(entity);
+
+        //entity.AddDomainEvent(new AlunoDeletedEvent(entity));
+
+        await _context.SaveChangesAsync(cancellationToken);
     }
+
 }
