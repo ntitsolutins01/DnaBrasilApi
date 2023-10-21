@@ -15,7 +15,6 @@ public class AlunoDto
     public required string Email { get; set; }
     public required string Sexo { get; set; }
     public required DateTime DtNascimento { get; set; }
-    public required int Etnia { get; set; }
     public string? NomeMae { get; set; }
     public string? NomePai { get; set; }
     public string? Cpf { get; set; }
@@ -32,6 +31,7 @@ public class AlunoDto
     public List<Deficiencia>? Deficiencias { get; set; } = new();
     public List<Ambiente>? Ambientes { get; set; } = new();
     public Parceiro? Parceiro { get; set; }
+    public int? Etnia { get; set; }
     private class Mapping : Profile
     {
         public Mapping()
