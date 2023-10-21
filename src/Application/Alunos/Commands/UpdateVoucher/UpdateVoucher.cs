@@ -1,19 +1,19 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
+﻿using DnaBrasil.Application.Alunos.Commands.CreateVoucher;
+using DnaBrasil.Application.Common.Interfaces;
+using DnaBrasil.Domain.Entities;
 
 namespace DnaBrasil.Application.Alunos.Commands.UpdateVoucher;
 
-public record UpdateVoucherCommand : IRequest<int>
+public record UpdateVoucherCommand : IRequest
 {
+    public int Id { get; set; }
+    public Local? Local { get; set; }
+    public string? Descricao { get; set; }
+    public string? Turma { get; set; }
+    public string? Serie { get; set; }
 }
 
-public class UpdateVoucherCommandValidator : AbstractValidator<UpdateVoucherCommand>
-{
-    public UpdateVoucherCommandValidator()
-    {
-    }
-}
-
-public class UpdateVoucherCommandHandler : IRequestHandler<UpdateVoucherCommand, int>
+public class UpdateVoucherCommandHandler : IRequestHandler<UpdateVoucherCommand>
 {
     private readonly IApplicationDbContext _context;
 
@@ -22,8 +22,18 @@ public class UpdateVoucherCommandHandler : IRequestHandler<UpdateVoucherCommand,
         _context = context;
     }
 
-    public Task<int> Handle(UpdateVoucherCommand request, CancellationToken cancellationToken)
+    public async Task Handle(UpdateVoucherCommand request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var entity = await _context.Vouchers
+            .FindAsync(new object[] { request.Id }, cancellationToken);
+
+        Guard.Against.NotFound(request.Id, entity);
+
+        entity.Local = request.Local;
+        entity.Descricao = request.Descricao;
+        entity.Turma = request.Turma;
+        entity.Serie = request.Serie;
+
+        await _context.SaveChangesAsync(cancellationToken);
     }
 }
