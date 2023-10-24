@@ -2,18 +2,9 @@
 
 namespace DnaBrasil.Application.Alunos.Commands.DeleteAlunoAmbientes;
 
-public record DeleteAlunoAmbientesCommand : IRequest<int>
-{
-}
+public record DeleteAlunoAmbientesCommand(int Id) : IRequest;
 
-public class DeleteAlunoAmbientesCommandValidator : AbstractValidator<DeleteAlunoAmbientesCommand>
-{
-    public DeleteAlunoAmbientesCommandValidator()
-    {
-    }
-}
-
-public class DeleteAlunoAmbientesCommandHandler : IRequestHandler<DeleteAlunoAmbientesCommand, int>
+public class DeleteAlunoAmbientesCommandHandler : IRequestHandler<DeleteAlunoAmbientesCommand>
 {
     private readonly IApplicationDbContext _context;
 
@@ -22,8 +13,18 @@ public class DeleteAlunoAmbientesCommandHandler : IRequestHandler<DeleteAlunoAmb
         _context = context;
     }
 
-    public Task<int> Handle(DeleteAlunoAmbientesCommand request, CancellationToken cancellationToken)
+    public async Task Handle(DeleteAlunoAmbientesCommand request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var entity = await _context.Alunos
+            .FindAsync(new object[] { request.Id }, cancellationToken);
+
+        Guard.Against.NotFound(request.Id, entity);
+
+        _context.Alunos.Remove(entity);
+
+        //entity.AddDomainEvent(new AlunoAmbientesDeletedEvent(entity));
+
+        await _context.SaveChangesAsync(cancellationToken);
     }
+
 }
