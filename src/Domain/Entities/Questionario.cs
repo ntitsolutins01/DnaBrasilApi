@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,6 +6,6 @@ using System.Threading.Tasks;
 namespace DnaBrasil.Domain.Entities;
 public class Questionario : BaseAuditableEntity
 {
-    public string? Descricao { get; set;}
-    public string? Tipo { get; set; }
+    public required string Pergunta { get; set;}
+    public required TipoLaudo Tipo { get; set; }
 }

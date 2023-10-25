@@ -12,9 +12,6 @@ internal class ContratoLocalProfissionalConfiguration : IEntityTypeConfiguration
 {
     public void Configure(EntityTypeBuilder<ContratoLocalProfissional> builder)
     {
-        builder.Property(t => t.IdContratoLocal)
-            .IsRequired();
-        builder.Property(t => t.IdProfissional)
-            .IsRequired();
+        
     }
 }

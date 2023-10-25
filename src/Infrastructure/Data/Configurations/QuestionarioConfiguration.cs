@@ -12,11 +12,8 @@ internal class QuestionarioConfiguration : IEntityTypeConfiguration<Questionario
 {
     public void Configure(EntityTypeBuilder<Questionario> builder)
     {
-        builder.Property(t => t.Descricao)
+        builder.Property(t => t.Pergunta)
             .HasMaxLength(200)
-            .IsRequired();
-        builder.Property(t => t.Tipo)
-            .HasMaxLength(50)
             .IsRequired();
     }
 }

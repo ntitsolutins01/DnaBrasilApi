@@ -33,6 +33,11 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<Voucher> Vouchers => Set<Voucher>();
     public DbSet<Parceiro> Parceiros => Set<Parceiro>();
     public DbSet<PlanoAula> PlanosAulas => Set<PlanoAula>();
+    public DbSet<Questionario> Questionarios => Set<Questionario>();
+    public DbSet<Contrato> Contratos => Set<Contrato>();
+    public DbSet<ContratoLocal> ContratosLocais => Set<ContratoLocal>();
+    public DbSet<ContratoLocalAluno> ContratosLocaisAlunos => Set<ContratoLocalAluno>();
+    public DbSet<ContratoLocalProfissional> ContratosLocaisProfissionais => Set<ContratoLocalProfissional>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

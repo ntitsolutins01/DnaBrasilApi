@@ -12,9 +12,6 @@ internal class ContratoLocalAlunoConfiguration : IEntityTypeConfiguration<Contra
 {
     public void Configure(EntityTypeBuilder<ContratoLocalAluno> builder)
     {
-        builder.Property(t => t.IdContratoLocal)
-            .IsRequired();
-        builder.Property(t => t.IdAluno)
-            .IsRequired();
+        
     }
 }

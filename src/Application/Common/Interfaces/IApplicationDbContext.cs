@@ -26,6 +26,11 @@ public interface IApplicationDbContext
     DbSet<Voucher> Vouchers { get; }
     DbSet<Parceiro> Parceiros { get; }
     DbSet<PlanoAula> PlanosAulas { get; }
+    DbSet<Questionario> Questionarios { get; }
+    DbSet<Contrato> Contratos { get; }
+    DbSet<ContratoLocal> ContratosLocais { get; }
+    DbSet<ContratoLocalAluno> ContratosLocaisAlunos { get; }
+    DbSet<ContratoLocalProfissional> ContratosLocaisProfissionais { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }
