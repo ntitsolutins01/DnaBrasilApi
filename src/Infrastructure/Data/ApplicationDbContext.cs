@@ -35,9 +35,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<PlanoAula> PlanosAulas => Set<PlanoAula>();
     public DbSet<Questionario> Questionarios => Set<Questionario>();
     public DbSet<Contrato> Contratos => Set<Contrato>();
-    public DbSet<ContratoLocal> ContratosLocais => Set<ContratoLocal>();
-    public DbSet<ContratoLocalAluno> ContratosLocaisAlunos => Set<ContratoLocalAluno>();
-    public DbSet<ContratoLocalProfissional> ContratosLocaisProfissionais => Set<ContratoLocalProfissional>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -77,5 +74,31 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
                 .WithOne(e => e.Parceiro)
                 .OnDelete(DeleteBehavior.NoAction);
 
+        builder.Entity<Contrato>()
+            .HasMany(e => e.Locais)
+            .WithMany(e => e.Contratos)
+            .UsingEntity(
+                "ContratosLocais",
+                r => r.HasOne(typeof(Local)).WithMany().HasForeignKey("LocalId").HasPrincipalKey(nameof(Local.Id)),
+                l => l.HasOne(typeof(Contrato)).WithMany().HasForeignKey("ContratoId").HasPrincipalKey(nameof(Contrato.Id)),
+                j => j.HasKey("ContratoId", "LocalId"));
+
+        builder.Entity<Contrato>()
+            .HasMany(e => e.Alunos)
+            .WithMany(e => e.Contratos)
+            .UsingEntity(
+                "ContratosAlunos",
+                r => r.HasOne(typeof(Aluno)).WithMany().HasForeignKey("AlunoId").HasPrincipalKey(nameof(Aluno.Id)),
+                l => l.HasOne(typeof(Contrato)).WithMany().HasForeignKey("ContratoId").HasPrincipalKey(nameof(Contrato.Id)),
+                j => j.HasKey("ContratoId", "AlunoId"));
+
+        builder.Entity<Contrato>()
+            .HasMany(e => e.Profissionais)
+            .WithMany(e => e.Contratos)
+            .UsingEntity(
+                "ContratosProfissionais",
+                r => r.HasOne(typeof(Profissional)).WithMany().HasForeignKey("ProfissionalId").HasPrincipalKey(nameof(Profissional.Id)),
+                l => l.HasOne(typeof(Contrato)).WithMany().HasForeignKey("ContratoId").HasPrincipalKey(nameof(Contrato.Id)),
+                j => j.HasKey("ContratoId", "ProfissionalId"));
     }
 }

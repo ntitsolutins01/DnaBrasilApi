@@ -12,4 +12,7 @@ public class Contrato : BaseAuditableEntity
     public required DateTime DtFim { get; set; }
     public string? Anexo { get; set; }
     public bool Status { get; set; } = true;
+    public List<Local>? Locais { get; set; }
+    public List<Aluno>? Alunos { get; set; }
+    public List<Profissional>? Profissionais { get; set; }
 }
