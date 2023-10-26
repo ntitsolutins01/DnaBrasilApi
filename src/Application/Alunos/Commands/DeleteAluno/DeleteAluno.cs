@@ -14,12 +14,12 @@ public class DeleteAlunoCommandHandler : IRequestHandler<DeleteAlunoCommand>
 
     public async Task Handle(DeleteAlunoCommand request, CancellationToken cancellationToken)
     {
-        var entity = await _context.TodoItems
+        var entity = await _context.Alunos
             .FindAsync(new object[] { request.Id }, cancellationToken);
 
         Guard.Against.NotFound(request.Id, entity);
 
-        _context.TodoItems.Remove(entity);
+        _context.Alunos.Remove(entity);
 
         //entity.AddDomainEvent(new AlunoDeletedEvent(entity));
 
