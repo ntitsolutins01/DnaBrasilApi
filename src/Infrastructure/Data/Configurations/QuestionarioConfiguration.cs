@@ -8,12 +8,12 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 
 namespace DnaBrasil.Infrastructure.Data.Configurations;
-public class VocacionalConfigurations : IEntityTypeConfiguration<Vocacional>
+internal class QuestionarioConfiguration : IEntityTypeConfiguration<Questionario>
 {
-    public void Configure(EntityTypeBuilder<Vocacional> builder)
+    public void Configure(EntityTypeBuilder<Questionario> builder)
     {
-        builder.Property(t => t.Resposta)
-            .HasMaxLength(80)
+        builder.Property(t => t.Pergunta)
+            .HasMaxLength(200)
             .IsRequired();
     }
 }

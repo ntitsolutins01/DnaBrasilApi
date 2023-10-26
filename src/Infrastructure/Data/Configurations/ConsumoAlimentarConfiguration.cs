@@ -12,9 +12,6 @@ public class ConsumoAlimentarConfiguration : IEntityTypeConfiguration<ConsumoAli
 {
     public void Configure(EntityTypeBuilder<ConsumoAlimentar> builder)
     {
-        builder.Property(t => t.Descricao)
-            .HasMaxLength(150)
-            .IsRequired();
         builder.Property(t => t.Resposta)
             .HasMaxLength(80)
             .IsRequired();
