@@ -4,7 +4,7 @@ using DnaBrasil.Domain.Entities;
 
 namespace DnaBrasil.Application.Alunos.Commands.CreateVoucher;
 
-public record CreateVoucherCommand : IRequest
+public record CreateVoucherCommand : IRequest<int>
 {
     public int Id { get; set; }
     public Local? Local { get; set; }
@@ -13,7 +13,7 @@ public record CreateVoucherCommand : IRequest
     public string? Serie { get; set; }
 }
 
-public class CreateVoucherCommandHandler : IRequestHandler<CreateVoucherCommand>
+public class CreateVoucherCommandHandler : IRequestHandler<CreateVoucherCommand, int>
 {
     private readonly IApplicationDbContext _context;
 
@@ -22,18 +22,22 @@ public class CreateVoucherCommandHandler : IRequestHandler<CreateVoucherCommand>
         _context = context;
     }
 
-    public async Task Handle(CreateVoucherCommand request, CancellationToken cancellationToken)
+    public async Task<int> Handle(CreateVoucherCommand request, CancellationToken cancellationToken)
     {
-        var entity = await _context.Vouchers
-            .FindAsync(new object[] { request.Id }, cancellationToken);
 
-        Guard.Against.NotFound(request.Id, entity);
+        var entity = new Voucher()
+        {
+            Local = request.Local,
+            Descricao = request.Descricao,
+            Turma = request.Turma,
+            Serie = request.Serie,
+            DomainEvents = {  }
+        };
 
-        entity.Local = request.Local;
-        entity.Descricao = request.Descricao;
-        entity.Turma = request.Turma;
-        entity.Serie = request.Serie;
+        _context.Vouchers.Add(entity);
 
         await _context.SaveChangesAsync(cancellationToken);
+
+        return entity.Id;
     }
 }

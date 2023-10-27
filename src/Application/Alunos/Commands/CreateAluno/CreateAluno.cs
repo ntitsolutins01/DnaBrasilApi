@@ -66,8 +66,6 @@ public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int
             Etnia = request.Etnia
         };
 
-        entity.AddDomainEvent(new AlunoCreatedEvent(entity));
-
         _context.Alunos.Add(entity);
 
         await _context.SaveChangesAsync(cancellationToken);
