@@ -3,10 +3,7 @@ using DnaBrasil.Domain.Entities;
 
 namespace DnaBrasil.Application.Alunos.Queries.GetAlunosByFilter;
 
-public record GetAlunosByFilterQuery : IRequest<List<AlunoDto>>
-{
-    public SearchAlunosDto? Search { get; init; }
-}
+public record GetAlunosByFilterQuery(SearchAlunosDto search) : IRequest<List<AlunoDto>>;
 
 public class GetAlunosByFilterQueryHandler : IRequestHandler<GetAlunosByFilterQuery, List<AlunoDto>>
 {
@@ -24,7 +21,7 @@ public class GetAlunosByFilterQueryHandler : IRequestHandler<GetAlunosByFilterQu
         var Alunos = _context.Alunos
             .AsNoTracking();
 
-        var result = FilterAlunos(Alunos, request.Search!)
+        var result = FilterAlunos(Alunos, request.search)
             .ProjectTo<AlunoDto>(_mapper.ConfigurationProvider)
             .OrderBy(t => t.Id)
             .ToListAsync(cancellationToken); ;

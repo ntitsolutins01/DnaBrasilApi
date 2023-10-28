@@ -5,7 +5,7 @@ using DnaBrasil.Domain.Entities;
 
 namespace DnaBrasil.Application.Alunos.Commands.CreateMatricula;
 
-public record CreateMatriculaCommand : IRequest
+public record CreateMatriculaCommand : IRequest<int>
 {
     public int Id { get; set; }
     public DateTime DtVencimentoParq { get; set; }
@@ -21,7 +21,7 @@ public record CreateMatriculaCommand : IRequest
     public string? CpfResponsavel3 { get; set; }
 }
 
-public class CreateMatriculaCommandHandler : IRequestHandler<CreateMatriculaCommand>
+public class CreateMatriculaCommandHandler : IRequestHandler<CreateMatriculaCommand, int>
 {
     private readonly IApplicationDbContext _context;
 
@@ -30,7 +30,7 @@ public class CreateMatriculaCommandHandler : IRequestHandler<CreateMatriculaComm
         _context = context;
     }
 
-    public async Task Handle(CreateMatriculaCommand request, CancellationToken cancellationToken)
+    public async Task<int> Handle(CreateMatriculaCommand request, CancellationToken cancellationToken)
     {
         var entity = await _context.Matriculas
             .FindAsync(new object[] { request.Id }, cancellationToken);
@@ -49,6 +49,10 @@ public class CreateMatriculaCommandHandler : IRequestHandler<CreateMatriculaComm
         entity.CpfResponsavel3 = request.CpfResponsavel3;
         entity.ParentescoResponsavel3 = request.ParentescoResponsavel3;
 
+        _context.Matriculas.Add(entity);
+
         await _context.SaveChangesAsync(cancellationToken);
+
+        return entity.Id;
     }
 }

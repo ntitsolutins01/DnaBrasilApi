@@ -5,7 +5,7 @@ namespace DnaBrasil.Application.Alunos.Commands.UpdateAlunoAmbientes;
 
 public record UpdateAlunoAmbientesCommand : IRequest
 {
-    public int Id { get; init; }
+    public int AlunoId { get; init; }
     public List<Ambiente>? Ambientes { get; init; }
 }
 
@@ -21,9 +21,9 @@ public class UpdateAlunoAmbientesCommandHandler : IRequestHandler<UpdateAlunoAmb
     public async Task Handle(UpdateAlunoAmbientesCommand request, CancellationToken cancellationToken)
     {
         var entity = await _context.Alunos
-            .FindAsync(new object[] { request.Id }, cancellationToken);
+            .FindAsync(new object[] { request.AlunoId }, cancellationToken);
 
-        Guard.Against.NotFound(request.Id, entity);
+        Guard.Against.NotFound(request.AlunoId, entity);
 
         entity.Ambientes = request.Ambientes;
 
