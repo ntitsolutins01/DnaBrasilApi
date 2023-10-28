@@ -4,6 +4,7 @@ using DnaBrasil.Application.Alunos.Commands.CreateVoucher;
 using DnaBrasil.Application.Alunos.Commands.DeleteAluno;
 using DnaBrasil.Application.Alunos.Commands.UpdateAluno;
 using DnaBrasil.Application.Alunos.Commands.UpdateAlunoAmbientes;
+using DnaBrasil.Application.Alunos.Commands.UpdateAlunoDeficiencias;
 using DnaBrasil.Application.Alunos.Commands.UpdateMatricula;
 using DnaBrasil.Application.Alunos.Commands.UpdateVoucher;
 using DnaBrasil.Application.Alunos.Queries;
@@ -25,7 +26,8 @@ public class Alunos : EndpointGroupBase
             .MapPost(CreateMatricula, "Matricula")
             .MapPut(UpdateMatricula, "/Matricula/{id}")
             .MapPost(CreateVoucher, "Voucher")
-            .MapPut(UpdateVoucher, "/Voucher/{id}");
+            .MapPut(UpdateVoucher, "/Voucher/{id}")
+            .MapPut(UpdateAlunoDeficiencias, "/Voucher/{id}");
     }
 
     public async Task<List<AlunoDto>> GetAlunosByFilter(ISender sender, [FromBody] SearchAlunosDto search)
@@ -76,6 +78,13 @@ public class Alunos : EndpointGroupBase
     {
         if (id != command.Id) return Results.BadRequest();
         await sender.Send(command);
+        return Results.NoContent();
+    }
+
+    public async Task<IResult> UpdateAlunoDeficiencias(ISender sender, UpdateAlunoDeficienciasCommand command)
+    {
+        await sender.Send(command);
+
         return Results.NoContent();
     }
 
