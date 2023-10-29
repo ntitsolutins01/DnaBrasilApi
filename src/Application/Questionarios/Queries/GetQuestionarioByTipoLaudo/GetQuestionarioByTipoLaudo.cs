@@ -1,6 +1,6 @@
 ﻿using DnaBrasil.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.Questionarios.Commands.GetQuestionarioByTipoLaudo;
+namespace DnaBrasil.Application.Questionarios.Queries.GetQuestionarioByTipoLaudo;
 
 public record GetQuestionarioByTipoLaudoCommand : IRequest<int>
 {
@@ -22,7 +22,7 @@ public class GetQuestionarioByTipoLaudoCommandHandler : IRequestHandler<GetQuest
         _context = context;
     }
 
-    public async Task<int> Handle(GetQuestionarioByTipoLaudoCommand request, CancellationToken cancellationToken)
+    public  Task<int> Handle(GetQuestionarioByTipoLaudoCommand request, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }

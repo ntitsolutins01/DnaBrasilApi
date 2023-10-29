@@ -20,6 +20,7 @@
   <ItemGroup>
     <Folder Include="Dependencias\Commands\" />
     <Folder Include="Dependencias\Queries\" />
+    <Folder Include="Questionarios\Commands\" />
   </ItemGroup>
 
 </Project>

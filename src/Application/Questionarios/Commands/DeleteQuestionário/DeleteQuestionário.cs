@@ -22,7 +22,7 @@ public class DeleteQuestionárioCommandHandler : IRequestHandler<DeleteQuestion�
         _context = context;
     }
 
-    public async Task<int> Handle(DeleteQuestionárioCommand request, CancellationToken cancellationToken)
+    public Task<int> Handle(DeleteQuestionárioCommand request, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }

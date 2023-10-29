@@ -1,10 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DnaBrasil.Application.Alunos.Queries;
+using DnaBrasil.Application.Profissionais.Queries.ProfissionalByFilter;
+using DnaBrasil.Domain.Entities;
 
 namespace DnaBrasil.Application.Ambientes.Queries.GetAmbientesAll;
 public class AmbienteDto
 {
+    public string? Nome { get; set; }
+    public bool Status { get; set; }
+    public List<AlunoDto> Alunos { get; } = new();
+    public List<ProfissionalDto> Profissionais { get; } = new();
+    private class Mapping : Profile
+    {
+        public Mapping()
+        {
+            CreateMap<Ambiente, AmbienteDto>();
+        }
+    }
 }

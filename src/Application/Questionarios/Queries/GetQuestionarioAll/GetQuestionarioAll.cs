@@ -1,6 +1,6 @@
 ﻿using DnaBrasil.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.Questionarios.Commands.GetQuestionarioAll;
+namespace DnaBrasil.Application.Questionarios.Queries.GetQuestionarioAll;
 
 public record GetQuestionarioAllCommand : IRequest<int>
 {
@@ -22,7 +22,7 @@ public class GetQuestionarioAllCommandHandler : IRequestHandler<GetQuestionarioA
         _context = context;
     }
 
-    public async Task<int> Handle(GetQuestionarioAllCommand request, CancellationToken cancellationToken)
+    public Task<int> Handle(GetQuestionarioAllCommand request, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }

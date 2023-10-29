@@ -3,7 +3,10 @@ using DnaBrasil.Domain.Entities;
 
 namespace DnaBrasil.Application.Alunos.Queries.GetAlunosByFilter;
 
-public record GetAlunosByFilterQuery(SearchAlunosDto search) : IRequest<List<AlunoDto>>;
+public record GetAlunosByFilterQuery : IRequest<List<AlunoDto>>
+{
+    public SearchAlunosDto? Search { get; init; }
+}
 
 public class GetAlunosByFilterQueryHandler : IRequestHandler<GetAlunosByFilterQuery, List<AlunoDto>>
 {
@@ -21,7 +24,7 @@ public class GetAlunosByFilterQueryHandler : IRequestHandler<GetAlunosByFilterQu
         var Alunos = _context.Alunos
             .AsNoTracking();
 
-        var result = FilterAlunos(Alunos, request.search)
+        var result = FilterAlunos(Alunos, request.Search!)
             .ProjectTo<AlunoDto>(_mapper.ConfigurationProvider)
             .OrderBy(t => t.Id)
             .ToListAsync(cancellationToken); ;
@@ -33,6 +36,16 @@ public class GetAlunosByFilterQueryHandler : IRequestHandler<GetAlunosByFilterQu
     {
         if (!string.IsNullOrWhiteSpace(search.Nome))
             Alunos = Alunos.Where(u => u.Nome.Contains(search.Nome));
+
+        if (!string.IsNullOrWhiteSpace(search.Cpf))
+            Alunos = Alunos.Where(u => u.Cpf!.Contains(search.Cpf));
+
+        if (search.DeficienciaId.GetValueOrDefault() != 0)
+            Alunos = Alunos.Where(u => u.Deficiencias!.Any(f => f.Id == search.DeficienciaId));
+
+        //TODO: Relacionamento Aluno-Local para filtro
+        //if (search.LocalId.GetValueOrDefault() != 0)
+        //    Alunos = Alunos.Where(u => u.Local!.Any(f => f.Id == search.LocalId));
 
         return Alunos;
     }

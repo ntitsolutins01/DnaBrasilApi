@@ -25,4 +25,6 @@ public class Aluno : BaseAuditableEntity
     public Parceiro? Parceiro { get; set; }
     public required int Etnia { get; set; }
     public List<Contrato>? Contratos { get; set; }
+    public Matricula? Matricula { get; set; }
+    public Voucher? Voucher { get; set; }
 }

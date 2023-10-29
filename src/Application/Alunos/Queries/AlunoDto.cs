@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using DnaBrasil.Application.Municipios.Queries;
-using DnaBrasil.Application.Profissionais.Queries.ProfissionalByFilter;
+﻿using DnaBrasil.Application.Ambientes.Queries.GetAmbientesAll;
+using DnaBrasil.Application.Deficiencias.Queries.GetDeficienciasAll;
 using DnaBrasil.Domain.Entities;
 
 namespace DnaBrasil.Application.Alunos.Queries;
@@ -28,10 +25,12 @@ public class AlunoDto
     public string? Url { get; set; }
     public bool Status { get; set; }
     public bool Habilitado { get; set; }
-    public List<Deficiencia>? Deficiencias { get; set; } = new();
-    public List<Ambiente>? Ambientes { get; set; } = new();
+    public List<DeficienciaDto>? Deficiencias { get; set; } = new();
+    public List<AmbienteDto>? Ambientes { get; set; } = new();
     public Parceiro? Parceiro { get; set; }
     public int? Etnia { get; set; }
+    public MatriculaDto? Matricula { get; set; }
+    public List<VoucherDto>? Vouchers { get; set; }
     private class Mapping : Profile
     {
         public Mapping()

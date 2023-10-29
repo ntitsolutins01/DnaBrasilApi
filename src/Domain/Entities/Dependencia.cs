@@ -21,4 +21,5 @@ public class Dependencia : BaseAuditableEntity
     public bool? AutorizacaoUsoImagemAudio { get; set; }
     public bool? AutorizacaoUsoIndicadores { get; set; }
     public bool? AutorizacaoSaida { get; set; } = false;
+    public required Aluno Aluno { get; set; }
 }
