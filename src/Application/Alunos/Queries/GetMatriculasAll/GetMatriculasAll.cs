@@ -1,29 +1,28 @@
 ﻿using DnaBrasil.Application.Common.Interfaces;
 
 namespace DnaBrasil.Application.Alunos.Queries.GetMatriculasAll;
+//[Authorize]
+public record GetMatriculasAllQuery : IRequest<List<MatriculaDto>>;
 
-public record GetMatriculasAllQuery : IRequest<MatriculaDto>
-{
-}
-
-public class GetMatriculasAllQueryValidator : AbstractValidator<GetMatriculasAllQuery>
-{
-    public GetMatriculasAllQueryValidator()
-    {
-    }
-}
-
-public class GetMatriculasAllQueryHandler : IRequestHandler<GetMatriculasAllQuery, MatriculaDto>
+public class GetMatriculasAllQueryHandler : IRequestHandler<GetMatriculasAllQuery, List<MatriculaDto>>
 {
     private readonly IApplicationDbContext _context;
+    private readonly IMapper _mapper;
 
-    public GetMatriculasAllQueryHandler(IApplicationDbContext context)
+    public GetMatriculasAllQueryHandler(IApplicationDbContext context, IMapper mapper)
     {
         _context = context;
+        _mapper = mapper;
     }
 
-    public Task<MatriculaDto> Handle(GetMatriculasAllQuery request, CancellationToken cancellationToken)
+    public async Task<List<MatriculaDto>> Handle(GetMatriculasAllQuery request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var result = await _context.Matriculas
+            .AsNoTracking()
+            .ProjectTo<MatriculaDto>(_mapper.ConfigurationProvider)
+            .OrderBy(t => t.Id)
+            .ToListAsync(cancellationToken);
+
+        return result == null ? throw new ArgumentNullException(nameof(result)) : result;
     }
 }

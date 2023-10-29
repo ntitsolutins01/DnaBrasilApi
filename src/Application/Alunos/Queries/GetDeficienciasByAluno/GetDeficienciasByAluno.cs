@@ -3,28 +3,31 @@ using DnaBrasil.Application.Deficiencias.Queries.GetDeficienciasAll;
 
 namespace DnaBrasil.Application.Alunos.Queries.GetDeficienciasByAluno;
 
-public record GetDeficienciasByAlunoQuery : IRequest<DeficienciaDto>
+public record GetDeficienciasByAlunoQuery : IRequest<List<DeficienciaDto>>
 {
+    public int AlunoId { get; set; }
 }
 
-public class GetDeficienciasByAlunoQueryValidator : AbstractValidator<GetDeficienciasByAlunoQuery>
-{
-    public GetDeficienciasByAlunoQueryValidator()
-    {
-    }
-}
-
-public class GetDeficienciasByAlunoQueryHandler : IRequestHandler<GetDeficienciasByAlunoQuery, DeficienciaDto>
+public class GetDeficienciasByAlunoQueryHandler : IRequestHandler<GetDeficienciasByAlunoQuery, List<DeficienciaDto>>
 {
     private readonly IApplicationDbContext _context;
+    private readonly IMapper _mapper;
 
-    public GetDeficienciasByAlunoQueryHandler(IApplicationDbContext context)
+    public GetDeficienciasByAlunoQueryHandler(IApplicationDbContext context, IMapper mapper)
     {
         _context = context;
+        _mapper = mapper;
     }
 
-    public Task<DeficienciaDto> Handle(GetDeficienciasByAlunoQuery request, CancellationToken cancellationToken)
+    public async Task<List<DeficienciaDto>> Handle(GetDeficienciasByAlunoQuery request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var result = await _context.Alunos
+            .Where(x => x.Id == request.AlunoId)
+            .AsNoTracking()
+            .ProjectTo<AlunoDto>(_mapper.ConfigurationProvider)
+            .FirstOrDefaultAsync(cancellationToken);
+
+
+        return result!.Deficiencias == null ? throw new ArgumentNullException(nameof(result.Deficiencias)) : result.Deficiencias;
     }
 }

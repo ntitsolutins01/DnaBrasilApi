@@ -29,7 +29,7 @@ internal class AlunoConfiguration : IEntityTypeConfiguration<Aluno>
         builder.Property(t => t.Celular)
             .HasMaxLength(13);
         builder.Property(t => t.Cep)
-            .HasMaxLength(8);
+            .HasMaxLength(9);
         builder.Property(t => t.Endereco)
             .HasMaxLength(200);
         builder.Property(t => t.Bairro)

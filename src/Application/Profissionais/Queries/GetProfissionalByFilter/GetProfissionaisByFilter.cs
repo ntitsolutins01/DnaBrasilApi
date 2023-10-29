@@ -1,7 +1,8 @@
 ﻿using DnaBrasil.Application.Common.Interfaces;
+using DnaBrasil.Application.Profissionais.Queries.ProfissionalByFilter;
 using DnaBrasil.Domain.Entities;
 
-namespace DnaBrasil.Application.Profissionais.Queries.ProfissionalByFilter;
+namespace DnaBrasil.Application.Profissionais.Queries.GetProfissionalByFilter;
 
 public record GetProfissionaisByFilterQuery : IRequest<List<ProfissionalDto>>
 {

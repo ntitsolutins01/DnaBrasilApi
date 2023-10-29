@@ -22,7 +22,7 @@ public class CreateQuestionárioCommandHandler : IRequestHandler<CreateQuestion�
         _context = context;
     }
 
-    public async Task<int> Handle(CreateQuestionárioCommand request, CancellationToken cancellationToken)
+    public Task<int> Handle(CreateQuestionárioCommand request, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }

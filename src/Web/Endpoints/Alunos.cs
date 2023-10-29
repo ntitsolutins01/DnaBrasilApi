@@ -18,7 +18,7 @@ public class Alunos : EndpointGroupBase
     {
         app.MapGroup(this)
             //.RequireAuthorization()
-            .MapGet(GetAlunosByFilter)
+            //.MapGet(GetAlunosByFilter)
             .MapPost(CreateAluno)
             .MapPut(UpdateAluno, "{id}")
             .MapPut(UpdateAlunoAmbientes, "/Ambientes")
@@ -30,10 +30,10 @@ public class Alunos : EndpointGroupBase
             .MapPut(UpdateAlunoDeficiencias, "/Voucher/{id}");
     }
 
-    public async Task<List<AlunoDto>> GetAlunosByFilter(ISender sender, [FromBody] SearchAlunosDto search)
-    {
-        return await sender.Send(new GetAlunosByFilterQuery(search));
-    }
+    //public async Task<List<AlunoDto>> GetAlunosByFilter(ISender sender, [FromBody] SearchAlunosDto search)
+    //{
+    //    return await sender.Send(new GetAlunosByFilterQuery(search));
+    //}
 
     public async Task<int> CreateAluno(ISender sender, CreateAlunoCommand command)
     {

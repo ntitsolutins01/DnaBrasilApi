@@ -4,6 +4,7 @@ using DnaBrasil.Domain.Entities;
 namespace DnaBrasil.Application.Alunos.Queries;
 public class MatriculaDto
 {
+    public int Id { get; set; }
     public DateTime DtVencimentoParq { get; set; }
     public DateTime DtVencimentoAtestadoMedico { get; set; }
     public string? NomeResponsavel1 { get; set; }
@@ -15,6 +16,7 @@ public class MatriculaDto
     public string? NomeResponsavel3 { get; set; }
     public string? ParentescoResponsavel3 { get; set; }
     public string? CpfResponsavel3 { get; set; }
+    public required AlunoDto Aluno { get; set; }
     private class Mapping : Profile
     {
         public Mapping()

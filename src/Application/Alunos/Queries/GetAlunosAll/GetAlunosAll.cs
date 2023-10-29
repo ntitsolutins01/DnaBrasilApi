@@ -1,29 +1,30 @@
 ﻿using DnaBrasil.Application.Common.Interfaces;
+using DnaBrasil.Application.Alunos.Queries.GetAlunosAll;
 
 namespace DnaBrasil.Application.Alunos.Queries.GetAlunosAll;
+//[Authorize]
+public record GetAlunosQuery : IRequest<List<AlunoDto>>;
 
-public record GetAlunosAllQuery : IRequest<AlunoDto>
-{
-}
-
-public class GetAlunosAllQueryValidator : AbstractValidator<GetAlunosAllQuery>
-{
-    public GetAlunosAllQueryValidator()
-    {
-    }
-}
-
-public class GetAlunosAllQueryHandler : IRequestHandler<GetAlunosAllQuery, AlunoDto>
+public class GetAlunosQueryHandler : IRequestHandler<GetAlunosQuery, List<AlunoDto>>
 {
     private readonly IApplicationDbContext _context;
+    private readonly IMapper _mapper;
 
-    public GetAlunosAllQueryHandler(IApplicationDbContext context)
+    public GetAlunosQueryHandler(IApplicationDbContext context, IMapper mapper)
     {
         _context = context;
+        _mapper = mapper;
     }
 
-    public Task<AlunoDto> Handle(GetAlunosAllQuery request, CancellationToken cancellationToken)
+    public async Task<List<AlunoDto>> Handle(GetAlunosQuery request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var result = await _context.Alunos
+            .AsNoTracking()
+            .ProjectTo<AlunoDto>(_mapper.ConfigurationProvider)
+            .OrderBy(t => t.Id)
+            .ToListAsync(cancellationToken);
+
+        return result == null ? throw new ArgumentNullException(nameof(result)) : result;
     }
 }
+
