@@ -1,29 +1,29 @@
 ﻿using DnaBrasil.Application.Common.Interfaces;
+using DnaBrasil.Domain.Entities;
 
 namespace DnaBrasil.Application.Deficiencias.Queries.GetDeficienciasAll;
+//[Authorize]
+public record GetDeficienciasQuery : IRequest<List<DeficienciaDto>>;
 
-public record GetDeficienciasAllQuery : IRequest<DeficienciaDto>
-{
-}
-
-public class GetDeficienciasAllQueryValidator : AbstractValidator<GetDeficienciasAllQuery>
-{
-    public GetDeficienciasAllQueryValidator()
-    {
-    }
-}
-
-public class GetDeficienciasAllQueryHandler : IRequestHandler<GetDeficienciasAllQuery, DeficienciaDto>
+public class GetDeficienciasQueryHandler : IRequestHandler<GetDeficienciasQuery, List<DeficienciaDto>>
 {
     private readonly IApplicationDbContext _context;
+    private readonly IMapper _mapper;
 
-    public GetDeficienciasAllQueryHandler(IApplicationDbContext context)
+    public GetDeficienciasQueryHandler(IApplicationDbContext context, IMapper mapper)
     {
         _context = context;
+        _mapper = mapper;
     }
 
-    public Task<DeficienciaDto> Handle(GetDeficienciasAllQuery request, CancellationToken cancellationToken)
+    public async Task<List<DeficienciaDto>> Handle(GetDeficienciasQuery request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var result = await _context.Deficiencias
+            .AsNoTracking()
+            .ProjectTo<DeficienciaDto>(_mapper.ConfigurationProvider)
+            .OrderBy(t => t.Id)
+            .ToListAsync(cancellationToken);
+
+        return result == null ? throw new ArgumentNullException(nameof(result)) : result;
     }
 }

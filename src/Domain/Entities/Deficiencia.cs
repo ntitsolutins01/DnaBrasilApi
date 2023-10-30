@@ -1,7 +1,7 @@
 ﻿namespace DnaBrasil.Domain.Entities;
 public class Deficiencia : BaseAuditableEntity
 {
-    public string? Nome { get; set; }
-    public bool Status { get; set; }
-    public List<Aluno> Alunos { get; } = new();
+    public required string Nome { get; set; }
+    public bool Status { get; set; } = true;
+    public List<Aluno>? Alunos { get; set; } = new();
 }

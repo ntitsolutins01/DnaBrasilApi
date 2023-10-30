@@ -1204,14 +1204,14 @@
             "additionalProperties": false,
             "properties": {
               "nome": {
-                "type": "string",
-                "nullable": true
+                "type": "string"
               },
               "status": {
                 "type": "boolean"
               },
               "alunos": {
                 "type": "array",
+                "nullable": true,
                 "items": {
                   "$ref": "#/components/schemas/Aluno"
                 }
