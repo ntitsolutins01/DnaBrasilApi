@@ -11,6 +11,7 @@ public record CreateVoucherCommand : IRequest<int>
     public string? Descricao { get; set; }
     public string? Turma { get; set; }
     public string? Serie { get; set; }
+    public required Aluno Aluno { get; set; }
 }
 
 public class CreateVoucherCommandHandler : IRequestHandler<CreateVoucherCommand, int>
@@ -31,7 +32,8 @@ public class CreateVoucherCommandHandler : IRequestHandler<CreateVoucherCommand,
             Descricao = request.Descricao,
             Turma = request.Turma,
             Serie = request.Serie,
-            DomainEvents = {  }
+            DomainEvents = {  },
+            Aluno = request.Aluno
         };
 
         _context.Vouchers.Add(entity);
