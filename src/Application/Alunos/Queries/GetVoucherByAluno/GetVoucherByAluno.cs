@@ -2,12 +2,12 @@
 
 namespace DnaBrasil.Application.Alunos.Queries.GetVoucherByAluno;
 
-public record GetVoucherByAlunoQuery : IRequest<List<VoucherDto>>
+public record GetVoucherByAlunoQuery : IRequest<VoucherDto>
 {
     public int AlunoId { get; set; }
 }
 
-public class GetVoucherByAlunoQueryHandler : IRequestHandler<GetVoucherByAlunoQuery, List<VoucherDto>>
+public class GetVoucherByAlunoQueryHandler : IRequestHandler<GetVoucherByAlunoQuery, VoucherDto>
 {
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
@@ -18,7 +18,7 @@ public class GetVoucherByAlunoQueryHandler : IRequestHandler<GetVoucherByAlunoQu
         _mapper = mapper;
     }
 
-    public async Task<List<VoucherDto>> Handle(GetVoucherByAlunoQuery request, CancellationToken cancellationToken)
+    public async Task<VoucherDto> Handle(GetVoucherByAlunoQuery request, CancellationToken cancellationToken)
     {
         var result = await _context.Alunos
             .Where(x => x.Id == request.AlunoId)
@@ -27,6 +27,6 @@ public class GetVoucherByAlunoQueryHandler : IRequestHandler<GetVoucherByAlunoQu
             .FirstOrDefaultAsync(cancellationToken);
 
 
-        return result!.Vouchers == null ? throw new ArgumentNullException(nameof(result.Vouchers)) : result.Vouchers;
+        return result!.Voucher == null ? throw new ArgumentNullException(nameof(result.Voucher)) : result.Voucher;
     }
 }

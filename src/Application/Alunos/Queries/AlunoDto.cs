@@ -29,8 +29,9 @@ public class AlunoDto
     public List<AmbienteDto>? Ambientes { get; set; } = new();
     public Parceiro? Parceiro { get; set; }
     public int? Etnia { get; set; }
+    public VoucherDto? Voucher { get; set; }
     public MatriculaDto? Matricula { get; set; }
-    public List<VoucherDto>? Vouchers { get; set; }
+
     private class Mapping : Profile
     {
         public Mapping()
