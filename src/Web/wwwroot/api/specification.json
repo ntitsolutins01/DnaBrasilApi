@@ -1352,6 +1352,14 @@
                     "$ref": "#/components/schemas/Voucher"
                   }
                 ]
+              },
+              "dependencia": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Dependencia"
+                  }
+                ]
               }
             }
           }
@@ -1743,6 +1751,7 @@
               },
               "alunos": {
                 "type": "array",
+                "nullable": true,
                 "items": {
                   "$ref": "#/components/schemas/Aluno"
                 }
@@ -1811,6 +1820,9 @@
                     "$ref": "#/components/schemas/Local"
                   }
                 ]
+              },
+              "aluno": {
+                "$ref": "#/components/schemas/Aluno"
               }
             }
           }
@@ -1844,6 +1856,81 @@
               "serie": {
                 "type": "string",
                 "nullable": true
+              },
+              "aluno": {
+                "$ref": "#/components/schemas/Aluno"
+              }
+            }
+          }
+        ]
+      },
+      "Dependencia": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "doencas": {
+                "type": "string",
+                "nullable": true
+              },
+              "nacionalidade": {
+                "type": "string",
+                "nullable": true
+              },
+              "naturalidade": {
+                "type": "string",
+                "nullable": true
+              },
+              "nomeEscola": {
+                "type": "string",
+                "nullable": true
+              },
+              "tipoEscola": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "tipoEscolaridade": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "turno": {
+                "type": "string",
+                "nullable": true
+              },
+              "serie": {
+                "type": "string",
+                "nullable": true
+              },
+              "ano": {
+                "type": "string",
+                "nullable": true
+              },
+              "turma": {
+                "type": "string",
+                "nullable": true
+              },
+              "termoCompromisso": {
+                "type": "boolean",
+                "nullable": true
+              },
+              "autorizacaoUsoImagemAudio": {
+                "type": "boolean",
+                "nullable": true
+              },
+              "autorizacaoUsoIndicadores": {
+                "type": "boolean",
+                "nullable": true
+              },
+              "autorizacaoSaida": {
+                "type": "boolean",
+                "nullable": true
+              },
+              "aluno": {
+                "$ref": "#/components/schemas/Aluno"
               }
             }
           }

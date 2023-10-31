@@ -11,5 +11,5 @@ public class Voucher : BaseAuditableEntity
     public string? Descricao { get; set; }
     public string? Turma { get; set; }
     public string? Serie { get; set; }
-    //public required Aluno Aluno { get; set; }
+    public required Aluno Aluno { get; set; }
 }

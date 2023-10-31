@@ -32,8 +32,7 @@ public class CreateVoucherCommandHandler : IRequestHandler<CreateVoucherCommand,
             Descricao = request.Descricao,
             Turma = request.Turma,
             Serie = request.Serie,
-            DomainEvents = {  },
-            //Aluno = request.Aluno
+            Aluno = request.Aluno
         };
 
         _context.Vouchers.Add(entity);
