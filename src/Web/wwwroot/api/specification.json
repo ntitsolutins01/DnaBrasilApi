@@ -2127,22 +2127,11 @@
               "profissional": {
                 "$ref": "#/components/schemas/Profissional"
               },
-              "descricao": {
-                "type": "string",
-                "nullable": true
+              "questionario": {
+                "$ref": "#/components/schemas/Questionario"
               },
               "resposta": {
-                "type": "string",
-                "nullable": true
-              },
-              "aluno": {
-                "$ref": "#/components/schemas/Aluno"
-              },
-              "questionarios": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/Questionario"
-                }
+                "type": "string"
               }
             }
           }
