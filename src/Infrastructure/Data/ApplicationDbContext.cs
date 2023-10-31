@@ -35,6 +35,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<PlanoAula> PlanosAulas => Set<PlanoAula>();
     public DbSet<Questionario> Questionarios => Set<Questionario>();
     public DbSet<Contrato> Contratos => Set<Contrato>();
+    public DbSet<Laudo> Laudos => Set<Laudo>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -100,6 +101,15 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
                 r => r.HasOne(typeof(Profissional)).WithMany().HasForeignKey("ProfissionalId").HasPrincipalKey(nameof(Profissional.Id)),
                 l => l.HasOne(typeof(Contrato)).WithMany().HasForeignKey("ContratoId").HasPrincipalKey(nameof(Contrato.Id)),
                 j => j.HasKey("ContratoId", "ProfissionalId"));
+        //Basic many-to-many
+        //builder.Entity<Aluno>()
+        //    .HasMany(e => e.Laudos)
+        //    .WithMany(e => e.Alunos)
+        //    .UsingEntity(
+        //        "AlunosLaudos",
+        //        r => r.HasOne(typeof(Laudo)).WithMany().HasForeignKey("LaudoId").HasPrincipalKey(nameof(Laudo.Id)),
+        //        l => l.HasOne(typeof(Aluno)).WithMany().HasForeignKey("AlunoId").HasPrincipalKey(nameof(Aluno.Id)),
+        //        j => j.HasKey("AlunoId", "LaudoId"));
         //Required one-to-one with primary key to primary key relationship
         builder.Entity<Aluno>()
             .HasOne(e => e.Dependencia)

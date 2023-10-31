@@ -4,6 +4,7 @@ using DnaBrasil.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DnaBrasil.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231031200829_DnaCreateLaudo")]
+    partial class DnaCreateLaudo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -475,6 +478,9 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("AlunoId")
+                        .HasColumnType("int");
+
                     b.Property<DateTimeOffset>("Created")
                         .HasColumnType("datetimeoffset");
 
@@ -491,6 +497,8 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AlunoId");
 
                     b.HasIndex("TalentoEsportivoId");
 
@@ -938,6 +946,9 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
                     b.Property<int>("TipoId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("VocacionalId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ConsumoAlimentarId");
@@ -947,6 +958,8 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
                     b.HasIndex("SaudeBucalId");
 
                     b.HasIndex("TipoId");
+
+                    b.HasIndex("VocacionalId");
 
                     b.ToTable("Questionarios");
                 });
@@ -1290,19 +1303,14 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
                     b.Property<int>("ProfissionalId")
                         .HasColumnType("int");
 
-                    b.Property<int>("QuestionarioId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Resposta")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(80)
+                        .HasColumnType("nvarchar(80)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ProfissionalId");
-
-                    b.HasIndex("QuestionarioId");
 
                     b.ToTable("Vocacionais");
                 });
@@ -1682,9 +1690,17 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("DnaBrasil.Domain.Entities.Laudo", b =>
                 {
+                    b.HasOne("DnaBrasil.Domain.Entities.Aluno", "Aluno")
+                        .WithMany()
+                        .HasForeignKey("AlunoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("DnaBrasil.Domain.Entities.TalentoEsportivo", "TalentoEsportivo")
                         .WithMany()
                         .HasForeignKey("TalentoEsportivoId");
+
+                    b.Navigation("Aluno");
 
                     b.Navigation("TalentoEsportivo");
                 });
@@ -1781,6 +1797,10 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("DnaBrasil.Domain.Entities.Vocacional", null)
+                        .WithMany("Questionarios")
+                        .HasForeignKey("VocacionalId");
+
                     b.Navigation("Tipo");
                 });
 
@@ -1875,15 +1895,7 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DnaBrasil.Domain.Entities.Questionario", "Questionario")
-                        .WithMany()
-                        .HasForeignKey("QuestionarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Profissional");
-
-                    b.Navigation("Questionario");
                 });
 
             modelBuilder.Entity("DnaBrasil.Domain.Entities.Voucher", b =>
@@ -2001,6 +2013,11 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
             modelBuilder.Entity("DnaBrasil.Domain.Entities.TodoList", b =>
                 {
                     b.Navigation("Items");
+                });
+
+            modelBuilder.Entity("DnaBrasil.Domain.Entities.Vocacional", b =>
+                {
+                    b.Navigation("Questionarios");
                 });
 #pragma warning restore 612, 618
         }

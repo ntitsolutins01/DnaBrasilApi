@@ -28,6 +28,7 @@ public interface IApplicationDbContext
     DbSet<PlanoAula> PlanosAulas { get; }
     DbSet<Questionario> Questionarios { get; }
     DbSet<Contrato> Contratos { get; }
+    DbSet<Laudo> Laudos { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }
