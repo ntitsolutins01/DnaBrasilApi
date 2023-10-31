@@ -4,6 +4,7 @@ using DnaBrasil.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DnaBrasil.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231031225609_DnaUpdateQualidadeVida")]
+    partial class DnaUpdateQualidadeVida
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,21 +53,6 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
                     b.HasIndex("DeficienciaId");
 
                     b.ToTable("AlunosDeficiencias");
-                });
-
-            modelBuilder.Entity("AlunosLaudos", b =>
-                {
-                    b.Property<int>("AlunoId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("LaudoId")
-                        .HasColumnType("int");
-
-                    b.HasKey("AlunoId", "LaudoId");
-
-                    b.HasIndex("LaudoId");
-
-                    b.ToTable("AlunosLaudos");
                 });
 
             modelBuilder.Entity("ContratosAlunos", b =>
@@ -1608,21 +1596,6 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
                     b.HasOne("DnaBrasil.Domain.Entities.Deficiencia", null)
                         .WithMany()
                         .HasForeignKey("DeficienciaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("AlunosLaudos", b =>
-                {
-                    b.HasOne("DnaBrasil.Domain.Entities.Aluno", null)
-                        .WithMany()
-                        .HasForeignKey("AlunoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DnaBrasil.Domain.Entities.Laudo", null)
-                        .WithMany()
-                        .HasForeignKey("LaudoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

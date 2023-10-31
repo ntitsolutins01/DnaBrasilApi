@@ -28,5 +28,5 @@ public class Aluno : BaseAuditableEntity
     public Matricula? Matricula { get; set; }
     public Voucher? Voucher { get; set; }
     public Dependencia? Dependencia { get; set; }
-    //public List<Laudo> Laudos { get; set; }
+    public List<Laudo>? Laudos { get; set; }
 }

@@ -1360,6 +1360,13 @@
                     "$ref": "#/components/schemas/Dependencia"
                   }
                 ]
+              },
+              "laudos": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "$ref": "#/components/schemas/Laudo"
+                }
               }
             }
           }
@@ -1931,6 +1938,211 @@
               },
               "aluno": {
                 "$ref": "#/components/schemas/Aluno"
+              }
+            }
+          }
+        ]
+      },
+      "Laudo": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "talentoEsportivo": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/TalentoEsportivo"
+                  }
+                ]
+              },
+              "vocacional": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Vocacional"
+                  }
+                ]
+              },
+              "qualidadeDeVida": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/QualidadeDeVida"
+                  }
+                ]
+              },
+              "alunos": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "$ref": "#/components/schemas/Aluno"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "TalentoEsportivo": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "profissional": {
+                "$ref": "#/components/schemas/Profissional"
+              },
+              "flexibilidade": {
+                "type": "integer",
+                "format": "int32",
+                "nullable": true
+              },
+              "preensaoManual": {
+                "type": "integer",
+                "format": "int32",
+                "nullable": true
+              },
+              "velocidade": {
+                "type": "integer",
+                "format": "int32",
+                "nullable": true
+              },
+              "impulsaoHorizontal": {
+                "type": "integer",
+                "format": "int32",
+                "nullable": true
+              },
+              "aptidaoFisica": {
+                "type": "integer",
+                "format": "int32",
+                "nullable": true
+              },
+              "agilidade": {
+                "type": "integer",
+                "format": "int32",
+                "nullable": true
+              },
+              "abdominal": {
+                "type": "integer",
+                "format": "int32",
+                "nullable": true
+              }
+            }
+          }
+        ]
+      },
+      "Vocacional": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "profissional": {
+                "$ref": "#/components/schemas/Profissional"
+              },
+              "questionario": {
+                "$ref": "#/components/schemas/Questionario"
+              },
+              "resposta": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "Questionario": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "pergunta": {
+                "type": "string"
+              },
+              "tipo": {
+                "$ref": "#/components/schemas/TipoLaudo"
+              }
+            }
+          }
+        ]
+      },
+      "TipoLaudo": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "nome": {
+                "type": "string",
+                "nullable": true
+              },
+              "descricao": {
+                "type": "string",
+                "nullable": true
+              },
+              "idadeInicial": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "idadeFinal": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "scoreTotal": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "status": {
+                "type": "boolean"
+              }
+            }
+          }
+        ]
+      },
+      "QualidadeDeVida": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "profissional": {
+                "$ref": "#/components/schemas/Profissional"
+              },
+              "descricao": {
+                "type": "string",
+                "nullable": true
+              },
+              "resposta": {
+                "type": "string",
+                "nullable": true
+              },
+              "aluno": {
+                "$ref": "#/components/schemas/Aluno"
+              },
+              "questionarios": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Questionario"
+                }
               }
             }
           }

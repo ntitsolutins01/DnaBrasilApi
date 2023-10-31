@@ -102,14 +102,14 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
                 l => l.HasOne(typeof(Contrato)).WithMany().HasForeignKey("ContratoId").HasPrincipalKey(nameof(Contrato.Id)),
                 j => j.HasKey("ContratoId", "ProfissionalId"));
         //Basic many-to-many
-        //builder.Entity<Aluno>()
-        //    .HasMany(e => e.Laudos)
-        //    .WithMany(e => e.Alunos)
-        //    .UsingEntity(
-        //        "AlunosLaudos",
-        //        r => r.HasOne(typeof(Laudo)).WithMany().HasForeignKey("LaudoId").HasPrincipalKey(nameof(Laudo.Id)),
-        //        l => l.HasOne(typeof(Aluno)).WithMany().HasForeignKey("AlunoId").HasPrincipalKey(nameof(Aluno.Id)),
-        //        j => j.HasKey("AlunoId", "LaudoId"));
+        builder.Entity<Aluno>()
+            .HasMany(e => e.Laudos)
+            .WithMany(e => e.Alunos)
+            .UsingEntity(
+                "AlunosLaudos",
+                r => r.HasOne(typeof(Laudo)).WithMany().HasForeignKey("LaudoId").HasPrincipalKey(nameof(Laudo.Id)),
+                l => l.HasOne(typeof(Aluno)).WithMany().HasForeignKey("AlunoId").HasPrincipalKey(nameof(Aluno.Id)),
+                j => j.HasKey("AlunoId", "LaudoId"));
         //Required one-to-one with primary key to primary key relationship
         builder.Entity<Aluno>()
             .HasOne(e => e.Dependencia)
