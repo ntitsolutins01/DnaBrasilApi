@@ -13,7 +13,7 @@ public class VocacionalConfigurations : IEntityTypeConfiguration<Vocacional>
     public void Configure(EntityTypeBuilder<Vocacional> builder)
     {
         builder.Property(t => t.Resposta)
-            .HasMaxLength(80)
+            .HasMaxLength(100)
             .IsRequired();
     }
 }
