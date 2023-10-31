@@ -1,6 +1,4 @@
-﻿using DnaBrasil.Application.Laudos.Commands.UpdateConsumoAlimentar;
-
-namespace DnaBrasil.Application.ConsumosAlimentares.Commands.UpdateConsumoAlimentar;
+﻿namespace DnaBrasil.Application.ConsumosAlimentares.Commands.UpdateConsumoAlimentar;
 
 public class UpdateConsumoAlimentarCommandValidator : AbstractValidator<UpdateConsumoAlimentarCommand>
 {
