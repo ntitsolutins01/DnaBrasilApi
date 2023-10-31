@@ -4,6 +4,7 @@ using DnaBrasil.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DnaBrasil.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231031225609_DnaUpdateQualidadeVida")]
+    partial class DnaUpdateQualidadeVida
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,21 +53,6 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
                     b.HasIndex("DeficienciaId");
 
                     b.ToTable("AlunosDeficiencias");
-                });
-
-            modelBuilder.Entity("AlunosLaudos", b =>
-                {
-                    b.Property<int>("AlunoId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("LaudoId")
-                        .HasColumnType("int");
-
-                    b.HasKey("AlunoId", "LaudoId");
-
-                    b.HasIndex("LaudoId");
-
-                    b.ToTable("AlunosLaudos");
                 });
 
             modelBuilder.Entity("ContratosAlunos", b =>
@@ -889,10 +877,16 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("AlunoId")
+                        .HasColumnType("int");
+
                     b.Property<DateTimeOffset>("Created")
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Descricao")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTimeOffset>("LastModified")
@@ -904,9 +898,6 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
                     b.Property<int>("ProfissionalId")
                         .HasColumnType("int");
 
-                    b.Property<int>("QuestionarioId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Resposta")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -914,9 +905,9 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProfissionalId");
+                    b.HasIndex("AlunoId");
 
-                    b.HasIndex("QuestionarioId");
+                    b.HasIndex("ProfissionalId");
 
                     b.ToTable("QualidadeDeVidas");
                 });
@@ -949,6 +940,9 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
+                    b.Property<int?>("QualidadeDeVidaId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("SaudeBucalId")
                         .HasColumnType("int");
 
@@ -958,6 +952,8 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ConsumoAlimentarId");
+
+                    b.HasIndex("QualidadeDeVidaId");
 
                     b.HasIndex("SaudeBucalId");
 
@@ -1604,21 +1600,6 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("AlunosLaudos", b =>
-                {
-                    b.HasOne("DnaBrasil.Domain.Entities.Aluno", null)
-                        .WithMany()
-                        .HasForeignKey("AlunoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DnaBrasil.Domain.Entities.Laudo", null)
-                        .WithMany()
-                        .HasForeignKey("LaudoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("ContratosAlunos", b =>
                 {
                     b.HasOne("DnaBrasil.Domain.Entities.Aluno", null)
@@ -1786,21 +1767,21 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("DnaBrasil.Domain.Entities.QualidadeDeVida", b =>
                 {
+                    b.HasOne("DnaBrasil.Domain.Entities.Aluno", "Aluno")
+                        .WithMany()
+                        .HasForeignKey("AlunoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("DnaBrasil.Domain.Entities.Profissional", "Profissional")
                         .WithMany()
                         .HasForeignKey("ProfissionalId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DnaBrasil.Domain.Entities.Questionario", "Questionario")
-                        .WithMany()
-                        .HasForeignKey("QuestionarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Aluno");
 
                     b.Navigation("Profissional");
-
-                    b.Navigation("Questionario");
                 });
 
             modelBuilder.Entity("DnaBrasil.Domain.Entities.Questionario", b =>
@@ -1808,6 +1789,10 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
                     b.HasOne("DnaBrasil.Domain.Entities.ConsumoAlimentar", null)
                         .WithMany("Questionarios")
                         .HasForeignKey("ConsumoAlimentarId");
+
+                    b.HasOne("DnaBrasil.Domain.Entities.QualidadeDeVida", null)
+                        .WithMany("Questionarios")
+                        .HasForeignKey("QualidadeDeVidaId");
 
                     b.HasOne("DnaBrasil.Domain.Entities.SaudeBucal", null)
                         .WithMany("Questionarios")
@@ -2024,6 +2009,11 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
             modelBuilder.Entity("DnaBrasil.Domain.Entities.Parceiro", b =>
                 {
                     b.Navigation("Alunos");
+                });
+
+            modelBuilder.Entity("DnaBrasil.Domain.Entities.QualidadeDeVida", b =>
+                {
+                    b.Navigation("Questionarios");
                 });
 
             modelBuilder.Entity("DnaBrasil.Domain.Entities.SaudeBucal", b =>
