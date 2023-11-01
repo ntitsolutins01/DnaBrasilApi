@@ -1,19 +1,18 @@
 ﻿using DnaBrasil.Application.Common.Interfaces;
+using DnaBrasil.Domain.Entities;
 
 namespace DnaBrasil.Application.Laudos.Commands.UpdateSaude;
 
-public record UpdateSaudeCommand : IRequest<int>
+public record UpdateSaudeCommand : IRequest
 {
+    public int Id { get; init; }
+    public required Profissional Profissional { get; init; }
+    public int? Altura { get; init; }
+    public int Massa { get; init; }
+    public int? Envergadura { get; init; }
 }
 
-public class UpdateSaudeCommandValidator : AbstractValidator<UpdateSaudeCommand>
-{
-    public UpdateSaudeCommandValidator()
-    {
-    }
-}
-
-public class UpdateSaudeCommandHandler : IRequestHandler<UpdateSaudeCommand, int>
+public class UpdateSaudeCommandHandler : IRequestHandler<UpdateSaudeCommand>
 {
     private readonly IApplicationDbContext _context;
 
@@ -22,8 +21,18 @@ public class UpdateSaudeCommandHandler : IRequestHandler<UpdateSaudeCommand, int
         _context = context;
     }
 
-    public Task<int> Handle(UpdateSaudeCommand request, CancellationToken cancellationToken)
+    public async Task Handle(UpdateSaudeCommand request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var entity = await _context.Saudes
+            .FindAsync(new object[] { request.Id }, cancellationToken);
+
+        Guard.Against.NotFound(request.Id, entity);
+
+        entity.Profissional = request.Profissional;
+        entity.Altura = request.Altura;
+        entity.Massa = request.Massa;
+        entity.Envergadura = request.Envergadura;
+
+        await _context.SaveChangesAsync(cancellationToken);
     }
 }

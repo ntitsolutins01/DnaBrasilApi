@@ -1,16 +1,14 @@
 ﻿using DnaBrasil.Application.Common.Interfaces;
+using DnaBrasil.Domain.Entities;
 
 namespace DnaBrasil.Application.Laudos.Commands.CreateSaude;
 
 public record CreateSaudeCommand : IRequest<int>
 {
-}
-
-public class CreateSaudeCommandValidator : AbstractValidator<CreateSaudeCommand>
-{
-    public CreateSaudeCommandValidator()
-    {
-    }
+    public required Profissional Profissional { get; init; }
+    public int? Altura { get; init; }
+    public int Massa { get; init; }
+    public int? Envergadura { get; init; }
 }
 
 public class CreateSaudeCommandHandler : IRequestHandler<CreateSaudeCommand, int>
@@ -22,8 +20,20 @@ public class CreateSaudeCommandHandler : IRequestHandler<CreateSaudeCommand, int
         _context = context;
     }
 
-    public Task<int> Handle(CreateSaudeCommand request, CancellationToken cancellationToken)
+    public async Task<int> Handle(CreateSaudeCommand request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var entity = new Saude
+        {
+            Profissional = request.Profissional,
+            Altura = request.Altura,
+            Massa = request.Massa,
+            Envergadura = request.Envergadura
+        };
+
+        _context.Saudes.Add(entity);
+
+        await _context.SaveChangesAsync(cancellationToken);
+
+        return entity.Id;
     }
 }
