@@ -9,6 +9,7 @@ public class CreateSaudeBucalCommandValidator : AbstractValidator<CreateSaudeBuc
         RuleFor(v => v.Questionario)
             .NotEmpty();
         RuleFor(v => v.Resposta)
+            .MaximumLength(100)
             .NotEmpty();
     }
 }

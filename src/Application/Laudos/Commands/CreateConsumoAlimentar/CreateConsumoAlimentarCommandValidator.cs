@@ -9,7 +9,7 @@ public class CreateConsumoAlimentarCommandValidator : AbstractValidator<CreateCo
         RuleFor(v => v.Questionario)
             .NotNull();
         RuleFor(v => v.Resposta)
-            .MaximumLength(50)
+            .MaximumLength(100)
             .NotEmpty();
     }
 }

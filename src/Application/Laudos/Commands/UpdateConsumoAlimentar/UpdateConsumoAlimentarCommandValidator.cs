@@ -1,13 +1,11 @@
-﻿namespace DnaBrasil.Application.ConsumosAlimentares.Commands.UpdateConsumoAlimentar;
+﻿namespace DnaBrasil.Application.Laudos.Commands.UpdateConsumoAlimentar;
 
 public class UpdateConsumoAlimentarCommandValidator : AbstractValidator<UpdateConsumoAlimentarCommand>
 {
     public UpdateConsumoAlimentarCommandValidator()
     {
         RuleFor(v => v.Resposta)
-            .MaximumLength(200)
-            .NotEmpty();
-        RuleFor(v => v.Profissional)
+            .MaximumLength(100)
             .NotEmpty();
     }
 }
