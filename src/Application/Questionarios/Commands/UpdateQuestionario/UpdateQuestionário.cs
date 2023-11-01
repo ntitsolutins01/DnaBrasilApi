@@ -27,7 +27,7 @@ public class UpdateQuestionarioCommandHandler : IRequestHandler<UpdateQuestionar
         Guard.Against.NotFound(request.Id, entity);
 
         entity.Pergunta = request.Pergunta;
-        //entity.Tipo = request.Tipo;
+        entity.Tipo = request.Tipo;
 
         await _context.SaveChangesAsync(cancellationToken);
     }
