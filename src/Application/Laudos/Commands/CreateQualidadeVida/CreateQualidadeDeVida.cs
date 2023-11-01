@@ -1,34 +1,34 @@
 ﻿using DnaBrasil.Application.Common.Interfaces;
 using DnaBrasil.Domain.Entities;
 
-namespace DnaBrasil.Application.Laudos.Commands.CreateSaudeBucal;
+namespace DnaBrasil.Application.Laudos.Commands.CreateQualidadeDeVida;
 
-public record CreateSaudeBucalCommand : IRequest<int>
+public record CreateQualidadeDeVidaCommand : IRequest<int>
 {
     public required Profissional Profissional { get; init; }
     public required Questionario Questionario { get; init; }
     public required string Resposta { get; init; }
 }
 
-public class CreateSaudeBucalCommandHandler : IRequestHandler<CreateSaudeBucalCommand, int>
+public class CreateQualidadeDeVidaCommandHandler : IRequestHandler<CreateQualidadeDeVidaCommand, int>
 {
     private readonly IApplicationDbContext _context;
 
-    public CreateSaudeBucalCommandHandler(IApplicationDbContext context)
+    public CreateQualidadeDeVidaCommandHandler(IApplicationDbContext context)
     {
         _context = context;
     }
 
-    public async Task<int> Handle(CreateSaudeBucalCommand request, CancellationToken cancellationToken)
+    public async Task<int> Handle(CreateQualidadeDeVidaCommand request, CancellationToken cancellationToken)
     {
-        var entity = new SaudeBucal
+        var entity = new QualidadeDeVida
         {
             Profissional = request.Profissional,
             Questionario = request.Questionario,
             Resposta = request.Resposta
         };
 
-        _context.SaudeBucais.Add(entity);
+        _context.QualidadeDeVidas.Add(entity);
 
         await _context.SaveChangesAsync(cancellationToken);
 

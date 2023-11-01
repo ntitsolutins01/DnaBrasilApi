@@ -1,4 +1,4 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
+using DnaBrasil.Application.Common.Interfaces;
 using DnaBrasil.Domain.Entities;
 
 namespace DnaBrasil.Application.Profissionais.Commands.UpdateProfissional;
