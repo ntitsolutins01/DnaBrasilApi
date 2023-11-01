@@ -1,5 +1,4 @@
 ﻿using DnaBrasil.Application.Common.Interfaces;
-using DnaBrasil.Domain.Events;
 
 namespace DnaBrasil.Application.Profissionais.Commands.DeleteProfissional;
 public record DeleteProfissionalCommand(int Id) : IRequest;
@@ -22,7 +21,6 @@ public class DeleteProfissionalCommandHandler : IRequestHandler<DeleteProfission
 
         _context.TodoItems.Remove(entity);
 
-        //entity.AddDomainEvent(new ProfissionalDeletedEvent(entity));
 
         await _context.SaveChangesAsync(cancellationToken);
     }

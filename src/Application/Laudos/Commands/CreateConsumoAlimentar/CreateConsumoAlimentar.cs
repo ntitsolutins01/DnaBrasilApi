@@ -1,16 +1,13 @@
 ﻿using DnaBrasil.Application.Common.Interfaces;
+using DnaBrasil.Domain.Entities;
 
 namespace DnaBrasil.Application.Laudos.Commands.CreateConsumoAlimentar;
 
 public record CreateConsumoAlimentarCommand : IRequest<int>
 {
-}
-
-public class CreateConsumoAlimentarCommandValidator : AbstractValidator<CreateConsumoAlimentarCommand>
-{
-    public CreateConsumoAlimentarCommandValidator()
-    {
-    }
+    public required Profissional Profissional { get; init; }
+    public required Questionario Questionario { get; init; }
+    public required string Resposta { get; init; }
 }
 
 public class CreateConsumoAlimentarCommandHandler : IRequestHandler<CreateConsumoAlimentarCommand, int>
@@ -22,8 +19,19 @@ public class CreateConsumoAlimentarCommandHandler : IRequestHandler<CreateConsum
         _context = context;
     }
 
-    public Task<int> Handle(CreateConsumoAlimentarCommand request, CancellationToken cancellationToken)
+    public async Task<int> Handle(CreateConsumoAlimentarCommand request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var entity = new ConsumoAlimentar
+        {
+            Profissional = request.Profissional,
+            Questionario = request.Questionario,
+            Resposta = request.Resposta
+        };
+
+        _context.ConsumoAlimentares.Add(entity);
+
+        await _context.SaveChangesAsync(cancellationToken);
+
+        return entity.Id;
     }
 }
