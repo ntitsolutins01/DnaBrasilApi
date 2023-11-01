@@ -1,13 +1,9 @@
-﻿using DnaBrasil.Application.Laudos.Commands.UpdateSaude;
-
-namespace DnaBrasil.Application.ConsumosAlimentares.Commands.UpdateSaude;
+﻿namespace DnaBrasil.Application.Laudos.Commands.UpdateSaude;
 
 public class UpdateSaudeCommandValidator : AbstractValidator<UpdateSaudeCommand>
 {
     public UpdateSaudeCommandValidator()
     {
-        RuleFor(v => v.Profissional)
-            .NotEmpty();
         RuleFor(v => v.Altura)
             .NotEmpty();
         RuleFor(v => v.Massa)

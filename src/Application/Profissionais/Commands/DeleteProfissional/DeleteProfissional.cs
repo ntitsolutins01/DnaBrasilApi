@@ -1,4 +1,4 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
+using DnaBrasil.Application.Common.Interfaces;
 
 namespace DnaBrasil.Application.Profissionais.Commands.DeleteProfissional;
 public record DeleteProfissionalCommand(int Id) : IRequest;

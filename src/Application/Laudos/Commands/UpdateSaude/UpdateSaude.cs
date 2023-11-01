@@ -6,7 +6,6 @@ namespace DnaBrasil.Application.Laudos.Commands.UpdateSaude;
 public record UpdateSaudeCommand : IRequest
 {
     public int Id { get; init; }
-    public required Profissional Profissional { get; init; }
     public int? Altura { get; init; }
     public int Massa { get; init; }
     public int? Envergadura { get; init; }
@@ -28,7 +27,6 @@ public class UpdateSaudeCommandHandler : IRequestHandler<UpdateSaudeCommand>
 
         Guard.Against.NotFound(request.Id, entity);
 
-        entity.Profissional = request.Profissional;
         entity.Altura = request.Altura;
         entity.Massa = request.Massa;
         entity.Envergadura = request.Envergadura;

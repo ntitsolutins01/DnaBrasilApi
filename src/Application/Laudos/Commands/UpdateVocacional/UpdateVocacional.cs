@@ -2,18 +2,13 @@
 
 namespace DnaBrasil.Application.Laudos.Commands.UpdateVocacional;
 
-public record UpdateVocacionalCommand : IRequest<int>
+public record UpdateVocacionalCommand : IRequest
 {
+    public int Id { get; init; }
+    public required string Resposta { get; init; }
 }
 
-public class UpdateVocacionalCommandValidator : AbstractValidator<UpdateVocacionalCommand>
-{
-    public UpdateVocacionalCommandValidator()
-    {
-    }
-}
-
-public class UpdateVocacionalCommandHandler : IRequestHandler<UpdateVocacionalCommand, int>
+public class UpdateVocacionalCommandHandler : IRequestHandler<UpdateVocacionalCommand>
 {
     private readonly IApplicationDbContext _context;
 
@@ -22,8 +17,15 @@ public class UpdateVocacionalCommandHandler : IRequestHandler<UpdateVocacionalCo
         _context = context;
     }
 
-    public Task<int> Handle(UpdateVocacionalCommand request, CancellationToken cancellationToken)
+    public async Task Handle(UpdateVocacionalCommand request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var entity = await _context.Vocacionais
+            .FindAsync(new object[] { request.Id }, cancellationToken);
+
+        Guard.Against.NotFound(request.Id, entity);
+
+        entity.Resposta = request.Resposta;
+
+        await _context.SaveChangesAsync(cancellationToken);
     }
 }

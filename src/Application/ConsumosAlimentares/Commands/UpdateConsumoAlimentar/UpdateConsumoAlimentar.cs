@@ -7,8 +7,8 @@ public record UpdateConsumoAlimentarCommand : IRequest
 {
     public int Id { get; init; }
     public required Profissional Profissional { get; init; }
+    public required Questionario Questionario { get; init; }
     public required string Resposta { get; init; }
-    public required Aluno Aluno { get; init; }
 }
 
 public class UpdateConsumoAlimentarCommandHandler : IRequestHandler<UpdateConsumoAlimentarCommand>
@@ -29,7 +29,6 @@ public class UpdateConsumoAlimentarCommandHandler : IRequestHandler<UpdateConsum
 
         entity.Profissional = request.Profissional;
         entity.Resposta = request.Resposta;
-        entity.Aluno = request.Aluno;
 
         await _context.SaveChangesAsync(cancellationToken);
     }

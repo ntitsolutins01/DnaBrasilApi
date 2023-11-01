@@ -7,8 +7,6 @@ public class UpdateConsumoAlimentarCommandValidator : AbstractValidator<UpdateCo
         RuleFor(v => v.Resposta)
             .MaximumLength(200)
             .NotEmpty();
-        RuleFor(v => v.Aluno)
-            .NotEmpty();
         RuleFor(v => v.Profissional)
             .NotEmpty();
     }

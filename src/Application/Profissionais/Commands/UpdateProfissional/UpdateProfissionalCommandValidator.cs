@@ -1,4 +1,4 @@
-﻿using System.Text.RegularExpressions;
+using System.Text.RegularExpressions;
 using DnaBrasil.Application.Common.Interfaces;
 
 namespace DnaBrasil.Application.Profissionais.Commands.UpdateProfissional;
