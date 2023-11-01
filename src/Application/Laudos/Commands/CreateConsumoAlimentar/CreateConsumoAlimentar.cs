@@ -1,7 +1,7 @@
 ﻿using DnaBrasil.Application.Common.Interfaces;
 using DnaBrasil.Domain.Entities;
 
-namespace DnaBrasil.Application.ConsumosAlimentares.Commands.CreateConsumoAlimentar;
+namespace DnaBrasil.Application.Laudos.Commands.CreateConsumoAlimentar;
 
 public record CreateConsumoAlimentarCommand : IRequest<int>
 {
@@ -23,7 +23,9 @@ public class CreateConsumoAlimentarCommandHandler : IRequestHandler<CreateConsum
     {
         var entity = new ConsumoAlimentar
         {
-            Profissional = request.Profissional, Questionario = request.Questionario, Resposta = request.Resposta
+            Profissional = request.Profissional,
+            Questionario = request.Questionario,
+            Resposta = request.Resposta
         };
 
         _context.ConsumoAlimentares.Add(entity);
