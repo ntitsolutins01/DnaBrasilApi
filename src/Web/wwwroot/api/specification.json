@@ -1976,6 +1976,30 @@
                   }
                 ]
               },
+              "saude": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Saude"
+                  }
+                ]
+              },
+              "consumo": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/ConsumoAlimentar"
+                  }
+                ]
+              },
+              "saudeBucal": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/SaudeBucal"
+                  }
+                ]
+              },
               "alunos": {
                 "type": "array",
                 "nullable": true,
@@ -2116,6 +2140,80 @@
         ]
       },
       "QualidadeDeVida": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "profissional": {
+                "$ref": "#/components/schemas/Profissional"
+              },
+              "questionario": {
+                "$ref": "#/components/schemas/Questionario"
+              },
+              "resposta": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "Saude": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "profissional": {
+                "$ref": "#/components/schemas/Profissional"
+              },
+              "altura": {
+                "type": "integer",
+                "format": "int32",
+                "nullable": true
+              },
+              "massa": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "envergadura": {
+                "type": "integer",
+                "format": "int32",
+                "nullable": true
+              }
+            }
+          }
+        ]
+      },
+      "ConsumoAlimentar": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "profissional": {
+                "$ref": "#/components/schemas/Profissional"
+              },
+              "questionario": {
+                "$ref": "#/components/schemas/Questionario"
+              },
+              "resposta": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "SaudeBucal": {
         "allOf": [
           {
             "$ref": "#/components/schemas/BaseAuditableEntity"
