@@ -5,10 +5,9 @@ namespace DnaBrasil.Application.ConsumosAlimentares.Commands.CreateConsumoAlimen
 
 public record CreateConsumoAlimentarCommand : IRequest<int>
 {
-    public required Profissional Profissional { get; set; }
-    public required List<Questionario> Questionarios { get; set; }
-    public required string Resposta { get; set; }
-    public required Aluno Aluno { get; set; }
+    public required Profissional Profissional { get; init; }
+    public required Questionario Questionario { get; init; }
+    public required string Resposta { get; init; }
 }
 
 public class CreateConsumoAlimentarCommandHandler : IRequestHandler<CreateConsumoAlimentarCommand, int>
@@ -24,10 +23,7 @@ public class CreateConsumoAlimentarCommandHandler : IRequestHandler<CreateConsum
     {
         var entity = new ConsumoAlimentar
         {
-            Profissional = request.Profissional,
-            Questionarios = request.Questionarios,
-            Resposta = request.Resposta,
-            Aluno = request.Aluno
+            Profissional = request.Profissional, Questionario = request.Questionario, Resposta = request.Resposta
         };
 
         _context.ConsumoAlimentares.Add(entity);
