@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DnaBrasil.Application.TodoItems.Commands.CreateTodoItem;
-
-namespace DnaBrasil.Application.TipoLaudos.Commands.CreateTipoLaudos;
-internal class CreateTipoLaudosCommandValidator : AbstractValidator<CreateTipoLaudosCommand>
+﻿namespace DnaBrasil.Application.TipoLaudos.Commands.UpdateTipoLaudo;
+internal class UpdateTipoLaudosCommandValidator : AbstractValidator<UpdateTipoLaudoCommand>
 {
-    public CreateTipoLaudosCommandValidator()
+    public UpdateTipoLaudosCommandValidator()
     {
         RuleFor(v => v.Nome)
             .MaximumLength(200)

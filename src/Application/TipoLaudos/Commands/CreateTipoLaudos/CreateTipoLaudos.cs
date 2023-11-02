@@ -10,11 +10,12 @@ using DnaBrasil.Domain.Events;
 namespace DnaBrasil.Application.TipoLaudos.Commands.CreateTipoLaudos;
 public record CreateTipoLaudosCommand : IRequest<int>
 {
-    public string? Nome { get; init; }
-    public string? Descricao { get; init; }
-    public int IdadeInicial { get; init; }
-    public int IdadeFinal { get; init; }
-    public int ScoreTotal { get; init; }
+    public required string? Nome { get; init; }
+    public required string? Descricao { get; init; }
+    public required int IdadeInicial { get; init; }
+    public required int IdadeFinal { get; init; }
+    public required int ScoreTotal { get; init; }
+    public required bool Status { get; init; } = true;
 }
 
 public class CreateTipoLaudosCommandHandler : IRequestHandler<CreateTipoLaudosCommand, int>
@@ -34,7 +35,8 @@ public class CreateTipoLaudosCommandHandler : IRequestHandler<CreateTipoLaudosCo
             Descricao = request.Descricao,
             IdadeInicial = request.IdadeInicial,
             IdadeFinal = request.IdadeFinal,
-            ScoreTotal = request.ScoreTotal
+            ScoreTotal = request.ScoreTotal,
+            Status = request.Status
         };
 
         _context.TipoLaudos.Add(entity);

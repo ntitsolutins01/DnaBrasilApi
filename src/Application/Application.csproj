@@ -29,9 +29,4 @@
     <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="TipoLaudos\Commands\DeleteTipoLaudos\" />
-    <Folder Include="TipoLaudos\Commands\UpdateTipoLaudos\" />
-  </ItemGroup>
-
 </Project>
