@@ -30,8 +30,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Series\Commands\DeleteSerie\" />
-    <Folder Include="Series\Commands\UpdateSerie\" />
     <Folder Include="TipoLaudos\Commands\DeleteTipoLaudos\" />
     <Folder Include="TipoLaudos\Commands\UpdateTipoLaudos\" />
   </ItemGroup>
