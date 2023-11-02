@@ -1,29 +1,28 @@
 ﻿using DnaBrasil.Application.Common.Interfaces;
 
 namespace DnaBrasil.Application.Profissionais.Queries.GetProfissionalAll;
+//[Authorize]
+public record GetProfissionaisQuery : IRequest<List<ProfissionalDto>>;
 
-public record GetProfissionaisAllCommand : IRequest<int>
-{
-}
-
-public class GetProfissionaisAllCommandValidator : AbstractValidator<GetProfissionaisAllCommand>
-{
-    public GetProfissionaisAllCommandValidator()
-    {
-    }
-}
-
-public class GetProfissionaisAllCommandHandler : IRequestHandler<GetProfissionaisAllCommand, int>
+public class GetProfissionaisQueryHandler : IRequestHandler<GetProfissionaisQuery, List<ProfissionalDto>>
 {
     private readonly IApplicationDbContext _context;
+    private readonly IMapper _mapper;
 
-    public GetProfissionaisAllCommandHandler(IApplicationDbContext context)
+    public GetProfissionaisQueryHandler(IApplicationDbContext context, IMapper mapper)
     {
         _context = context;
+        _mapper = mapper;
     }
 
-    public Task<int> Handle(GetProfissionaisAllCommand request, CancellationToken cancellationToken)
+    public async Task<List<ProfissionalDto>> Handle(GetProfissionaisQuery request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var result = await _context.Profissionais
+            .AsNoTracking()
+            .ProjectTo<ProfissionalDto>(_mapper.ConfigurationProvider)
+            .OrderBy(t => t.Nome)
+            .ToListAsync(cancellationToken);
+
+        return result == null ? throw new ArgumentNullException(nameof(result)) : result;
     }
 }
