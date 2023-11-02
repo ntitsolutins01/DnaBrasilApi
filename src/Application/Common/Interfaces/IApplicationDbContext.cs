@@ -31,8 +31,8 @@ public interface IApplicationDbContext
     DbSet<Laudo> Laudos { get; }
     DbSet<Perfil> Perfis { get; }
     DbSet<Usuario> Usuarios { get; }
-    DbSet<Modulo> Modulos { get; }
-    DbSet<Funcionalidade> Funcionalidades { get; }
+    //DbSet<Modulo> Modulos { get; }
+    //DbSet<Funcionalidade> Funcionalidades { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }
