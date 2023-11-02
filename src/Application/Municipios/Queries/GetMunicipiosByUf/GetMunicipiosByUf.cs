@@ -1,27 +1,32 @@
 ﻿using DnaBrasil.Application.Common.Interfaces;
 
 namespace DnaBrasil.Application.Municipios.Queries.GetMunicipiosByUf;
-public record GetMunicipiosByUfQuery : IRequest<List<MunicipioDto>>;
 
-public class GetMunicipiosByUfQueryHandler : IRequestHandler<GetMunicipiosByUfQuery, List<MunicipioDto>>
+public record GetMunicipioByUfQuery : IRequest<List<MunicipioDto>>
+{
+    public required string? Uf { get; init; }
+}
+
+public class GetMunicipioByUfQueryHandler : IRequestHandler<GetMunicipioByUfQuery, List<MunicipioDto>>
 {
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
 
-    public GetMunicipiosByUfQueryHandler(IApplicationDbContext context, IMapper mapper)
+    public GetMunicipioByUfQueryHandler(IApplicationDbContext context, IMapper mapper)
     {
         _context = context;
         _mapper = mapper;
     }
 
-    public async Task<List<MunicipioDto>> Handle(GetMunicipiosByUfQuery request, CancellationToken cancellationToken)
+    public async Task<List<MunicipioDto>> Handle(GetMunicipioByUfQuery request, CancellationToken cancellationToken)
     {
         var result = await _context.Municipios
+            .Where(x => x.Estado!.Sigla == request.Uf)
             .AsNoTracking()
             .ProjectTo<MunicipioDto>(_mapper.ConfigurationProvider)
             .OrderBy(t => t.Id)
             .ToListAsync(cancellationToken);
 
-        return result == null ? throw new ArgumentNullException(nameof(result)) : result;
+        return result;
     }
 }
