@@ -2,28 +2,31 @@
 
 namespace DnaBrasil.Application.Questionarios.Queries.GetQuestionarioByTipoLaudo;
 
-public record GetQuestionarioByTipoLaudoCommand : IRequest<int>
+public record GetQuestionarioByTipoLaudoQuery : IRequest<List<QuestionarioDto>>
 {
+    public required string? NomeLaudo { get; init; }
 }
 
-public class GetQuestionarioByTipoLaudoCommandValidator : AbstractValidator<GetQuestionarioByTipoLaudoCommand>
-{
-    public GetQuestionarioByTipoLaudoCommandValidator()
-    {
-    }
-}
-
-public class GetQuestionarioByTipoLaudoCommandHandler : IRequestHandler<GetQuestionarioByTipoLaudoCommand, int>
+public class GetQuestionarioByTipoLaudoQueryHandler : IRequestHandler<GetQuestionarioByTipoLaudoQuery, List<QuestionarioDto>>
 {
     private readonly IApplicationDbContext _context;
+    private readonly IMapper _mapper;
 
-    public GetQuestionarioByTipoLaudoCommandHandler(IApplicationDbContext context)
+    public GetQuestionarioByTipoLaudoQueryHandler(IApplicationDbContext context, IMapper mapper)
     {
         _context = context;
+        _mapper = mapper;
     }
 
-    public  Task<int> Handle(GetQuestionarioByTipoLaudoCommand request, CancellationToken cancellationToken)
+    public async Task<List<QuestionarioDto>> Handle(GetQuestionarioByTipoLaudoQuery request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var result = await _context.Questionarios
+            .Where(x => x.Tipo!.Nome == request.NomeLaudo)
+            .AsNoTracking()
+            .ProjectTo<QuestionarioDto>(_mapper.ConfigurationProvider)
+            .OrderBy(t => t.Tipo)
+            .ToListAsync(cancellationToken);
+
+        return result;
     }
 }

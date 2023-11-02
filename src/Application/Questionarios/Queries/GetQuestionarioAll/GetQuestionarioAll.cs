@@ -1,29 +1,28 @@
 ﻿using DnaBrasil.Application.Common.Interfaces;
 
 namespace DnaBrasil.Application.Questionarios.Queries.GetQuestionarioAll;
+//[Authorize]
+public record GetQuestionariosQuery : IRequest<List<QuestionarioDto>>;
 
-public record GetQuestionarioAllCommand : IRequest<int>
-{
-}
-
-public class GetQuestionarioAllCommandValidator : AbstractValidator<GetQuestionarioAllCommand>
-{
-    public GetQuestionarioAllCommandValidator()
-    {
-    }
-}
-
-public class GetQuestionarioAllCommandHandler : IRequestHandler<GetQuestionarioAllCommand, int>
+public class GetQuestionariosQueryHandler : IRequestHandler<GetQuestionariosQuery, List<QuestionarioDto>>
 {
     private readonly IApplicationDbContext _context;
+    private readonly IMapper _mapper;
 
-    public GetQuestionarioAllCommandHandler(IApplicationDbContext context)
+    public GetQuestionariosQueryHandler(IApplicationDbContext context, IMapper mapper)
     {
         _context = context;
+        _mapper = mapper;
     }
 
-    public Task<int> Handle(GetQuestionarioAllCommand request, CancellationToken cancellationToken)
+    public async Task<List<QuestionarioDto>> Handle(GetQuestionariosQuery request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var result = await _context.Questionarios
+            .AsNoTracking()
+            .ProjectTo<QuestionarioDto>(_mapper.ConfigurationProvider)
+            .OrderBy(t => t.Tipo)
+            .ToListAsync(cancellationToken);
+
+        return result == null ? throw new ArgumentNullException(nameof(result)) : result;
     }
 }

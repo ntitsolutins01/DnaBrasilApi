@@ -1,5 +1,4 @@
-﻿using DnaBrasil.Application.Profissionais.Queries.ProfissionalByFilter;
-using DnaBrasil.Domain.Entities;
+﻿using DnaBrasil.Domain.Entities;
 
 namespace DnaBrasil.Application.Alunos.Queries;
 public class MatriculaDto
