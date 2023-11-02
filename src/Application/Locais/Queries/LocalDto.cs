@@ -1,6 +1,6 @@
 ﻿using DnaBrasil.Domain.Entities;
 
-namespace DnaBrasil.Application.Locais.Queries.GetLocais;
+namespace DnaBrasil.Application.Locais.Queries;
 public class LocalDto
 {
     public int Id { get; init; }

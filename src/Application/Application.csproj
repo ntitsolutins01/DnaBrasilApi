@@ -30,8 +30,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Locais\Commands\DeleteLocal\" />
-    <Folder Include="Locais\Commands\UpdateLocal\" />
     <Folder Include="Municipios\Commands\CreateMunicipio\" />
     <Folder Include="Municipios\Commands\DeleteMunicipio\" />
     <Folder Include="Municipios\Commands\UpdateMunicipio\" />
