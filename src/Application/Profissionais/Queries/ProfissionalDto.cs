@@ -1,7 +1,7 @@
 ﻿using DnaBrasil.Application.Municipios.Queries;
 using DnaBrasil.Domain.Entities;
 
-namespace DnaBrasil.Application.Profissionais.Queries.ProfissionalByFilter;
+namespace DnaBrasil.Application.Profissionais.Queries;
 public class ProfissionalDto
 {
     public int Id { get; set; }
@@ -17,10 +17,10 @@ public class ProfissionalDto
     public int? Numero { get; set; }
     public string? Cep { get; set; }
     public string? Bairro { get; set; }
-    public bool Status { get; set; } = true; 
+    public bool Status { get; set; } = true;
     public MunicipioDto? Municipio { get; set; }
     public List<Ambiente>? Ambientes { get; init; } = new();
-    public bool? Habilitado { get; set; } 
+    public bool? Habilitado { get; set; }
     private class Mapping : Profile
     {
         public Mapping()

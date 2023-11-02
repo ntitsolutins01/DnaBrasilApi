@@ -1,5 +1,5 @@
 ﻿using DnaBrasil.Application.Alunos.Queries;
-using DnaBrasil.Application.Profissionais.Queries.ProfissionalByFilter;
+using DnaBrasil.Application.Profissionais.Queries;
 using DnaBrasil.Domain.Entities;
 
 namespace DnaBrasil.Application.Ambientes.Queries;

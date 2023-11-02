@@ -1,7 +1,7 @@
 ﻿using DnaBrasil.Application.Municipios.Queries;
 using DnaBrasil.Domain.Entities;
 
-namespace DnaBrasil.Application.Profissionais.Queries.ProfissionalByFilter;
+namespace DnaBrasil.Application.Profissionais.Queries;
 public class SearchProfissionaisDto
 {
     public string? Nome { get; set; }
