@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DnaBrasil.Application.Municipios.Queries.GetMunicipiosAll;
-using DnaBrasil.Domain.Entities;
+﻿using DnaBrasil.Domain.Entities;
 
 namespace DnaBrasil.Application.Municipios.Queries;
 

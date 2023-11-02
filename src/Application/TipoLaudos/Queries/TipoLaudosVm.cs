@@ -1,4 +1,4 @@
-﻿namespace DnaBrasil.Application.TipoLaudos.Queries.GetTipoLaudos;
+﻿namespace DnaBrasil.Application.TipoLaudos.Queries;
 
 public class TipoLaudosVm
 {
