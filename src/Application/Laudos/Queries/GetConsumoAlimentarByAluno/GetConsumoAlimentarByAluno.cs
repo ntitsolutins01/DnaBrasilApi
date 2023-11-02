@@ -1,30 +1,32 @@
 ﻿using DnaBrasil.Application.Common.Interfaces;
-using DnaBrasil.Application.Laudos.Queries.ConsumoAlimentarByAluno;
 
 namespace DnaBrasil.Application.Laudos.Queries.GetConsumoAlimentarByAluno;
 
-public record GetConsumoAlimentarByAlunoQuery : IRequest<ConsumoAlimentarDto>
+public record GetConsumoAlimentaresByAlunoQuery : IRequest<ConsumoAlimentarDto>
 {
+    public int AlunoId { get; set; }
 }
 
-public class GetConsumoAlimentarByAlunoQueryValidator : AbstractValidator<GetConsumoAlimentarByAlunoQuery>
-{
-    public GetConsumoAlimentarByAlunoQueryValidator()
-    {
-    }
-}
-
-public class GetConsumoAlimentarByAlunoQueryHandler : IRequestHandler<GetConsumoAlimentarByAlunoQuery, ConsumoAlimentarDto>
+public class GetConsumoAlimentaresByAlunoQueryHandler : IRequestHandler<GetConsumoAlimentaresByAlunoQuery, ConsumoAlimentarDto>
 {
     private readonly IApplicationDbContext _context;
+    private readonly IMapper _mapper;
 
-    public GetConsumoAlimentarByAlunoQueryHandler(IApplicationDbContext context)
+    public GetConsumoAlimentaresByAlunoQueryHandler(IApplicationDbContext context, IMapper mapper)
     {
         _context = context;
+        _mapper = mapper;
     }
 
-    public Task<ConsumoAlimentarDto> Handle(GetConsumoAlimentarByAlunoQuery request, CancellationToken cancellationToken)
+    public async Task<ConsumoAlimentarDto> Handle(GetConsumoAlimentaresByAlunoQuery request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var result = await _context.ConsumoAlimentares
+            .Where(x => x.Id == request.AlunoId)
+            .AsNoTracking()
+            .ProjectTo<ConsumoAlimentarDto>(_mapper.ConfigurationProvider)
+            .FirstOrDefaultAsync(cancellationToken);
+
+
+        return result! == null ? throw new ArgumentNullException(nameof(result)) : result;
     }
 }
