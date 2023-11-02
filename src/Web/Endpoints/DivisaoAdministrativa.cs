@@ -9,7 +9,7 @@ public class DivisaoAdministrativa : EndpointGroupBase
     public override void Map(WebApplication app)
     {
         app.MapGroup(this)
-            .RequireAuthorization()
+            //.RequireAuthorization()
             .MapGet(GetEstadosAll, "Estados")
             .MapGet(GetMunicipiosByUf, "Municipios/{uf}");
     }
