@@ -4,11 +4,11 @@ using DnaBrasil.Domain.Entities;
 namespace DnaBrasil.Application.Locais.Commands.CreateLocal;
 public record CreateLocalCommand : IRequest<int>
 {
-    public string? Nome { get; init; }
+    public required string? Nome { get; init; }
     public string? Descricao { get; init; }
-    public bool Status { get; init; } = true;
-    public Municipio? Municipio { get; init; }
-    public List<Contrato>? Contratos { get; init; }
+    public bool Status { get; set; } = true;
+    public required Municipio? Municipio { get; init; }
+    public required List<Contrato>? Contratos { get; init; }
 }
 
 public class CreateLocalCommandHandler : IRequestHandler<CreateLocalCommand, int>

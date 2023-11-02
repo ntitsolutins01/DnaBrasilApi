@@ -1,14 +1,9 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
+﻿namespace DnaBrasil.Application.Locals.Commands.UpdateLocal;
 
-namespace DnaBrasil.Application.Locais.Commands.CreateLocal;
-
-public class CreateLocalCommandValidator : AbstractValidator<CreateLocalCommand>
+public class UpdateLocalCommandValidator : AbstractValidator<UpdateLocalCommand>
 {
-    private readonly IApplicationDbContext _context;
-
-    public CreateLocalCommandValidator(IApplicationDbContext context)
+    public UpdateLocalCommandValidator()
     {
-        _context = context;
 
         RuleFor(v => v.Nome)
             .MaximumLength(150)
