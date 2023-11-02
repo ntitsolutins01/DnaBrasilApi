@@ -1,5 +1,4 @@
-﻿using DnaBrasil.Application.TipoLaudos.Queries.GetTipoLaudos;
-using DnaBrasil.Domain.Entities;
+﻿using DnaBrasil.Domain.Entities;
 
 namespace DnaBrasil.Application.Estados.Queries.GetEstadosAll;
 public class EstadoDto
