@@ -2,7 +2,7 @@
 using DnaBrasil.Application.Profissionais.Queries.ProfissionalByFilter;
 using DnaBrasil.Domain.Entities;
 
-namespace DnaBrasil.Application.Ambientes.Queries.GetAmbientesAll;
+namespace DnaBrasil.Application.Ambientes.Queries;
 public class AmbienteDto
 {
     public string? Nome { get; set; }
