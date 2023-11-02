@@ -1,14 +1,15 @@
 ﻿using DnaBrasil.Application.Alunos.Queries;
 using DnaBrasil.Application.Common.Interfaces;
+using DnaBrasil.Domain.Entities;
 
 namespace DnaBrasil.Application.Laudos.Queries.GetConsumoAlimentarByAluno;
 
-public record GetConsumoAlimentaresByAlunoQuery : IRequest<ConsumoAlimentarDto>
+public record GetConsumoAlimentaresByAlunoQuery : IRequest<ConsumoAlimentarDto?>
 {
     public int AlunoId { get; set; }
 }
 
-public class GetConsumoAlimentaresByAlunoQueryHandler : IRequestHandler<GetConsumoAlimentaresByAlunoQuery, ConsumoAlimentarDto>
+public class GetConsumoAlimentaresByAlunoQueryHandler : IRequestHandler<GetConsumoAlimentaresByAlunoQuery, ConsumoAlimentarDto?>
 {
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
@@ -19,21 +20,22 @@ public class GetConsumoAlimentaresByAlunoQueryHandler : IRequestHandler<GetConsu
         _mapper = mapper;
     }
 
-    public async Task<ConsumoAlimentarDto> Handle(GetConsumoAlimentaresByAlunoQuery request, CancellationToken cancellationToken)
+    public async Task<ConsumoAlimentarDto?> Handle(GetConsumoAlimentaresByAlunoQuery request, CancellationToken cancellationToken)
     {
         var aluno = await _context.Alunos
-            .Where(x => x.Id == request.AlunoId)
-            .AsNoTracking();
+                .FindAsync(new object[] { request.AlunoId }, cancellationToken);
 
-        var laudos = aluno.Laudos.where(x)
+        Guard.Against.NotFound(request.AlunoId, aluno);
 
-        var result = await _context.ConsumoAlimentares
-            .Where(x => x.Id == request.AlunoId)
+        var laudos = aluno.Laudos!.OrderByDescending(o => o.Created).AsQueryable();
+
+        var result = await laudos
             .AsNoTracking()
-            .ProjectTo<ConsumoAlimentarDto>(_mapper.ConfigurationProvider)
+            .ProjectTo<LaudoDto>(_mapper.ConfigurationProvider)
             .FirstOrDefaultAsync(cancellationToken);
 
+        Guard.Against.NotFound(request.AlunoId, result);
 
-        return result! == null ? throw new ArgumentNullException(nameof(result)) : result;
+        return result == null ? throw new ArgumentNullException(nameof(result)) : result.ConsumoAlimentar;
     }
 }
