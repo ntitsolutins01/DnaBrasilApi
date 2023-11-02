@@ -17,7 +17,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<Serie> Series => Set<Serie>();
     public DbSet<Estado> Estados => Set<Estado>();
     public DbSet<Municipio> Municipios => Set<Municipio>();
-    public DbSet<Local> Locais => Set<Local>();
+    public DbSet<Localidade> Localidade => Set<Localidade>();
     public DbSet<Profissional> Profissionais => Set<Profissional>();
     public DbSet<Deficiencia> Deficiencias => Set<Deficiencia>();
     public DbSet<Ambiente> Ambientes => Set<Ambiente>();
@@ -80,7 +80,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
             .WithMany(e => e.Contratos)
             .UsingEntity(
                 "ContratosLocais",
-                r => r.HasOne(typeof(Local)).WithMany().HasForeignKey("LocalId").HasPrincipalKey(nameof(Local.Id)),
+                r => r.HasOne(typeof(Localidade)).WithMany().HasForeignKey("LocalId").HasPrincipalKey(nameof(Domain.Entities.Localidade.Id)),
                 l => l.HasOne(typeof(Contrato)).WithMany().HasForeignKey("ContratoId").HasPrincipalKey(nameof(Contrato.Id)),
                 j => j.HasKey("ContratoId", "LocalId"));
 

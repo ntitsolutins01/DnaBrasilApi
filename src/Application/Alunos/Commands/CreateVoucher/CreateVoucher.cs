@@ -7,7 +7,7 @@ namespace DnaBrasil.Application.Alunos.Commands.CreateVoucher;
 public record CreateVoucherCommand : IRequest<int>
 {
     public int Id { get; set; }
-    public Local? Local { get; set; }
+    public Localidade? Local { get; set; }
     public string? Descricao { get; set; }
     public string? Turma { get; set; }
     public string? Serie { get; set; }

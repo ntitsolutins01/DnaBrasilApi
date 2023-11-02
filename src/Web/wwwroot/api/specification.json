@@ -1929,7 +1929,7 @@
                 "type": "array",
                 "nullable": true,
                 "items": {
-                  "$ref": "#/components/schemas/Local"
+                  "$ref": "#/components/schemas/Localidade"
                 }
               },
               "alunos": {
@@ -1950,7 +1950,7 @@
           }
         ]
       },
-      "Local": {
+      "Localidade": {
         "allOf": [
           {
             "$ref": "#/components/schemas/BaseAuditableEntity"
@@ -2125,7 +2125,7 @@
                 "nullable": true,
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/Local"
+                    "$ref": "#/components/schemas/Localidade"
                   }
                 ]
               },
@@ -2149,7 +2149,7 @@
                 "nullable": true,
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/Local"
+                    "$ref": "#/components/schemas/Localidade"
                   }
                 ]
               },
@@ -2879,7 +2879,7 @@
             "nullable": true,
             "oneOf": [
               {
-                "$ref": "#/components/schemas/Local"
+                "$ref": "#/components/schemas/Localidade"
               }
             ]
           },
@@ -2923,7 +2923,7 @@
             "nullable": true,
             "oneOf": [
               {
-                "$ref": "#/components/schemas/Local"
+                "$ref": "#/components/schemas/Localidade"
               }
             ]
           },

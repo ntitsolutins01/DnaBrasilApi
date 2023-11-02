@@ -22,7 +22,7 @@ public class CreateLocalCommandHandler : IRequestHandler<CreateLocalCommand, int
 
     public async Task<int> Handle(CreateLocalCommand request, CancellationToken cancellationToken)
     {
-        var entity = new Local
+        var entity = new Localidade
         {
             Nome = request.Nome,
             Descricao = request.Descricao,
@@ -31,7 +31,7 @@ public class CreateLocalCommandHandler : IRequestHandler<CreateLocalCommand, int
             Contratos = request.Contratos
         };
 
-        _context.Locais.Add(entity);
+        _context.Localidade.Add(entity);
 
         await _context.SaveChangesAsync(cancellationToken);
 

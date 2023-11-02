@@ -14,12 +14,12 @@ public class DeleteLocalCommandHandler : IRequestHandler<DeleteLocalCommand>
 
     public async Task Handle(DeleteLocalCommand request, CancellationToken cancellationToken)
     {
-        var entity = await _context.Locais
+        var entity = await _context.Localidade
             .FindAsync(new object[] { request.Id }, cancellationToken);
 
         Guard.Against.NotFound(request.Id, entity);
 
-        _context.Locais.Remove(entity);
+        _context.Localidade.Remove(entity);
 
         //entity.AddDomainEvent(new LocalDeletedEvent(entity));
 

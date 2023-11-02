@@ -25,7 +25,7 @@ public class UpdateLocalCommandHandler : IRequestHandler<UpdateLocalCommand>
 
     public async Task Handle(UpdateLocalCommand request, CancellationToken cancellationToken)
     {
-        var entity = await _context.Locais
+        var entity = await _context.Localidade
             .FindAsync(new object[] { request.Id }, cancellationToken);
 
         Guard.Against.NotFound(request.Id, entity);

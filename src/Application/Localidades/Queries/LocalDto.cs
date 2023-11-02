@@ -12,7 +12,7 @@ public class LocalDto
     {
         public Mapping()
         {
-            CreateMap<Local, LocalDto>();
+            CreateMap<Localidade, LocalDto>();
         }
     }
 }
