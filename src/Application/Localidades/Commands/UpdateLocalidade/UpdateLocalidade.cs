@@ -1,9 +1,9 @@
 ﻿using DnaBrasil.Application.Common.Interfaces;
 using DnaBrasil.Domain.Entities;
 
-namespace DnaBrasil.Application.Locais.Commands.UpdateLocal;
+namespace DnaBrasil.Application.Localidades.Commands.UpdateLocalidade;
 
-public record UpdateLocalCommand : IRequest
+public record UpdateLocalidadeCommand : IRequest
 {
     public int Id { get; init; }
     public required string? Nome { get; init; }
@@ -13,16 +13,16 @@ public record UpdateLocalCommand : IRequest
     public required List<Contrato>? Contratos { get; init; }
 }
 
-public class UpdateLocalCommandHandler : IRequestHandler<UpdateLocalCommand>
+public class UpdateLocalidadeCommandHandler : IRequestHandler<UpdateLocalidadeCommand>
 {
     private readonly IApplicationDbContext _context;
 
-    public UpdateLocalCommandHandler(IApplicationDbContext context)
+    public UpdateLocalidadeCommandHandler(IApplicationDbContext context)
     {
         _context = context;
     }
 
-    public async Task Handle(UpdateLocalCommand request, CancellationToken cancellationToken)
+    public async Task Handle(UpdateLocalidadeCommand request, CancellationToken cancellationToken)
     {
         var entity = await _context.Localidades
             .FindAsync(new object[] { request.Id }, cancellationToken);

@@ -1,8 +1,8 @@
 ﻿using DnaBrasil.Application.Common.Interfaces;
 using DnaBrasil.Domain.Entities;
 
-namespace DnaBrasil.Application.Locais.Commands.CreateLocal;
-public record CreateLocalCommand : IRequest<int>
+namespace DnaBrasil.Application.Localidades.Commands.CreateLocalidade;
+public record CreateLocalidadeCommand : IRequest<int>
 {
     public required string? Nome { get; init; }
     public string? Descricao { get; init; }
@@ -11,16 +11,16 @@ public record CreateLocalCommand : IRequest<int>
     public required List<Contrato>? Contratos { get; init; }
 }
 
-public class CreateLocalCommandHandler : IRequestHandler<CreateLocalCommand, int>
+public class CreateLocalidadeCommandHandler : IRequestHandler<CreateLocalidadeCommand, int>
 {
     private readonly IApplicationDbContext _context;
 
-    public CreateLocalCommandHandler(IApplicationDbContext context)
+    public CreateLocalidadeCommandHandler(IApplicationDbContext context)
     {
         _context = context;
     }
 
-    public async Task<int> Handle(CreateLocalCommand request, CancellationToken cancellationToken)
+    public async Task<int> Handle(CreateLocalidadeCommand request, CancellationToken cancellationToken)
     {
         var entity = new Localidade
         {

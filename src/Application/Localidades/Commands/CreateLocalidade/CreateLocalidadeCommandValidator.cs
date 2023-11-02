@@ -1,12 +1,12 @@
 ﻿using DnaBrasil.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.Locais.Commands.CreateLocal;
+namespace DnaBrasil.Application.Localidades.Commands.CreateLocalidade;
 
-public class CreateLocalCommandValidator : AbstractValidator<CreateLocalCommand>
+public class CreateLocalidadeCommandValidator : AbstractValidator<CreateLocalidadeCommand>
 {
     private readonly IApplicationDbContext _context;
 
-    public CreateLocalCommandValidator(IApplicationDbContext context)
+    public CreateLocalidadeCommandValidator(IApplicationDbContext context)
     {
         _context = context;
 
