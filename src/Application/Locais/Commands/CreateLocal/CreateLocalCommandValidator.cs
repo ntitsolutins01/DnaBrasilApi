@@ -1,6 +1,6 @@
 ﻿using DnaBrasil.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.Locais.CreateLocal;
+namespace DnaBrasil.Application.Locais.Commands.CreateLocal;
 
 public class CreateLocalCommandValidator : AbstractValidator<CreateLocalCommand>
 {

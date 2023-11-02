@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DnaBrasil.Application.TipoLaudos.Commands.CreateTipoLaudos;
-
-namespace DnaBrasil.Application.Series.Commands;
+﻿namespace DnaBrasil.Application.Series.Commands.CreateSerie;
 internal class CreateSeriesCommandValidator : AbstractValidator<CreateSerieCommand>
 {
     public CreateSeriesCommandValidator()

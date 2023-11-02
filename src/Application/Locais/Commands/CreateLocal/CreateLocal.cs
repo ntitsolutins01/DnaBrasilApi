@@ -1,7 +1,7 @@
 ﻿using DnaBrasil.Application.Common.Interfaces;
 using DnaBrasil.Domain.Entities;
 
-namespace DnaBrasil.Application.Locais.CreateLocal;
+namespace DnaBrasil.Application.Locais.Commands.CreateLocal;
 public record CreateLocalCommand : IRequest<int>
 {
     public string? Nome { get; init; }
