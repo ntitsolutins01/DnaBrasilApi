@@ -5,9 +5,9 @@ public class CreateQuestionarioCommandValidator : AbstractValidator<CreateQuesti
     public CreateQuestionarioCommandValidator()
     {
         RuleFor(v => v.Tipo)
-            .NotEmpty();
+            .NotNull();
         RuleFor(v => v.Pergunta)
-            .MaximumLength(200)
+            .MaximumLength(400)
             .NotEmpty();
     }
 }

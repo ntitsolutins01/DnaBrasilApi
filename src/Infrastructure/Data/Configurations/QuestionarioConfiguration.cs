@@ -13,7 +13,7 @@ internal class QuestionarioConfiguration : IEntityTypeConfiguration<Questionario
     public void Configure(EntityTypeBuilder<Questionario> builder)
     {
         builder.Property(t => t.Pergunta)
-            .HasMaxLength(200)
+            .HasMaxLength(400)
             .IsRequired();
     }
 }
