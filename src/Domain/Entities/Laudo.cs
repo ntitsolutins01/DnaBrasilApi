@@ -7,6 +7,5 @@ public class Laudo : BaseAuditableEntity
     public Saude? Saude { get; set; }
     public ConsumoAlimentar? Consumo { get; set; }
     public SaudeBucal? SaudeBucal { get; set; }
-    public List<Aluno>? Alunos { get; set; }
-
+    public required Aluno Aluno { get; set; }
 }

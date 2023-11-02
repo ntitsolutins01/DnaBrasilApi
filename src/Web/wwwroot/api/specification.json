@@ -2301,12 +2301,8 @@
                   }
                 ]
               },
-              "alunos": {
-                "type": "array",
-                "nullable": true,
-                "items": {
-                  "$ref": "#/components/schemas/Aluno"
-                }
+              "aluno": {
+                "$ref": "#/components/schemas/Aluno"
               }
             }
           }

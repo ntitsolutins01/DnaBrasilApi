@@ -4,6 +4,7 @@ using DnaBrasil.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DnaBrasil.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231102200203_DnaDeleteAlunosLaudos")]
+    partial class DnaDeleteAlunosLaudos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -510,7 +513,7 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AlunoId")
+                    b.Property<int?>("AlunoId")
                         .HasColumnType("int");
 
                     b.Property<int?>("ConsumoId")
@@ -1844,11 +1847,9 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("DnaBrasil.Domain.Entities.Laudo", b =>
                 {
-                    b.HasOne("DnaBrasil.Domain.Entities.Aluno", "Aluno")
+                    b.HasOne("DnaBrasil.Domain.Entities.Aluno", null)
                         .WithMany("Laudos")
-                        .HasForeignKey("AlunoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AlunoId");
 
                     b.HasOne("DnaBrasil.Domain.Entities.ConsumoAlimentar", "Consumo")
                         .WithMany()
@@ -1873,8 +1874,6 @@ namespace DnaBrasil.Infrastructure.Data.Migrations
                     b.HasOne("DnaBrasil.Domain.Entities.Vocacional", "Vocacional")
                         .WithMany()
                         .HasForeignKey("VocacionalId");
-
-                    b.Navigation("Aluno");
 
                     b.Navigation("Consumo");
 
