@@ -1,0 +1,29 @@
+﻿using DnaBrasil.Application.Common.Interfaces;
+
+namespace DnaBrasil.Application.Municipios.Commands.DeleteMunicipio;
+public record DeleteMunicipioCommand(int Id) : IRequest;
+
+public class DeleteMunicipioCommandHandler : IRequestHandler<DeleteMunicipioCommand>
+{
+    private readonly IApplicationDbContext _context;
+
+    public DeleteMunicipioCommandHandler(IApplicationDbContext context)
+    {
+        _context = context;
+    }
+
+    public async Task Handle(DeleteMunicipioCommand request, CancellationToken cancellationToken)
+    {
+        var entity = await _context.Municipios
+            .FindAsync(new object[] { request.Id }, cancellationToken);
+
+        Guard.Against.NotFound(request.Id, entity);
+
+        _context.Municipios.Remove(entity);
+
+        //entity.AddDomainEvent(new MunicipioDeletedEvent(entity));
+
+        await _context.SaveChangesAsync(cancellationToken);
+    }
+
+}
