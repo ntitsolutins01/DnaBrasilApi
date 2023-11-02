@@ -1,8 +1,7 @@
 ﻿using DnaBrasil.Application.Common.Interfaces;
-using DnaBrasil.Application.Locals.Commands.UpdateLocal;
 using DnaBrasil.Domain.Entities;
 
-namespace DnaBrasil.Application.Locals.Commands.UpdateLocal;
+namespace DnaBrasil.Application.Locais.Commands.UpdateLocal;
 
 public record UpdateLocalCommand : IRequest
 {
