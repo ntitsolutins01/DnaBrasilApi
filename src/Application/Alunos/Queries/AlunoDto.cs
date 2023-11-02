@@ -1,4 +1,4 @@
-﻿using DnaBrasil.Application.Ambientes.Queries.GetAmbientesAll;
+﻿using DnaBrasil.Application.Ambientes.Queries;
 using DnaBrasil.Application.Deficiencias.Queries.GetDeficienciasAll;
 using DnaBrasil.Domain.Entities;
 

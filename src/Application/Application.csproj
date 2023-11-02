@@ -30,9 +30,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Ambientes\Commands\CreateAmbiente\" />
-    <Folder Include="Ambientes\Commands\DeleteAmbiente\" />
-    <Folder Include="Ambientes\Commands\UpdateAmbiente\" />
     <Folder Include="Locais\Commands\DeleteLocal\" />
     <Folder Include="Locais\Commands\UpdateLocal\" />
     <Folder Include="Municipios\Commands\CreateMunicipio\" />
