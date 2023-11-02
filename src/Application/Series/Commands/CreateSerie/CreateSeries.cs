@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DnaBrasil.Application.Common.Interfaces;
+﻿using DnaBrasil.Application.Common.Interfaces;
 using DnaBrasil.Domain.Entities;
-using DnaBrasil.Domain.Events;
 
-namespace DnaBrasil.Application.Series.Commands;
+namespace DnaBrasil.Application.Series.Commands.CreateSerie;
 public record CreateSerieCommand : IRequest<int>
 {
     public required string Nome { get; init; }

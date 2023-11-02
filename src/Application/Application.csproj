@@ -29,4 +29,19 @@
     <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Ambientes\Commands\CreateAmbiente\" />
+    <Folder Include="Ambientes\Commands\DeleteAmbiente\" />
+    <Folder Include="Ambientes\Commands\UpdateAmbiente\" />
+    <Folder Include="Locais\Commands\DeleteLocal\" />
+    <Folder Include="Locais\Commands\UpdateLocal\" />
+    <Folder Include="Municipios\Commands\CreateMunicipio\" />
+    <Folder Include="Municipios\Commands\DeleteMunicipio\" />
+    <Folder Include="Municipios\Commands\UpdateMunicipio\" />
+    <Folder Include="Series\Commands\DeleteSerie\" />
+    <Folder Include="Series\Commands\UpdateSerie\" />
+    <Folder Include="TipoLaudos\Commands\DeleteTipoLaudos\" />
+    <Folder Include="TipoLaudos\Commands\UpdateTipoLaudos\" />
+  </ItemGroup>
+
 </Project>
