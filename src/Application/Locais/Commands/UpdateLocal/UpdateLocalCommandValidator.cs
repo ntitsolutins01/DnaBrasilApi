@@ -1,4 +1,4 @@
-﻿namespace DnaBrasil.Application.Locals.Commands.UpdateLocal;
+﻿namespace DnaBrasil.Application.Locais.Commands.UpdateLocal;
 
 public class UpdateLocalCommandValidator : AbstractValidator<UpdateLocalCommand>
 {
