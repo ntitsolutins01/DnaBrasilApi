@@ -2300,6 +2300,9 @@
                     "$ref": "#/components/schemas/SaudeBucal"
                   }
                 ]
+              },
+              "aluno": {
+                "$ref": "#/components/schemas/Aluno"
               }
             }
           }

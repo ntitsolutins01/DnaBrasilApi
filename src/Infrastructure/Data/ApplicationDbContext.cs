@@ -46,7 +46,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
         base.OnModelCreating(builder);
-        //Basic many-to-many
+
+        #region Basic many-to-many
         builder.Entity<Aluno>()
         .HasMany(e => e.Deficiencias)
         .WithMany(e => e.Alunos)
@@ -55,7 +56,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
             r => r.HasOne(typeof(Deficiencia)).WithMany().HasForeignKey("DeficienciaId").HasPrincipalKey(nameof(Deficiencia.Id)),
             l => l.HasOne(typeof(Aluno)).WithMany().HasForeignKey("AlunoId").HasPrincipalKey(nameof(Aluno.Id)),
             j => j.HasKey("AlunoId", "DeficienciaId"));
-        //Basic many-to-many
+
         builder.Entity<Aluno>()
         .HasMany(e => e.Ambientes)
         .WithMany(e => e.Alunos)
@@ -64,7 +65,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
             r => r.HasOne(typeof(Ambiente)).WithMany().HasForeignKey("AmbienteId").HasPrincipalKey(nameof(Ambiente.Id)),
             l => l.HasOne(typeof(Aluno)).WithMany().HasForeignKey("AlunoId").HasPrincipalKey(nameof(Aluno.Id)),
             j => j.HasKey("AlunoId", "AmbienteId"));
-        //Basic many-to-many
+
         builder.Entity<Profissional>()
                     .HasMany(e => e.Ambientes)
                     .WithMany(e => e.Profissionais)
@@ -73,12 +74,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
                         r => r.HasOne(typeof(Ambiente)).WithMany().HasForeignKey("AmbienteId").HasPrincipalKey(nameof(Ambiente.Id)),
                         l => l.HasOne(typeof(Profissional)).WithMany().HasForeignKey("ProfissionalId").HasPrincipalKey(nameof(Profissional.Id)),
                         j => j.HasKey("ProfissionalId", "AmbienteId"));
-        // Required one-to-many
-        builder.Entity<Parceiro>()
-            .HasMany(e => e.Alunos)
-            .WithOne(e => e.Parceiro)
-            .OnDelete(DeleteBehavior.NoAction);
-        //Basic many-to-many
+
         builder.Entity<Contrato>()
             .HasMany(e => e.Locais)
             .WithMany(e => e.Contratos)
@@ -87,7 +83,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
                 r => r.HasOne(typeof(Local)).WithMany().HasForeignKey("LocalId").HasPrincipalKey(nameof(Local.Id)),
                 l => l.HasOne(typeof(Contrato)).WithMany().HasForeignKey("ContratoId").HasPrincipalKey(nameof(Contrato.Id)),
                 j => j.HasKey("ContratoId", "LocalId"));
-        //Basic many-to-many
+
         builder.Entity<Contrato>()
             .HasMany(e => e.Alunos)
             .WithMany(e => e.Contratos)
@@ -96,7 +92,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
                 r => r.HasOne(typeof(Aluno)).WithMany().HasForeignKey("AlunoId").HasPrincipalKey(nameof(Aluno.Id)),
                 l => l.HasOne(typeof(Contrato)).WithMany().HasForeignKey("ContratoId").HasPrincipalKey(nameof(Contrato.Id)),
                 j => j.HasKey("ContratoId", "AlunoId"));
-        //Basic many-to-many
+
         builder.Entity<Contrato>()
             .HasMany(e => e.Profissionais)
             .WithMany(e => e.Contratos)
@@ -105,27 +101,46 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
                 r => r.HasOne(typeof(Profissional)).WithMany().HasForeignKey("ProfissionalId").HasPrincipalKey(nameof(Profissional.Id)),
                 l => l.HasOne(typeof(Contrato)).WithMany().HasForeignKey("ContratoId").HasPrincipalKey(nameof(Contrato.Id)),
                 j => j.HasKey("ContratoId", "ProfissionalId"));
-        
-        //Required one-to-one with primary key to primary key relationship
+
+        #endregion
+
+        #region Required one-to-one with primary key to primary key relationship
+
         builder.Entity<Aluno>()
             .HasOne(e => e.Dependencia)
             .WithOne(e => e.Aluno)
             .HasForeignKey<Dependencia>();
-        //Required one-to-one with primary key to primary key relationship
+
         builder.Entity<Aluno>()
             .HasOne(e => e.Matricula)
             .WithOne(e => e.Aluno)
             .HasForeignKey<Matricula>();
-        //Required one-to-one with primary key to primary key relationship
+
         builder.Entity<Aluno>()
             .HasOne(e => e.Voucher)
             .WithOne(e => e.Aluno)
             .HasForeignKey<Voucher>();
 
+        #endregion
+
+        #region Required one-to-many
+
+        builder.Entity<Parceiro>()
+            .HasMany(e => e.Alunos)
+            .WithOne(e => e.Parceiro)
+            .OnDelete(DeleteBehavior.NoAction);
+
         builder.Entity<Modulo>()
             .HasMany(c => c.Funcionalidades)
             .WithOne(e => e.Modulo)
             .IsRequired();
+
+        builder.Entity<Aluno>()
+            .HasMany(c => c.Laudos)
+            .WithOne(e => e.Aluno)
+            .IsRequired();
+
+        #endregion
 
 
     }
