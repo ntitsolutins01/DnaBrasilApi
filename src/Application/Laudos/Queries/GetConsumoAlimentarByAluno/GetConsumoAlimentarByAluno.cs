@@ -1,4 +1,5 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
+﻿using DnaBrasil.Application.Alunos.Queries;
+using DnaBrasil.Application.Common.Interfaces;
 
 namespace DnaBrasil.Application.Laudos.Queries.GetConsumoAlimentarByAluno;
 
@@ -20,6 +21,12 @@ public class GetConsumoAlimentaresByAlunoQueryHandler : IRequestHandler<GetConsu
 
     public async Task<ConsumoAlimentarDto> Handle(GetConsumoAlimentaresByAlunoQuery request, CancellationToken cancellationToken)
     {
+        var aluno = await _context.Alunos
+            .Where(x => x.Id == request.AlunoId)
+            .AsNoTracking();
+
+        var laudos = aluno.Laudos.where(x)
+
         var result = await _context.ConsumoAlimentares
             .Where(x => x.Id == request.AlunoId)
             .AsNoTracking()

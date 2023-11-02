@@ -1,5 +1,6 @@
 ﻿using DnaBrasil.Application.Ambientes.Queries;
 using DnaBrasil.Application.Deficiencias.Queries.GetDeficienciasAll;
+using DnaBrasil.Application.Laudos.Queries;
 using DnaBrasil.Domain.Entities;
 
 namespace DnaBrasil.Application.Alunos.Queries;
@@ -31,6 +32,7 @@ public class AlunoDto
     public int? Etnia { get; set; }
     public VoucherDto? Voucher { get; set; }
     public MatriculaDto? Matricula { get; set; }
+    public List<LaudoDto>? Laudos { get; set; }
 
     private class Mapping : Profile
     {
