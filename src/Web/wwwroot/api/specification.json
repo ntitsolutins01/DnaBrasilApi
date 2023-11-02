@@ -2300,13 +2300,6 @@
                     "$ref": "#/components/schemas/SaudeBucal"
                   }
                 ]
-              },
-              "alunos": {
-                "type": "array",
-                "nullable": true,
-                "items": {
-                  "$ref": "#/components/schemas/Aluno"
-                }
               }
             }
           }
