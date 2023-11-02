@@ -31,7 +31,7 @@ public class CreateLocalCommandHandler : IRequestHandler<CreateLocalCommand, int
             Contratos = request.Contratos
         };
 
-        _context.Localidade.Add(entity);
+        _context.Localidades.Add(entity);
 
         await _context.SaveChangesAsync(cancellationToken);
 

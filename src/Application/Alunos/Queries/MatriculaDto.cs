@@ -15,7 +15,6 @@ public class MatriculaDto
     public string? NomeResponsavel3 { get; set; }
     public string? ParentescoResponsavel3 { get; set; }
     public string? CpfResponsavel3 { get; set; }
-    //public required AlunoDto Aluno { get; set; }
     private class Mapping : Profile
     {
         public Mapping()

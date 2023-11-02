@@ -17,7 +17,7 @@ public class GetLocalQueryHandler : IRequestHandler<GetLocalQuery, List<LocalDto
 
     public async Task<List<LocalDto>> Handle(GetLocalQuery request, CancellationToken cancellationToken)
     {
-        var result = await _context.Localidade
+        var result = await _context.Localidades
             .AsNoTracking()
             .ProjectTo<LocalDto>(_mapper.ConfigurationProvider)
             .OrderBy(t => t.Nome)

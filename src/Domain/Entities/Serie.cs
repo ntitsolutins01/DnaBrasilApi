@@ -9,7 +9,7 @@ public class Serie : BaseAuditableEntity
 {
     public required string Nome { get; set; }
     public required string Descricao { get; set; }
-    public int IdadeInicial { get; set; }
-    public int IdadeFinal { get; set; }
-    public int ScoreTotal { get; set; }
+    public required int IdadeInicial { get; set; }
+    public required int IdadeFinal { get; set; }
+    public required int ScoreTotal { get; set; }
 }

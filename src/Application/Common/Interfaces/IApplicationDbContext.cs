@@ -10,7 +10,7 @@ public interface IApplicationDbContext
     DbSet<Serie> Series { get; }
     DbSet<Estado> Estados { get; }
     DbSet<Municipio> Municipios { get; }
-    DbSet<Localidade> Localidade { get; }
+    DbSet<Localidade> Localidades { get; }
     DbSet<Profissional> Profissionais { get; }
     DbSet<Deficiencia> Deficiencias { get; }
     DbSet<Ambiente> Ambientes { get; }
