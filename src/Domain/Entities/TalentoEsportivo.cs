@@ -15,5 +15,4 @@ public class TalentoEsportivo : BaseAuditableEntity
     public int? AptidaoFisica { get; set; }
     public int? Agilidade { get; set; }
     public int? Abdominal { get; set; }
-    //public required Aluno Aluno { get; set; }
 }

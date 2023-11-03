@@ -1,24 +1,25 @@
 ﻿using DnaBrasil.Application.Common.Interfaces;
+using DnaBrasil.Application.Laudos.Queries.GetConsumoAlimentarByAluno;
 
-namespace DnaBrasil.Application.Laudos.Queries.GetVocacionalByAluno;
+namespace DnaBrasil.Application.Laudos.Queries.GetQualidadeVidaByAluno;
 
-public record GetVocacionalByAlunoQuery : IRequest<VocacionalDto?>
+public record GetQualidadeDeVidaByAlunoQuery : IRequest<QualidadeDeVidaDto?>
 {
     public int AlunoId { get; set; }
 }
 
-public class GetVocacionalByAlunoQueryHandler : IRequestHandler<GetVocacionalByAlunoQuery, VocacionalDto?>
+public class GetQualidadeDeVidaByAlunoQueryHandler : IRequestHandler<GetQualidadeDeVidaByAlunoQuery, QualidadeDeVidaDto?>
 {
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
 
-    public GetVocacionalByAlunoQueryHandler(IApplicationDbContext context, IMapper mapper)
+    public GetQualidadeDeVidaByAlunoQueryHandler(IApplicationDbContext context, IMapper mapper)
     {
         _context = context;
         _mapper = mapper;
     }
 
-    public async Task<VocacionalDto?> Handle(GetVocacionalByAlunoQuery request, CancellationToken cancellationToken)
+    public async Task<QualidadeDeVidaDto?> Handle(GetQualidadeDeVidaByAlunoQuery request, CancellationToken cancellationToken)
     {
         var aluno = await _context.Alunos
             .FindAsync(new object[] { request.AlunoId }, cancellationToken);
@@ -34,6 +35,6 @@ public class GetVocacionalByAlunoQueryHandler : IRequestHandler<GetVocacionalByA
 
         Guard.Against.NotFound(request.AlunoId, result);
 
-        return result == null ? throw new ArgumentNullException(nameof(result)) : result.Vocacional;
+        return result == null ? throw new ArgumentNullException(nameof(result)) : result.QualidadeDeVida;
     }
 }

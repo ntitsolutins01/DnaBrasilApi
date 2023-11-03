@@ -1,30 +1,29 @@
-﻿using DnaBrasil.Application.Alunos.Queries;
-using DnaBrasil.Application.Common.Interfaces;
+﻿using DnaBrasil.Application.Common.Interfaces;
+using DnaBrasil.Application.Laudos.Queries;
 
-namespace DnaBrasil.Application.Laudos.Queries.GetConsumosAlimentaresAll;
+namespace DnaBrasil.Application.ConsumosAlimentaresAll.Queries.GetConsumosAlimentaresAllAll;
+//[Authorize]
+public record GetConsumosAlimentaresAllQuery : IRequest<List<ConsumoAlimentarDto>>;
 
-public record GetConsumosAlimentaresAllQuery : IRequest<AlunoDto>
-{
-}
-
-public class GetConsumosAlimentaresAllQueryValidator : AbstractValidator<GetConsumosAlimentaresAllQuery>
-{
-    public GetConsumosAlimentaresAllQueryValidator()
-    {
-    }
-}
-
-public class GetConsumosAlimentaresAllQueryHandler : IRequestHandler<GetConsumosAlimentaresAllQuery, AlunoDto>
+public class GetConsumosAlimentaresAllQueryHandler : IRequestHandler<GetConsumosAlimentaresAllQuery, List<ConsumoAlimentarDto>>
 {
     private readonly IApplicationDbContext _context;
+    private readonly IMapper _mapper;
 
-    public GetConsumosAlimentaresAllQueryHandler(IApplicationDbContext context)
+    public GetConsumosAlimentaresAllQueryHandler(IApplicationDbContext context, IMapper mapper)
     {
         _context = context;
+        _mapper = mapper;
     }
 
-    public Task<AlunoDto> Handle(GetConsumosAlimentaresAllQuery request, CancellationToken cancellationToken)
+    public async Task<List<ConsumoAlimentarDto>> Handle(GetConsumosAlimentaresAllQuery request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var result = await _context.ConsumoAlimentares
+            .AsNoTracking()
+            .ProjectTo<ConsumoAlimentarDto>(_mapper.ConfigurationProvider)
+            .OrderBy(o => o.Id)
+            .ToListAsync(cancellationToken);
+
+        return result == null ? throw new ArgumentNullException(nameof(result)) : result;
     }
 }
