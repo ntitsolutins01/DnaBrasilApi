@@ -1,6 +1,4 @@
-﻿using DnaBrasil.Application.Alunos.Queries;
-using DnaBrasil.Application.Common.Interfaces;
-using DnaBrasil.Domain.Entities;
+﻿using DnaBrasil.Application.Common.Interfaces;
 
 namespace DnaBrasil.Application.Laudos.Queries.GetConsumoAlimentarByAluno;
 

@@ -1,29 +1,39 @@
 ﻿using DnaBrasil.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.Laudos.Queries.SaudeByAluno;
+namespace DnaBrasil.Application.Laudos.Queries.GetSaudeByAluno;
 
-public record GetSaudeByAlunoQuery : IRequest<SaudeDto>
+public record GetSaudeByAlunoQuery : IRequest<SaudeDto?>
 {
+    public int AlunoId { get; set; }
 }
 
-public class GetSaudeByAlunoQueryValidator : AbstractValidator<GetSaudeByAlunoQuery>
-{
-    public GetSaudeByAlunoQueryValidator()
-    {
-    }
-}
-
-public class GetSaudeByAlunoQueryHandler : IRequestHandler<GetSaudeByAlunoQuery, SaudeDto>
+public class GetSaudeByAlunoQueryHandler : IRequestHandler<GetSaudeByAlunoQuery, SaudeDto?>
 {
     private readonly IApplicationDbContext _context;
+    private readonly IMapper _mapper;
 
-    public GetSaudeByAlunoQueryHandler(IApplicationDbContext context)
+    public GetSaudeByAlunoQueryHandler(IApplicationDbContext context, IMapper mapper)
     {
         _context = context;
+        _mapper = mapper;
     }
 
-    public Task<SaudeDto> Handle(GetSaudeByAlunoQuery request, CancellationToken cancellationToken)
+    public async Task<SaudeDto?> Handle(GetSaudeByAlunoQuery request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var aluno = await _context.Alunos
+            .FindAsync(new object[] { request.AlunoId }, cancellationToken);
+
+        Guard.Against.NotFound(request.AlunoId, aluno);
+
+        var laudos = aluno.Laudos!.OrderByDescending(o => o.Created).AsQueryable();
+
+        var result = await laudos
+            .AsNoTracking()
+            .ProjectTo<LaudoDto>(_mapper.ConfigurationProvider)
+            .FirstOrDefaultAsync(cancellationToken);
+
+        Guard.Against.NotFound(request.AlunoId, result);
+
+        return result == null ? throw new ArgumentNullException(nameof(result)) : result.Saude;
     }
 }
