@@ -2416,21 +2416,6 @@
               "descricao": {
                 "type": "string",
                 "nullable": true
-              },
-              "idadeInicial": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "idadeFinal": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "scoreTotal": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "status": {
-                "type": "boolean"
               }
             }
           }

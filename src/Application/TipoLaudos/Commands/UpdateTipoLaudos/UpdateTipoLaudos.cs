@@ -8,10 +8,6 @@ public record UpdateTipoLaudoCommand : IRequest
     public required int Id { get; init; }
     public required string? Nome { get; init; }
     public required string? Descricao { get; init; }
-    public required int IdadeInicial { get; init; }
-    public required int IdadeFinal { get; init; }
-    public required int ScoreTotal { get; init; }
-    public required bool Status { get; init; }
 }
 
 public class UpdateTipoLaudoCommandHandler : IRequestHandler<UpdateTipoLaudoCommand>
@@ -32,10 +28,6 @@ public class UpdateTipoLaudoCommandHandler : IRequestHandler<UpdateTipoLaudoComm
 
         entity.Nome = request.Nome;
         entity.Descricao = request.Descricao;
-        entity.IdadeInicial = request.IdadeInicial;
-        entity.IdadeFinal = request.IdadeFinal;
-        entity.ScoreTotal = request.ScoreTotal;
-        entity.Status = request.Status;
 
         await _context.SaveChangesAsync(cancellationToken);
     }
