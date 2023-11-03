@@ -2,20 +2,20 @@
 
 namespace DnaBrasil.Application.Locais.Queries.GetLocais;
 //[Authorize]
-public record GetLocalQuery : IRequest<List<LocalDto>>;
+public record GetLocalidadesAllQuery : IRequest<List<LocalDto>>;
 
-public class GetLocalQueryHandler : IRequestHandler<GetLocalQuery, List<LocalDto>>
+public class GetLocalidadesAllQueryHandler : IRequestHandler<GetLocalidadesAllQuery, List<LocalDto>>
 {
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
 
-    public GetLocalQueryHandler(IApplicationDbContext context, IMapper mapper)
+    public GetLocalidadesAllQueryHandler(IApplicationDbContext context, IMapper mapper)
     {
         _context = context;
         _mapper = mapper;
     }
 
-    public async Task<List<LocalDto>> Handle(GetLocalQuery request, CancellationToken cancellationToken)
+    public async Task<List<LocalDto>> Handle(GetLocalidadesAllQuery request, CancellationToken cancellationToken)
     {
         var result = await _context.Localidades
             .AsNoTracking()
