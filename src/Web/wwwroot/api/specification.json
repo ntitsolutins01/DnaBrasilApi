@@ -3377,12 +3377,6 @@
                   "$ref": "#/components/schemas/Laudo"
                 }
               },
-              "perfis": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/Perfil"
-                }
-              },
               "usuarios": {
                 "type": "array",
                 "items": {
@@ -3556,26 +3550,6 @@
                 "nullable": true
               },
               "url": {
-                "type": "string",
-                "nullable": true
-              }
-            }
-          }
-        ]
-      },
-      "Perfil": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BaseAuditableEntity"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "nome": {
-                "type": "string"
-              },
-              "descricao": {
                 "type": "string",
                 "nullable": true
               }

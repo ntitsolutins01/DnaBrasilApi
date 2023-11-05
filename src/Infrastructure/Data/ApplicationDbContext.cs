@@ -36,7 +36,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<Questionario> Questionarios => Set<Questionario>();
     public DbSet<Contrato> Contratos => Set<Contrato>();
     public DbSet<Laudo> Laudos => Set<Laudo>();
-    public DbSet<Perfil> Perfis => Set<Perfil>();
     public DbSet<Usuario> Usuarios => Set<Usuario>();
     public DbSet<Modulo> Modulos => Set<Modulo>();
     public DbSet<Funcionalidade> Funcionalidades => Set<Funcionalidade>();
