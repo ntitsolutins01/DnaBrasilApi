@@ -3608,8 +3608,8 @@
               "telefone": {
                 "type": "string"
               },
-              "perfil": {
-                "$ref": "#/components/schemas/Perfil"
+              "aspNetRoleId": {
+                "type": "string"
               }
             }
           }
@@ -4715,8 +4715,8 @@
           "telefone": {
             "type": "string"
           },
-          "perfil": {
-            "$ref": "#/components/schemas/Perfil"
+          "aspNetRoleId": {
+            "type": "string"
           }
         }
       },

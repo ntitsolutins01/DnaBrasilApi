@@ -10,7 +10,7 @@ public record CreateUsuarioCommand : IRequest<int>
     public required string Cpf { get; init; }
     public required string Email { get; init; }
     public required string Telefone { get; init; }
-    public required Perfil Perfil { get; init; }
+    public required string AspNetRoleId { get; init; }
 }
 
 public class CreateUsuarioCommandHandler : IRequestHandler<CreateUsuarioCommand, int>
@@ -30,8 +30,8 @@ public class CreateUsuarioCommandHandler : IRequestHandler<CreateUsuarioCommand,
             AspNetUserId = request.AspNetUserId,
             Cpf = request.Cpf,
             Email = request.Email,
-            Perfil = request.Perfil,
-            Telefone = request.Telefone
+            Telefone = request.Telefone,
+            AspNetRoleId = request.AspNetRoleId 
         };
 
         _context.Usuarios.Add(entity);

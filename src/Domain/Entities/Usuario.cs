@@ -6,5 +6,5 @@ public class Usuario : BaseAuditableEntity
     public required string Cpf { get; set; }
     public required string Email { get; set; }
     public required string Telefone { get; set; }
-    public required Perfil Perfil { get; set; }
+    public required string AspNetRoleId { get; set; }
 }
