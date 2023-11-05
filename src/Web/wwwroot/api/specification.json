@@ -466,12 +466,90 @@
         }
       }
     },
+    "/api/Localidades": {
+      "get": {
+        "tags": [
+          "Localidades"
+        ],
+        "operationId": "GetLocalidadesAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LocalDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Localidades"
+        ],
+        "operationId": "CreateLocalidade",
+        "requestBody": {
+          "x-name": "command",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateLocalidadeCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
     "/api/Perfis": {
       "get": {
         "tags": [
           "Perfis"
         ],
         "operationId": "GetPerfisAll",
+        "requestBody": {
+          "x-name": "command",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PerfilCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
         "responses": {
           "200": {
             "description": "",
@@ -504,7 +582,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreatePerfilCommand"
+                "$ref": "#/components/schemas/PerfilCommand"
               }
             }
           },
@@ -3041,7 +3119,7 @@
           }
         }
       },
-      "PerfilDto": {
+      "LocalDto": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -3050,26 +3128,1092 @@
             "format": "int32"
           },
           "nome": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "descricao": {
+            "type": "string",
+            "nullable": true
+          },
+          "municipio": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Municipio"
+              }
+            ]
+          }
+        }
+      },
+      "CreateLocalidadeCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "nome",
+          "status",
+          "municipio",
+          "contratos"
+        ],
+        "properties": {
+          "nome": {
+            "type": "string",
+            "maxLength": 150,
+            "minLength": 1,
+            "nullable": false
+          },
+          "descricao": {
+            "type": "string",
+            "maxLength": 300,
+            "minLength": 0,
+            "nullable": true
+          },
+          "status": {
+            "type": "boolean",
+            "minLength": 1,
+            "nullable": false
+          },
+          "municipio": {
+            "nullable": false,
+            "$ref": "#/components/schemas/Municipio"
+          },
+          "contratos": {
+            "type": "array",
+            "nullable": false,
+            "items": {
+              "$ref": "#/components/schemas/Contrato"
+            }
+          }
+        }
+      },
+      "PerfilDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "nome": {
             "type": "string",
             "nullable": true
           }
         }
       },
-      "CreatePerfilCommand": {
+      "PerfilCommand": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
+          "dbContext": {
+            "$ref": "#/components/schemas/ApplicationDbContext"
+          },
+          "roleManager": {
+            "$ref": "#/components/schemas/RoleManagerOfIdentityRole"
+          },
           "nome": {
             "type": "string"
           },
-          "descricao": {
+          "claims": {
+            "type": "object",
+            "additionalProperties": {}
+          }
+        }
+      },
+      "ApplicationDbContext": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/IdentityDbContextOfApplicationUser"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "todoLists": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/TodoList"
+                }
+              },
+              "todoItems": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/TodoItem"
+                }
+              },
+              "tipoLaudos": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/TipoLaudo"
+                }
+              },
+              "series": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Serie"
+                }
+              },
+              "estados": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Estado"
+                }
+              },
+              "municipios": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Municipio"
+                }
+              },
+              "localidades": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Localidade"
+                }
+              },
+              "profissionais": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Profissional"
+                }
+              },
+              "deficiencias": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Deficiencia"
+                }
+              },
+              "ambientes": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Ambiente"
+                }
+              },
+              "talentosEsportivos": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/TalentoEsportivo"
+                }
+              },
+              "saudes": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Saude"
+                }
+              },
+              "qualidadeDeVidas": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/QualidadeDeVida"
+                }
+              },
+              "saudeBucais": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/SaudeBucal"
+                }
+              },
+              "consumoAlimentares": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ConsumoAlimentar"
+                }
+              },
+              "vocacionais": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Vocacional"
+                }
+              },
+              "alunos": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Aluno"
+                }
+              },
+              "dependencias": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Dependencia"
+                }
+              },
+              "matriculas": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Matricula"
+                }
+              },
+              "vouchers": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Voucher"
+                }
+              },
+              "parceiros": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Parceiro"
+                }
+              },
+              "planosAulas": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/PlanoAula"
+                }
+              },
+              "questionarios": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Questionario"
+                }
+              },
+              "contratos": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Contrato"
+                }
+              },
+              "laudos": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Laudo"
+                }
+              },
+              "perfis": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Perfil"
+                }
+              },
+              "usuarios": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Usuario"
+                }
+              },
+              "modulos": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Modulo"
+                }
+              },
+              "funcionalidades": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Funcionalidade"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "TodoList": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "title": {
+                "type": "string",
+                "nullable": true
+              },
+              "colour": {
+                "$ref": "#/components/schemas/Colour"
+              },
+              "items": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/TodoItem"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "Colour": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ValueObject"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "code": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "ValueObject": {
+        "type": "object",
+        "x-abstract": true,
+        "additionalProperties": false
+      },
+      "TodoItem": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "listId": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "title": {
+                "type": "string",
+                "nullable": true
+              },
+              "note": {
+                "type": "string",
+                "nullable": true
+              },
+              "priority": {
+                "$ref": "#/components/schemas/PriorityLevel"
+              },
+              "reminder": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              },
+              "done": {
+                "type": "boolean"
+              },
+              "list": {
+                "$ref": "#/components/schemas/TodoList"
+              }
+            }
+          }
+        ]
+      },
+      "PriorityLevel": {
+        "type": "integer",
+        "description": "",
+        "x-enumNames": [
+          "None",
+          "Low",
+          "Medium",
+          "High"
+        ],
+        "enum": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      "Serie": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "nome": {
+                "type": "string"
+              },
+              "descricao": {
+                "type": "string"
+              },
+              "idadeInicial": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "idadeFinal": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "scoreTotal": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          }
+        ]
+      },
+      "PlanoAula": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "nome": {
+                "type": "string",
+                "nullable": true
+              },
+              "grade": {
+                "type": "string",
+                "nullable": true
+              },
+              "url": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          }
+        ]
+      },
+      "Perfil": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "nome": {
+                "type": "string"
+              },
+              "descricao": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          }
+        ]
+      },
+      "Usuario": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "aspNetUserId": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "nome": {
+                "type": "string"
+              },
+              "cpf": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "telefone": {
+                "type": "string"
+              },
+              "perfil": {
+                "$ref": "#/components/schemas/Perfil"
+              }
+            }
+          }
+        ]
+      },
+      "Modulo": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "nome": {
+                "type": "string"
+              },
+              "funcionalidades": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "$ref": "#/components/schemas/Funcionalidade"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "Funcionalidade": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "nome": {
+                "type": "string"
+              },
+              "modulo": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Modulo"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "IdentityDbContextOfApplicationUser": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/IdentityDbContextOfApplicationUserAndIdentityRoleAndString"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false
+          }
+        ]
+      },
+      "IdentityDbContextOfApplicationUserAndIdentityRoleAndString": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/IdentityDbContextOfApplicationUserAndIdentityRoleAndStringAndIdentityUserClaimOfStringAndIdentityUserRoleOfStringAndIdentityUserLoginOfStringAndIdentityRoleClaimOfStringAndIdentityUserTokenOfString"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false
+          }
+        ]
+      },
+      "IdentityDbContextOfApplicationUserAndIdentityRoleAndStringAndIdentityUserClaimOfStringAndIdentityUserRoleOfStringAndIdentityUserLoginOfStringAndIdentityRoleClaimOfStringAndIdentityUserTokenOfString": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/IdentityUserContextOfApplicationUserAndStringAndIdentityUserClaimOfStringAndIdentityUserLoginOfStringAndIdentityUserTokenOfString"
+          },
+          {
+            "type": "object",
+            "x-abstract": true,
+            "additionalProperties": false,
+            "properties": {
+              "userRoles": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/IdentityUserRoleOfString"
+                }
+              },
+              "roles": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/IdentityRole"
+                }
+              },
+              "roleClaims": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/IdentityRoleClaimOfString"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "IdentityUserRoleOfString": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "userId": {
+            "type": "string"
+          },
+          "roleId": {
+            "type": "string"
+          }
+        }
+      },
+      "IdentityRole": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/IdentityRoleOfString"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false
+          }
+        ]
+      },
+      "IdentityRoleOfString": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "normalizedName": {
+            "type": "string",
+            "nullable": true
+          },
+          "concurrencyStamp": {
             "type": "string",
             "nullable": true
           }
         }
+      },
+      "IdentityRoleClaimOfString": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "roleId": {
+            "type": "string"
+          },
+          "claimType": {
+            "type": "string",
+            "nullable": true
+          },
+          "claimValue": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "IdentityUserContextOfApplicationUserAndStringAndIdentityUserClaimOfStringAndIdentityUserLoginOfStringAndIdentityUserTokenOfString": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DbContext"
+          },
+          {
+            "type": "object",
+            "x-abstract": true,
+            "additionalProperties": false,
+            "properties": {
+              "users": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ApplicationUser"
+                }
+              },
+              "userClaims": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/IdentityUserClaimOfString"
+                }
+              },
+              "userLogins": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/IdentityUserLoginOfString"
+                }
+              },
+              "userTokens": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/IdentityUserTokenOfString"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "ApplicationUser": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/IdentityUser"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false
+          }
+        ]
+      },
+      "IdentityUser": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/IdentityUserOfString"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false
+          }
+        ]
+      },
+      "IdentityUserOfString": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "userName": {
+            "type": "string",
+            "nullable": true
+          },
+          "normalizedUserName": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "normalizedEmail": {
+            "type": "string",
+            "nullable": true
+          },
+          "emailConfirmed": {
+            "type": "boolean"
+          },
+          "passwordHash": {
+            "type": "string",
+            "nullable": true
+          },
+          "securityStamp": {
+            "type": "string",
+            "nullable": true
+          },
+          "concurrencyStamp": {
+            "type": "string",
+            "nullable": true
+          },
+          "phoneNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "phoneNumberConfirmed": {
+            "type": "boolean"
+          },
+          "twoFactorEnabled": {
+            "type": "boolean"
+          },
+          "lockoutEnd": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lockoutEnabled": {
+            "type": "boolean"
+          },
+          "accessFailedCount": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "IdentityUserClaimOfString": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userId": {
+            "type": "string"
+          },
+          "claimType": {
+            "type": "string",
+            "nullable": true
+          },
+          "claimValue": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "IdentityUserLoginOfString": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "loginProvider": {
+            "type": "string"
+          },
+          "providerKey": {
+            "type": "string"
+          },
+          "providerDisplayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "userId": {
+            "type": "string"
+          }
+        }
+      },
+      "IdentityUserTokenOfString": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "userId": {
+            "type": "string"
+          },
+          "loginProvider": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "DbContext": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "database": {
+            "$ref": "#/components/schemas/DatabaseFacade"
+          },
+          "changeTracker": {
+            "$ref": "#/components/schemas/ChangeTracker"
+          },
+          "model": {
+            "$ref": "#/components/schemas/IModel"
+          },
+          "contextId": {
+            "$ref": "#/components/schemas/DbContextId"
+          }
+        }
+      },
+      "DatabaseFacade": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "currentTransaction": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/IDbContextTransaction"
+              }
+            ]
+          },
+          "autoTransactionsEnabled": {
+            "type": "boolean",
+            "deprecated": true,
+            "x-deprecatedMessage": "Use AutoTransactionBehavior instead"
+          },
+          "autoTransactionBehavior": {
+            "$ref": "#/components/schemas/AutoTransactionBehavior"
+          },
+          "autoSavepointsEnabled": {
+            "type": "boolean"
+          },
+          "providerName": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "IDbContextTransaction": {
+        "type": "object",
+        "x-abstract": true,
+        "additionalProperties": false,
+        "properties": {
+          "transactionId": {
+            "type": "string",
+            "format": "guid"
+          },
+          "supportsSavepoints": {
+            "type": "boolean"
+          }
+        }
+      },
+      "AutoTransactionBehavior": {
+        "type": "integer",
+        "description": "",
+        "x-enumNames": [
+          "WhenNeeded",
+          "Always",
+          "Never"
+        ],
+        "enum": [
+          0,
+          1,
+          2
+        ]
+      },
+      "ChangeTracker": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "autoDetectChangesEnabled": {
+            "type": "boolean"
+          },
+          "lazyLoadingEnabled": {
+            "type": "boolean"
+          },
+          "queryTrackingBehavior": {
+            "$ref": "#/components/schemas/QueryTrackingBehavior"
+          },
+          "deleteOrphansTiming": {
+            "$ref": "#/components/schemas/CascadeTiming"
+          },
+          "cascadeDeleteTiming": {
+            "$ref": "#/components/schemas/CascadeTiming"
+          },
+          "context": {
+            "$ref": "#/components/schemas/DbContext"
+          },
+          "debugView": {
+            "$ref": "#/components/schemas/DebugView"
+          }
+        }
+      },
+      "QueryTrackingBehavior": {
+        "type": "integer",
+        "description": "",
+        "x-enumNames": [
+          "TrackAll",
+          "NoTracking",
+          "NoTrackingWithIdentityResolution"
+        ],
+        "enum": [
+          0,
+          1,
+          2
+        ]
+      },
+      "CascadeTiming": {
+        "type": "integer",
+        "description": "",
+        "x-enumNames": [
+          "Immediate",
+          "OnSaveChanges",
+          "Never"
+        ],
+        "enum": [
+          0,
+          1,
+          2
+        ]
+      },
+      "DebugView": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "longView": {
+            "type": "string"
+          },
+          "shortView": {
+            "type": "string"
+          }
+        }
+      },
+      "IModel": {
+        "type": "object",
+        "x-abstract": true,
+        "additionalProperties": false,
+        "properties": {
+          "modelDependencies": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/RuntimeModelDependencies"
+              }
+            ]
+          }
+        }
+      },
+      "RuntimeModelDependencies": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "typeMappingSource": {
+            "$ref": "#/components/schemas/ITypeMappingSource"
+          },
+          "constructorBindingFactory": {
+            "$ref": "#/components/schemas/IConstructorBindingFactory"
+          },
+          "parameterBindingFactories": {
+            "$ref": "#/components/schemas/IParameterBindingFactories"
+          }
+        }
+      },
+      "ITypeMappingSource": {
+        "type": "object",
+        "x-abstract": true,
+        "additionalProperties": false
+      },
+      "IConstructorBindingFactory": {
+        "type": "object",
+        "x-abstract": true,
+        "additionalProperties": false
+      },
+      "IParameterBindingFactories": {
+        "type": "object",
+        "x-abstract": true,
+        "additionalProperties": false
+      },
+      "DbContextId": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "instanceId": {
+            "type": "string",
+            "format": "guid"
+          },
+          "lease": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "RoleManagerOfIdentityRole": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "logger": {
+            "$ref": "#/components/schemas/ILogger"
+          },
+          "roleValidators": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IRoleValidatorOfIdentityRole"
+            }
+          },
+          "errorDescriber": {
+            "$ref": "#/components/schemas/IdentityErrorDescriber"
+          },
+          "keyNormalizer": {
+            "$ref": "#/components/schemas/ILookupNormalizer"
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IdentityRole"
+            }
+          },
+          "supportsQueryableRoles": {
+            "type": "boolean"
+          },
+          "supportsRoleClaims": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ILogger": {
+        "type": "object",
+        "x-abstract": true,
+        "additionalProperties": false
+      },
+      "IRoleValidatorOfIdentityRole": {
+        "type": "object",
+        "x-abstract": true,
+        "additionalProperties": false
+      },
+      "IdentityErrorDescriber": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "ILookupNormalizer": {
+        "type": "object",
+        "x-abstract": true,
+        "additionalProperties": false
       },
       "PaginatedListOfTodoItemBriefDto": {
         "type": "object",
@@ -3183,22 +4327,6 @@
             "nullable": true
           }
         }
-      },
-      "PriorityLevel": {
-        "type": "integer",
-        "description": "",
-        "x-enumNames": [
-          "None",
-          "Low",
-          "Medium",
-          "High"
-        ],
-        "enum": [
-          0,
-          1,
-          2,
-          3
-        ]
       },
       "TodosVm": {
         "type": "object",
@@ -3591,26 +4719,6 @@
             "$ref": "#/components/schemas/Perfil"
           }
         }
-      },
-      "Perfil": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BaseAuditableEntity"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "nome": {
-                "type": "string"
-              },
-              "descricao": {
-                "type": "string",
-                "nullable": true
-              }
-            }
-          }
-        ]
       },
       "WeatherForecast": {
         "type": "object",
