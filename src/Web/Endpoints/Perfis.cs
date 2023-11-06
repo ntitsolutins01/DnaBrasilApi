@@ -1,9 +1,13 @@
 ﻿using System.Collections;
 using System.Security.Claims;
+using DnaBrasil.Application.Perfis.Commands.CreatePerfil;
+using DnaBrasil.Application.Perfis.Queries.GetPerfisAll;
 using DnaBrasil.Web.Dto;
 using DnaBrasil.Web.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using PerfilDto = DnaBrasil.Application.Perfis.Queries.PerfilDto;
 
 namespace DnaBrasil.Web.Endpoints;
 
@@ -12,49 +16,18 @@ public class Perfis : EndpointGroupBase
     public override void Map(WebApplication app)
     {
         app.MapGroup(this)
-            .RequireAuthorization()
+            //.RequireAuthorization()
             .MapGet(GetPerfisAll)
             .MapPost(CreatePerfil);
     }
 
-    public Task<List<PerfilDto>> GetPerfisAll(ISender sender, [FromBody] PerfilCommand command)
+    public async Task<List<PerfilDto>> GetPerfisAll(ISender sender)
     {
-        try
-        {
-            var list = command.DbContext.Roles.Select(s => s).ToList().Select(item => new PerfilDto { Nome = item.Name, Id = item.Id }).ToList();
-            return Task.FromResult(list);
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw;
-        }
+        return await sender.Send(new GetPerfisAllQuery());
     }
-    public async Task<int> CreatePerfil(ISender sender, PerfilCommand command)
+
+    public async Task<int> CreatePerfil(ISender sender, CreatePerfilCommand command)
     {
-        try
-        {
-            var adminRole = await command.RoleManager.FindByNameAsync(command.Nome);
-            var result = false;
-            if (adminRole == null)
-            {
-                adminRole = new IdentityRole(command.Nome);
-                await command.RoleManager.CreateAsync(adminRole);
-                foreach (DictionaryEntry claim in command.Claims)
-                {
-                    var addClaim = new Claim(claim.Key.ToString()!, claim.Value!.ToString()!);
-                    await command.RoleManager.AddClaimAsync(adminRole, addClaim);
-                }
-
-                result = true;
-            }
-
-            return result ? 1 : 0;
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw;
-        }
+        return await sender.Send(command);
     }
 }
