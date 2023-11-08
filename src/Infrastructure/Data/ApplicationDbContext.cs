@@ -40,6 +40,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<Perfil> Perfis => Set<Perfil>();
     public DbSet<Modulo> Modulos => Set<Modulo>();
     public DbSet<Funcionalidade> Funcionalidades => Set<Funcionalidade>();
+    public DbSet<Escolaridade> Escolaridades => Set<Escolaridade>();
+
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

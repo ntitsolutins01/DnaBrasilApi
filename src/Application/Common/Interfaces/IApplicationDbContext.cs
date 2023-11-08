@@ -33,6 +33,7 @@ public interface IApplicationDbContext
     DbSet<Usuario> Usuarios { get; }
     DbSet<Modulo> Modulos { get; }
     DbSet<Funcionalidade> Funcionalidades { get; }
+    DbSet<Escolaridade> Escolaridades { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }
