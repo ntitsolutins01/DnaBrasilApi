@@ -1339,12 +1339,7 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
+        }
       },
       "post": {
         "tags": [
@@ -1376,12 +1371,7 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
+        }
       }
     },
     "/api/WeatherForecasts": {
@@ -3197,6 +3187,9 @@
           "descricao": {
             "type": "string",
             "nullable": true
+          },
+          "aspNetRoleId": {
+            "type": "string"
           }
         }
       },
@@ -3688,8 +3681,7 @@
             "format": "int32"
           },
           "aspNetUserId": {
-            "type": "integer",
-            "format": "int32"
+            "type": "string"
           },
           "nome": {
             "type": "string"

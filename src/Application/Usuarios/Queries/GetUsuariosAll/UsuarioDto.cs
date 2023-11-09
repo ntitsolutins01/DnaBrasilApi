@@ -4,7 +4,7 @@ namespace DnaBrasil.Application.Usuarios.Queries.GetUsuariosAll;
 public class UsuarioDto
 {
     public int Id { get; init; }
-    public required int AspNetUserId { get; set; }
+    public required string AspNetUserId { get; set; }
     public required string Nome { get; set; }
     public required string Cpf { get; set; }
     public required string Email { get; set; }

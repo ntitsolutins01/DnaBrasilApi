@@ -8,7 +8,7 @@ public class Usuarios : EndpointGroupBase
     public override void Map(WebApplication app)
     {
         app.MapGroup(this)
-            .RequireAuthorization()
+            //.RequireAuthorization()
             .MapGet(GetUsuariosAll)
             .MapPost(CreateUsuario);
     }
