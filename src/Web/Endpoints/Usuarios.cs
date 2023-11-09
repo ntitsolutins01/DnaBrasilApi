@@ -1,5 +1,4 @@
 ﻿using DnaBrasil.Application.Usuarios.Commands.CreateUsuario;
-using DnaBrasil.Application.Usuarios.Queries.GetUsuarioAll;
 using DnaBrasil.Application.Usuarios.Queries.GetUsuariosAll;
 
 namespace DnaBrasil.Web.Endpoints;

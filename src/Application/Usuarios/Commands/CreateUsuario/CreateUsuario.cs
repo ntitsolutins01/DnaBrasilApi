@@ -5,11 +5,10 @@ namespace DnaBrasil.Application.Usuarios.Commands.CreateUsuario;
 
 public record CreateUsuarioCommand : IRequest<int>
 {
-    public required int AspNetUserId { get; init; }
+    public required string AspNetUserId { get; init; }
     public required string Nome { get; init; }
     public required string Cpf { get; init; }
     public required string Email { get; init; }
-    public required string Telefone { get; init; }
     public required string AspNetRoleId { get; init; }
 }
 
@@ -30,7 +29,6 @@ public class CreateUsuarioCommandHandler : IRequestHandler<CreateUsuarioCommand,
             AspNetUserId = request.AspNetUserId,
             Cpf = request.Cpf,
             Email = request.Email,
-            Telefone = request.Telefone,
             AspNetRoleId = request.AspNetRoleId 
         };
 

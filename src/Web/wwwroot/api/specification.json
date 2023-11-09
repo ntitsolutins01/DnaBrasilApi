@@ -3687,19 +3687,6 @@
             "type": "integer",
             "format": "int32"
           },
-          "nome": {
-            "type": "string"
-          },
-          "descricao": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
-      "CreateUsuarioCommand": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
           "aspNetUserId": {
             "type": "integer",
             "format": "int32"
@@ -3714,6 +3701,27 @@
             "type": "string"
           },
           "telefone": {
+            "type": "string"
+          },
+          "aspNetRoleId": {
+            "type": "string"
+          }
+        }
+      },
+      "CreateUsuarioCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "aspNetUserId": {
+            "type": "string"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "cpf": {
+            "type": "string"
+          },
+          "email": {
             "type": "string"
           },
           "aspNetRoleId": {

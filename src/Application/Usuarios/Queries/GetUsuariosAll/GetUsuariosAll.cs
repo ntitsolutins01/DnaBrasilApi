@@ -1,5 +1,4 @@
 ﻿using DnaBrasil.Application.Common.Interfaces;
-using DnaBrasil.Application.Usuarios.Queries.GetUsuarioAll;
 
 namespace DnaBrasil.Application.Usuarios.Queries.GetUsuariosAll;
 //[Authorize]
