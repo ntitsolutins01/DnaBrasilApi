@@ -1,4 +1,5 @@
-﻿using DnaBrasil.Domain.Entities;
+﻿using DnaBrasil.Application.Estados.Queries;
+using DnaBrasil.Domain.Entities;
 
 namespace DnaBrasil.Application.Municipios.Queries;
 
@@ -7,7 +8,7 @@ public class MunicipioDto
     public int Id { get; init; }
     public int Codigo { get; init; }
     public string? Nome { get; init; }
-    public Estado? Estado { get; init; }
+    public EstadoDto? Estado { get; init; }
 
     private class Mapping : Profile
     {

@@ -1,4 +1,5 @@
-﻿using DnaBrasil.Domain.Entities;
+﻿using DnaBrasil.Application.Perfis.Queries;
+using DnaBrasil.Domain.Entities;
 
 namespace DnaBrasil.Application.Usuarios.Queries.GetUsuariosAll;
 public class UsuarioDto
@@ -10,6 +11,7 @@ public class UsuarioDto
     public required string Email { get; set; }
     public required string Telefone { get; set; }
     public required string AspNetRoleId { get; set; }
+    public PerfilDto? Perfil { get; set; }
     private class Mapping : Profile
     {
         public Mapping()

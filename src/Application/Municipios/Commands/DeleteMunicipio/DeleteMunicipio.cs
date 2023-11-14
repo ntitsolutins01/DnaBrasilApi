@@ -21,8 +21,6 @@ public class DeleteMunicipioCommandHandler : IRequestHandler<DeleteMunicipioComm
 
         _context.Municipios.Remove(entity);
 
-        //entity.AddDomainEvent(new MunicipioDeletedEvent(entity));
-
         await _context.SaveChangesAsync(cancellationToken);
     }
 

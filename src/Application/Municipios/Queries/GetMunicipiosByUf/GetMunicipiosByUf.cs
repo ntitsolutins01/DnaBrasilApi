@@ -4,7 +4,7 @@ namespace DnaBrasil.Application.Municipios.Queries.GetMunicipiosByUf;
 
 public record GetMunicipioByUfQuery : IRequest<List<MunicipioDto>>
 {
-    public required string? Uf { get; init; }
+    public required string Uf { get; init; }
 }
 
 public class GetMunicipioByUfQueryHandler : IRequestHandler<GetMunicipioByUfQuery, List<MunicipioDto>>
