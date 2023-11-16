@@ -1,5 +1,5 @@
 ﻿using DnaBrasil.Application.Usuarios.Commands.CreateUsuario;
-using DnaBrasil.Application.Usuarios.Queries.GetUsuariosAll;
+using DnaBrasil.Application.Usuarios.Queries;
 
 namespace DnaBrasil.Web.Endpoints;
 
@@ -10,7 +10,9 @@ public class Usuarios : EndpointGroupBase
         app.MapGroup(this)
             //.RequireAuthorization()
             .MapGet(GetUsuariosAll)
-            .MapPost(CreateUsuario);
+            .MapPost(CreateUsuario)
+            .MapGet(GetUsuarioByEmail, "Email/{email}")
+            .MapGet(GetUsuarioByCpf, "Cpf/{cpf}");
     }
 
     public async Task<List<UsuarioDto>> GetUsuariosAll(ISender sender)
@@ -21,5 +23,13 @@ public class Usuarios : EndpointGroupBase
     public async Task<int> CreateUsuario(ISender sender, CreateUsuarioCommand command)
     {
         return await sender.Send(command);
+    }
+    public async Task<UsuarioDto> GetUsuarioByEmail(ISender sender, string email)
+    {
+        return await sender.Send(new GetUsuarioByEmailQuery() { Email = email });
+    }
+    public async Task<UsuarioDto> GetUsuarioByCpf(ISender sender, string cpf)
+    {
+        return await sender.Send(new GetUsuarioByCpfQuery() { Cpf = cpf });
     }
 }

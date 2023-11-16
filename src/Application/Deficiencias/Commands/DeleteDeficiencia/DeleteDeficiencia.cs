@@ -2,9 +2,9 @@
 
 namespace DnaBrasil.Application.Deficiencias.Commands.DeleteDeficiencia;
 
-public record DeleteDeficienciaCommand(int Id) : IRequest;
+public record DeleteDeficienciaCommand(int Id) : IRequest<bool>;
 
-public class DeleteDeficienciaCommandHandler : IRequestHandler<DeleteDeficienciaCommand>
+public class DeleteDeficienciaCommandHandler : IRequestHandler<DeleteDeficienciaCommand, bool>
 {
     private readonly IApplicationDbContext _context;
 
@@ -13,7 +13,7 @@ public class DeleteDeficienciaCommandHandler : IRequestHandler<DeleteDeficiencia
         _context = context;
     }
 
-    public async Task Handle(DeleteDeficienciaCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(DeleteDeficienciaCommand request, CancellationToken cancellationToken)
     {
         var entity = await _context.Deficiencias
             .FindAsync(new object[] { request.Id }, cancellationToken);
@@ -22,7 +22,8 @@ public class DeleteDeficienciaCommandHandler : IRequestHandler<DeleteDeficiencia
 
         _context.Deficiencias.Remove(entity);
 
-        await _context.SaveChangesAsync(cancellationToken);
+        var result = await _context.SaveChangesAsync(cancellationToken);
+        return result == 1;
     }
 
 }

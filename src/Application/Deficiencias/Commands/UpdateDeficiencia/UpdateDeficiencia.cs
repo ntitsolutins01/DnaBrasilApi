@@ -1,17 +1,15 @@
 ﻿using DnaBrasil.Application.Common.Interfaces;
-using DnaBrasil.Domain.Entities;
 
 namespace DnaBrasil.Application.Deficiencias.Commands.UpdateDeficiencia;
 
-public record UpdateDeficienciaCommand : IRequest
+public record UpdateDeficienciaCommand : IRequest<bool>
 {
     public int Id { get; init; }
     public required string Nome { get; init; }
     public bool Status { get; init; }
-    public List<Aluno>? Alunos { get; init; }
 }
 
-public class UpdateDeficienciaCommandHandler : IRequestHandler<UpdateDeficienciaCommand>
+public class UpdateDeficienciaCommandHandler : IRequestHandler<UpdateDeficienciaCommand, bool>
 {
     private readonly IApplicationDbContext _context;
 
@@ -20,7 +18,7 @@ public class UpdateDeficienciaCommandHandler : IRequestHandler<UpdateDeficiencia
         _context = context;
     }
 
-    public async Task Handle(UpdateDeficienciaCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(UpdateDeficienciaCommand request, CancellationToken cancellationToken)
     {
         var entity = await _context.Deficiencias
             .FindAsync(new object[] { request.Id }, cancellationToken);
@@ -29,8 +27,9 @@ public class UpdateDeficienciaCommandHandler : IRequestHandler<UpdateDeficiencia
 
         entity.Nome = request.Nome;
         entity.Status = request.Status;
-        entity.Alunos = request.Alunos;
 
-        await _context.SaveChangesAsync(cancellationToken);
+        var result = await _context.SaveChangesAsync(cancellationToken);
+
+        return result == 1;//true
     }
 }

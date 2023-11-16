@@ -1,5 +1,5 @@
 ﻿using DnaBrasil.Application.Common.Interfaces;
-using DnaBrasil.Application.Deficiencias.Queries.GetDeficienciasAll;
+using DnaBrasil.Application.Deficiencias.Queries;
 
 namespace DnaBrasil.Application.Alunos.Queries.GetDeficienciasByAluno;
 

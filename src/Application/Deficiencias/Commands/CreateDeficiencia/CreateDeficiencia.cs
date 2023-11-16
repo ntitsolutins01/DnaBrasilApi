@@ -7,7 +7,6 @@ public record CreateDeficienciaCommand : IRequest<int>
 {
     public required string Nome { get; init; }
     public bool Status { get; init; }
-    public List<Aluno>? Alunos { get; init;} 
 }
 
 public class CreateDeficienciaCommandHandler : IRequestHandler<CreateDeficienciaCommand, int>
@@ -24,8 +23,7 @@ public class CreateDeficienciaCommandHandler : IRequestHandler<CreateDeficiencia
         var entity = new Deficiencia
         {
             Nome = request.Nome,
-            Status = request.Status,
-            Alunos = request.Alunos
+            Status = request.Status
         };
 
         _context.Deficiencias.Add(entity);

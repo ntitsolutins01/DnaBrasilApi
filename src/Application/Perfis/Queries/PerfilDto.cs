@@ -1,5 +1,4 @@
-﻿using DnaBrasil.Application.Usuarios.Queries.GetUsuariosAll;
-using DnaBrasil.Domain.Entities;
+﻿using DnaBrasil.Domain.Entities;
 
 namespace DnaBrasil.Application.Perfis.Queries;
 public class PerfilDto

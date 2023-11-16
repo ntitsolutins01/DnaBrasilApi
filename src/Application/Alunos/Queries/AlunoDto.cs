@@ -1,5 +1,5 @@
 ﻿using DnaBrasil.Application.Ambientes.Queries;
-using DnaBrasil.Application.Deficiencias.Queries.GetDeficienciasAll;
+using DnaBrasil.Application.Deficiencias.Queries;
 using DnaBrasil.Application.Laudos.Queries;
 using DnaBrasil.Domain.Entities;
 

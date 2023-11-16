@@ -27,8 +27,8 @@ public class DivisoesAdministrativas : EndpointGroupBase
         return await sender.Send(new GetMunicipioByUfQuery { Uf = uf });
     }
 
-    public async Task<EstadoDto> GetEstadoByUf(ISender sender, string uf)
-    {
-        return await sender.Send(new GetEstadoByUfQuery() { Uf = uf });
-    }
+        public async Task<EstadoDto> GetEstadoByUf(ISender sender, string uf)
+        {
+            return await sender.Send(new GetEstadoByUfQuery() { Uf = uf });
+        }
 }
