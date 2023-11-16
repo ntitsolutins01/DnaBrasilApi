@@ -1,11 +1,6 @@
 ﻿using DnaBrasil.Application.Alunos.Commands.CreateVoucher;
 using DnaBrasil.Application.Alunos.Commands.UpdateVoucher;
-using DnaBrasil.Application.Alunos.Queries;
-using DnaBrasil.Application.Vouchers.Commands.CreateVoucher;
-using DnaBrasil.Application.Vouchers.Commands.DeleteVoucher;
-using DnaBrasil.Application.Vouchers.Commands.UpdateVoucher;
-using DnaBrasil.Application.Vouchers.Queries;
-using DnaBrasil.Application.Vouchers.Queries.GetVouchersAll;
+
 
 namespace DnaBrasil.Web.Endpoints;
 
