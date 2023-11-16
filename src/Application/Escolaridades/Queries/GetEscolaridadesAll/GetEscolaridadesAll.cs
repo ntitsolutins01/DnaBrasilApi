@@ -1,25 +1,25 @@
 ﻿using DnaBrasil.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.Ambientes.Queries.GetAmbientesAll;
+namespace DnaBrasil.Application.Escolaridades.Queries.GetEscolaridadesAll;
 //[Authorize]
-public record GetAmbientesQuery : IRequest<List<AmbienteDto>>;
+public record GetEscolaridadeQuery : IRequest<List<EscolaridadeDto>>;
 
-public class GetAmbientesQueryHandler : IRequestHandler<GetAmbientesQuery, List<AmbienteDto>>
+public class GetEscolaridadeQueryHandler : IRequestHandler<GetEscolaridadeQuery, List<EscolaridadeDto>>
 {
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
 
-    public GetAmbientesQueryHandler(IApplicationDbContext context, IMapper mapper)
+    public GetEscolaridadeQueryHandler(IApplicationDbContext context, IMapper mapper)
     {
         _context = context;
         _mapper = mapper;
     }
 
-    public async Task<List<AmbienteDto>> Handle(GetAmbientesQuery request, CancellationToken cancellationToken)
+    public async Task<List<EscolaridadeDto>> Handle(GetEscolaridadeQuery request, CancellationToken cancellationToken)
     {
-        var result = await _context.Ambientes
+        var result = await _context.Escolaridades
             .AsNoTracking()
-            .ProjectTo<AmbienteDto>(_mapper.ConfigurationProvider)
+            .ProjectTo<EscolaridadeDto>(_mapper.ConfigurationProvider)
             .OrderBy(t => t.Nome)
             .ToListAsync(cancellationToken);
 

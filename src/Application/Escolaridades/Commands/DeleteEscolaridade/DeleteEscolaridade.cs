@@ -1,25 +1,25 @@
 ﻿using DnaBrasil.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.Ambientes.Commands.DeleteAmbiente;
-public record DeleteAmbienteCommand(int Id) : IRequest<bool>;
+namespace DnaBrasil.Application.Escolaridades.Commands.DeleteEscolaridade;
+public record DeleteEscolaridadeCommand(int Id) : IRequest<bool>;
 
-public class DeleteAmbienteCommandHandler : IRequestHandler<DeleteAmbienteCommand, bool>
+public class DeleteEscolaridadeCommandHandler : IRequestHandler<DeleteEscolaridadeCommand, bool>
 {
     private readonly IApplicationDbContext _context;
 
-    public DeleteAmbienteCommandHandler(IApplicationDbContext context)
+    public DeleteEscolaridadeCommandHandler(IApplicationDbContext context)
     {
         _context = context;
     }
 
-    public async Task<bool> Handle(DeleteAmbienteCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(DeleteEscolaridadeCommand request, CancellationToken cancellationToken)
     {
-        var entity = await _context.Ambientes
+        var entity = await _context.Escolaridades
             .FindAsync(new object[] { request.Id }, cancellationToken);
 
         Guard.Against.NotFound(request.Id, entity);
 
-        _context.Ambientes.Remove(entity);
+        _context.Escolaridades.Remove(entity);
 
         var result = await _context.SaveChangesAsync(cancellationToken);
         return result == 1;
