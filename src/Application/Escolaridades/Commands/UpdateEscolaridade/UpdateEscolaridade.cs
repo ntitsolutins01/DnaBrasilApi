@@ -1,27 +1,27 @@
 ﻿using DnaBrasil.Application.Common.Interfaces;
-using DnaBrasil.Application.Ambientes.Commands.UpdateAmbiente;
+using DnaBrasil.Application.Escolaridades.Commands.UpdateEscolaridade;
 using DnaBrasil.Domain.Entities;
-namespace DnaBrasil.Application.Ambientes.Commands.UpdateAmbiente;
+namespace DnaBrasil.Application.Escolaridades.Commands.UpdateEscolaridade;
 
-public record UpdateAmbienteCommand : IRequest<bool>
+public record UpdateEscolaridadeCommand : IRequest<bool>
 {
     public int Id { get; init; }
     public string? Nome { get; init; }
     public bool Status { get; init; }
 }
 
-public class UpdateAmbienteCommandHandler : IRequestHandler<UpdateAmbienteCommand, bool>
+public class UpdateEscolaridadeCommandHandler : IRequestHandler<UpdateEscolaridadeCommand, bool>
 {
     private readonly IApplicationDbContext _context;
 
-    public UpdateAmbienteCommandHandler(IApplicationDbContext context)
+    public UpdateEscolaridadeCommandHandler(IApplicationDbContext context)
     {
         _context = context;
     }
 
-    public async Task<bool> Handle(UpdateAmbienteCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(UpdateEscolaridadeCommand request, CancellationToken cancellationToken)
     {
-        var entity = await _context.Ambientes
+        var entity = await _context.Escolaridades
             .FindAsync(new object[] { request.Id }, cancellationToken);
 
         Guard.Against.NotFound(request.Id, entity);

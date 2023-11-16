@@ -1,8 +1,8 @@
-﻿namespace DnaBrasil.Application.Ambientes.Commands.UpdateAmbiente;
+﻿namespace DnaBrasil.Application.Escolaridades.Commands.UpdateEscolaridade;
 
-public class UpdateAmbienteCommandValidator : AbstractValidator<UpdateAmbienteCommand>
+public class UpdateEscolaridadeCommandValidator : AbstractValidator<UpdateEscolaridadeCommand>
 {
-    public UpdateAmbienteCommandValidator()
+    public UpdateEscolaridadeCommandValidator()
     {
         RuleFor(v => v.Nome)
             .MaximumLength(100)
