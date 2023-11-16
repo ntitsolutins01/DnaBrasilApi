@@ -6,7 +6,7 @@ namespace DnaBrasil.Application.Escolaridades.Commands.UpdateEscolaridade;
 public record UpdateEscolaridadeCommand : IRequest<bool>
 {
     public int Id { get; init; }
-    public string? Nome { get; init; }
+    public required string Nome { get; init; }
     public bool Status { get; init; }
 }
 

@@ -1,5 +1,4 @@
 ﻿using DnaBrasil.Application.Common.Interfaces;
-using DnaBrasil.Application.Locais.Queries;
 
 namespace DnaBrasil.Application.Municipios.Queries.GetMunicipiosAll;
 //[Authorize]

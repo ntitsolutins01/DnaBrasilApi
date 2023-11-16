@@ -3,9 +3,6 @@ using DnaBrasil.Application.Ambientes.Commands.DeleteAmbiente;
 using DnaBrasil.Application.Ambientes.Commands.UpdateAmbiente;
 using DnaBrasil.Application.Ambientes.Queries;
 using DnaBrasil.Application.Ambientes.Queries.GetAmbientesAll;
-using DnaBrasil.Application.Ambientes.Queries.GetTodos;
-using DnaBrasil.Application.Ambientes.Commands.DeleteAmbiente;
-using DnaBrasil.Application.Ambientes.Commands.UpdateAmbiente;
 
 namespace DnaBrasil.Web.Endpoints;
 

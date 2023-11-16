@@ -2,20 +2,20 @@
 
 namespace DnaBrasil.Application.Series.Querries.GetSeriesAll;
 //[Authorize]
-public record GetSerieQuery : IRequest<List<SerieDto>>;
+public record GetSeriesAllQuery : IRequest<List<SerieDto>>;
 
-public class GetSerieQueryHandler : IRequestHandler<GetSerieQuery, List<SerieDto>>
+public class GetSeriesAllQueryHandler : IRequestHandler<GetSeriesAllQuery, List<SerieDto>>
 {
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
 
-    public GetSerieQueryHandler(IApplicationDbContext context, IMapper mapper)
+    public GetSeriesAllQueryHandler(IApplicationDbContext context, IMapper mapper)
     {
         _context = context;
         _mapper = mapper;
     }
 
-    public async Task<List<SerieDto>> Handle(GetSerieQuery request, CancellationToken cancellationToken)
+    public async Task<List<SerieDto>> Handle(GetSeriesAllQuery request, CancellationToken cancellationToken)
     {
         var result = await _context.Series
             .AsNoTracking()

@@ -1,18 +1,18 @@
 ﻿using DnaBrasil.Application.Common.Interfaces;
 
 namespace DnaBrasil.Application.Localidades.Commands.DeleteLocalidade;
-public record DeleteLocalCommand(int Id) : IRequest;
+public record DeleteLocalidadeCommand(int Id) : IRequest<bool>;
 
-public class DeleteLocalCommandHandler : IRequestHandler<DeleteLocalCommand>
+public class DeleteLocalidadeCommandHandler : IRequestHandler<DeleteLocalidadeCommand, bool>
 {
     private readonly IApplicationDbContext _context;
 
-    public DeleteLocalCommandHandler(IApplicationDbContext context)
+    public DeleteLocalidadeCommandHandler(IApplicationDbContext context)
     {
         _context = context;
     }
 
-    public async Task Handle(DeleteLocalCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(DeleteLocalidadeCommand request, CancellationToken cancellationToken)
     {
         var entity = await _context.Localidades
             .FindAsync(new object[] { request.Id }, cancellationToken);
@@ -21,9 +21,8 @@ public class DeleteLocalCommandHandler : IRequestHandler<DeleteLocalCommand>
 
         _context.Localidades.Remove(entity);
 
-        //entity.AddDomainEvent(new LocalDeletedEvent(entity));
-
-        await _context.SaveChangesAsync(cancellationToken);
+        var result = await _context.SaveChangesAsync(cancellationToken);
+        return result == 1;
     }
 
 }

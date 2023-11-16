@@ -1,7 +1,7 @@
 ﻿using DnaBrasil.Domain.Entities;
 
-namespace DnaBrasil.Application.Locais.Queries;
-public class LocalDto
+namespace DnaBrasil.Application.Localidades.Queries;
+public class LocalidadeDto
 {
     public int Id { get; init; }
     public string? Nome { get; init; }
@@ -12,7 +12,7 @@ public class LocalDto
     {
         public Mapping()
         {
-            CreateMap<Localidade, LocalDto>();
+            CreateMap<Localidade, LocalidadeDto>();
         }
     }
 }
