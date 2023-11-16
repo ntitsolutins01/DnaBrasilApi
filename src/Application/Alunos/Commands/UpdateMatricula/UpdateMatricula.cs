@@ -3,7 +3,7 @@ using DnaBrasil.Domain.Entities;
 
 namespace DnaBrasil.Application.Alunos.Commands.UpdateMatricula;
 
-public record UpdateMatriculaCommand : IRequest
+public record UpdateMatriculaCommand : IRequest <bool>
 {
     public int Id { get; set; }
     public DateTime DtVencimentoParq { get; set; }
@@ -19,7 +19,7 @@ public record UpdateMatriculaCommand : IRequest
     public string? CpfResponsavel3 { get; set; }
 }
 
-public class UpdateMatriculaCommandHandler : IRequestHandler<UpdateMatriculaCommand>
+public class UpdateMatriculaCommandHandler : IRequestHandler<UpdateMatriculaCommand, bool>
 {
     private readonly IApplicationDbContext _context;
 
@@ -28,7 +28,7 @@ public class UpdateMatriculaCommandHandler : IRequestHandler<UpdateMatriculaComm
         _context = context;
     }
 
-    public async Task Handle(UpdateMatriculaCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(UpdateMatriculaCommand request, CancellationToken cancellationToken)
     {
         var entity = await _context.Matriculas
             .FindAsync(new object[] { request.Id }, cancellationToken);
@@ -47,6 +47,8 @@ public class UpdateMatriculaCommandHandler : IRequestHandler<UpdateMatriculaComm
         entity.CpfResponsavel3 = request.CpfResponsavel3;
         entity.ParentescoResponsavel3 = request.ParentescoResponsavel3;
 
-        await _context.SaveChangesAsync(cancellationToken);
+        var result = await _context.SaveChangesAsync(cancellationToken);
+
+        return result == 1;//true
     }
 }
