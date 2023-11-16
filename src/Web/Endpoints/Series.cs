@@ -1,9 +1,8 @@
 ﻿using DnaBrasil.Application.Series.Commands.CreateSerie;
 using DnaBrasil.Application.Series.Commands.DeleteSerie;
 using DnaBrasil.Application.Series.Commands.UpdateSerie;
-using DnaBrasil.Application.Series.Queries;
-using DnaBrasil.Application.Series.Queries.GetSeriesAll;
 using DnaBrasil.Application.Series.Querries;
+using DnaBrasil.Application.Series.Querries.GetSeriesAll;
 
 namespace DnaBrasil.Web.Endpoints;
 

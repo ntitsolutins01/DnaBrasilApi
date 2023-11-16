@@ -2,20 +2,20 @@
 
 namespace DnaBrasil.Application.Escolaridades.Queries.GetEscolaridadesAll;
 //[Authorize]
-public record GetEscolaridadeQuery : IRequest<List<EscolaridadeDto>>;
+public record GerEscolaridadesAllQuery : IRequest<List<EscolaridadeDto>>;
 
-public class GetEscolaridadeQueryHandler : IRequestHandler<GetEscolaridadeQuery, List<EscolaridadeDto>>
+public class GerEscolaridadesAllQueryHandler : IRequestHandler<GerEscolaridadesAllQuery, List<EscolaridadeDto>>
 {
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
 
-    public GetEscolaridadeQueryHandler(IApplicationDbContext context, IMapper mapper)
+    public GerEscolaridadesAllQueryHandler(IApplicationDbContext context, IMapper mapper)
     {
         _context = context;
         _mapper = mapper;
     }
 
-    public async Task<List<EscolaridadeDto>> Handle(GetEscolaridadeQuery request, CancellationToken cancellationToken)
+    public async Task<List<EscolaridadeDto>> Handle(GerEscolaridadesAllQuery request, CancellationToken cancellationToken)
     {
         var result = await _context.Escolaridades
             .AsNoTracking()

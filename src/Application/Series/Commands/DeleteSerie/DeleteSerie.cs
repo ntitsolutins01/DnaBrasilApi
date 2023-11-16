@@ -1,9 +1,9 @@
 ﻿using DnaBrasil.Application.Common.Interfaces;
 
 namespace DnaBrasil.Application.Series.Commands.DeleteSerie;
-public record DeleteSerieCommand(int Id) : IRequest;
+public record DeleteSerieCommand(int Id) : IRequest<bool>;
 
-public class DeleteSerieCommandHandler : IRequestHandler<DeleteSerieCommand>
+public class DeleteSerieCommandHandler : IRequestHandler<DeleteSerieCommand, bool>
 {
     private readonly IApplicationDbContext _context;
 
@@ -12,7 +12,7 @@ public class DeleteSerieCommandHandler : IRequestHandler<DeleteSerieCommand>
         _context = context;
     }
 
-    public async Task Handle(DeleteSerieCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(DeleteSerieCommand request, CancellationToken cancellationToken)
     {
         var entity = await _context.Series
             .FindAsync(new object[] { request.Id }, cancellationToken);
@@ -21,9 +21,8 @@ public class DeleteSerieCommandHandler : IRequestHandler<DeleteSerieCommand>
 
         _context.Series.Remove(entity);
 
-        //entity.AddDomainEvent(new SerieDeletedEvent(entity));
-
-        await _context.SaveChangesAsync(cancellationToken);
+        var result = await _context.SaveChangesAsync(cancellationToken);
+        return result == 1;
     }
 
 }

@@ -1,5 +1,4 @@
-﻿using DnaBrasil.Application.Locais.Queries;
-using DnaBrasil.Application.Localidades.Commands.CreateLocalidade;
+﻿using DnaBrasil.Application.Localidades.Commands.CreateLocalidade;
 using DnaBrasil.Application.Localidades.Commands.DeleteLocalidade;
 using DnaBrasil.Application.Localidades.Commands.UpdateLocalidade;
 using DnaBrasil.Application.Localidades.Queries;

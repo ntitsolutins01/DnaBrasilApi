@@ -20,7 +20,7 @@ public class Escolaridades : EndpointGroupBase
 
     public async Task<List<EscolaridadeDto>> GetEscolaridadesAll(ISender sender)
     {
-        return await sender.Send(new GetEscolaridadesAllQuery());
+        return await sender.Send(new GerEscolaridadesAllQuery());
     }
 
     public async Task<int> CreateEscolaridade(ISender sender, CreateEscolaridadeCommand command)

@@ -2,11 +2,7 @@
 using DnaBrasil.Application.TipoLaudos.Commands.DeleteTipoLaudos;
 using DnaBrasil.Application.TipoLaudos.Commands.UpdateTipoLaudo;
 using DnaBrasil.Application.TipoLaudos.Queries;
-using DnaBrasil.Application.TiposLaudos.Commands.CreateTipoLaudo;
-using DnaBrasil.Application.TiposLaudos.Commands.DeleteTipoLaudo;
-using DnaBrasil.Application.TiposLaudos.Commands.UpdateTipoLaudo;
-using DnaBrasil.Application.TiposLaudos.Queries;
-using DnaBrasil.Application.TiposLaudos.Queries.GetTiposLaudosAll;
+using DnaBrasil.Application.TipoLaudos.Queries.GetTipoLaudosAll;
 
 namespace DnaBrasil.Web.Endpoints;
 
