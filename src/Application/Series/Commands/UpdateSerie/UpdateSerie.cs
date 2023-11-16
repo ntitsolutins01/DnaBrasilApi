@@ -3,7 +3,7 @@ using DnaBrasil.Domain.Entities;
 
 namespace DnaBrasil.Application.Series.Commands.UpdateSerie;
 
-public record UpdateSerieCommand : IRequest
+public record UpdateSerieCommand : IRequest <bool>
 {
     public int Id { get; init; }
     public required string Nome { get; init; }
@@ -13,7 +13,7 @@ public record UpdateSerieCommand : IRequest
     public required int ScoreTotal { get; init; }
 }
 
-public class UpdateSerieCommandHandler : IRequestHandler<UpdateSerieCommand>
+public class UpdateSerieCommandHandler : IRequestHandler<UpdateSerieCommand, bool>
 {
     private readonly IApplicationDbContext _context;
 
@@ -22,7 +22,7 @@ public class UpdateSerieCommandHandler : IRequestHandler<UpdateSerieCommand>
         _context = context;
     }
 
-    public async Task Handle(UpdateSerieCommand request, CancellationToken cancellationToken)
+    public async Task <bool> Handle(UpdateSerieCommand request, CancellationToken cancellationToken)
     {
         var entity = await _context.Series
             .FindAsync(new object[] { request.Id }, cancellationToken);
@@ -35,6 +35,8 @@ public class UpdateSerieCommandHandler : IRequestHandler<UpdateSerieCommand>
         entity.IdadeFinal = request.IdadeFinal;
         entity.ScoreTotal = request.ScoreTotal;
 
-        await _context.SaveChangesAsync(cancellationToken);
+        var result = await _context.SaveChangesAsync(cancellationToken);
+
+        return result == 1;//true
     }
 }

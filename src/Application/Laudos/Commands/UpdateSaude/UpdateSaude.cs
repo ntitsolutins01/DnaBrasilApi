@@ -3,7 +3,7 @@ using DnaBrasil.Domain.Entities;
 
 namespace DnaBrasil.Application.Laudos.Commands.UpdateSaude;
 
-public record UpdateSaudeCommand : IRequest
+public record UpdateSaudeCommand : IRequest <bool>
 {
     public int Id { get; init; }
     public int? Altura { get; init; }
@@ -11,7 +11,7 @@ public record UpdateSaudeCommand : IRequest
     public int? Envergadura { get; init; }
 }
 
-public class UpdateSaudeCommandHandler : IRequestHandler<UpdateSaudeCommand>
+public class UpdateSaudeCommandHandler : IRequestHandler<UpdateSaudeCommand, bool>
 {
     private readonly IApplicationDbContext _context;
 
@@ -20,7 +20,7 @@ public class UpdateSaudeCommandHandler : IRequestHandler<UpdateSaudeCommand>
         _context = context;
     }
 
-    public async Task Handle(UpdateSaudeCommand request, CancellationToken cancellationToken)
+    public async Task <bool> Handle(UpdateSaudeCommand request, CancellationToken cancellationToken)
     {
         var entity = await _context.Saudes
             .FindAsync(new object[] { request.Id }, cancellationToken);
@@ -31,6 +31,8 @@ public class UpdateSaudeCommandHandler : IRequestHandler<UpdateSaudeCommand>
         entity.Massa = request.Massa;
         entity.Envergadura = request.Envergadura;
 
-        await _context.SaveChangesAsync(cancellationToken);
+        var result = await _context.SaveChangesAsync(cancellationToken);
+
+        return result == 1;//true
     }
 }

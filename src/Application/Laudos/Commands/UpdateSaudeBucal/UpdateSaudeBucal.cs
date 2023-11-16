@@ -3,13 +3,13 @@ using DnaBrasil.Domain.Entities;
 
 namespace DnaBrasil.Application.Laudos.Commands.UpdateSaudeBucal;
 
-public record UpdateSaudeBucalCommand : IRequest
+public record UpdateSaudeBucalCommand : IRequest <bool>
 {
     public int Id { get; init; }
     public required string Resposta { get; init; }
 }
 
-public class UpdateSaudeBucalCommandHandler : IRequestHandler<UpdateSaudeBucalCommand>
+public class UpdateSaudeBucalCommandHandler : IRequestHandler<UpdateSaudeBucalCommand, bool>
 {
     private readonly IApplicationDbContext _context;
 
@@ -18,7 +18,7 @@ public class UpdateSaudeBucalCommandHandler : IRequestHandler<UpdateSaudeBucalCo
         _context = context;
     }
 
-    public async Task Handle(UpdateSaudeBucalCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(UpdateSaudeBucalCommand request, CancellationToken cancellationToken)
     {
         var entity = await _context.SaudeBucais
             .FindAsync(new object[] { request.Id }, cancellationToken);
@@ -27,6 +27,8 @@ public class UpdateSaudeBucalCommandHandler : IRequestHandler<UpdateSaudeBucalCo
 
         entity.Resposta = request.Resposta;
 
-        await _context.SaveChangesAsync(cancellationToken);
+        var result = await _context.SaveChangesAsync(cancellationToken);
+
+        return result == 1;//true
     }
 }
