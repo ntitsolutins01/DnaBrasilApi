@@ -3,7 +3,7 @@ using DnaBrasil.Domain.Entities;
 
 namespace DnaBrasil.Application.Localidades.Commands.UpdateLocalidade;
 
-public record UpdateLocalidadeCommand : IRequest
+public record UpdateLocalidadeCommand : IRequest<bool>
 {
     public int Id { get; init; }
     public required string? Nome { get; init; }
@@ -13,7 +13,7 @@ public record UpdateLocalidadeCommand : IRequest
     public required List<Contrato>? Contratos { get; init; }
 }
 
-public class UpdateLocalidadeCommandHandler : IRequestHandler<UpdateLocalidadeCommand>
+public class UpdateLocalidadeCommandHandler : IRequestHandler<UpdateLocalidadeCommand, bool>
 {
     private readonly IApplicationDbContext _context;
 
@@ -22,7 +22,7 @@ public class UpdateLocalidadeCommandHandler : IRequestHandler<UpdateLocalidadeCo
         _context = context;
     }
 
-    public async Task Handle(UpdateLocalidadeCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(UpdateLocalidadeCommand request, CancellationToken cancellationToken)
     {
         var entity = await _context.Localidades
             .FindAsync(new object[] { request.Id }, cancellationToken);
@@ -35,6 +35,8 @@ public class UpdateLocalidadeCommandHandler : IRequestHandler<UpdateLocalidadeCo
         entity.Municipio = request.Municipio;
         entity.Contratos = request.Contratos;
 
-        await _context.SaveChangesAsync(cancellationToken);
+        var result = await _context.SaveChangesAsync(cancellationToken);
+
+        return result == 1;//true
     }
 }

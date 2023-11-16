@@ -1,10 +1,10 @@
 ﻿using DnaBrasil.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.Locais.Queries.GetLocais;
+namespace DnaBrasil.Application.Localidades.Queries.GetLocalidadesAll;
 //[Authorize]
-public record GetLocalidadesAllQuery : IRequest<List<LocalDto>>;
+public record GetLocalidadesAllQuery : IRequest<List<LocalidadeDto>>;
 
-public class GetLocalidadesAllQueryHandler : IRequestHandler<GetLocalidadesAllQuery, List<LocalDto>>
+public class GetLocalidadesAllQueryHandler : IRequestHandler<GetLocalidadesAllQuery, List<LocalidadeDto>>
 {
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
@@ -15,11 +15,11 @@ public class GetLocalidadesAllQueryHandler : IRequestHandler<GetLocalidadesAllQu
         _mapper = mapper;
     }
 
-    public async Task<List<LocalDto>> Handle(GetLocalidadesAllQuery request, CancellationToken cancellationToken)
+    public async Task<List<LocalidadeDto>> Handle(GetLocalidadesAllQuery request, CancellationToken cancellationToken)
     {
         var result = await _context.Localidades
             .AsNoTracking()
-            .ProjectTo<LocalDto>(_mapper.ConfigurationProvider)
+            .ProjectTo<LocalidadeDto>(_mapper.ConfigurationProvider)
             .OrderBy(t => t.Nome)
             .ToListAsync(cancellationToken);
 
