@@ -1,17 +1,16 @@
 ﻿using DnaBrasil.Application.Common.Interfaces;
 using DnaBrasil.Application.Ambientes.Commands.UpdateAmbiente;
 using DnaBrasil.Domain.Entities;
-
 namespace DnaBrasil.Application.Ambientes.Commands.UpdateAmbiente;
 
-public record UpdateAmbienteCommand : IRequest
+public record UpdateAmbienteCommand : IRequest<bool>
 {
     public int Id { get; init; }
     public string? Nome { get; init; }
     public bool Status { get; init; }
 }
 
-public class UpdateAmbienteCommandHandler : IRequestHandler<UpdateAmbienteCommand>
+public class UpdateAmbienteCommandHandler : IRequestHandler<UpdateAmbienteCommand, bool>
 {
     private readonly IApplicationDbContext _context;
 
@@ -20,7 +19,7 @@ public class UpdateAmbienteCommandHandler : IRequestHandler<UpdateAmbienteComman
         _context = context;
     }
 
-    public async Task Handle(UpdateAmbienteCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(UpdateAmbienteCommand request, CancellationToken cancellationToken)
     {
         var entity = await _context.Ambientes
             .FindAsync(new object[] { request.Id }, cancellationToken);
@@ -30,6 +29,8 @@ public class UpdateAmbienteCommandHandler : IRequestHandler<UpdateAmbienteComman
         entity.Nome = request.Nome;
         entity.Status = request.Status;
 
-        await _context.SaveChangesAsync(cancellationToken);
+        var result = await _context.SaveChangesAsync(cancellationToken);
+
+        return result == 1;//true
     }
 }
