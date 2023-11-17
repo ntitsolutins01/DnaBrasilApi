@@ -2,7 +2,8 @@
 using DnaBrasil.Application.Parceiros.Commands.DeleteParceiro;
 using DnaBrasil.Application.Parceiros.Commands.UpdateParceiro;
 using DnaBrasil.Application.Parceiros.Queries;
-using DnaBrasil.Application.Parceiros.Queries.GetParceirosAll;
+using DnaBrasil.Application.Parceiros.Queries.GetParceiroAll;
+
 
 namespace DnaBrasil.Web.Endpoints;
 

@@ -27,7 +27,7 @@ public class AlunoDto
     public bool Status { get; set; }
     public bool Habilitado { get; set; }
     public List<DeficienciaDto>? Deficiencias { get; set; } = new();
-    public List<AmbienteDto>? Ambientes { get; set; } = new();
+    public List<AlunoDto>? Aluno { get; set; } = new();
     public Parceiro? Parceiro { get; set; }
     public int? Etnia { get; set; }
     public VoucherDto? Voucher { get; set; }

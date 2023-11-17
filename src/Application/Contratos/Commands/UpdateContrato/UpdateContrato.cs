@@ -40,7 +40,7 @@ public class UpdateContratoCommandHandler : IRequestHandler<UpdateContratoComman
         entity.Anexo = request.Anexo;
         entity.Alunos = request.Alunos;
         entity.Status = request.Status;
-        entity.Locais = request.Locais;
+        entity.Localidades = request.Locais;
         entity.Profissionais = request.Profissionais;
         
         await _context.SaveChangesAsync(cancellationToken);
