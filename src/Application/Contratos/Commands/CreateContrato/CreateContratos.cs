@@ -34,7 +34,7 @@ public class CreateContratoCommandHandler : IRequestHandler<CreateContratoComman
             DtFim = request.DtFim,
             Alunos = request.Alunos,
             Anexo = request.Anexo,
-            Locais = request.Locais,
+            Localidades = request.Locais,
             Profissionais = request.Profissionais,
             Status = request.Status
 

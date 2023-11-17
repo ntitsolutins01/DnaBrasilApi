@@ -78,13 +78,13 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
                         j => j.HasKey("ProfissionalId", "AmbienteId"));
 
         builder.Entity<Contrato>()
-            .HasMany(e => e.Locais)
+            .HasMany(e => e.Localidades)
             .WithMany(e => e.Contratos)
             .UsingEntity(
-                "ContratosLocais",
-                r => r.HasOne(typeof(Localidade)).WithMany().HasForeignKey("LocalId").HasPrincipalKey(nameof(Domain.Entities.Localidade.Id)),
+                "ContratosLocalidades",
+                r => r.HasOne(typeof(Localidade)).WithMany().HasForeignKey("LocalidadeId").HasPrincipalKey(nameof(Domain.Entities.Localidade.Id)),
                 l => l.HasOne(typeof(Contrato)).WithMany().HasForeignKey("ContratoId").HasPrincipalKey(nameof(Contrato.Id)),
-                j => j.HasKey("ContratoId", "LocalId"));
+                j => j.HasKey("ContratoId", "LocalidadeId"));
 
         builder.Entity<Contrato>()
             .HasMany(e => e.Alunos)

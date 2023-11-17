@@ -7,8 +7,8 @@ public record CreateLocalidadeCommand : IRequest<int>
     public required string? Nome { get; init; }
     public string? Descricao { get; init; }
     public bool Status { get; set; } = true;
-    public required Municipio? Municipio { get; init; }
-    public required List<Contrato>? Contratos { get; init; }
+    public  Municipio? Municipio { get; init; }
+    public  List<Contrato>? Contratos { get; init; }
 }
 
 public class CreateLocalidadeCommandHandler : IRequestHandler<CreateLocalidadeCommand, int>

@@ -3626,7 +3626,7 @@
               "status": {
                 "type": "boolean"
               },
-              "locais": {
+              "localidades": {
                 "type": "array",
                 "nullable": true,
                 "items": {
@@ -5484,14 +5484,6 @@
           "descricao": {
             "type": "string",
             "nullable": true
-          },
-          "municipio": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/Municipio"
-              }
-            ]
           }
         }
       },
