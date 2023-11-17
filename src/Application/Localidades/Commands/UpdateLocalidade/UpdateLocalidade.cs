@@ -9,8 +9,7 @@ public record UpdateLocalidadeCommand : IRequest<bool>
     public required string? Nome { get; init; }
     public string? Descricao { get; init; }
     public bool Status { get; set; } = true;
-    public required Municipio? Municipio { get; init; }
-    public required List<Contrato>? Contratos { get; init; }
+    public int MunicipioId { get; set; }
 }
 
 public class UpdateLocalidadeCommandHandler : IRequestHandler<UpdateLocalidadeCommand, bool>
@@ -29,11 +28,12 @@ public class UpdateLocalidadeCommandHandler : IRequestHandler<UpdateLocalidadeCo
 
         Guard.Against.NotFound(request.Id, entity);
 
+        var municipio = _context.Municipios.Where(x => x.Id == request.MunicipioId).FirstOrDefault();
+
         entity.Nome = request.Nome;
         entity.Descricao = request.Descricao;
         entity.Status = request.Status;
-        entity.Municipio = request.Municipio;
-        entity.Contratos = request.Contratos;
+        entity.Municipio = municipio;
 
         var result = await _context.SaveChangesAsync(cancellationToken);
 

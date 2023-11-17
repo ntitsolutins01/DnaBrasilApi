@@ -10,11 +10,9 @@ public class UpdateLocalidadeCommandValidator : AbstractValidator<UpdateLocalida
             .NotEmpty().NotNull();
         RuleFor(v => v.Descricao)
             .MaximumLength(300);
-        RuleFor(v => v.Status)
-            .NotNull().NotEmpty();
-        RuleFor(v => v.Municipio)
-            .NotNull();
-        RuleFor(v => v.Contratos)
-            .NotNull();
+        //RuleFor(v => v.Municipio)
+        //    .NotNull();
+        //RuleFor(v => v.Contratos)
+        //    .NotNull();
     }
 }

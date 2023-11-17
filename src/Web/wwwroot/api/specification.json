@@ -5484,6 +5484,9 @@
           "descricao": {
             "type": "string",
             "nullable": true
+          },
+          "status": {
+            "type": "boolean"
           }
         }
       },
@@ -5491,10 +5494,7 @@
         "type": "object",
         "additionalProperties": false,
         "required": [
-          "nome",
-          "status",
-          "municipio",
-          "contratos"
+          "nome"
         ],
         "properties": {
           "nome": {
@@ -5510,20 +5510,11 @@
             "nullable": true
           },
           "status": {
-            "type": "boolean",
-            "minLength": 1,
-            "nullable": false
+            "type": "boolean"
           },
-          "municipio": {
-            "nullable": false,
-            "$ref": "#/components/schemas/Municipio"
-          },
-          "contratos": {
-            "type": "array",
-            "nullable": false,
-            "items": {
-              "$ref": "#/components/schemas/Contrato"
-            }
+          "municipioId": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },
@@ -5531,10 +5522,7 @@
         "type": "object",
         "additionalProperties": false,
         "required": [
-          "nome",
-          "status",
-          "municipio",
-          "contratos"
+          "nome"
         ],
         "properties": {
           "id": {
@@ -5554,20 +5542,11 @@
             "nullable": true
           },
           "status": {
-            "type": "boolean",
-            "minLength": 1,
-            "nullable": false
+            "type": "boolean"
           },
-          "municipio": {
-            "nullable": false,
-            "$ref": "#/components/schemas/Municipio"
-          },
-          "contratos": {
-            "type": "array",
-            "nullable": false,
-            "items": {
-              "$ref": "#/components/schemas/Contrato"
-            }
+          "municipioId": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },
