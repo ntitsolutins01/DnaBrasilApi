@@ -22,13 +22,13 @@ public class GetAmbientesByAlunoQueryHandler : IRequestHandler<GetAmbientesByAlu
 
     public async Task<List<AmbienteDto>> Handle(GetAmbientesByAlunoQuery request, CancellationToken cancellationToken)
     {
-        var result = await _context.Alunos
+        var result = await _context.Ambientes
             .Where(x => x.Id == request.AlunoId)
             .AsNoTracking()
-            .ProjectTo<AlunoDto>(_mapper.ConfigurationProvider)
-            .FirstOrDefaultAsync(cancellationToken);
+            .ProjectTo<AmbienteDto>(_mapper.ConfigurationProvider)
+            .ToListAsync(cancellationToken);
         
 
-        return result!.Ambientes == null ? throw new ArgumentNullException(nameof(result.Ambientes)) : result.Ambientes;
+        return result! == null ? throw new ArgumentNullException(nameof(result)) : result;
     }
 }

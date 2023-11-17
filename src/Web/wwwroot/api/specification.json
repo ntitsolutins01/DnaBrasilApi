@@ -127,174 +127,6 @@
         }
       }
     },
-    "/api/Alunos/Matricula": {
-      "post": {
-        "tags": [
-          "Alunos"
-        ],
-        "operationId": "CreateMatricula",
-        "requestBody": {
-          "x-name": "command",
-          "description": "",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateMatriculaCommand"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 1
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/Alunos/Matricula/{id}": {
-      "put": {
-        "tags": [
-          "Alunos"
-        ],
-        "operationId": "UpdateMatricula",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "x-position": 1
-          }
-        ],
-        "requestBody": {
-          "x-name": "command",
-          "description": "",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateMatriculaCommand"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 2
-        },
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/api/Alunos/Voucher": {
-      "post": {
-        "tags": [
-          "Alunos"
-        ],
-        "operationId": "CreateVoucher",
-        "requestBody": {
-          "x-name": "command",
-          "description": "",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateVoucherCommand"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 1
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Alunos"
-        ],
-        "operationId": "UpdateAlunoDeficiencias",
-        "requestBody": {
-          "x-name": "command",
-          "description": "",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateAlunoDeficienciasCommand"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 1
-        },
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/api/Alunos/Voucher/{id}": {
-      "put": {
-        "tags": [
-          "Alunos"
-        ],
-        "operationId": "UpdateVoucher",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "x-position": 1
-          }
-        ],
-        "requestBody": {
-          "x-name": "command",
-          "description": "",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateVoucherCommand"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 2
-        },
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        }
-      }
-    },
     "/api/Ambientes": {
       "get": {
         "tags": [
@@ -1005,6 +837,136 @@
         }
       }
     },
+    "/api/Escolaridades": {
+      "get": {
+        "tags": [
+          "Escolaridades"
+        ],
+        "operationId": "GetEscolaridadesAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EscolaridadeDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Escolaridades"
+        ],
+        "operationId": "CreateEscolaridade",
+        "requestBody": {
+          "x-name": "command",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateEscolaridadeCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Escolaridades/{id}": {
+      "put": {
+        "tags": [
+          "Escolaridades"
+        ],
+        "operationId": "UpdateEscolaridade",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEscolaridadeCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Escolaridades"
+        ],
+        "operationId": "DeleteEscolaridade",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Localidades": {
       "get": {
         "tags": [
@@ -1019,18 +981,13 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/LocalDto"
+                    "$ref": "#/components/schemas/LocalidadeDto"
                   }
                 }
               }
             }
           }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
+        }
       },
       "post": {
         "tags": [
@@ -1062,12 +1019,312 @@
               }
             }
           }
-        },
-        "security": [
+        }
+      }
+    },
+    "/api/Localidades/{id}": {
+      "put": {
+        "tags": [
+          "Localidades"
+        ],
+        "operationId": "UpdateLocalidade",
+        "parameters": [
           {
-            "JWT": []
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
           }
-        ]
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateLocalidadeCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Localidades"
+        ],
+        "operationId": "DeleteLocalidade",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Matriculas": {
+      "get": {
+        "tags": [
+          "Matriculas"
+        ],
+        "operationId": "GetMatriculasAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MatriculaDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Matriculas"
+        ],
+        "operationId": "CreateMatricula",
+        "requestBody": {
+          "x-name": "command",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateMatriculaCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Matriculas/{id}": {
+      "put": {
+        "tags": [
+          "Matriculas"
+        ],
+        "operationId": "UpdateMatricula",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateMatriculaCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Parceiros": {
+      "get": {
+        "tags": [
+          "Parceiros"
+        ],
+        "operationId": "GetParceirosAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ParceiroDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Parceiros"
+        ],
+        "operationId": "CreateParceiro",
+        "requestBody": {
+          "x-name": "command",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateParceiroCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Parceiros/{id}": {
+      "put": {
+        "tags": [
+          "Parceiros"
+        ],
+        "operationId": "UpdateParceiro",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateParceiroCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Parceiros"
+        ],
+        "operationId": "DeleteParceiro",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/api/Perfis": {
@@ -1235,6 +1492,503 @@
           "Perfis"
         ],
         "operationId": "DeletePerfil",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/QualidadeDeVidas": {
+      "post": {
+        "tags": [
+          "QualidadeDeVidas"
+        ],
+        "operationId": "CreateQualidadeDeVida",
+        "requestBody": {
+          "x-name": "command",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateQualidadeDeVidaCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/QualidadeDeVidas/{id}": {
+      "put": {
+        "tags": [
+          "QualidadeDeVidas"
+        ],
+        "operationId": "UpdateQualidadeDeVida",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateQualidadeDeVidaCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/SaudeBucais": {
+      "post": {
+        "tags": [
+          "SaudeBucais"
+        ],
+        "operationId": "CreateSaudeBucal",
+        "requestBody": {
+          "x-name": "command",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSaudeBucalCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/SaudeBucais/{id}": {
+      "put": {
+        "tags": [
+          "SaudeBucais"
+        ],
+        "operationId": "UpdateSaudeBucal",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSaudeBucalCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Saudes": {
+      "post": {
+        "tags": [
+          "Saudes"
+        ],
+        "operationId": "CreateSaude",
+        "requestBody": {
+          "x-name": "command",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSaudeCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Saudes/{id}": {
+      "put": {
+        "tags": [
+          "Saudes"
+        ],
+        "operationId": "UpdateSaude",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSaudeCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Series": {
+      "get": {
+        "tags": [
+          "Series"
+        ],
+        "operationId": "GetSeriesAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SerieDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Series"
+        ],
+        "operationId": "CreateSerie",
+        "requestBody": {
+          "x-name": "command",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSerieCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Series/{id}": {
+      "put": {
+        "tags": [
+          "Series"
+        ],
+        "operationId": "UpdateSerie",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSerieCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Series"
+        ],
+        "operationId": "DeleteSerie",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/TiposLaudos": {
+      "get": {
+        "tags": [
+          "TiposLaudos"
+        ],
+        "operationId": "GetTiposLaudosAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TipoLaudoDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "TiposLaudos"
+        ],
+        "operationId": "CreateTipoLaudo",
+        "requestBody": {
+          "x-name": "command",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTipoLaudosCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/TiposLaudos/{id}": {
+      "put": {
+        "tags": [
+          "TiposLaudos"
+        ],
+        "operationId": "UpdateTipoLaudo",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTipoLaudoCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "TiposLaudos"
+        ],
+        "operationId": "DeleteTipoLaudo",
         "parameters": [
           {
             "name": "id",
@@ -2104,6 +2858,164 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/UsuarioDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Vocacionais": {
+      "post": {
+        "tags": [
+          "Vocacionais"
+        ],
+        "operationId": "CreateVocacional",
+        "requestBody": {
+          "x-name": "command",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateVocacionalCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Vocacionais/{id}": {
+      "put": {
+        "tags": [
+          "Vocacionais"
+        ],
+        "operationId": "UpdateVocacional",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateVocacionalCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Vouchers": {
+      "post": {
+        "tags": [
+          "Vouchers"
+        ],
+        "operationId": "CreateVoucher",
+        "requestBody": {
+          "x-name": "command",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateVoucherCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Vouchers/{id}": {
+      "put": {
+        "tags": [
+          "Vouchers"
+        ],
+        "operationId": "UpdateVoucher",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateVoucherCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
                 }
               }
             }
@@ -3468,286 +4380,6 @@
           }
         }
       },
-      "CreateMatriculaCommand": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-          "dtVencimentoParq",
-          "dtVencimentoAtestadoMedico",
-          "nomeResponsavel1",
-          "parentescoResponsavel1",
-          "cpfResponsavel1",
-          "nomeResponsavel2",
-          "parentescoResponsavel2",
-          "cpfResponsavel2",
-          "nomeResponsavel3",
-          "parentescoResponsavel3",
-          "cpfResponsavel3"
-        ],
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "dtVencimentoParq": {
-            "type": "string",
-            "format": "date-time",
-            "minLength": 1,
-            "nullable": false
-          },
-          "dtVencimentoAtestadoMedico": {
-            "type": "string",
-            "format": "date-time",
-            "minLength": 1,
-            "nullable": false
-          },
-          "nomeResponsavel1": {
-            "type": "string",
-            "maxLength": 150,
-            "minLength": 1,
-            "nullable": false
-          },
-          "parentescoResponsavel1": {
-            "type": "string",
-            "maxLength": 150,
-            "minLength": 1,
-            "nullable": false
-          },
-          "cpfResponsavel1": {
-            "type": "string",
-            "maxLength": 14,
-            "minLength": 1,
-            "nullable": false
-          },
-          "nomeResponsavel2": {
-            "type": "string",
-            "maxLength": 150,
-            "minLength": 1,
-            "nullable": false
-          },
-          "parentescoResponsavel2": {
-            "type": "string",
-            "maxLength": 150,
-            "minLength": 1,
-            "nullable": false
-          },
-          "cpfResponsavel2": {
-            "type": "string",
-            "maxLength": 14,
-            "minLength": 1,
-            "nullable": false
-          },
-          "nomeResponsavel3": {
-            "type": "string",
-            "maxLength": 150,
-            "minLength": 1,
-            "nullable": false
-          },
-          "parentescoResponsavel3": {
-            "type": "string",
-            "maxLength": 150,
-            "minLength": 1,
-            "nullable": false
-          },
-          "cpfResponsavel3": {
-            "type": "string",
-            "maxLength": 14,
-            "minLength": 1,
-            "nullable": false
-          }
-        }
-      },
-      "UpdateMatriculaCommand": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-          "dtVencimentoParq",
-          "dtVencimentoAtestadoMedico",
-          "nomeResponsavel1",
-          "parentescoResponsavel1",
-          "cpfResponsavel1",
-          "nomeResponsavel2",
-          "parentescoResponsavel2",
-          "cpfResponsavel2",
-          "nomeResponsavel3",
-          "parentescoResponsavel3",
-          "cpfResponsavel3"
-        ],
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "dtVencimentoParq": {
-            "type": "string",
-            "format": "date-time",
-            "minLength": 1,
-            "nullable": false
-          },
-          "dtVencimentoAtestadoMedico": {
-            "type": "string",
-            "format": "date-time",
-            "minLength": 1,
-            "nullable": false
-          },
-          "nomeResponsavel1": {
-            "type": "string",
-            "maxLength": 150,
-            "minLength": 1,
-            "nullable": false
-          },
-          "parentescoResponsavel1": {
-            "type": "string",
-            "maxLength": 150,
-            "minLength": 1,
-            "nullable": false
-          },
-          "cpfResponsavel1": {
-            "type": "string",
-            "maxLength": 14,
-            "minLength": 1,
-            "nullable": false
-          },
-          "nomeResponsavel2": {
-            "type": "string",
-            "maxLength": 150,
-            "minLength": 1,
-            "nullable": false
-          },
-          "parentescoResponsavel2": {
-            "type": "string",
-            "maxLength": 150,
-            "minLength": 1,
-            "nullable": false
-          },
-          "cpfResponsavel2": {
-            "type": "string",
-            "maxLength": 14,
-            "minLength": 1,
-            "nullable": false
-          },
-          "nomeResponsavel3": {
-            "type": "string",
-            "maxLength": 150,
-            "minLength": 1,
-            "nullable": false
-          },
-          "parentescoResponsavel3": {
-            "type": "string",
-            "maxLength": 150,
-            "minLength": 1,
-            "nullable": false
-          },
-          "cpfResponsavel3": {
-            "type": "string",
-            "maxLength": 14,
-            "minLength": 1,
-            "nullable": false
-          }
-        }
-      },
-      "CreateVoucherCommand": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-          "descricao",
-          "turma",
-          "serie"
-        ],
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "local": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/Localidade"
-              }
-            ]
-          },
-          "descricao": {
-            "type": "string",
-            "maxLength": 150,
-            "minLength": 1,
-            "nullable": false
-          },
-          "turma": {
-            "type": "string",
-            "maxLength": 150,
-            "minLength": 1,
-            "nullable": false
-          },
-          "serie": {
-            "type": "string",
-            "maxLength": 150,
-            "minLength": 1,
-            "nullable": false
-          },
-          "aluno": {
-            "$ref": "#/components/schemas/Aluno"
-          }
-        }
-      },
-      "UpdateVoucherCommand": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-          "descricao",
-          "turma",
-          "serie"
-        ],
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "local": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/Localidade"
-              }
-            ]
-          },
-          "descricao": {
-            "type": "string",
-            "maxLength": 150,
-            "minLength": 1,
-            "nullable": false
-          },
-          "turma": {
-            "type": "string",
-            "maxLength": 150,
-            "minLength": 1,
-            "nullable": false
-          },
-          "serie": {
-            "type": "string",
-            "maxLength": 150,
-            "minLength": 1,
-            "nullable": false
-          }
-        }
-      },
-      "UpdateAlunoDeficienciasCommand": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "deficiencias": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/Deficiencia"
-            }
-          }
-        }
-      },
       "AmbienteDto": {
         "type": "object",
         "additionalProperties": false,
@@ -3863,11 +4495,11 @@
               "$ref": "#/components/schemas/DeficienciaDto"
             }
           },
-          "ambientes": {
+          "aluno": {
             "type": "array",
             "nullable": true,
             "items": {
-              "$ref": "#/components/schemas/AmbienteDto"
+              "$ref": "#/components/schemas/AlunoDto"
             }
           },
           "parceiro": {
@@ -4758,7 +5390,86 @@
           }
         }
       },
-      "LocalDto": {
+      "EscolaridadeDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "nome": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "boolean"
+          },
+          "alunos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AlunoDto"
+            }
+          },
+          "profissionais": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProfissionalDto"
+            }
+          }
+        }
+      },
+      "CreateEscolaridadeCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "nome"
+        ],
+        "properties": {
+          "nome": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "nullable": false
+          },
+          "status": {
+            "type": "boolean"
+          },
+          "alunos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Aluno"
+            }
+          },
+          "profissionais": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Profissional"
+            }
+          }
+        }
+      },
+      "UpdateEscolaridadeCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "nome",
+          "status"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "nullable": false
+          },
+          "status": {
+            "type": "boolean",
+            "nullable": false
+          }
+        }
+      },
+      "LocalidadeDto": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -4824,6 +5535,465 @@
           }
         }
       },
+      "UpdateLocalidadeCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "nome",
+          "status",
+          "municipio",
+          "contratos"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string",
+            "maxLength": 150,
+            "minLength": 1,
+            "nullable": false
+          },
+          "descricao": {
+            "type": "string",
+            "maxLength": 300,
+            "minLength": 0,
+            "nullable": true
+          },
+          "status": {
+            "type": "boolean",
+            "minLength": 1,
+            "nullable": false
+          },
+          "municipio": {
+            "nullable": false,
+            "$ref": "#/components/schemas/Municipio"
+          },
+          "contratos": {
+            "type": "array",
+            "nullable": false,
+            "items": {
+              "$ref": "#/components/schemas/Contrato"
+            }
+          }
+        }
+      },
+      "CreateMatriculaCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "dtVencimentoParq",
+          "dtVencimentoAtestadoMedico",
+          "nomeResponsavel1",
+          "parentescoResponsavel1",
+          "cpfResponsavel1",
+          "nomeResponsavel2",
+          "parentescoResponsavel2",
+          "cpfResponsavel2",
+          "nomeResponsavel3",
+          "parentescoResponsavel3",
+          "cpfResponsavel3"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dtVencimentoParq": {
+            "type": "string",
+            "format": "date-time",
+            "minLength": 1,
+            "nullable": false
+          },
+          "dtVencimentoAtestadoMedico": {
+            "type": "string",
+            "format": "date-time",
+            "minLength": 1,
+            "nullable": false
+          },
+          "nomeResponsavel1": {
+            "type": "string",
+            "maxLength": 150,
+            "minLength": 1,
+            "nullable": false
+          },
+          "parentescoResponsavel1": {
+            "type": "string",
+            "maxLength": 150,
+            "minLength": 1,
+            "nullable": false
+          },
+          "cpfResponsavel1": {
+            "type": "string",
+            "maxLength": 14,
+            "minLength": 1,
+            "nullable": false
+          },
+          "nomeResponsavel2": {
+            "type": "string",
+            "maxLength": 150,
+            "minLength": 1,
+            "nullable": false
+          },
+          "parentescoResponsavel2": {
+            "type": "string",
+            "maxLength": 150,
+            "minLength": 1,
+            "nullable": false
+          },
+          "cpfResponsavel2": {
+            "type": "string",
+            "maxLength": 14,
+            "minLength": 1,
+            "nullable": false
+          },
+          "nomeResponsavel3": {
+            "type": "string",
+            "maxLength": 150,
+            "minLength": 1,
+            "nullable": false
+          },
+          "parentescoResponsavel3": {
+            "type": "string",
+            "maxLength": 150,
+            "minLength": 1,
+            "nullable": false
+          },
+          "cpfResponsavel3": {
+            "type": "string",
+            "maxLength": 14,
+            "minLength": 1,
+            "nullable": false
+          }
+        }
+      },
+      "UpdateMatriculaCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "dtVencimentoParq",
+          "dtVencimentoAtestadoMedico",
+          "nomeResponsavel1",
+          "parentescoResponsavel1",
+          "cpfResponsavel1",
+          "nomeResponsavel2",
+          "parentescoResponsavel2",
+          "cpfResponsavel2",
+          "nomeResponsavel3",
+          "parentescoResponsavel3",
+          "cpfResponsavel3"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dtVencimentoParq": {
+            "type": "string",
+            "format": "date-time",
+            "minLength": 1,
+            "nullable": false
+          },
+          "dtVencimentoAtestadoMedico": {
+            "type": "string",
+            "format": "date-time",
+            "minLength": 1,
+            "nullable": false
+          },
+          "nomeResponsavel1": {
+            "type": "string",
+            "maxLength": 150,
+            "minLength": 1,
+            "nullable": false
+          },
+          "parentescoResponsavel1": {
+            "type": "string",
+            "maxLength": 150,
+            "minLength": 1,
+            "nullable": false
+          },
+          "cpfResponsavel1": {
+            "type": "string",
+            "maxLength": 14,
+            "minLength": 1,
+            "nullable": false
+          },
+          "nomeResponsavel2": {
+            "type": "string",
+            "maxLength": 150,
+            "minLength": 1,
+            "nullable": false
+          },
+          "parentescoResponsavel2": {
+            "type": "string",
+            "maxLength": 150,
+            "minLength": 1,
+            "nullable": false
+          },
+          "cpfResponsavel2": {
+            "type": "string",
+            "maxLength": 14,
+            "minLength": 1,
+            "nullable": false
+          },
+          "nomeResponsavel3": {
+            "type": "string",
+            "maxLength": 150,
+            "minLength": 1,
+            "nullable": false
+          },
+          "parentescoResponsavel3": {
+            "type": "string",
+            "maxLength": 150,
+            "minLength": 1,
+            "nullable": false
+          },
+          "cpfResponsavel3": {
+            "type": "string",
+            "maxLength": 14,
+            "minLength": 1,
+            "nullable": false
+          }
+        }
+      },
+      "ParceiroDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "nome": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "boolean"
+          },
+          "alunos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AlunoDto"
+            }
+          },
+          "profissionais": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProfissionalDto"
+            }
+          }
+        }
+      },
+      "CreateParceiroCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "nome",
+          "email",
+          "tipoPessoa",
+          "cpfCnpj",
+          "telefone",
+          "celular",
+          "cep",
+          "endereco",
+          "bairro"
+        ],
+        "properties": {
+          "aspNetUserId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "municipio": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Municipio"
+              }
+            ]
+          },
+          "nome": {
+            "type": "string",
+            "maxLength": 150,
+            "minLength": 1,
+            "nullable": false
+          },
+          "email": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "nullable": false
+          },
+          "tipoParceria": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tipoPessoa": {
+            "type": "string",
+            "minLength": 1,
+            "nullable": false
+          },
+          "cpfCnpj": {
+            "type": "string",
+            "maxLength": 18,
+            "minLength": 1,
+            "nullable": false
+          },
+          "telefone": {
+            "type": "string",
+            "maxLength": 13,
+            "minLength": 1,
+            "nullable": false
+          },
+          "celular": {
+            "type": "string",
+            "maxLength": 13,
+            "minLength": 1,
+            "nullable": false
+          },
+          "cep": {
+            "type": "string",
+            "maxLength": 9,
+            "minLength": 1,
+            "nullable": false
+          },
+          "endereco": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "nullable": false
+          },
+          "numero": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "bairro": {
+            "type": "string",
+            "maxLength": 50,
+            "minLength": 1,
+            "nullable": false
+          },
+          "status": {
+            "type": "boolean"
+          },
+          "habilitado": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "alunos": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/Aluno"
+            }
+          }
+        }
+      },
+      "UpdateParceiroCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "nome",
+          "email",
+          "tipoPessoa",
+          "cpfCnpj",
+          "telefone",
+          "celular",
+          "cep",
+          "endereco",
+          "bairro"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "aspNetUserId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "municipio": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Municipio"
+              }
+            ]
+          },
+          "nome": {
+            "type": "string",
+            "maxLength": 150,
+            "minLength": 1,
+            "nullable": false
+          },
+          "email": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "nullable": false
+          },
+          "tipoParceria": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tipoPessoa": {
+            "type": "string",
+            "minLength": 1,
+            "nullable": false
+          },
+          "cpfCnpj": {
+            "type": "string",
+            "maxLength": 18,
+            "minLength": 1,
+            "nullable": false
+          },
+          "telefone": {
+            "type": "string",
+            "maxLength": 13,
+            "minLength": 1,
+            "nullable": false
+          },
+          "celular": {
+            "type": "string",
+            "maxLength": 13,
+            "minLength": 1,
+            "nullable": false
+          },
+          "cep": {
+            "type": "string",
+            "maxLength": 9,
+            "minLength": 1,
+            "nullable": false
+          },
+          "endereco": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "nullable": false
+          },
+          "numero": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "bairro": {
+            "type": "string",
+            "maxLength": 50,
+            "minLength": 1,
+            "nullable": false
+          },
+          "status": {
+            "type": "boolean"
+          },
+          "habilitado": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "alunos": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/Aluno"
+            }
+          }
+        }
+      },
       "PerfilDto": {
         "type": "object",
         "additionalProperties": false,
@@ -4869,6 +6039,268 @@
           },
           "nome": {
             "type": "string"
+          },
+          "descricao": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "CreateQualidadeDeVidaCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "profissional",
+          "questionario",
+          "resposta"
+        ],
+        "properties": {
+          "profissional": {
+            "minLength": 1,
+            "nullable": false,
+            "$ref": "#/components/schemas/Profissional"
+          },
+          "questionario": {
+            "minLength": 1,
+            "nullable": false,
+            "$ref": "#/components/schemas/Questionario"
+          },
+          "resposta": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "nullable": false
+          }
+        }
+      },
+      "UpdateQualidadeDeVidaCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "resposta"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "resposta": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "nullable": false
+          }
+        }
+      },
+      "CreateSaudeBucalCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "profissional",
+          "questionario",
+          "resposta"
+        ],
+        "properties": {
+          "profissional": {
+            "minLength": 1,
+            "nullable": false,
+            "$ref": "#/components/schemas/Profissional"
+          },
+          "questionario": {
+            "minLength": 1,
+            "nullable": false,
+            "$ref": "#/components/schemas/Questionario"
+          },
+          "resposta": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "nullable": false
+          }
+        }
+      },
+      "UpdateSaudeBucalCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "resposta"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "resposta": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "nullable": false
+          }
+        }
+      },
+      "CreateSaudeCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "profissional",
+          "altura",
+          "massa",
+          "envergadura"
+        ],
+        "properties": {
+          "profissional": {
+            "minLength": 1,
+            "nullable": false,
+            "$ref": "#/components/schemas/Profissional"
+          },
+          "altura": {
+            "type": "integer",
+            "format": "int32",
+            "minLength": 1,
+            "nullable": false
+          },
+          "massa": {
+            "type": "integer",
+            "format": "int32",
+            "minLength": 1,
+            "nullable": false
+          },
+          "envergadura": {
+            "type": "integer",
+            "format": "int32",
+            "minLength": 1,
+            "nullable": false
+          }
+        }
+      },
+      "UpdateSaudeCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "altura",
+          "massa",
+          "envergadura"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "altura": {
+            "type": "integer",
+            "format": "int32",
+            "minLength": 1,
+            "nullable": false
+          },
+          "massa": {
+            "type": "integer",
+            "format": "int32",
+            "minLength": 1,
+            "nullable": false
+          },
+          "envergadura": {
+            "type": "integer",
+            "format": "int32",
+            "minLength": 1,
+            "nullable": false
+          }
+        }
+      },
+      "SerieDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true
+          },
+          "descricao": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "CreateSerieCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "descricao": {
+            "type": "string"
+          },
+          "idadeInicial": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idadeFinal": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "scoreTotal": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "UpdateSerieCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "descricao": {
+            "type": "string"
+          },
+          "idadeInicial": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idadeFinal": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "scoreTotal": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "CreateTipoLaudosCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "nome": {
+            "type": "string",
+            "nullable": true
+          },
+          "descricao": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "UpdateTipoLaudoCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true
           },
           "descricao": {
             "type": "string",
@@ -5406,6 +6838,137 @@
           },
           "aspNetRoleId": {
             "type": "string"
+          }
+        }
+      },
+      "CreateVocacionalCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "profissional",
+          "questionario",
+          "resposta"
+        ],
+        "properties": {
+          "profissional": {
+            "minLength": 1,
+            "nullable": false,
+            "$ref": "#/components/schemas/Profissional"
+          },
+          "questionario": {
+            "minLength": 1,
+            "nullable": false,
+            "$ref": "#/components/schemas/Questionario"
+          },
+          "resposta": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "nullable": false
+          }
+        }
+      },
+      "UpdateVocacionalCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "resposta"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "resposta": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "nullable": false
+          }
+        }
+      },
+      "CreateVoucherCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "descricao",
+          "turma",
+          "serie"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "local": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Localidade"
+              }
+            ]
+          },
+          "descricao": {
+            "type": "string",
+            "maxLength": 150,
+            "minLength": 1,
+            "nullable": false
+          },
+          "turma": {
+            "type": "string",
+            "maxLength": 150,
+            "minLength": 1,
+            "nullable": false
+          },
+          "serie": {
+            "type": "string",
+            "maxLength": 150,
+            "minLength": 1,
+            "nullable": false
+          },
+          "aluno": {
+            "$ref": "#/components/schemas/Aluno"
+          }
+        }
+      },
+      "UpdateVoucherCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "descricao",
+          "turma",
+          "serie"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "local": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Localidade"
+              }
+            ]
+          },
+          "descricao": {
+            "type": "string",
+            "maxLength": 150,
+            "minLength": 1,
+            "nullable": false
+          },
+          "turma": {
+            "type": "string",
+            "maxLength": 150,
+            "minLength": 1,
+            "nullable": false
+          },
+          "serie": {
+            "type": "string",
+            "maxLength": 150,
+            "minLength": 1,
+            "nullable": false
           }
         }
       },
