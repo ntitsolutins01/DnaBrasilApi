@@ -2803,6 +2803,113 @@
         }
       }
     },
+    "/api/Usuarios/Usuario/{id}": {
+      "get": {
+        "tags": [
+          "Usuarios"
+        ],
+        "operationId": "GetUsuarioById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsuarioDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Usuarios/{id}": {
+      "put": {
+        "tags": [
+          "Usuarios"
+        ],
+        "operationId": "UpdateUsuario",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUsuarioCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Usuarios"
+        ],
+        "operationId": "DeleteUsuario",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Usuarios/Email/{email}": {
       "get": {
         "tags": [
@@ -6788,6 +6895,10 @@
                 "$ref": "#/components/schemas/PerfilDto"
               }
             ]
+          },
+          "status": {
+            "type": "boolean",
+            "nullable": true
           }
         }
       },
@@ -6809,6 +6920,42 @@
           },
           "aspNetRoleId": {
             "type": "string"
+          }
+        }
+      },
+      "UpdateUsuarioCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "nome",
+          "email",
+          "status"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string",
+            "maxLength": 150,
+            "minLength": 1,
+            "nullable": false
+          },
+          "email": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "nullable": false
+          },
+          "perfilId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "status": {
+            "type": "boolean",
+            "minLength": 1,
+            "nullable": false
           }
         }
       },
