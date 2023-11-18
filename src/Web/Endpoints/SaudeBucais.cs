@@ -1,7 +1,7 @@
-﻿using DnaBrasil.Application.Laudos.Commands.CreateSaudeBucal;
-using DnaBrasil.Application.Laudos.Commands.UpdateSaudeBucal;
+﻿using DnaBrasilApi.Application.Laudos.Commands.CreateSaudeBucal;
+using DnaBrasilApi.Application.Laudos.Commands.UpdateSaudeBucal;
 
-namespace DnaBrasil.Web.Endpoints;
+namespace DnaBrasilApi.Web.Endpoints;
 
 public class SaudeBucais : EndpointGroupBase
 {

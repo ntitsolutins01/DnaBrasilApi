@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DnaBrasil.Domain.Entities;
+using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasil.Application.Alunos.Queries;
+namespace DnaBrasilApi.Application.Alunos.Queries;
 public class VoucherDto
 {
     public int Id { get; set; }

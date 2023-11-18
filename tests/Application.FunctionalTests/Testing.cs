@@ -1,12 +1,12 @@
-﻿using DnaBrasil.Domain.Constants;
-using DnaBrasil.Infrastructure.Data;
-using DnaBrasil.Infrastructure.Identity;
+﻿using DnaBrasilApi.Domain.Constants;
+using DnaBrasilApi.Infrastructure.Data;
+using DnaBrasilApi.Infrastructure.Identity;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DnaBrasil.Application.FunctionalTests;
+namespace DnaBrasilApi.Application.FunctionalTests;
 
 [SetUpFixture]
 public partial class Testing

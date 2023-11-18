@@ -1,9 +1,9 @@
-﻿using DnaBrasil.Domain.Exceptions;
-using DnaBrasil.Domain.ValueObjects;
+﻿using DnaBrasilApi.Domain.Exceptions;
+using DnaBrasilApi.Domain.ValueObjects;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace DnaBrasil.Domain.UnitTests.ValueObjects;
+namespace DnaBrasilApi.Domain.UnitTests.ValueObjects;
 
 public class ColourTests
 {

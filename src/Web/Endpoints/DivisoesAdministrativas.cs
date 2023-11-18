@@ -1,11 +1,11 @@
 ﻿
-using DnaBrasil.Application.Estados.Queries;
-using DnaBrasil.Application.Estados.Queries.GetEstadoByUf;
-using DnaBrasil.Application.Estados.Queries.GetEstadosAll;
-using DnaBrasil.Application.Municipios.Queries;
-using DnaBrasil.Application.Municipios.Queries.GetMunicipiosByUf;
+using DnaBrasilApi.Application.Estados.Queries;
+using DnaBrasilApi.Application.Estados.Queries.GetEstadoByUf;
+using DnaBrasilApi.Application.Estados.Queries.GetEstadosAll;
+using DnaBrasilApi.Application.Municipios.Queries;
+using DnaBrasilApi.Application.Municipios.Queries.GetMunicipiosByUf;
 
-namespace DnaBrasil.Web.Endpoints;
+namespace DnaBrasilApi.Web.Endpoints;
 
 public class DivisoesAdministrativas : EndpointGroupBase
 {

@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.Alunos.Commands.UpdateVoucher;
+namespace DnaBrasilApi.Application.Alunos.Commands.UpdateVoucher;
 
 public class UpdateVoucherCommandValidator : AbstractValidator<UpdateVoucherCommand>
 {

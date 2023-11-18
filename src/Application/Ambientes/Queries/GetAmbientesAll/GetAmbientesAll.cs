@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.Ambientes.Queries.GetAmbientesAll;
+namespace DnaBrasilApi.Application.Ambientes.Queries.GetAmbientesAll;
 //[Authorize]
 public record GetAmbientesQuery : IRequest<List<AmbienteDto>>;
 

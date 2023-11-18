@@ -1,11 +1,11 @@
 using System.Reflection;
-using DnaBrasil.Application.Common.Interfaces;
-using DnaBrasil.Domain.Entities;
-using DnaBrasil.Infrastructure.Identity;
+using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Domain.Entities;
+using DnaBrasilApi.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace DnaBrasil.Infrastructure.Data;
+namespace DnaBrasilApi.Infrastructure.Data;
 
 public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplicationDbContext
 {

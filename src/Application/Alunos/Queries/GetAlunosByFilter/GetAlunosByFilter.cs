@@ -1,7 +1,7 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
-using DnaBrasil.Domain.Entities;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasil.Application.Alunos.Queries.GetAlunosByFilter;
+namespace DnaBrasilApi.Application.Alunos.Queries.GetAlunosByFilter;
 
 public record GetAlunosByFilterQuery : IRequest<List<AlunoDto>>
 {

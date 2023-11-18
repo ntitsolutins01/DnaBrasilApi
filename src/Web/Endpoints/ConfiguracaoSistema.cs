@@ -1,10 +1,10 @@
-﻿using DnaBrasil.Application.Funcionalidades.Commands.CreateFuncionalidade;
-using DnaBrasil.Application.Funcionalidades.Queries;
-using DnaBrasil.Application.Funcionalidades.Queries.GetFuncionalidadesAll;
-using DnaBrasil.Application.Modulos.Queries.GetModulosAll;
-using DnaBrasil.Application.Perfis.Commands.CreateModulo;
+﻿using DnaBrasilApi.Application.Funcionalidades.Commands.CreateFuncionalidade;
+using DnaBrasilApi.Application.Funcionalidades.Queries;
+using DnaBrasilApi.Application.Funcionalidades.Queries.GetFuncionalidadesAll;
+using DnaBrasilApi.Application.Modulos.Queries.GetModulosAll;
+using DnaBrasilApi.Application.Perfis.Commands.CreateModulo;
 
-namespace DnaBrasil.Web.Endpoints;
+namespace DnaBrasilApi.Web.Endpoints;
 
 public class ConfiguracaoSistema : EndpointGroupBase
 {

@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.Modulos.Queries.GetModulosAll;
+namespace DnaBrasilApi.Application.Modulos.Queries.GetModulosAll;
 //[Authorize]
 public record GetModulosAllQuery : IRequest<List<ModuloDto>>;
 

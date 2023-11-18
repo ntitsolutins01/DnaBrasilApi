@@ -1,7 +1,7 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
-using DnaBrasil.Domain.Entities;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasil.Application.Laudos.Commands.CreateSaudeBucal;
+namespace DnaBrasilApi.Application.Laudos.Commands.CreateSaudeBucal;
 
 public record CreateSaudeBucalCommand : IRequest<int>
 {

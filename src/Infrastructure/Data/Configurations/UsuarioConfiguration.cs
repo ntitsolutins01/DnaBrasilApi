@@ -1,8 +1,8 @@
-﻿using DnaBrasil.Domain.Entities;
+﻿using DnaBrasilApi.Domain.Entities;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 
-namespace DnaBrasil.Infrastructure.Data.Configurations;
+namespace DnaBrasilApi.Infrastructure.Data.Configurations;
 public class UsuarioConfiguration : IEntityTypeConfiguration<Usuario>
 {
     public void Configure(EntityTypeBuilder<Usuario> builder)

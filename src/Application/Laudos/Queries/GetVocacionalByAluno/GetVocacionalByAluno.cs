@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.Laudos.Queries.VocacionalByAluno;
+namespace DnaBrasilApi.Application.Laudos.Queries.VocacionalByAluno;
 
 public record GetVocacionalByAlunoQuery : IRequest<VocacionalDto>
 {

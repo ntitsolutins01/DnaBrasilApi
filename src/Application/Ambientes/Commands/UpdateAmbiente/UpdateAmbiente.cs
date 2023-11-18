@@ -1,7 +1,7 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
-using DnaBrasil.Application.Ambientes.Commands.UpdateAmbiente;
-using DnaBrasil.Domain.Entities;
-namespace DnaBrasil.Application.Ambientes.Commands.UpdateAmbiente;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Application.Ambientes.Commands.UpdateAmbiente;
+using DnaBrasilApi.Domain.Entities;
+namespace DnaBrasilApi.Application.Ambientes.Commands.UpdateAmbiente;
 
 public record UpdateAmbienteCommand : IRequest<bool>
 {

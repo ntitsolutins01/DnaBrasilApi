@@ -1,7 +1,7 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
-using DnaBrasil.Domain.Entities;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasil.Application.Laudos.Commands.CreateConsumoAlimentar;
+namespace DnaBrasilApi.Application.Laudos.Commands.CreateConsumoAlimentar;
 
 public record CreateConsumoAlimentarCommand : IRequest<int>
 {

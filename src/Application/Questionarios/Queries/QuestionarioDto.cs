@@ -1,7 +1,7 @@
-﻿using DnaBrasil.Application.TipoLaudos.Queries;
-using DnaBrasil.Domain.Entities;
+﻿using DnaBrasilApi.Application.TipoLaudos.Queries;
+using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasil.Application.Questionarios.Queries;
+namespace DnaBrasilApi.Application.Questionarios.Queries;
 
 public class QuestionarioDto
 {

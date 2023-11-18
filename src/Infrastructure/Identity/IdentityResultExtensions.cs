@@ -1,7 +1,7 @@
-﻿using DnaBrasil.Application.Common.Models;
+﻿using DnaBrasilApi.Application.Common.Models;
 using Microsoft.AspNetCore.Identity;
 
-namespace DnaBrasil.Infrastructure.Identity;
+namespace DnaBrasilApi.Infrastructure.Identity;
 
 public static class IdentityResultExtensions
 {

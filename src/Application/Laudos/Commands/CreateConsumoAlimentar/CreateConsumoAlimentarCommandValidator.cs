@@ -1,4 +1,4 @@
-﻿namespace DnaBrasil.Application.Laudos.Commands.CreateConsumoAlimentar;
+﻿namespace DnaBrasilApi.Application.Laudos.Commands.CreateConsumoAlimentar;
 
 public class CreateConsumoAlimentarCommandValidator : AbstractValidator<CreateConsumoAlimentarCommand>
 {

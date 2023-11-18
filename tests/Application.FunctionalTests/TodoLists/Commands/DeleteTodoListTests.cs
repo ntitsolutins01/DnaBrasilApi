@@ -1,8 +1,8 @@
-﻿using DnaBrasil.Application.TodoLists.Commands.CreateTodoList;
-using DnaBrasil.Application.TodoLists.Commands.DeleteTodoList;
-using DnaBrasil.Domain.Entities;
+﻿using DnaBrasilApi.Application.TodoLists.Commands.CreateTodoList;
+using DnaBrasilApi.Application.TodoLists.Commands.DeleteTodoList;
+using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasil.Application.FunctionalTests.TodoLists.Commands;
+namespace DnaBrasilApi.Application.FunctionalTests.TodoLists.Commands;
 
 using static Testing;
 

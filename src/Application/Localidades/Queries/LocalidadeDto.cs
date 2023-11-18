@@ -1,7 +1,7 @@
-﻿using DnaBrasil.Application.Municipios.Queries;
-using DnaBrasil.Domain.Entities;
+﻿using DnaBrasilApi.Application.Municipios.Queries;
+using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasil.Application.Localidades.Queries;
+namespace DnaBrasilApi.Application.Localidades.Queries;
 public class LocalidadeDto
 {
     public int Id { get; init; }

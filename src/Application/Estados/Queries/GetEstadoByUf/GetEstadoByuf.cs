@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.Estados.Queries.GetEstadoByUf;
+namespace DnaBrasilApi.Application.Estados.Queries.GetEstadoByUf;
 //[Authorize]
 public record GetEstadoByUfQuery : IRequest<EstadoDto>
 {

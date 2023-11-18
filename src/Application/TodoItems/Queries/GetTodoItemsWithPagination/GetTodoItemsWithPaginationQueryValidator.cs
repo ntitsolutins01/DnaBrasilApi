@@ -1,4 +1,4 @@
-﻿namespace DnaBrasil.Application.TodoItems.Queries.GetTodoItemsWithPagination;
+﻿namespace DnaBrasilApi.Application.TodoItems.Queries.GetTodoItemsWithPagination;
 
 public class GetTodoItemsWithPaginationQueryValidator : AbstractValidator<GetTodoItemsWithPaginationQuery>
 {

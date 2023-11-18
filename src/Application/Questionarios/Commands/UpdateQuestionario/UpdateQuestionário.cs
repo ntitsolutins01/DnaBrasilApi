@@ -1,7 +1,7 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
-using DnaBrasil.Domain.Entities;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasil.Application.Questionarios.Commands.UpdateQuestionario;
+namespace DnaBrasilApi.Application.Questionarios.Commands.UpdateQuestionario;
 
 public record UpdateQuestionarioCommand : IRequest
 {

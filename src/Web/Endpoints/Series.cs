@@ -1,10 +1,10 @@
-﻿using DnaBrasil.Application.Series.Commands.CreateSerie;
-using DnaBrasil.Application.Series.Commands.DeleteSerie;
-using DnaBrasil.Application.Series.Commands.UpdateSerie;
-using DnaBrasil.Application.Series.Querries;
-using DnaBrasil.Application.Series.Querries.GetSeriesAll;
+﻿using DnaBrasilApi.Application.Series.Commands.CreateSerie;
+using DnaBrasilApi.Application.Series.Commands.DeleteSerie;
+using DnaBrasilApi.Application.Series.Commands.UpdateSerie;
+using DnaBrasilApi.Application.Series.Querries;
+using DnaBrasilApi.Application.Series.Querries.GetSeriesAll;
 
-namespace DnaBrasil.Web.Endpoints;
+namespace DnaBrasilApi.Web.Endpoints;
 
 public class Series : EndpointGroupBase
 {

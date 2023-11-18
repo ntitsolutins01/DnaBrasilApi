@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.Parceiros.Commands.DeleteParceiro;
+namespace DnaBrasilApi.Application.Parceiros.Commands.DeleteParceiro;
 public record DeleteParceiroCommand(int Id) : IRequest<bool>;
 
 public class DeleteParceiroCommandHandler : IRequestHandler<DeleteParceiroCommand,bool>

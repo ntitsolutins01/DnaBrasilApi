@@ -1,7 +1,7 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
-using DnaBrasil.Domain.Entities;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasil.Application.Localidades.Commands.CreateLocalidade;
+namespace DnaBrasilApi.Application.Localidades.Commands.CreateLocalidade;
 public record CreateLocalidadeCommand : IRequest<int>
 {
     public required string? Nome { get; init; }

@@ -1,8 +1,8 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
-using DnaBrasil.Application.Common.Mappings;
-using DnaBrasil.Application.Common.Models;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Application.Common.Mappings;
+using DnaBrasilApi.Application.Common.Models;
 
-namespace DnaBrasil.Application.TodoItems.Queries.GetTodoItemsWithPagination;
+namespace DnaBrasilApi.Application.TodoItems.Queries.GetTodoItemsWithPagination;
 
 public record GetTodoItemsWithPaginationQuery : IRequest<PaginatedList<TodoItemBriefDto>>
 {

@@ -1,4 +1,4 @@
-﻿namespace DnaBrasil.Application.Alunos.Queries;
+﻿namespace DnaBrasilApi.Application.Alunos.Queries;
 public class SearchAlunosDto
 {
     public string? Nome { get; set; }

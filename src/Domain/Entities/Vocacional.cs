@@ -1,4 +1,4 @@
-﻿namespace DnaBrasil.Domain.Entities;
+﻿namespace DnaBrasilApi.Domain.Entities;
 public class Vocacional : BaseAuditableEntity
 {
     public required Profissional Profissional { get; set; }

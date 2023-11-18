@@ -1,10 +1,10 @@
-﻿using DnaBrasil.Application.Localidades.Commands.CreateLocalidade;
-using DnaBrasil.Application.Localidades.Commands.DeleteLocalidade;
-using DnaBrasil.Application.Localidades.Commands.UpdateLocalidade;
-using DnaBrasil.Application.Localidades.Queries;
-using DnaBrasil.Application.Localidades.Queries.GetLocalidadesAll;
+﻿using DnaBrasilApi.Application.Localidades.Commands.CreateLocalidade;
+using DnaBrasilApi.Application.Localidades.Commands.DeleteLocalidade;
+using DnaBrasilApi.Application.Localidades.Commands.UpdateLocalidade;
+using DnaBrasilApi.Application.Localidades.Queries;
+using DnaBrasilApi.Application.Localidades.Queries.GetLocalidadesAll;
 
-namespace DnaBrasil.Web.Endpoints;
+namespace DnaBrasilApi.Web.Endpoints;
 
 public class Localidades : EndpointGroupBase
 {

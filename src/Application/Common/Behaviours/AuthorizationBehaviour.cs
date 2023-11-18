@@ -1,9 +1,9 @@
 ﻿using System.Reflection;
-using DnaBrasil.Application.Common.Exceptions;
-using DnaBrasil.Application.Common.Interfaces;
-using DnaBrasil.Application.Common.Security;
+using DnaBrasilApi.Application.Common.Exceptions;
+using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Application.Common.Security;
 
-namespace DnaBrasil.Application.Common.Behaviours;
+namespace DnaBrasilApi.Application.Common.Behaviours;
 
 public class AuthorizationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : notnull
 {

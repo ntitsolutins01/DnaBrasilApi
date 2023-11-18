@@ -1,4 +1,4 @@
-﻿namespace DnaBrasil.Application.Series.Commands.UpdateSerie;
+﻿namespace DnaBrasilApi.Application.Series.Commands.UpdateSerie;
 internal class UpdateSerieCommandValidator : AbstractValidator<UpdateSerieCommand>
 {
     public UpdateSerieCommandValidator()

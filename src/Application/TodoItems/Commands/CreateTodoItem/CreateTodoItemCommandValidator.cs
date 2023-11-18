@@ -1,4 +1,4 @@
-﻿namespace DnaBrasil.Application.TodoItems.Commands.CreateTodoItem;
+﻿namespace DnaBrasilApi.Application.TodoItems.Commands.CreateTodoItem;
 
 public class CreateTodoItemCommandValidator : AbstractValidator<CreateTodoItemCommand>
 {

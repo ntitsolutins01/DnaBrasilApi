@@ -1,7 +1,7 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
-using DnaBrasil.Application.Deficiencias.Queries;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Application.Deficiencias.Queries;
 
-namespace DnaBrasil.Application.Alunos.Queries.GetDeficienciasByAluno;
+namespace DnaBrasilApi.Application.Alunos.Queries.GetDeficienciasByAluno;
 
 public record GetDeficienciasByAlunoQuery : IRequest<List<DeficienciaDto>>
 {

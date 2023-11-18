@@ -1,7 +1,7 @@
-﻿using DnaBrasil.Application.Municipios.Queries;
-using DnaBrasil.Domain.Entities;
+﻿using DnaBrasilApi.Application.Municipios.Queries;
+using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasil.Application.Estados.Queries;
+namespace DnaBrasilApi.Application.Estados.Queries;
 public class EstadoDto
 {
     public int Id { get; init; }

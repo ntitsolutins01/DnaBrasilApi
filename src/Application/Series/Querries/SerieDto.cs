@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Domain.Entities;
+﻿using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasil.Application.Series.Querries;
+namespace DnaBrasilApi.Application.Series.Querries;
 public class SerieDto
 {
     public int Id { get; init; }

@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Domain.Entities;
+﻿using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasil.Application.TipoLaudos.Queries;
+namespace DnaBrasilApi.Application.TipoLaudos.Queries;
 
 public class TipoLaudoDto
 {

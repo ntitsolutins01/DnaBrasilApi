@@ -1,4 +1,4 @@
-﻿namespace DnaBrasil.Domain.Entities;
+﻿namespace DnaBrasilApi.Domain.Entities;
 public class Funcionalidade : BaseAuditableEntity
 {
     public required string Nome { get; set; }

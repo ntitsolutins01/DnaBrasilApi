@@ -1,4 +1,4 @@
-﻿namespace DnaBrasil.Application.Localidades.Commands.UpdateLocalidade;
+﻿namespace DnaBrasilApi.Application.Localidades.Commands.UpdateLocalidade;
 
 public class UpdateLocalidadeCommandValidator : AbstractValidator<UpdateLocalidadeCommand>
 {

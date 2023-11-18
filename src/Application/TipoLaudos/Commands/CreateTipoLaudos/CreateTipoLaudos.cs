@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DnaBrasil.Application.Common.Interfaces;
-using DnaBrasil.Domain.Entities;
-using DnaBrasil.Domain.Events;
+using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Domain.Entities;
+using DnaBrasilApi.Domain.Events;
 
-namespace DnaBrasil.Application.TipoLaudos.Commands.CreateTipoLaudos;
+namespace DnaBrasilApi.Application.TipoLaudos.Commands.CreateTipoLaudos;
 public record CreateTipoLaudosCommand : IRequest<int>
 {
     public required string? Nome { get; init; }

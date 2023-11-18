@@ -1,9 +1,9 @@
 ﻿
-using DnaBrasil.Application.ConsumosAlimentaresAll.Queries.GetConsumosAlimentaresAllAll;
-using DnaBrasil.Application.Laudos.Commands.CreateConsumoAlimentar;
-using DnaBrasil.Application.Laudos.Commands.UpdateConsumoAlimentar;
-using DnaBrasil.Application.Laudos.Queries;
-namespace DnaBrasil.Web.Endpoints;
+using DnaBrasilApi.Application.ConsumosAlimentaresAll.Queries.GetConsumosAlimentaresAllAll;
+using DnaBrasilApi.Application.Laudos.Commands.CreateConsumoAlimentar;
+using DnaBrasilApi.Application.Laudos.Commands.UpdateConsumoAlimentar;
+using DnaBrasilApi.Application.Laudos.Queries;
+namespace DnaBrasilApi.Web.Endpoints;
 
 public class ConsumosAlimentares : EndpointGroupBase
 {

@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.Localidades.Queries.GetLocalidadesAll;
+namespace DnaBrasilApi.Application.Localidades.Queries.GetLocalidadesAll;
 //[Authorize]
 public record GetLocalidadesAllQuery : IRequest<List<LocalidadeDto>>;
 

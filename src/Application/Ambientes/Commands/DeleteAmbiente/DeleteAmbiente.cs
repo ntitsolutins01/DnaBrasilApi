@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.Ambientes.Commands.DeleteAmbiente;
+namespace DnaBrasilApi.Application.Ambientes.Commands.DeleteAmbiente;
 public record DeleteAmbienteCommand(int Id) : IRequest<bool>;
 
 public class DeleteAmbienteCommandHandler : IRequestHandler<DeleteAmbienteCommand, bool>

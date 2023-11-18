@@ -1,13 +1,13 @@
 ﻿using Azure.Core;
-using DnaBrasil.Application.Perfis.Commands.CreatePerfil;
-using DnaBrasil.Application.Perfis.Commands.DeletePerfil;
-using DnaBrasil.Application.Perfis.Commands.UpdatePerfil;
-using DnaBrasil.Application.Perfis.Queries;
-using DnaBrasil.Application.Perfis.Queries.GetPerfilByAspNetRoleId;
-using DnaBrasil.Application.Perfis.Queries.GetPerfilById;
-using DnaBrasil.Application.Perfis.Queries.GetPerfisAll;
+using DnaBrasilApi.Application.Perfis.Commands.CreatePerfil;
+using DnaBrasilApi.Application.Perfis.Commands.DeletePerfil;
+using DnaBrasilApi.Application.Perfis.Commands.UpdatePerfil;
+using DnaBrasilApi.Application.Perfis.Queries;
+using DnaBrasilApi.Application.Perfis.Queries.GetPerfilByAspNetRoleId;
+using DnaBrasilApi.Application.Perfis.Queries.GetPerfilById;
+using DnaBrasilApi.Application.Perfis.Queries.GetPerfisAll;
 
-namespace DnaBrasil.Web.Endpoints;
+namespace DnaBrasilApi.Web.Endpoints;
 
 public class Perfis : EndpointGroupBase
 {

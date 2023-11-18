@@ -1,7 +1,7 @@
 ﻿using System.Data.Common;
-using DnaBrasil.Application.Common.Interfaces;
-using DnaBrasil.Infrastructure.Data;
-using DnaBrasil.Web;
+using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Infrastructure.Data;
+using DnaBrasilApi.Web;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
-namespace DnaBrasil.Application.FunctionalTests;
+namespace DnaBrasilApi.Application.FunctionalTests;
 
 using static Testing;
 

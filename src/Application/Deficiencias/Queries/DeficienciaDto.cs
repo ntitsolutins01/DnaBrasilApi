@@ -1,7 +1,7 @@
-﻿using DnaBrasil.Application.Alunos.Queries;
-using DnaBrasil.Domain.Entities;
+﻿using DnaBrasilApi.Application.Alunos.Queries;
+using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasil.Application.Deficiencias.Queries;
+namespace DnaBrasilApi.Application.Deficiencias.Queries;
 public class DeficienciaDto
 {
     public int Id { get; init; }

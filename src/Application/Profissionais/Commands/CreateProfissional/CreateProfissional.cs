@@ -1,7 +1,7 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
-using DnaBrasil.Domain.Entities;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasil.Application.Profissionais.Commands.CreateProfissional;
+namespace DnaBrasilApi.Application.Profissionais.Commands.CreateProfissional;
 public record CreateProfissionalCommand : IRequest<int>
 {
     public required string Nome { get; init; }

@@ -1,9 +1,9 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
-using DnaBrasil.Application.Common.Models;
-using DnaBrasil.Application.Common.Security;
-using DnaBrasil.Domain.Enums;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Application.Common.Models;
+using DnaBrasilApi.Application.Common.Security;
+using DnaBrasilApi.Domain.Enums;
 
-namespace DnaBrasil.Application.TodoLists.Queries.GetTodos;
+namespace DnaBrasilApi.Application.TodoLists.Queries.GetTodos;
 
 [Authorize]
 public record GetTodosQuery : IRequest<TodosVm>;

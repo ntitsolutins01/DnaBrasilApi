@@ -1,8 +1,8 @@
-﻿using DnaBrasil.Domain.Entities;
+﻿using DnaBrasilApi.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace DnaBrasil.Infrastructure.Data.Configurations;
+namespace DnaBrasilApi.Infrastructure.Data.Configurations;
 
 public class SerieConfiguration : IEntityTypeConfiguration<Serie>
 {

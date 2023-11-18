@@ -1,8 +1,8 @@
-﻿using DnaBrasil.Application.Common.Exceptions;
+﻿using DnaBrasilApi.Application.Common.Exceptions;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DnaBrasil.Web.Infrastructure;
+namespace DnaBrasilApi.Web.Infrastructure;
 
 public class CustomExceptionHandler : IExceptionHandler
 {

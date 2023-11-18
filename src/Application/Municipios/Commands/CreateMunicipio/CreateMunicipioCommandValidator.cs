@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.Municipios.Commands.CreateMunicipio;
+namespace DnaBrasilApi.Application.Municipios.Commands.CreateMunicipio;
 
 public class CreateMunicipioCommandValidator : AbstractValidator<CreateMunicipioCommand>
 {

@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Application.Common.Models;
+﻿using DnaBrasilApi.Application.Common.Models;
 
-namespace DnaBrasil.Application.Common.Interfaces;
+namespace DnaBrasilApi.Application.Common.Interfaces;
 
 public interface IIdentityService
 {

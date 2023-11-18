@@ -1,8 +1,8 @@
 ﻿using System.Text.RegularExpressions;
-using DnaBrasil.Application.Common.Interfaces;
-using DnaBrasil.Application.Alunos.Commands.UpdateAluno;
+using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Application.Alunos.Commands.UpdateAluno;
 
-namespace DnaBrasil.Application.Alunos.Commands.UpdateAluno;
+namespace DnaBrasilApi.Application.Alunos.Commands.UpdateAluno;
 
 public class UpdateAlunoCommandValidator : AbstractValidator<UpdateAlunoCommand>
 {

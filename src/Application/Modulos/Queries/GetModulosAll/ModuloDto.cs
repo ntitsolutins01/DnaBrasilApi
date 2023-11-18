@@ -1,7 +1,7 @@
-﻿using DnaBrasil.Application.Funcionalidades.Queries;
-using DnaBrasil.Domain.Entities;
+﻿using DnaBrasilApi.Application.Funcionalidades.Queries;
+using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasil.Application.Modulos.Queries.GetModulosAll;
+namespace DnaBrasilApi.Application.Modulos.Queries.GetModulosAll;
 public class ModuloDto
 {
     public int Id { get; init; }

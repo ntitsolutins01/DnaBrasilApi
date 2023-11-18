@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.Localidades.Commands.CreateLocalidade;
+namespace DnaBrasilApi.Application.Localidades.Commands.CreateLocalidade;
 
 public class CreateLocalidadeCommandValidator : AbstractValidator<CreateLocalidadeCommand>
 {

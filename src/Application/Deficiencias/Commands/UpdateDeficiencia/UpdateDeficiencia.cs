@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.Deficiencias.Commands.UpdateDeficiencia;
+namespace DnaBrasilApi.Application.Deficiencias.Commands.UpdateDeficiencia;
 
 public record UpdateDeficienciaCommand : IRequest<bool>
 {

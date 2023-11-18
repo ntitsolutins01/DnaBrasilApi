@@ -1,4 +1,4 @@
-﻿namespace DnaBrasil.Domain.Constants;
+﻿namespace DnaBrasilApi.Domain.Constants;
 
 public abstract class Policies
 {

@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <RootNamespace>DnaBrasil.Domain</RootNamespace>
-    <AssemblyName>DnaBrasil.Domain</AssemblyName>
+    <RootNamespace>DnaBrasilApi.Domain</RootNamespace>
+    <AssemblyName>DnaBrasilApi.Domain</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

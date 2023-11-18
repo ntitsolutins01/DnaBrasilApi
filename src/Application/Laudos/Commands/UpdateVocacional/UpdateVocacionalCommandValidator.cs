@@ -1,4 +1,4 @@
-﻿namespace DnaBrasil.Application.Laudos.Commands.UpdateVocacional;
+﻿namespace DnaBrasilApi.Application.Laudos.Commands.UpdateVocacional;
 
 public class UpdateVocacionalCommandValidator : AbstractValidator<UpdateVocacionalCommand>
 {

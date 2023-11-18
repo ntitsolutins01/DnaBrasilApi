@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.Perfis.Commands.DeletePerfil;
+namespace DnaBrasilApi.Application.Perfis.Commands.DeletePerfil;
 public record DeletePerfilCommand(int Id) : IRequest<bool>;
 
 public class DeletePerfilCommandHandler : IRequestHandler<DeletePerfilCommand, bool>

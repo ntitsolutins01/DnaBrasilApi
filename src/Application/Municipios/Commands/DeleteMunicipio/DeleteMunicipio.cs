@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.Municipios.Commands.DeleteMunicipio;
+namespace DnaBrasilApi.Application.Municipios.Commands.DeleteMunicipio;
 public record DeleteMunicipioCommand(int Id) : IRequest;
 
 public class DeleteMunicipioCommandHandler : IRequestHandler<DeleteMunicipioCommand>

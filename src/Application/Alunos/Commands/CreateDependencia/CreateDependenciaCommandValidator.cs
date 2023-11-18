@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.Alunos.Commands.CreateDependencia;
+namespace DnaBrasilApi.Application.Alunos.Commands.CreateDependencia;
 public class CreateDependenciaCommandValidator : AbstractValidator<CreateDependenciaCommand>
 {
     private readonly IApplicationDbContext _context;

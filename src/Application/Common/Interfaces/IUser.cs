@@ -1,4 +1,4 @@
-﻿namespace DnaBrasil.Application.Common.Interfaces;
+﻿namespace DnaBrasilApi.Application.Common.Interfaces;
 
 public interface IUser
 {

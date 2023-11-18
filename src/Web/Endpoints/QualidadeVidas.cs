@@ -1,7 +1,7 @@
-﻿using DnaBrasil.Application.Laudos.Commands.CreateQualidadeDeVida;
-using DnaBrasil.Application.Laudos.Commands.UpdateQualidadeDeVida;
+﻿using DnaBrasilApi.Application.Laudos.Commands.CreateQualidadeDeVida;
+using DnaBrasilApi.Application.Laudos.Commands.UpdateQualidadeDeVida;
 
-namespace DnaBrasil.Web.Endpoints;
+namespace DnaBrasilApi.Web.Endpoints;
 
 public class QualidadeDeVidas : EndpointGroupBase
 {

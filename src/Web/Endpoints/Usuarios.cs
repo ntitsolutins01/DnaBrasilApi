@@ -1,7 +1,7 @@
-﻿using DnaBrasil.Application.Usuarios.Commands.CreateUsuario;
-using DnaBrasil.Application.Usuarios.Queries;
+﻿using DnaBrasilApi.Application.Usuarios.Commands.CreateUsuario;
+using DnaBrasilApi.Application.Usuarios.Queries;
 
-namespace DnaBrasil.Web.Endpoints;
+namespace DnaBrasilApi.Web.Endpoints;
 
 public class Usuarios : EndpointGroupBase
 {

@@ -1,7 +1,7 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
-using DnaBrasil.Domain.Entities;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasil.Application.Escolaridades.Commands.CreateEscolaridade;
+namespace DnaBrasilApi.Application.Escolaridades.Commands.CreateEscolaridade;
 
 public record CreateEscolaridadeCommand : IRequest<int>
 {

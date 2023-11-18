@@ -1,4 +1,4 @@
-﻿namespace DnaBrasil.Application.Laudos.Commands.CreateTalentoEsportivo;
+﻿namespace DnaBrasilApi.Application.Laudos.Commands.CreateTalentoEsportivo;
 
 public class CreateTalentoEsportivoCommandValidator : AbstractValidator<CreateTalentoEsportivoCommand>
 {

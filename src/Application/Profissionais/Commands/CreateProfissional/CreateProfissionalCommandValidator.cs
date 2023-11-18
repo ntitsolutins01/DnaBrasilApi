@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.Profissionais.Commands.CreateProfissional;
+namespace DnaBrasilApi.Application.Profissionais.Commands.CreateProfissional;
 
 public class CreateProfissionalCommandValidator : AbstractValidator<CreateProfissionalCommand>
 {

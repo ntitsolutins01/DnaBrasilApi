@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.Estados.Queries.GetEstadosAll;
+namespace DnaBrasilApi.Application.Estados.Queries.GetEstadosAll;
 //[Authorize]
 public record GetEstadosAllQuery : IRequest<List<EstadoDto>>;
 

@@ -1,7 +1,7 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
-using DnaBrasil.Application.Laudos.Queries.GetConsumoAlimentarByAluno;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Application.Laudos.Queries.GetConsumoAlimentarByAluno;
 
-namespace DnaBrasil.Application.Laudos.Queries.GetQualidadeVidaByAluno;
+namespace DnaBrasilApi.Application.Laudos.Queries.GetQualidadeVidaByAluno;
 
 public record GetQualidadeDeVidaByAlunoQuery : IRequest<QualidadeDeVidaDto?>
 {

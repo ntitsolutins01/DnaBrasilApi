@@ -1,7 +1,7 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
-using DnaBrasil.Application.Laudos.Queries;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Application.Laudos.Queries;
 
-namespace DnaBrasil.Application.ConsumosAlimentaresAll.Queries.GetConsumosAlimentaresAllAll;
+namespace DnaBrasilApi.Application.ConsumosAlimentaresAll.Queries.GetConsumosAlimentaresAllAll;
 //[Authorize]
 public record GetConsumosAlimentaresAllQuery : IRequest<List<ConsumoAlimentarDto>>;
 

@@ -1,6 +1,6 @@
 ﻿using FluentValidation.Results;
 
-namespace DnaBrasil.Application.Common.Exceptions;
+namespace DnaBrasilApi.Application.Common.Exceptions;
 
 public class ValidationException : Exception
 {

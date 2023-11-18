@@ -1,7 +1,7 @@
-﻿using DnaBrasil.Application.Laudos.Commands.CreateVocacional;
-using DnaBrasil.Application.Laudos.Commands.UpdateVocacional;
+﻿using DnaBrasilApi.Application.Laudos.Commands.CreateVocacional;
+using DnaBrasilApi.Application.Laudos.Commands.UpdateVocacional;
 
-namespace DnaBrasil.Web.Endpoints;
+namespace DnaBrasilApi.Web.Endpoints;
 
 public class Vocacionais : EndpointGroupBase
 {

@@ -1,10 +1,10 @@
-﻿using DnaBrasil.Application.Ambientes.Commands.CreateAmbiente;
-using DnaBrasil.Application.Ambientes.Commands.DeleteAmbiente;
-using DnaBrasil.Application.Ambientes.Commands.UpdateAmbiente;
-using DnaBrasil.Application.Ambientes.Queries;
-using DnaBrasil.Application.Ambientes.Queries.GetAmbientesAll;
+﻿using DnaBrasilApi.Application.Ambientes.Commands.CreateAmbiente;
+using DnaBrasilApi.Application.Ambientes.Commands.DeleteAmbiente;
+using DnaBrasilApi.Application.Ambientes.Commands.UpdateAmbiente;
+using DnaBrasilApi.Application.Ambientes.Queries;
+using DnaBrasilApi.Application.Ambientes.Queries.GetAmbientesAll;
 
-namespace DnaBrasil.Web.Endpoints;
+namespace DnaBrasilApi.Web.Endpoints;
 
 public class Ambientes : EndpointGroupBase
 {

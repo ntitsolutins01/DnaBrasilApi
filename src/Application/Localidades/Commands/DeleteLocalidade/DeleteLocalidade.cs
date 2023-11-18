@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.Localidades.Commands.DeleteLocalidade;
+namespace DnaBrasilApi.Application.Localidades.Commands.DeleteLocalidade;
 public record DeleteLocalidadeCommand(int Id) : IRequest<bool>;
 
 public class DeleteLocalidadeCommandHandler : IRequestHandler<DeleteLocalidadeCommand, bool>

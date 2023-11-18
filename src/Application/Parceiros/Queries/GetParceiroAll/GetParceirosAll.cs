@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.Parceiros.Queries.GetParceiroAll;
+namespace DnaBrasilApi.Application.Parceiros.Queries.GetParceiroAll;
 //[Authorize]
 public record GetParceirosAllQuery : IRequest<List<ParceiroDto>>;
 

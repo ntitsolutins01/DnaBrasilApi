@@ -1,4 +1,4 @@
-﻿namespace DnaBrasil.Domain.ValueObjects;
+﻿namespace DnaBrasilApi.Domain.ValueObjects;
 
 public class Colour : ValueObject
 {

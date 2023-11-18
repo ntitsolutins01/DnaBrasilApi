@@ -1,7 +1,7 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
-using DnaBrasil.Domain.Entities;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasil.Application.Contratos.Commands.UpdateContrato;
+namespace DnaBrasilApi.Application.Contratos.Commands.UpdateContrato;
 
 public record UpdateContratoCommand : IRequest
 {

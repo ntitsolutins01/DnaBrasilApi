@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.Perfis.Queries.GetPerfilByAspNetRoleId;
+namespace DnaBrasilApi.Application.Perfis.Queries.GetPerfilByAspNetRoleId;
 
 public record GetPerfilByAspNetRoleIdQuery : IRequest<PerfilDto>
 {

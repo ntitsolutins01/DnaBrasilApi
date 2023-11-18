@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.Laudos.Queries.GetSaudeBucalByAluno;
+namespace DnaBrasilApi.Application.Laudos.Queries.GetSaudeBucalByAluno;
 
 public record GetSaudeBucalByAlunoQuery : IRequest<SaudeBucalDto?>
 {

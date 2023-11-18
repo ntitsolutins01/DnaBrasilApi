@@ -1,7 +1,7 @@
 using System.Text.RegularExpressions;
-using DnaBrasil.Application.Common.Interfaces;
+using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.Profissionais.Commands.UpdateProfissional;
+namespace DnaBrasilApi.Application.Profissionais.Commands.UpdateProfissional;
 
 public class UpdateProfissionalCommandValidator : AbstractValidator<UpdateProfissionalCommand>
 {

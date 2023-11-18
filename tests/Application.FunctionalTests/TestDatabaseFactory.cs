@@ -1,4 +1,4 @@
-﻿namespace DnaBrasil.Application.FunctionalTests;
+﻿namespace DnaBrasilApi.Application.FunctionalTests;
 
 public static class TestDatabaseFactory
 {

@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.Municipios.Queries.GetMunicipiosByUf;
+namespace DnaBrasilApi.Application.Municipios.Queries.GetMunicipiosByUf;
 
 public record GetMunicipioByUfQuery : IRequest<List<MunicipioDto>>
 {

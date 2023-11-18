@@ -3,7 +3,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DnaBrasil.Domain.Entities;
+namespace DnaBrasilApi.Domain.Entities;
 
 public class ConsumoAlimentar : BaseAuditableEntity
 {

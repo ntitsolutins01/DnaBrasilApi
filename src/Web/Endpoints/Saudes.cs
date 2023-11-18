@@ -1,8 +1,8 @@
-﻿using DnaBrasil.Application.Laudos.Commands.CreateSaude;
-using DnaBrasil.Application.Laudos.Commands.UpdateSaude;
+﻿using DnaBrasilApi.Application.Laudos.Commands.CreateSaude;
+using DnaBrasilApi.Application.Laudos.Commands.UpdateSaude;
 
 
-namespace DnaBrasil.Web.Endpoints;
+namespace DnaBrasilApi.Web.Endpoints;
 
 public class Saudes : EndpointGroupBase
 {

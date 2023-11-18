@@ -1,8 +1,8 @@
 ﻿using System.Security.Claims;
 
-using DnaBrasil.Application.Common.Interfaces;
+using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasil.Web.Services;
+namespace DnaBrasilApi.Web.Services;
 
 public class CurrentUser : IUser
 {

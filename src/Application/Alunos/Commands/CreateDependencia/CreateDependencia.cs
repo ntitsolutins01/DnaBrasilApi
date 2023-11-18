@@ -1,8 +1,8 @@
-﻿using DnaBrasil.Application.Alunos.Commands.CreateDependencia;
-using DnaBrasil.Application.Common.Interfaces;
-using DnaBrasil.Domain.Entities;
+﻿using DnaBrasilApi.Application.Alunos.Commands.CreateDependencia;
+using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasil.Application.Alunos.Commands.CreateDependencia;
+namespace DnaBrasilApi.Application.Alunos.Commands.CreateDependencia;
 
 public record CreateDependenciaCommand : IRequest<int>
 {

@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.Municipios.Commands.UpdateMunicipio;
+namespace DnaBrasilApi.Application.Municipios.Commands.UpdateMunicipio;
 
 public class UpdateMunicipioCommandValidator : AbstractValidator<UpdateMunicipioCommand>
 {

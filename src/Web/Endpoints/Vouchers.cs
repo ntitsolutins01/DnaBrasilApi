@@ -1,8 +1,8 @@
-﻿using DnaBrasil.Application.Alunos.Commands.CreateVoucher;
-using DnaBrasil.Application.Alunos.Commands.UpdateVoucher;
+﻿using DnaBrasilApi.Application.Alunos.Commands.CreateVoucher;
+using DnaBrasilApi.Application.Alunos.Commands.UpdateVoucher;
 
 
-namespace DnaBrasil.Web.Endpoints;
+namespace DnaBrasilApi.Web.Endpoints;
 
 public class Vouchers : EndpointGroupBase
 {

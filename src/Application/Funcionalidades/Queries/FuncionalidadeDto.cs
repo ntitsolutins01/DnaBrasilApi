@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Domain.Entities;
+﻿using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasil.Application.Funcionalidades.Queries;
+namespace DnaBrasilApi.Application.Funcionalidades.Queries;
 public class FuncionalidadeDto
 {
     public int Id { get; init; }

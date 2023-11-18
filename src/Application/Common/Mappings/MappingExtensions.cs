@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Application.Common.Models;
+﻿using DnaBrasilApi.Application.Common.Models;
 
-namespace DnaBrasil.Application.Common.Mappings;
+namespace DnaBrasilApi.Application.Common.Mappings;
 
 public static class MappingExtensions
 {

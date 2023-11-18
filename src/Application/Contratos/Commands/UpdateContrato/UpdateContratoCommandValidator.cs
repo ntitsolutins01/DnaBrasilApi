@@ -1,4 +1,4 @@
-﻿namespace DnaBrasil.Application.Contratos.Commands.UpdateContrato;
+﻿namespace DnaBrasilApi.Application.Contratos.Commands.UpdateContrato;
 internal class UpdateContratoCommandValidator : AbstractValidator<UpdateContratoCommand>
 {
     public UpdateContratoCommandValidator()

@@ -1,6 +1,6 @@
-﻿global using DnaBrasil.Domain.Common;
-global using DnaBrasil.Domain.Entities;
-global using DnaBrasil.Domain.Enums;
-global using DnaBrasil.Domain.Events;
-global using DnaBrasil.Domain.Exceptions;
-global using DnaBrasil.Domain.ValueObjects;
+﻿global using DnaBrasilApi.Domain.Common;
+global using DnaBrasilApi.Domain.Entities;
+global using DnaBrasilApi.Domain.Enums;
+global using DnaBrasilApi.Domain.Events;
+global using DnaBrasilApi.Domain.Exceptions;
+global using DnaBrasilApi.Domain.ValueObjects;

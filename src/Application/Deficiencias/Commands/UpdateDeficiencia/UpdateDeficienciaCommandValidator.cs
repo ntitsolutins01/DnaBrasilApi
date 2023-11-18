@@ -1,4 +1,4 @@
-﻿namespace DnaBrasil.Application.Deficiencias.Commands.UpdateDeficiencia;
+﻿namespace DnaBrasilApi.Application.Deficiencias.Commands.UpdateDeficiencia;
 
 public class UpdateDeficienciaCommandValidator : AbstractValidator<UpdateDeficienciaCommand>
 {
