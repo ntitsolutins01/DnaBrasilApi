@@ -10,6 +10,7 @@ public record UpdateUsuarioCommand : IRequest<bool>
     public required string Email { get; init; }
     public int PerfilId { get; init; }
     public bool Status { get; init; }
+    public required string AspNetRoleId { get; set; }
 }
 
 public class UpdateUsuarioCommandHandler : IRequestHandler<UpdateUsuarioCommand, bool>
@@ -34,6 +35,7 @@ public class UpdateUsuarioCommandHandler : IRequestHandler<UpdateUsuarioCommand,
         entity.Email = request.Email;
         entity.Status = request.Status;
         entity.Perfil = perfil;
+        entity.AspNetRoleId = request.AspNetRoleId;
 
         var result = await _context.SaveChangesAsync(cancellationToken);
 
