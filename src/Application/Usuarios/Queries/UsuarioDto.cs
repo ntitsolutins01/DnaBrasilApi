@@ -11,6 +11,7 @@ public class UsuarioDto
     public required string Email { get; set; }
     public required string AspNetRoleId { get; set; }
     public PerfilDto? Perfil { get; set; }
+    public bool? Status { get; set; } = true;
     private class Mapping : Profile
     {
         public Mapping()

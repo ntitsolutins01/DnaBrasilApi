@@ -20,7 +20,7 @@ public class GetEstadosAllQueryHandler : IRequestHandler<GetEstadosAllQuery, Lis
         var result = await _context.Estados
             .AsNoTracking()
             .ProjectTo<EstadoDto>(_mapper.ConfigurationProvider)
-            .OrderBy(t => t.Id)
+            .OrderBy(t => t.Nome)
             .ToListAsync(cancellationToken);
         
         return result == null ? throw new ArgumentNullException(nameof(result)) : result;
