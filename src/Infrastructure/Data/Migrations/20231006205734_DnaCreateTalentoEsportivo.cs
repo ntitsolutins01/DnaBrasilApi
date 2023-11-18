@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace DnaBrasil.Infrastructure.Data.Migrations
+namespace DnaBrasilApi.Infrastructure.Data.Migrations
 {
     /// <inheritdoc />
     public partial class DnaCreateTalentoEsportivo : Migration

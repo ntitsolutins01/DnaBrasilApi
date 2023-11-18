@@ -1,8 +1,8 @@
 ﻿using System.Collections.Specialized;
-using DnaBrasil.Infrastructure.Data;
+using DnaBrasilApi.Infrastructure.Data;
 using Microsoft.AspNetCore.Identity;
 
-namespace DnaBrasil.Web.Models;
+namespace DnaBrasilApi.Web.Models;
 
 public class PerfilCommand
 {

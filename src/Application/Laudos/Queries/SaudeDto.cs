@@ -1,7 +1,7 @@
-﻿using DnaBrasil.Application.Profissionais.Queries;
-using DnaBrasil.Domain.Entities;
+﻿using DnaBrasilApi.Application.Profissionais.Queries;
+using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasil.Application.Laudos.Queries;
+namespace DnaBrasilApi.Application.Laudos.Queries;
 public class SaudeDto
 {
     public int Id { get; init; }

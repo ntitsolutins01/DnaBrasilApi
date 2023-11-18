@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.Deficiencias.Queries.GetDeficienciaById;
+namespace DnaBrasilApi.Application.Deficiencias.Queries.GetDeficienciaById;
 
 public record GetDeficienciaByIdQuery : IRequest<DeficienciaDto>
 {

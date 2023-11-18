@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DnaBrasil.Domain.Entities;
+namespace DnaBrasilApi.Domain.Entities;
 public class Municipio : BaseAuditableEntity
 {
     public required int Codigo { get; set; }

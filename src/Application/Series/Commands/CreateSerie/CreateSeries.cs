@@ -1,7 +1,7 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
-using DnaBrasil.Domain.Entities;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasil.Application.Series.Commands.CreateSerie;
+namespace DnaBrasilApi.Application.Series.Commands.CreateSerie;
 public record CreateSerieCommand : IRequest<int>
 {
     public required string Nome { get; init; }

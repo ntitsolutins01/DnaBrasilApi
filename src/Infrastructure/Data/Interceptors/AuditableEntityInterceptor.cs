@@ -1,10 +1,10 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
-using DnaBrasil.Domain.Common;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Domain.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
-namespace DnaBrasil.Infrastructure.Data.Interceptors;
+namespace DnaBrasilApi.Infrastructure.Data.Interceptors;
 
 public class AuditableEntityInterceptor : SaveChangesInterceptor
 {

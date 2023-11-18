@@ -1,4 +1,4 @@
-﻿namespace DnaBrasil.Web.Infrastructure;
+﻿namespace DnaBrasilApi.Web.Infrastructure;
 
 public static class IEndpointRouteBuilderExtensions
 {

@@ -1,9 +1,9 @@
-﻿using DnaBrasil.Application.TodoLists.Commands.CreateTodoList;
-using DnaBrasil.Application.TodoLists.Commands.DeleteTodoList;
-using DnaBrasil.Application.TodoLists.Commands.UpdateTodoList;
-using DnaBrasil.Application.TodoLists.Queries.GetTodos;
+﻿using DnaBrasilApi.Application.TodoLists.Commands.CreateTodoList;
+using DnaBrasilApi.Application.TodoLists.Commands.DeleteTodoList;
+using DnaBrasilApi.Application.TodoLists.Commands.UpdateTodoList;
+using DnaBrasilApi.Application.TodoLists.Queries.GetTodos;
 
-namespace DnaBrasil.Web.Endpoints;
+namespace DnaBrasilApi.Web.Endpoints;
 
 public class TodoLists : EndpointGroupBase
 {

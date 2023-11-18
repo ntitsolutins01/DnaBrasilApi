@@ -1,10 +1,10 @@
-﻿using DnaBrasil.Application.TipoLaudos.Commands.CreateTipoLaudos;
-using DnaBrasil.Application.TipoLaudos.Commands.DeleteTipoLaudos;
-using DnaBrasil.Application.TipoLaudos.Commands.UpdateTipoLaudo;
-using DnaBrasil.Application.TipoLaudos.Queries;
-using DnaBrasil.Application.TipoLaudos.Queries.GetTipoLaudosAll;
+﻿using DnaBrasilApi.Application.TipoLaudos.Commands.CreateTipoLaudos;
+using DnaBrasilApi.Application.TipoLaudos.Commands.DeleteTipoLaudos;
+using DnaBrasilApi.Application.TipoLaudos.Commands.UpdateTipoLaudo;
+using DnaBrasilApi.Application.TipoLaudos.Queries;
+using DnaBrasilApi.Application.TipoLaudos.Queries.GetTipoLaudosAll;
 
-namespace DnaBrasil.Web.Endpoints;
+namespace DnaBrasilApi.Web.Endpoints;
 
 public class TiposLaudos : EndpointGroupBase
 {

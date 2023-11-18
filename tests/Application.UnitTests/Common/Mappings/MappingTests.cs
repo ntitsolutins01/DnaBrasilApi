@@ -1,14 +1,14 @@
 ﻿using System.Reflection;
 using System.Runtime.Serialization;
 using AutoMapper;
-using DnaBrasil.Application.Common.Interfaces;
-using DnaBrasil.Application.Common.Models;
-using DnaBrasil.Application.TodoItems.Queries.GetTodoItemsWithPagination;
-using DnaBrasil.Application.TodoLists.Queries.GetTodos;
-using DnaBrasil.Domain.Entities;
+using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Application.Common.Models;
+using DnaBrasilApi.Application.TodoItems.Queries.GetTodoItemsWithPagination;
+using DnaBrasilApi.Application.TodoLists.Queries.GetTodos;
+using DnaBrasilApi.Domain.Entities;
 using NUnit.Framework;
 
-namespace DnaBrasil.Application.UnitTests.Common.Mappings;
+namespace DnaBrasilApi.Application.UnitTests.Common.Mappings;
 
 public class MappingTests
 {

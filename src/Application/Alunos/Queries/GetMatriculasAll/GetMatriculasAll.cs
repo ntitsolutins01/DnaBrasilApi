@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.Alunos.Queries.GetMatriculasAll;
+namespace DnaBrasilApi.Application.Alunos.Queries.GetMatriculasAll;
 //[Authorize]
 public record GetMatriculasAllQuery : IRequest<List<MatriculaDto>>;
 

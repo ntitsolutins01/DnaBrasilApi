@@ -1,10 +1,10 @@
-﻿using DnaBrasil.Application.Escolaridades.Commands.CreateEscolaridade;
-using DnaBrasil.Application.Escolaridades.Commands.DeleteEscolaridade;
-using DnaBrasil.Application.Escolaridades.Commands.UpdateEscolaridade;
-using DnaBrasil.Application.Escolaridades.Queries;
-using DnaBrasil.Application.Escolaridades.Queries.GetEscolaridadesAll;
+﻿using DnaBrasilApi.Application.Escolaridades.Commands.CreateEscolaridade;
+using DnaBrasilApi.Application.Escolaridades.Commands.DeleteEscolaridade;
+using DnaBrasilApi.Application.Escolaridades.Commands.UpdateEscolaridade;
+using DnaBrasilApi.Application.Escolaridades.Queries;
+using DnaBrasilApi.Application.Escolaridades.Queries.GetEscolaridadesAll;
 
-namespace DnaBrasil.Web.Endpoints;
+namespace DnaBrasilApi.Web.Endpoints;
 
 public class Escolaridades : EndpointGroupBase
 {

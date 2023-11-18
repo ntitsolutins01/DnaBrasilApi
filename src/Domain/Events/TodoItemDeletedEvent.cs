@@ -1,4 +1,4 @@
-﻿namespace DnaBrasil.Domain.Events;
+﻿namespace DnaBrasilApi.Domain.Events;
 
 public class TodoItemDeletedEvent : BaseEvent
 {

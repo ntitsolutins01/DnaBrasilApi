@@ -1,7 +1,7 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
-using DnaBrasil.Domain.Entities;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasil.Application.Perfis.Commands.CreateModulo;
+namespace DnaBrasilApi.Application.Perfis.Commands.CreateModulo;
 
 public record CreateModuloCommand : IRequest<int>
 {

@@ -1,7 +1,7 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
-using DnaBrasil.Domain.Entities;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasil.Application.Ambientes.Commands.CreateAmbiente;
+namespace DnaBrasilApi.Application.Ambientes.Commands.CreateAmbiente;
 
 public record CreateAmbienteCommand : IRequest<int>
 {

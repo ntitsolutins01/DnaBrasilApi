@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Domain.Entities;
+﻿using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasil.Application.Perfis.Queries;
+namespace DnaBrasilApi.Application.Perfis.Queries;
 public class PerfilDto
 {
     public required string Id { get; set; }

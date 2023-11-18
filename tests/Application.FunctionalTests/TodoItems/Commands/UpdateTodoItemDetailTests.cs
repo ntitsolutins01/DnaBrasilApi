@@ -1,11 +1,11 @@
-﻿using DnaBrasil.Application.TodoItems.Commands.CreateTodoItem;
-using DnaBrasil.Application.TodoItems.Commands.UpdateTodoItem;
-using DnaBrasil.Application.TodoItems.Commands.UpdateTodoItemDetail;
-using DnaBrasil.Application.TodoLists.Commands.CreateTodoList;
-using DnaBrasil.Domain.Entities;
-using DnaBrasil.Domain.Enums;
+﻿using DnaBrasilApi.Application.TodoItems.Commands.CreateTodoItem;
+using DnaBrasilApi.Application.TodoItems.Commands.UpdateTodoItem;
+using DnaBrasilApi.Application.TodoItems.Commands.UpdateTodoItemDetail;
+using DnaBrasilApi.Application.TodoLists.Commands.CreateTodoList;
+using DnaBrasilApi.Domain.Entities;
+using DnaBrasilApi.Domain.Enums;
 
-namespace DnaBrasil.Application.FunctionalTests.TodoItems.Commands;
+namespace DnaBrasilApi.Application.FunctionalTests.TodoItems.Commands;
 
 using static Testing;
 

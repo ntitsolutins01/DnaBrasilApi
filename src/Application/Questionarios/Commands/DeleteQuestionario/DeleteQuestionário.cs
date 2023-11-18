@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.Questionarios.Commands.DeleteQuestionario;
+namespace DnaBrasilApi.Application.Questionarios.Commands.DeleteQuestionario;
 public record DeleteQuestionarioCommand(int Id) : IRequest;
 
 public class DeleteQuestionarioCommandHandler : IRequestHandler<DeleteQuestionarioCommand>

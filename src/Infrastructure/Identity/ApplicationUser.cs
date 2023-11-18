@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace DnaBrasil.Infrastructure.Identity;
+namespace DnaBrasilApi.Infrastructure.Identity;
 
 public class ApplicationUser : IdentityUser
 {

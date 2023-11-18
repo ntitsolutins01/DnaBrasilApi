@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.Perfis.Commands.UpdatePerfil;
+namespace DnaBrasilApi.Application.Perfis.Commands.UpdatePerfil;
 
 public record UpdatePerfilCommand : IRequest<bool>
 {

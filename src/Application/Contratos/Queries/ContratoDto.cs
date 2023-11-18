@@ -1,8 +1,8 @@
-﻿using DnaBrasil.Application.Alunos.Queries;
-using DnaBrasil.Application.Profissionais.Queries;
-using DnaBrasil.Domain.Entities;
+﻿using DnaBrasilApi.Application.Alunos.Queries;
+using DnaBrasilApi.Application.Profissionais.Queries;
+using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasil.Application.Contratos.Queries;
+namespace DnaBrasilApi.Application.Contratos.Queries;
 public class ContratoDto
 {
     public int Id { get; init; }

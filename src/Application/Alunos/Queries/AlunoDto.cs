@@ -1,9 +1,9 @@
-﻿using DnaBrasil.Application.Ambientes.Queries;
-using DnaBrasil.Application.Deficiencias.Queries;
-using DnaBrasil.Application.Laudos.Queries;
-using DnaBrasil.Domain.Entities;
+﻿using DnaBrasilApi.Application.Ambientes.Queries;
+using DnaBrasilApi.Application.Deficiencias.Queries;
+using DnaBrasilApi.Application.Laudos.Queries;
+using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasil.Application.Alunos.Queries;
+namespace DnaBrasilApi.Application.Alunos.Queries;
 public class AlunoDto
 {
     public int Id { get; set; }

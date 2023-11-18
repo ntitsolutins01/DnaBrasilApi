@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.Contratos.Queries.GetContratosAll;
+namespace DnaBrasilApi.Application.Contratos.Queries.GetContratosAll;
 //[Authorize]
 public record GetContratosAllQuery : IRequest<List<ContratoDto>>;
 

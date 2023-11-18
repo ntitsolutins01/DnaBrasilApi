@@ -1,4 +1,4 @@
-﻿namespace DnaBrasil.Application.Ambientes.Commands.UpdateAmbiente;
+﻿namespace DnaBrasilApi.Application.Ambientes.Commands.UpdateAmbiente;
 
 public class UpdateAmbienteCommandValidator : AbstractValidator<UpdateAmbienteCommand>
 {

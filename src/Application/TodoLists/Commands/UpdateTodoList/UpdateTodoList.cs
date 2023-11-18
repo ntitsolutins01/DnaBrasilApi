@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.TodoLists.Commands.UpdateTodoList;
+namespace DnaBrasilApi.Application.TodoLists.Commands.UpdateTodoList;
 
 public record UpdateTodoListCommand : IRequest
 {

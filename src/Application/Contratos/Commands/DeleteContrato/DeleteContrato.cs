@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.Contratos.Commands.DeleteContrato;
+namespace DnaBrasilApi.Application.Contratos.Commands.DeleteContrato;
 public record DeleteContratoCommand(int Id) : IRequest;
 
 public class DeleteContratoCommandHandler : IRequestHandler<DeleteContratoCommand>

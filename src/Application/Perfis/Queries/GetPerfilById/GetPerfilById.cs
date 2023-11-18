@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.Perfis.Queries.GetPerfilById;
+namespace DnaBrasilApi.Application.Perfis.Queries.GetPerfilById;
 
 public record GetPerfilByIdQuery : IRequest<PerfilDto>
 {

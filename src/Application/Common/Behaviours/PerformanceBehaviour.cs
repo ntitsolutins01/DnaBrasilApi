@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics;
-using DnaBrasil.Application.Common.Interfaces;
+using DnaBrasilApi.Application.Common.Interfaces;
 using Microsoft.Extensions.Logging;
 
-namespace DnaBrasil.Application.Common.Behaviours;
+namespace DnaBrasilApi.Application.Common.Behaviours;
 
 public class PerformanceBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : notnull
 {

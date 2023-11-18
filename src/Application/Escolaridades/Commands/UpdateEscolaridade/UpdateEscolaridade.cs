@@ -1,7 +1,7 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
-using DnaBrasil.Application.Escolaridades.Commands.UpdateEscolaridade;
-using DnaBrasil.Domain.Entities;
-namespace DnaBrasil.Application.Escolaridades.Commands.UpdateEscolaridade;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Application.Escolaridades.Commands.UpdateEscolaridade;
+using DnaBrasilApi.Domain.Entities;
+namespace DnaBrasilApi.Application.Escolaridades.Commands.UpdateEscolaridade;
 
 public record UpdateEscolaridadeCommand : IRequest<bool>
 {

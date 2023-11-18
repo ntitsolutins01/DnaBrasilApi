@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.Escolaridades.Queries.GetEscolaridadesAll;
+namespace DnaBrasilApi.Application.Escolaridades.Queries.GetEscolaridadesAll;
 //[Authorize]
 public record GerEscolaridadesAllQuery : IRequest<List<EscolaridadeDto>>;
 

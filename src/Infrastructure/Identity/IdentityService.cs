@@ -1,10 +1,10 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
-using DnaBrasil.Application.Common.Models;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Application.Common.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace DnaBrasil.Infrastructure.Identity;
+namespace DnaBrasilApi.Infrastructure.Identity;
 
 public class IdentityService : IIdentityService
 {

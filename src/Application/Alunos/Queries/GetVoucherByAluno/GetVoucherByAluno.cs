@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.Alunos.Queries.GetVoucherByAluno;
+namespace DnaBrasilApi.Application.Alunos.Queries.GetVoucherByAluno;
 
 public record GetVoucherByAlunoQuery : IRequest<VoucherDto>
 {

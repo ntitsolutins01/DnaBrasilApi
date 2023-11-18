@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.Profissionais.Queries.GetProfissionalAll;
+namespace DnaBrasilApi.Application.Profissionais.Queries.GetProfissionalAll;
 //[Authorize]
 public record GetProfissionaisQuery : IRequest<List<ProfissionalDto>>;
 

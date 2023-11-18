@@ -1,4 +1,4 @@
-﻿namespace DnaBrasil.Application.Questionarios.Commands.CreateQuestionário;
+﻿namespace DnaBrasilApi.Application.Questionarios.Commands.CreateQuestionário;
 
 public class CreateQuestionarioCommandValidator : AbstractValidator<CreateQuestionarioCommand>
 {

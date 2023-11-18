@@ -1,11 +1,11 @@
-﻿using DnaBrasil.Application.Deficiencias.Commands.CreateDeficiencia;
-using DnaBrasil.Application.Deficiencias.Commands.DeleteDeficiencia;
-using DnaBrasil.Application.Deficiencias.Commands.UpdateDeficiencia;
-using DnaBrasil.Application.Deficiencias.Queries;
-using DnaBrasil.Application.Deficiencias.Queries.GetDeficienciaById;
-using DnaBrasil.Application.Deficiencias.Queries.GetDeficienciasAll;
+﻿using DnaBrasilApi.Application.Deficiencias.Commands.CreateDeficiencia;
+using DnaBrasilApi.Application.Deficiencias.Commands.DeleteDeficiencia;
+using DnaBrasilApi.Application.Deficiencias.Commands.UpdateDeficiencia;
+using DnaBrasilApi.Application.Deficiencias.Queries;
+using DnaBrasilApi.Application.Deficiencias.Queries.GetDeficienciaById;
+using DnaBrasilApi.Application.Deficiencias.Queries.GetDeficienciasAll;
 
-namespace DnaBrasil.Web.Endpoints;
+namespace DnaBrasilApi.Web.Endpoints;
 
 public class Deficiencias : EndpointGroupBase
 {

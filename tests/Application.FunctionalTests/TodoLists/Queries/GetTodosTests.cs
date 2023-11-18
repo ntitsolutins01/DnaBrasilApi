@@ -1,8 +1,8 @@
-﻿using DnaBrasil.Application.TodoLists.Queries.GetTodos;
-using DnaBrasil.Domain.Entities;
-using DnaBrasil.Domain.ValueObjects;
+﻿using DnaBrasilApi.Application.TodoLists.Queries.GetTodos;
+using DnaBrasilApi.Domain.Entities;
+using DnaBrasilApi.Domain.ValueObjects;
 
-namespace DnaBrasil.Application.FunctionalTests.TodoLists.Queries;
+namespace DnaBrasilApi.Application.FunctionalTests.TodoLists.Queries;
 
 using static Testing;
 

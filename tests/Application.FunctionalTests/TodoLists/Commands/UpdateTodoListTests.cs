@@ -1,9 +1,9 @@
-﻿using DnaBrasil.Application.Common.Exceptions;
-using DnaBrasil.Application.TodoLists.Commands.CreateTodoList;
-using DnaBrasil.Application.TodoLists.Commands.UpdateTodoList;
-using DnaBrasil.Domain.Entities;
+﻿using DnaBrasilApi.Application.Common.Exceptions;
+using DnaBrasilApi.Application.TodoLists.Commands.CreateTodoList;
+using DnaBrasilApi.Application.TodoLists.Commands.UpdateTodoList;
+using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasil.Application.FunctionalTests.TodoLists.Commands;
+namespace DnaBrasilApi.Application.FunctionalTests.TodoLists.Commands;
 
 using static Testing;
 

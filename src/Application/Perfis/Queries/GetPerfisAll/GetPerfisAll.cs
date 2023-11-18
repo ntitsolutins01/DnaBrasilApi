@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.Perfis.Queries.GetPerfisAll;
+namespace DnaBrasilApi.Application.Perfis.Queries.GetPerfisAll;
 //[Authorize]
 public record GetPerfisAllQuery : IRequest<List<PerfilDto>>;
 

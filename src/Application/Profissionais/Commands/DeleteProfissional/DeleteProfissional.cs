@@ -1,6 +1,6 @@
-using DnaBrasil.Application.Common.Interfaces;
+using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.Profissionais.Commands.DeleteProfissional;
+namespace DnaBrasilApi.Application.Profissionais.Commands.DeleteProfissional;
 public record DeleteProfissionalCommand(int Id) : IRequest;
 
 public class DeleteProfissionalCommandHandler : IRequestHandler<DeleteProfissionalCommand>

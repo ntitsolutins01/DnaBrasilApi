@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.Questionarios.Queries.GetQuestionarioByTipoLaudo;
+namespace DnaBrasilApi.Application.Questionarios.Queries.GetQuestionarioByTipoLaudo;
 
 public record GetQuestionarioByTipoLaudoQuery : IRequest<List<QuestionarioDto>>
 {

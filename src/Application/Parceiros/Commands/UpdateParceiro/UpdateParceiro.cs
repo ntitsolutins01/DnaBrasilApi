@@ -1,8 +1,8 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
-using DnaBrasil.Application.Parceiros.Commands.UpdateParceiro;
-using DnaBrasil.Domain.Entities;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Application.Parceiros.Commands.UpdateParceiro;
+using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasil.Application.Parceiros.Commands.UpdateParceiro;
+namespace DnaBrasilApi.Application.Parceiros.Commands.UpdateParceiro;
 
 public record UpdateParceiroCommand : IRequest<bool>
 {

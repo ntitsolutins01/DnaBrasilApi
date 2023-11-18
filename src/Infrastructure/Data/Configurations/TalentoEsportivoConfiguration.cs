@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DnaBrasil.Domain.Entities;
+using DnaBrasilApi.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace DnaBrasil.Infrastructure.Data.Configurations;
+namespace DnaBrasilApi.Infrastructure.Data.Configurations;
 public class TalentoEsportivoConfiguration : IEntityTypeConfiguration<TalentoEsportivo>
 {
     public void Configure(EntityTypeBuilder<TalentoEsportivo> builder)

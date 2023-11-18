@@ -1,9 +1,9 @@
 ﻿using System.Xml;
-using DnaBrasil.Application.Alunos.Commands.CreateMatricula;
-using DnaBrasil.Application.Common.Interfaces;
-using DnaBrasil.Domain.Entities;
+using DnaBrasilApi.Application.Alunos.Commands.CreateMatricula;
+using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasil.Application.Alunos.Commands.CreateMatricula;
+namespace DnaBrasilApi.Application.Alunos.Commands.CreateMatricula;
 
 public record CreateMatriculaCommand : IRequest<int>
 {

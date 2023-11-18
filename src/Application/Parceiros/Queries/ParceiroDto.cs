@@ -1,8 +1,8 @@
-﻿using DnaBrasil.Application.Alunos.Queries;
-using DnaBrasil.Application.Profissionais.Queries;
-using DnaBrasil.Domain.Entities;
+﻿using DnaBrasilApi.Application.Alunos.Queries;
+using DnaBrasilApi.Application.Profissionais.Queries;
+using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasil.Application.Parceiros.Queries;
+namespace DnaBrasilApi.Application.Parceiros.Queries;
 public class ParceiroDto
 {
     public string? Nome { get; set; }

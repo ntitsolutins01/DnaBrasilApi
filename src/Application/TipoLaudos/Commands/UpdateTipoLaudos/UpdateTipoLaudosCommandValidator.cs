@@ -1,4 +1,4 @@
-﻿namespace DnaBrasil.Application.TipoLaudos.Commands.UpdateTipoLaudo;
+﻿namespace DnaBrasilApi.Application.TipoLaudos.Commands.UpdateTipoLaudo;
 internal class UpdateTipoLaudosCommandValidator : AbstractValidator<UpdateTipoLaudoCommand>
 {
     public UpdateTipoLaudosCommandValidator()

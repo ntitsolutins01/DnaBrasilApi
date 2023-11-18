@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.Laudos.Queries.GetConsumoAlimentarByAluno;
+namespace DnaBrasilApi.Application.Laudos.Queries.GetConsumoAlimentarByAluno;
 
 public record GetConsumoAlimentaresByAlunoQuery : IRequest<ConsumoAlimentarDto?>
 {

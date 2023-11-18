@@ -1,7 +1,7 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
-using DnaBrasil.Domain.Entities;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasil.Application.Usuarios.Commands.CreateUsuario;
+namespace DnaBrasilApi.Application.Usuarios.Commands.CreateUsuario;
 
 public record CreateUsuarioCommand : IRequest<int>
 {

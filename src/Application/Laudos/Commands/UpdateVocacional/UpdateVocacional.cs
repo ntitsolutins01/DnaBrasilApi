@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.Laudos.Commands.UpdateVocacional;
+namespace DnaBrasilApi.Application.Laudos.Commands.UpdateVocacional;
 
 public record UpdateVocacionalCommand : IRequest <bool>
 {

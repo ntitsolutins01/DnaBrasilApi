@@ -1,11 +1,11 @@
-﻿using DnaBrasil.Application.Parceiros.Commands.CreateParceiro;
-using DnaBrasil.Application.Parceiros.Commands.DeleteParceiro;
-using DnaBrasil.Application.Parceiros.Commands.UpdateParceiro;
-using DnaBrasil.Application.Parceiros.Queries;
-using DnaBrasil.Application.Parceiros.Queries.GetParceiroAll;
+﻿using DnaBrasilApi.Application.Parceiros.Commands.CreateParceiro;
+using DnaBrasilApi.Application.Parceiros.Commands.DeleteParceiro;
+using DnaBrasilApi.Application.Parceiros.Commands.UpdateParceiro;
+using DnaBrasilApi.Application.Parceiros.Queries;
+using DnaBrasilApi.Application.Parceiros.Queries.GetParceiroAll;
 
 
-namespace DnaBrasil.Web.Endpoints;
+namespace DnaBrasilApi.Web.Endpoints;
 
 public class Parceiros : EndpointGroupBase
 {

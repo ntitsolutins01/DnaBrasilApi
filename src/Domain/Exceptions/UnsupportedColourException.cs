@@ -1,4 +1,4 @@
-﻿namespace DnaBrasil.Domain.Exceptions;
+﻿namespace DnaBrasilApi.Domain.Exceptions;
 
 public class UnsupportedColourException : Exception
 {

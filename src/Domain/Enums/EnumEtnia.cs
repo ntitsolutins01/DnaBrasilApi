@@ -1,4 +1,4 @@
-﻿namespace DnaBrasil.Domain.Enums;
+﻿namespace DnaBrasilApi.Domain.Enums;
 
 public enum EnumEtnia
 {

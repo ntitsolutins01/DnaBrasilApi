@@ -1,8 +1,8 @@
-﻿using DnaBrasil.Application.Alunos.Queries;
-using DnaBrasil.Application.Profissionais.Queries;
-using DnaBrasil.Domain.Entities;
+﻿using DnaBrasilApi.Application.Alunos.Queries;
+using DnaBrasilApi.Application.Profissionais.Queries;
+using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasil.Application.Ambientes.Queries;
+namespace DnaBrasilApi.Application.Ambientes.Queries;
 public class AmbienteDto
 {
     public string? Nome { get; set; }

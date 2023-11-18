@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.TodoLists.Commands.CreateTodoList;
+namespace DnaBrasilApi.Application.TodoLists.Commands.CreateTodoList;
 
 public class CreateTodoListCommandValidator : AbstractValidator<CreateTodoListCommand>
 {

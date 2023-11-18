@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.TipoLaudos.Queries.GetTipoLaudosAll;
+namespace DnaBrasilApi.Application.TipoLaudos.Queries.GetTipoLaudosAll;
 //[Authorize]
 public record GetTipoLaudosAllQuery : IRequest<List<TipoLaudoDto>>;
 

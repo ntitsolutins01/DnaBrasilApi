@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.TodoItems.Commands.UpdateTodoItem;
+namespace DnaBrasilApi.Application.TodoItems.Commands.UpdateTodoItem;
 
 public record UpdateTodoItemCommand : IRequest
 {

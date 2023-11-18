@@ -1,7 +1,7 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
-using DnaBrasil.Domain.Entities;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasil.Application.Parceiros.Commands.CreateParceiro;
+namespace DnaBrasilApi.Application.Parceiros.Commands.CreateParceiro;
 
 public record CreateParceiroCommand : IRequest<int>
 {

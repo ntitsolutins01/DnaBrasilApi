@@ -1,7 +1,7 @@
-﻿using DnaBrasil.Application.Perfis.Queries;
-using DnaBrasil.Domain.Entities;
+﻿using DnaBrasilApi.Application.Perfis.Queries;
+using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasil.Application.Usuarios.Queries;
+namespace DnaBrasilApi.Application.Usuarios.Queries;
 public class UsuarioDto
 {
     public int Id { get; init; }

@@ -1,4 +1,4 @@
-﻿namespace DnaBrasil.Application.Series.Commands.CreateSerie;
+﻿namespace DnaBrasilApi.Application.Series.Commands.CreateSerie;
 internal class CreateSeriesCommandValidator : AbstractValidator<CreateSerieCommand>
 {
     public CreateSeriesCommandValidator()

@@ -1,9 +1,9 @@
-﻿using DnaBrasil.Application.Common.Exceptions;
+﻿using DnaBrasilApi.Application.Common.Exceptions;
 using FluentAssertions;
 using FluentValidation.Results;
 using NUnit.Framework;
 
-namespace DnaBrasil.Application.UnitTests.Common.Exceptions;
+namespace DnaBrasilApi.Application.UnitTests.Common.Exceptions;
 
 public class ValidationExceptionTests
 {

@@ -1,4 +1,4 @@
-﻿namespace DnaBrasil.Domain.Entities;
+﻿namespace DnaBrasilApi.Domain.Entities;
 public class Aluno : BaseAuditableEntity
 {
     public required int AspNetUserId { get; set; }

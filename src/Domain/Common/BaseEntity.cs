@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DnaBrasil.Domain.Common;
+namespace DnaBrasilApi.Domain.Common;
 
 public abstract class BaseEntity
 {

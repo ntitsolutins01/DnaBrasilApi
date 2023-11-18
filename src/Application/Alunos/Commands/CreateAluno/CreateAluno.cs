@@ -1,9 +1,9 @@
-using DnaBrasil.Application.Common.Interfaces;
-using DnaBrasil.Application.TodoItems.Commands.CreateTodoItem;
-using DnaBrasil.Domain.Entities;
-using DnaBrasil.Domain.Events;
+using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Application.TodoItems.Commands.CreateTodoItem;
+using DnaBrasilApi.Domain.Entities;
+using DnaBrasilApi.Domain.Events;
 
-namespace DnaBrasil.Application.Alunos.Commands.CreateAluno;
+namespace DnaBrasilApi.Application.Alunos.Commands.CreateAluno;
 
 public record CreateAlunoCommand : IRequest<int>
 {

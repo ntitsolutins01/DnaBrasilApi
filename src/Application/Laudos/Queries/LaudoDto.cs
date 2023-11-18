@@ -1,7 +1,7 @@
-﻿using DnaBrasil.Application.Alunos.Queries;
-using DnaBrasil.Domain.Entities;
+﻿using DnaBrasilApi.Application.Alunos.Queries;
+using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasil.Application.Laudos.Queries;
+namespace DnaBrasilApi.Application.Laudos.Queries;
 public class LaudoDto
 {
     public TalentoEsportivoDto? TalentoEsportivo { get; set; }

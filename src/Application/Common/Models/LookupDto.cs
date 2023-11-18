@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Domain.Entities;
+﻿using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasil.Application.Common.Models;
+namespace DnaBrasilApi.Application.Common.Models;
 
 public class LookupDto
 {

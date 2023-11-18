@@ -1,6 +1,6 @@
-﻿using ValidationException = DnaBrasil.Application.Common.Exceptions.ValidationException;
+﻿using ValidationException = DnaBrasilApi.Application.Common.Exceptions.ValidationException;
 
-namespace DnaBrasil.Application.Common.Behaviours;
+namespace DnaBrasilApi.Application.Common.Behaviours;
 
 public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
      where TRequest : notnull

@@ -1,8 +1,8 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
-using DnaBrasil.Domain.Entities;
-using DnaBrasil.Domain.Events;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Domain.Entities;
+using DnaBrasilApi.Domain.Events;
 
-namespace DnaBrasil.Application.TodoItems.Commands.CreateTodoItem;
+namespace DnaBrasilApi.Application.TodoItems.Commands.CreateTodoItem;
 
 public record CreateTodoItemCommand : IRequest<int>
 {

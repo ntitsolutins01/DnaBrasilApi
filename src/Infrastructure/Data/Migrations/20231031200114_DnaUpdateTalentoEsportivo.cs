@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace DnaBrasil.Infrastructure.Data.Migrations
+namespace DnaBrasilApi.Infrastructure.Data.Migrations
 {
     /// <inheritdoc />
     public partial class DnaUpdateTalentoEsportivo : Migration

@@ -1,4 +1,4 @@
-﻿namespace DnaBrasil.Domain.Entities;
+﻿namespace DnaBrasilApi.Domain.Entities;
 public class Deficiencia : BaseAuditableEntity
 {
     public required string Nome { get; set; }

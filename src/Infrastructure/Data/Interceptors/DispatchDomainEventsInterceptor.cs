@@ -1,9 +1,9 @@
-﻿using DnaBrasil.Domain.Common;
+﻿using DnaBrasilApi.Domain.Common;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
-namespace DnaBrasil.Infrastructure.Data.Interceptors;
+namespace DnaBrasilApi.Infrastructure.Data.Interceptors;
 
 public class DispatchDomainEventsInterceptor : SaveChangesInterceptor
 {

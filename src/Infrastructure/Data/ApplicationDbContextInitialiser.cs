@@ -1,14 +1,14 @@
 ﻿using System.Runtime.InteropServices;
-using DnaBrasil.Domain.Constants;
-using DnaBrasil.Domain.Entities;
-using DnaBrasil.Infrastructure.Identity;
+using DnaBrasilApi.Domain.Constants;
+using DnaBrasilApi.Domain.Entities;
+using DnaBrasilApi.Infrastructure.Identity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace DnaBrasil.Infrastructure.Data;
+namespace DnaBrasilApi.Infrastructure.Data;
 
 public static class InitialiserExtensions
 {

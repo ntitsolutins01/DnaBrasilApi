@@ -1,10 +1,10 @@
-﻿using DnaBrasil.Application.Contratos.Commands.CreateContrato;
-using DnaBrasil.Application.Contratos.Commands.DeleteContrato;
-using DnaBrasil.Application.Contratos.Commands.UpdateContrato;
-using DnaBrasil.Application.Contratos.Queries;
-using DnaBrasil.Application.Contratos.Queries.GetContratosAll;
+﻿using DnaBrasilApi.Application.Contratos.Commands.CreateContrato;
+using DnaBrasilApi.Application.Contratos.Commands.DeleteContrato;
+using DnaBrasilApi.Application.Contratos.Commands.UpdateContrato;
+using DnaBrasilApi.Application.Contratos.Queries;
+using DnaBrasilApi.Application.Contratos.Queries.GetContratosAll;
 
-namespace DnaBrasil.Web.Endpoints;
+namespace DnaBrasilApi.Web.Endpoints;
 
 public class Contratos : EndpointGroupBase
 {

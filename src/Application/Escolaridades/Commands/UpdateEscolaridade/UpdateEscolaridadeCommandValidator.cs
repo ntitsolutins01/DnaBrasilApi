@@ -1,4 +1,4 @@
-﻿namespace DnaBrasil.Application.Escolaridades.Commands.UpdateEscolaridade;
+﻿namespace DnaBrasilApi.Application.Escolaridades.Commands.UpdateEscolaridade;
 
 public class UpdateEscolaridadeCommandValidator : AbstractValidator<UpdateEscolaridadeCommand>
 {

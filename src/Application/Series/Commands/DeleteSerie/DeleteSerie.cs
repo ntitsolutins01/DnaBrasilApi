@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.Series.Commands.DeleteSerie;
+namespace DnaBrasilApi.Application.Series.Commands.DeleteSerie;
 public record DeleteSerieCommand(int Id) : IRequest<bool>;
 
 public class DeleteSerieCommandHandler : IRequestHandler<DeleteSerieCommand, bool>

@@ -1,9 +1,9 @@
-﻿using DnaBrasil.Application.Alunos.Commands.CreateMatricula;
-using DnaBrasil.Application.Alunos.Commands.UpdateMatricula;
-using DnaBrasil.Application.Alunos.Queries;
-using DnaBrasil.Application.Alunos.Queries.GetMatriculasAll;
+﻿using DnaBrasilApi.Application.Alunos.Commands.CreateMatricula;
+using DnaBrasilApi.Application.Alunos.Commands.UpdateMatricula;
+using DnaBrasilApi.Application.Alunos.Queries;
+using DnaBrasilApi.Application.Alunos.Queries.GetMatriculasAll;
 
-namespace DnaBrasil.Web.Endpoints;
+namespace DnaBrasilApi.Web.Endpoints;
 
 public class Matriculas : EndpointGroupBase
 {

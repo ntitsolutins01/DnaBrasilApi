@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Domain.Entities;
+﻿using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasil.Application.TodoLists.Queries.GetTodos;
+namespace DnaBrasilApi.Application.TodoLists.Queries.GetTodos;
 
 public class TodoItemDto
 {

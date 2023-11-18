@@ -1,4 +1,4 @@
-﻿namespace DnaBrasil.Application.Ambientes.Commands.CreateAmbiente;
+﻿namespace DnaBrasilApi.Application.Ambientes.Commands.CreateAmbiente;
 
 public class CreateAmbienteCommandValidator : AbstractValidator<CreateAmbienteCommand>
 {

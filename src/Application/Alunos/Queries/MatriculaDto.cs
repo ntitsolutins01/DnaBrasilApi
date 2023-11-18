@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Domain.Entities;
+﻿using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasil.Application.Alunos.Queries;
+namespace DnaBrasilApi.Application.Alunos.Queries;
 public class MatriculaDto
 {
     public int Id { get; set; }

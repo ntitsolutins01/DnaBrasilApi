@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.Alunos.Commands.DeleteAlunoDeficiencias;
+namespace DnaBrasilApi.Application.Alunos.Commands.DeleteAlunoDeficiencias;
 
 public record DeleteAlunoDeficienciasCommand(int Id) : IRequest;
 

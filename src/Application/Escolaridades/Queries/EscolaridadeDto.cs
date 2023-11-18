@@ -1,8 +1,8 @@
-﻿using DnaBrasil.Application.Alunos.Queries;
-using DnaBrasil.Application.Profissionais.Queries;
-using DnaBrasil.Domain.Entities;
+﻿using DnaBrasilApi.Application.Alunos.Queries;
+using DnaBrasilApi.Application.Profissionais.Queries;
+using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasil.Application.Escolaridades.Queries;
+namespace DnaBrasilApi.Application.Escolaridades.Queries;
 public class EscolaridadeDto
 {
     public string? Nome { get; set; }

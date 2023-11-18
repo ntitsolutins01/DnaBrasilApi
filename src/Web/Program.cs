@@ -1,7 +1,7 @@
-using DnaBrasil.Application;
-using DnaBrasil.Infrastructure;
-using DnaBrasil.Infrastructure.Data;
-using DnaBrasil.Web;
+using DnaBrasilApi.Application;
+using DnaBrasilApi.Infrastructure;
+using DnaBrasilApi.Infrastructure.Data;
+using DnaBrasilApi.Web;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -51,7 +51,7 @@ app.MapEndpoints();
 
 app.Run();
 
-namespace DnaBrasil.Web
+namespace DnaBrasilApi.Web
 {
     public partial class Program { }
 }

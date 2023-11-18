@@ -1,4 +1,4 @@
-﻿namespace DnaBrasil.Application.Parceiros.Commands.UpdateParceiro;
+﻿namespace DnaBrasilApi.Application.Parceiros.Commands.UpdateParceiro;
 
 public class UpdateParceiroCommandValidator : AbstractValidator<UpdateParceiroCommand>
 {

@@ -1,4 +1,4 @@
-﻿namespace DnaBrasil.Application.Parceiros.Commands.CreateParceiro;
+﻿namespace DnaBrasilApi.Application.Parceiros.Commands.CreateParceiro;
 
 public class CreateParecrioCommandValidator : AbstractValidator<CreateParceiroCommand>
 {

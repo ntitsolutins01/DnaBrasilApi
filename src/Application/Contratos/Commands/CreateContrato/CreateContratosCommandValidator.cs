@@ -1,4 +1,4 @@
-﻿namespace DnaBrasil.Application.Contratos.Commands.CreateContrato;
+﻿namespace DnaBrasilApi.Application.Contratos.Commands.CreateContrato;
 internal class CreateContratosCommandValidator : AbstractValidator<CreateContratoCommand>
 {
     public CreateContratosCommandValidator()

@@ -1,11 +1,11 @@
-﻿using DnaBrasil.Application.Common.Models;
-using DnaBrasil.Application.TodoItems.Commands.CreateTodoItem;
-using DnaBrasil.Application.TodoItems.Commands.DeleteTodoItem;
-using DnaBrasil.Application.TodoItems.Commands.UpdateTodoItem;
-using DnaBrasil.Application.TodoItems.Commands.UpdateTodoItemDetail;
-using DnaBrasil.Application.TodoItems.Queries.GetTodoItemsWithPagination;
+﻿using DnaBrasilApi.Application.Common.Models;
+using DnaBrasilApi.Application.TodoItems.Commands.CreateTodoItem;
+using DnaBrasilApi.Application.TodoItems.Commands.DeleteTodoItem;
+using DnaBrasilApi.Application.TodoItems.Commands.UpdateTodoItem;
+using DnaBrasilApi.Application.TodoItems.Commands.UpdateTodoItemDetail;
+using DnaBrasilApi.Application.TodoItems.Queries.GetTodoItemsWithPagination;
 
-namespace DnaBrasil.Web.Endpoints;
+namespace DnaBrasilApi.Web.Endpoints;
 
 public class TodoItems : EndpointGroupBase
 {

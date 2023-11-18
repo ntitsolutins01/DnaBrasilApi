@@ -1,7 +1,7 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
-using DnaBrasil.Application.Deficiencias.Queries.GetDeficienciasAll;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Application.Deficiencias.Queries.GetDeficienciasAll;
 
-namespace DnaBrasil.Application.Alunos.Queries.GetMatriculaByAluno;
+namespace DnaBrasilApi.Application.Alunos.Queries.GetMatriculaByAluno;
 
 public record GetMatriculaByAlunoQuery : IRequest<MatriculaDto>
 {

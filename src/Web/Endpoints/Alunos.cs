@@ -1,12 +1,12 @@
-﻿using DnaBrasil.Application.Alunos.Commands.CreateAluno;
-using DnaBrasil.Application.Alunos.Commands.CreateVoucher;
-using DnaBrasil.Application.Alunos.Commands.DeleteAluno;
-using DnaBrasil.Application.Alunos.Commands.UpdateAluno;
-using DnaBrasil.Application.Alunos.Commands.UpdateAlunoAmbientes;
-using DnaBrasil.Application.Alunos.Commands.UpdateAlunoDeficiencias;
-using DnaBrasil.Application.Alunos.Commands.UpdateVoucher;
+﻿using DnaBrasilApi.Application.Alunos.Commands.CreateAluno;
+using DnaBrasilApi.Application.Alunos.Commands.CreateVoucher;
+using DnaBrasilApi.Application.Alunos.Commands.DeleteAluno;
+using DnaBrasilApi.Application.Alunos.Commands.UpdateAluno;
+using DnaBrasilApi.Application.Alunos.Commands.UpdateAlunoAmbientes;
+using DnaBrasilApi.Application.Alunos.Commands.UpdateAlunoDeficiencias;
+using DnaBrasilApi.Application.Alunos.Commands.UpdateVoucher;
 
-namespace DnaBrasil.Web.Endpoints;
+namespace DnaBrasilApi.Web.Endpoints;
 public class Alunos : EndpointGroupBase
 {
     public override void Map(WebApplication app)

@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.Alunos.Commands.CreateMatricula;
+namespace DnaBrasilApi.Application.Alunos.Commands.CreateMatricula;
 public class CreateMatriculaCommandValidator : AbstractValidator<CreateMatriculaCommand>
 {
     private readonly IApplicationDbContext _context;

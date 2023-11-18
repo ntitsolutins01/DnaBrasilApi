@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DnaBrasil.Domain.Entities;
+namespace DnaBrasilApi.Domain.Entities;
 public class Parceiro : BaseAuditableEntity
 {
     public int AspNetUserId { get; set; }

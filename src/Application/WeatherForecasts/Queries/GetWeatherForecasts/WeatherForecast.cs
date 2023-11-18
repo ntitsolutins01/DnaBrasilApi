@@ -1,4 +1,4 @@
-﻿namespace DnaBrasil.Application.WeatherForecasts.Queries.GetWeatherForecasts;
+﻿namespace DnaBrasilApi.Application.WeatherForecasts.Queries.GetWeatherForecasts;
 
 public class WeatherForecast
 {

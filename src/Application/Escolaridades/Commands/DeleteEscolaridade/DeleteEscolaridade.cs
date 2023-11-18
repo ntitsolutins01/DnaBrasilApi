@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.Escolaridades.Commands.DeleteEscolaridade;
+namespace DnaBrasilApi.Application.Escolaridades.Commands.DeleteEscolaridade;
 public record DeleteEscolaridadeCommand(int Id) : IRequest<bool>;
 
 public class DeleteEscolaridadeCommandHandler : IRequestHandler<DeleteEscolaridadeCommand, bool>

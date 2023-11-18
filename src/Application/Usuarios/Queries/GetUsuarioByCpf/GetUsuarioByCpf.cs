@@ -1,7 +1,7 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
-using DnaBrasil.Application.Estados.Queries;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Application.Estados.Queries;
 
-namespace DnaBrasil.Application.Usuarios.Queries;
+namespace DnaBrasilApi.Application.Usuarios.Queries;
 //[Authorize]
 public record GetUsuarioByCpfQuery : IRequest<UsuarioDto>
 {

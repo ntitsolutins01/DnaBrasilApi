@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.Alunos.Commands.UpdateDependencia;
+namespace DnaBrasilApi.Application.Alunos.Commands.UpdateDependencia;
 
 public class UpdateDependenciaCommandValidator : AbstractValidator<UpdateDependenciaCommand>
 {

@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.Alunos.Commands.CreateVoucher;
+namespace DnaBrasilApi.Application.Alunos.Commands.CreateVoucher;
 public class CreateVoucherCommandValidator : AbstractValidator<CreateVoucherCommand>
 {
     private readonly IApplicationDbContext _context;

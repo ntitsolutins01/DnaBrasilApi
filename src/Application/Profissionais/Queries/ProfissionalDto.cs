@@ -1,7 +1,7 @@
-﻿using DnaBrasil.Application.Municipios.Queries;
-using DnaBrasil.Domain.Entities;
+﻿using DnaBrasilApi.Application.Municipios.Queries;
+using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasil.Application.Profissionais.Queries;
+namespace DnaBrasilApi.Application.Profissionais.Queries;
 public class ProfissionalDto
 {
     public int Id { get; set; }

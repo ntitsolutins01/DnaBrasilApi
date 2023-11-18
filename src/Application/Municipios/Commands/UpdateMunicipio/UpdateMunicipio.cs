@@ -1,7 +1,7 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
-using DnaBrasil.Domain.Entities;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasil.Application.Municipios.Commands.UpdateMunicipio;
+namespace DnaBrasilApi.Application.Municipios.Commands.UpdateMunicipio;
 
 public record UpdateMunicipioCommand : IRequest
 {

@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.TipoLaudos.Commands.DeleteTipoLaudos;
+namespace DnaBrasilApi.Application.TipoLaudos.Commands.DeleteTipoLaudos;
 public record DeleteTipoLaudoCommand(int Id) : IRequest<bool>;
 
 public class DeleteTipoLaudoCommandHandler : IRequestHandler<DeleteTipoLaudoCommand, bool>

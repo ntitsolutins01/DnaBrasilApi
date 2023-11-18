@@ -1,8 +1,8 @@
-﻿using DnaBrasil.Application.Alunos.Commands.CreateVoucher;
-using DnaBrasil.Application.Common.Interfaces;
-using DnaBrasil.Domain.Entities;
+﻿using DnaBrasilApi.Application.Alunos.Commands.CreateVoucher;
+using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasil.Application.Alunos.Commands.CreateVoucher;
+namespace DnaBrasilApi.Application.Alunos.Commands.CreateVoucher;
 
 public record CreateVoucherCommand : IRequest<int>
 {

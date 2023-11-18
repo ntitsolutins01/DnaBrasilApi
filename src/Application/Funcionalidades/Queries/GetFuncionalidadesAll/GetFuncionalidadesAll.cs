@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasil.Application.Funcionalidades.Queries.GetFuncionalidadesAll;
+namespace DnaBrasilApi.Application.Funcionalidades.Queries.GetFuncionalidadesAll;
 //[Authorize]
 public record GetFuncionalidadesAllQuery : IRequest<List<FuncionalidadeDto>>;
 

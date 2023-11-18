@@ -1,4 +1,4 @@
-﻿namespace DnaBrasil.Application.Questionarios.Commands.UpdateQuestionario;
+﻿namespace DnaBrasilApi.Application.Questionarios.Commands.UpdateQuestionario;
 
 public class UpdateQuestionarioCommandValidator : AbstractValidator<UpdateQuestionarioCommand>
 {

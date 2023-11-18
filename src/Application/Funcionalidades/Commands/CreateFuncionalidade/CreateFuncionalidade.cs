@@ -1,7 +1,7 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
-using DnaBrasil.Domain.Entities;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasil.Application.Funcionalidades.Commands.CreateFuncionalidade;
+namespace DnaBrasilApi.Application.Funcionalidades.Commands.CreateFuncionalidade;
 
 public record CreateFuncionalidadeCommand : IRequest<int>
 {

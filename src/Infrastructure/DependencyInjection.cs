@@ -1,15 +1,15 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
-using DnaBrasil.Domain.Constants;
-using DnaBrasil.Infrastructure.Data;
-using DnaBrasil.Infrastructure.Data.Interceptors;
-using DnaBrasil.Infrastructure.Identity;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Domain.Constants;
+using DnaBrasilApi.Infrastructure.Data;
+using DnaBrasilApi.Infrastructure.Data.Interceptors;
+using DnaBrasilApi.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DnaBrasil.Infrastructure;
+namespace DnaBrasilApi.Infrastructure;
 
 public static class DependencyInjection
 {
