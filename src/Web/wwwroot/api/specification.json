@@ -6956,6 +6956,9 @@
             "type": "boolean",
             "minLength": 1,
             "nullable": false
+          },
+          "aspNetRoleId": {
+            "type": "string"
           }
         }
       },
