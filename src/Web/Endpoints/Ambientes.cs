@@ -3,6 +3,7 @@ using DnaBrasilApi.Application.Ambientes.Commands.DeleteAmbiente;
 using DnaBrasilApi.Application.Ambientes.Commands.UpdateAmbiente;
 using DnaBrasilApi.Application.Ambientes.Queries;
 using DnaBrasilApi.Application.Ambientes.Queries.GetAmbientesAll;
+using DnaBrasilApi.Application.Ambientes.Queries.GetAmbienteById;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -15,7 +16,9 @@ public class Ambientes : EndpointGroupBase
             .MapGet(GetAmbientesAll)
             .MapPost(CreateAmbiente)
             .MapPut(UpdateAmbiente, "{id}")
-            .MapDelete(DeleteAmbiente, "{id}");
+            .MapDelete(DeleteAmbiente, "{id}")
+            .MapGet(GetAmbienteById, "Ambiente/{id}");
+
     }
 
     public async Task<List<AmbienteDto>> GetAmbientesAll(ISender sender)
@@ -23,6 +26,10 @@ public class Ambientes : EndpointGroupBase
         return await sender.Send(new GetAmbientesQuery());
     }
 
+    public async Task<AmbienteDto> GetAmbienteById(ISender sender, int id)
+    {
+        return await sender.Send(new GetAmbienteByIdQuery() { Id = id });
+    }
     public async Task<int> CreateAmbiente(ISender sender, CreateAmbienteCommand command)
     {
         return await sender.Send(command);

@@ -257,6 +257,38 @@
         }
       }
     },
+    "/api/Ambientes/Ambiente/{id}": {
+      "get": {
+        "tags": [
+          "Ambientes"
+        ],
+        "operationId": "GetAmbienteById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AmbienteDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/ConfiguracaoSistema/Modulos": {
       "get": {
         "tags": [
@@ -583,6 +615,38 @@
         "responses": {
           "200": {
             "description": ""
+          }
+        }
+      }
+    },
+    "/api/Contratos/Contrato/{id}": {
+      "get": {
+        "tags": [
+          "Contratos"
+        ],
+        "operationId": "GetContratoById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContratoDto"
+                }
+              }
+            }
           }
         }
       }
@@ -4491,6 +4555,10 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
           "nome": {
             "type": "string",
             "nullable": true
@@ -6956,6 +7024,9 @@
             "type": "boolean",
             "minLength": 1,
             "nullable": false
+          },
+          "aspNetRoleId": {
+            "type": "string"
           }
         }
       },
