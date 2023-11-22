@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DnaBrasilApi.Domain.Entities;
+﻿namespace DnaBrasilApi.Domain.Entities;
 public class Ambiente : BaseAuditableEntity
 {
     public string? Nome { get; set; }

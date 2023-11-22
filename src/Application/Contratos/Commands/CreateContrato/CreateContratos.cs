@@ -10,9 +10,6 @@ public record CreateContratoCommand : IRequest<int>
     public required DateTime DtFim { get; set; }
     public string? Anexo { get; set; }
     public bool Status { get; set; } = true;
-    public List<Localidade>? Locais { get; set; }
-    public List<Aluno>? Alunos { get; set; }
-    public List<Profissional>? Profissionais { get; set; }
 }
 
 public class CreateContratoCommandHandler : IRequestHandler<CreateContratoCommand, int>
@@ -32,10 +29,7 @@ public class CreateContratoCommandHandler : IRequestHandler<CreateContratoComman
             Descricao = request.Descricao,
             DtIni = request.DtIni,
             DtFim = request.DtFim,
-            Alunos = request.Alunos,
             Anexo = request.Anexo,
-            Localidades = request.Locais,
-            Profissionais = request.Profissionais,
             Status = request.Status
 
         };
