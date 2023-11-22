@@ -1,6 +1,6 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasilApi.Application.Series.Querries.GetSeriesAll;
+namespace DnaBrasilApi.Application.Series.Queries.GetSeriesAll;
 //[Authorize]
 public record GetSeriesAllQuery : IRequest<List<SerieDto>>;
 

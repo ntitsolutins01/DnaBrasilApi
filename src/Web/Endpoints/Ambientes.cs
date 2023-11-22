@@ -18,7 +18,6 @@ public class Ambientes : EndpointGroupBase
             .MapPut(UpdateAmbiente, "{id}")
             .MapDelete(DeleteAmbiente, "{id}")
             .MapGet(GetAmbienteById, "Ambiente/{id}");
-
     }
 
     public async Task<List<AmbienteDto>> GetAmbientesAll(ISender sender)

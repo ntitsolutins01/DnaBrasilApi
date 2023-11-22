@@ -1,7 +1,8 @@
-﻿using DnaBrasilApi.Application.Escolaridades.Commands.CreateEscolaridade;
+﻿using DnaBrasilApi.Application.Escolaridades.Queries.GetEscolaridadeById;
+using DnaBrasilApi.Application.Escolaridades.Queries;
+using DnaBrasilApi.Application.Escolaridades.Commands.CreateEscolaridade;
 using DnaBrasilApi.Application.Escolaridades.Commands.DeleteEscolaridade;
 using DnaBrasilApi.Application.Escolaridades.Commands.UpdateEscolaridade;
-using DnaBrasilApi.Application.Escolaridades.Queries;
 using DnaBrasilApi.Application.Escolaridades.Queries.GetEscolaridadesAll;
 
 namespace DnaBrasilApi.Web.Endpoints;
@@ -15,12 +16,18 @@ public class Escolaridades : EndpointGroupBase
             .MapGet(GetEscolaridadesAll)
             .MapPost(CreateEscolaridade)
             .MapPut(UpdateEscolaridade, "{id}")
-            .MapDelete(DeleteEscolaridade, "{id}");
+            .MapDelete(DeleteEscolaridade, "{id}")
+            .MapGet(GetEscolaridadeById, "Escolaridade/{id}");
     }
 
     public async Task<List<EscolaridadeDto>> GetEscolaridadesAll(ISender sender)
     {
         return await sender.Send(new GerEscolaridadesAllQuery());
+    }
+
+    public async Task<EscolaridadeDto> GetEscolaridadeById(ISender sender, int id)
+    {
+        return await sender.Send(new GetEscolaridadeByIdQuery() { Id = id });
     }
 
     public async Task<int> CreateEscolaridade(ISender sender, CreateEscolaridadeCommand command)
