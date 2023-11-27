@@ -5,6 +5,7 @@ using DnaBrasilApi.Domain.Entities;
 namespace DnaBrasilApi.Application.Ambientes.Queries;
 public class AmbienteDto
 {
+    public int Id { get; set; }
     public string? Nome { get; set; }
     public bool Status { get; set; }
     private class Mapping : Profile

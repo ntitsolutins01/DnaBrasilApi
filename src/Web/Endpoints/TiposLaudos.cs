@@ -1,7 +1,8 @@
-﻿using DnaBrasilApi.Application.TipoLaudos.Commands.CreateTipoLaudos;
+﻿using DnaBrasilApi.Application.TipoLaudos.Queries.GetTipoLaudoById;
+using DnaBrasilApi.Application.TipoLaudos.Queries;
+using DnaBrasilApi.Application.TipoLaudos.Commands.CreateTipoLaudos;
 using DnaBrasilApi.Application.TipoLaudos.Commands.DeleteTipoLaudos;
 using DnaBrasilApi.Application.TipoLaudos.Commands.UpdateTipoLaudo;
-using DnaBrasilApi.Application.TipoLaudos.Queries;
 using DnaBrasilApi.Application.TipoLaudos.Queries.GetTipoLaudosAll;
 
 namespace DnaBrasilApi.Web.Endpoints;
@@ -15,12 +16,18 @@ public class TiposLaudos : EndpointGroupBase
             .MapGet(GetTiposLaudosAll)
             .MapPost(CreateTipoLaudo)
             .MapPut(UpdateTipoLaudo, "{id}")
-            .MapDelete(DeleteTipoLaudo, "{id}");
+            .MapDelete(DeleteTipoLaudo, "{id}")
+            .MapGet(GetTipoLaudoById, "TipoLaudo/{id}");
     }
 
     public async Task<List<TipoLaudoDto>> GetTiposLaudosAll(ISender sender)
     {
         return await sender.Send(new GetTipoLaudosAllQuery());
+    }
+
+    public async Task<TipoLaudoDto> GetTipoLaudoById(ISender sender, int id)
+    {
+        return await sender.Send(new GetTipoLaudoByIdQuery() { Id = id });
     }
 
     public async Task<int> CreateTipoLaudo(ISender sender, CreateTipoLaudosCommand command)

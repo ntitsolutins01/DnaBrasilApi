@@ -1,7 +1,8 @@
-﻿using DnaBrasilApi.Application.Contratos.Commands.CreateContrato;
+﻿using DnaBrasilApi.Application.Contratos.Queries.GetContratoById;
+using DnaBrasilApi.Application.Contratos.Queries;
+using DnaBrasilApi.Application.Contratos.Commands.CreateContrato;
 using DnaBrasilApi.Application.Contratos.Commands.DeleteContrato;
 using DnaBrasilApi.Application.Contratos.Commands.UpdateContrato;
-using DnaBrasilApi.Application.Contratos.Queries;
 using DnaBrasilApi.Application.Contratos.Queries.GetContratosAll;
 
 namespace DnaBrasilApi.Web.Endpoints;
@@ -15,12 +16,18 @@ public class Contratos : EndpointGroupBase
             .MapGet(GetContratosAll)
             .MapPost(CreateContrato)
             .MapPut(UpdateContrato, "{id}")
-            .MapDelete(DeleteContrato, "{id}");
+            .MapDelete(DeleteContrato, "{id}")
+            .MapGet(GetContratoById, "Contrato/{id}");
     }
 
     public async Task<List<ContratoDto>> GetContratosAll(ISender sender)
     {
         return await sender.Send(new GetContratosAllQuery());
+    }
+
+    public async Task<ContratoDto> GetContratoById(ISender sender, int id)
+    {
+        return await sender.Send(new GetContratoByIdQuery() { Id = id });
     }
 
     public async Task<int> CreateContrato(ISender sender, CreateContratoCommand command)
