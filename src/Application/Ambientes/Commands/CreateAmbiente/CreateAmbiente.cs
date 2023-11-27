@@ -7,8 +7,6 @@ public record CreateAmbienteCommand : IRequest<int>
 {
     public required string Nome { get; init; }
     public bool Status { get; init; }
-    public required List<Aluno> Alunos { get; init; }
-    public required List<Profissional> Profissionais { get; init; }
 }
 
 public class CreateAmbienteCommandHandler : IRequestHandler<CreateAmbienteCommand, int>
@@ -25,10 +23,7 @@ public class CreateAmbienteCommandHandler : IRequestHandler<CreateAmbienteComman
         var entity = new Ambiente
         {
             Nome = request.Nome,
-            Status = request.Status,
-            Alunos = request.Alunos,
-            Profissionais = request.Profissionais,
-
+            Status = request.Status
         };
 
         _context.Ambientes.Add(entity);

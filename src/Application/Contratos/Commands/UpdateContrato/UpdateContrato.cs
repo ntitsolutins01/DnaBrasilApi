@@ -12,9 +12,6 @@ public record UpdateContratoCommand : IRequest
     public required DateTime DtFim { get; set; }
     public string? Anexo { get; set; }
     public bool Status { get; set; } = true;
-    public List<Localidade>? Locais { get; set; }
-    public List<Aluno>? Alunos { get; set; }
-    public List<Profissional>? Profissionais { get; set; }
 }
 
 public class UpdateContratoCommandHandler : IRequestHandler<UpdateContratoCommand>
@@ -38,10 +35,7 @@ public class UpdateContratoCommandHandler : IRequestHandler<UpdateContratoComman
         entity.DtFim = request.DtFim;
         entity.DtIni = request.DtIni;
         entity.Anexo = request.Anexo;
-        entity.Alunos = request.Alunos;
         entity.Status = request.Status;
-        entity.Localidades = request.Locais;
-        entity.Profissionais = request.Profissionais;
         
         await _context.SaveChangesAsync(cancellationToken);
     }
