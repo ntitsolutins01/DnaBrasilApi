@@ -20,13 +20,21 @@ public class GetMunicipioByUfQueryHandler : IRequestHandler<GetMunicipioByUfQuer
 
     public async Task<List<MunicipioDto>> Handle(GetMunicipioByUfQuery request, CancellationToken cancellationToken)
     {
-        var result = await _context.Municipios
-            .Where(x => x.Estado!.Sigla == request.Uf)
-            .AsNoTracking()
-            .ProjectTo<MunicipioDto>(_mapper.ConfigurationProvider)
-            .OrderBy(t => t.Id)
-            .ToListAsync(cancellationToken);
+        try
+        {
+            var result = await _context.Municipios
+                .Where(x => x.Estado!.Sigla == request.Uf)
+                .AsNoTracking()
+                .ProjectTo<MunicipioDto>(_mapper.ConfigurationProvider)
+                .OrderBy(t => t.Id)
+                .ToListAsync(cancellationToken);
 
-        return result;
+            return result;
+        }
+        catch (Exception e)
+        {
+            Console.Write(e.Message);
+            throw;
+        }
     }
 }

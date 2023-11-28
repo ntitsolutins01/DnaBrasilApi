@@ -2,6 +2,7 @@
 using DnaBrasilApi.Application.Usuarios.Commands.UpdateUsuario;
 using DnaBrasilApi.Application.Usuarios.Commands.CreateUsuario;
 using DnaBrasilApi.Application.Usuarios.Queries;
+using DnaBrasilApi.Application.Usuarios.Queries.GetUsuarioByCpf;
 using DnaBrasilApi.Application.Usuarios.Queries.GetUsuarioById;
 
 namespace DnaBrasilApi.Web.Endpoints;
