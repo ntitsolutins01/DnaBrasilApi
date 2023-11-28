@@ -1,7 +1,6 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
-using DnaBrasilApi.Application.Estados.Queries;
 
-namespace DnaBrasilApi.Application.Usuarios.Queries;
+namespace DnaBrasilApi.Application.Usuarios.Queries.GetUsuarioByCpf;
 //[Authorize]
 public record GetUsuarioByCpfQuery : IRequest<UsuarioDto>
 {
@@ -28,7 +27,7 @@ public class GetUsuarioByCpfQueryHandler : IRequestHandler<GetUsuarioByCpfQuery,
             .OrderBy(t => t.Id)
             .FirstOrDefaultAsync(cancellationToken);
         
-        return result == null ? throw new ArgumentNullException(nameof(result)) : result;
+        return result!;
     }
 }
 
