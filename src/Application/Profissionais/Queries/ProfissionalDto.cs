@@ -22,7 +22,6 @@ public class ProfissionalDto
     public bool Status { get; set; } = true;
     public MunicipioDto? Municipio { get; set; }
     public List<AmbienteDto>? Ambientes { get; init; }
-    public bool? Habilitado { get; set; }
     public List<ContratoDto>? Contratos { get; set; }
     private class Mapping : Profile
     {
