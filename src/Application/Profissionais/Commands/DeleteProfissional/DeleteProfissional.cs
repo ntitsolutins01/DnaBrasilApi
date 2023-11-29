@@ -1,9 +1,9 @@
 using DnaBrasilApi.Application.Common.Interfaces;
 
 namespace DnaBrasilApi.Application.Profissionais.Commands.DeleteProfissional;
-public record DeleteProfissionalCommand(int Id) : IRequest;
+public record DeleteProfissionalCommand(int Id) : IRequest<bool>;
 
-public class DeleteProfissionalCommandHandler : IRequestHandler<DeleteProfissionalCommand>
+public class DeleteProfissionalCommandHandler : IRequestHandler<DeleteProfissionalCommand, bool>
 {
     private readonly IApplicationDbContext _context;
 
@@ -12,7 +12,7 @@ public class DeleteProfissionalCommandHandler : IRequestHandler<DeleteProfission
         _context = context;
     }
 
-    public async Task Handle(DeleteProfissionalCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(DeleteProfissionalCommand request, CancellationToken cancellationToken)
     {
         var entity = await _context.TodoItems
             .FindAsync(new object[] { request.Id }, cancellationToken);
@@ -21,8 +21,8 @@ public class DeleteProfissionalCommandHandler : IRequestHandler<DeleteProfission
 
         _context.TodoItems.Remove(entity);
 
-
-        await _context.SaveChangesAsync(cancellationToken);
+        var result = await _context.SaveChangesAsync(cancellationToken);
+        return result == 1;
     }
 
 }

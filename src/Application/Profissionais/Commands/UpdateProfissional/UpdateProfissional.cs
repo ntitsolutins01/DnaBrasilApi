@@ -3,7 +3,7 @@ using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Profissionais.Commands.UpdateProfissional;
 
-public record UpdateProfissionalCommand : IRequest
+public record UpdateProfissionalCommand : IRequest<bool>
 {
     public int Id { get; init; }
     public required string Nome { get; init; }
@@ -23,7 +23,7 @@ public record UpdateProfissionalCommand : IRequest
     public List<Ambiente>? Ambientes { get; init; }
 }
 
-public class UpdateProfissionalCommandHandler : IRequestHandler<UpdateProfissionalCommand>
+public class UpdateProfissionalCommandHandler : IRequestHandler<UpdateProfissionalCommand, bool>
 {
     private readonly IApplicationDbContext _context;
 
@@ -32,7 +32,7 @@ public class UpdateProfissionalCommandHandler : IRequestHandler<UpdateProfission
         _context = context;
     }
 
-    public async Task Handle(UpdateProfissionalCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(UpdateProfissionalCommand request, CancellationToken cancellationToken)
     {
         var entity = await _context.Profissionais
             .FindAsync(new object[] { request.Id }, cancellationToken);
@@ -52,6 +52,8 @@ public class UpdateProfissionalCommandHandler : IRequestHandler<UpdateProfission
         entity.Bairro = request.Bairro;
         entity.Municipio = request.Municipio;
 
-        await _context.SaveChangesAsync(cancellationToken);
+        var result = await _context.SaveChangesAsync(cancellationToken);
+
+        return result == 1;//true
     }
 }

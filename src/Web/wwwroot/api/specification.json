@@ -1646,6 +1646,168 @@
         }
       }
     },
+    "/api/Profissionais": {
+      "get": {
+        "tags": [
+          "Profissionais"
+        ],
+        "operationId": "GetProfissionaisAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProfissionalDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Profissionais"
+        ],
+        "operationId": "CreateProfissional",
+        "requestBody": {
+          "x-name": "command",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateProfissionalCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Profissionais/{id}": {
+      "put": {
+        "tags": [
+          "Profissionais"
+        ],
+        "operationId": "UpdateProfissional",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateProfissionalCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Profissionais"
+        ],
+        "operationId": "DeleteProfissional",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Profissionais/Profissional/{id}": {
+      "get": {
+        "tags": [
+          "Profissionais"
+        ],
+        "operationId": "GetProfissionalById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfissionalDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/QualidadeDeVidas": {
       "post": {
         "tags": [
@@ -4885,12 +5047,19 @@
             "type": "array",
             "nullable": true,
             "items": {
-              "$ref": "#/components/schemas/Ambiente"
+              "$ref": "#/components/schemas/AmbienteDto"
             }
           },
           "habilitado": {
             "type": "boolean",
             "nullable": true
+          },
+          "contratos": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ContratoDto"
+            }
           }
         }
       },
@@ -4909,108 +5078,6 @@
           "nome": {
             "type": "string",
             "nullable": true
-          }
-        }
-      },
-      "QuestionarioDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "pergunta": {
-            "type": "string"
-          },
-          "tipo": {
-            "$ref": "#/components/schemas/TipoLaudoDto"
-          }
-        }
-      },
-      "TipoLaudoDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nome": {
-            "type": "string",
-            "nullable": true
-          },
-          "descricao": {
-            "type": "string",
-            "nullable": true
-          },
-          "idadeInicial": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "idadeFinal": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "scoreTotal": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "CreateConsumoAlimentarCommand": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-          "profissional",
-          "questionario",
-          "resposta"
-        ],
-        "properties": {
-          "profissional": {
-            "nullable": false,
-            "$ref": "#/components/schemas/Profissional"
-          },
-          "questionario": {
-            "nullable": false,
-            "$ref": "#/components/schemas/Questionario"
-          },
-          "resposta": {
-            "type": "string",
-            "maxLength": 100,
-            "minLength": 1,
-            "nullable": false
-          }
-        }
-      },
-      "UpdateConsumoAlimentarCommand": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-          "resposta"
-        ],
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "resposta": {
-            "type": "string",
-            "maxLength": 100,
-            "minLength": 1,
-            "nullable": false
-          },
-          "profissional": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/Profissional"
-              }
-            ]
-          },
-          "questionario": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/Questionario"
-              }
-            ]
           }
         }
       },
@@ -5421,6 +5488,48 @@
           }
         }
       },
+      "QuestionarioDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "pergunta": {
+            "type": "string"
+          },
+          "tipo": {
+            "$ref": "#/components/schemas/TipoLaudoDto"
+          }
+        }
+      },
+      "TipoLaudoDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true
+          },
+          "descricao": {
+            "type": "string",
+            "nullable": true
+          },
+          "idadeInicial": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idadeFinal": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "scoreTotal": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
       "QualidadeDeVidaDto": {
         "type": "object",
         "additionalProperties": false,
@@ -5483,6 +5592,66 @@
           },
           "resposta": {
             "type": "string"
+          }
+        }
+      },
+      "CreateConsumoAlimentarCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "profissional",
+          "questionario",
+          "resposta"
+        ],
+        "properties": {
+          "profissional": {
+            "nullable": false,
+            "$ref": "#/components/schemas/Profissional"
+          },
+          "questionario": {
+            "nullable": false,
+            "$ref": "#/components/schemas/Questionario"
+          },
+          "resposta": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "nullable": false
+          }
+        }
+      },
+      "UpdateConsumoAlimentarCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "resposta"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "resposta": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "nullable": false
+          },
+          "profissional": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Profissional"
+              }
+            ]
+          },
+          "questionario": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Questionario"
+              }
+            ]
           }
         }
       },
@@ -6245,6 +6414,218 @@
           "descricao": {
             "type": "string",
             "nullable": true
+          }
+        }
+      },
+      "CreateProfissionalCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "nome",
+          "dtNascimento",
+          "email",
+          "sexo",
+          "cpf",
+          "status"
+        ],
+        "properties": {
+          "nome": {
+            "type": "string",
+            "maxLength": 150,
+            "minLength": 1,
+            "nullable": false
+          },
+          "dtNascimento": {
+            "type": "string",
+            "format": "date-time",
+            "minLength": 1,
+            "nullable": false
+          },
+          "email": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "pattern": "^[^@]+@[^@]+$",
+            "nullable": false
+          },
+          "sexo": {
+            "type": "string",
+            "maxLength": 1,
+            "minLength": 1,
+            "nullable": false
+          },
+          "cpf": {
+            "type": "string",
+            "maxLength": 14,
+            "minLength": 1,
+            "nullable": false
+          },
+          "telefone": {
+            "type": "string",
+            "maxLength": 14,
+            "minLength": 0,
+            "nullable": true
+          },
+          "celular": {
+            "type": "string",
+            "maxLength": 14,
+            "minLength": 0,
+            "nullable": true
+          },
+          "endereco": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 0,
+            "nullable": true
+          },
+          "numero": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cep": {
+            "type": "string",
+            "maxLength": 9,
+            "minLength": 0,
+            "nullable": true
+          },
+          "bairro": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 0,
+            "nullable": true
+          },
+          "status": {
+            "type": "boolean",
+            "minLength": 1,
+            "nullable": false
+          },
+          "municipio": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Municipio"
+              }
+            ]
+          },
+          "aspNetUserId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ambientes": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/Ambiente"
+            }
+          }
+        }
+      },
+      "UpdateProfissionalCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "nome",
+          "dtNascimento",
+          "email",
+          "sexo",
+          "cpf",
+          "status"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string",
+            "maxLength": 150,
+            "minLength": 1,
+            "nullable": false
+          },
+          "dtNascimento": {
+            "type": "string",
+            "format": "date-time",
+            "minLength": 1,
+            "nullable": false
+          },
+          "email": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "pattern": "^[^@]+@[^@]+$",
+            "nullable": false
+          },
+          "sexo": {
+            "type": "string",
+            "maxLength": 1,
+            "minLength": 1,
+            "nullable": false
+          },
+          "cpf": {
+            "type": "string",
+            "maxLength": 14,
+            "minLength": 1,
+            "nullable": false
+          },
+          "telefone": {
+            "type": "string",
+            "maxLength": 14,
+            "minLength": 0,
+            "pattern": "((\\(\\d{3}\\) ?)|(\\d{3}-))?\\d{3}-\\d{4}",
+            "nullable": true
+          },
+          "celular": {
+            "type": "string",
+            "maxLength": 14,
+            "minLength": 0,
+            "pattern": "((\\(\\d{3}\\) ?)|(\\d{3}-))?\\d{3}-\\d{4}",
+            "nullable": true
+          },
+          "endereco": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 0,
+            "nullable": true
+          },
+          "numero": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cep": {
+            "type": "string",
+            "maxLength": 9,
+            "minLength": 0,
+            "nullable": true
+          },
+          "bairro": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 0,
+            "nullable": true
+          },
+          "status": {
+            "type": "boolean",
+            "minLength": 1,
+            "nullable": false
+          },
+          "municipio": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Municipio"
+              }
+            ]
+          },
+          "aspNetUserId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ambientes": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/Ambiente"
+            }
           }
         }
       },
