@@ -28,7 +28,7 @@ public class GetUsuarioByEmailQueryHandler : IRequestHandler<GetUsuarioByEmailQu
             .OrderBy(t => t.Id)
             .FirstOrDefaultAsync(cancellationToken);
         
-        return result == null ? throw new ArgumentNullException(nameof(result)) : result;
+        return result!;
     }
 }
 
