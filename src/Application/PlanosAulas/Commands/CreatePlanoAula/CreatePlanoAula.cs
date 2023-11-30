@@ -23,8 +23,8 @@ public class CreatePlanoAulaCommandHandler : IRequestHandler<CreatePlanoAulaComm
         var entity = new PlanoAula
         {
             Nome = request.Nome,
-            //TODO: DRK refazer
-            
+            Grade = request.Grade,
+            Url = request.Url
         };
 
         _context.PlanosAulas.Add(entity);

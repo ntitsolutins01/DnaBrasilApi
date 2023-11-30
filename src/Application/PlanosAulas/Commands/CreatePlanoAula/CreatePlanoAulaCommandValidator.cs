@@ -13,7 +13,11 @@ public class CreatePlanoAulaCommandValidator : AbstractValidator<CreatePlanoAula
         RuleFor(v => v.Nome)
             .MaximumLength(150)
             .NotEmpty();
-        //TODO: DRK Refazer
-        
+        RuleFor(v => v.Grade)
+            .MaximumLength(150)
+            .NotEmpty();
+        RuleFor(v => v.Url)
+            .MaximumLength(150)
+            .NotEmpty();
     }
 }
