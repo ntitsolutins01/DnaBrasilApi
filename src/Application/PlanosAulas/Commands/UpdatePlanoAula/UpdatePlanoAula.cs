@@ -28,7 +28,8 @@ public class UpdatePlanoAulaCommandHandler : IRequestHandler<UpdatePlanoAulaComm
         Guard.Against.NotFound(request.Id, entity);
 
         entity.Nome = request.Nome;
-        //TODO: DRK refazer
+        entity.Grade = request.Grade;
+        entity.Url = request.Url;
 
         var result = await _context.SaveChangesAsync(cancellationToken);
 

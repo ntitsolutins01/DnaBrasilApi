@@ -6583,7 +6583,9 @@
         "type": "object",
         "additionalProperties": false,
         "required": [
-          "nome"
+          "nome",
+          "grade",
+          "url"
         ],
         "properties": {
           "nome": {
@@ -6594,11 +6596,15 @@
           },
           "grade": {
             "type": "string",
-            "nullable": true
+            "maxLength": 150,
+            "minLength": 1,
+            "nullable": false
           },
           "url": {
             "type": "string",
-            "nullable": true
+            "maxLength": 150,
+            "minLength": 1,
+            "nullable": false
           }
         }
       },
@@ -6606,7 +6612,9 @@
         "type": "object",
         "additionalProperties": false,
         "required": [
-          "nome"
+          "nome",
+          "grade",
+          "url"
         ],
         "properties": {
           "id": {
@@ -6621,11 +6629,15 @@
           },
           "grade": {
             "type": "string",
-            "nullable": true
+            "maxLength": 150,
+            "minLength": 1,
+            "nullable": false
           },
           "url": {
             "type": "string",
-            "nullable": true
+            "maxLength": 150,
+            "minLength": 1,
+            "nullable": false
           }
         }
       },
