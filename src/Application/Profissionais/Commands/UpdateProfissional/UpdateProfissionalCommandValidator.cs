@@ -29,13 +29,6 @@ public class UpdateProfissionalCommandValidator : AbstractValidator<UpdateProfis
             .NotEmpty().WithMessage("É necessário um endereço de e-mail")
             .EmailAddress().WithMessage("É necessário um e-mail válido");
 
-        RuleFor(v => v.Cpf)
-            .NotEmpty()
-            .MaximumLength(14)
-            .MustAsync(BeUniquCpf)
-                .WithMessage("'{PropertyName}' deve ser único.")
-                .WithErrorCode("Unique");
-
         RuleFor(v => v.Telefone)
             .MaximumLength(14)
             .MinimumLength(13).WithMessage("'{PropertyName}' não deve ter menos de 13 caracteres.")
@@ -49,7 +42,7 @@ public class UpdateProfissionalCommandValidator : AbstractValidator<UpdateProfis
             .MaximumLength(14).WithMessage("'{PropertyName}' não deve exceder 14 caracteres.")
             .Matches(new Regex(@"((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}"))
             .WithMessage("Número de telefone inválido");
-
+        
         RuleFor(v => v.Endereco)
             .MaximumLength(200);
 

@@ -14,12 +14,12 @@ public class DeleteProfissionalCommandHandler : IRequestHandler<DeleteProfission
 
     public async Task<bool> Handle(DeleteProfissionalCommand request, CancellationToken cancellationToken)
     {
-        var entity = await _context.TodoItems
+        var entity = await _context.Profissionais
             .FindAsync(new object[] { request.Id }, cancellationToken);
 
         Guard.Against.NotFound(request.Id, entity);
 
-        _context.TodoItems.Remove(entity);
+        _context.Profissionais.Remove(entity);
 
         var result = await _context.SaveChangesAsync(cancellationToken);
         return result == 1;

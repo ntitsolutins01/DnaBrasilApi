@@ -18,9 +18,7 @@ public record UpdateProfissionalCommand : IRequest<bool>
     public string? Cep { get; init; }
     public string? Bairro { get; init; }
     public bool Status { get; init; } = true;
-    public Municipio? Municipio { get; init; }
-    public int AspNetUserId { get; init; }
-    public List<Ambiente>? Ambientes { get; init; }
+    public int? MunicipioId { get; init; }
 }
 
 public class UpdateProfissionalCommandHandler : IRequestHandler<UpdateProfissionalCommand, bool>
@@ -34,6 +32,14 @@ public class UpdateProfissionalCommandHandler : IRequestHandler<UpdateProfission
 
     public async Task<bool> Handle(UpdateProfissionalCommand request, CancellationToken cancellationToken)
     {
+        Municipio? municipio = null;
+
+        if (request.MunicipioId != null)
+        {
+            municipio = await _context.Municipios
+                .FindAsync(new object[] { request.MunicipioId }, cancellationToken);
+        }
+
         var entity = await _context.Profissionais
             .FindAsync(new object[] { request.Id }, cancellationToken);
 
@@ -43,14 +49,13 @@ public class UpdateProfissionalCommandHandler : IRequestHandler<UpdateProfission
         entity.DtNascimento = request.DtNascimento;
         entity.Email = request.Email;
         entity.Sexo = request.Sexo;
-        entity.Cpf = request.Cpf;
         entity.Telefone = request.Telefone;
         entity.Celular = request.Celular;
         entity.Endereco = request.Endereco;
         entity.Numero = request.Numero;
         entity.Cep = request.Cep;
         entity.Bairro = request.Bairro;
-        entity.Municipio = request.Municipio;
+        entity.Municipio = municipio;
 
         var result = await _context.SaveChangesAsync(cancellationToken);
 

@@ -16,9 +16,8 @@ public record CreateProfissionalCommand : IRequest<int>
     public string? Cep { get; init; }
     public string? Bairro { get; init; }
     public bool Status { get; init; } = true;
-    public Municipio? Municipio { get; init; }
+    public int? MunicipioId { get; init; }
     public int AspNetUserId { get; init; }
-    public List<Ambiente>? Ambientes { get; init; }
 }
 
 public class CreateProfissionalCommandHandler : IRequestHandler<CreateProfissionalCommand, int>
@@ -32,6 +31,14 @@ public class CreateProfissionalCommandHandler : IRequestHandler<CreateProfission
 
     public async Task<int> Handle(CreateProfissionalCommand request, CancellationToken cancellationToken)
     {
+        Municipio? municipio = null;
+
+        if (request.MunicipioId != null)
+        {
+            municipio = await _context.Municipios
+                .FindAsync(new object[] { request.MunicipioId }, cancellationToken);
+        }
+
         var entity = new Profissional
         {
             Nome = request.Nome,
@@ -45,9 +52,8 @@ public class CreateProfissionalCommandHandler : IRequestHandler<CreateProfission
             Numero = request.Numero,
             Cep = request.Cep,
             Bairro = request.Bairro,
-            Municipio = request.Municipio,
-            AspNetUserId = request.AspNetUserId,
-            Ambientes = request.Ambientes!
+            Municipio = municipio,
+            AspNetUserId = request.AspNetUserId
         };
 
         _context.Profissionais.Add(entity);
