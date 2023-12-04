@@ -7,10 +7,8 @@ public record UpdateFomentoCommand : IRequest <bool>
 {
     public int Id { get; init; }
     public required string Nome { get; init; }
-    public required string Descricao { get; init; }
-    public required int IdadeInicial { get; init; }
-    public required int IdadeFinal { get; init; }
-    public required int ScoreTotal { get; init; }
+    public required int MunicipioId { get; init; }
+    public required int LocalidadeId { get; init; }
 }
 
 public class UpdateFomentoCommandHandler : IRequestHandler<UpdateFomentoCommand, bool>
@@ -24,16 +22,19 @@ public class UpdateFomentoCommandHandler : IRequestHandler<UpdateFomentoCommand,
 
     public async Task <bool> Handle(UpdateFomentoCommand request, CancellationToken cancellationToken)
     {
+
+        var municipio = await _context.Municipios
+            .FindAsync(new object[] { request.MunicipioId }, cancellationToken);
+        var localidade = await _context.Localidades
+            .FindAsync(new object[] { request.MunicipioId }, cancellationToken);
         var entity = await _context.Fomentos
             .FindAsync(new object[] { request.Id }, cancellationToken);
 
         Guard.Against.NotFound(request.Id, entity);
 
         entity.Nome = request.Nome;
-        entity.Descricao = request.Descricao;
-        entity.IdadeInicial = request.IdadeInicial;
-        entity.IdadeFinal = request.IdadeFinal;
-        entity.ScoreTotal = request.ScoreTotal;
+        entity.Municipio = municipio;
+         entity.Localidade = localidade!;
 
         var result = await _context.SaveChangesAsync(cancellationToken);
 

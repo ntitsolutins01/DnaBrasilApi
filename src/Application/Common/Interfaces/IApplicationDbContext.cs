@@ -35,7 +35,7 @@ public interface IApplicationDbContext
     DbSet<Modulo> Modulos { get; }
     DbSet<Funcionalidade> Funcionalidades { get; }
     DbSet<Escolaridade> Escolaridades { get; }
-    DbSet<Domain.Entities.Fomentu> Fomentos { get; }
+    DbSet<Fomentu> Fomentos { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

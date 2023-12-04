@@ -18,7 +18,7 @@ public class DeleteFomentoCommandHandler : IRequestHandler<DeleteFomentoCommand,
         var entity = await _context.Fomentos
             .FindAsync(new object[] { request.Id }, cancellationToken);
 
-        Guard.Against.NotFound<Fomento?>(request.Id, entity);
+        Guard.Against.NotFound(request.Id, entity);
 
         _context.Fomentos.Remove(entity);
 
