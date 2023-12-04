@@ -1,3 +1,4 @@
+using DnaBrasilApi.Application.Fomento.Queries;
 using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Common.Interfaces;
@@ -34,6 +35,7 @@ public interface IApplicationDbContext
     DbSet<Modulo> Modulos { get; }
     DbSet<Funcionalidade> Funcionalidades { get; }
     DbSet<Escolaridade> Escolaridades { get; }
+    DbSet<Domain.Entities.Fomentu> Fomentos { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }
