@@ -37,6 +37,8 @@ public class GetProfissionaisByFilterQueryHandler : IRequestHandler<GetProfissio
         if (!string.IsNullOrWhiteSpace(search.Nome))
             profissionais = profissionais.Where(u => u.Nome.Contains(search.Nome));
 
+        //TODO: DRK implementar resto dos filtros
+
         return profissionais;
     }
 }

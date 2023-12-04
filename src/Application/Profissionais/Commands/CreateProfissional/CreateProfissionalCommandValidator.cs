@@ -1,4 +1,5 @@
-﻿using DnaBrasilApi.Application.Common.Interfaces;
+﻿using System.Text.RegularExpressions;
+using DnaBrasilApi.Application.Common.Interfaces;
 
 namespace DnaBrasilApi.Application.Profissionais.Commands.CreateProfissional;
 
@@ -36,13 +37,18 @@ public class CreateProfissionalCommandValidator : AbstractValidator<CreateProfis
                 .WithErrorCode("Unique");
 
         RuleFor(v => v.Telefone)
-            .MaximumLength(14);
+            .MaximumLength(14)
+            .MinimumLength(13).WithMessage("'{PropertyName}' não deve ter menos de 13 caracteres.")
+            .MaximumLength(14).WithMessage("'{PropertyName}' não deve exceder 14 caracteres.")
+            .Matches(new Regex(@"((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}"))
+            .WithMessage("Número de telefone inválido");
 
         RuleFor(v => v.Celular)
-            .MaximumLength(14);
-
-        RuleFor(v => v.Celular)
-            .MaximumLength(14);
+            .MaximumLength(14)
+            .MinimumLength(13).WithMessage("'{PropertyName}' não deve ter menos de 13 caracteres.")
+            .MaximumLength(14).WithMessage("'{PropertyName}' não deve exceder 14 caracteres.")
+            .Matches(new Regex(@"((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}"))
+            .WithMessage("Número de telefone inválido");
 
         RuleFor(v => v.Endereco)
             .MaximumLength(200);
