@@ -1,9 +1,7 @@
-﻿using DnaBrasilApi.Application.Fomentos.Commands.CreateFomento;
-
-namespace DnaBrasilApi.Application.Fomento.Commands.CreateFomento;
-internal class CreateFomentosCommandValidator : AbstractValidator<CreateFomentoCommand>
+﻿namespace DnaBrasilApi.Application.Fomento.Commands.CreateFomento;
+internal class CreateFomentoCommandValidator : AbstractValidator<CreateFomentoCommand>
 {
-    public CreateFomentosCommandValidator()
+    public CreateFomentoCommandValidator()
     {
         RuleFor(v => v.Nome)
             .MaximumLength(150)

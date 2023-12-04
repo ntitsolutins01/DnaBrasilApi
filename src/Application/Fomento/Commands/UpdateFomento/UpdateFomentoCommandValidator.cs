@@ -1,6 +1,4 @@
-﻿using DnaBrasilApi.Application.Fomentos.Commands.UpdateFomento;
-
-namespace DnaBrasilApi.Application.Fomento.Commands.UpdateFomento;
+﻿namespace DnaBrasilApi.Application.Fomento.Commands.UpdateFomento;
 internal class UpdateFomentoCommandValidator : AbstractValidator<UpdateFomentoCommand>
 {
     public UpdateFomentoCommandValidator()

@@ -4,10 +4,8 @@ namespace DnaBrasilApi.Application.Fomento.Commands.CreateFomento;
 public record CreateFomentoCommand : IRequest<int>
 {
     public required string Nome { get; init; }
-    public required string Descricao { get; init; }
-    public required int IdadeInicial { get; init; }
-    public required int IdadeFinal { get; init; }
-    public required int ScoreTotal { get; init; }
+    public required int MunicipioId { get; init; }
+    public required int LocalidadeId { get; init; }
 }
 
 public class CreateFomentoCommandHandler : IRequestHandler<CreateFomentoCommand, int>
@@ -21,13 +19,11 @@ public class CreateFomentoCommandHandler : IRequestHandler<CreateFomentoCommand,
 
     public async Task<int> Handle(CreateFomentoCommand request, CancellationToken cancellationToken)
     {
-        var entity = new Fomento
+        var entity = new Fomentos
         {
             Nome = request.Nome,
-            Descricao = request.Descricao,
-            IdadeInicial = request.IdadeInicial,
-            IdadeFinal = request.IdadeFinal,
-            ScoreTotal = request.ScoreTotal
+            Municipo = municipio,
+            Localidade = localidade
         };
 
         _context.Fomentos.Add(entity);
