@@ -27,7 +27,7 @@ public class UpdateFomentoCommandHandler : IRequestHandler<UpdateFomentoCommand,
         var entity = await _context.Fomentos
             .FindAsync(new object[] { request.Id }, cancellationToken);
 
-        Guard.Against.NotFound<Fomento?>(request.Id, entity);
+        Guard.Against.NotFound(request.Id, entity);
 
         entity.Nome = request.Nome;
         entity.Descricao = request.Descricao;
