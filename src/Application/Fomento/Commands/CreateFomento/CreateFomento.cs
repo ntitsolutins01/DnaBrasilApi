@@ -1,4 +1,5 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Fomento.Commands.CreateFomento;
 public record CreateFomentoCommand : IRequest<int>
@@ -19,11 +20,17 @@ public class CreateFomentoCommandHandler : IRequestHandler<CreateFomentoCommand,
 
     public async Task<int> Handle(CreateFomentoCommand request, CancellationToken cancellationToken)
     {
-        var entity = new Fomentos
+        
+           var municipio = await _context.Municipios
+                .FindAsync(new object[] { request.MunicipioId }, cancellationToken);
+           var localidade = await _context.Localidades
+                .FindAsync(new object[] { request.MunicipioId }, cancellationToken);
+
+        var entity = new Fomentu
         {
             Nome = request.Nome,
-            Municipo = municipio,
-            Localidade = localidade
+            Municipio = municipio,
+            Localidade = localidade!
         };
 
         _context.Fomentos.Add(entity);
