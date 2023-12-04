@@ -6,7 +6,7 @@ namespace DnaBrasilApi.Application.Ambientes.Commands.CreateAmbiente;
 public record CreateAmbienteCommand : IRequest<int>
 {
     public required string Nome { get; init; }
-    public bool Status { get; init; }
+    public bool Status { get; init; } = true;
 }
 
 public class CreateAmbienteCommandHandler : IRequestHandler<CreateAmbienteCommand, int>

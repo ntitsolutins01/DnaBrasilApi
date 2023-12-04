@@ -7611,6 +7611,10 @@
           },
           "aspNetRoleId": {
             "type": "string"
+          },
+          "perfilId": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },

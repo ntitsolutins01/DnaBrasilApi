@@ -34,7 +34,7 @@ public class UpdateUsuarioCommandHandler : IRequestHandler<UpdateUsuarioCommand,
         entity.Nome = request.Nome;
         entity.Email = request.Email;
         entity.Status = request.Status;
-        entity.Perfil = perfil;
+        entity.Perfil = perfil!;
         entity.AspNetRoleId = request.AspNetRoleId;
 
         var result = await _context.SaveChangesAsync(cancellationToken);

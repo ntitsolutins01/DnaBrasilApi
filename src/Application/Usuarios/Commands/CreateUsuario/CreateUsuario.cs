@@ -10,6 +10,7 @@ public record CreateUsuarioCommand : IRequest<int>
     public required string Cpf { get; init; }
     public required string Email { get; init; }
     public required string AspNetRoleId { get; init; }
+    public required int PerfilId { get; init; }
 }
 
 public class CreateUsuarioCommandHandler : IRequestHandler<CreateUsuarioCommand, int>
@@ -23,13 +24,17 @@ public class CreateUsuarioCommandHandler : IRequestHandler<CreateUsuarioCommand,
 
     public async Task<int> Handle(CreateUsuarioCommand request, CancellationToken cancellationToken)
     {
+        var perfil = await _context.Perfis
+            .FindAsync(new object[] { request.PerfilId }, cancellationToken);
+
         var entity = new Usuario
         {
             Nome = request.Nome,
             AspNetUserId = request.AspNetUserId,
             Cpf = request.Cpf,
             Email = request.Email,
-            AspNetRoleId = request.AspNetRoleId 
+            AspNetRoleId = request.AspNetRoleId,
+            Perfil = perfil!
         };
 
         _context.Usuarios.Add(entity);
