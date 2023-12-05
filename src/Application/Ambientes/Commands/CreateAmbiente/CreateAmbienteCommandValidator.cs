@@ -7,7 +7,5 @@ public class CreateAmbienteCommandValidator : AbstractValidator<CreateAmbienteCo
         RuleFor(v => v.Nome)
             .MaximumLength(100)
             .NotNull().NotEmpty();
-        RuleFor(v => v.Status)
-            .NotNull().NotEmpty();
     }
 }

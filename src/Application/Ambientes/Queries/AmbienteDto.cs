@@ -7,7 +7,7 @@ public class AmbienteDto
 {
     public int Id { get; set; }
     public string? Nome { get; set; }
-    public bool Status { get; set; }
+    public bool Status { get; set; } = true;
     private class Mapping : Profile
     {
         public Mapping()
