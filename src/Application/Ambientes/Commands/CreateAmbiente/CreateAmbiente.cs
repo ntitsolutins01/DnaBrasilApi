@@ -26,7 +26,7 @@ public class CreateAmbienteCommandHandler : IRequestHandler<CreateAmbienteComman
             Status = request.Status
         };
 
-        q_context.Ambientes.Add(entity);
+        _context.Ambientes.Add(entity);
 
         await _context.SaveChangesAsync(cancellationToken);
 
