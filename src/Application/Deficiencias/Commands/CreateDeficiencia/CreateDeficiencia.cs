@@ -6,7 +6,7 @@ namespace DnaBrasilApi.Application.Deficiencias.Commands.CreateDeficiencia;
 public record CreateDeficienciaCommand : IRequest<int>
 {
     public required string Nome { get; init; }
-    public bool Status { get; init; }
+    public bool Status { get; init; } = true;
 }
 
 public class CreateDeficienciaCommandHandler : IRequestHandler<CreateDeficienciaCommand, int>

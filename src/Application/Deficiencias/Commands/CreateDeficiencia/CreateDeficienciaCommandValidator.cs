@@ -7,8 +7,5 @@ public class CreateDeficienciaCommandValidator : AbstractValidator<CreateDeficie
         RuleFor(v => v.Nome)
             .MaximumLength(80)
             .NotEmpty();
-
-        RuleFor(v => v.Status)
-            .NotNull().NotEmpty();
     }
 }
