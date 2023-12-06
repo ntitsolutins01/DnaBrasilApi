@@ -1,7 +1,6 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
-using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasilApi.Application.Fomento.Commands.DeleteFomento;
+namespace DnaBrasilApi.Application.Fomentos.Commands.DeleteFomento;
 public record DeleteFomentoCommand(int Id) : IRequest<bool>;
 
 public class DeleteFomentoCommandHandler : IRequestHandler<DeleteFomentoCommand, bool>

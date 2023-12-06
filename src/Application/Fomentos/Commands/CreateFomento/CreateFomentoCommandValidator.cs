@@ -1,7 +1,7 @@
-﻿namespace DnaBrasilApi.Application.Fomento.Commands.UpdateFomento;
-internal class UpdateFomentoCommandValidator : AbstractValidator<UpdateFomentoCommand>
+﻿namespace DnaBrasilApi.Application.Fomentos.Commands.CreateFomento;
+internal class CreateFomentoCommandValidator : AbstractValidator<CreateFomentoCommand>
 {
-    public UpdateFomentoCommandValidator()
+    public CreateFomentoCommandValidator()
     {
         RuleFor(v => v.Nome)
             .MaximumLength(150)
@@ -10,6 +10,5 @@ internal class UpdateFomentoCommandValidator : AbstractValidator<UpdateFomentoCo
             .NotNull();
         RuleFor(v => v.LocalidadeId)
             .NotNull();
-
     }
 }

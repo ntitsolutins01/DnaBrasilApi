@@ -1,6 +1,6 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasilApi.Application.Fomento.Queries.GetFomentosAll;
+namespace DnaBrasilApi.Application.Fomentos.Queries.GetFomentosAll;
 //[Authorize]
 public record GetFomentosAllQuery : IRequest<List<FomentoDto>>;
 

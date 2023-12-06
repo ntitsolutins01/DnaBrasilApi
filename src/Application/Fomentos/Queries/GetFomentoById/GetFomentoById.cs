@@ -1,6 +1,6 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasilApi.Application.Fomento.Queries.GetFomentoById;
+namespace DnaBrasilApi.Application.Fomentos.Queries.GetFomentoById;
 
 public record GetFomentoByIdQuery : IRequest<FomentoDto>
 {

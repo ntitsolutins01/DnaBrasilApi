@@ -1,4 +1,3 @@
-using DnaBrasilApi.Application.Fomento.Queries;
 using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Common.Interfaces;
