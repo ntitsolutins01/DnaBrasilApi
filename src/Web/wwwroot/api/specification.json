@@ -4212,6 +4212,10 @@
             "type": "object",
             "additionalProperties": false,
             "properties": {
+              "aspNetUserId": {
+                "type": "integer",
+                "format": "int32"
+              },
               "municipio": {
                 "nullable": true,
                 "oneOf": [
@@ -4219,6 +4223,22 @@
                     "$ref": "#/components/schemas/Municipio"
                   }
                 ]
+              },
+              "nome": {
+                "type": "string",
+                "nullable": true
+              },
+              "email": {
+                "type": "string",
+                "nullable": true
+              },
+              "sexo": {
+                "type": "string",
+                "nullable": true
+              },
+              "dtNascimento": {
+                "type": "string",
+                "format": "date-time"
               },
               "nomeMae": {
                 "type": "string",
@@ -4291,6 +4311,10 @@
                     "$ref": "#/components/schemas/Parceiro"
                   }
                 ]
+              },
+              "etnia": {
+                "type": "integer",
+                "format": "int32"
               },
               "contratos": {
                 "type": "array",

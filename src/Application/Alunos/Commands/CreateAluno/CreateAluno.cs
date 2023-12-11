@@ -45,11 +45,11 @@ public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int
     {
         var entity = new Aluno
         {
-            //AspNetUserId = request.AspNetUserId,
-            //Nome = request.Nome,
-            //Email = request.Email,
-            //Sexo = request.Sexo,
-            //DtNascimento = request.DtNascimento,
+            AspNetUserId = request.AspNetUserId,
+            Nome = request.Nome,
+            Email = request.Email,
+            Sexo = request.Sexo,
+            DtNascimento = request.DtNascimento,
             NomeMae = request.NomeMae,
             NomePai = request.NomePai,
             Cpf = request.Cpf,
@@ -63,7 +63,7 @@ public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int
             Status = request.Status,
             Habilitado = request.Habilitado,
             Parceiro = request.Parceiro,
-            //Etnia = request.Etnia
+            Etnia = request.Etnia
         };
 
         _context.Alunos.Add(entity);

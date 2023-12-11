@@ -1,7 +1,12 @@
 ﻿namespace DnaBrasilApi.Domain.Entities;
 public class Aluno : BaseAuditableEntity
 {
+    public int AspNetUserId { get; set; }
     public Municipio? Municipio { get; set; }
+    public string? Nome { get; set; }
+    public string? Email { get; set; }
+    public string? Sexo { get; set; }
+    public DateTime DtNascimento { get; set; }
     public string? NomeMae { get; set; }
     public string? NomePai { get; set; }
     public string? Cpf { get; set; }
@@ -18,6 +23,7 @@ public class Aluno : BaseAuditableEntity
     public List<Deficiencia>? Deficiencias { get; set; } = new();
     public List<Ambiente>? Ambientes { get; set; } = new();
     public Parceiro? Parceiro { get; set; }
+    public int Etnia { get; set; }
     public List<Contrato>? Contratos { get; set; }
     public Matricula? Matricula { get; set; }
     public Voucher? Voucher { get; set; }
