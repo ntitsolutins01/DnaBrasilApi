@@ -2,7 +2,6 @@
 public class Aluno : BaseAuditableEntity
 {
     public int AspNetUserId { get; set; }
-    public Municipio? Municipio { get; set; }
     public string? Nome { get; set; }
     public string? Email { get; set; }
     public string? Sexo { get; set; }
@@ -20,10 +19,13 @@ public class Aluno : BaseAuditableEntity
     public string? Url { get; set; }
     public bool Status { get; set; }
     public bool Habilitado { get; set; }
-    public List<Deficiencia>? Deficiencias { get; set; } = new();
-    public List<Ambiente>? Ambientes { get; set; } = new();
-    public Parceiro? Parceiro { get; set; }
     public int Etnia { get; set; }
+    public int IdCliente { get; set; }
+    public Municipio? Municipio { get; set; }
+    public Localidade? Localidade { get; set; }
+    public List<Deficiencia>? Deficiencias { get; set; }
+    public List<Ambiente>? Ambientes { get; set; }
+    public Parceiro? Parceiro { get; set; }
     public List<Contrato>? Contratos { get; set; }
     public Matricula? Matricula { get; set; }
     public Voucher? Voucher { get; set; }
