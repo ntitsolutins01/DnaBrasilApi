@@ -5,6 +5,9 @@ using DnaBrasilApi.Application.Alunos.Commands.UpdateAluno;
 using DnaBrasilApi.Application.Alunos.Commands.UpdateAlunoAmbientes;
 using DnaBrasilApi.Application.Alunos.Commands.UpdateAlunoDeficiencias;
 using DnaBrasilApi.Application.Alunos.Commands.UpdateVoucher;
+using DnaBrasilApi.Application.Alunos.Queries;
+using DnaBrasilApi.Application.Alunos.Queries.GetAlunosAll;
+using DnaBrasilApi.Application.Escolaridades.Queries.GetEscolaridadesAll;
 
 namespace DnaBrasilApi.Web.Endpoints;
 public class Alunos : EndpointGroupBase
@@ -14,6 +17,7 @@ public class Alunos : EndpointGroupBase
         app.MapGroup(this)
             //.RequireAuthorization()
             //.MapGet(GetAlunosByFilter)
+            .MapGet(GetAlunosAll)
             .MapPost(CreateAluno)
             .MapPut(UpdateAluno, "{id}")
             .MapPut(UpdateAlunoAmbientes, "/Ambientes")
@@ -24,6 +28,10 @@ public class Alunos : EndpointGroupBase
     //{
     //    return await sender.Send(new GetAlunosByFilterQuery(search));
     //}
+    public async Task<List<AlunoDto>> GetAlunosAll(ISender sender)
+    {
+        return await sender.Send(new GetAlunosAllQuery());
+    }
 
     public async Task<int> CreateAluno(ISender sender, CreateAlunoCommand command)
     {

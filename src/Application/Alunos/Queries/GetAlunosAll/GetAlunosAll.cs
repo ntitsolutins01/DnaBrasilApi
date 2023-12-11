@@ -1,22 +1,21 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
-using DnaBrasilApi.Application.Alunos.Queries.GetAlunosAll;
 
 namespace DnaBrasilApi.Application.Alunos.Queries.GetAlunosAll;
 //[Authorize]
-public record GetAlunosQuery : IRequest<List<AlunoDto>>;
+public record GetAlunosAllQuery : IRequest<List<AlunoDto>>;
 
-public class GetAlunosQueryHandler : IRequestHandler<GetAlunosQuery, List<AlunoDto>>
+public class GetAlunosAllQueryHandler : IRequestHandler<GetAlunosAllQuery, List<AlunoDto>>
 {
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
 
-    public GetAlunosQueryHandler(IApplicationDbContext context, IMapper mapper)
+    public GetAlunosAllQueryHandler(IApplicationDbContext context, IMapper mapper)
     {
         _context = context;
         _mapper = mapper;
     }
 
-    public async Task<List<AlunoDto>> Handle(GetAlunosQuery request, CancellationToken cancellationToken)
+    public async Task<List<AlunoDto>> Handle(GetAlunosAllQuery request, CancellationToken cancellationToken)
     {
         var result = await _context.Alunos
             .AsNoTracking()

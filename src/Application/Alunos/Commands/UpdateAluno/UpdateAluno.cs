@@ -45,11 +45,11 @@ public class UpdateAlunoCommandHandler : IRequestHandler<UpdateAlunoCommand>
 
         Guard.Against.NotFound(request.AspNetUserId, entity);
 
-        entity.AspNetUserId = request.AspNetUserId;
-        entity.Nome = request.Nome;
-        entity.Email = request.Email;
-        entity.Sexo = request.Sexo;
-        entity.DtNascimento = request.DtNascimento;
+        //entity.AspNetUserId = request.AspNetUserId;
+        //entity.Nome = request.Nome;
+        //entity.Email = request.Email;
+        //entity.Sexo = request.Sexo;
+        //entity.DtNascimento = request.DtNascimento;
         entity.NomeMae = request.NomeMae;
         entity.NomePai = request.NomePai;
         entity.Cpf = request.Cpf;

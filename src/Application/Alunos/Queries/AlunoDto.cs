@@ -7,12 +7,12 @@ namespace DnaBrasilApi.Application.Alunos.Queries;
 public class AlunoDto
 {
     public int Id { get; set; }
-    public required int AspNetUserId { get; set; }
+    public  int AspNetUserId { get; set; }
     public Municipio? Municipio { get; set; }
-    public required string Nome { get; set; }
-    public required string Email { get; set; }
-    public required string Sexo { get; set; }
-    public required DateTime DtNascimento { get; set; }
+    public  string? Nome { get; set; }
+    public  string? Email { get; set; }
+    public  string? Sexo { get; set; }
+    public  DateTime DtNascimento { get; set; }
     public string? NomeMae { get; set; }
     public string? NomePai { get; set; }
     public string? Cpf { get; set; }

@@ -7,17 +7,17 @@ internal class AlunoConfiguration : IEntityTypeConfiguration<Aluno>
 {
     public void Configure(EntityTypeBuilder<Aluno> builder)
     {
-        builder.Property(t => t.Nome)
-            .HasMaxLength(150)
-            .IsRequired();
-        builder.Property(t => t.Email)
-            .HasMaxLength(100)
-            .IsRequired();
-        builder.Property(t => t.DtNascimento)
-            .IsRequired();
-        builder.Property(t => t.Sexo)
-            .HasMaxLength(1)
-            .IsRequired();
+        //builder.Property(t => t.Nome)
+        //    .HasMaxLength(150)
+        //    .IsRequired();
+        //builder.Property(t => t.Email)
+        //    .HasMaxLength(100)
+        //    .IsRequired();
+        //builder.Property(t => t.DtNascimento)
+        //    .IsRequired();
+        //builder.Property(t => t.Sexo)
+        //    .HasMaxLength(1)
+        //    .IsRequired();
         builder.Property(t => t.NomePai)
             .HasMaxLength(150);
         builder.Property(t => t.NomeMae)
@@ -38,7 +38,7 @@ internal class AlunoConfiguration : IEntityTypeConfiguration<Aluno>
             .HasMaxLength(100);
         builder.Property(t => t.Url)
             .HasMaxLength(200);
-        builder.Property(t => t.Etnia)
-            .IsRequired();
+        //builder.Property(t => t.Etnia)
+        //    .IsRequired();
     }
 }

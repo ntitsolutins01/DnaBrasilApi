@@ -34,8 +34,8 @@ public class GetAlunosByFilterQueryHandler : IRequestHandler<GetAlunosByFilterQu
 
     private IQueryable<Aluno> FilterAlunos(IQueryable<Aluno> Alunos, SearchAlunosDto search)
     {
-        if (!string.IsNullOrWhiteSpace(search.Nome))
-            Alunos = Alunos.Where(u => u.Nome.Contains(search.Nome));
+        //if (!string.IsNullOrWhiteSpace(search.Nome))
+        //    Alunos = Alunos.Where(u => u.Nome.Contains(search.Nome));
 
         if (!string.IsNullOrWhiteSpace(search.Cpf))
             Alunos = Alunos.Where(u => u.Cpf!.Contains(search.Cpf));
