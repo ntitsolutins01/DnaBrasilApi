@@ -9,6 +9,7 @@ public record CreateSerieCommand : IRequest<int>
     public required int IdadeInicial { get; init; }
     public required int IdadeFinal { get; init; }
     public required int ScoreTotal { get; init; }
+    public bool Status { get; init; } = true;
 }
 
 public class CreateSerieCommandHandler : IRequestHandler<CreateSerieCommand, int>
@@ -28,7 +29,8 @@ public class CreateSerieCommandHandler : IRequestHandler<CreateSerieCommand, int
             Descricao = request.Descricao,
             IdadeInicial = request.IdadeInicial,
             IdadeFinal = request.IdadeFinal,
-            ScoreTotal = request.ScoreTotal
+            ScoreTotal = request.ScoreTotal,
+            Status = request.Status
         };
 
         _context.Series.Add(entity);

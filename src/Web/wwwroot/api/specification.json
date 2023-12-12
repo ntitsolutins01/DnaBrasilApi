@@ -6987,6 +6987,9 @@
           "descricao": {
             "type": "string",
             "nullable": true
+          },
+          "status": {
+            "type": "boolean"
           }
         }
       },
@@ -7011,6 +7014,9 @@
           "scoreTotal": {
             "type": "integer",
             "format": "int32"
+          },
+          "status": {
+            "type": "boolean"
           }
         }
       },
@@ -7039,6 +7045,9 @@
           "scoreTotal": {
             "type": "integer",
             "format": "int32"
+          },
+          "status": {
+            "type": "boolean"
           }
         }
       },
