@@ -12,4 +12,5 @@ public class Serie : BaseAuditableEntity
     public required int IdadeInicial { get; set; }
     public required int IdadeFinal { get; set; }
     public required int ScoreTotal { get; set; }
+    public bool Status { get; set; }
 }

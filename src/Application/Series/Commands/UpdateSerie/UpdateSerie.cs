@@ -11,6 +11,7 @@ public record UpdateSerieCommand : IRequest <bool>
     public required int IdadeInicial { get; init; }
     public required int IdadeFinal { get; init; }
     public required int ScoreTotal { get; init; }
+    public bool Status { get; init; }
 }
 
 public class UpdateSerieCommandHandler : IRequestHandler<UpdateSerieCommand, bool>
@@ -34,6 +35,7 @@ public class UpdateSerieCommandHandler : IRequestHandler<UpdateSerieCommand, boo
         entity.IdadeInicial = request.IdadeInicial;
         entity.IdadeFinal = request.IdadeFinal;
         entity.ScoreTotal = request.ScoreTotal;
+        entity.Status = request.Status;
 
         var result = await _context.SaveChangesAsync(cancellationToken);
 
