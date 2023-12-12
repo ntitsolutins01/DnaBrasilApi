@@ -7,7 +7,9 @@ using DnaBrasilApi.Application.Alunos.Commands.UpdateAlunoDeficiencias;
 using DnaBrasilApi.Application.Alunos.Commands.UpdateVoucher;
 using DnaBrasilApi.Application.Alunos.Queries;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunosAll;
+using DnaBrasilApi.Application.Alunos.Queries.GetAlunosByFilter;
 using DnaBrasilApi.Application.Escolaridades.Queries.GetEscolaridadesAll;
+using Microsoft.AspNetCore.Mvc;
 
 namespace DnaBrasilApi.Web.Endpoints;
 public class Alunos : EndpointGroupBase

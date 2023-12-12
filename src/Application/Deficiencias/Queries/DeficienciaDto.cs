@@ -6,7 +6,7 @@ public class DeficienciaDto
 {
     public int Id { get; init; }
     public string? Nome { get; init; }
-    public bool Status { get; set; } = true;
+    public bool Status { get; set; }
     private class Mapping : Profile
     {
         public Mapping()

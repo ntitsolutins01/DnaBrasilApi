@@ -21,6 +21,7 @@ public class Aluno : BaseAuditableEntity
     public bool Habilitado { get; set; }
     public int Etnia { get; set; }
     public int IdCliente { get; set; }
+    public int Idade { get; set; }
     public Municipio? Municipio { get; set; }
     public Localidade? Localidade { get; set; }
     public List<Deficiencia>? Deficiencias { get; set; }
