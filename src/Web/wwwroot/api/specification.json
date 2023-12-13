@@ -5758,8 +5758,7 @@
             "type": "string"
           },
           "descricao": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "dtIni": {
             "type": "string",

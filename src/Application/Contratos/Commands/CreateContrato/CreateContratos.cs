@@ -5,7 +5,7 @@ namespace DnaBrasilApi.Application.Contratos.Commands.CreateContrato;
 public record CreateContratoCommand : IRequest<int>
 {
     public required string Nome { get; set; }
-    public required string? Descricao { get; set; }
+    public required string Descricao { get; set; }
     public required DateTime DtIni { get; set; }
     public required DateTime DtFim { get; set; }
     public string? Anexo { get; set; }
