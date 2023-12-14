@@ -10,11 +10,8 @@ public class TipoLaudoConfiguration : IEntityTypeConfiguration<TipoLaudo>
     {
         builder.Property(t => t.Nome)
             .HasMaxLength(50)
-            .IsRequired()
-            .HasColumnOrder(1);
+            .IsRequired();
         builder.Property(t => t.Descricao)
-            .HasMaxLength(150)
-            .IsRequired()
-            .HasColumnOrder(2);
+            .HasMaxLength(150);
     }
 }

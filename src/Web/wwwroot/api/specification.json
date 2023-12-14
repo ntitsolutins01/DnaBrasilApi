@@ -5129,12 +5129,14 @@
             "additionalProperties": false,
             "properties": {
               "nome": {
-                "type": "string",
-                "nullable": true
+                "type": "string"
               },
               "descricao": {
                 "type": "string",
                 "nullable": true
+              },
+              "status": {
+                "type": "boolean"
               }
             }
           }
@@ -5687,6 +5689,9 @@
           "descricao": {
             "type": "string",
             "nullable": true
+          },
+          "status": {
+            "type": "boolean"
           }
         }
       },
@@ -6987,6 +6992,18 @@
             "type": "string",
             "nullable": true
           },
+          "idadeInicial": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idadeFinal": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "scoreTotal": {
+            "type": "integer",
+            "format": "int32"
+          },
           "status": {
             "type": "boolean"
           }
@@ -7055,12 +7072,13 @@
         "additionalProperties": false,
         "properties": {
           "nome": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "descricao": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
+          },
+          "status": {
+            "type": "boolean"
           }
         }
       },
@@ -7073,12 +7091,14 @@
             "format": "int32"
           },
           "nome": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "descricao": {
             "type": "string",
             "nullable": true
+          },
+          "status": {
+            "type": "boolean"
           }
         }
       },
