@@ -35,6 +35,7 @@ public interface IApplicationDbContext
     DbSet<Funcionalidade> Funcionalidades { get; }
     DbSet<Escolaridade> Escolaridades { get; }
     DbSet<Fomentu> Fomentos { get; }
+    DbSet<Resposta> Respostas { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

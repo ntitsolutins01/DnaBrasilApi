@@ -4,7 +4,7 @@ namespace DnaBrasilApi.Application.Questionarios.Queries.GetQuestionarioByTipoLa
 
 public record GetQuestionarioByTipoLaudoQuery : IRequest<List<QuestionarioDto>>
 {
-    public required string? NomeLaudo { get; init; }
+    public required int TipoLaudoId { get; init; }
 }
 
 public class GetQuestionarioByTipoLaudoQueryHandler : IRequestHandler<GetQuestionarioByTipoLaudoQuery, List<QuestionarioDto>>
@@ -21,7 +21,7 @@ public class GetQuestionarioByTipoLaudoQueryHandler : IRequestHandler<GetQuestio
     public async Task<List<QuestionarioDto>> Handle(GetQuestionarioByTipoLaudoQuery request, CancellationToken cancellationToken)
     {
         var result = await _context.Questionarios
-            .Where(x => x.TipoLaudo!.Nome == request.NomeLaudo)
+            .Where(x => x.TipoLaudo!.Id == request.TipoLaudoId)
             .AsNoTracking()
             .ProjectTo<QuestionarioDto>(_mapper.ConfigurationProvider)
             .OrderBy(t => t.Id)
