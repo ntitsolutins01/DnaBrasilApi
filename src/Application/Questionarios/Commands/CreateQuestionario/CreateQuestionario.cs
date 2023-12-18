@@ -1,12 +1,12 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasilApi.Application.Questionarios.Commands.CreateQuestionário;
+namespace DnaBrasilApi.Application.Questionarios.Commands.CreateQuestionario;
 
 public record CreateQuestionarioCommand : IRequest<int>
 {
     public required string Pergunta { get; init; }
-    public required TipoLaudo Tipo { get; init; }
+    public required int TipoLaudoId { get; init; }
 }
 
 public class CreateQuestionarioCommandHandler : IRequestHandler<CreateQuestionarioCommand, int>
@@ -20,10 +20,15 @@ public class CreateQuestionarioCommandHandler : IRequestHandler<CreateQuestionar
 
     public async Task<int> Handle(CreateQuestionarioCommand request, CancellationToken cancellationToken)
     {
+        var tipoLaudo = await _context.TipoLaudos
+            .FindAsync(new object[] { request.TipoLaudoId }, cancellationToken);
+
+        Guard.Against.NotFound(request.TipoLaudoId, tipoLaudo);
+
         var entity = new Questionario
         {
             Pergunta = request.Pergunta,
-            Tipo = request.Tipo
+            TipoLaudo = tipoLaudo!
         };
 
         _context.Questionarios.Add(entity);

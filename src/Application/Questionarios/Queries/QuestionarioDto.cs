@@ -5,8 +5,10 @@ namespace DnaBrasilApi.Application.Questionarios.Queries;
 
 public class QuestionarioDto
 {
-    public required string Pergunta { get; set; }
-    public required TipoLaudoDto Tipo { get; set; }
+    public int Id { get; init; }
+    public required string Pergunta { get; init; }
+    public required TipoLaudoDto TipoLaudo { get; init; }
+        
 
     private class Mapping : Profile
     {

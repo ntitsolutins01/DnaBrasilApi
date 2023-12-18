@@ -21,10 +21,10 @@ public class GetQuestionarioByTipoLaudoQueryHandler : IRequestHandler<GetQuestio
     public async Task<List<QuestionarioDto>> Handle(GetQuestionarioByTipoLaudoQuery request, CancellationToken cancellationToken)
     {
         var result = await _context.Questionarios
-            .Where(x => x.Tipo!.Nome == request.NomeLaudo)
+            .Where(x => x.TipoLaudo!.Nome == request.NomeLaudo)
             .AsNoTracking()
             .ProjectTo<QuestionarioDto>(_mapper.ConfigurationProvider)
-            .OrderBy(t => t.Tipo)
+            .OrderBy(t => t.Id)
             .ToListAsync(cancellationToken);
 
         return result;
