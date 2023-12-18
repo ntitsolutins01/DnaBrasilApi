@@ -2362,6 +2362,41 @@
         }
       }
     },
+    "/api/Questionarios/TipoLaudo/{id}": {
+      "get": {
+        "tags": [
+          "Questionarios"
+        ],
+        "operationId": "GetQuestionarioByTipoLaudo",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/QuestionarioDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Questionarios/Questionario/{id}": {
       "get": {
         "tags": [
@@ -2387,6 +2422,168 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/QuestionarioDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Respostas": {
+      "get": {
+        "tags": [
+          "Respostas"
+        ],
+        "operationId": "GetRespostasAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RespostaDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Respostas"
+        ],
+        "operationId": "CreateResposta",
+        "requestBody": {
+          "x-name": "command",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRespostaCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Respostas/{id}": {
+      "put": {
+        "tags": [
+          "Respostas"
+        ],
+        "operationId": "UpdateResposta",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateRespostaCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Respostas"
+        ],
+        "operationId": "DeleteResposta",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Respostas/Resposta/{id}": {
+      "get": {
+        "tags": [
+          "Respostas"
+        ],
+        "operationId": "GetRespostaById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaDto"
                 }
               }
             }
@@ -7067,6 +7264,60 @@
           "tipoLaudoId": {
             "type": "integer",
             "format": "int32"
+          }
+        }
+      },
+      "RespostaDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "respostaQuestionario": {
+            "type": "string"
+          },
+          "questionario": {
+            "$ref": "#/components/schemas/QuestionarioDto"
+          }
+        }
+      },
+      "CreateRespostaCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "respostaQuestionario"
+        ],
+        "properties": {
+          "respostaQuestionario": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "nullable": false
+          },
+          "questionarioId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "UpdateRespostaCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "respostaQuestionario"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "respostaQuestionario": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "nullable": false
           }
         }
       },

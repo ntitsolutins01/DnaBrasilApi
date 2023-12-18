@@ -4,6 +4,7 @@ using DnaBrasilApi.Application.Questionarios.Commands.DeleteQuestionario;
 using DnaBrasilApi.Application.Questionarios.Commands.UpdateQuestionario;
 using DnaBrasilApi.Application.Questionarios.Queries;
 using DnaBrasilApi.Application.Questionarios.Queries.GetQuestionarioAll;
+using DnaBrasilApi.Application.Questionarios.Queries.GetQuestionarioByTipoLaudo;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -17,7 +18,13 @@ public class Questionarios : EndpointGroupBase
             .MapPost(CreateQuestionario)
             .MapPut(UpdateQuestionario, "{id}")
             .MapDelete(DeleteQuestionario, "{id}")
+            .MapGet(GetQuestionarioByTipoLaudo, "TipoLaudo/{id}")
             .MapGet(GetQuestionarioById, "Questionario/{id}");
+    }
+
+    public async Task<List<QuestionarioDto>> GetQuestionarioByTipoLaudo(ISender sender, int id)
+    {
+        return await sender.Send(new GetQuestionarioByTipoLaudoQuery() { TipoLaudoId = id });
     }
 
     public async Task<List<QuestionarioDto>> GetQuestionariosAll(ISender sender)
