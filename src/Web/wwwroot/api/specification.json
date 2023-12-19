@@ -7305,9 +7305,6 @@
       "UpdateRespostaCommand": {
         "type": "object",
         "additionalProperties": false,
-        "required": [
-          "respostaQuestionario"
-        ],
         "properties": {
           "id": {
             "type": "integer",
@@ -7316,8 +7313,7 @@
           "respostaQuestionario": {
             "type": "string",
             "maxLength": 100,
-            "minLength": 1,
-            "nullable": false
+            "minLength": 0
           }
         }
       },
