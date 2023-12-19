@@ -5,7 +5,7 @@ public class CreateRespostaCommandValidator : AbstractValidator<CreateRespostaCo
     public CreateRespostaCommandValidator()
     {
         RuleFor(v => v.RespostaQuestionario)
-            .MaximumLength(100)
+            .MaximumLength(300)
             .NotEmpty();
     }
 }

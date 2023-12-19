@@ -8,7 +8,7 @@ internal class RespostaConfiguration : IEntityTypeConfiguration<Resposta>
     public void Configure(EntityTypeBuilder<Resposta> builder)
     {
         builder.Property(t => t.RespostaQuestionario)
-            .HasMaxLength(100)
+            .HasMaxLength(300)
             .IsRequired();
     }
 }

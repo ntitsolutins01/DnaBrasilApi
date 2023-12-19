@@ -7292,7 +7292,7 @@
         "properties": {
           "respostaQuestionario": {
             "type": "string",
-            "maxLength": 100,
+            "maxLength": 300,
             "minLength": 1,
             "nullable": false
           },
@@ -7312,7 +7312,7 @@
           },
           "respostaQuestionario": {
             "type": "string",
-            "maxLength": 100,
+            "maxLength": 300,
             "minLength": 0
           }
         }
