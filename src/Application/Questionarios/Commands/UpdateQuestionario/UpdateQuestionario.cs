@@ -27,15 +27,8 @@ public class UpdateQuestionarioCommandHandler : IRequestHandler<UpdateQuestionar
 
         Guard.Against.NotFound(request.Id, entity);
 
-        var tipoLaudo = await _context.TipoLaudos
-            .FindAsync(new object[] { request.TipoLaudoId }, cancellationToken);
-
-        Guard.Against.NotFound(request.TipoLaudoId, tipoLaudo);
-
         entity.Pergunta = request.Pergunta;
-        entity.TipoLaudo = tipoLaudo;
         
-
         var result = await _context.SaveChangesAsync(cancellationToken);
 
         return result == 1;//true

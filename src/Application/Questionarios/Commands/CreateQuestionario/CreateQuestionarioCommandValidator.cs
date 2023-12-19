@@ -4,8 +4,7 @@ public class CreateQuestionarioCommandValidator : AbstractValidator<CreateQuesti
 {
     public CreateQuestionarioCommandValidator()
     {
-        RuleFor(v => v.TipoLaudoId)
-            .NotEqual(0);
+        
         RuleFor(v => v.Pergunta)
             .MaximumLength(400)
             .NotEmpty();
