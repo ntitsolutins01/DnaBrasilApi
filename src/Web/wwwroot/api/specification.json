@@ -1638,6 +1638,38 @@
         }
       }
     },
+    "/api/Parceiros/Parceiro/{id}": {
+      "get": {
+        "tags": [
+          "Parceiros"
+        ],
+        "operationId": "GetParceiroById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ParceiroDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Perfis": {
       "get": {
         "tags": [
@@ -5077,8 +5109,8 @@
             "additionalProperties": false,
             "properties": {
               "aspNetUserId": {
-                "type": "integer",
-                "format": "int32"
+                "type": "string",
+                "nullable": true
               },
               "municipio": {
                 "nullable": true,
@@ -5089,20 +5121,24 @@
                 ]
               },
               "nome": {
-                "type": "string"
+                "type": "string",
+                "nullable": true
               },
               "email": {
-                "type": "string"
+                "type": "string",
+                "nullable": true
               },
               "tipoParceria": {
                 "type": "integer",
                 "format": "int32"
               },
               "tipoPessoa": {
-                "type": "string"
+                "type": "string",
+                "nullable": true
               },
               "cpfCnpj": {
-                "type": "string"
+                "type": "string",
+                "nullable": true
               },
               "telefone": {
                 "type": "string",
@@ -6661,8 +6697,8 @@
         ],
         "properties": {
           "aspNetUserId": {
-            "type": "integer",
-            "format": "int32"
+            "type": "string",
+            "nullable": true
           },
           "municipio": {
             "nullable": true,
@@ -6769,8 +6805,8 @@
             "format": "int32"
           },
           "aspNetUserId": {
-            "type": "integer",
-            "format": "int32"
+            "type": "string",
+            "nullable": true
           },
           "municipio": {
             "nullable": true,

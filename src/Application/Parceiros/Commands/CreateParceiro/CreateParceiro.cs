@@ -5,7 +5,7 @@ namespace DnaBrasilApi.Application.Parceiros.Commands.CreateParceiro;
 
 public record CreateParceiroCommand : IRequest<int>
 {
-    public int AspNetUserId { get; set; }
+    public string? AspNetUserId { get; set; }
     public Municipio? Municipio { get; set; }
     public required string Nome { get; set; }
     public required string Email { get; set; }

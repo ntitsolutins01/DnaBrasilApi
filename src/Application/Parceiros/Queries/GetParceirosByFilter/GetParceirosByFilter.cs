@@ -36,7 +36,7 @@ public class GetParceirosByFilterQueryHandler : IRequestHandler<GetParceirosByFi
     private IQueryable<Parceiro> FilterParceiros(IQueryable<Parceiro> Parceiros, SearchParceirosDto search)
     {
         if (!string.IsNullOrWhiteSpace(search.Nome))
-            Parceiros = Parceiros.Where(u => u.Nome.Contains(search.Nome));
+            Parceiros = Parceiros.Where(u => u.Nome!.Contains(search.Nome));
 
         //TODO: Fabio favor verificar erro
         //if (!string.IsNullOrWhiteSpace(search.SoliticaoesContrato))

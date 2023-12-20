@@ -7,7 +7,7 @@ namespace DnaBrasilApi.Application.Parceiros.Commands.UpdateParceiro;
 public record UpdateParceiroCommand : IRequest<bool>
 {
     public int Id { get; init; }
-    public int AspNetUserId { get; init; }
+    public string? AspNetUserId { get; init; }
     public Municipio? Municipio { get; init; }
     public required string Nome { get; init; }
     public required string Email { get; init; }
