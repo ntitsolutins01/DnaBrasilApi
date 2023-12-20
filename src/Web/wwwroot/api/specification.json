@@ -2185,6 +2185,69 @@
         }
       }
     },
+    "/api/Profissionais/Email/{email}": {
+      "get": {
+        "tags": [
+          "Profissionais"
+        ],
+        "operationId": "GetProfissionalByEmail",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfissionalDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Profissionais/Cpf": {
+      "get": {
+        "tags": [
+          "Profissionais"
+        ],
+        "operationId": "GetProfissionalByCpfCnpj",
+        "parameters": [
+          {
+            "name": "cpfCnpj",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfissionalDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/QualidadeDeVidas": {
       "post": {
         "tags": [
@@ -5008,7 +5071,7 @@
               "sexo": {
                 "type": "string"
               },
-              "cpf": {
+              "cpfCnpj": {
                 "type": "string"
               },
               "telefone": {
@@ -7037,7 +7100,7 @@
           "dtNascimento",
           "email",
           "sexo",
-          "cpf",
+          "cpfCnpj",
           "status"
         ],
         "properties": {
@@ -7066,7 +7129,7 @@
             "minLength": 1,
             "nullable": false
           },
-          "cpf": {
+          "cpfCnpj": {
             "type": "string",
             "maxLength": 14,
             "minLength": 1,

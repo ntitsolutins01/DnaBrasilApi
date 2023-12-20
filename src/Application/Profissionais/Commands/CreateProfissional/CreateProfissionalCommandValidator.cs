@@ -29,7 +29,7 @@ public class CreateProfissionalCommandValidator : AbstractValidator<CreateProfis
             .NotEmpty().WithMessage("É necessário um endereço de e-mail")
             .EmailAddress().WithMessage("É necessário um e-mail válido");
 
-        RuleFor(v => v.Cpf)
+        RuleFor(v => v.CpfCnpj)
             .NotEmpty()
             .MaximumLength(14)
             .MustAsync(BeUniquCpf)
@@ -66,6 +66,6 @@ public class CreateProfissionalCommandValidator : AbstractValidator<CreateProfis
     public async Task<bool> BeUniquCpf(string cpf, CancellationToken cancellationToken)
     {
         return await _context.Profissionais
-            .AllAsync(l => l.Cpf != cpf, cancellationToken);
+            .AllAsync(l => l.CpfCnpj != cpf, cancellationToken);
     }
 }
