@@ -12,7 +12,7 @@ public class Profissional : BaseAuditableEntity
     public required DateTime DtNascimento { get; set; }
     public required string Email { get; set; }
     public required string Sexo { get; set; }
-    public required string Cpf { get; set; }
+    public required string CpfCnpj { get; set; }
     public string? Telefone { get; set; }
     public string? Celular { get; set; }
     public string? Endereco { get; set; }

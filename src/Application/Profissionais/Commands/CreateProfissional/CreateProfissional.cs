@@ -8,7 +8,7 @@ public record CreateProfissionalCommand : IRequest<int>
     public DateTime DtNascimento { get; init; }
     public required string Email { get; init; }
     public required string Sexo { get; init; }
-    public required string Cpf { get; init; }
+    public required string CpfCnpj { get; init; }
     public string? Telefone { get; init; }
     public string? Celular { get; init; }
     public string? Endereco { get; init; }
@@ -45,7 +45,7 @@ public class CreateProfissionalCommandHandler : IRequestHandler<CreateProfission
             DtNascimento = request.DtNascimento,
             Email = request.Email,
             Sexo = request.Sexo,
-            Cpf = request.Cpf,
+            CpfCnpj = request.CpfCnpj,
             Telefone = request.Telefone,
             Celular = request.Celular,
             Endereco = request.Endereco,

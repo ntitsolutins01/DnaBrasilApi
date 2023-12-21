@@ -67,6 +67,6 @@ public class CreateAlunoCommandValidator : AbstractValidator<CreateAlunoCommand>
     public async Task<bool> BeUniquCpf(string cpf, CancellationToken cancellationToken)
     {
         return await _context.Profissionais
-            .AllAsync(l => l.Cpf != cpf, cancellationToken);
+            .AllAsync(l => l.CpfCnpj != cpf, cancellationToken);
     }
 }

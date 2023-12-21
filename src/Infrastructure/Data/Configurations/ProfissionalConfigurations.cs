@@ -23,7 +23,7 @@ public class ProfissionalConfigurations : IEntityTypeConfiguration<Profissional>
         builder.Property(t => t.Sexo)
             .HasMaxLength(1)
             .IsRequired();
-        builder.Property(t => t.Cpf)
+        builder.Property(t => t.CpfCnpj)
             .HasMaxLength(14)
             .IsRequired();
         builder.Property(t => t.Telefone)
