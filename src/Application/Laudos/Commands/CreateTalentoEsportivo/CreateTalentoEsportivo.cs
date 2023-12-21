@@ -34,7 +34,6 @@ public class CreateTalentoEsportivoCommandHandler : IRequestHandler<CreateTalent
             Velocidade = request.Velocidade,
             ImpulsaoHorizontal = request.ImpulsaoHorizontal,
             AptidaoFisica = request.AptidaoFisica,
-            Agilidade = request.Agilidade,
             Abdominal = request.Abdominal
         };
 

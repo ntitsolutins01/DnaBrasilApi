@@ -16,8 +16,6 @@ public class TalentoEsportivoConfiguration : IEntityTypeConfiguration<TalentoEsp
             .IsRequired();
         builder.Property(t => t.PreensaoManual)
             .IsRequired();
-        builder.Property(t => t.Agilidade)
-            .IsRequired();
         builder.Property(t => t.Velocidade)
             .IsRequired();
         builder.Property(t => t.Abdominal)

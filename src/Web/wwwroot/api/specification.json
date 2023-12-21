@@ -5518,11 +5518,6 @@
                 "format": "decimal",
                 "nullable": true
               },
-              "agilidade": {
-                "type": "number",
-                "format": "decimal",
-                "nullable": true
-              },
               "abdominal": {
                 "type": "number",
                 "format": "decimal",
@@ -5539,8 +5534,7 @@
                 "nullable": true
               },
               "encaminhamento": {
-                "type": "number",
-                "format": "decimal",
+                "type": "string",
                 "nullable": true
               },
               "altura": {

@@ -36,7 +36,6 @@ public class UpdateTalentoEsportivoCommandHandler : IRequestHandler<UpdateTalent
         entity.Velocidade = request.Velocidade;
         entity.ImpulsaoHorizontal = request.ImpulsaoHorizontal;
         entity.AptidaoFisica = request.AptidaoFisica;
-        entity.Agilidade = request.Agilidade;
         entity.Abdominal = request.Abdominal;
 
         await _context.SaveChangesAsync(cancellationToken);
