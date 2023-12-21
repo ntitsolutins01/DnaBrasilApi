@@ -46,6 +46,10 @@ public class AlunoDto
     //public DependenciaDto? Dependencia { get; set; }
     //public List<LaudoDto>? Laudos { get; set; }
 
+    public int MunicipioId { get; set; }
+    public string? NomeMunicipio { get; set; }
+    public int LocalidadeId { get; set; }
+    public string? NomeLocalidade { get; set; }
     private class Mapping : Profile
     {
         public Mapping()
@@ -55,12 +59,37 @@ public class AlunoDto
                 .ForMember(dest => dest.NomeMunicipio, opt => opt.MapFrom(src => src.Municipio!.Nome))
                 .ForMember(dest => dest.LocalidadeId, opt => opt.MapFrom(src => src.Localidade!.Id))
                 .ForMember(dest => dest.NomeLocalidade, opt => opt.MapFrom(src => src.Localidade!.Nome))
+                .ForMember(dest => dest.Idade, opt => opt.MapFrom(src => GetIdade(src.DtNascimento,null)))
                 .ForMember(dest => dest.Sexo, opt => opt.MapFrom(src => src.Sexo == "F" ? "Feminino" : "Masculino"));
         }
     }
+    /// <summary>
+    /// Calcula quantidade de anos passdos com base em duas datas, caso encontre qualquer problema retorna 0 
+    /// </summary>
+    /// <param name="data">Data inicial</param>
+    /// <param name="now">Data final ou deixar nula para data atual</param>
+    /// <returns>Retorna inteiro com quantiadde de anos</returns>
+    public static int GetIdade(DateTime data, DateTime? now = null)
+    {
+        // Carrega a data do dia para comparação caso data informada seja nula
 
-    public int MunicipioId { get; set; }
-    public string? NomeMunicipio { get; set; }
-    public int LocalidadeId { get; set; }
-    public string? NomeLocalidade { get; set; }
+        now = ((now == null) ? DateTime.Now : now);
+
+        try
+        {
+            int YearsOld = (now.Value.Year - data.Year);
+
+            if (now.Value.Month < data.Month || (now.Value.Month == data.Month && now.Value.Day < data.Day))
+            {
+                YearsOld--;
+            }
+
+            return (YearsOld < 0) ? 0 : YearsOld;
+        }
+        catch
+        {
+            return 0;
+        }
+    }
+
 }
