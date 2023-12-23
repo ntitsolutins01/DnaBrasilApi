@@ -6,6 +6,7 @@ using DnaBrasilApi.Application.Deficiencias.Queries;
 using DnaBrasilApi.Application.Laudos.Queries;
 using DnaBrasilApi.Application.Localidades.Queries;
 using DnaBrasilApi.Application.Municipios.Queries;
+using DnaBrasilApi.Application.Parceiros.Queries;
 using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Alunos.Queries;
@@ -37,14 +38,14 @@ public class AlunoDto
 
     //public MunicipioDto? Municipio { get; set; }
     //public LocalidadeDto? Localidade { get; set; }
-    //public Parceiro? Parceiro { get; set; }
+    //public ParceiroDto? Parceiro { get; set; }
     public List<DeficienciaDto>? Deficiencias { get; set; }
     //public List<AmbienteDto>? Ambientes { get; set; }
     //public List<ContratoDto>? Contratos { get; set; }
     public MatriculaDto? Matricula { get; set; }
     public VoucherDto? Voucher { get; set; }
     //public DependenciaDto? Dependencia { get; set; }
-    //public List<LaudoDto>? Laudos { get; set; }
+    public List<LaudoDto>? Laudos { get; set; }
 
     public int MunicipioId { get; set; }
     public string? NomeMunicipio { get; set; }
