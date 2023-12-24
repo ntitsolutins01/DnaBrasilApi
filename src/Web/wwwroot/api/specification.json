@@ -612,7 +612,14 @@
         },
         "responses": {
           "200": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
           }
         }
       },
@@ -6448,18 +6455,20 @@
         "additionalProperties": false,
         "properties": {
           "nome": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "descricao": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "dtIni": {
             "type": "string",
-            "format": "date-time"
+            "nullable": true
           },
           "dtFim": {
             "type": "string",
-            "format": "date-time"
+            "nullable": true
           },
           "anexo": {
             "type": "string",
@@ -6479,7 +6488,8 @@
             "format": "int32"
           },
           "nome": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "descricao": {
             "type": "string",
@@ -6487,11 +6497,11 @@
           },
           "dtIni": {
             "type": "string",
-            "format": "date-time"
+            "nullable": true
           },
           "dtFim": {
             "type": "string",
-            "format": "date-time"
+            "nullable": true
           },
           "anexo": {
             "type": "string",

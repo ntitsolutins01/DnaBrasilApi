@@ -4,10 +4,10 @@ using DnaBrasilApi.Domain.Entities;
 namespace DnaBrasilApi.Application.Contratos.Commands.CreateContrato;
 public record CreateContratoCommand : IRequest<int>
 {
-    public required string Nome { get; set; }
-    public required string Descricao { get; set; }
-    public required DateTime DtIni { get; set; }
-    public required DateTime DtFim { get; set; }
+    public string? Nome { get; set; }
+    public string? Descricao { get; set; }
+    public string? DtIni { get; set; }
+    public string? DtFim { get; set; }
     public string? Anexo { get; set; }
     public bool Status { get; set; } = true;
 }
@@ -25,10 +25,10 @@ public class CreateContratoCommandHandler : IRequestHandler<CreateContratoComman
     {
         var entity = new Contrato
         {
-            Nome = request.Nome,
+            Nome = request.Nome!,
             Descricao = request.Descricao,
-            DtIni = request.DtIni,
-            DtFim = request.DtFim,
+            DtIni = Convert.ToDateTime(request.DtIni),
+            DtFim = Convert.ToDateTime(request.DtFim),
             Anexo = request.Anexo,
             Status = request.Status
 
