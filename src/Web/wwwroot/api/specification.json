@@ -4656,23 +4656,25 @@
             "format": "int32"
           },
           "aspNetUserId": {
-            "type": "integer",
-            "format": "int32"
+            "type": "string",
+            "nullable": true
           },
           "nome": {
             "type": "string"
           },
           "dtNascimento": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "nullable": true
           },
           "email": {
             "type": "string"
           },
           "sexo": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
-          "cpf": {
+          "cpfCnpj": {
             "type": "string"
           },
           "telefone": {
@@ -4703,95 +4705,17 @@
           "status": {
             "type": "boolean"
           },
-          "municipio": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/MunicipioDto"
-              }
-            ]
-          },
-          "ambientes": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/AmbienteDto"
-            }
-          },
-          "contratos": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/ContratoDto"
-            }
-          }
-        }
-      },
-      "MunicipioDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
+          "estadoId": {
             "type": "integer",
             "format": "int32"
           },
-          "codigo": {
+          "uf": {
+            "type": "string",
+            "nullable": true
+          },
+          "municipioId": {
             "type": "integer",
             "format": "int32"
-          },
-          "nome": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
-      "AmbienteDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nome": {
-            "type": "string",
-            "nullable": true
-          },
-          "status": {
-            "type": "boolean"
-          }
-        }
-      },
-      "ContratoDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nome": {
-            "type": "string",
-            "nullable": true
-          },
-          "descricao": {
-            "type": "string",
-            "nullable": true
-          },
-          "dtIni": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "dtFim": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "anexo": {
-            "type": "string",
-            "nullable": true
-          },
-          "status": {
-            "type": "boolean"
           }
         }
       },
@@ -5477,21 +5401,23 @@
             "additionalProperties": false,
             "properties": {
               "aspNetUserId": {
-                "type": "integer",
-                "format": "int32"
+                "type": "string",
+                "nullable": true
               },
               "nome": {
                 "type": "string"
               },
               "dtNascimento": {
                 "type": "string",
-                "format": "date-time"
+                "format": "date-time",
+                "nullable": true
               },
               "email": {
                 "type": "string"
               },
               "sexo": {
-                "type": "string"
+                "type": "string",
+                "nullable": true
               },
               "cpfCnpj": {
                 "type": "string"
@@ -6295,6 +6221,23 @@
           }
         }
       },
+      "AmbienteDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "boolean"
+          }
+        }
+      },
       "CreateAmbienteCommand": {
         "type": "object",
         "additionalProperties": false,
@@ -6450,6 +6393,39 @@
           }
         }
       },
+      "ContratoDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true
+          },
+          "descricao": {
+            "type": "string",
+            "nullable": true
+          },
+          "dtIni": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "dtFim": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "anexo": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "boolean"
+          }
+        }
+      },
       "CreateContratoCommand": {
         "type": "object",
         "additionalProperties": false,
@@ -6577,6 +6553,24 @@
             "items": {
               "$ref": "#/components/schemas/MunicipioDto"
             }
+          }
+        }
+      },
+      "MunicipioDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "codigo": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -7350,13 +7344,15 @@
         "additionalProperties": false,
         "required": [
           "nome",
-          "dtNascimento",
           "email",
-          "sexo",
-          "cpfCnpj",
+          "cpf",
           "status"
         ],
         "properties": {
+          "aspNetUserId": {
+            "type": "string",
+            "nullable": true
+          },
           "nome": {
             "type": "string",
             "maxLength": 150,
@@ -7365,9 +7361,7 @@
           },
           "dtNascimento": {
             "type": "string",
-            "format": "date-time",
-            "minLength": 1,
-            "nullable": false
+            "nullable": true
           },
           "email": {
             "type": "string",
@@ -7378,11 +7372,9 @@
           },
           "sexo": {
             "type": "string",
-            "maxLength": 1,
-            "minLength": 1,
-            "nullable": false
+            "nullable": true
           },
-          "cpfCnpj": {
+          "cpf": {
             "type": "string",
             "maxLength": 14,
             "minLength": 1,
@@ -7390,16 +7382,10 @@
           },
           "telefone": {
             "type": "string",
-            "maxLength": 14,
-            "minLength": 0,
-            "pattern": "((\\(\\d{3}\\) ?)|(\\d{3}-))?\\d{3}-\\d{4}",
             "nullable": true
           },
           "celular": {
             "type": "string",
-            "maxLength": 14,
-            "minLength": 0,
-            "pattern": "((\\(\\d{3}\\) ?)|(\\d{3}-))?\\d{3}-\\d{4}",
             "nullable": true
           },
           "endereco": {
@@ -7410,7 +7396,8 @@
           },
           "numero": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "cep": {
             "type": "string",
@@ -7434,9 +7421,8 @@
             "format": "int32",
             "nullable": true
           },
-          "aspNetUserId": {
-            "type": "integer",
-            "format": "int32"
+          "habilitado": {
+            "type": "boolean"
           }
         }
       },

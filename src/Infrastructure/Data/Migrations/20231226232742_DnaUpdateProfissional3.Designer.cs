@@ -4,6 +4,7 @@ using DnaBrasilApi.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DnaBrasilApi.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231226232742_DnaUpdateProfissional3")]
+    partial class DnaUpdateProfissional3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1007,7 +1010,7 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("Celular")
+                    b.Property<string>("Celulars")
                         .HasMaxLength(14)
                         .HasColumnType("nvarchar(14)");
 
@@ -1026,7 +1029,7 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("DtNascimento")
+                    b.Property<DateTime?>("DtNascimentos")
                         .IsRequired()
                         .HasColumnType("datetime2");
 
@@ -1056,7 +1059,7 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.Property<int?>("Numero")
                         .HasColumnType("int");
 
-                    b.Property<string>("Sexo")
+                    b.Property<string>("Sexos")
                         .IsRequired()
                         .HasMaxLength(1)
                         .HasColumnType("nvarchar(1)");
@@ -1064,7 +1067,7 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Telefone")
+                    b.Property<string>("Telefones")
                         .HasMaxLength(14)
                         .HasColumnType("nvarchar(14)");
 
