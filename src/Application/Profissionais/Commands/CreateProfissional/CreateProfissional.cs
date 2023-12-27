@@ -46,13 +46,19 @@ public class CreateProfissionalCommandHandler : IRequestHandler<CreateProfission
 
         if (!string.IsNullOrWhiteSpace(request.AmbientesIds))
         {
-            foreach (var id in request.AmbientesIds.Split(',').ToList())
+            List<int> listIds = request.AmbientesIds.Split(',').Select(s => Convert.ToInt32(s)).ToList();
+
+            foreach (int id in listIds)
             {
                 var ambiente = await _context.Ambientes
                     .FindAsync(new object[] { id }, cancellationToken);
 
                 list.Add(ambiente!);
             }
+        }
+        else
+        {
+            list = null;
         }
 
         var entity = new Profissional
