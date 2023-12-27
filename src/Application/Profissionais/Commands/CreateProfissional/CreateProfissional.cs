@@ -20,6 +20,7 @@ public record CreateProfissionalCommand : IRequest<int>
     public bool Status { get; init; } = true;
     public int? MunicipioId { get; init; }
     public bool Habilitado { get; init; }
+    public string? AmbientesIds { get; init; }
 }
 
 public class CreateProfissionalCommandHandler : IRequestHandler<CreateProfissionalCommand, int>
@@ -41,6 +42,19 @@ public class CreateProfissionalCommandHandler : IRequestHandler<CreateProfission
                 .FindAsync(new object[] { request.MunicipioId }, cancellationToken);
         }
 
+        var list = new List<Ambiente>();
+
+        if (!string.IsNullOrWhiteSpace(request.AmbientesIds))
+        {
+            foreach (var id in request.AmbientesIds.Split(',').ToList())
+            {
+                var ambiente = await _context.Ambientes
+                    .FindAsync(new object[] { id }, cancellationToken);
+
+                list.Add(ambiente!);
+            }
+        }
+
         var entity = new Profissional
         {
             Nome = request.Nome!,
@@ -55,7 +69,8 @@ public class CreateProfissionalCommandHandler : IRequestHandler<CreateProfission
             Cep = request.Cep,
             Bairro = request.Bairro,
             Municipio = municipio,
-            AspNetUserId = request.AspNetUserId!
+            AspNetUserId = request.AspNetUserId!,
+            Ambientes = list
         };
 
         _context.Profissionais.Add(entity);
