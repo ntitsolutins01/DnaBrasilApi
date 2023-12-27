@@ -35,11 +35,11 @@ public class Contratos : EndpointGroupBase
         return await sender.Send(command);
     }
 
-    public async Task<IResult> UpdateContrato(ISender sender, int id, UpdateContratoCommand command)
+    public async Task<bool> UpdateContrato(ISender sender, int id, UpdateContratoCommand command)
     {
-        if (id != command.Id) return Results.BadRequest();
-        await sender.Send(command);
-        return Results.NoContent();
+        if (id != command.Id) return false;
+        var result = await sender.Send(command);
+        return result;
     }
 
     public async Task<IResult> DeleteContrato(ISender sender, int id)

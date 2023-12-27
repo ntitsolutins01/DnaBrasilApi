@@ -612,7 +612,14 @@
         },
         "responses": {
           "200": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
           }
         }
       },
@@ -1638,6 +1645,38 @@
         }
       }
     },
+    "/api/Parceiros/Parceiro/{id}": {
+      "get": {
+        "tags": [
+          "Parceiros"
+        ],
+        "operationId": "GetParceiroById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ParceiroDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Perfis": {
       "get": {
         "tags": [
@@ -2153,6 +2192,69 @@
         }
       }
     },
+    "/api/Profissionais/Email/{email}": {
+      "get": {
+        "tags": [
+          "Profissionais"
+        ],
+        "operationId": "GetProfissionalByEmail",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfissionalDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Profissionais/Cpf": {
+      "get": {
+        "tags": [
+          "Profissionais"
+        ],
+        "operationId": "GetProfissionalByCpfCnpj",
+        "parameters": [
+          {
+            "name": "cpfCnpj",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfissionalDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/QualidadeDeVidas": {
       "post": {
         "tags": [
@@ -2225,6 +2327,365 @@
               "application/json": {
                 "schema": {
                   "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Questionarios": {
+      "get": {
+        "tags": [
+          "Questionarios"
+        ],
+        "operationId": "GetQuestionariosAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/QuestionarioDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Questionarios"
+        ],
+        "operationId": "CreateQuestionario",
+        "requestBody": {
+          "x-name": "command",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateQuestionarioCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Questionarios/{id}": {
+      "put": {
+        "tags": [
+          "Questionarios"
+        ],
+        "operationId": "UpdateQuestionario",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateQuestionarioCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Questionarios"
+        ],
+        "operationId": "DeleteQuestionario",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Questionarios/TipoLaudo/{id}": {
+      "get": {
+        "tags": [
+          "Questionarios"
+        ],
+        "operationId": "GetQuestionarioByTipoLaudo",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/QuestionarioDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Questionarios/Questionario/{id}": {
+      "get": {
+        "tags": [
+          "Questionarios"
+        ],
+        "operationId": "GetQuestionarioById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuestionarioDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Respostas": {
+      "get": {
+        "tags": [
+          "Respostas"
+        ],
+        "operationId": "GetRespostasAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RespostaDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Respostas"
+        ],
+        "operationId": "CreateResposta",
+        "requestBody": {
+          "x-name": "command",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRespostaCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Respostas/{id}": {
+      "put": {
+        "tags": [
+          "Respostas"
+        ],
+        "operationId": "UpdateResposta",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateRespostaCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Respostas"
+        ],
+        "operationId": "DeleteResposta",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Respostas/Resposta/{id}": {
+      "get": {
+        "tags": [
+          "Respostas"
+        ],
+        "operationId": "GetRespostaById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaDto"
                 }
               }
             }
@@ -4303,10 +4764,6 @@
                 "type": "integer",
                 "format": "int32"
               },
-              "idade": {
-                "type": "integer",
-                "format": "int32"
-              },
               "municipio": {
                 "nullable": true,
                 "oneOf": [
@@ -4601,23 +5058,25 @@
             "additionalProperties": false,
             "properties": {
               "aspNetUserId": {
-                "type": "integer",
-                "format": "int32"
+                "type": "string",
+                "nullable": true
               },
               "nome": {
                 "type": "string"
               },
               "dtNascimento": {
                 "type": "string",
-                "format": "date-time"
+                "format": "date-time",
+                "nullable": true
               },
               "email": {
                 "type": "string"
               },
               "sexo": {
-                "type": "string"
+                "type": "string",
+                "nullable": true
               },
-              "cpf": {
+              "cpfCnpj": {
                 "type": "string"
               },
               "telefone": {
@@ -4646,6 +5105,9 @@
                 "nullable": true
               },
               "status": {
+                "type": "boolean"
+              },
+              "habilitado": {
                 "type": "boolean"
               },
               "municipio": {
@@ -4718,8 +5180,8 @@
             "additionalProperties": false,
             "properties": {
               "aspNetUserId": {
-                "type": "integer",
-                "format": "int32"
+                "type": "string",
+                "nullable": true
               },
               "municipio": {
                 "nullable": true,
@@ -5040,38 +5502,57 @@
                 "$ref": "#/components/schemas/Profissional"
               },
               "flexibilidade": {
-                "type": "integer",
-                "format": "int32",
+                "type": "number",
+                "format": "decimal",
                 "nullable": true
               },
               "preensaoManual": {
-                "type": "integer",
-                "format": "int32",
+                "type": "number",
+                "format": "decimal",
                 "nullable": true
               },
               "velocidade": {
-                "type": "integer",
-                "format": "int32",
+                "type": "number",
+                "format": "decimal",
                 "nullable": true
               },
               "impulsaoHorizontal": {
-                "type": "integer",
-                "format": "int32",
+                "type": "number",
+                "format": "decimal",
                 "nullable": true
               },
               "aptidaoFisica": {
-                "type": "integer",
-                "format": "int32",
-                "nullable": true
-              },
-              "agilidade": {
-                "type": "integer",
-                "format": "int32",
+                "type": "number",
+                "format": "decimal",
                 "nullable": true
               },
               "abdominal": {
-                "type": "integer",
-                "format": "int32",
+                "type": "number",
+                "format": "decimal",
+                "nullable": true
+              },
+              "imc": {
+                "type": "number",
+                "format": "decimal",
+                "nullable": true
+              },
+              "quadrado": {
+                "type": "number",
+                "format": "decimal",
+                "nullable": true
+              },
+              "encaminhamento": {
+                "type": "string",
+                "nullable": true
+              },
+              "altura": {
+                "type": "number",
+                "format": "decimal",
+                "nullable": true
+              },
+              "peso": {
+                "type": "number",
+                "format": "decimal",
                 "nullable": true
               }
             }
@@ -5112,7 +5593,7 @@
               "pergunta": {
                 "type": "string"
               },
-              "tipo": {
+              "tipoLaudo": {
                 "$ref": "#/components/schemas/TipoLaudo"
               }
             }
@@ -5129,12 +5610,14 @@
             "additionalProperties": false,
             "properties": {
               "nome": {
-                "type": "string",
-                "nullable": true
+                "type": "string"
               },
               "descricao": {
                 "type": "string",
                 "nullable": true
+              },
+              "status": {
+                "type": "boolean"
               }
             }
           }
@@ -5538,23 +6021,25 @@
             "format": "int32"
           },
           "aspNetUserId": {
-            "type": "integer",
-            "format": "int32"
+            "type": "string",
+            "nullable": true
           },
           "nome": {
             "type": "string"
           },
           "dtNascimento": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "nullable": true
           },
           "email": {
             "type": "string"
           },
           "sexo": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
-          "cpf": {
+          "cpfCnpj": {
             "type": "string"
           },
           "telefone": {
@@ -5569,11 +6054,6 @@
             "type": "string",
             "nullable": true
           },
-          "numero": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
           "cep": {
             "type": "string",
             "nullable": true
@@ -5585,78 +6065,20 @@
           "status": {
             "type": "boolean"
           },
-          "municipio": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/MunicipioDto"
-              }
-            ]
-          },
-          "ambientes": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/AmbienteDto"
-            }
-          },
-          "contratos": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/ContratoDto"
-            }
-          }
-        }
-      },
-      "MunicipioDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "codigo": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nome": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
-      "ContratoDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nome": {
-            "type": "string",
-            "nullable": true
-          },
-          "descricao": {
-            "type": "string",
-            "nullable": true
-          },
-          "dtIni": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "dtFim": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "anexo": {
-            "type": "string",
-            "nullable": true
-          },
-          "status": {
+          "habilitado": {
             "type": "boolean"
+          },
+          "estadoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "uf": {
+            "type": "string",
+            "nullable": true
+          },
+          "municipioId": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },
@@ -5664,10 +6086,14 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
           "pergunta": {
             "type": "string"
           },
-          "tipo": {
+          "tipoLaudo": {
             "$ref": "#/components/schemas/TipoLaudoDto"
           }
         }
@@ -5687,6 +6113,9 @@
           "descricao": {
             "type": "string",
             "nullable": true
+          },
+          "status": {
+            "type": "boolean"
           }
         }
       },
@@ -5750,12 +6179,17 @@
           }
         }
       },
-      "CreateContratoCommand": {
+      "ContratoDto": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
           "nome": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "descricao": {
             "type": "string",
@@ -5778,6 +6212,35 @@
           }
         }
       },
+      "CreateContratoCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "nome": {
+            "type": "string",
+            "nullable": true
+          },
+          "descricao": {
+            "type": "string",
+            "nullable": true
+          },
+          "dtIni": {
+            "type": "string",
+            "nullable": true
+          },
+          "dtFim": {
+            "type": "string",
+            "nullable": true
+          },
+          "anexo": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "boolean"
+          }
+        }
+      },
       "UpdateContratoCommand": {
         "type": "object",
         "additionalProperties": false,
@@ -5787,7 +6250,8 @@
             "format": "int32"
           },
           "nome": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "descricao": {
             "type": "string",
@@ -5795,11 +6259,11 @@
           },
           "dtIni": {
             "type": "string",
-            "format": "date-time"
+            "nullable": true
           },
           "dtFim": {
             "type": "string",
-            "format": "date-time"
+            "nullable": true
           },
           "anexo": {
             "type": "string",
@@ -5875,6 +6339,24 @@
             "items": {
               "$ref": "#/components/schemas/MunicipioDto"
             }
+          }
+        }
+      },
+      "MunicipioDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "codigo": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -6257,6 +6739,10 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
           "nome": {
             "type": "string",
             "nullable": true
@@ -6266,6 +6752,7 @@
           },
           "alunos": {
             "type": "array",
+            "nullable": true,
             "items": {
               "$ref": "#/components/schemas/AlunoDto"
             }
@@ -6275,6 +6762,18 @@
             "items": {
               "$ref": "#/components/schemas/ProfissionalDto"
             }
+          },
+          "estadoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "uf": {
+            "type": "string",
+            "nullable": true
+          },
+          "municipioId": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },
@@ -6294,8 +6793,8 @@
         ],
         "properties": {
           "aspNetUserId": {
-            "type": "integer",
-            "format": "int32"
+            "type": "string",
+            "nullable": true
           },
           "municipio": {
             "nullable": true,
@@ -6402,8 +6901,8 @@
             "format": "int32"
           },
           "aspNetUserId": {
-            "type": "integer",
-            "format": "int32"
+            "type": "string",
+            "nullable": true
           },
           "municipio": {
             "nullable": true,
@@ -6631,13 +7130,15 @@
         "additionalProperties": false,
         "required": [
           "nome",
-          "dtNascimento",
           "email",
-          "sexo",
           "cpf",
           "status"
         ],
         "properties": {
+          "aspNetUserId": {
+            "type": "string",
+            "nullable": true
+          },
           "nome": {
             "type": "string",
             "maxLength": 150,
@@ -6646,9 +7147,7 @@
           },
           "dtNascimento": {
             "type": "string",
-            "format": "date-time",
-            "minLength": 1,
-            "nullable": false
+            "nullable": true
           },
           "email": {
             "type": "string",
@@ -6659,9 +7158,7 @@
           },
           "sexo": {
             "type": "string",
-            "maxLength": 1,
-            "minLength": 1,
-            "nullable": false
+            "nullable": true
           },
           "cpf": {
             "type": "string",
@@ -6671,16 +7168,10 @@
           },
           "telefone": {
             "type": "string",
-            "maxLength": 14,
-            "minLength": 0,
-            "pattern": "((\\(\\d{3}\\) ?)|(\\d{3}-))?\\d{3}-\\d{4}",
             "nullable": true
           },
           "celular": {
             "type": "string",
-            "maxLength": 14,
-            "minLength": 0,
-            "pattern": "((\\(\\d{3}\\) ?)|(\\d{3}-))?\\d{3}-\\d{4}",
             "nullable": true
           },
           "endereco": {
@@ -6691,7 +7182,8 @@
           },
           "numero": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "cep": {
             "type": "string",
@@ -6715,9 +7207,8 @@
             "format": "int32",
             "nullable": true
           },
-          "aspNetUserId": {
-            "type": "integer",
-            "format": "int32"
+          "habilitado": {
+            "type": "boolean"
           }
         }
       },
@@ -6858,6 +7349,98 @@
           }
         }
       },
+      "CreateQuestionarioCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "pergunta"
+        ],
+        "properties": {
+          "pergunta": {
+            "type": "string",
+            "maxLength": 400,
+            "minLength": 1,
+            "nullable": false
+          },
+          "tipoLaudoId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "UpdateQuestionarioCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "pergunta"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pergunta": {
+            "type": "string",
+            "maxLength": 400,
+            "minLength": 1,
+            "nullable": false
+          },
+          "tipoLaudoId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "RespostaDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "respostaQuestionario": {
+            "type": "string"
+          },
+          "questionario": {
+            "$ref": "#/components/schemas/QuestionarioDto"
+          }
+        }
+      },
+      "CreateRespostaCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "respostaQuestionario"
+        ],
+        "properties": {
+          "respostaQuestionario": {
+            "type": "string",
+            "maxLength": 300,
+            "minLength": 1,
+            "nullable": false
+          },
+          "questionarioId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "UpdateRespostaCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "respostaQuestionario": {
+            "type": "string",
+            "maxLength": 300,
+            "minLength": 0
+          }
+        }
+      },
       "CreateSaudeBucalCommand": {
         "type": "object",
         "additionalProperties": false,
@@ -6988,6 +7571,18 @@
             "type": "string",
             "nullable": true
           },
+          "idadeInicial": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idadeFinal": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "scoreTotal": {
+            "type": "integer",
+            "format": "int32"
+          },
           "status": {
             "type": "boolean"
           }
@@ -7056,12 +7651,13 @@
         "additionalProperties": false,
         "properties": {
           "nome": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "descricao": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
+          },
+          "status": {
+            "type": "boolean"
           }
         }
       },
@@ -7074,12 +7670,14 @@
             "format": "int32"
           },
           "nome": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "descricao": {
             "type": "string",
             "nullable": true
+          },
+          "status": {
+            "type": "boolean"
           }
         }
       },

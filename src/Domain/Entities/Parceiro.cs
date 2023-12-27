@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 namespace DnaBrasilApi.Domain.Entities;
 public class Parceiro : BaseAuditableEntity
 {
-    public int AspNetUserId { get; set; }
+    public string? AspNetUserId { get; set; }
     public Municipio? Municipio { get; set; }
     public required string Nome { get; set; }
-    public required string Email { get; set; }      
+    public required string Email { get; set; }
     public required int TipoParceria { get; set; }
     public required string TipoPessoa { get; set; }
     public required string CpfCnpj { get; set; }

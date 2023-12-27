@@ -1,9 +1,9 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
 
 namespace DnaBrasilApi.Application.Questionarios.Commands.DeleteQuestionario;
-public record DeleteQuestionarioCommand(int Id) : IRequest;
+public record DeleteQuestionarioCommand(int Id) : IRequest<bool>;
 
-public class DeleteQuestionarioCommandHandler : IRequestHandler<DeleteQuestionarioCommand>
+public class DeleteQuestionarioCommandHandler : IRequestHandler<Questionarios.Commands.DeleteQuestionario.DeleteQuestionarioCommand, bool>
 {
     private readonly IApplicationDbContext _context;
 
@@ -12,7 +12,7 @@ public class DeleteQuestionarioCommandHandler : IRequestHandler<DeleteQuestionar
         _context = context;
     }
 
-    public async Task Handle(DeleteQuestionarioCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(Questionarios.Commands.DeleteQuestionario.DeleteQuestionarioCommand request, CancellationToken cancellationToken)
     {
         var entity = await _context.Questionarios
             .FindAsync(new object[] { request.Id }, cancellationToken);
@@ -21,9 +21,8 @@ public class DeleteQuestionarioCommandHandler : IRequestHandler<DeleteQuestionar
 
         _context.Questionarios.Remove(entity);
 
-        //entity.AddDomainEvent(new QuestionarioDeletedEvent(entity));
-
-        await _context.SaveChangesAsync(cancellationToken);
+        var result = await _context.SaveChangesAsync(cancellationToken);
+        return result == 1;
     }
 
 }

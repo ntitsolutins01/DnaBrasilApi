@@ -42,6 +42,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<Funcionalidade> Funcionalidades => Set<Funcionalidade>();
     public DbSet<Escolaridade> Escolaridades => Set<Escolaridade>();
     public DbSet<Fomentu> Fomentos => Set<Fomentu>();
+    public DbSet<Resposta> Respostas => Set<Resposta>();
 
 
     protected override void OnModelCreating(ModelBuilder builder)
