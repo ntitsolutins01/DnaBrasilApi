@@ -5107,6 +5107,9 @@
               "status": {
                 "type": "boolean"
               },
+              "habilitado": {
+                "type": "boolean"
+              },
               "municipio": {
                 "nullable": true,
                 "oneOf": [
@@ -6051,11 +6054,6 @@
             "type": "string",
             "nullable": true
           },
-          "numero": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
           "cep": {
             "type": "string",
             "nullable": true
@@ -6065,6 +6063,9 @@
             "nullable": true
           },
           "status": {
+            "type": "boolean"
+          },
+          "habilitado": {
             "type": "boolean"
           },
           "estadoId": {

@@ -16,10 +16,11 @@ public class ProfissionalDto
     public string? Telefone { get; set; }
     public string? Celular { get; set; }
     public string? Endereco { get; set; }
-    public int? Numero { get; set; }
+    //public int? Numero { get; set; }
     public string? Cep { get; set; }
     public string? Bairro { get; set; }
     public bool Status { get; set; } = true;
+    public bool Habilitado { get; set; } = false;
     //public List<Ambiente>? Ambientes { get; set; }
     //public List<Contrato>? Contratos { get; set; }
     public int EstadoId { get; set; }

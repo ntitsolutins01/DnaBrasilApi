@@ -20,6 +20,7 @@ public class Profissional : BaseAuditableEntity
     public string? Cep { get; set; }
     public string? Bairro { get; set; }
     public bool Status { get; set; } = true;
+    public bool Habilitado { get; set; } = false;
     public Municipio? Municipio { get; set; }
     public List<Ambiente>? Ambientes { get; set; }
     public List<Contrato>? Contratos { get; set; }
