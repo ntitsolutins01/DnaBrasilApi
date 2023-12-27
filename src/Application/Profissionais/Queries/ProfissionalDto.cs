@@ -20,7 +20,7 @@ public class ProfissionalDto
     public string? Cep { get; set; }
     public string? Bairro { get; set; }
     public bool Status { get; set; } = true;
-    public bool Habilitado { get; set; } = false;
+    public bool Habilitado { get; set; }
     //public List<Ambiente>? Ambientes { get; set; }
     //public List<Contrato>? Contratos { get; set; }
     public int EstadoId { get; set; }

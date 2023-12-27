@@ -7209,6 +7209,10 @@
           },
           "habilitado": {
             "type": "boolean"
+          },
+          "ambientesIds": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
