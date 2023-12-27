@@ -45,7 +45,7 @@ public class AlunoDto
     public MatriculaDto? Matricula { get; set; }
     public VoucherDto? Voucher { get; set; }
     //public DependenciaDto? Dependencia { get; set; }
-    public List<LaudoDto>? Laudos { get; set; }
+    //public List<LaudoDto>? Laudos { get; set; }
 
     public int MunicipioId { get; set; }
     public string? NomeMunicipio { get; set; }

@@ -44,7 +44,7 @@ public class CreateProfissionalCommandHandler : IRequestHandler<CreateProfission
         var entity = new Profissional
         {
             Nome = request.Nome!,
-            DtNascimento = request.DtNascimento==""?null:Convert.ToDateTime(request.DtNascimento),
+            DtNascimento = request.DtNascimento == "" ? null : Convert.ToDateTime(request.DtNascimento),
             Email = request.Email!,
             Sexo = request.Sexo!,
             CpfCnpj = request.Cpf!,

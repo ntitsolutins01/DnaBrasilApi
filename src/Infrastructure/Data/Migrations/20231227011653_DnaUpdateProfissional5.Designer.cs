@@ -4,6 +4,7 @@ using DnaBrasilApi.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DnaBrasilApi.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231227011653_DnaUpdateProfissional5")]
+    partial class DnaUpdateProfissional5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1026,9 +1029,6 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("DtNascimento")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(150)
@@ -1054,9 +1054,6 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
 
                     b.Property<int?>("Numero")
                         .HasColumnType("int");
-
-                    b.Property<string>("Sexo")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Status")
                         .HasColumnType("bit");

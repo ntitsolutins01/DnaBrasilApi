@@ -15,14 +15,11 @@ public class ProfissionalConfigurations : IEntityTypeConfiguration<Profissional>
         builder.Property(t => t.Nome)
             .HasMaxLength(150)
             .IsRequired();
-        builder.Property(t => t.DtNascimento)
-            .IsRequired();
         builder.Property(t => t.Email)
             .HasMaxLength(150)
             .IsRequired();
-        builder.Property(t => t.Sexo)
-            .HasMaxLength(1)
-            .IsRequired();
+        //builder.Property(t => t.Sexo)
+        //    .HasMaxLength(1);
         builder.Property(t => t.CpfCnpj)
             .HasMaxLength(14)
             .IsRequired();
