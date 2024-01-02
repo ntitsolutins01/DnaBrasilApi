@@ -4513,6 +4513,22 @@
           },
           "status": {
             "type": "boolean"
+          },
+          "municipioId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "estadoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeMunicipio": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeEstado": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
