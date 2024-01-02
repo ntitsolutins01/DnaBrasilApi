@@ -3640,7 +3640,7 @@
         "tags": [
           "Users"
         ],
-        "operationId": "MapIdentityApi-/api/Users/confirmEmail",
+        "operationId": "GetApiUsersConfirmEmail",
         "parameters": [
           {
             "name": "userId",
@@ -3689,7 +3689,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ResendEmailRequest"
+                "$ref": "#/components/schemas/ResendConfirmationEmailRequest"
               }
             }
           },
@@ -6084,6 +6084,13 @@
           "habilitado": {
             "type": "boolean"
           },
+          "ambientes": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/AmbienteDto"
+            }
+          },
           "estadoId": {
             "type": "integer",
             "format": "int32"
@@ -8062,7 +8069,7 @@
           }
         }
       },
-      "ResendEmailRequest": {
+      "ResendConfirmationEmailRequest": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -8153,12 +8160,6 @@
           },
           "isEmailConfirmed": {
             "type": "boolean"
-          },
-          "claims": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            }
           }
         }
       },
