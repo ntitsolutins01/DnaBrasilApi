@@ -6474,6 +6474,10 @@
             "type": "integer",
             "format": "int32"
           },
+          "codigo": {
+            "type": "string",
+            "nullable": true
+          },
           "nome": {
             "type": "string",
             "nullable": true
@@ -6504,6 +6508,9 @@
           "localidadeId": {
             "type": "integer",
             "format": "int32"
+          },
+          "codigo": {
+            "type": "string"
           }
         }
       },
@@ -6516,6 +6523,9 @@
             "format": "int32"
           },
           "nome": {
+            "type": "string"
+          },
+          "codigo": {
             "type": "string"
           }
         }

@@ -6,6 +6,7 @@ public record UpdateFomentoCommand : IRequest <bool>
 {
     public int Id { get; init; }
     public required string Nome { get; init; }
+    public required string Codigo { get; init; }
     //public required int MunicipioId { get; init; }
     //public required int LocalidadeId { get; init; }
 }
@@ -32,7 +33,7 @@ public class UpdateFomentoCommandHandler : IRequestHandler<UpdateFomentoCommand,
         Guard.Against.NotFound(request.Id, entity);
 
         entity.Nome = request.Nome;
-        //entity.Municipio = municipio;
+        entity.Codigo = request.Codigo;
         // entity.Localidade = localidade!;
 
         var result = await _context.SaveChangesAsync(cancellationToken);
