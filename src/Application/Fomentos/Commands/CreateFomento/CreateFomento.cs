@@ -7,6 +7,7 @@ public record CreateFomentoCommand : IRequest<int>
     public required string Nome { get; init; }
     public required int MunicipioId { get; init; }
     public required int LocalidadeId { get; init; }
+    public required string Codigo { get; set; }
 }
 
 public class CreateFomentoCommandHandler : IRequestHandler<CreateFomentoCommand, int>
@@ -28,6 +29,7 @@ public class CreateFomentoCommandHandler : IRequestHandler<CreateFomentoCommand,
 
         var entity = new Fomentu
         {
+            Codigo = request.Codigo,
             Nome = request.Nome,
             Municipio = municipio,
             Localidade = localidade!

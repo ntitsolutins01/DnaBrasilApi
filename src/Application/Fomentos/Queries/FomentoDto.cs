@@ -5,6 +5,7 @@ namespace DnaBrasilApi.Application.Fomentos.Queries;
 public class FomentoDto
 {
     public int Id { get; init; }
+    public string? Codigo { get; init; }
     public string? Nome { get; init; }
     public required Municipio Municipio { get; init; }
     public required Localidade Localidade { get; init; }

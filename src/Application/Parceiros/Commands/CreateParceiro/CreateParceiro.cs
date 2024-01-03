@@ -6,7 +6,7 @@ namespace DnaBrasilApi.Application.Parceiros.Commands.CreateParceiro;
 public record CreateParceiroCommand : IRequest<int>
 {
     public string? AspNetUserId { get; set; }
-    public Municipio? Municipio { get; set; }
+    public int? MunicipioId { get; set; }
     public required string Nome { get; set; }
     public required string Email { get; set; }
     public required int TipoParceria { get; set; }
@@ -34,6 +34,16 @@ public class CreateParceiroCommandHandler : IRequestHandler<CreateParceiroComman
 
     public async Task<int> Handle(CreateParceiroCommand request, CancellationToken cancellationToken)
     {
+        Municipio? municipio = null;
+
+        if (request.MunicipioId != null)
+        {
+            municipio = await _context.Municipios
+                .FindAsync(new object[] { request.MunicipioId }, cancellationToken);
+
+            Guard.Against.NotFound((int)request.MunicipioId, municipio);
+        }
+
         var entity = new Parceiro
         {
             Nome = request.Nome,
@@ -46,12 +56,12 @@ public class CreateParceiroCommandHandler : IRequestHandler<CreateParceiroComman
             CpfCnpj = request.CpfCnpj,
             Cep = request.Cep,
             Endereco = request.Endereco,
-            Municipio = request.Municipio,
+            Municipio = municipio,
             AspNetUserId = request.AspNetUserId,
             Habilitado = request.Habilitado,
             Email = request.Email,
             Bairro = request.Bairro,
-            Numero = request.Numero,
+            Numero = request.Numero!,
 
         };
 

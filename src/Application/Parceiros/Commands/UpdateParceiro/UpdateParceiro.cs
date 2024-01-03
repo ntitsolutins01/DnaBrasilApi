@@ -8,7 +8,7 @@ public record UpdateParceiroCommand : IRequest<bool>
 {
     public int Id { get; init; }
     public string? AspNetUserId { get; init; }
-    public Municipio? Municipio { get; init; }
+    public int? MunicipioId { get; init; }
     public required string Nome { get; init; }
     public required string Email { get; init; }
     public required int TipoParceria { get; init; }
@@ -36,6 +36,16 @@ public class UpdateParceiroCommandHandler : IRequestHandler<UpdateParceiroComman
 
     public async Task<bool> Handle(UpdateParceiroCommand request, CancellationToken cancellationToken)
     {
+        Municipio? municipio = null;
+
+        if (request.MunicipioId != null)
+        {
+            municipio = await _context.Municipios
+                .FindAsync(new object[] { request.MunicipioId }, cancellationToken);
+
+            Guard.Against.NotFound((int)request.MunicipioId, municipio);
+        }
+
         var entity = await _context.Parceiros
             .FindAsync(new object[] { request.Id }, cancellationToken);
 
@@ -53,7 +63,7 @@ public class UpdateParceiroCommandHandler : IRequestHandler<UpdateParceiroComman
         entity.CpfCnpj = request.CpfCnpj;
         entity.Cep = request.Cep;
         entity.Endereco = request.Endereco;
-        entity.Municipio = request.Municipio;
+        entity.Municipio = municipio;
         entity.AspNetUserId = request.AspNetUserId;
         entity.Habilitado = request.Habilitado;
         entity.Email = request.Email;
