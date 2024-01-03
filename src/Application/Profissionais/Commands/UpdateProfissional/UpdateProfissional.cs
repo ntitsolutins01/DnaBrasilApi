@@ -6,19 +6,22 @@ namespace DnaBrasilApi.Application.Profissionais.Commands.UpdateProfissional;
 public record UpdateProfissionalCommand : IRequest<bool>
 {
     public int Id { get; init; }
-    public required string Nome { get; init; }
-    public DateTime DtNascimento { get; init; }
-    public required string Email { get; init; }
-    public required string Sexo { get; init; }
-    public required string Cpf { get; init; }
+    public string? AspNetUserId { get; init; }
+    public string? Nome { get; init; }
+    public string? DtNascimento { get; init; }
+    public string? Email { get; init; }
+    public string? Sexo { get; init; }
+    public string? Cpf { get; init; }
     public string? Telefone { get; init; }
     public string? Celular { get; init; }
     public string? Endereco { get; init; }
-    public int Numero { get; init; }
+    public int? Numero { get; init; }
     public string? Cep { get; init; }
     public string? Bairro { get; init; }
     public bool Status { get; init; } = true;
     public int? MunicipioId { get; init; }
+    public bool Habilitado { get; init; }
+    public string? AmbientesIds { get; init; }
 }
 
 public class UpdateProfissionalCommandHandler : IRequestHandler<UpdateProfissionalCommand, bool>
@@ -45,9 +48,9 @@ public class UpdateProfissionalCommandHandler : IRequestHandler<UpdateProfission
 
         Guard.Against.NotFound(request.Id, entity);
 
-        entity.Nome = request.Nome;
-        entity.DtNascimento = request.DtNascimento;
-        entity.Email = request.Email;
+        entity.Nome = request.Nome!;
+        entity.DtNascimento = request.DtNascimento == "" ? null : Convert.ToDateTime(request.DtNascimento);
+        entity.Email = request.Email!;
         entity.Sexo = request.Sexo;
         entity.Telefone = request.Telefone;
         entity.Celular = request.Celular;
@@ -56,6 +59,8 @@ public class UpdateProfissionalCommandHandler : IRequestHandler<UpdateProfission
         entity.Cep = request.Cep;
         entity.Bairro = request.Bairro;
         entity.Municipio = municipio;
+        entity.Status = request.Status;
+        entity.Habilitado = request.Habilitado;
 
         var result = await _context.SaveChangesAsync(cancellationToken);
 

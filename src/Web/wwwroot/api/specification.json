@@ -6045,7 +6045,6 @@
           },
           "dtNascimento": {
             "type": "string",
-            "format": "date-time",
             "nullable": true
           },
           "email": {
@@ -7244,15 +7243,17 @@
         "additionalProperties": false,
         "required": [
           "nome",
-          "dtNascimento",
           "email",
-          "sexo",
-          "status"
+          "sexo"
         ],
         "properties": {
           "id": {
             "type": "integer",
             "format": "int32"
+          },
+          "aspNetUserId": {
+            "type": "string",
+            "nullable": true
           },
           "nome": {
             "type": "string",
@@ -7262,9 +7263,7 @@
           },
           "dtNascimento": {
             "type": "string",
-            "format": "date-time",
-            "minLength": 1,
-            "nullable": false
+            "nullable": true
           },
           "email": {
             "type": "string",
@@ -7280,20 +7279,15 @@
             "nullable": false
           },
           "cpf": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "telefone": {
             "type": "string",
-            "maxLength": 14,
-            "minLength": 0,
-            "pattern": "((\\(\\d{3}\\) ?)|(\\d{3}-))?\\d{3}-\\d{4}",
             "nullable": true
           },
           "celular": {
             "type": "string",
-            "maxLength": 14,
-            "minLength": 0,
-            "pattern": "((\\(\\d{3}\\) ?)|(\\d{3}-))?\\d{3}-\\d{4}",
             "nullable": true
           },
           "endereco": {
@@ -7304,7 +7298,8 @@
           },
           "numero": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "cep": {
             "type": "string",
@@ -7319,13 +7314,18 @@
             "nullable": true
           },
           "status": {
-            "type": "boolean",
-            "minLength": 1,
-            "nullable": false
+            "type": "boolean"
           },
           "municipioId": {
             "type": "integer",
             "format": "int32",
+            "nullable": true
+          },
+          "habilitado": {
+            "type": "boolean"
+          },
+          "ambientesIds": {
+            "type": "string",
             "nullable": true
           }
         }

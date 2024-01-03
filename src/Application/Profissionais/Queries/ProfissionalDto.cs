@@ -9,7 +9,7 @@ public class ProfissionalDto
     public int Id { get; set; }
     public string? AspNetUserId { get; set; }
     public required string Nome { get; set; }
-    public DateTime? DtNascimento { get; set; }
+    public string? DtNascimento { get; set; }
     public required string Email { get; set; }
     public string? Sexo { get; set; }
     public required string CpfCnpj { get; set; }
@@ -33,7 +33,8 @@ public class ProfissionalDto
             CreateMap<Profissional, ProfissionalDto>()
                 .ForMember(dest => dest.MunicipioId, opt => opt.MapFrom(src => src.Municipio!.Id))
                 .ForMember(dest => dest.EstadoId, opt => opt.MapFrom(src => src.Municipio!.Estado!.Id))
-                .ForMember(dest => dest.Uf, opt => opt.MapFrom(src => src.Municipio!.Estado!.Sigla));
+                .ForMember(dest => dest.Uf, opt => opt.MapFrom(src => src.Municipio!.Estado!.Sigla))
+                .ForMember(dest => dest.DtNascimento, opt => opt.MapFrom(src => src.DtNascimento!.Value.ToString("dd/MM/yyyy")));
         }
     }
 }
