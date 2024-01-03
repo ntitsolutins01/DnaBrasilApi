@@ -16,7 +16,7 @@ public record CreateParceiroCommand : IRequest<int>
     public string? Celular { get; set; }
     public string? Cep { get; set; }
     public string? Endereco { get; set; }
-    public int Numero { get; set; }
+    public int? Numero { get; set; }
     public string? Bairro { get; set; }
     public bool Status { get; set; }
     public bool? Habilitado { get; set; }
