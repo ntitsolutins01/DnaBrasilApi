@@ -41,6 +41,8 @@ public class UpdateProfissionalCommandHandler : IRequestHandler<UpdateProfission
         {
             municipio = await _context.Municipios
                 .FindAsync(new object[] { request.MunicipioId }, cancellationToken);
+
+            Guard.Against.NotFound((int)request.MunicipioId, municipio);
         }
 
         var entity = await _context.Profissionais

@@ -5241,7 +5241,8 @@
               },
               "numero": {
                 "type": "integer",
-                "format": "int32"
+                "format": "int32",
+                "nullable": true
               },
               "bairro": {
                 "type": "string",
@@ -6804,27 +6805,17 @@
         "additionalProperties": false,
         "required": [
           "nome",
-          "email",
-          "tipoPessoa",
-          "cpfCnpj",
-          "telefone",
-          "celular",
-          "cep",
-          "endereco",
-          "bairro"
+          "email"
         ],
         "properties": {
           "aspNetUserId": {
             "type": "string",
             "nullable": true
           },
-          "municipio": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/Municipio"
-              }
-            ]
+          "municipioId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
           },
           "nome": {
             "type": "string",
@@ -6836,6 +6827,7 @@
             "type": "string",
             "maxLength": 100,
             "minLength": 1,
+            "pattern": "^[^@]+@[^@]+$",
             "nullable": false
           },
           "tipoParceria": {
@@ -6843,49 +6835,41 @@
             "format": "int32"
           },
           "tipoPessoa": {
-            "type": "string",
-            "minLength": 1,
-            "nullable": false
+            "type": "string"
           },
           "cpfCnpj": {
-            "type": "string",
-            "maxLength": 18,
-            "minLength": 1,
-            "nullable": false
+            "type": "string"
           },
           "telefone": {
             "type": "string",
-            "maxLength": 13,
-            "minLength": 1,
-            "nullable": false
+            "nullable": true
           },
           "celular": {
             "type": "string",
-            "maxLength": 13,
-            "minLength": 1,
-            "nullable": false
+            "nullable": true
           },
           "cep": {
             "type": "string",
             "maxLength": 9,
-            "minLength": 1,
-            "nullable": false
+            "minLength": 0,
+            "nullable": true
           },
           "endereco": {
             "type": "string",
             "maxLength": 200,
-            "minLength": 1,
-            "nullable": false
+            "minLength": 0,
+            "nullable": true
           },
           "numero": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "bairro": {
             "type": "string",
-            "maxLength": 50,
-            "minLength": 1,
-            "nullable": false
+            "maxLength": 100,
+            "minLength": 0,
+            "nullable": true
           },
           "status": {
             "type": "boolean"
@@ -6908,14 +6892,7 @@
         "additionalProperties": false,
         "required": [
           "nome",
-          "email",
-          "tipoPessoa",
-          "cpfCnpj",
-          "telefone",
-          "celular",
-          "cep",
-          "endereco",
-          "bairro"
+          "email"
         ],
         "properties": {
           "id": {
@@ -6926,13 +6903,10 @@
             "type": "string",
             "nullable": true
           },
-          "municipio": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/Municipio"
-              }
-            ]
+          "municipioId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
           },
           "nome": {
             "type": "string",
@@ -6944,6 +6918,7 @@
             "type": "string",
             "maxLength": 100,
             "minLength": 1,
+            "pattern": "^[^@]+@[^@]+$",
             "nullable": false
           },
           "tipoParceria": {
@@ -6951,39 +6926,30 @@
             "format": "int32"
           },
           "tipoPessoa": {
-            "type": "string",
-            "minLength": 1,
-            "nullable": false
+            "type": "string"
           },
           "cpfCnpj": {
-            "type": "string",
-            "maxLength": 18,
-            "minLength": 1,
-            "nullable": false
+            "type": "string"
           },
           "telefone": {
             "type": "string",
-            "maxLength": 13,
-            "minLength": 1,
-            "nullable": false
+            "nullable": true
           },
           "celular": {
             "type": "string",
-            "maxLength": 13,
-            "minLength": 1,
-            "nullable": false
+            "nullable": true
           },
           "cep": {
             "type": "string",
             "maxLength": 9,
-            "minLength": 1,
-            "nullable": false
+            "minLength": 0,
+            "nullable": true
           },
           "endereco": {
             "type": "string",
             "maxLength": 200,
-            "minLength": 1,
-            "nullable": false
+            "minLength": 0,
+            "nullable": true
           },
           "numero": {
             "type": "integer",
@@ -6991,9 +6957,9 @@
           },
           "bairro": {
             "type": "string",
-            "maxLength": 50,
-            "minLength": 1,
-            "nullable": false
+            "maxLength": 100,
+            "minLength": 0,
+            "nullable": true
           },
           "status": {
             "type": "boolean"
