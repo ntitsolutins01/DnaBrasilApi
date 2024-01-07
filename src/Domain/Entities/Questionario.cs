@@ -8,5 +8,6 @@ public class Questionario : BaseAuditableEntity
 {
     public required string Pergunta { get; set;}
     public required TipoLaudo TipoLaudo { get; set; }
+    public List<Resposta>? Respostas { get; set;}
     
 }

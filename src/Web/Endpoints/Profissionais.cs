@@ -6,6 +6,7 @@ using DnaBrasilApi.Application.Profissionais.Commands.UpdateProfissional;
 using DnaBrasilApi.Application.Profissionais.Queries.GetProfissionaisAll;
 using DnaBrasilApi.Application.Profissionais.Queries.GetProfissionalByCpfCnpj;
 using DnaBrasilApi.Application.Profissionais.Queries.GetProfissionalByEmail;
+using DnaBrasilApi.Application.Profissionais.Queries.GetProfissionalByLocalidade;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -21,7 +22,8 @@ public class Profissionais : EndpointGroupBase
             .MapDelete(DeleteProfissional, "{id}")
             .MapGet(GetProfissionalById, "Profissional/{id}")
             .MapGet(GetProfissionalByEmail, "Email/{email}")
-            .MapGet(GetProfissionalByCpfCnpj, "Cpf/{cpf}");
+            .MapGet(GetProfissionalByCpfCnpj, "Cpf/{cpf}")
+            .MapGet(GetProfissionaisByLocalidade, "Localidade/{id}");
     }
 
     public async Task<List<ProfissionalDto>> GetProfissionaisAll(ISender sender)
@@ -57,5 +59,9 @@ public class Profissionais : EndpointGroupBase
     public async Task<ProfissionalDto> GetProfissionalByCpfCnpj(ISender sender, string cpfCnpj)
     {
         return await sender.Send(new GetProfissionalByCpfCnpjQuery() { CpfCnpj = cpfCnpj });
+    }
+    public async Task<List<ProfissionalDto>> GetProfissionaisByLocalidade(ISender sender, int id)
+    {
+        return await sender.Send(new GetProfissionalByLocalidadeQuery() { LocalidadeId = id });
     }
 }

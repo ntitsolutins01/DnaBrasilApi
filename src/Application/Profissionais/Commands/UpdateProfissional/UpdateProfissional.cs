@@ -20,6 +20,7 @@ public record UpdateProfissionalCommand : IRequest<bool>
     public string? Bairro { get; init; }
     public bool Status { get; init; } = true;
     public int? MunicipioId { get; init; }
+    public int? LocalidadeId { get; init; }
     public bool Habilitado { get; init; }
     public string? AmbientesIds { get; init; }
 }
@@ -45,6 +46,16 @@ public class UpdateProfissionalCommandHandler : IRequestHandler<UpdateProfission
             Guard.Against.NotFound((int)request.MunicipioId, municipio);
         }
 
+        Localidade? localidade = null;
+
+        if (request.LocalidadeId != null)
+        {
+            localidade = await _context.Localidades
+                .FindAsync(new object[] { request.LocalidadeId }, cancellationToken);
+
+            Guard.Against.NotFound((int)request.LocalidadeId, localidade);
+        }
+
         var entity = await _context.Profissionais
             .FindAsync(new object[] { request.Id }, cancellationToken);
 
@@ -63,6 +74,7 @@ public class UpdateProfissionalCommandHandler : IRequestHandler<UpdateProfission
         entity.Municipio = municipio;
         entity.Status = request.Status;
         entity.Habilitado = request.Habilitado;
+        entity.Localidade = localidade;
 
         var result = await _context.SaveChangesAsync(cancellationToken);
 

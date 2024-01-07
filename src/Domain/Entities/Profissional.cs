@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DnaBrasilApi.Domain.Entities;
+﻿namespace DnaBrasilApi.Domain.Entities;
 public class Profissional : BaseAuditableEntity
 {
     public string? AspNetUserId { get; set; }
@@ -22,6 +16,7 @@ public class Profissional : BaseAuditableEntity
     public bool Status { get; set; } = true;
     public bool Habilitado { get; set; } = false;
     public Municipio? Municipio { get; set; }
+    public Localidade? Localidade { get; set; }
     public List<Ambiente>? Ambientes { get; set; }
     public List<Contrato>? Contratos { get; set; }
 }

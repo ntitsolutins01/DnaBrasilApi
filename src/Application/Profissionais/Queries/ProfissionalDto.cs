@@ -25,16 +25,19 @@ public class ProfissionalDto
     //public List<Contrato>? Contratos { get; set; }
     public int EstadoId { get; set; }
     public string? Uf { get; set; }
-    public int MunicipioId { get; set; }
+    public int? MunicipioId { get; set; }
+    public int? LocalidadeId { get; set; }
     private class Mapping : Profile
     {
         public Mapping()
         {
             CreateMap<Profissional, ProfissionalDto>()
                 .ForMember(dest => dest.MunicipioId, opt => opt.MapFrom(src => src.Municipio!.Id))
+                .ForMember(dest => dest.LocalidadeId, opt =>opt.MapFrom(src => src.Localidade!.Id))
                 .ForMember(dest => dest.EstadoId, opt => opt.MapFrom(src => src.Municipio!.Estado!.Id))
                 .ForMember(dest => dest.Uf, opt => opt.MapFrom(src => src.Municipio!.Estado!.Sigla))
-                .ForMember(dest => dest.DtNascimento, opt => opt.MapFrom(src => src.DtNascimento!.Value.ToString("dd/MM/yyyy")));
+                .ForMember(dest => dest.DtNascimento,
+                    opt => opt.MapFrom(src => src.DtNascimento!.Value.ToString("dd/MM/yyyy")));
         }
     }
 }

@@ -10,6 +10,7 @@ public class FomentoDto
     public required Municipio Municipio { get; init; }
     public required Localidade Localidade { get; init; }
     public string? Data { get; set; }
+    public bool Status { get; set; }
 
     private class Mapping : Profile
     {
