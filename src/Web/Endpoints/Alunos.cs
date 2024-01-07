@@ -8,7 +8,10 @@ using DnaBrasilApi.Application.Alunos.Commands.UpdateVoucher;
 using DnaBrasilApi.Application.Alunos.Queries;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunosAll;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunosByFilter;
+using DnaBrasilApi.Application.Alunos.Queries.GetAlunosByLocalidade;
 using DnaBrasilApi.Application.Escolaridades.Queries.GetEscolaridadesAll;
+using DnaBrasilApi.Application.Localidades.Queries.GetLocalidadesByFomento;
+using DnaBrasilApi.Application.Localidades.Queries;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DnaBrasilApi.Web.Endpoints;
@@ -19,6 +22,7 @@ public class Alunos : EndpointGroupBase
         app.MapGroup(this)
             //.RequireAuthorization()
             //.MapGet(GetAlunosByFilter)
+            .MapGet(GetAlunosByLocalidade, "/Localidade/{id}")
             .MapGet(GetAlunosAll)
             .MapPost(CreateAluno)
             .MapPut(UpdateAluno, "{id}")
@@ -76,5 +80,9 @@ public class Alunos : EndpointGroupBase
         await sender.Send(command);
 
         return Results.NoContent();
+    }
+    public async Task<List<AlunoDto>> GetAlunosByLocalidade(ISender sender, int id)
+    {
+        return await sender.Send(new GetAlunosByLocalidadeQuery { LocalidadeId = id });
     }
 }

@@ -4,6 +4,7 @@ using DnaBrasilApi.Application.Localidades.Commands.CreateLocalidade;
 using DnaBrasilApi.Application.Localidades.Commands.DeleteLocalidade;
 using DnaBrasilApi.Application.Localidades.Commands.UpdateLocalidade;
 using DnaBrasilApi.Application.Localidades.Queries.GetLocalidadesAll;
+using DnaBrasilApi.Application.Localidades.Queries.GetLocalidadesByFomento;
 using DnaBrasilApi.Application.Municipios.Queries.GetMunicipiosByUf;
 using DnaBrasilApi.Application.Municipios.Queries;
 using DnaBrasilApi.Application.Localidades.Queries.GetLocalidadesByMunicipio;
@@ -21,7 +22,8 @@ public class Localidades : EndpointGroupBase
             .MapPut(UpdateLocalidade, "{id}")
             .MapDelete(DeleteLocalidade, "{id}")
             .MapGet(GetLocalidadeById, "Localidade/{id}")
-            .MapGet(GetLocalidadesByMunicipio, "Municipio/{id}");
+            .MapGet(GetLocalidadesByMunicipio, "Municipio/{id}")
+            .MapGet(GetLocalidadesByFomento, "Fomento/{id}");
     }
 
     public async Task<List<LocalidadeDto>> GetLocalidadesAll(ISender sender)
@@ -53,5 +55,9 @@ public class Localidades : EndpointGroupBase
     public async Task<List<LocalidadeDto>> GetLocalidadesByMunicipio(ISender sender, int id)
     {
         return await sender.Send(new GetLocalidadesByMunicipioQuery { Id = id });
+    }
+    public async Task<List<LocalidadeDto>> GetLocalidadesByFomento(ISender sender, int id)
+    {
+        return await sender.Send(new GetLocalidadesByFomentoQuery { Id = id });
     }
 }
