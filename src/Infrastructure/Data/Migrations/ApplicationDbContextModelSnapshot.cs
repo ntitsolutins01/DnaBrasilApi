@@ -1053,6 +1053,9 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("LocalidadeId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("MunicipioId")
                         .HasColumnType("int");
 
@@ -1076,6 +1079,8 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                         .HasColumnType("nvarchar(14)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("LocalidadeId");
 
                     b.HasIndex("MunicipioId");
 
@@ -2095,9 +2100,15 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("DnaBrasilApi.Domain.Entities.Profissional", b =>
                 {
+                    b.HasOne("DnaBrasilApi.Domain.Entities.Localidade", "Localidade")
+                        .WithMany()
+                        .HasForeignKey("LocalidadeId");
+
                     b.HasOne("DnaBrasilApi.Domain.Entities.Municipio", "Municipio")
                         .WithMany()
                         .HasForeignKey("MunicipioId");
+
+                    b.Navigation("Localidade");
 
                     b.Navigation("Municipio");
                 });

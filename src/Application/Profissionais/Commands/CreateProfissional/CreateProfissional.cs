@@ -4,7 +4,6 @@ using DnaBrasilApi.Domain.Entities;
 namespace DnaBrasilApi.Application.Profissionais.Commands.CreateProfissional;
 public record CreateProfissionalCommand : IRequest<int>
 {
-
     public string? AspNetUserId { get; init; }
     public string? Nome { get; init; }
     public string? DtNascimento { get; init; }
@@ -19,6 +18,7 @@ public record CreateProfissionalCommand : IRequest<int>
     public string? Bairro { get; init; }
     public bool Status { get; init; } = true;
     public int? MunicipioId { get; init; }
+    public int? LocalidadeId { get; init; }
     public bool Habilitado { get; init; }
     public string? AmbientesIds { get; init; }
 }
@@ -42,6 +42,16 @@ public class CreateProfissionalCommandHandler : IRequestHandler<CreateProfission
                 .FindAsync(new object[] { request.MunicipioId }, cancellationToken);
 
             Guard.Against.NotFound((int)request.MunicipioId, municipio);
+        }
+
+        Localidade? localidade = null;
+
+        if (request.LocalidadeId != null)
+        {
+            localidade = await _context.Localidades
+                .FindAsync(new object[] { request.LocalidadeId }, cancellationToken);
+
+            Guard.Against.NotFound((int)request.LocalidadeId, localidade);
         }
 
         var list = new List<Ambiente>();
@@ -78,7 +88,9 @@ public class CreateProfissionalCommandHandler : IRequestHandler<CreateProfission
             Bairro = request.Bairro,
             Municipio = municipio,
             AspNetUserId = request.AspNetUserId!,
-            Ambientes = list
+            Ambientes = list,
+            Habilitado = request.Habilitado,
+            Localidade = localidade
         };
 
         _context.Profissionais.Add(entity);

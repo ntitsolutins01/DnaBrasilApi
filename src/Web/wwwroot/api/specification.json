@@ -6,6 +6,41 @@
     "version": "1.0.0"
   },
   "paths": {
+    "/api/Alunos/Localidade/{id}": {
+      "get": {
+        "tags": [
+          "Alunos"
+        ],
+        "operationId": "GetAlunosByLocalidade",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AlunoDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Alunos": {
       "get": {
         "tags": [
@@ -1253,6 +1288,29 @@
         }
       }
     },
+    "/api/Laudos": {
+      "get": {
+        "tags": [
+          "Laudos"
+        ],
+        "operationId": "GetLaudosAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LaudoDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Localidades": {
       "get": {
         "tags": [
@@ -1408,6 +1466,76 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/LocalidadeDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Localidades/Municipio/{id}": {
+      "get": {
+        "tags": [
+          "Localidades"
+        ],
+        "operationId": "GetLocalidadesByMunicipio",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LocalidadeDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Localidades/Fomento/{id}": {
+      "get": {
+        "tags": [
+          "Localidades"
+        ],
+        "operationId": "GetLocalidadesByFomento",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LocalidadeDto"
+                  }
                 }
               }
             }
@@ -2248,6 +2376,41 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ProfissionalDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Profissionais/Localidade/{id}": {
+      "get": {
+        "tags": [
+          "Profissionais"
+        ],
+        "operationId": "GetProfissionaisByLocalidade",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProfissionalDto"
+                  }
                 }
               }
             }
@@ -5134,6 +5297,14 @@
                   }
                 ]
               },
+              "localidade": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Localidade"
+                  }
+                ]
+              },
               "ambientes": {
                 "type": "array",
                 "nullable": true,
@@ -5612,6 +5783,13 @@
               },
               "tipoLaudo": {
                 "$ref": "#/components/schemas/TipoLaudo"
+              },
+              "respostas": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "$ref": "#/components/schemas/Resposta"
+                }
               }
             }
           }
@@ -5635,6 +5813,25 @@
               },
               "status": {
                 "type": "boolean"
+              }
+            }
+          }
+        ]
+      },
+      "Resposta": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "respostaQuestionario": {
+                "type": "string"
+              },
+              "questionario": {
+                "$ref": "#/components/schemas/Questionario"
               }
             }
           }
@@ -6101,7 +6298,13 @@
           },
           "municipioId": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
+          },
+          "localidadeId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
           }
         }
       },
@@ -6118,6 +6321,13 @@
           },
           "tipoLaudo": {
             "$ref": "#/components/schemas/TipoLaudoDto"
+          },
+          "respostas": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/RespostaDto"
+            }
           }
         }
       },
@@ -6139,6 +6349,22 @@
           },
           "status": {
             "type": "boolean"
+          }
+        }
+      },
+      "RespostaDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "respostaQuestionario": {
+            "type": "string"
+          },
+          "questionario": {
+            "$ref": "#/components/schemas/QuestionarioDto"
           }
         }
       },
@@ -6491,6 +6717,9 @@
           "data": {
             "type": "string",
             "nullable": true
+          },
+          "status": {
+            "type": "boolean"
           }
         }
       },
@@ -6526,6 +6755,217 @@
             "type": "string"
           },
           "codigo": {
+            "type": "string"
+          },
+          "status": {
+            "type": "boolean"
+          }
+        }
+      },
+      "LaudoDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "talentoEsportivo": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/TalentoEsportivoDto"
+              }
+            ]
+          },
+          "vocacional": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/VocacionalDto"
+              }
+            ]
+          },
+          "qualidadeDeVida": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/QualidadeDeVidaDto"
+              }
+            ]
+          },
+          "saude": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/SaudeDto"
+              }
+            ]
+          },
+          "consumoAlimentar": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/ConsumoAlimentarDto"
+              }
+            ]
+          },
+          "saudeBucal": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/SaudeBucalDto"
+              }
+            ]
+          },
+          "aluno": {
+            "$ref": "#/components/schemas/AlunoDto"
+          }
+        }
+      },
+      "TalentoEsportivoDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "profissional": {
+            "$ref": "#/components/schemas/ProfissionalDto"
+          },
+          "flexibilidade": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "preensaoManual": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "velocidade": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "impulsaoHorizontal": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "aptidaoFisica": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "abdominal": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "imc": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "quadrado": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "encaminhamento": {
+            "type": "string",
+            "nullable": true
+          },
+          "altura": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "peso": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          }
+        }
+      },
+      "VocacionalDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "profissional": {
+            "$ref": "#/components/schemas/ProfissionalDto"
+          },
+          "questionario": {
+            "$ref": "#/components/schemas/QuestionarioDto"
+          },
+          "resposta": {
+            "type": "string"
+          }
+        }
+      },
+      "QualidadeDeVidaDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "profissional": {
+            "$ref": "#/components/schemas/ProfissionalDto"
+          },
+          "questionario": {
+            "$ref": "#/components/schemas/QuestionarioDto"
+          },
+          "resposta": {
+            "type": "string"
+          }
+        }
+      },
+      "SaudeDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "profissional": {
+            "$ref": "#/components/schemas/ProfissionalDto"
+          },
+          "altura": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "massa": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "envergadura": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        }
+      },
+      "SaudeBucalDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "profissional": {
+            "$ref": "#/components/schemas/ProfissionalDto"
+          },
+          "questionario": {
+            "$ref": "#/components/schemas/QuestionarioDto"
+          },
+          "resposta": {
             "type": "string"
           }
         }
@@ -7205,6 +7645,11 @@
             "format": "int32",
             "nullable": true
           },
+          "localidadeId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
           "habilitado": {
             "type": "boolean"
           },
@@ -7293,6 +7738,11 @@
             "type": "boolean"
           },
           "municipioId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "localidadeId": {
             "type": "integer",
             "format": "int32",
             "nullable": true
@@ -7391,22 +7841,6 @@
           "tipoLaudoId": {
             "type": "integer",
             "format": "int32"
-          }
-        }
-      },
-      "RespostaDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "respostaQuestionario": {
-            "type": "string"
-          },
-          "questionario": {
-            "$ref": "#/components/schemas/QuestionarioDto"
           }
         }
       },
