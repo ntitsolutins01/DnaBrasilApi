@@ -1,8 +1,8 @@
 ﻿using DnaBrasilApi.Application.Funcionalidades.Commands.CreateFuncionalidade;
 using DnaBrasilApi.Application.Funcionalidades.Queries;
 using DnaBrasilApi.Application.Funcionalidades.Queries.GetFuncionalidadesAll;
+using DnaBrasilApi.Application.Modulos.Commands.CreateModulo;
 using DnaBrasilApi.Application.Modulos.Queries.GetModulosAll;
-using DnaBrasilApi.Application.Perfis.Commands.CreateModulo;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
