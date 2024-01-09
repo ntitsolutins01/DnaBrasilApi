@@ -2,7 +2,12 @@
 using DnaBrasilApi.Application.Funcionalidades.Queries;
 using DnaBrasilApi.Application.Funcionalidades.Queries.GetFuncionalidadesAll;
 using DnaBrasilApi.Application.Modulos.Commands.CreateModulo;
+using DnaBrasilApi.Application.Modulos.Commands.DeleteModulo;
+using DnaBrasilApi.Application.Modulos.Commands.UpdateModulo;
+using DnaBrasilApi.Application.Modulos.Queries.GetModuloById;
 using DnaBrasilApi.Application.Modulos.Queries.GetModulosAll;
+using DnaBrasilApi.Application.Series.Commands.DeleteSerie;
+using DnaBrasilApi.Application.Series.Commands.UpdateSerie;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -13,7 +18,10 @@ public class ConfiguracaoSistema : EndpointGroupBase
         app.MapGroup(this)
             //.RequireAuthorization()
             .MapGet(GetModulosAll, "Modulos")
+            .MapGet(GetModuloById, "Modulo/{id}")
             .MapPost(CreateModulo, "Modulo")
+            .MapPut(UpdateModulo, "{id}")
+            .MapDelete(DeleteModulo, "{id}")
             .MapGet(GetFuncionalidadesAll, "Funcionalidades")
             .MapPost(CreateFuncionalidade, "Funcionalidade");
     }
@@ -26,6 +34,17 @@ public class ConfiguracaoSistema : EndpointGroupBase
     {
         return await sender.Send(command);
     }
+    public async Task<bool> UpdateModulo(ISender sender, int id, UpdateModuloCommand command)
+    {
+        if (id != command.Id) return false;
+        var result = await sender.Send(command);
+        return result;
+    }
+
+    public async Task<bool> DeleteModulo(ISender sender, int id)
+    {
+        return await sender.Send(new DeleteModuloCommand(id));
+    }
 
     public async Task<List<FuncionalidadeDto>> GetFuncionalidadesAll(ISender sender)
     {
@@ -34,5 +53,9 @@ public class ConfiguracaoSistema : EndpointGroupBase
     public async Task<int> CreateFuncionalidade(ISender sender, CreateFuncionalidadeCommand command)
     {
         return await sender.Send(command);
+    }
+    public async Task<ModuloDto> GetModuloById(ISender sender, int id)
+    {
+        return await sender.Send(new GetModuloByIdQuery() { Id = id });
     }
 }

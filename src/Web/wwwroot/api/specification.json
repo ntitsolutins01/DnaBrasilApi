@@ -368,6 +368,38 @@
         }
       }
     },
+    "/api/ConfiguracaoSistema/Modulo/{id}": {
+      "get": {
+        "tags": [
+          "ConfiguracaoSistema"
+        ],
+        "operationId": "GetModuloById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModuloDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/ConfiguracaoSistema/Modulo": {
       "post": {
         "tags": [
@@ -395,6 +427,81 @@
                 "schema": {
                   "type": "integer",
                   "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ConfiguracaoSistema/{id}": {
+      "put": {
+        "tags": [
+          "ConfiguracaoSistema"
+        ],
+        "operationId": "UpdateModulo",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateModuloCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ConfiguracaoSistema"
+        ],
+        "operationId": "DeleteModulo",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
                 }
               }
             }
@@ -6189,6 +6296,19 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
+          "nome": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdateModuloCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
           "nome": {
             "type": "string"
           }
