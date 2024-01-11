@@ -1,7 +1,7 @@
 ﻿namespace DnaBrasilApi.Domain.Entities;
 public class Aluno : BaseAuditableEntity
 {
-    public int AspNetUserId { get; set; }
+    public string? AspNetUserId { get; set; }
     public string? Nome { get; set; }
     public string? Email { get; set; }
     public string? Sexo { get; set; }
@@ -15,7 +15,6 @@ public class Aluno : BaseAuditableEntity
     public string? Endereco { get; set; }
     public string? Numero { get; set; }
     public string? Bairro { get; set; }
-    public string? RedeSocial { get; set; }
     public string? Url { get; set; }
     public bool Status { get; set; }
     public bool Habilitado { get; set; }

@@ -6,7 +6,7 @@ namespace DnaBrasilApi.Application.Alunos.Commands.UpdateAluno;
 public record UpdateAlunoCommand : IRequest
 {
     public int Id { get; init; }
-    public required int AspNetUserId { get; init; }
+    public required string AspNetUserId { get; init; }
     public required string Nome { get; init; }
     public required string Email { get; init; }
     public required string Sexo { get; init; }
@@ -58,7 +58,6 @@ public class UpdateAlunoCommandHandler : IRequestHandler<UpdateAlunoCommand>
         entity.Endereco = request.Endereco;
         entity.Numero = request.Numero;
         entity.Bairro = request.Bairro;
-        entity.RedeSocial = request.RedeSocial;
         entity.Url = request.Url;
         entity.Status = request.Status;
         entity.Habilitado = request.Habilitado;

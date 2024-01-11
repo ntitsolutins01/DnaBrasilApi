@@ -87,7 +87,7 @@ public class CreateProfissionalCommandHandler : IRequestHandler<CreateProfission
             Cep = request.Cep,
             Bairro = request.Bairro,
             Municipio = municipio,
-            AspNetUserId = request.AspNetUserId!,
+            AspNetUserId = request.AspNetUserId,
             Ambientes = list,
             Habilitado = request.Habilitado,
             Localidade = localidade
