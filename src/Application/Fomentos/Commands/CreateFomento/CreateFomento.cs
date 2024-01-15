@@ -8,6 +8,8 @@ public record CreateFomentoCommand : IRequest<int>
     public required int MunicipioId { get; init; }
     public required int LocalidadeId { get; init; }
     public required string Codigo { get; set; }
+    public required string DtIni { get; set; }
+    public required string DtFim { get; set; }
 }
 
 public class CreateFomentoCommandHandler : IRequestHandler<CreateFomentoCommand, int>
@@ -32,7 +34,9 @@ public class CreateFomentoCommandHandler : IRequestHandler<CreateFomentoCommand,
             Codigo = request.Codigo,
             Nome = request.Nome,
             Municipio = municipio,
-            Localidade = localidade!
+            Localidade = localidade!,
+            DtIni = Convert.ToDateTime(request.DtIni),
+            DtFim = Convert.ToDateTime(request.DtFim)
         };
 
         _context.Fomentos.Add(entity);

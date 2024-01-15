@@ -6813,12 +6813,26 @@
             "nullable": true
           },
           "municipio": {
-            "$ref": "#/components/schemas/Municipio"
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Municipio"
+              }
+            ]
           },
           "localidade": {
-            "$ref": "#/components/schemas/Localidade"
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Localidade"
+              }
+            ]
           },
-          "data": {
+          "dtIni": {
+            "type": "string",
+            "nullable": true
+          },
+          "dtFim": {
             "type": "string",
             "nullable": true
           },
@@ -6844,6 +6858,12 @@
           },
           "codigo": {
             "type": "string"
+          },
+          "dtIni": {
+            "type": "string"
+          },
+          "dtFim": {
+            "type": "string"
           }
         }
       },
@@ -6863,6 +6883,12 @@
           },
           "status": {
             "type": "boolean"
+          },
+          "dtIni": {
+            "type": "string"
+          },
+          "dtFim": {
+            "type": "string"
           }
         }
       },

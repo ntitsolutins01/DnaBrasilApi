@@ -8,8 +8,8 @@ public record UpdateFomentoCommand : IRequest <bool>
     public required string Nome { get; init; }
     public required string Codigo { get; init; }
     public bool Status { get; init; }
-    //public required int MunicipioId { get; init; }
-    //public required int LocalidadeId { get; init; }
+    public required string DtIni { get; set; }
+    public required string DtFim { get; set; }
 }
 
 public class UpdateFomentoCommandHandler : IRequestHandler<UpdateFomentoCommand, bool>
@@ -36,7 +36,8 @@ public class UpdateFomentoCommandHandler : IRequestHandler<UpdateFomentoCommand,
         entity.Nome = request.Nome;
         entity.Codigo = request.Codigo;
         entity.Status = request.Status;
-        // entity.Localidade = localidade!;
+        entity.DtIni = Convert.ToDateTime(request.DtIni);
+        entity.DtFim = Convert.ToDateTime(request.DtFim);
 
         var result = await _context.SaveChangesAsync(cancellationToken);
 

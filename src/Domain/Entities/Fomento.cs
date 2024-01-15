@@ -6,4 +6,6 @@ public class Fomentu : BaseAuditableEntity
     public bool Status { get; set; } = true;
     public required Municipio? Municipio { get; set; }
     public required Localidade Localidade { get; set; }
+    public required DateTime DtIni { get; set; }
+    public required DateTime DtFim { get; set; }
 }

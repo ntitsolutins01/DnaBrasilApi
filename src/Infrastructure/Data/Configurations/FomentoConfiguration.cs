@@ -14,5 +14,9 @@ public class FomentoConfiguration : IEntityTypeConfiguration<Fomentu>
         builder.Property(t => t.Codigo)
             .HasMaxLength(50)
             .IsRequired();
+        builder.Property(t => t.DtIni)
+            .IsRequired();
+        builder.Property(t => t.DtFim)
+            .IsRequired();
     }
 }
