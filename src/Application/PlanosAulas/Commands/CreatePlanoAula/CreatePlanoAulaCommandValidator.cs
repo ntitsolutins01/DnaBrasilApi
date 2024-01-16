@@ -19,7 +19,7 @@ public class CreatePlanoAulaCommandValidator : AbstractValidator<CreatePlanoAula
             .MaximumLength(50)
             .NotEmpty();
         RuleFor(v => v.Url)
-            .MaximumLength(500)
-            .NotEmpty();
+            .MaximumLength(500);
+
     }
 }
