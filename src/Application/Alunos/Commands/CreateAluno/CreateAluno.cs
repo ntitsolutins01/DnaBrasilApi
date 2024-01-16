@@ -11,7 +11,7 @@ public record CreateAlunoCommand : IRequest<int>
     public required string Nome { get; init; }
     public required string Email { get; init; }
     public required string Sexo { get; init; }
-    public required DateTime DtNascimento { get; init; }
+    public required string DtNascimento { get; init; }
     public string? NomeMae { get; init; }
     public string? NomePai { get; init; }
     public string? Cpf { get; init; }
@@ -86,7 +86,7 @@ public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int
             Nome = request.Nome,
             Email = request.Email,
             Sexo = request.Sexo,
-            DtNascimento = request.DtNascimento,
+            DtNascimento = Convert.ToDateTime(request.DtNascimento),
             Etnia = request.Etnia,
             NomeMae = request.NomeMae,
             NomePai = request.NomePai,
