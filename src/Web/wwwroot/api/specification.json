@@ -4808,8 +4808,6 @@
         "required": [
           "nome",
           "email",
-          "sexo",
-          "dtNascimento",
           "cpf",
           "status"
         ],
@@ -4832,16 +4830,10 @@
             "nullable": false
           },
           "sexo": {
-            "type": "string",
-            "maxLength": 1,
-            "minLength": 1,
-            "nullable": false
+            "type": "string"
           },
           "dtNascimento": {
-            "type": "string",
-            "format": "date-time",
-            "minLength": 1,
-            "nullable": false
+            "type": "string"
           },
           "nomeMae": {
             "type": "string",
@@ -4859,16 +4851,10 @@
           },
           "telefone": {
             "type": "string",
-            "maxLength": 14,
-            "minLength": 0,
-            "pattern": "((\\(\\d{3}\\) ?)|(\\d{3}-))?\\d{3}-\\d{4}",
             "nullable": true
           },
           "celular": {
             "type": "string",
-            "maxLength": 14,
-            "minLength": 0,
-            "pattern": "((\\(\\d{3}\\) ?)|(\\d{3}-))?\\d{3}-\\d{4}",
             "nullable": true
           },
           "cep": {
@@ -7608,11 +7594,11 @@
             "type": "string",
             "nullable": true
           },
-          "grade": {
+          "tipoEscolaridade": {
             "type": "string",
             "nullable": true
           },
-          "url": {
+          "modalidade": {
             "type": "string",
             "nullable": true
           }
@@ -7623,8 +7609,8 @@
         "additionalProperties": false,
         "required": [
           "nome",
-          "grade",
-          "url"
+          "url",
+          "tipoEscolaridade"
         ],
         "properties": {
           "nome": {
@@ -7635,15 +7621,25 @@
           },
           "grade": {
             "type": "string",
-            "maxLength": 150,
-            "minLength": 1,
-            "nullable": false
+            "nullable": true
           },
           "url": {
             "type": "string",
-            "maxLength": 150,
+            "maxLength": 500,
             "minLength": 1,
             "nullable": false
+          },
+          "tipoEscolaridade": {
+            "type": "string",
+            "maxLength": 50,
+            "minLength": 1,
+            "nullable": false
+          },
+          "modalidade": {
+            "type": "string",
+            "maxLength": 50,
+            "minLength": 0,
+            "nullable": true
           }
         }
       },
@@ -7652,8 +7648,7 @@
         "additionalProperties": false,
         "required": [
           "nome",
-          "grade",
-          "url"
+          "tipoEscolaridade"
         ],
         "properties": {
           "id": {
@@ -7666,17 +7661,23 @@
             "minLength": 1,
             "nullable": false
           },
-          "grade": {
+          "tipoEscolaridade": {
             "type": "string",
-            "maxLength": 150,
+            "maxLength": 50,
             "minLength": 1,
             "nullable": false
           },
+          "modalidade": {
+            "type": "string",
+            "maxLength": 50,
+            "minLength": 0,
+            "nullable": true
+          },
           "url": {
             "type": "string",
-            "maxLength": 150,
-            "minLength": 1,
-            "nullable": false
+            "maxLength": 500,
+            "minLength": 0,
+            "nullable": true
           }
         }
       },

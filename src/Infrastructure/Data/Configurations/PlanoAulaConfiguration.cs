@@ -15,11 +15,11 @@ internal class PlanoAulaConfiguration : IEntityTypeConfiguration<PlanoAula>
         builder.Property(t => t.Nome)
             .HasMaxLength(150)
             .IsRequired();
-        builder.Property(t => t.Grade)
-            .HasMaxLength(150)
-            .IsRequired();
+        builder.Property(t => t.Modalidade)
+            .HasMaxLength(50);
+        builder.Property(t => t.TipoEscolaridade)
+            .HasMaxLength(50);
         builder.Property(t => t.Url)
-            .HasMaxLength(150)
-            .IsRequired();
+            .HasMaxLength(500);
     }
 }
