@@ -18,7 +18,7 @@ public class FomentoDto
         {
             CreateMap<Fomentu, FomentoDto>()
                 .ForMember(dest => dest.DtIni, opt => opt.MapFrom(src => src.DtIni.ToString("dd/MM/yyyy")))
-                .ForMember(dest => dest.DtFim, opt => opt.MapFrom(src => src.DtIni.ToString("dd/MM/yyyy")));
+                .ForMember(dest => dest.DtFim, opt => opt.MapFrom(src => src.DtFim.ToString("dd/MM/yyyy")));
         }
     }
 
