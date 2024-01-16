@@ -27,7 +27,7 @@ public record CreateAlunoCommand : IRequest<int>
     public int? LocalidadeId { get; init; }
     public int? ProfissionalId { get; init; }
     public string? DeficienciasIds { get; init; }
-    public required int Etnia { get; init; }
+    public required string Etnia { get; init; }
 }
 
 public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int>
@@ -99,8 +99,8 @@ public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int
             Url = null,
             Status = request.Status,
             Habilitado = request.Habilitado,
-            Municipio = municipio,
-            Localidade = localidade,
+            Municipio = municipio!,
+            Localidade = localidade!,
             Deficiencias = list,
         };
 

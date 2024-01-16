@@ -4921,8 +4921,7 @@
             "nullable": true
           },
           "etnia": {
-            "type": "integer",
-            "format": "int32"
+            "type": "string"
           }
         }
       },
@@ -5100,16 +5099,13 @@
                 "nullable": true
               },
               "nome": {
-                "type": "string",
-                "nullable": true
+                "type": "string"
               },
               "email": {
-                "type": "string",
-                "nullable": true
+                "type": "string"
               },
               "sexo": {
-                "type": "string",
-                "nullable": true
+                "type": "string"
               },
               "dtNascimento": {
                 "type": "string",
@@ -5162,28 +5158,19 @@
                 "type": "boolean"
               },
               "etnia": {
-                "type": "integer",
-                "format": "int32"
+                "type": "string",
+                "nullable": true
               },
               "idCliente": {
                 "type": "integer",
-                "format": "int32"
+                "format": "int32",
+                "nullable": true
               },
               "municipio": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/Municipio"
-                  }
-                ]
+                "$ref": "#/components/schemas/Municipio"
               },
               "localidade": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/Localidade"
-                  }
-                ]
+                "$ref": "#/components/schemas/Localidade"
               },
               "deficiencias": {
                 "type": "array",
