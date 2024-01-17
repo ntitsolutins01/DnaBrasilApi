@@ -4805,29 +4805,16 @@
       "CreateAlunoCommand": {
         "type": "object",
         "additionalProperties": false,
-        "required": [
-          "nome",
-          "email",
-          "cpf",
-          "status"
-        ],
         "properties": {
           "aspNetUserId": {
             "type": "string",
             "nullable": true
           },
           "nome": {
-            "type": "string",
-            "maxLength": 150,
-            "minLength": 1,
-            "nullable": false
+            "type": "string"
           },
           "email": {
-            "type": "string",
-            "maxLength": 100,
-            "minLength": 1,
-            "pattern": "^[^@]+@[^@]+$",
-            "nullable": false
+            "type": "string"
           },
           "sexo": {
             "type": "string"
@@ -4845,9 +4832,7 @@
           },
           "cpf": {
             "type": "string",
-            "maxLength": 14,
-            "minLength": 1,
-            "nullable": false
+            "nullable": true
           },
           "telefone": {
             "type": "string",
@@ -4859,14 +4844,10 @@
           },
           "cep": {
             "type": "string",
-            "maxLength": 9,
-            "minLength": 0,
             "nullable": true
           },
           "endereco": {
             "type": "string",
-            "maxLength": 200,
-            "minLength": 0,
             "nullable": true
           },
           "numero": {
@@ -4875,14 +4856,10 @@
           },
           "bairro": {
             "type": "string",
-            "maxLength": 100,
-            "minLength": 0,
             "nullable": true
           },
           "status": {
-            "type": "boolean",
-            "minLength": 1,
-            "nullable": false
+            "type": "boolean"
           },
           "habilitado": {
             "type": "boolean"
@@ -7609,7 +7586,6 @@
         "additionalProperties": false,
         "required": [
           "nome",
-          "url",
           "tipoEscolaridade"
         ],
         "properties": {
@@ -7619,15 +7595,11 @@
             "minLength": 1,
             "nullable": false
           },
-          "grade": {
-            "type": "string",
-            "nullable": true
-          },
           "url": {
             "type": "string",
             "maxLength": 500,
-            "minLength": 1,
-            "nullable": false
+            "minLength": 0,
+            "nullable": true
           },
           "tipoEscolaridade": {
             "type": "string",
