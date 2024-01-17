@@ -1,10 +1,9 @@
-﻿using DnaBrasilApi.Application.Alunos.Commands.CreateDependencia;
-using DnaBrasilApi.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasilApi.Application.Alunos.Commands.UpdateDependencia;
+namespace DnaBrasilApi.Application.Dependencias.Commands.UpdateDependencia;
 
-public record UpdateDependenciaCommand : IRequest
+public record UpdateDependenciaCommand : IRequest<bool>
 {
     public int Id { get; set; }
     public string? Doencas { get; init; }
@@ -21,10 +20,10 @@ public record UpdateDependenciaCommand : IRequest
     public bool? AutorizacaoUsoImagemAudio { get; init; }
     public bool? AutorizacaoUsoIndicadores { get; init; }
     public bool? AutorizacaoSaida { get; init; } = false;
-    public required Aluno Aluno { get; init; }
+    public required int AlunoId { get; init; }
 }
 
-public class UpdateDependenciaCommandHandler : IRequestHandler<UpdateDependenciaCommand>
+public class UpdateDependenciaCommandHandler : IRequestHandler<UpdateDependenciaCommand, bool>
 {
     private readonly IApplicationDbContext _context;
 
@@ -33,12 +32,17 @@ public class UpdateDependenciaCommandHandler : IRequestHandler<UpdateDependencia
         _context = context;
     }
 
-    public async Task Handle(UpdateDependenciaCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(UpdateDependenciaCommand request, CancellationToken cancellationToken)
     {
         var entity = await _context.Dependencias
             .FindAsync(new object[] { request.Id }, cancellationToken);
 
         Guard.Against.NotFound(request.Id, entity);
+
+        var aluno = await _context.Alunos
+            .FindAsync(new object[] { request.AlunoId }, cancellationToken);
+
+        Guard.Against.NotFound(request.AlunoId, aluno);
 
         entity.Doencas = request.Doencas;
         entity.Nacionalidade = request.Nacionalidade;
@@ -54,8 +58,10 @@ public class UpdateDependenciaCommandHandler : IRequestHandler<UpdateDependencia
         entity.AutorizacaoUsoImagemAudio = request.AutorizacaoUsoImagemAudio;
         entity.AutorizacaoUsoIndicadores = request.AutorizacaoUsoIndicadores;
         entity.AutorizacaoSaida = request.AutorizacaoSaida;
-        entity.Aluno = request.Aluno;
+        entity.Aluno = aluno;
 
-        await _context.SaveChangesAsync(cancellationToken);
+        var result = await _context.SaveChangesAsync(cancellationToken);
+
+        return result == 1;//true
     }
 }

@@ -1,4 +1,5 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Application.Dependencias.Commands.UpdateDependencia;
 
 namespace DnaBrasilApi.Application.Alunos.Commands.UpdateDependencia;
 
