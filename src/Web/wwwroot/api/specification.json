@@ -5743,12 +5743,12 @@
                 "nullable": true
               },
               "tipoEscola": {
-                "type": "integer",
-                "format": "int32"
+                "type": "string",
+                "nullable": true
               },
               "tipoEscolaridade": {
-                "type": "integer",
-                "format": "int32"
+                "type": "string",
+                "nullable": true
               },
               "turno": {
                 "type": "string",

@@ -16,6 +16,10 @@ internal class DependenciaConfiguration : IEntityTypeConfiguration<Dependencia>
             .HasMaxLength(400);
         builder.Property(t => t.Nacionalidade)
             .HasMaxLength(50);
+        builder.Property(t => t.TipoEscolaridade)
+            .HasMaxLength(50);
+        builder.Property(t => t.TipoEscola)
+            .HasMaxLength(50);
         builder.Property(t => t.Naturalidade)
             .HasMaxLength(50);
         builder.Property(t => t.NomeEscola)

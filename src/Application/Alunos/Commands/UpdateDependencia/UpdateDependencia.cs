@@ -11,8 +11,8 @@ public record UpdateDependenciaCommand : IRequest
     public string? Nacionalidade { get; init; }
     public string? Naturalidade { get; init; }
     public string? NomeEscola { get; init; }
-    public int TipoEscola { get; init; }
-    public int TipoEscolaridade { get; init; }
+    public string? TipoEscola { get; init; }
+    public string? TipoEscolaridade { get; init; }
     public string? Turno { get; init; }
     public string? Serie { get; init; }
     public string? Ano { get; init; }
