@@ -1,3 +1,4 @@
+using System.Globalization;
 using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Application.TodoItems.Commands.CreateTodoItem;
 using DnaBrasilApi.Domain.Entities;
@@ -86,7 +87,7 @@ public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int
             Nome = request.Nome,
             Email = request.Email,
             Sexo = request.Sexo,
-            DtNascimento = Convert.ToDateTime(request.DtNascimento),
+            DtNascimento = DateTime.ParseExact(request.DtNascimento, "dd/MM/yyyy", CultureInfo.CreateSpecificCulture("pt-BR")),
             Etnia = request.Etnia,
             NomeMae = request.NomeMae,
             NomePai = request.NomePai,

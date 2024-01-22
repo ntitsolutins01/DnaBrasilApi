@@ -4745,7 +4745,7 @@
           },
           "dtNascimento": {
             "type": "string",
-            "format": "date-time"
+            "nullable": true
           },
           "idCliente": {
             "type": "integer",

@@ -17,7 +17,7 @@ public class AlunoDto
     public string? Nome { get; set; }
     public string? Email { get; set; }
     public string? Sexo { get; set; }
-    public DateTime DtNascimento { get; set; }
+    public string? DtNascimento { get; set; }
     //public string? NomeMae { get; set; }
     //public string? NomePai { get; set; }
     //public string? Cpf { get; set; }
@@ -61,7 +61,8 @@ public class AlunoDto
                 .ForMember(dest => dest.LocalidadeId, opt => opt.MapFrom(src => src.Localidade!.Id))
                 .ForMember(dest => dest.NomeLocalidade, opt => opt.MapFrom(src => src.Localidade!.Nome))
                 .ForMember(dest => dest.Idade, opt => opt.MapFrom(src => GetIdade(src.DtNascimento,null)))
-                .ForMember(dest => dest.Sexo, opt => opt.MapFrom(src => src.Sexo == "F" ? "Feminino" : "Masculino"));
+                .ForMember(dest => dest.Sexo, opt => opt.MapFrom(src => src.Sexo == "F" ? "Feminino" : "Masculino"))
+                .ForMember(dest => dest.DtNascimento, opt => opt.MapFrom(src => src.DtNascimento.ToString("dd/MM/yyyy")));
         }
     }
     /// <summary>

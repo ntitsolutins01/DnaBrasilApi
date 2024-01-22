@@ -27,7 +27,7 @@ public class Dependencias : EndpointGroupBase
 
     public async Task<DependenciaDto> GetDependenciaById(ISender sender, int id)
     {
-        return await sender.Send(new GetDependenciaByIdQuery() { Id = id });
+        return await sender.Send(new GetDependenciaByIdQuery { Id = id });
     }
     public async Task<int> CreateDependencia(ISender sender, CreateDependenciaCommand command)
     {
