@@ -4042,7 +4042,7 @@
         "tags": [
           "Users"
         ],
-        "operationId": "GetApiUsersConfirmEmail",
+        "operationId": "MapIdentityApi-/api/Users/confirmEmail",
         "parameters": [
           {
             "name": "userId",
@@ -4091,7 +4091,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ResendConfirmationEmailRequest"
+                "$ref": "#/components/schemas/ResendEmailRequest"
               }
             }
           },
@@ -4823,11 +4823,11 @@
           },
           "dtVencimentoParq": {
             "type": "string",
-            "format": "date-time"
+            "nullable": true
           },
           "dtVencimentoAtestadoMedico": {
             "type": "string",
-            "format": "date-time"
+            "nullable": true
           },
           "nomeResponsavel1": {
             "type": "string",
@@ -4864,6 +4864,14 @@
           "cpfResponsavel3": {
             "type": "string",
             "nullable": true
+          },
+          "aluno": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/AlunoDto"
+              }
+            ]
           }
         }
       },
@@ -6881,8 +6889,9 @@
             "type": "boolean",
             "nullable": true
           },
-          "aluno": {
-            "$ref": "#/components/schemas/Aluno"
+          "alunoId": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },
@@ -7449,85 +7458,50 @@
       "CreateMatriculaCommand": {
         "type": "object",
         "additionalProperties": false,
-        "required": [
-          "dtVencimentoParq",
-          "dtVencimentoAtestadoMedico",
-          "nomeResponsavel1",
-          "parentescoResponsavel1",
-          "cpfResponsavel1",
-          "nomeResponsavel2",
-          "parentescoResponsavel2",
-          "cpfResponsavel2",
-          "nomeResponsavel3",
-          "parentescoResponsavel3",
-          "cpfResponsavel3"
-        ],
         "properties": {
           "dtVencimentoParq": {
             "type": "string",
-            "format": "date-time",
-            "minLength": 1,
-            "nullable": false
+            "nullable": true
           },
           "dtVencimentoAtestadoMedico": {
             "type": "string",
-            "format": "date-time",
-            "minLength": 1,
-            "nullable": false
+            "nullable": true
           },
           "nomeResponsavel1": {
             "type": "string",
-            "maxLength": 150,
-            "minLength": 1,
-            "nullable": false
+            "nullable": true
           },
           "parentescoResponsavel1": {
             "type": "string",
-            "maxLength": 150,
-            "minLength": 1,
-            "nullable": false
+            "nullable": true
           },
           "cpfResponsavel1": {
             "type": "string",
-            "maxLength": 14,
-            "minLength": 1,
-            "nullable": false
+            "nullable": true
           },
           "nomeResponsavel2": {
             "type": "string",
-            "maxLength": 150,
-            "minLength": 1,
-            "nullable": false
+            "nullable": true
           },
           "parentescoResponsavel2": {
             "type": "string",
-            "maxLength": 150,
-            "minLength": 1,
-            "nullable": false
+            "nullable": true
           },
           "cpfResponsavel2": {
             "type": "string",
-            "maxLength": 14,
-            "minLength": 1,
-            "nullable": false
+            "nullable": true
           },
           "nomeResponsavel3": {
             "type": "string",
-            "maxLength": 150,
-            "minLength": 1,
-            "nullable": false
+            "nullable": true
           },
           "parentescoResponsavel3": {
             "type": "string",
-            "maxLength": 150,
-            "minLength": 1,
-            "nullable": false
+            "nullable": true
           },
           "cpfResponsavel3": {
             "type": "string",
-            "maxLength": 14,
-            "minLength": 1,
-            "nullable": false
+            "nullable": true
           },
           "alunoId": {
             "type": "integer",
@@ -7538,19 +7512,6 @@
       "UpdateMatriculaCommand": {
         "type": "object",
         "additionalProperties": false,
-        "required": [
-          "dtVencimentoParq",
-          "dtVencimentoAtestadoMedico",
-          "nomeResponsavel1",
-          "parentescoResponsavel1",
-          "cpfResponsavel1",
-          "nomeResponsavel2",
-          "parentescoResponsavel2",
-          "cpfResponsavel2",
-          "nomeResponsavel3",
-          "parentescoResponsavel3",
-          "cpfResponsavel3"
-        ],
         "properties": {
           "id": {
             "type": "integer",
@@ -7558,69 +7519,51 @@
           },
           "dtVencimentoParq": {
             "type": "string",
-            "format": "date-time",
-            "minLength": 1,
-            "nullable": false
+            "nullable": true
           },
           "dtVencimentoAtestadoMedico": {
             "type": "string",
-            "format": "date-time",
-            "minLength": 1,
-            "nullable": false
+            "nullable": true
           },
           "nomeResponsavel1": {
             "type": "string",
-            "maxLength": 150,
-            "minLength": 1,
-            "nullable": false
+            "nullable": true
           },
           "parentescoResponsavel1": {
             "type": "string",
-            "maxLength": 150,
-            "minLength": 1,
-            "nullable": false
+            "nullable": true
           },
           "cpfResponsavel1": {
             "type": "string",
-            "maxLength": 14,
-            "minLength": 1,
-            "nullable": false
+            "nullable": true
           },
           "nomeResponsavel2": {
             "type": "string",
-            "maxLength": 150,
-            "minLength": 1,
-            "nullable": false
+            "nullable": true
           },
           "parentescoResponsavel2": {
             "type": "string",
-            "maxLength": 150,
-            "minLength": 1,
-            "nullable": false
+            "nullable": true
           },
           "cpfResponsavel2": {
             "type": "string",
-            "maxLength": 14,
-            "minLength": 1,
-            "nullable": false
+            "nullable": true
           },
           "nomeResponsavel3": {
             "type": "string",
-            "maxLength": 150,
-            "minLength": 1,
-            "nullable": false
+            "nullable": true
           },
           "parentescoResponsavel3": {
             "type": "string",
-            "maxLength": 150,
-            "minLength": 1,
-            "nullable": false
+            "nullable": true
           },
           "cpfResponsavel3": {
             "type": "string",
-            "maxLength": 14,
-            "minLength": 1,
-            "nullable": false
+            "nullable": true
+          },
+          "alunoId": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },
@@ -8905,7 +8848,7 @@
           }
         }
       },
-      "ResendConfirmationEmailRequest": {
+      "ResendEmailRequest": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -8996,6 +8939,12 @@
           },
           "isEmailConfirmed": {
             "type": "boolean"
+          },
+          "claims": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
           }
         }
       },

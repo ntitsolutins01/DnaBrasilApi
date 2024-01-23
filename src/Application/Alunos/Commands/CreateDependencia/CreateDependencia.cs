@@ -20,7 +20,7 @@ public record CreateDependenciaCommand : IRequest<int>
     public bool? AutorizacaoUsoImagemAudio { get; init; }
     public bool? AutorizacaoUsoIndicadores { get; init; }
     public bool? AutorizacaoSaida { get; init; } = false;
-    public required Aluno Aluno { get; init; }
+    public int AlunoId { get; init; }
 }
 
 public class CreateDependenciaCommandHandler : IRequestHandler<CreateDependenciaCommand, int>
@@ -34,6 +34,10 @@ public class CreateDependenciaCommandHandler : IRequestHandler<CreateDependencia
 
     public async Task<int> Handle(CreateDependenciaCommand request, CancellationToken cancellationToken)
     {
+        var aluno = await _context.Alunos
+            .FindAsync(new object[] { request.AlunoId }, cancellationToken);
+
+        Guard.Against.NotFound(request.AlunoId, aluno);
 
         var entity = new Dependencia()
         {
@@ -51,7 +55,7 @@ public class CreateDependenciaCommandHandler : IRequestHandler<CreateDependencia
             AutorizacaoUsoImagemAudio = request.AutorizacaoUsoImagemAudio,
             AutorizacaoUsoIndicadores = request.AutorizacaoUsoIndicadores,
             AutorizacaoSaida = request.AutorizacaoSaida,
-            Aluno = request.Aluno
+            Aluno = aluno
         };
 
         _context.Dependencias.Add(entity);
