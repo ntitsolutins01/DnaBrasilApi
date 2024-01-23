@@ -1,12 +1,13 @@
-﻿using DnaBrasilApi.Application.Common.Interfaces;
+﻿using System.Globalization;
+using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Alunos.Commands.CreateMatricula;
 
 public record CreateMatriculaCommand : IRequest<int>
 {
-    public DateTime DtVencimentoParq { get; set; }
-    public DateTime DtVencimentoAtestadoMedico { get; set; }
+    public string? DtVencimentoParq { get; set; }
+    public string? DtVencimentoAtestadoMedico { get; set; }
     public string? NomeResponsavel1 { get; set; }
     public string? ParentescoResponsavel1 { get; set; }
     public string? CpfResponsavel1 { get; set; }
@@ -37,8 +38,8 @@ public class CreateMatriculaCommandHandler : IRequestHandler<CreateMatriculaComm
 
         var entity = new Matricula
         {
-            DtVencimentoParq = request.DtVencimentoParq,
-            DtVencimentoAtestadoMedico = request.DtVencimentoAtestadoMedico,
+            DtVencimentoParq = DateTime.ParseExact(request.DtVencimentoParq!, "dd/MM/yyyy", CultureInfo.CreateSpecificCulture("pt-BR")),
+            DtVencimentoAtestadoMedico = DateTime.ParseExact(request.DtVencimentoAtestadoMedico!, "dd/MM/yyyy", CultureInfo.CreateSpecificCulture("pt-BR")),
             ParentescoResponsavel1 = request.ParentescoResponsavel1,
             NomeResponsavel1 = request.NomeResponsavel1,
             CpfResponsavel1 = request.CpfResponsavel1,
