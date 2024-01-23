@@ -4865,14 +4865,6 @@
             "type": "string",
             "nullable": true
           },
-          "localidade": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/LocalidadeDto"
-              }
-            ]
-          },
           "aluno": {
             "nullable": true,
             "oneOf": [
@@ -4880,6 +4872,36 @@
                 "$ref": "#/components/schemas/AlunoDto"
               }
             ]
+          }
+        }
+      },
+      "VoucherDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "local": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/LocalidadeDto"
+              }
+            ]
+          },
+          "descricao": {
+            "type": "string",
+            "nullable": true
+          },
+          "turma": {
+            "type": "string",
+            "nullable": true
+          },
+          "serie": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -4915,36 +4937,6 @@
             "nullable": true
           },
           "nomeEstado": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
-      "VoucherDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "local": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/LocalidadeDto"
-              }
-            ]
-          },
-          "descricao": {
-            "type": "string",
-            "nullable": true
-          },
-          "turma": {
-            "type": "string",
-            "nullable": true
-          },
-          "serie": {
             "type": "string",
             "nullable": true
           }
@@ -5813,14 +5805,6 @@
               "cpfResponsavel3": {
                 "type": "string",
                 "nullable": true
-              },
-              "localidade": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/Localidade"
-                  }
-                ]
               },
               "aluno": {
                 "$ref": "#/components/schemas/Aluno"
@@ -7509,11 +7493,6 @@
           },
           "cpfResponsavel3": {
             "type": "string",
-            "nullable": true
-          },
-          "localidadeId": {
-            "type": "integer",
-            "format": "int32",
             "nullable": true
           },
           "alunoId": {
