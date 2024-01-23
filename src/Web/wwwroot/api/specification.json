@@ -4042,7 +4042,7 @@
         "tags": [
           "Users"
         ],
-        "operationId": "MapIdentityApi-/api/Users/confirmEmail",
+        "operationId": "GetApiUsersConfirmEmail",
         "parameters": [
           {
             "name": "userId",
@@ -4091,7 +4091,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ResendEmailRequest"
+                "$ref": "#/components/schemas/ResendConfirmationEmailRequest"
               }
             }
           },
@@ -4865,25 +4865,7 @@
             "type": "string",
             "nullable": true
           },
-          "aluno": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/AlunoDto"
-              }
-            ]
-          }
-        }
-      },
-      "VoucherDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "local": {
+          "localidade": {
             "nullable": true,
             "oneOf": [
               {
@@ -4891,17 +4873,13 @@
               }
             ]
           },
-          "descricao": {
-            "type": "string",
-            "nullable": true
-          },
-          "turma": {
-            "type": "string",
-            "nullable": true
-          },
-          "serie": {
-            "type": "string",
-            "nullable": true
+          "aluno": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/AlunoDto"
+              }
+            ]
           }
         }
       },
@@ -4937,6 +4915,36 @@
             "nullable": true
           },
           "nomeEstado": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "VoucherDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "local": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/LocalidadeDto"
+              }
+            ]
+          },
+          "descricao": {
+            "type": "string",
+            "nullable": true
+          },
+          "turma": {
+            "type": "string",
+            "nullable": true
+          },
+          "serie": {
             "type": "string",
             "nullable": true
           }
@@ -5806,7 +5814,7 @@
                 "type": "string",
                 "nullable": true
               },
-              "local": {
+              "localidade": {
                 "nullable": true,
                 "oneOf": [
                   {
@@ -7503,6 +7511,11 @@
             "type": "string",
             "nullable": true
           },
+          "localidadeId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
           "alunoId": {
             "type": "integer",
             "format": "int32"
@@ -8848,7 +8861,7 @@
           }
         }
       },
-      "ResendEmailRequest": {
+      "ResendConfirmationEmailRequest": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -8939,12 +8952,6 @@
           },
           "isEmailConfirmed": {
             "type": "boolean"
-          },
-          "claims": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            }
           }
         }
       },
