@@ -4042,7 +4042,7 @@
         "tags": [
           "Users"
         ],
-        "operationId": "GetApiUsersConfirmEmail",
+        "operationId": "MapIdentityApi-/api/Users/confirmEmail",
         "parameters": [
           {
             "name": "userId",
@@ -4091,7 +4091,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ResendConfirmationEmailRequest"
+                "$ref": "#/components/schemas/ResendEmailRequest"
               }
             }
           },
@@ -8861,7 +8861,7 @@
           }
         }
       },
-      "ResendConfirmationEmailRequest": {
+      "ResendEmailRequest": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -8952,6 +8952,12 @@
           },
           "isEmailConfirmed": {
             "type": "boolean"
+          },
+          "claims": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
           }
         }
       },

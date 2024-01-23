@@ -17,7 +17,6 @@ public record CreateMatriculaCommand : IRequest<int>
     public string? NomeResponsavel3 { get; set; }
     public string? ParentescoResponsavel3 { get; set; }
     public string? CpfResponsavel3 { get; set; }
-    public int? LocalidadeId { get; set; }
     public int AlunoId { get; set; }
 }
 
@@ -37,15 +36,6 @@ public class CreateMatriculaCommandHandler : IRequestHandler<CreateMatriculaComm
 
         Guard.Against.NotFound(request.AlunoId, aluno);
 
-        Localidade? localidade = null;
-
-        if (request.LocalidadeId != null)
-        {
-            localidade = await _context.Localidades
-                .FindAsync(new object[] { request.LocalidadeId }, cancellationToken);
-
-            Guard.Against.NotFound((int)request.LocalidadeId, localidade);
-        }
 
         var entity = new Matricula
         {
@@ -61,7 +51,7 @@ public class CreateMatriculaCommandHandler : IRequestHandler<CreateMatriculaComm
             CpfResponsavel3 = request.CpfResponsavel3,
             ParentescoResponsavel3 = request.ParentescoResponsavel3,
             Aluno = aluno,
-            Localidade = localidade
+
 
         };
 

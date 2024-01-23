@@ -12,6 +12,5 @@ public class Matricula : BaseAuditableEntity
     public string? NomeResponsavel3 { get; set; }
     public string? ParentescoResponsavel3 { get; set; }
     public string? CpfResponsavel3 { get; set; }
-    public Localidade? Localidade { get; set; }
     public required Aluno Aluno { get; set; }
 }
