@@ -34,7 +34,7 @@ public class UpdateDependenciaCommandHandler : IRequestHandler<UpdateDependencia
 
     public async Task<bool> Handle(UpdateDependenciaCommand request, CancellationToken cancellationToken)
     {
-        var entity = await _context.Dependencias
+        var entity = await _context.DependenciasOld
             .FindAsync(new object[] { request.Id }, cancellationToken);
 
         Guard.Against.NotFound(request.Id, entity);

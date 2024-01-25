@@ -20,7 +20,7 @@ public class GetDependenciaByIdQueryHandler : IRequestHandler<GetDependenciaById
 
     public async Task<DependenciaDto> Handle(GetDependenciaByIdQuery request, CancellationToken cancellationToken)
     {
-        var result = await _context.Dependencias
+        var result = await _context.DependenciasOld
             .Where(x => x.Id == request.Id)
             .AsNoTracking()
             .ProjectTo<DependenciaDto>(_mapper.ConfigurationProvider)

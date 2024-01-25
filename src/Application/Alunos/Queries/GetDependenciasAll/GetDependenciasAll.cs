@@ -17,7 +17,7 @@ public class GetDependenciasAllQueryHandler : IRequestHandler<GetDependenciasAll
 
     public async Task<List<DependenciaDto>> Handle(GetDependenciasAllQuery request, CancellationToken cancellationToken)
     {
-        var result = await _context.Dependencias
+        var result = await _context.DependenciasOld
             .AsNoTracking()
             .ProjectTo<DependenciaDto>(_mapper.ConfigurationProvider)
             .OrderBy(t => t.Id)

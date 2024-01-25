@@ -28,6 +28,6 @@ public class Aluno : BaseAuditableEntity
     public List<Contrato>? Contratos { get; set; }
     public Matricula? Matricula { get; set; }
     public Voucher? Voucher { get; set; }
-    public Dependencia? Dependencia { get; set; }
+    public DependenciaOld? Dependencia { get; set; }
     public List<Laudo>? Laudos { get; set; }
 }

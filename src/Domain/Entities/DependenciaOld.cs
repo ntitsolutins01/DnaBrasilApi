@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DnaBrasilApi.Domain.Entities;
-public class Dependencia : BaseAuditableEntity
+﻿namespace DnaBrasilApi.Domain.Entities;
+public class DependenciaOld : BaseAuditableEntity
 {
     public string? Doencas { get; set; }
     public string? Nacionalidade { get; set; }

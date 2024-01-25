@@ -39,7 +39,7 @@ public class CreateDependenciaCommandHandler : IRequestHandler<CreateDependencia
 
         Guard.Against.NotFound(request.AlunoId, aluno);
 
-        var entity = new Dependencia()
+        var entity = new DependenciaOld()
         {
             Doencas = request.Doencas,
             Nacionalidade = request.Nacionalidade,
@@ -58,7 +58,7 @@ public class CreateDependenciaCommandHandler : IRequestHandler<CreateDependencia
             Aluno = aluno
         };
 
-        _context.Dependencias.Add(entity);
+        _context.DependenciasOld.Add(entity);
 
         await _context.SaveChangesAsync(cancellationToken);
 
