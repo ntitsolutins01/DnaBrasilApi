@@ -28,8 +28,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<ConsumoAlimentar> ConsumoAlimentares => Set<ConsumoAlimentar>();
     public DbSet<Vocacional> Vocacionais => Set<Vocacional>();
     public DbSet<Aluno> Alunos => Set<Aluno>();
-    public DbSet<DependenciaOld> DependenciasOld => Set<DependenciaOld>();
-    public DbSet<Matricula> Matriculas => Set<Matricula>();
+    public DbSet<Dependencia> Dependencias => Set<Dependencia>();
+    public DbSet<MatriculaOld> MatriculasOld => Set<MatriculaOld>();
     public DbSet<Voucher> Vouchers => Set<Voucher>();
     public DbSet<Parceiro> Parceiros => Set<Parceiro>();
     public DbSet<PlanoAula> PlanosAulas => Set<PlanoAula>();
@@ -113,12 +113,12 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
         builder.Entity<Aluno>()
             .HasOne(e => e.Dependencia)
             .WithOne(e => e.Aluno)
-            .HasForeignKey<DependenciaOld>();
+            .HasForeignKey<Dependencia>();
 
         builder.Entity<Aluno>()
             .HasOne(e => e.Matricula)
             .WithOne(e => e.Aluno)
-            .HasForeignKey<Matricula>();
+            .HasForeignKey<MatriculaOld>();
 
         builder.Entity<Aluno>()
             .HasOne(e => e.Voucher)

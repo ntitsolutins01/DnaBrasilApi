@@ -1,5 +1,5 @@
 ﻿namespace DnaBrasilApi.Domain.Entities;
-public class Matricula : BaseAuditableEntity
+public class MatriculaOld : BaseAuditableEntity
 {
     public DateTime DtVencimentoParq { get; set; }
     public DateTime DtVencimentoAtestadoMedico { get; set; }

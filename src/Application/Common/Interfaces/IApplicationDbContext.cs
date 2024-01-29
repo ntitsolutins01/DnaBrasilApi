@@ -21,8 +21,8 @@ public interface IApplicationDbContext
     DbSet<ConsumoAlimentar> ConsumoAlimentares { get; }
     DbSet<Vocacional> Vocacionais { get; }
     DbSet<Aluno> Alunos { get; }
-    DbSet<DependenciaOld> DependenciasOld { get; }
-    DbSet<Matricula> Matriculas { get; }
+    DbSet<Dependencia> Dependencias { get; }
+    DbSet<MatriculaOld> MatriculasOld { get; }
     DbSet<Voucher> Vouchers { get; }
     DbSet<Parceiro> Parceiros { get; }
     DbSet<PlanoAula> PlanosAulas { get; }

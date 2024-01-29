@@ -9,9 +9,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DnaBrasilApi.Infrastructure.Data.Configurations;
 
-internal class MatriculasConfiguration : IEntityTypeConfiguration<Matricula>
+internal class MatriculasConfiguration : IEntityTypeConfiguration<MatriculaOld>
 {
-    public void Configure(EntityTypeBuilder<Matricula> builder)
+    public void Configure(EntityTypeBuilder<MatriculaOld> builder)
     {
         //    builder.Property(t => t.NomeResponsavel1)
         //        .HasMaxLength(150);

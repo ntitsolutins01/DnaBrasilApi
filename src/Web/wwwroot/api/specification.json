@@ -5308,7 +5308,7 @@
                 "nullable": true,
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/Matricula"
+                    "$ref": "#/components/schemas/MatriculaOld"
                   }
                 ]
               },
@@ -5324,7 +5324,7 @@
                 "nullable": true,
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/DependenciaOld"
+                    "$ref": "#/components/schemas/Dependencia"
                   }
                 ]
               },
@@ -5753,7 +5753,7 @@
           }
         ]
       },
-      "Matricula": {
+      "MatriculaOld": {
         "allOf": [
           {
             "$ref": "#/components/schemas/BaseAuditableEntity"
@@ -5849,7 +5849,7 @@
           }
         ]
       },
-      "DependenciaOld": {
+      "Dependencia": {
         "allOf": [
           {
             "$ref": "#/components/schemas/BaseAuditableEntity"

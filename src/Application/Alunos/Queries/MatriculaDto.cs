@@ -21,7 +21,7 @@ public class MatriculaDto
     {
         public Mapping()
         {
-            CreateMap<Matricula, MatriculaDto>()
+            CreateMap<MatriculaOld, MatriculaDto>()
                 .ForMember(dest => dest.DtVencimentoAtestadoMedico, opt => opt.MapFrom(src => src.DtVencimentoAtestadoMedico.ToString("dd/MM/yyyy")))
                 .ForMember(dest => dest.DtVencimentoParq, opt => opt.MapFrom(src => src.DtVencimentoParq.ToString("dd/MM/yyyy")));
         }

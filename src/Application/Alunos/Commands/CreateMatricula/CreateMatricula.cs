@@ -37,7 +37,7 @@ public class CreateMatriculaCommandHandler : IRequestHandler<CreateMatriculaComm
         Guard.Against.NotFound(request.AlunoId, aluno);
 
 
-        var entity = new Matricula
+        var entity = new MatriculaOld
         {
             DtVencimentoParq = DateTime.ParseExact(request.DtVencimentoParq!, "dd/MM/yyyy", CultureInfo.CreateSpecificCulture("pt-BR")),
             DtVencimentoAtestadoMedico = DateTime.ParseExact(request.DtVencimentoAtestadoMedico!, "dd/MM/yyyy", CultureInfo.CreateSpecificCulture("pt-BR")),
@@ -55,7 +55,7 @@ public class CreateMatriculaCommandHandler : IRequestHandler<CreateMatriculaComm
 
         };
 
-        _context.Matriculas.Add(entity);
+        _context.MatriculasOld.Add(entity);
 
         await _context.SaveChangesAsync(cancellationToken);
 

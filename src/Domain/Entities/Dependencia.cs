@@ -1,5 +1,5 @@
 ﻿namespace DnaBrasilApi.Domain.Entities;
-public class DependenciaOld : BaseAuditableEntity
+public class Dependencia : BaseAuditableEntity
 {
     public string? Doencas { get; set; }
     public string? Nacionalidade { get; set; }

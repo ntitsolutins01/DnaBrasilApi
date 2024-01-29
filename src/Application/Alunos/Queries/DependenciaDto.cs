@@ -23,7 +23,7 @@ public class DependenciaDto
     {
         public Mapping()
         {
-            CreateMap<DependenciaOld, DependenciaDto>();
+            CreateMap<Dependencia, DependenciaDto>();
         }
     }
 }

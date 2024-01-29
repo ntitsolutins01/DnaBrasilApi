@@ -8,9 +8,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 
 namespace DnaBrasilApi.Infrastructure.Data.Configurations;
-internal class DependenciaConfiguration : IEntityTypeConfiguration<DependenciaOld>
+internal class DependenciaConfiguration : IEntityTypeConfiguration<Dependencia>
 {
-    public void Configure(EntityTypeBuilder<DependenciaOld> builder)
+    public void Configure(EntityTypeBuilder<Dependencia> builder)
     {
         builder.Property(t => t.Doencas)
             .HasMaxLength(400);

@@ -12,17 +12,11 @@ public class TalentoEsportivoConfiguration : IEntityTypeConfiguration<TalentoEsp
 {
     public void Configure(EntityTypeBuilder<TalentoEsportivo> builder)
     {
-        builder.Property(t => t.Flexibilidade)
-            .IsRequired();
-        builder.Property(t => t.PreensaoManual)
-            .IsRequired();
-        builder.Property(t => t.Velocidade)
-            .IsRequired();
-        builder.Property(t => t.Abdominal)
-            .IsRequired();
-        builder.Property(t => t.AptidaoFisica)
-            .IsRequired();
-        builder.Property(t => t.ImpulsaoHorizontal)
-            .IsRequired();
+        builder.Property(t => t.Flexibilidade).HasPrecision(10, 2);
+        builder.Property(t => t.PreensaoManual).HasPrecision(10, 2);
+        builder.Property(t => t.Velocidade).HasPrecision(10, 2);
+        builder.Property(t => t.Abdominal).HasPrecision(10, 2);
+        builder.Property(t => t.AptidaoFisica).HasPrecision(10, 2);
+        builder.Property(t => t.ImpulsaoHorizontal).HasPrecision(10, 2);
     }
 }
