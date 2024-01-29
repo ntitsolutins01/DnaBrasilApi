@@ -115,10 +115,10 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
             .WithOne(e => e.Aluno)
             .HasForeignKey<Dependencia>();
 
-        //builder.Entity<Aluno>()
-        //    .HasOne(e => e.Matricula)
-        //    .WithOne(e => e.Aluno)
-        //    .HasForeignKey<Matricula>();
+        builder.Entity<Aluno>()
+            .HasOne(e => e.Matricula)
+            .WithOne(e => e.Aluno)
+            .HasForeignKey<Matricula>();
 
         builder.Entity<Aluno>()
             .HasOne(e => e.Voucher)
