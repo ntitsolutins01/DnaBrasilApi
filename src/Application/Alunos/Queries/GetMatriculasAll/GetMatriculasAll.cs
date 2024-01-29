@@ -17,7 +17,7 @@ public class GetMatriculasAllQueryHandler : IRequestHandler<GetMatriculasAllQuer
 
     public async Task<List<MatriculaDto>> Handle(GetMatriculasAllQuery request, CancellationToken cancellationToken)
     {
-        var result = await _context.MatriculasOld
+        var result = await _context.Matriculas
             .AsNoTracking()
             .ProjectTo<MatriculaDto>(_mapper.ConfigurationProvider)
             .OrderBy(t => t.Id)

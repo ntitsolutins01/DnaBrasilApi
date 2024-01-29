@@ -37,7 +37,7 @@ public class UpdateMatriculaCommandHandler : IRequestHandler<UpdateMatriculaComm
 
         Guard.Against.NotFound(request.AlunoId, aluno);
 
-        var entity = await _context.MatriculasOld
+        var entity = await _context.Matriculas
             .FindAsync(new object[] { request.Id }, cancellationToken);
 
         Guard.Against.NotFound(request.Id, entity);

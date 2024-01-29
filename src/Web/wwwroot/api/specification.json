@@ -5308,7 +5308,7 @@
                 "nullable": true,
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/MatriculaOld"
+                    "$ref": "#/components/schemas/Matricula"
                   }
                 ]
               },
@@ -5753,7 +5753,7 @@
           }
         ]
       },
-      "MatriculaOld": {
+      "Matricula": {
         "allOf": [
           {
             "$ref": "#/components/schemas/BaseAuditableEntity"
@@ -9102,11 +9102,6 @@
       "CreateVoucherCommand": {
         "type": "object",
         "additionalProperties": false,
-        "required": [
-          "descricao",
-          "turma",
-          "serie"
-        ],
         "properties": {
           "id": {
             "type": "integer",
@@ -9122,21 +9117,15 @@
           },
           "descricao": {
             "type": "string",
-            "maxLength": 150,
-            "minLength": 1,
-            "nullable": false
+            "nullable": true
           },
           "turma": {
             "type": "string",
-            "maxLength": 150,
-            "minLength": 1,
-            "nullable": false
+            "nullable": true
           },
           "serie": {
             "type": "string",
-            "maxLength": 150,
-            "minLength": 1,
-            "nullable": false
+            "nullable": true
           },
           "aluno": {
             "$ref": "#/components/schemas/Aluno"

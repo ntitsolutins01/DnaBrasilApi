@@ -11,12 +11,12 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Matriculas_Alunos_Id",
-                table: "Alunos");
+            //migrationBuilder.DropForeignKey(
+            //    name: "FK_Matriculas_Alunos_Id",
+            //    table: "Alunos");
 
-            migrationBuilder.DropTable(
-                name: "Matriculas");
+            //migrationBuilder.DropTable(
+            //    name: "Matriculas");
 
             migrationBuilder.AlterColumn<decimal>(
                 name: "Quadrado",

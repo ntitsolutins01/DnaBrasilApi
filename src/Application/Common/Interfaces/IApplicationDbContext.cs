@@ -22,7 +22,7 @@ public interface IApplicationDbContext
     DbSet<Vocacional> Vocacionais { get; }
     DbSet<Aluno> Alunos { get; }
     DbSet<Dependencia> Dependencias { get; }
-    DbSet<MatriculaOld> MatriculasOld { get; }
+    DbSet<Matricula> Matriculas { get; }
     DbSet<Voucher> Vouchers { get; }
     DbSet<Parceiro> Parceiros { get; }
     DbSet<PlanoAula> PlanosAulas { get; }
