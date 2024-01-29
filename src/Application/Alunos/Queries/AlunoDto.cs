@@ -1,12 +1,4 @@
-﻿using System.Text.Json.Serialization;
-using System.Xml;
-using DnaBrasilApi.Application.Ambientes.Queries;
-using DnaBrasilApi.Application.Contratos.Queries;
-using DnaBrasilApi.Application.Deficiencias.Queries;
-using DnaBrasilApi.Application.Laudos.Queries;
-using DnaBrasilApi.Application.Localidades.Queries;
-using DnaBrasilApi.Application.Municipios.Queries;
-using DnaBrasilApi.Application.Parceiros.Queries;
+﻿using DnaBrasilApi.Application.Deficiencias.Queries;
 using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Alunos.Queries;
@@ -47,15 +39,19 @@ public class AlunoDto
     //public DependenciaDto? Dependencia { get; set; }
     //public List<LaudoDto>? Laudos { get; set; }
 
-    public int MunicipioId { get; set; }
+    public int? MunicipioId { get; set; }
     public string? NomeMunicipio { get; set; }
-    public int LocalidadeId { get; set; }
+    public int? LocalidadeId { get; set; }
+    public int? DependenciaId { get; set; }
+    public int? MatriculaId { get; set; }
     public string? NomeLocalidade { get; set; }
     private class Mapping : Profile
     {
         public Mapping()
         {
             CreateMap<Aluno, AlunoDto>()
+                .ForMember(dest => dest.DependenciaId, opt => opt.MapFrom(src => src.Dependencia!.Id))
+                .ForMember(dest => dest.MatriculaId, opt => opt.MapFrom(src => src.Matricula!.Id))
                 .ForMember(dest => dest.MunicipioId, opt => opt.MapFrom(src => src.Municipio!.Id))
                 .ForMember(dest => dest.NomeMunicipio, opt => opt.MapFrom(src => src.Municipio!.Nome))
                 .ForMember(dest => dest.LocalidadeId, opt => opt.MapFrom(src => src.Localidade!.Id))

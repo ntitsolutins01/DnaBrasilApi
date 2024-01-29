@@ -4780,7 +4780,8 @@
           },
           "municipioId": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "nomeMunicipio": {
             "type": "string",
@@ -4788,7 +4789,18 @@
           },
           "localidadeId": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
+          },
+          "dependenciaId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "matriculaId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
           },
           "nomeLocalidade": {
             "type": "string",
