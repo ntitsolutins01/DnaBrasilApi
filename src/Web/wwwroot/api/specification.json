@@ -5304,14 +5304,6 @@
                   "$ref": "#/components/schemas/Contrato"
                 }
               },
-              "matricula": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/Matricula"
-                  }
-                ]
-              },
               "voucher": {
                 "nullable": true,
                 "oneOf": [
@@ -5748,66 +5740,6 @@
                 "items": {
                   "$ref": "#/components/schemas/Aluno"
                 }
-              }
-            }
-          }
-        ]
-      },
-      "Matricula": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BaseAuditableEntity"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "dtVencimentoParq": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "dtVencimentoAtestadoMedico": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "nomeResponsavel1": {
-                "type": "string",
-                "nullable": true
-              },
-              "parentescoResponsavel1": {
-                "type": "string",
-                "nullable": true
-              },
-              "cpfResponsavel1": {
-                "type": "string",
-                "nullable": true
-              },
-              "nomeResponsavel2": {
-                "type": "string",
-                "nullable": true
-              },
-              "parentescoResponsavel2": {
-                "type": "string",
-                "nullable": true
-              },
-              "cpfResponsavel2": {
-                "type": "string",
-                "nullable": true
-              },
-              "nomeResponsavel3": {
-                "type": "string",
-                "nullable": true
-              },
-              "parentescoResponsavel3": {
-                "type": "string",
-                "nullable": true
-              },
-              "cpfResponsavel3": {
-                "type": "string",
-                "nullable": true
-              },
-              "aluno": {
-                "$ref": "#/components/schemas/Aluno"
               }
             }
           }
