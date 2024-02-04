@@ -853,6 +853,26 @@
         }
       }
     },
+    "/api/Dashboards/Indicadores": {
+      "get": {
+        "tags": [
+          "Dashboards"
+        ],
+        "operationId": "GetIndicadoresByFilter",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DashboardIndicadoresDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Deficiencias": {
       "get": {
         "tags": [
@@ -6750,6 +6770,44 @@
           },
           "status": {
             "type": "boolean"
+          }
+        }
+      },
+      "DashboardIndicadoresDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "avaliacoesDna": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "laudosAndamentos": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "laudosFinalizados": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cadastrosMasculinos": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cadastrosFemininos": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "alunosCadastrados": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "laudosMasculinos": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "laudosFemininos": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },
