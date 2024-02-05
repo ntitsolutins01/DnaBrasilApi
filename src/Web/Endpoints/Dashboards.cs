@@ -1,6 +1,5 @@
-﻿using DnaBrasilApi.Application.Alunos.Queries.GetAlunosAll;
+﻿using DnaBrasilApi.Application.Alunos.Queries.GetIndicadoresAlunosByFilter;
 using DnaBrasilApi.Application.Dashboards.Queries;
-using DnaBrasilApi.Application.Dashboards.Queries.GetAlunosBySexo;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DnaBrasilApi.Web.Endpoints;
@@ -11,16 +10,18 @@ public class Dashboards : EndpointGroupBase
     {
         app.MapGroup(this)
             //.RequireAuthorization()
-            .MapGet(GetIndicadoresByFilter, "Indicadores");
+            .MapPost(GetIndicadoresByFilter, "Indicadores");
     }
 
-    public Task<DashboardIndicadoresDto> GetIndicadoresByFilter(ISender sender)
+    public Task<DashboardIndicadoresDto> GetIndicadoresByFilter(ISender sender, [FromBody] DashboardIndicadoresDto indicadores)
     {
         var result = new DashboardIndicadoresDto();
-        result.AlunosCadastrados = sender.Send(new GetAlunosBySexoQuery()).Result;
-        result.CadastrosFemininos = sender.Send(new GetAlunosBySexoQuery() { Sexo = "F" }).Result;
-        result.CadastrosMasculinos = sender.Send(new GetAlunosBySexoQuery() { Sexo = "M" }).Result;
+        indicadores.AlunosCadastrados = sender.Send(new GetIndicadoresAlunosByFilterQuery(){SearchFilter = indicadores }).Result;
+        indicadores.Sexo = "M";
+        indicadores.CadastrosFemininos = sender.Send(new GetIndicadoresAlunosByFilterQuery() { SearchFilter = indicadores }).Result;
+        indicadores.Sexo = "F";
+        indicadores.CadastrosMasculinos = sender.Send(new GetIndicadoresAlunosByFilterQuery() { SearchFilter = indicadores}).Result;
 
-        return Task.FromResult(result);
+        return Task.FromResult(indicadores);
     }
 }

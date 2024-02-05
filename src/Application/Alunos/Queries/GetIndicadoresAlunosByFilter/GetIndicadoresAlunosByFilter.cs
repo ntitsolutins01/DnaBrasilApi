@@ -1,40 +1,42 @@
-﻿using DnaBrasilApi.Application.Alunos.Queries;
-using DnaBrasilApi.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Application.Dashboards.Queries;
 using DnaBrasilApi.Application.Fomentos.Queries;
 using DnaBrasilApi.Domain.Entities;
+using MediatR;
 
-namespace DnaBrasilApi.Application.Dashboards.Queries.GetAlunosBySexo;
-
-public record GetAlunosBySexoQuery : IRequest<int>
+namespace DnaBrasilApi.Application.Alunos.Queries.GetIndicadoresAlunosByFilter;
+//[Authorize]
+public record GetIndicadoresAlunosByFilterQuery : IRequest<int>
 {
     public DashboardIndicadoresDto? SearchFilter { get; init; }
+
 }
 
-public class GetAlunosBySexoQueryHandler : IRequestHandler<GetAlunosBySexoQuery, int>
+public class GetIndicadoresAlunosByFilterQueryHandler : IRequestHandler<GetIndicadoresAlunosByFilterQuery, int>
 {
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
 
-    public GetAlunosBySexoQueryHandler(IApplicationDbContext context, IMapper mapper)
+    public GetIndicadoresAlunosByFilterQueryHandler(IApplicationDbContext context, IMapper mapper)
     {
         _context = context;
         _mapper = mapper;
     }
 
-    public async Task<int> Handle(GetAlunosBySexoQuery request, CancellationToken cancellationToken)
+    public Task<int> Handle(GetIndicadoresAlunosByFilterQuery request, CancellationToken cancellationToken)
     {
-        int result = 0;
+        IQueryable<Aluno> Alunos;
 
-        result = string.IsNullOrWhiteSpace(request.SearchFilter!.Sexo)
-            ? await _context.Alunos
+        Alunos = string.IsNullOrWhiteSpace(request.SearchFilter!.Sexo)
+            ? _context.Alunos
                 .AsNoTracking()
-                .CountAsync(cancellationToken)
-            : await _context.Alunos
+            : _context.Alunos
                 .Where(x => x.Sexo == request.SearchFilter!.Sexo)
-                .AsNoTracking()
-                .CountAsync(cancellationToken);
+                .AsNoTracking();
 
-        return result;
+        var result = FilterAlunos(Alunos, request.SearchFilter!, cancellationToken);
+            
+        return Task.FromResult((result));
     }
 
     private int FilterAlunos(IQueryable<Aluno> Alunos, DashboardIndicadoresDto search, CancellationToken cancellationToken)
@@ -44,7 +46,7 @@ public class GetAlunosBySexoQueryHandler : IRequestHandler<GetAlunosBySexoQuery,
             var fomento = _context.Fomentos.Where(x => x.Id == Convert.ToInt32(search.FomentoId))
                 .AsNoTracking()
                 .ProjectTo<FomentoDto>(_mapper.ConfigurationProvider)
-                .FirstOrDefaultAsync(cancellationToken);
+                .FirstOrDefaultAsync(cancellationToken); 
 
             Alunos = Alunos.Where(u => u.Municipio!.Id.Equals(fomento.Id));
         }
@@ -67,3 +69,4 @@ public class GetAlunosBySexoQueryHandler : IRequestHandler<GetAlunosBySexoQuery,
         return Alunos.Count();
     }
 }
+

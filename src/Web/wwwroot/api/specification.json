@@ -73,6 +73,40 @@
         }
       }
     },
+    "/api/Alunos/NomeAlunos/{id}": {
+      "get": {
+        "tags": [
+          "Alunos"
+        ],
+        "operationId": "GetNomeAlunosAll",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SelectListDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Alunos": {
       "get": {
         "tags": [
@@ -854,11 +888,24 @@
       }
     },
     "/api/Dashboards/Indicadores": {
-      "get": {
+      "post": {
         "tags": [
           "Dashboards"
         ],
         "operationId": "GetIndicadoresByFilter",
+        "requestBody": {
+          "x-name": "indicadores",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DashboardIndicadoresDto"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
         "responses": {
           "200": {
             "description": "",
@@ -5006,6 +5053,20 @@
           }
         }
       },
+      "SelectListDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
       "CreateAlunoCommand": {
         "type": "object",
         "additionalProperties": false,
@@ -6808,6 +6869,26 @@
           "laudosFemininos": {
             "type": "integer",
             "format": "int32"
+          },
+          "sexo": {
+            "type": "string",
+            "nullable": true
+          },
+          "fomentoId": {
+            "type": "string",
+            "nullable": true
+          },
+          "estado": {
+            "type": "string",
+            "nullable": true
+          },
+          "municipioId": {
+            "type": "string",
+            "nullable": true
+          },
+          "localidadeId": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
