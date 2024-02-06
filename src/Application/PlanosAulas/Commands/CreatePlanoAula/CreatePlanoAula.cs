@@ -8,6 +8,7 @@ public record CreatePlanoAulaCommand : IRequest<int>
     public string? Url { get; set; }
     public string? TipoEscolaridade { get; set; }
     public string? Modalidade { get; set; }
+    public string? NomeArquivo { get; set; }
 }
 
 public class CreatePlanoAulaCommandHandler : IRequestHandler<CreatePlanoAulaCommand, int>
@@ -26,7 +27,8 @@ public class CreatePlanoAulaCommandHandler : IRequestHandler<CreatePlanoAulaComm
             Nome = request.Nome,
             Modalidade = request.Modalidade,
             TipoEscolaridade = request.TipoEscolaridade,
-            Url = request.Url
+            Url = request.Url,
+            NomeArquivo = request.NomeArquivo
         };
 
         _context.PlanosAulas.Add(entity);

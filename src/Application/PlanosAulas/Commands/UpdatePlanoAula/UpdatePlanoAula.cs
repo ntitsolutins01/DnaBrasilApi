@@ -10,6 +10,7 @@ public record UpdatePlanoAulaCommand : IRequest<bool>
     public string? TipoEscolaridade { get; set; }
     public string? Modalidade { get; set; }
     public string? Url { get; set; }
+    public string? NomeArquivo { get; set; }
 }
 
 public class UpdatePlanoAulaCommandHandler : IRequestHandler<UpdatePlanoAulaCommand, bool>
@@ -32,6 +33,7 @@ public class UpdatePlanoAulaCommandHandler : IRequestHandler<UpdatePlanoAulaComm
         entity.Modalidade = request.Modalidade;
         entity.TipoEscolaridade = request.TipoEscolaridade;
         entity.Url = request.Url;
+        entity.NomeArquivo = request.NomeArquivo;
 
         var result = await _context.SaveChangesAsync(cancellationToken);
 

@@ -7282,21 +7282,13 @@
             "type": "string",
             "nullable": true
           },
-          "municipio": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/Municipio"
-              }
-            ]
+          "municipioEstado": {
+            "type": "string",
+            "nullable": true
           },
           "localidade": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/Localidade"
-              }
-            ]
+            "type": "string",
+            "nullable": true
           },
           "dtIni": {
             "type": "string",
@@ -8029,6 +8021,14 @@
             "type": "string",
             "nullable": true
           },
+          "url": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeArquivo": {
+            "type": "string",
+            "nullable": true
+          },
           "modalidade": {
             "type": "string",
             "nullable": true
@@ -8065,6 +8065,10 @@
             "type": "string",
             "maxLength": 50,
             "minLength": 0,
+            "nullable": true
+          },
+          "nomeArquivo": {
+            "type": "string",
             "nullable": true
           }
         }
@@ -8103,6 +8107,10 @@
             "type": "string",
             "maxLength": 500,
             "minLength": 0,
+            "nullable": true
+          },
+          "nomeArquivo": {
+            "type": "string",
             "nullable": true
           }
         }

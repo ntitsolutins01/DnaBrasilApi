@@ -48,7 +48,7 @@ public class GetIndicadoresAlunosByFilterQueryHandler : IRequestHandler<GetIndic
                 .ProjectTo<FomentoDto>(_mapper.ConfigurationProvider)
                 .FirstOrDefaultAsync(cancellationToken); 
 
-            Alunos = Alunos.Where(u => u.Municipio!.Id.Equals(fomento.Id));
+            Alunos = Alunos.Where(u => u.Municipio!.Id ==fomento.Id);
         }
 
         if (!string.IsNullOrWhiteSpace(search.Estado))
@@ -58,12 +58,12 @@ public class GetIndicadoresAlunosByFilterQueryHandler : IRequestHandler<GetIndic
 
         if (!string.IsNullOrWhiteSpace(search.MunicipioId))
         {
-            Alunos = Alunos.Where(u => u.Municipio!.Id.Equals(search.MunicipioId));
+            Alunos = Alunos.Where(u => u.Municipio!.Id == Convert.ToInt32(search.MunicipioId));
         }
 
         if (!string.IsNullOrWhiteSpace(search.LocalidadeId))
         {
-            Alunos = Alunos.Where(u => u.Localidade!.Id.Equals(search.LocalidadeId));
+            Alunos = Alunos.Where(u => u.Localidade!.Id == Convert.ToInt32(search.LocalidadeId));
         }
 
         return Alunos.Count();

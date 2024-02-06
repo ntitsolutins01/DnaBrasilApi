@@ -21,5 +21,7 @@ internal class PlanoAulaConfiguration : IEntityTypeConfiguration<PlanoAula>
             .HasMaxLength(50);
         builder.Property(t => t.Url)
             .HasMaxLength(500);
+        builder.Property(t => t.NomeArquivo)
+            .HasMaxLength(200);
     }
 }

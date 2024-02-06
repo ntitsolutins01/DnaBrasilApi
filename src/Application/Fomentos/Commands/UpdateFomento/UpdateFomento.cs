@@ -1,4 +1,5 @@
-﻿using DnaBrasilApi.Application.Common.Interfaces;
+﻿using System.Globalization;
+using DnaBrasilApi.Application.Common.Interfaces;
 
 namespace DnaBrasilApi.Application.Fomentos.Commands.UpdateFomento;
 
@@ -36,8 +37,8 @@ public class UpdateFomentoCommandHandler : IRequestHandler<UpdateFomentoCommand,
         entity.Nome = request.Nome;
         entity.Codigo = request.Codigo;
         entity.Status = request.Status;
-        entity.DtIni = Convert.ToDateTime(request.DtIni);
-        entity.DtFim = Convert.ToDateTime(request.DtFim);
+        entity.DtIni = DateTime.ParseExact(request.DtIni, "dd/MM/yyyy", CultureInfo.CreateSpecificCulture("pt-BR"));
+        entity.DtFim = DateTime.ParseExact(request.DtFim, "dd/MM/yyyy", CultureInfo.CreateSpecificCulture("pt-BR"));
 
         var result = await _context.SaveChangesAsync(cancellationToken);
 
