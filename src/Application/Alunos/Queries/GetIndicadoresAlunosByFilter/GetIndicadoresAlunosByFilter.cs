@@ -43,9 +43,9 @@ public class GetIndicadoresAlunosByFilterQueryHandler : IRequestHandler<GetIndic
     {
         if (!string.IsNullOrWhiteSpace(search.FomentoId))
         {
-            var fomento = _context.Fomentos.First(x => x.Id == Convert.ToInt32(search.FomentoId));
+            var fomento = _context.Fomentos.Include(i => i.Municipio).First(x => x.Id == Convert.ToInt32(search.FomentoId));
 
-            Alunos = Alunos.Where(u => u.Municipio!.Id ==fomento.Id);
+            Alunos = Alunos.Where(u => u.Municipio!.Id == fomento.Municipio!.Id);
         }
 
         if (!string.IsNullOrWhiteSpace(search.Estado))
