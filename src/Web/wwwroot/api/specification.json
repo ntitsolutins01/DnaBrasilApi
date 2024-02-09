@@ -249,6 +249,39 @@
         }
       }
     },
+    "/api/Alunos/Filter": {
+      "post": {
+        "tags": [
+          "Alunos"
+        ],
+        "operationId": "GetAlunosByFilter",
+        "requestBody": {
+          "x-name": "search",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AlunosFilterDto"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AlunosFilterDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Ambientes": {
       "get": {
         "tags": [
@@ -4846,6 +4879,10 @@
             "type": "string",
             "nullable": true
           },
+          "etnia": {
+            "type": "string",
+            "nullable": true
+          },
           "idCliente": {
             "type": "integer",
             "format": "int32"
@@ -4896,12 +4933,29 @@
             "format": "int32",
             "nullable": true
           },
+          "profissionalId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
           "matriculaId": {
             "type": "integer",
             "format": "int32",
             "nullable": true
           },
           "nomeLocalidade": {
+            "type": "string",
+            "nullable": true
+          },
+          "municipioEstado": {
+            "type": "string",
+            "nullable": true
+          },
+          "controle": {
+            "type": "string",
+            "nullable": true
+          },
+          "estado": {
             "type": "string",
             "nullable": true
           }
@@ -5157,12 +5211,7 @@
         "type": "object",
         "additionalProperties": false,
         "required": [
-          "nome",
-          "email",
-          "sexo",
-          "dtNascimento",
-          "cpf",
-          "status"
+          "nome"
         ],
         "properties": {
           "id": {
@@ -5179,23 +5228,13 @@
             "nullable": false
           },
           "email": {
-            "type": "string",
-            "maxLength": 100,
-            "minLength": 1,
-            "pattern": "^[^@]+@[^@]+$",
-            "nullable": false
+            "type": "string"
           },
           "sexo": {
-            "type": "string",
-            "maxLength": 1,
-            "minLength": 1,
-            "nullable": false
+            "type": "string"
           },
           "dtNascimento": {
-            "type": "string",
-            "format": "date-time",
-            "minLength": 1,
-            "nullable": false
+            "type": "string"
           },
           "nomeMae": {
             "type": "string",
@@ -5207,34 +5246,22 @@
           },
           "cpf": {
             "type": "string",
-            "maxLength": 14,
-            "minLength": 1,
-            "nullable": false
+            "nullable": true
           },
           "telefone": {
             "type": "string",
-            "maxLength": 14,
-            "minLength": 0,
-            "pattern": "((\\(\\d{3}\\) ?)|(\\d{3}-))?\\d{3}-\\d{4}",
             "nullable": true
           },
           "celular": {
             "type": "string",
-            "maxLength": 14,
-            "minLength": 0,
-            "pattern": "((\\(\\d{3}\\) ?)|(\\d{3}-))?\\d{3}-\\d{4}",
             "nullable": true
           },
           "cep": {
             "type": "string",
-            "maxLength": 9,
-            "minLength": 0,
             "nullable": true
           },
           "endereco": {
             "type": "string",
-            "maxLength": 200,
-            "minLength": 0,
             "nullable": true
           },
           "numero": {
@@ -5243,8 +5270,6 @@
           },
           "bairro": {
             "type": "string",
-            "maxLength": 100,
-            "minLength": 0,
             "nullable": true
           },
           "redeSocial": {
@@ -5256,9 +5281,7 @@
             "nullable": true
           },
           "status": {
-            "type": "boolean",
-            "minLength": 1,
-            "nullable": false
+            "type": "boolean"
           },
           "habilitado": {
             "type": "boolean"
@@ -5284,6 +5307,14 @@
                 "$ref": "#/components/schemas/Parceiro"
               }
             ]
+          },
+          "etnia": {
+            "type": "string",
+            "nullable": true
+          },
+          "profissionalId": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -5459,6 +5490,14 @@
                 "items": {
                   "$ref": "#/components/schemas/Laudo"
                 }
+              },
+              "profissional": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Profissional"
+                  }
+                ]
               }
             }
           }
@@ -6393,6 +6432,47 @@
           }
         }
       },
+      "AlunosFilterDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "sexo": {
+            "type": "string",
+            "nullable": true
+          },
+          "fomentoId": {
+            "type": "string",
+            "nullable": true
+          },
+          "estado": {
+            "type": "string",
+            "nullable": true
+          },
+          "municipioId": {
+            "type": "string",
+            "nullable": true
+          },
+          "localidadeId": {
+            "type": "string",
+            "nullable": true
+          },
+          "deficienciaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "etnia": {
+            "type": "string",
+            "nullable": true
+          },
+          "alunos": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/AlunoDto"
+            }
+          }
+        }
+      },
       "AmbienteDto": {
         "type": "object",
         "additionalProperties": false,
@@ -6889,6 +6969,14 @@
           "localidadeId": {
             "type": "string",
             "nullable": true
+          },
+          "deficienciaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "etnia": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -7283,6 +7371,10 @@
             "nullable": true
           },
           "municipioEstado": {
+            "type": "string",
+            "nullable": true
+          },
+          "municipioId": {
             "type": "string",
             "nullable": true
           },

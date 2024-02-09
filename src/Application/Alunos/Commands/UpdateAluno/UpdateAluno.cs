@@ -1,4 +1,5 @@
-﻿using DnaBrasilApi.Application.Common.Interfaces;
+﻿using System.Globalization;
+using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Alunos.Commands.UpdateAluno;
@@ -10,7 +11,7 @@ public record UpdateAlunoCommand : IRequest
     public required string Nome { get; init; }
     public required string Email { get; init; }
     public required string Sexo { get; init; }
-    public required DateTime DtNascimento { get; init; }
+    public required string DtNascimento { get; init; }
     public string? NomeMae { get; init; }
     public string? NomePai { get; init; }
     public string? Cpf { get; init; }
@@ -27,6 +28,8 @@ public record UpdateAlunoCommand : IRequest
     public List<Deficiencia>? Deficiencias { get; init; }
     public List<Ambiente>? Ambientes { get; init; }
     public Parceiro? Parceiro { get; init; }
+    public string? Etnia { get; set; }
+    public string? ProfissionalId { get; set; }
 }
 
 public class UpdateAlunoCommandHandler : IRequestHandler<UpdateAlunoCommand>
@@ -45,11 +48,16 @@ public class UpdateAlunoCommandHandler : IRequestHandler<UpdateAlunoCommand>
 
         Guard.Against.NotFound(request.AspNetUserId, entity);
 
+        var profissional = await _context.Profissionais
+            .FindAsync(new object[] { request.ProfissionalId! }, cancellationToken);
+
+        Guard.Against.NotFound(request.ProfissionalId!, profissional);
+
         entity.AspNetUserId = request.AspNetUserId;
         entity.Nome = request.Nome;
         entity.Email = request.Email;
         entity.Sexo = request.Sexo;
-        entity.DtNascimento = request.DtNascimento;
+        entity.DtNascimento = DateTime.ParseExact(request.DtNascimento, "dd/MM/yyyy", CultureInfo.CreateSpecificCulture("pt-BR")); ;
         entity.NomeMae = request.NomeMae;
         entity.NomePai = request.NomePai;
         entity.Cpf = request.Cpf;
@@ -62,6 +70,7 @@ public class UpdateAlunoCommandHandler : IRequestHandler<UpdateAlunoCommand>
         entity.Status = request.Status;
         entity.Habilitado = request.Habilitado;
         entity.Parceiro = request.Parceiro;
+        entity.Profissional = profissional;
 
         await _context.SaveChangesAsync(cancellationToken);
     }

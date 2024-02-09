@@ -30,4 +30,5 @@ public class Aluno : BaseAuditableEntity
     public Voucher? Voucher { get; set; }
     public Dependencia? Dependencia { get; set; }
     public List<Laudo>? Laudos { get; set; }
+    public Profissional? Profissional { get; set; }
 }

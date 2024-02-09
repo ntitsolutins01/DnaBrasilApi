@@ -17,9 +17,9 @@ public class Dashboards : EndpointGroupBase
     {
         var result = new DashboardIndicadoresDto();
         indicadores.AlunosCadastrados = sender.Send(new GetIndicadoresAlunosByFilterQuery(){SearchFilter = indicadores }).Result;
-        indicadores.Sexo = "M";
-        indicadores.CadastrosFemininos = sender.Send(new GetIndicadoresAlunosByFilterQuery() { SearchFilter = indicadores }).Result;
         indicadores.Sexo = "F";
+        indicadores.CadastrosFemininos = sender.Send(new GetIndicadoresAlunosByFilterQuery() { SearchFilter = indicadores }).Result;
+        indicadores.Sexo = "M";
         indicadores.CadastrosMasculinos = sender.Send(new GetIndicadoresAlunosByFilterQuery() { SearchFilter = indicadores}).Result;
 
         return Task.FromResult(indicadores);

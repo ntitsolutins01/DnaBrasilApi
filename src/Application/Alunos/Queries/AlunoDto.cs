@@ -23,7 +23,7 @@ public class AlunoDto
     //public string? Url { get; set; }
     //public bool Status { get; set; }
     //public bool Habilitado { get; set; }
-    //public int Etnia { get; set; }
+    public string? Etnia { get; set; }
     public int IdCliente { get; set; }
     public int Idade { get; set; }
 
@@ -43,24 +43,35 @@ public class AlunoDto
     public string? NomeMunicipio { get; set; }
     public int? LocalidadeId { get; set; }
     public int? DependenciaId { get; set; }
+    public int? ProfissionalId { get; set; }
     public int? MatriculaId { get; set; }
     public string? NomeLocalidade { get; set; }
+    public string? MunicipioEstado { get; set; }
+    public string? Controle { get; set; }
+    public string? Estado { get; set; }
     private class Mapping : Profile
     {
         public Mapping()
         {
             CreateMap<Aluno, AlunoDto>()
+                .ForMember(dest => dest.Controle, opt => opt.MapFrom(src => src.Dependencia!.Turma))
                 .ForMember(dest => dest.DependenciaId, opt => opt.MapFrom(src => src.Dependencia!.Id))
                 .ForMember(dest => dest.MatriculaId, opt => opt.MapFrom(src => src.Matricula!.Id))
+                .ForMember(dest => dest.ProfissionalId, opt => opt.MapFrom(src => src.Profissional!.Id))
                 .ForMember(dest => dest.MunicipioId, opt => opt.MapFrom(src => src.Municipio!.Id))
                 .ForMember(dest => dest.NomeMunicipio, opt => opt.MapFrom(src => src.Municipio!.Nome))
                 .ForMember(dest => dest.LocalidadeId, opt => opt.MapFrom(src => src.Localidade!.Id))
                 .ForMember(dest => dest.NomeLocalidade, opt => opt.MapFrom(src => src.Localidade!.Nome))
                 .ForMember(dest => dest.Idade, opt => opt.MapFrom(src => GetIdade(src.DtNascimento,null)))
                 .ForMember(dest => dest.Sexo, opt => opt.MapFrom(src => src.Sexo == "F" ? "Feminino" : "Masculino"))
-                .ForMember(dest => dest.DtNascimento, opt => opt.MapFrom(src => src.DtNascimento.ToString("dd/MM/yyyy")));
+                .ForMember(dest => dest.DtNascimento, opt => opt.MapFrom(src => src.DtNascimento.ToString("dd/MM/yyyy")))
+                .ForMember(dest => dest.MunicipioEstado, opt => opt.MapFrom(src => src.Municipio!.Nome!.ToString() + " / " + src.Municipio!.Estado!.Sigla!.ToString()))
+                .ForMember(dest => dest.Estado, opt => opt.MapFrom(src => src.Municipio.Estado!.Sigla));
         }
     }
+
+
+
     /// <summary>
     /// Calcula quantidade de anos passdos com base em duas datas, caso encontre qualquer problema retorna 0 
     /// </summary>

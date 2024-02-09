@@ -1,11 +1,12 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Application.Dashboards.Queries;
 using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Alunos.Queries.GetAlunosByFilter;
 
 public record GetAlunosByFilterQuery : IRequest<List<AlunoDto>>
 {
-    public SearchAlunosDto? Search { get; init; }
+    public AlunosFilterDto? SearchFilter { get; init; }
 }
 
 public class GetAlunosByFilterQueryHandler : IRequestHandler<GetAlunosByFilterQuery, List<AlunoDto>>
@@ -24,7 +25,7 @@ public class GetAlunosByFilterQueryHandler : IRequestHandler<GetAlunosByFilterQu
         var Alunos = _context.Alunos
             .AsNoTracking();
 
-        var result = FilterAlunos(Alunos, request.Search!)
+        var result = FilterAlunos(Alunos, request.SearchFilter!, cancellationToken)
             .ProjectTo<AlunoDto>(_mapper.ConfigurationProvider)
             .OrderBy(t => t.Id)
             .ToListAsync(cancellationToken); ;
@@ -32,20 +33,45 @@ public class GetAlunosByFilterQueryHandler : IRequestHandler<GetAlunosByFilterQu
         return await (result ?? throw new ArgumentNullException(nameof(result)));
     }
 
-    private IQueryable<Aluno> FilterAlunos(IQueryable<Aluno> Alunos, SearchAlunosDto search)
+    private IQueryable<Aluno> FilterAlunos(IQueryable<Aluno> Alunos, AlunosFilterDto search, CancellationToken cancellationToken)
     {
-        if (!string.IsNullOrWhiteSpace(search.Nome))
-            Alunos = Alunos.Where(u => u.Nome!.Contains(search.Nome));
+        if (!string.IsNullOrWhiteSpace(search.FomentoId))
+        {
+            var fomento = _context.Fomentos.Include(i=>i.Municipio).First(x => x.Id == Convert.ToInt32(search.FomentoId));
 
-        if (!string.IsNullOrWhiteSpace(search.Cpf))
-            Alunos = Alunos.Where(u => u.Cpf!.Contains(search.Cpf));
+            Alunos = Alunos.Where(u => u.Municipio!.Id == fomento.Municipio!.Id);
+        }
 
-        if (search.DeficienciaId.GetValueOrDefault() != 0)
-            Alunos = Alunos.Where(u => u.Deficiencias!.Any(f => f.Id == search.DeficienciaId));
+        if (!string.IsNullOrWhiteSpace(search.Estado))
+        {
+            Alunos = Alunos.Where(u => u.Municipio!.Estado!.Sigla!.Contains(search.Estado));
+        }
 
-        //TODO: Relacionamento Aluno-Local para filtro
-        //if (search.LocalId.GetValueOrDefault() != 0)
-        //    Alunos = Alunos.Where(u => u.Local!.Any(f => f.Id == search.LocalId));
+        if (!string.IsNullOrWhiteSpace(search.MunicipioId))
+        {
+            Alunos = Alunos.Where(u => u.Municipio!.Id == Convert.ToInt32(search.MunicipioId));
+        }
+
+        if (!string.IsNullOrWhiteSpace(search.LocalidadeId))
+        {
+            Alunos = Alunos.Where(u => u.Localidade!.Id == Convert.ToInt32(search.LocalidadeId));
+        }
+
+        if (!string.IsNullOrWhiteSpace(search.DeficienciaId))
+        {
+            var deficiencias = _context.Deficiencias
+                .Include(i => i.Alunos)
+                .First(f => f.Id == Convert.ToInt32(search.DeficienciaId));
+
+            var listAlunos = deficiencias.Alunos!.Select(s => s.Id).ToList();
+
+            Alunos = Alunos.Where(u => listAlunos.Contains(u.Id));
+        }
+
+        if (!string.IsNullOrWhiteSpace(search.Etnia))
+        {
+            Alunos = Alunos.Where(u => u.Etnia!.Equals(search.Etnia));
+        }
 
         return Alunos;
     }

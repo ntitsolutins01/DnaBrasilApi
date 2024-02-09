@@ -33,13 +33,17 @@ public class Alunos : EndpointGroupBase
             .MapPost(CreateAluno)
             .MapPut(UpdateAluno, "{id}")
             .MapPut(UpdateAlunoAmbientes, "/Ambientes")
-            .MapDelete(DeleteAluno, "{id}");
+            .MapDelete(DeleteAluno, "{id}")
+            .MapPost(GetAlunosByFilter, "Filter");
     }
 
-    //public async Task<List<AlunoDto>> GetAlunosByFilter(ISender sender, [FromBody] SearchAlunosDto search)
-    //{
-    //    return await sender.Send(new GetAlunosByFilterQuery(search));
-    //}
+
+    public async Task<AlunosFilterDto> GetAlunosByFilter(ISender sender, [FromBody] AlunosFilterDto search)
+    {
+        var result = await sender.Send(new GetAlunosByFilterQuery() { SearchFilter = search });
+
+        return new AlunosFilterDto{ Alunos = result};
+    }
     public async Task<AlunoDto> GetAlunoById(ISender sender, int id)
     {
         return await sender.Send(new GetAlunoByIdQuery() { Id = id });

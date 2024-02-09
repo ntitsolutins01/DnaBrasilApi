@@ -7,6 +7,7 @@ public class FomentoDto
     public string? Codigo { get; init; }
     public string? Nome { get; init; }
     public string? MunicipioEstado { get; init; }
+    public string? MunicipioId { get; init; }
     public string? Localidade { get; init; }
     public string? DtIni { get; set; }
     public string? DtFim { get; set; }
@@ -20,6 +21,7 @@ public class FomentoDto
                 .ForMember(dest => dest.DtIni, opt => opt.MapFrom(src => src.DtIni.ToString("dd/MM/yyyy")))
                 .ForMember(dest => dest.DtFim, opt => opt.MapFrom(src => src.DtFim.ToString("dd/MM/yyyy")))
                 .ForMember(dest => dest.Localidade, opt => opt.MapFrom(src => src.Localidade.Nome!.ToString()))
+                .ForMember(dest => dest.MunicipioId, opt => opt.MapFrom(src => src.Municipio!.Id.ToString()))
                 .ForMember(dest => dest.MunicipioEstado, opt => opt.MapFrom(src => src.Municipio!.Nome!.ToString() +" / "+ src.Municipio!.Estado!.Sigla!.ToString()));
         }
     }

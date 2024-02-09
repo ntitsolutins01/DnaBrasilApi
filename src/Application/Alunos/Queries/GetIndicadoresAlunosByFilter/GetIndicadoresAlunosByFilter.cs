@@ -43,10 +43,7 @@ public class GetIndicadoresAlunosByFilterQueryHandler : IRequestHandler<GetIndic
     {
         if (!string.IsNullOrWhiteSpace(search.FomentoId))
         {
-            var fomento = _context.Fomentos.Where(x => x.Id == Convert.ToInt32(search.FomentoId))
-                .AsNoTracking()
-                .ProjectTo<FomentoDto>(_mapper.ConfigurationProvider)
-                .FirstOrDefaultAsync(cancellationToken); 
+            var fomento = _context.Fomentos.First(x => x.Id == Convert.ToInt32(search.FomentoId));
 
             Alunos = Alunos.Where(u => u.Municipio!.Id ==fomento.Id);
         }
@@ -64,6 +61,22 @@ public class GetIndicadoresAlunosByFilterQueryHandler : IRequestHandler<GetIndic
         if (!string.IsNullOrWhiteSpace(search.LocalidadeId))
         {
             Alunos = Alunos.Where(u => u.Localidade!.Id == Convert.ToInt32(search.LocalidadeId));
+        }
+
+        if (!string.IsNullOrWhiteSpace(search.DeficienciaId))
+        {
+            var deficiencias = _context.Deficiencias
+                .Include(i=>i.Alunos)
+                .First(f=>f.Id == Convert.ToInt32(search.DeficienciaId));
+
+            var listAlunos = deficiencias.Alunos!.Select(s => s.Id).ToList();
+
+            Alunos = Alunos.Where(u => listAlunos.Contains(u.Id));
+        }
+
+        if (!string.IsNullOrWhiteSpace(search.Etnia))
+        {
+            Alunos = Alunos.Where(u => u.Etnia!.Equals(search.Etnia));
         }
 
         return Alunos.Count();
