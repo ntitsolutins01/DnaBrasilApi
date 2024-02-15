@@ -58,11 +58,11 @@ public class Alunos : EndpointGroupBase
         return await sender.Send(command);
     }
 
-    public async Task<IResult> UpdateAluno(ISender sender, int id, UpdateAlunoCommand command)
+    public async Task<bool> UpdateAluno(ISender sender, int id, UpdateAlunoCommand command)
     {
-        if (id != command.Id) return Results.BadRequest();
-        await sender.Send(command);
-        return Results.NoContent();
+        if (id != command.Id) return false;
+        var result = await sender.Send(command);
+        return result;
     }
 
     public async Task<IResult> DeleteAluno(ISender sender, int id)

@@ -12,9 +12,9 @@ public class UpdateAlunoCommandValidator : AbstractValidator<UpdateAlunoCommand>
     {
         _context = context;
 
-        RuleFor(v => v.Nome)
-            .MaximumLength(150)
-            .NotEmpty();
+        //RuleFor(v => v.Nome)
+        //    .MaximumLength(150)
+        //    .NotEmpty();
 
         //RuleFor(v => v.DtNascimento)
         //    .InclusiveBetween(new DateTime(1900, 01, 01), new DateTime(2050, 01, 01))

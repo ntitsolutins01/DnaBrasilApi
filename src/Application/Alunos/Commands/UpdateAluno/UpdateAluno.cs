@@ -4,14 +4,14 @@ using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Alunos.Commands.UpdateAluno;
 
-public record UpdateAlunoCommand : IRequest
+public record UpdateAlunoCommand : IRequest<bool>
 {
     public int Id { get; init; }
-    public required string AspNetUserId { get; init; }
-    public required string Nome { get; init; }
-    public required string Email { get; init; }
-    public required string Sexo { get; init; }
-    public required string DtNascimento { get; init; }
+    public string? AspNetUserId { get; init; }
+    public string? Nome { get; init; }
+    public string? Email { get; init; }
+    public string? Sexo { get; init; }
+    public string? DtNascimento { get; init; }
     public string? NomeMae { get; init; }
     public string? NomePai { get; init; }
     public string? Cpf { get; init; }
@@ -29,10 +29,10 @@ public record UpdateAlunoCommand : IRequest
     public List<Ambiente>? Ambientes { get; init; }
     public Parceiro? Parceiro { get; init; }
     public string? Etnia { get; set; }
-    public string? ProfissionalId { get; set; }
+    public int ProfissionalId { get; set; }
 }
 
-public class UpdateAlunoCommandHandler : IRequestHandler<UpdateAlunoCommand>
+public class UpdateAlunoCommandHandler : IRequestHandler<UpdateAlunoCommand, bool>
 {
     private readonly IApplicationDbContext _context;
 
@@ -41,23 +41,24 @@ public class UpdateAlunoCommandHandler : IRequestHandler<UpdateAlunoCommand>
         _context = context;
     }
 
-    public async Task Handle(UpdateAlunoCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(UpdateAlunoCommand request, CancellationToken cancellationToken)
     {
         var entity = await _context.Alunos
-            .FindAsync(new object[] { request.AspNetUserId }, cancellationToken);
+            .FindAsync([request.Id], cancellationToken);
 
-        Guard.Against.NotFound(request.AspNetUserId, entity);
+        Guard.Against.NotFound(request.Id, entity);
+
 
         var profissional = await _context.Profissionais
-            .FindAsync(new object[] { request.ProfissionalId! }, cancellationToken);
+            .FindAsync([request.ProfissionalId], cancellationToken);
 
-        Guard.Against.NotFound(request.ProfissionalId!, profissional);
+        Guard.Against.NotFound(request.ProfissionalId, profissional);
 
         entity.AspNetUserId = request.AspNetUserId;
-        entity.Nome = request.Nome;
-        entity.Email = request.Email;
-        entity.Sexo = request.Sexo;
-        entity.DtNascimento = DateTime.ParseExact(request.DtNascimento, "dd/MM/yyyy", CultureInfo.CreateSpecificCulture("pt-BR")); ;
+        entity.Nome = request.Nome!;
+        entity.Email = request.Email!;
+        entity.Sexo = request.Sexo!;
+        entity.DtNascimento = DateTime.ParseExact(request.DtNascimento!, "dd/MM/yyyy", CultureInfo.CreateSpecificCulture("pt-BR")); ;
         entity.NomeMae = request.NomeMae;
         entity.NomePai = request.NomePai;
         entity.Cpf = request.Cpf;
@@ -72,6 +73,8 @@ public class UpdateAlunoCommandHandler : IRequestHandler<UpdateAlunoCommand>
         entity.Parceiro = request.Parceiro;
         entity.Profissional = profissional;
 
-        await _context.SaveChangesAsync(cancellationToken);
+        var result = await _context.SaveChangesAsync(cancellationToken);
+
+        return result == 1;//true
     }
 }

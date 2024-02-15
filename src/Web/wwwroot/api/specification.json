@@ -195,7 +195,14 @@
         },
         "responses": {
           "200": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
           }
         }
       },
@@ -4879,6 +4886,16 @@
             "type": "string",
             "nullable": true
           },
+          "url": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "boolean"
+          },
+          "habilitado": {
+            "type": "boolean"
+          },
           "etnia": {
             "type": "string",
             "nullable": true
@@ -5210,31 +5227,30 @@
       "UpdateAlunoCommand": {
         "type": "object",
         "additionalProperties": false,
-        "required": [
-          "nome"
-        ],
         "properties": {
           "id": {
             "type": "integer",
             "format": "int32"
           },
           "aspNetUserId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "nome": {
             "type": "string",
-            "maxLength": 150,
-            "minLength": 1,
-            "nullable": false
+            "nullable": true
           },
           "email": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "sexo": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "dtNascimento": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "nomeMae": {
             "type": "string",
@@ -5313,8 +5329,8 @@
             "nullable": true
           },
           "profissionalId": {
-            "type": "string",
-            "nullable": true
+            "type": "integer",
+            "format": "int32"
           }
         }
       },
