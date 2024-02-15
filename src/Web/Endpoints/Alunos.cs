@@ -11,12 +11,7 @@ using DnaBrasilApi.Application.Alunos.Queries.GetAlunosAll;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunosByFilter;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunosByLocalidade;
 using DnaBrasilApi.Application.Alunos.Queries.GetNomeAlunosAll;
-using DnaBrasilApi.Application.Escolaridades.Queries.GetEscolaridadesAll;
-using DnaBrasilApi.Application.Localidades.Queries.GetLocalidadesByFomento;
-using DnaBrasilApi.Application.Localidades.Queries;
 using Microsoft.AspNetCore.Mvc;
-using DnaBrasilApi.Application.Ambientes.Queries.GetAmbienteById;
-using DnaBrasilApi.Application.Ambientes.Queries;
 
 namespace DnaBrasilApi.Web.Endpoints;
 public class Alunos : EndpointGroupBase

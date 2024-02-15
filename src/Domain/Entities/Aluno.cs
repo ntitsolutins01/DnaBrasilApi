@@ -31,4 +31,6 @@ public class Aluno : BaseAuditableEntity
     public Dependencia? Dependencia { get; set; }
     public List<Laudo>? Laudos { get; set; }
     public Profissional? Profissional { get; set; }
+    public string? NomeResponsavel { get; set; }
+    public string? AreasDesejadas { get; set; }
 }

@@ -5514,6 +5514,14 @@
                     "$ref": "#/components/schemas/Profissional"
                   }
                 ]
+              },
+              "nomeResponsavel": {
+                "type": "string",
+                "nullable": true
+              },
+              "areasDesejadas": {
+                "type": "string",
+                "nullable": true
               }
             }
           }
