@@ -36,6 +36,7 @@ public interface IApplicationDbContext
     DbSet<Escolaridade> Escolaridades { get; }
     DbSet<Fomentu> Fomentos { get; }
     DbSet<Resposta> Respostas { get; }
+    DbSet<TipoParceria> TiposParcerias { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

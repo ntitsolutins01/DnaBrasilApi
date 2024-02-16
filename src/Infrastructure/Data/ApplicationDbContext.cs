@@ -43,6 +43,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<Escolaridade> Escolaridades => Set<Escolaridade>();
     public DbSet<Fomentu> Fomentos => Set<Fomentu>();
     public DbSet<Resposta> Respostas => Set<Resposta>();
+    public DbSet<TipoParceria> TiposParcerias => Set<TipoParceria>();
 
 
     protected override void OnModelCreating(ModelBuilder builder)
