@@ -7,7 +7,5 @@ public class UpdateTipoParceriaCommandValidator : AbstractValidator<UpdateTipoPa
         RuleFor(v => v.Nome)
             .MaximumLength(150)
             .NotEmpty();
-        RuleFor(v => v.Parceria)
-            .NotNull();
     }
 }

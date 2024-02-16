@@ -6,7 +6,6 @@ public record UpdateTipoParceriaCommand : IRequest<bool>
 {
     public int Id { get; init; }
     public required string Nome { get; init; }
-    public required int Parceria { get; init; }
     public bool Status { get; init; }
 }
 
@@ -27,7 +26,6 @@ public class UpdateTipoParceriaCommandHandler : IRequestHandler<UpdateTipoParcer
         Guard.Against.NotFound(request.Id, entity);
 
         entity.Nome = request.Nome;
-        entity.Parceria = request.Parceria;
         entity.Status = request.Status;
 
         var result = await _context.SaveChangesAsync(cancellationToken);

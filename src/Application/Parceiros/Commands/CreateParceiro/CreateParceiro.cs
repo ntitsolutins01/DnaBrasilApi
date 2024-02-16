@@ -9,7 +9,7 @@ public record CreateParceiroCommand : IRequest<int>
     public int? MunicipioId { get; set; }
     public required string Nome { get; set; }
     public required string Email { get; set; }
-    public required int TipoParceria { get; set; }
+    public required int TipoParceriaId { get; set; }
     public required string TipoPessoa { get; set; }
     public required string CpfCnpj { get; set; }
     public string? Telefone { get; set; }
@@ -44,12 +44,17 @@ public class CreateParceiroCommandHandler : IRequestHandler<CreateParceiroComman
             Guard.Against.NotFound((int)request.MunicipioId, municipio);
         }
 
+        var tipoParceria = await _context.TiposParcerias
+            .FindAsync(new object[] { request.TipoParceriaId }, cancellationToken);
+
+        Guard.Against.NotFound(request.TipoParceriaId, tipoParceria);
+
         var entity = new Parceiro
         {
             Nome = request.Nome,
             Status = request.Status,
             Alunos = request.Alunos,
-            TipoParceria = request.TipoParceria,
+            TipoParceria = tipoParceria,
             TipoPessoa = request.TipoPessoa,
             Celular = request.Celular,
             Telefone = request.Telefone,

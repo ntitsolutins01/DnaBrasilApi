@@ -27,13 +27,17 @@ public class GetSaudeByAlunoQueryHandler : IRequestHandler<GetSaudeByAlunoQuery,
 
         var laudos = aluno.Laudos!.OrderByDescending(o => o.Created).AsQueryable();
 
-        var result = await laudos
+        var laudoRecente = await laudos
             .AsNoTracking()
             .ProjectTo<LaudoDto>(_mapper.ConfigurationProvider)
             .FirstOrDefaultAsync(cancellationToken);
 
-        Guard.Against.NotFound(request.AlunoId, result);
+        var result = await _context.Saudes
+            .Where(x => x.Id == laudoRecente!.SaudeId)
+            .AsNoTracking()
+            .ProjectTo<SaudeDto>(_mapper.ConfigurationProvider)
+            .FirstOrDefaultAsync(cancellationToken);
 
-        return result == null ? throw new ArgumentNullException(nameof(result)) : result.Saude;
+        return result == null ? throw new ArgumentNullException(nameof(result)) : result;
     }
 }

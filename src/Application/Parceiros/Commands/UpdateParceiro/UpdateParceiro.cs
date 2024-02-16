@@ -11,7 +11,7 @@ public record UpdateParceiroCommand : IRequest<bool>
     public int? MunicipioId { get; init; }
     public required string Nome { get; init; }
     public required string Email { get; init; }
-    public required int TipoParceria { get; init; }
+    public required int TipoParceriaId { get; init; }
     public required string TipoPessoa { get; init; }
     public required string CpfCnpj { get; init; }
     public string? Telefone { get; init; }
@@ -51,12 +51,17 @@ public class UpdateParceiroCommandHandler : IRequestHandler<UpdateParceiroComman
 
         Guard.Against.NotFound(request.Id, entity);
 
+        var tipoParceria = await _context.TiposParcerias
+            .FindAsync(new object[] { request.TipoParceriaId }, cancellationToken);
+
+        Guard.Against.NotFound(request.TipoParceriaId, tipoParceria);
+
         entity.Nome = request.Nome;
         entity.Status = request.Status;
         entity.Nome = request.Nome;
         entity.Status = request.Status;
         entity.Alunos = request.Alunos;
-        entity.TipoParceria = request.TipoParceria;
+        entity.TipoParceria = tipoParceria;
         entity.TipoPessoa = request.TipoPessoa;
         entity.Celular = request.Celular;
         entity.Telefone = request.Telefone;

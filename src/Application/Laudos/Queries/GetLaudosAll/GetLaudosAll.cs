@@ -20,7 +20,7 @@ public class GetLaudosAllQueryHandler : IRequestHandler<GetLaudosAllQuery, List<
         var result = await _context.Laudos
             .AsNoTracking()
             .ProjectTo<LaudoDto>(_mapper.ConfigurationProvider)
-            .OrderBy(t => t.Aluno.Nome)
+            .OrderBy(t => t.AlunoId)
             .ToListAsync(cancellationToken);
 
         return result == null ? throw new ArgumentNullException(nameof(result)) : result;
