@@ -29,6 +29,8 @@ public record CreateAlunoCommand : IRequest<int>
     public int? ProfissionalId { get; init; }
     public string? DeficienciasIds { get; init; }
     public required string Etnia { get; init; }
+    public string? AreasDesejadas { get; init; }
+    public string? NomeResponsavel { get; init; }
 }
 
 public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int>
@@ -103,6 +105,9 @@ public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int
             Municipio = municipio!,
             Localidade = localidade!,
             Deficiencias = list,
+            AreasDesejadas = request.AreasDesejadas,
+            NomeResponsavel = request.NomeResponsavel,
+            
         };
 
         _context.Alunos.Add(entity);

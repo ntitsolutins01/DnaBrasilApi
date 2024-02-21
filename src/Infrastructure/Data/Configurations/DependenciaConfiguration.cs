@@ -12,6 +12,8 @@ internal class DependenciaConfiguration : IEntityTypeConfiguration<Dependencia>
 {
     public void Configure(EntityTypeBuilder<Dependencia> builder)
     {
+        builder.Property(t => t.Id)
+            .ValueGeneratedOnAdd();
         builder.Property(t => t.Doencas)
             .HasMaxLength(400);
         builder.Property(t => t.Nacionalidade)

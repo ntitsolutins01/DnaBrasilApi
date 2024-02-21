@@ -5383,6 +5383,14 @@
           },
           "etnia": {
             "type": "string"
+          },
+          "areasDesejadas": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeResponsavel": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
