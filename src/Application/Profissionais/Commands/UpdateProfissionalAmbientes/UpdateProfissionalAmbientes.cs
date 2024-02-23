@@ -1,30 +1,30 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasilApi.Application.Profissionais.Commands.UpdateProfissionalAmbientes;
-public record UpdateProfissionalAmbientesCommand : IRequest
+namespace DnaBrasilApi.Application.Profissionais.Commands.UpdateProfissionalModalidades;
+public record UpdateProfissionalModalidadesCommand : IRequest
 {
     public int Id { get; init; }
-    public List<Ambiente>? Ambientes { get; init; }
+    public List<Modalidade>? Modalidades { get; init; }
 }
 
-public class UpdateProfissionalAmbientesCommandHandler : IRequestHandler<UpdateProfissionalAmbientesCommand>
+public class UpdateProfissionalModalidadesCommandHandler : IRequestHandler<UpdateProfissionalModalidadesCommand>
 {
     private readonly IApplicationDbContext _context;
 
-    public UpdateProfissionalAmbientesCommandHandler(IApplicationDbContext context)
+    public UpdateProfissionalModalidadesCommandHandler(IApplicationDbContext context)
     {
         _context = context;
     }
 
-    public async Task Handle(UpdateProfissionalAmbientesCommand request, CancellationToken cancellationToken)
+    public async Task Handle(UpdateProfissionalModalidadesCommand request, CancellationToken cancellationToken)
     {
         var entity = await _context.Alunos
             .FindAsync(new object[] { request.Id }, cancellationToken);
 
         Guard.Against.NotFound(request.Id, entity);
 
-        entity.Ambientes = request.Ambientes;
+        entity.Modalidades = request.Modalidades;
 
         await _context.SaveChangesAsync(cancellationToken);
     }

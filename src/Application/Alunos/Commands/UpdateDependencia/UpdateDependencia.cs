@@ -39,10 +39,10 @@ public class UpdateDependenciaCommandHandler : IRequestHandler<UpdateDependencia
 
         Guard.Against.NotFound(request.Id, entity);
 
-        var aluno = await _context.Alunos
-            .FindAsync(new object[] { request.AlunoId }, cancellationToken);
+        //var aluno = await _context.Alunos
+        //    .FindAsync(new object[] { request.AlunoId }, cancellationToken);
 
-        Guard.Against.NotFound(request.AlunoId, aluno);
+        //Guard.Against.NotFound(request.AlunoId, aluno);
 
         entity.Doencas = request.Doencas;
         entity.Nacionalidade = request.Nacionalidade;
@@ -58,7 +58,7 @@ public class UpdateDependenciaCommandHandler : IRequestHandler<UpdateDependencia
         entity.AutorizacaoUsoImagemAudio = request.AutorizacaoUsoImagemAudio;
         entity.AutorizacaoUsoIndicadores = request.AutorizacaoUsoIndicadores;
         entity.AutorizacaoSaida = request.AutorizacaoSaida;
-        entity.Aluno = aluno;
+        //entity.Aluno = aluno;
 
         var result = await _context.SaveChangesAsync(cancellationToken);
 

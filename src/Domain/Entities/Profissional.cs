@@ -17,6 +17,6 @@ public class Profissional : BaseAuditableEntity
     public bool Habilitado { get; set; } = false;
     public Municipio? Municipio { get; set; }
     public Localidade? Localidade { get; set; }
-    public List<Ambiente>? Ambientes { get; set; }
+    public List<Modalidade>? Modalidades { get; set; }
     public List<Contrato>? Contratos { get; set; }
 }

@@ -26,7 +26,7 @@ public record UpdateAlunoCommand : IRequest<bool>
     public bool Status { get; init; }
     public bool Habilitado { get; init; }
     public List<Deficiencia>? Deficiencias { get; init; }
-    public List<Ambiente>? Ambientes { get; init; }
+    public List<Modalidade>? Ambientes { get; init; }
     public Parceiro? Parceiro { get; init; }
     public string? Etnia { get; set; }
     public int ProfissionalId { get; set; }

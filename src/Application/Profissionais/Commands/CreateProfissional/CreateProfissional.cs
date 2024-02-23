@@ -20,7 +20,7 @@ public record CreateProfissionalCommand : IRequest<int>
     public int? MunicipioId { get; init; }
     public int? LocalidadeId { get; init; }
     public bool Habilitado { get; init; }
-    public string? AmbientesIds { get; init; }
+    public string? ModalidadesIds { get; init; }
 }
 
 public class CreateProfissionalCommandHandler : IRequestHandler<CreateProfissionalCommand, int>
@@ -54,18 +54,18 @@ public class CreateProfissionalCommandHandler : IRequestHandler<CreateProfission
             Guard.Against.NotFound((int)request.LocalidadeId, localidade);
         }
 
-        var list = new List<Ambiente>();
+        var list = new List<Modalidade>();
 
-        if (!string.IsNullOrWhiteSpace(request.AmbientesIds))
+        if (!string.IsNullOrWhiteSpace(request.ModalidadesIds))
         {
-            List<int> listIds = request.AmbientesIds.Split(',').Select(s => Convert.ToInt32(s)).ToList();
+            List<int> listIds = request.ModalidadesIds.Split(',').Select(s => Convert.ToInt32(s)).ToList();
 
             foreach (int id in listIds)
             {
-                var ambiente = await _context.Ambientes
+                var Modalidade = await _context.Modalidades
                     .FindAsync(new object[] { id }, cancellationToken);
 
-                list.Add(ambiente!);
+                list.Add(Modalidade!);
             }
         }
         else
@@ -88,7 +88,7 @@ public class CreateProfissionalCommandHandler : IRequestHandler<CreateProfission
             Bairro = request.Bairro,
             Municipio = municipio,
             AspNetUserId = request.AspNetUserId,
-            Ambientes = list,
+            Modalidades = list,
             Habilitado = request.Habilitado,
             Localidade = localidade
         };

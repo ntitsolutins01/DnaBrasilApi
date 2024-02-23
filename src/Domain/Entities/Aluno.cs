@@ -23,12 +23,12 @@ public class Aluno : BaseAuditableEntity
     public required Municipio Municipio { get; set; }
     public required Localidade Localidade { get; set; }
     public List<Deficiencia>? Deficiencias { get; set; }
-    public List<Ambiente>? Ambientes { get; set; }
+    public List<Modalidade>? Modalidades { get; set; }
     public Parceiro? Parceiro { get; set; }
     public List<Contrato>? Contratos { get; set; }
     public Matricula? Matricula { get; set; }
     public Voucher? Voucher { get; set; }
-    public Dependencia? Dependencia { get; set; }
+    //public Dependencia? Dependencia { get; set; }
     public List<Laudo>? Laudos { get; set; }
     public Profissional? Profissional { get; set; }
     public string? NomeResponsavel { get; set; }

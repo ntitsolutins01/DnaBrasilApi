@@ -54,8 +54,8 @@ public class AlunoDto
         public Mapping()
         {
             CreateMap<Aluno, AlunoDto>()
-                .ForMember(dest => dest.Controle, opt => opt.MapFrom(src => src.Dependencia!.Turma))
-                .ForMember(dest => dest.DependenciaId, opt => opt.MapFrom(src => src.Dependencia!.Id))
+                //.ForMember(dest => dest.Controle, opt => opt.MapFrom(src => src.Dependencia!.Turma))
+                //.ForMember(dest => dest.DependenciaId, opt => opt.MapFrom(src => src.Dependencia!.Id))
                 .ForMember(dest => dest.MatriculaId, opt => opt.MapFrom(src => src.Matricula!.Id))
                 .ForMember(dest => dest.ProfissionalId, opt => opt.MapFrom(src => src.Profissional!.Id))
                 .ForMember(dest => dest.MunicipioId, opt => opt.MapFrom(src => src.Municipio!.Id))

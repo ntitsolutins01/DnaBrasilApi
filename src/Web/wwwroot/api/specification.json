@@ -230,19 +230,19 @@
         }
       }
     },
-    "/api/Alunos/Ambientes": {
+    "/api/Alunos/Modalidades": {
       "put": {
         "tags": [
           "Alunos"
         ],
-        "operationId": "UpdateAlunoAmbientes",
+        "operationId": "UpdateAlunoModalidades",
         "requestBody": {
           "x-name": "command",
           "description": "",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateAlunoAmbientesCommand"
+                "$ref": "#/components/schemas/UpdateAlunoModalidadesCommand"
               }
             }
           },
@@ -282,168 +282,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AlunosFilterDto"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/Ambientes": {
-      "get": {
-        "tags": [
-          "Ambientes"
-        ],
-        "operationId": "GetAmbientesAll",
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/AmbienteDto"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Ambientes"
-        ],
-        "operationId": "CreateAmbiente",
-        "requestBody": {
-          "x-name": "command",
-          "description": "",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateAmbienteCommand"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 1
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/Ambientes/{id}": {
-      "put": {
-        "tags": [
-          "Ambientes"
-        ],
-        "operationId": "UpdateAmbiente",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "x-position": 1
-          }
-        ],
-        "requestBody": {
-          "x-name": "command",
-          "description": "",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateAmbienteCommand"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 2
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "boolean"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Ambientes"
-        ],
-        "operationId": "DeleteAmbiente",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "x-position": 1
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "boolean"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/Ambientes/Ambiente/{id}": {
-      "get": {
-        "tags": [
-          "Ambientes"
-        ],
-        "operationId": "GetAmbienteById",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "x-position": 1
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AmbienteDto"
                 }
               }
             }
@@ -2014,6 +1852,168 @@
               "application/json": {
                 "schema": {
                   "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Modalidades": {
+      "get": {
+        "tags": [
+          "Modalidades"
+        ],
+        "operationId": "GetModalidadesAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ModalidadeDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Modalidades"
+        ],
+        "operationId": "CreateModalidade",
+        "requestBody": {
+          "x-name": "command",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateModalidadeCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Modalidades/{id}": {
+      "put": {
+        "tags": [
+          "Modalidades"
+        ],
+        "operationId": "UpdateModalidade",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateModalidadeCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Modalidades"
+        ],
+        "operationId": "DeleteModalidade",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Modalidades/Modalidade/{id}": {
+      "get": {
+        "tags": [
+          "Modalidades"
+        ],
+        "operationId": "GetModalidadeById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModalidadeDto"
                 }
               }
             }
@@ -5483,7 +5483,7 @@
             "type": "array",
             "nullable": true,
             "items": {
-              "$ref": "#/components/schemas/Ambiente"
+              "$ref": "#/components/schemas/Modalidade"
             }
           },
           "parceiro": {
@@ -5624,11 +5624,11 @@
                   "$ref": "#/components/schemas/Deficiencia"
                 }
               },
-              "ambientes": {
+              "modalidades": {
                 "type": "array",
                 "nullable": true,
                 "items": {
-                  "$ref": "#/components/schemas/Ambiente"
+                  "$ref": "#/components/schemas/Modalidade"
                 }
               },
               "parceiro": {
@@ -5659,14 +5659,6 @@
                 "oneOf": [
                   {
                     "$ref": "#/components/schemas/Voucher"
-                  }
-                ]
-              },
-              "dependencia": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/Dependencia"
                   }
                 ]
               },
@@ -5979,11 +5971,11 @@
                   }
                 ]
               },
-              "ambientes": {
+              "modalidades": {
                 "type": "array",
                 "nullable": true,
                 "items": {
-                  "$ref": "#/components/schemas/Ambiente"
+                  "$ref": "#/components/schemas/Modalidade"
                 }
               },
               "contratos": {
@@ -5997,7 +5989,7 @@
           }
         ]
       },
-      "Ambiente": {
+      "Modalidade": {
         "allOf": [
           {
             "$ref": "#/components/schemas/BaseAuditableEntity"
@@ -6009,6 +6001,86 @@
               "nome": {
                 "type": "string",
                 "nullable": true
+              },
+              "vo2MaxIni": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "vo2MaxFim": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "vinteMetrosIni": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "vinteMetrosFim": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "shutlleRunIni": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "shutlleRunFim": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "flexibilidadeIni": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "flexibilidadeFim": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "preensaoManualIni": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "preensaoManualFim": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "abdominalPranchaIni": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "abdominalPranchaFim": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "impulsaoIni": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "impulsaoFim": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "envergaduraIni": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "envergaduraFim": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "pesoIni": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "pesoFim": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "alturaIni": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "alturaFim": {
+                "type": "integer",
+                "format": "int32"
               },
               "status": {
                 "type": "boolean"
@@ -6227,78 +6299,6 @@
               },
               "serie": {
                 "type": "string",
-                "nullable": true
-              },
-              "aluno": {
-                "$ref": "#/components/schemas/Aluno"
-              }
-            }
-          }
-        ]
-      },
-      "Dependencia": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BaseAuditableEntity"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "doencas": {
-                "type": "string",
-                "nullable": true
-              },
-              "nacionalidade": {
-                "type": "string",
-                "nullable": true
-              },
-              "naturalidade": {
-                "type": "string",
-                "nullable": true
-              },
-              "nomeEscola": {
-                "type": "string",
-                "nullable": true
-              },
-              "tipoEscola": {
-                "type": "string",
-                "nullable": true
-              },
-              "tipoEscolaridade": {
-                "type": "string",
-                "nullable": true
-              },
-              "turno": {
-                "type": "string",
-                "nullable": true
-              },
-              "serie": {
-                "type": "string",
-                "nullable": true
-              },
-              "ano": {
-                "type": "string",
-                "nullable": true
-              },
-              "turma": {
-                "type": "string",
-                "nullable": true
-              },
-              "termoCompromisso": {
-                "type": "boolean",
-                "nullable": true
-              },
-              "autorizacaoUsoImagemAudio": {
-                "type": "boolean",
-                "nullable": true
-              },
-              "autorizacaoUsoIndicadores": {
-                "type": "boolean",
-                "nullable": true
-              },
-              "autorizacaoSaida": {
-                "type": "boolean",
                 "nullable": true
               },
               "aluno": {
@@ -6638,7 +6638,7 @@
           }
         ]
       },
-      "UpdateAlunoAmbientesCommand": {
+      "UpdateAlunoModalidadesCommand": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -6646,11 +6646,11 @@
             "type": "integer",
             "format": "int32"
           },
-          "ambientes": {
+          "modalidades": {
             "type": "array",
             "nullable": true,
             "items": {
-              "$ref": "#/components/schemas/Ambiente"
+              "$ref": "#/components/schemas/Modalidade"
             }
           }
         }
@@ -6693,63 +6693,6 @@
             "items": {
               "$ref": "#/components/schemas/AlunoDto"
             }
-          }
-        }
-      },
-      "AmbienteDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nome": {
-            "type": "string",
-            "nullable": true
-          },
-          "status": {
-            "type": "boolean"
-          }
-        }
-      },
-      "CreateAmbienteCommand": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-          "nome"
-        ],
-        "properties": {
-          "nome": {
-            "type": "string",
-            "maxLength": 100,
-            "minLength": 1,
-            "nullable": false
-          },
-          "status": {
-            "type": "boolean"
-          }
-        }
-      },
-      "UpdateAmbienteCommand": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-          "nome"
-        ],
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nome": {
-            "type": "string",
-            "maxLength": 100,
-            "minLength": 1,
-            "nullable": false
-          },
-          "status": {
-            "type": "boolean"
           }
         }
       },
@@ -6895,11 +6838,11 @@
           "habilitado": {
             "type": "boolean"
           },
-          "ambientes": {
+          "modalidades": {
             "type": "array",
             "nullable": true,
             "items": {
-              "$ref": "#/components/schemas/AmbienteDto"
+              "$ref": "#/components/schemas/ModalidadeDto"
             }
           },
           "estadoId": {
@@ -6919,6 +6862,103 @@
             "type": "integer",
             "format": "int32",
             "nullable": true
+          }
+        }
+      },
+      "ModalidadeDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true
+          },
+          "vo2MaxIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "vo2MaxFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "vinteMetrosIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "vinteMetrosFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "shutlleRunIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "shutlleRunFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "flexibilidadeIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "flexibilidadeFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "preensaoManualIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "preensaoManualFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "abdominalPranchaIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "abdominalPranchaFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "impulsaoIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "impulsaoFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "envergaduraIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "envergaduraFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pesoIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pesoFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "alturaIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "alturaFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "status": {
+            "type": "boolean"
           }
         }
       },
@@ -7887,6 +7927,206 @@
           }
         }
       },
+      "CreateModalidadeCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "nome"
+        ],
+        "properties": {
+          "nome": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "nullable": false
+          },
+          "vo2MaxIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "vo2MaxFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "vinteMetrosIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "vinteMetrosFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "shutlleRunIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "shutlleRunFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "flexibilidadeIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "flexibilidadeFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "preensaoManualIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "preensaoManualFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "abdominalPranchaIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "abdominalPranchaFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "impulsaoIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "impulsaoFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "envergaduraIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "envergaduraFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pesoIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pesoFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "alturaIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "alturaFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "status": {
+            "type": "boolean"
+          }
+        }
+      },
+      "UpdateModalidadeCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "nome"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "nullable": false
+          },
+          "vo2MaxIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "vo2MaxFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "vinteMetrosIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "vinteMetrosFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "shutlleRunIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "shutlleRunFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "flexibilidadeIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "flexibilidadeFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "preensaoManualIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "preensaoManualFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "abdominalPranchaIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "abdominalPranchaFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "impulsaoIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "impulsaoFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "envergaduraIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "envergaduraFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pesoIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pesoFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "alturaIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "alturaFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "status": {
+            "type": "boolean"
+          }
+        }
+      },
       "ParceiroDto": {
         "type": "object",
         "additionalProperties": false,
@@ -8426,7 +8666,7 @@
           "habilitado": {
             "type": "boolean"
           },
-          "ambientesIds": {
+          "modalidadesIds": {
             "type": "string",
             "nullable": true
           }

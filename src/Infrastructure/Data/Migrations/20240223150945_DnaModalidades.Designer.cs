@@ -4,6 +4,7 @@ using DnaBrasilApi.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DnaBrasilApi.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240223150945_DnaModalidades")]
+    partial class DnaModalidades
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -755,41 +758,11 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AbdominalPranchaFim")
-                        .HasColumnType("int");
-
-                    b.Property<int>("AbdominalPranchaIni")
-                        .HasColumnType("int");
-
-                    b.Property<int>("AlturaFim")
-                        .HasColumnType("int");
-
-                    b.Property<int>("AlturaIni")
-                        .HasColumnType("int");
-
                     b.Property<DateTimeOffset>("Created")
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("EnvergaduraFim")
-                        .HasColumnType("int");
-
-                    b.Property<int>("EnvergaduraIni")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FlexibilidadeFim")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FlexibilidadeIni")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ImpulsaoFim")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ImpulsaoIni")
-                        .HasColumnType("int");
 
                     b.Property<DateTimeOffset>("LastModified")
                         .HasColumnType("datetimeoffset");
@@ -802,38 +775,8 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                         .HasMaxLength(80)
                         .HasColumnType("nvarchar(80)");
 
-                    b.Property<int>("PesoFim")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PesoIni")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PreensaoManualFim")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PreensaoManualIni")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ShutlleRunFim")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ShutlleRunIni")
-                        .HasColumnType("int");
-
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
-
-                    b.Property<int>("VinteMetrosFim")
-                        .HasColumnType("int");
-
-                    b.Property<int>("VinteMetrosIni")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Vo2MaxFim")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Vo2MaxIni")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

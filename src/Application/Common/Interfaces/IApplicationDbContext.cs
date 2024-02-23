@@ -13,7 +13,7 @@ public interface IApplicationDbContext
     DbSet<Localidade> Localidades { get; }
     DbSet<Profissional> Profissionais { get; }
     DbSet<Deficiencia> Deficiencias { get; }
-    DbSet<Ambiente> Ambientes { get; }
+    DbSet<Modalidade> Modalidades { get; }
     DbSet<TalentoEsportivo> TalentosEsportivos { get; }
     DbSet<Saude> Saudes { get; }
     DbSet<QualidadeDeVida> QualidadeDeVidas { get; }
