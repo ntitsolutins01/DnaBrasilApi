@@ -7,8 +7,10 @@ public record UpdatePlanoAulaCommand : IRequest<bool>
 {
     public int Id { get; init; }
     public string? Nome { get; set; }
-    public string? Grade { get; set; }
+    public string? TipoEscolaridade { get; set; }
+    public string? Modalidade { get; set; }
     public string? Url { get; set; }
+    public string? NomeArquivo { get; set; }
 }
 
 public class UpdatePlanoAulaCommandHandler : IRequestHandler<UpdatePlanoAulaCommand, bool>
@@ -28,8 +30,10 @@ public class UpdatePlanoAulaCommandHandler : IRequestHandler<UpdatePlanoAulaComm
         Guard.Against.NotFound(request.Id, entity);
 
         entity.Nome = request.Nome;
-        entity.Grade = request.Grade;
+        entity.Modalidade = request.Modalidade;
+        entity.TipoEscolaridade = request.TipoEscolaridade;
         entity.Url = request.Url;
+        entity.NomeArquivo = request.NomeArquivo;
 
         var result = await _context.SaveChangesAsync(cancellationToken);
 

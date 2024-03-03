@@ -20,7 +20,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<Localidade> Localidades => Set<Localidade>();
     public DbSet<Profissional> Profissionais => Set<Profissional>();
     public DbSet<Deficiencia> Deficiencias => Set<Deficiencia>();
-    public DbSet<Ambiente> Ambientes => Set<Ambiente>();
+    public DbSet<Modalidade> Modalidades => Set<Modalidade>();
     public DbSet<TalentoEsportivo> TalentosEsportivos => Set<TalentoEsportivo>();
     public DbSet<Saude> Saudes => Set<Saude>();
     public DbSet<QualidadeDeVida> QualidadeDeVidas => Set<QualidadeDeVida>();
@@ -43,6 +43,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<Escolaridade> Escolaridades => Set<Escolaridade>();
     public DbSet<Fomentu> Fomentos => Set<Fomentu>();
     public DbSet<Resposta> Respostas => Set<Resposta>();
+    public DbSet<TipoParceria> TiposParcerias => Set<TipoParceria>();
 
 
     protected override void OnModelCreating(ModelBuilder builder)
@@ -62,22 +63,22 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
             j => j.HasKey("AlunoId", "DeficienciaId"));
 
         builder.Entity<Aluno>()
-        .HasMany(e => e.Ambientes)
+        .HasMany(e => e.Modalidades)
         .WithMany(e => e.Alunos)
         .UsingEntity(
-            "AlunosAmbientes",
-            r => r.HasOne(typeof(Ambiente)).WithMany().HasForeignKey("AmbienteId").HasPrincipalKey(nameof(Ambiente.Id)),
+            "AlunosModalidades",
+            r => r.HasOne(typeof(Modalidade)).WithMany().HasForeignKey("ModalidadeId").HasPrincipalKey(nameof(Modalidade.Id)),
             l => l.HasOne(typeof(Aluno)).WithMany().HasForeignKey("AlunoId").HasPrincipalKey(nameof(Aluno.Id)),
-            j => j.HasKey("AlunoId", "AmbienteId"));
+            j => j.HasKey("AlunoId", "ModalidadeId"));
 
         builder.Entity<Profissional>()
-                    .HasMany(e => e.Ambientes)
+                    .HasMany(e => e.Modalidades)
                     .WithMany(e => e.Profissionais)
                     .UsingEntity(
-                        "ProfissionaisAmbientes",
-                        r => r.HasOne(typeof(Ambiente)).WithMany().HasForeignKey("AmbienteId").HasPrincipalKey(nameof(Ambiente.Id)),
+                        "ProfissionaisModalidades",
+                        r => r.HasOne(typeof(Modalidade)).WithMany().HasForeignKey("ModalidadeId").HasPrincipalKey(nameof(Modalidade.Id)),
                         l => l.HasOne(typeof(Profissional)).WithMany().HasForeignKey("ProfissionalId").HasPrincipalKey(nameof(Profissional.Id)),
-                        j => j.HasKey("ProfissionalId", "AmbienteId"));
+                        j => j.HasKey("ProfissionalId", "ModalidadeId"));
 
         builder.Entity<Contrato>()
             .HasMany(e => e.Localidades)
@@ -110,10 +111,10 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
 
         #region Required one-to-one with primary key to primary key relationship
 
-        builder.Entity<Aluno>()
-            .HasOne(e => e.Dependencia)
-            .WithOne(e => e.Aluno)
-            .HasForeignKey<Dependencia>();
+        //builder.Entity<Aluno>()
+        //    .HasOne(e => e.Dependencia)
+        //    .WithOne(e => e.Aluno)
+        //    .HasForeignKey<Dependencia>();
 
         builder.Entity<Aluno>()
             .HasOne(e => e.Matricula)

@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DnaBrasilApi.Domain.Entities;
+﻿namespace DnaBrasilApi.Domain.Entities;
 public class Dependencia : BaseAuditableEntity
 {
     public string? Doencas { get; set; }
     public string? Nacionalidade { get; set; }
     public string? Naturalidade { get; set; }
     public string? NomeEscola { get; set; }
-    public int TipoEscola { get; set; }
-    public int TipoEscolaridade { get; set; }
+    public string? TipoEscola { get; set; }
+    public string? TipoEscolaridade { get; set; }
     public string? Turno { get; set; }
     public string? Serie { get; set; }
     public string? Ano { get; set; }
@@ -21,5 +15,5 @@ public class Dependencia : BaseAuditableEntity
     public bool? AutorizacaoUsoImagemAudio { get; set; }
     public bool? AutorizacaoUsoIndicadores { get; set; }
     public bool? AutorizacaoSaida { get; set; } = false;
-    public required Aluno Aluno { get; set; }
+    public Aluno? Aluno { get; set; }
 }

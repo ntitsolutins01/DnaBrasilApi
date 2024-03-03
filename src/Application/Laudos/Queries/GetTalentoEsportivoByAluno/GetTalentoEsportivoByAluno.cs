@@ -27,13 +27,17 @@ public class GetVocacionalByAlunoQueryHandler : IRequestHandler<GetVocacionalByA
 
         var laudos = aluno.Laudos!.OrderByDescending(o => o.Created).AsQueryable();
 
-        var result = await laudos
+        var laudoRecente = await laudos
             .AsNoTracking()
             .ProjectTo<LaudoDto>(_mapper.ConfigurationProvider)
             .FirstOrDefaultAsync(cancellationToken);
 
-        Guard.Against.NotFound(request.AlunoId, result);
+        var result = await _context.Vocacionais
+            .Where(x => x.Id == laudoRecente!.VocacionalId)
+            .AsNoTracking()
+            .ProjectTo<VocacionalDto>(_mapper.ConfigurationProvider)
+            .FirstOrDefaultAsync(cancellationToken);
 
-        return result == null ? throw new ArgumentNullException(nameof(result)) : result.Vocacional;
+        return result == null ? throw new ArgumentNullException(nameof(result)) : result;
     }
 }

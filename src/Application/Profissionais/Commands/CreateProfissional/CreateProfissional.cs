@@ -4,7 +4,6 @@ using DnaBrasilApi.Domain.Entities;
 namespace DnaBrasilApi.Application.Profissionais.Commands.CreateProfissional;
 public record CreateProfissionalCommand : IRequest<int>
 {
-
     public string? AspNetUserId { get; init; }
     public string? Nome { get; init; }
     public string? DtNascimento { get; init; }
@@ -19,8 +18,9 @@ public record CreateProfissionalCommand : IRequest<int>
     public string? Bairro { get; init; }
     public bool Status { get; init; } = true;
     public int? MunicipioId { get; init; }
+    public int? LocalidadeId { get; init; }
     public bool Habilitado { get; init; }
-    public string? AmbientesIds { get; init; }
+    public string? ModalidadesIds { get; init; }
 }
 
 public class CreateProfissionalCommandHandler : IRequestHandler<CreateProfissionalCommand, int>
@@ -40,19 +40,37 @@ public class CreateProfissionalCommandHandler : IRequestHandler<CreateProfission
         {
             municipio = await _context.Municipios
                 .FindAsync(new object[] { request.MunicipioId }, cancellationToken);
+
+            Guard.Against.NotFound((int)request.MunicipioId, municipio);
         }
 
-        var list = new List<Ambiente>();
+        Localidade? localidade = null;
 
-        if (!string.IsNullOrWhiteSpace(request.AmbientesIds))
+        if (request.LocalidadeId != null)
         {
-            foreach (var id in request.AmbientesIds.Split(',').ToList())
+            localidade = await _context.Localidades
+                .FindAsync(new object[] { request.LocalidadeId }, cancellationToken);
+
+            Guard.Against.NotFound((int)request.LocalidadeId, localidade);
+        }
+
+        var list = new List<Modalidade>();
+
+        if (!string.IsNullOrWhiteSpace(request.ModalidadesIds))
+        {
+            List<int> listIds = request.ModalidadesIds.Split(',').Select(s => Convert.ToInt32(s)).ToList();
+
+            foreach (int id in listIds)
             {
-                var ambiente = await _context.Ambientes
+                var Modalidade = await _context.Modalidades
                     .FindAsync(new object[] { id }, cancellationToken);
 
-                list.Add(ambiente!);
+                list.Add(Modalidade!);
             }
+        }
+        else
+        {
+            list = null;
         }
 
         var entity = new Profissional
@@ -69,8 +87,10 @@ public class CreateProfissionalCommandHandler : IRequestHandler<CreateProfission
             Cep = request.Cep,
             Bairro = request.Bairro,
             Municipio = municipio,
-            AspNetUserId = request.AspNetUserId!,
-            Ambientes = list
+            AspNetUserId = request.AspNetUserId,
+            Modalidades = list,
+            Habilitado = request.Habilitado,
+            Localidade = localidade
         };
 
         _context.Profissionais.Add(entity);

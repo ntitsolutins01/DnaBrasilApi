@@ -28,13 +28,17 @@ public class GetQualidadeDeVidaByAlunoQueryHandler : IRequestHandler<GetQualidad
 
         var laudos = aluno.Laudos!.OrderByDescending(o => o.Created).AsQueryable();
 
-        var result = await laudos
+        var laudoRecente = await laudos
             .AsNoTracking()
             .ProjectTo<LaudoDto>(_mapper.ConfigurationProvider)
             .FirstOrDefaultAsync(cancellationToken);
 
-        Guard.Against.NotFound(request.AlunoId, result);
+        var result = await _context.QualidadeDeVidas
+            .Where(x => x.Id == laudoRecente!.ConsumoAlimentarId)
+            .AsNoTracking()
+            .ProjectTo<QualidadeDeVidaDto>(_mapper.ConfigurationProvider)
+            .FirstOrDefaultAsync(cancellationToken);
 
-        return result == null ? throw new ArgumentNullException(nameof(result)) : result.QualidadeDeVida;
+        return result == null ? throw new ArgumentNullException(nameof(result)) : result;
     }
 }

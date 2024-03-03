@@ -23,6 +23,7 @@ public class GetProfissionalByIdQueryHandler : IRequestHandler<GetProfissionalBy
         var result = await _context.Profissionais
             .Where(x => x.Id == request.Id)
             .AsNoTracking()
+            .Include(i=>i.Modalidades)
             .ProjectTo<ProfissionalDto>(_mapper.ConfigurationProvider)
             .FirstOrDefaultAsync(cancellationToken);
 

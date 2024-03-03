@@ -7,6 +7,8 @@ public record CreateQuestionarioCommand : IRequest<int>
 {
     public required string Pergunta { get; init; }
     public required int TipoLaudoId { get; init; }
+    public required int Quadrante { get; init; }
+    public required int Questao { get; init; }
 }
 
 public class CreateQuestionarioCommandHandler : IRequestHandler<CreateQuestionarioCommand, int>
@@ -28,7 +30,9 @@ public class CreateQuestionarioCommandHandler : IRequestHandler<CreateQuestionar
         var entity = new Questionario
         {
             Pergunta = request.Pergunta,
-            TipoLaudo = tipoLaudo!
+            TipoLaudo = tipoLaudo!,
+            Quadrante = request.Quadrante,
+            Questao = request.Questao
         };
 
         _context.Questionarios.Add(entity);

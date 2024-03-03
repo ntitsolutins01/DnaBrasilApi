@@ -8,7 +8,9 @@ public record UpdateQuestionarioCommand : IRequest<bool>
     public int Id { get; init; }
     public required string Pergunta { get; init; }
     public required int TipoLaudoId { get; init; }
-   
+    public required int Quadrante { get; init; }
+    public required int Questao { get; init; }
+
 }
 
 public class UpdateQuestionarioCommandHandler : IRequestHandler<UpdateQuestionarioCommand, bool>
@@ -28,6 +30,8 @@ public class UpdateQuestionarioCommandHandler : IRequestHandler<UpdateQuestionar
         Guard.Against.NotFound(request.Id, entity);
 
         entity.Pergunta = request.Pergunta;
+        entity.Quadrante = request.Quadrante;
+        entity.Questao = request.Questao;
         
         var result = await _context.SaveChangesAsync(cancellationToken);
 

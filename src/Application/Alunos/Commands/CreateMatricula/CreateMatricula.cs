@@ -1,5 +1,4 @@
-﻿using System.Xml;
-using DnaBrasilApi.Application.Alunos.Commands.CreateMatricula;
+﻿using System.Globalization;
 using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
 
@@ -7,9 +6,8 @@ namespace DnaBrasilApi.Application.Alunos.Commands.CreateMatricula;
 
 public record CreateMatriculaCommand : IRequest<int>
 {
-    public int Id { get; set; }
-    public DateTime DtVencimentoParq { get; set; }
-    public DateTime DtVencimentoAtestadoMedico { get; set; }
+    public string? DtVencimentoParq { get; set; }
+    public string? DtVencimentoAtestadoMedico { get; set; }
     public string? NomeResponsavel1 { get; set; }
     public string? ParentescoResponsavel1 { get; set; }
     public string? CpfResponsavel1 { get; set; }
@@ -19,6 +17,7 @@ public record CreateMatriculaCommand : IRequest<int>
     public string? NomeResponsavel3 { get; set; }
     public string? ParentescoResponsavel3 { get; set; }
     public string? CpfResponsavel3 { get; set; }
+    public int AlunoId { get; set; }
 }
 
 public class CreateMatriculaCommandHandler : IRequestHandler<CreateMatriculaCommand, int>
@@ -32,22 +31,29 @@ public class CreateMatriculaCommandHandler : IRequestHandler<CreateMatriculaComm
 
     public async Task<int> Handle(CreateMatriculaCommand request, CancellationToken cancellationToken)
     {
-        var entity = await _context.Matriculas
-            .FindAsync(new object[] { request.Id }, cancellationToken);
+        var aluno = await _context.Alunos
+            .FindAsync(new object[] { request.AlunoId }, cancellationToken);
 
-        Guard.Against.NotFound(request.Id, entity);
+        Guard.Against.NotFound(request.AlunoId, aluno);
 
-        entity.DtVencimentoParq = request.DtVencimentoParq;
-        entity.DtVencimentoAtestadoMedico = request.DtVencimentoAtestadoMedico;
-        entity.ParentescoResponsavel1 = request.ParentescoResponsavel1;
-        entity.NomeResponsavel1 = request.NomeResponsavel1;
-        entity.CpfResponsavel1 = request.CpfResponsavel1;
-        entity.NomeResponsavel2 = request.NomeResponsavel2;
-        entity.CpfResponsavel2 = request.CpfResponsavel2;
-        entity.ParentescoResponsavel2 = request.ParentescoResponsavel2;
-        entity.NomeResponsavel3 = request.NomeResponsavel3;
-        entity.CpfResponsavel3 = request.CpfResponsavel3;
-        entity.ParentescoResponsavel3 = request.ParentescoResponsavel3;
+
+        var entity = new Matricula
+        {
+            DtVencimentoParq = DateTime.ParseExact(request.DtVencimentoParq!, "dd/MM/yyyy", CultureInfo.CreateSpecificCulture("pt-BR")),
+            DtVencimentoAtestadoMedico = DateTime.ParseExact(request.DtVencimentoAtestadoMedico!, "dd/MM/yyyy", CultureInfo.CreateSpecificCulture("pt-BR")),
+            ParentescoResponsavel1 = request.ParentescoResponsavel1,
+            NomeResponsavel1 = request.NomeResponsavel1,
+            CpfResponsavel1 = request.CpfResponsavel1,
+            NomeResponsavel2 = request.NomeResponsavel2,
+            CpfResponsavel2 = request.CpfResponsavel2,
+            ParentescoResponsavel2 = request.ParentescoResponsavel2,
+            NomeResponsavel3 = request.NomeResponsavel3,
+            CpfResponsavel3 = request.CpfResponsavel3,
+            ParentescoResponsavel3 = request.ParentescoResponsavel3,
+            Aluno = aluno,
+
+
+        };
 
         _context.Matriculas.Add(entity);
 

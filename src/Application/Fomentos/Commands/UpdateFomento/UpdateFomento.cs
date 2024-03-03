@@ -1,4 +1,5 @@
-﻿using DnaBrasilApi.Application.Common.Interfaces;
+﻿using System.Globalization;
+using DnaBrasilApi.Application.Common.Interfaces;
 
 namespace DnaBrasilApi.Application.Fomentos.Commands.UpdateFomento;
 
@@ -6,8 +7,10 @@ public record UpdateFomentoCommand : IRequest <bool>
 {
     public int Id { get; init; }
     public required string Nome { get; init; }
-    //public required int MunicipioId { get; init; }
-    //public required int LocalidadeId { get; init; }
+    public required string Codigo { get; init; }
+    public bool Status { get; init; }
+    public required string DtIni { get; set; }
+    public required string DtFim { get; set; }
 }
 
 public class UpdateFomentoCommandHandler : IRequestHandler<UpdateFomentoCommand, bool>
@@ -32,8 +35,10 @@ public class UpdateFomentoCommandHandler : IRequestHandler<UpdateFomentoCommand,
         Guard.Against.NotFound(request.Id, entity);
 
         entity.Nome = request.Nome;
-        //entity.Municipio = municipio;
-        // entity.Localidade = localidade!;
+        entity.Codigo = request.Codigo;
+        entity.Status = request.Status;
+        entity.DtIni = DateTime.ParseExact(request.DtIni, "dd/MM/yyyy", CultureInfo.CreateSpecificCulture("pt-BR"));
+        entity.DtFim = DateTime.ParseExact(request.DtFim, "dd/MM/yyyy", CultureInfo.CreateSpecificCulture("pt-BR"));
 
         var result = await _context.SaveChangesAsync(cancellationToken);
 

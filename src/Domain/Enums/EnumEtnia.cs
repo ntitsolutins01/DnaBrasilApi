@@ -3,7 +3,7 @@
 public enum EnumEtnia
 {
     Brancos = 1,
-    Negros = 2,
+    Pretos = 2,
     Indígenas = 3,
     Pardos  = 4,
     Mulatos = 5,

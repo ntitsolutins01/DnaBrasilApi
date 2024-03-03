@@ -6,7 +6,8 @@ public record UpdateRespostaCommand : IRequest<bool>
 {
     public int Id { get; init; }
     public required string RespostaQuestionario { get; init; }
-   
+    public required int ValorPesoResposta { get; set; }
+
 }
 
 public class UpdateRespostaCommandHandler : IRequestHandler<UpdateRespostaCommand, bool>
@@ -26,6 +27,7 @@ public class UpdateRespostaCommandHandler : IRequestHandler<UpdateRespostaComman
         Guard.Against.NotFound(request.Id, entity);
 
         entity.RespostaQuestionario = request.RespostaQuestionario;
+        entity.ValorPesoResposta = request.ValorPesoResposta;
         
 
         var result = await _context.SaveChangesAsync(cancellationToken);

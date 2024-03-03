@@ -5,8 +5,10 @@ namespace DnaBrasilApi.Application.PlanosAulas.Commands.CreatePlanoAula;
 public record CreatePlanoAulaCommand : IRequest<int>
 {
     public string? Nome { get; set; }
-    public string? Grade { get; set; }
     public string? Url { get; set; }
+    public string? TipoEscolaridade { get; set; }
+    public string? Modalidade { get; set; }
+    public string? NomeArquivo { get; set; }
 }
 
 public class CreatePlanoAulaCommandHandler : IRequestHandler<CreatePlanoAulaCommand, int>
@@ -23,8 +25,10 @@ public class CreatePlanoAulaCommandHandler : IRequestHandler<CreatePlanoAulaComm
         var entity = new PlanoAula
         {
             Nome = request.Nome,
-            Grade = request.Grade,
-            Url = request.Url
+            Modalidade = request.Modalidade,
+            TipoEscolaridade = request.TipoEscolaridade,
+            Url = request.Url,
+            NomeArquivo = request.NomeArquivo
         };
 
         _context.PlanosAulas.Add(entity);
