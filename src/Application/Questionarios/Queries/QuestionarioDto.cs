@@ -10,7 +10,9 @@ public class QuestionarioDto
     public required string Pergunta { get; init; }
     public required TipoLaudoDto TipoLaudo { get; init; }
     public List<RespostaDto>? Respostas { get; init; }
-        
+    public required int Quadrante { get; init; }
+    public required int Questao { get; init; }
+
 
     private class Mapping : Profile
     {

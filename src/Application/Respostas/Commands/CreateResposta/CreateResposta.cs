@@ -7,6 +7,7 @@ public record CreateRespostaCommand : IRequest<int>
 {
     public required string RespostaQuestionario { get; init; }
     public required int QuestionarioId { get; init; }
+    public required int ValorPesoResposta { get; init; }
 }
 
 public class CreateRespostaCommandHandler : IRequestHandler<CreateRespostaCommand, int>
@@ -28,7 +29,8 @@ public class CreateRespostaCommandHandler : IRequestHandler<CreateRespostaComman
         var entity = new Resposta
         {
             RespostaQuestionario = request.RespostaQuestionario,
-            Questionario = questionario!
+            Questionario = questionario!,
+            ValorPesoResposta = request.ValorPesoResposta
         };
 
         _context.Respostas.Add(entity);

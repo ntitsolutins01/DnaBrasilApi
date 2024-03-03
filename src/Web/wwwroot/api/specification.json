@@ -6485,6 +6485,14 @@
                 "items": {
                   "$ref": "#/components/schemas/Resposta"
                 }
+              },
+              "quadrante": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "questao": {
+                "type": "integer",
+                "format": "int32"
               }
             }
           }
@@ -6527,6 +6535,10 @@
               },
               "questionario": {
                 "$ref": "#/components/schemas/Questionario"
+              },
+              "valorPesoResposta": {
+                "type": "integer",
+                "format": "int32"
               }
             }
           }
@@ -6982,6 +6994,14 @@
             "items": {
               "$ref": "#/components/schemas/RespostaDto"
             }
+          },
+          "quadrante": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "questao": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },
@@ -7019,6 +7039,10 @@
           },
           "questionario": {
             "$ref": "#/components/schemas/QuestionarioDto"
+          },
+          "valorPesoResposta": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },
@@ -8831,6 +8855,14 @@
           "tipoLaudoId": {
             "type": "integer",
             "format": "int32"
+          },
+          "quadrante": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "questao": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },
@@ -8854,6 +8886,14 @@
           "tipoLaudoId": {
             "type": "integer",
             "format": "int32"
+          },
+          "quadrante": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "questao": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },
@@ -8873,6 +8913,10 @@
           "questionarioId": {
             "type": "integer",
             "format": "int32"
+          },
+          "valorPesoResposta": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },
@@ -8888,6 +8932,10 @@
             "type": "string",
             "maxLength": 300,
             "minLength": 0
+          },
+          "valorPesoResposta": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },
