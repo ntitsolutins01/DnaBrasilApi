@@ -7,7 +7,7 @@ public record CreateQualidadeDeVidaCommand : IRequest<int>
 {
     public int ProfissionalId { get; init; }
     public required int AlunoId { get; init; }
-    public required int RespostaId { get; init; }
+    public string[]? ListQualidadeDeVida { get; set; }
 }
 
 public class CreateQualidadeDeVidaCommandHandler : IRequestHandler<CreateQualidadeDeVidaCommand, int>
@@ -33,23 +33,26 @@ public class CreateQualidadeDeVidaCommandHandler : IRequestHandler<CreateQualida
 
         Guard.Against.NotFound((int)request.AlunoId, aluno);
 
-
-        var resposta = await _context.Respostas
-            .FindAsync([request.RespostaId], cancellationToken);
-
-        Guard.Against.NotFound((int)request.RespostaId, resposta);
-
-        var entity = new QualidadeDeVida
+        foreach (string item in request.ListQualidadeDeVida!)
         {
-            Profissional = profissional,
-            Aluno = aluno,
-            Resposta = resposta
-        };
+            var resposta = await _context.Respostas
+                .FindAsync([item], cancellationToken);
 
-        _context.QualidadeDeVidas.Add(entity);
+            Guard.Against.NotFound(item, resposta);
+
+            var entity = new QualidadeDeVida
+            {
+                Profissional = profissional,
+                Aluno = aluno,
+                Resposta = resposta
+            };
+
+            _context.QualidadeDeVidas.Add(entity);
+
+        }
 
         await _context.SaveChangesAsync(cancellationToken);
 
-        return entity.Id;
+        return 0;
     }
 }

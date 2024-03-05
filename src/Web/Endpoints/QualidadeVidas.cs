@@ -1,5 +1,9 @@
 ﻿using DnaBrasilApi.Application.Laudos.Commands.CreateQualidadeVida;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateQualidadeDeVida;
+using DnaBrasilApi.Application.Laudos.Queries;
+using DnaBrasilApi.Application.Laudos.Queries.GetQualidadeDeVidasAll;
+using DnaBrasilApi.Application.Modalidades.Queries.GetAmbientesAll;
+using DnaBrasilApi.Application.Modalidades.Queries;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -9,12 +13,17 @@ public class QualidadeDeVidas : EndpointGroupBase
     {
         app.MapGroup(this)
             //.RequireAuthorization()
+            .MapGet(GetQualidadeDeVidasAll)
             .MapPost(CreateQualidadeDeVida)
             .MapPut(UpdateQualidadeDeVida, "{id}");
 
     }
 
-    
+
+    public async Task<List<QualidadeDeVidaDto>> GetQualidadeDeVidasAll(ISender sender)
+    {
+        return await sender.Send(new GetQualidadeDeVidasAllQuery());
+    }
 
     public async Task<int> CreateQualidadeDeVida(ISender sender, CreateQualidadeDeVidaCommand command)
     {
