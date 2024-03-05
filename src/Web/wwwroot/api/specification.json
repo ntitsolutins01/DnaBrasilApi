@@ -5662,13 +5662,6 @@
                   }
                 ]
               },
-              "laudos": {
-                "type": "array",
-                "nullable": true,
-                "items": {
-                  "$ref": "#/components/schemas/Laudo"
-                }
-              },
               "profissional": {
                 "nullable": true,
                 "oneOf": [
@@ -5684,6 +5677,13 @@
               "areasDesejadas": {
                 "type": "string",
                 "nullable": true
+              },
+              "qualidadeDeVidas": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "$ref": "#/components/schemas/QualidadeDeVida"
+                }
               }
             }
           }
@@ -6308,7 +6308,7 @@
           }
         ]
       },
-      "Laudo": {
+      "QualidadeDeVida": {
         "allOf": [
           {
             "$ref": "#/components/schemas/BaseAuditableEntity"
@@ -6317,62 +6317,25 @@
             "type": "object",
             "additionalProperties": false,
             "properties": {
-              "talentoEsportivo": {
+              "profissional": {
                 "nullable": true,
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/TalentoEsportivo"
-                  }
-                ]
-              },
-              "vocacional": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/Vocacional"
-                  }
-                ]
-              },
-              "qualidadeDeVida": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/QualidadeDeVida"
-                  }
-                ]
-              },
-              "saude": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/Saude"
-                  }
-                ]
-              },
-              "consumo": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/ConsumoAlimentar"
-                  }
-                ]
-              },
-              "saudeBucal": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/SaudeBucal"
+                    "$ref": "#/components/schemas/Profissional"
                   }
                 ]
               },
               "aluno": {
                 "$ref": "#/components/schemas/Aluno"
+              },
+              "resposta": {
+                "$ref": "#/components/schemas/Resposta"
               }
             }
           }
         ]
       },
-      "TalentoEsportivo": {
+      "Resposta": {
         "allOf": [
           {
             "$ref": "#/components/schemas/BaseAuditableEntity"
@@ -6381,84 +6344,15 @@
             "type": "object",
             "additionalProperties": false,
             "properties": {
-              "profissional": {
-                "$ref": "#/components/schemas/Profissional"
-              },
-              "flexibilidade": {
-                "type": "number",
-                "format": "decimal",
-                "nullable": true
-              },
-              "preensaoManual": {
-                "type": "number",
-                "format": "decimal",
-                "nullable": true
-              },
-              "velocidade": {
-                "type": "number",
-                "format": "decimal",
-                "nullable": true
-              },
-              "impulsaoHorizontal": {
-                "type": "number",
-                "format": "decimal",
-                "nullable": true
-              },
-              "aptidaoFisica": {
-                "type": "number",
-                "format": "decimal",
-                "nullable": true
-              },
-              "abdominal": {
-                "type": "number",
-                "format": "decimal",
-                "nullable": true
-              },
-              "imc": {
-                "type": "number",
-                "format": "decimal",
-                "nullable": true
-              },
-              "quadrado": {
-                "type": "number",
-                "format": "decimal",
-                "nullable": true
-              },
-              "encaminhamento": {
-                "type": "string",
-                "nullable": true
-              },
-              "altura": {
-                "type": "number",
-                "format": "decimal",
-                "nullable": true
-              },
-              "peso": {
-                "type": "number",
-                "format": "decimal",
-                "nullable": true
-              }
-            }
-          }
-        ]
-      },
-      "Vocacional": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BaseAuditableEntity"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "profissional": {
-                "$ref": "#/components/schemas/Profissional"
+              "respostaQuestionario": {
+                "type": "string"
               },
               "questionario": {
                 "$ref": "#/components/schemas/Questionario"
               },
-              "resposta": {
-                "type": "string"
+              "valorPesoResposta": {
+                "type": "integer",
+                "format": "int32"
               }
             }
           }
@@ -6478,13 +6372,6 @@
               },
               "tipoLaudo": {
                 "$ref": "#/components/schemas/TipoLaudo"
-              },
-              "respostas": {
-                "type": "array",
-                "nullable": true,
-                "items": {
-                  "$ref": "#/components/schemas/Resposta"
-                }
               },
               "quadrante": {
                 "type": "integer",
@@ -6516,135 +6403,6 @@
               },
               "status": {
                 "type": "boolean"
-              }
-            }
-          }
-        ]
-      },
-      "Resposta": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BaseAuditableEntity"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "respostaQuestionario": {
-                "type": "string"
-              },
-              "questionario": {
-                "$ref": "#/components/schemas/Questionario"
-              },
-              "valorPesoResposta": {
-                "type": "integer",
-                "format": "int32"
-              }
-            }
-          }
-        ]
-      },
-      "QualidadeDeVida": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BaseAuditableEntity"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "profissional": {
-                "$ref": "#/components/schemas/Profissional"
-              },
-              "questionario": {
-                "$ref": "#/components/schemas/Questionario"
-              },
-              "resposta": {
-                "type": "string"
-              }
-            }
-          }
-        ]
-      },
-      "Saude": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BaseAuditableEntity"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "profissional": {
-                "$ref": "#/components/schemas/Profissional"
-              },
-              "altura": {
-                "type": "integer",
-                "format": "int32",
-                "nullable": true
-              },
-              "massa": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "envergadura": {
-                "type": "integer",
-                "format": "int32",
-                "nullable": true
-              }
-            }
-          }
-        ]
-      },
-      "ConsumoAlimentar": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BaseAuditableEntity"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "profissional": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/Profissional"
-                  }
-                ]
-              },
-              "questionario": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/Questionario"
-                  }
-                ]
-              },
-              "resposta": {
-                "type": "string"
-              }
-            }
-          }
-        ]
-      },
-      "SaudeBucal": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BaseAuditableEntity"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "profissional": {
-                "$ref": "#/components/schemas/Profissional"
-              },
-              "questionario": {
-                "$ref": "#/components/schemas/Questionario"
-              },
-              "resposta": {
-                "type": "string"
               }
             }
           }
@@ -6988,13 +6746,6 @@
           "tipoLaudo": {
             "$ref": "#/components/schemas/TipoLaudoDto"
           },
-          "respostas": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/RespostaDto"
-            }
-          },
           "quadrante": {
             "type": "integer",
             "format": "int32"
@@ -7023,26 +6774,6 @@
           },
           "status": {
             "type": "boolean"
-          }
-        }
-      },
-      "RespostaDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "respostaQuestionario": {
-            "type": "string"
-          },
-          "questionario": {
-            "$ref": "#/components/schemas/QuestionarioDto"
-          },
-          "valorPesoResposta": {
-            "type": "integer",
-            "format": "int32"
           }
         }
       },
@@ -8797,25 +8528,22 @@
         "type": "object",
         "additionalProperties": false,
         "required": [
-          "profissional",
-          "questionario",
-          "resposta"
+          "alunoId",
+          "respostaId"
         ],
         "properties": {
-          "profissional": {
-            "minLength": 1,
-            "nullable": false,
-            "$ref": "#/components/schemas/Profissional"
+          "profissionalId": {
+            "type": "integer",
+            "format": "int32"
           },
-          "questionario": {
-            "minLength": 1,
-            "nullable": false,
-            "$ref": "#/components/schemas/Questionario"
+          "alunoId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": false
           },
-          "resposta": {
-            "type": "string",
-            "maxLength": 100,
-            "minLength": 1,
+          "respostaId": {
+            "type": "integer",
+            "format": "int32",
             "nullable": false
           }
         }
@@ -8892,6 +8620,26 @@
             "format": "int32"
           },
           "questao": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "RespostaDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "respostaQuestionario": {
+            "type": "string"
+          },
+          "questionario": {
+            "$ref": "#/components/schemas/QuestionarioDto"
+          },
+          "valorPesoResposta": {
             "type": "integer",
             "format": "int32"
           }

@@ -4,6 +4,7 @@ using DnaBrasilApi.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DnaBrasilApi.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240305092853_DnaUpdateQualidade1")]
+    partial class DnaUpdateQualidade1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1194,16 +1197,11 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.Property<int?>("ProfissionalId")
                         .HasColumnType("int");
 
-                    b.Property<int>("RespostaId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("AlunoId");
 
                     b.HasIndex("ProfissionalId");
-
-                    b.HasIndex("RespostaId");
 
                     b.ToTable("QualidadeDeVidas");
                 });
@@ -2259,17 +2257,9 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                         .WithMany()
                         .HasForeignKey("ProfissionalId");
 
-                    b.HasOne("DnaBrasilApi.Domain.Entities.Resposta", "Resposta")
-                        .WithMany()
-                        .HasForeignKey("RespostaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Aluno");
 
                     b.Navigation("Profissional");
-
-                    b.Navigation("Resposta");
                 });
 
             modelBuilder.Entity("DnaBrasilApi.Domain.Entities.Questionario", b =>

@@ -141,7 +141,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
             .IsRequired();
 
         builder.Entity<Aluno>()
-            .HasMany(c => c.Laudos)
+            .HasMany(c => c.QualidadeDeVidas)
             .WithOne(e => e.Aluno)
             .IsRequired();
 

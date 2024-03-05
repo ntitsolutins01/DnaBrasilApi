@@ -12,8 +12,8 @@ public class QualidadeDeVidaConfiguration : IEntityTypeConfiguration<QualidadeDe
 {
     public void Configure(EntityTypeBuilder<QualidadeDeVida> builder)
     {
-        builder.Property(t => t.Resposta)
-            .HasMaxLength(100)
-            .IsRequired();
+        //builder.Property(t => t.Resposta)
+        //    .HasMaxLength(100)
+        //    .IsRequired();
     }
 }

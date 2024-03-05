@@ -1,4 +1,4 @@
-﻿using DnaBrasilApi.Application.Laudos.Commands.CreateQualidadeDeVida;
+﻿using DnaBrasilApi.Application.Laudos.Commands.CreateQualidadeVida;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateQualidadeDeVida;
 
 namespace DnaBrasilApi.Web.Endpoints;
