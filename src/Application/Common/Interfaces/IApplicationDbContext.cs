@@ -38,6 +38,7 @@ public interface IApplicationDbContext
     DbSet<Resposta> Respostas { get; }
     DbSet<TipoParceria> TiposParcerias { get; }
     DbSet<TextoLaudo> TextosLaudos { get; }
+    DbSet<ControlePresenca> ControlesPresencas { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

@@ -765,6 +765,168 @@
         }
       }
     },
+    "/api/ControlesPresencas": {
+      "get": {
+        "tags": [
+          "ControlesPresencas"
+        ],
+        "operationId": "GetControlesPresencasAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ControlePresencaDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "ControlesPresencas"
+        ],
+        "operationId": "CreateControlePresenca",
+        "requestBody": {
+          "x-name": "command",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateControlePresencaCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ControlesPresencas/{id}": {
+      "put": {
+        "tags": [
+          "ControlesPresencas"
+        ],
+        "operationId": "UpdateControlePresenca",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateControlePresencaCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ControlesPresencas"
+        ],
+        "operationId": "DeleteControlePresenca",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ControlesPresencas/ControlePresenca/{id}": {
+      "get": {
+        "tags": [
+          "ControlesPresencas"
+        ],
+        "operationId": "GetControlePresencaById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ControlePresencaDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Dashboards/Indicadores": {
       "post": {
         "tags": [
@@ -7154,6 +7316,97 @@
           "anexo": {
             "type": "string",
             "nullable": true
+          },
+          "status": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ControlePresencaDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "boolean"
+          },
+          "alunos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AlunoDto"
+            }
+          },
+          "profissionais": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProfissionalDto"
+            }
+          }
+        }
+      },
+      "CreateControlePresencaCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "controle",
+          "justificativa"
+        ],
+        "properties": {
+          "alunoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "controle": {
+            "type": "string",
+            "maxLength": 1,
+            "minLength": 1,
+            "nullable": false
+          },
+          "justificativa": {
+            "type": "string",
+            "maxLength": 500,
+            "minLength": 1,
+            "nullable": false
+          },
+          "status": {
+            "type": "boolean"
+          }
+        }
+      },
+      "UpdateControlePresencaCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "controle",
+          "justificativa"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "alunoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "controle": {
+            "type": "string",
+            "maxLength": 1,
+            "minLength": 1,
+            "nullable": false
+          },
+          "justificativa": {
+            "type": "string",
+            "maxLength": 500,
+            "minLength": 1,
+            "nullable": false
           },
           "status": {
             "type": "boolean"
