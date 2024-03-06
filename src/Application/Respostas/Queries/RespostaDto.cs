@@ -11,7 +11,7 @@ public class RespostaDto
     public int TipoLaudoId { get; init; }
     public required string NomeTipoLaudo { get; set; }
     public required string RespostaQuestionario { get; set; }
-   public required int ValorPesoResposta { get; set; }
+   public required decimal ValorPesoResposta { get; set; }
 
 
     private class Mapping : Profile

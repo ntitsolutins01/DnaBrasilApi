@@ -37,6 +37,7 @@ public interface IApplicationDbContext
     DbSet<Fomentu> Fomentos { get; }
     DbSet<Resposta> Respostas { get; }
     DbSet<TipoParceria> TiposParcerias { get; }
+    DbSet<TextoLaudo> TextosLaudos { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

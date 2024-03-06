@@ -6372,8 +6372,8 @@
                 "$ref": "#/components/schemas/Questionario"
               },
               "valorPesoResposta": {
-                "type": "integer",
-                "format": "int32"
+                "type": "number",
+                "format": "decimal"
               }
             }
           }
@@ -6838,8 +6838,8 @@
             "type": "string"
           },
           "valorPesoResposta": {
-            "type": "integer",
-            "format": "int32"
+            "type": "number",
+            "format": "decimal"
           }
         }
       },
@@ -8623,8 +8623,7 @@
         "type": "object",
         "additionalProperties": false,
         "required": [
-          "alunoId",
-          "respostaId"
+          "alunoId"
         ],
         "properties": {
           "profissionalId": {
@@ -8636,10 +8635,12 @@
             "format": "int32",
             "nullable": false
           },
-          "respostaId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": false
+          "listQualidadeDeVida": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
           }
         }
       },

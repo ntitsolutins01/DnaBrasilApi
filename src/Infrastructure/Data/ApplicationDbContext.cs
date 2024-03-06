@@ -44,6 +44,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<Fomentu> Fomentos => Set<Fomentu>();
     public DbSet<Resposta> Respostas => Set<Resposta>();
     public DbSet<TipoParceria> TiposParcerias => Set<TipoParceria>();
+    public DbSet<TextoLaudo> TextosLaudos => Set<TextoLaudo>();
 
 
     protected override void OnModelCreating(ModelBuilder builder)

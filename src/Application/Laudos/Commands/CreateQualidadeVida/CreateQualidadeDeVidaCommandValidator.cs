@@ -6,7 +6,5 @@ public class CreateQualidadeDeVidaCommandValidator : AbstractValidator<CreateQua
     {
         RuleFor(v => v.AlunoId)
             .NotNull();
-        RuleFor(v => v.RespostaId)
-            .NotNull();
     }
 }
