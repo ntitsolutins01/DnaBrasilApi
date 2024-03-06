@@ -3737,6 +3737,168 @@
         }
       }
     },
+    "/api/TextosLaudos": {
+      "get": {
+        "tags": [
+          "TextosLaudos"
+        ],
+        "operationId": "GetTextosLaudosAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TextoLaudoDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "TextosLaudos"
+        ],
+        "operationId": "CreateTextoLaudo",
+        "requestBody": {
+          "x-name": "command",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTextoLaudoCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/TextosLaudos/{id}": {
+      "put": {
+        "tags": [
+          "TextosLaudos"
+        ],
+        "operationId": "UpdateTextoLaudo",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTextoLaudoCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "TextosLaudos"
+        ],
+        "operationId": "DeleteTextoLaudo",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/TextosLaudos/TextoLaudo/{id}": {
+      "get": {
+        "tags": [
+          "TextosLaudos"
+        ],
+        "operationId": "GetTextoLaudoById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TextoLaudoDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/TiposLaudos": {
       "get": {
         "tags": [
@@ -8962,6 +9124,132 @@
           "scoreTotal": {
             "type": "integer",
             "format": "int32"
+          },
+          "status": {
+            "type": "boolean"
+          }
+        }
+      },
+      "TextoLaudoDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tipoLaudoId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "nomeTipoLaudo": {
+            "type": "string",
+            "nullable": true
+          },
+          "classificacao": {
+            "type": "string",
+            "nullable": true
+          },
+          "pontoInicial": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "pontoFinal": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "aviso": {
+            "type": "string",
+            "nullable": true
+          },
+          "texto": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "boolean"
+          }
+        }
+      },
+      "CreateTextoLaudoCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "tipoLaudoId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "classificacao": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 0,
+            "nullable": true
+          },
+          "pontoInicial": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "pontoFinal": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "aviso": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 0,
+            "nullable": true
+          },
+          "texto": {
+            "type": "string",
+            "maxLength": 500,
+            "minLength": 0,
+            "nullable": true
+          },
+          "status": {
+            "type": "boolean"
+          }
+        }
+      },
+      "UpdateTextoLaudoCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tipoLaudoId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "classificacao": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 0,
+            "nullable": true
+          },
+          "pontoInicial": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "pontoFinal": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "aviso": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 0,
+            "nullable": true
+          },
+          "texto": {
+            "type": "string",
+            "maxLength": 500,
+            "minLength": 0,
+            "nullable": true
           },
           "status": {
             "type": "boolean"

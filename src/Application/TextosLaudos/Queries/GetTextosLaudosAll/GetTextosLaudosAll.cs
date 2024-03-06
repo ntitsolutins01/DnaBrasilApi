@@ -2,20 +2,20 @@
 
 namespace DnaBrasilApi.Application.TextosLaudos.Queries.GetTextosLaudosAll;
 //[Authorize]
-public record GetTextoLaudosQuery : IRequest<List<TextoLaudoDto>>;
+public record GetTextosLaudosAllQuery : IRequest<List<TextoLaudoDto>>;
 
-public class GetTextoLaudosQueryHandler : IRequestHandler<GetTextoLaudosQuery, List<TextoLaudoDto>>
+public class GetTextosLaudosAllQueryHandler : IRequestHandler<GetTextosLaudosAllQuery, List<TextoLaudoDto>>
 {
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
 
-    public GetTextoLaudosQueryHandler(IApplicationDbContext context, IMapper mapper)
+    public GetTextosLaudosAllQueryHandler(IApplicationDbContext context, IMapper mapper)
     {
         _context = context;
         _mapper = mapper;
     }
 
-    public async Task<List<TextoLaudoDto>> Handle(GetTextoLaudosQuery request, CancellationToken cancellationToken)
+    public async Task<List<TextoLaudoDto>> Handle(GetTextosLaudosAllQuery request, CancellationToken cancellationToken)
     {
         var result = await _context.TextosLaudos
             .AsNoTracking()
