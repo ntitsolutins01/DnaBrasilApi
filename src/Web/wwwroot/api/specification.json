@@ -7330,24 +7330,22 @@
             "type": "integer",
             "format": "int32"
           },
-          "nome": {
+          "alunoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeAluno": {
+            "type": "string"
+          },
+          "controle": {
+            "type": "string"
+          },
+          "justificativa": {
             "type": "string",
             "nullable": true
           },
           "status": {
             "type": "boolean"
-          },
-          "alunos": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AlunoDto"
-            }
-          },
-          "profissionais": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ProfissionalDto"
-            }
           }
         }
       },

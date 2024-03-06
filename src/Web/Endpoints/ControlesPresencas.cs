@@ -4,6 +4,8 @@ using DnaBrasilApi.Application.ControlesPresencas.Commands.DeleteControlePresenc
 using DnaBrasilApi.Application.ControlesPresencas.Commands.UpdateControlePresenca;
 using DnaBrasilApi.Application.ControlesPresencas.Queries;
 using DnaBrasilApi.Application.ControlesPresencas.Queries.GetControlePresencaById;
+using DnaBrasilApi.Application.ControlesPresencas.Queries.GetControlesPresencasByAlunoId;
+using DnaBrasilApi.Application.Laudos.Queries.GetConsumoAlimentarByAluno;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -17,7 +19,8 @@ public class ControlesPresencas : EndpointGroupBase
             .MapPost(CreateControlePresenca)
             .MapPut(UpdateControlePresenca, "{id}")
             .MapDelete(DeleteControlePresenca, "{id}")
-            .MapGet(GetControlePresencaById, "ControlePresenca/{id}");
+            .MapGet(GetControlePresencaById, "ControlePresenca/{id}")
+            .MapGet(GetControlesPresencasByAlunoId, "ControlePresenca/Aluno/{alunoId}");
     }
 
     public async Task<List<ControlePresencaDto>> GetControlesPresencasAll(ISender sender)
@@ -28,6 +31,10 @@ public class ControlesPresencas : EndpointGroupBase
     public async Task<ControlePresencaDto> GetControlePresencaById(ISender sender, int id)
     {
         return await sender.Send(new GetControlePresencaByIdQuery() { Id = id });
+    }
+    public async Task<List<ControlePresencaDto>> GetControlesPresencasByAlunoId(ISender sender, int alunoId)
+    {
+        return await sender.Send(new GetControlesPresencasByAlunoIdQuery() { AlunoId = alunoId });
     }
     public async Task<int> CreateControlePresenca(ISender sender, CreateControlePresencaCommand command)
     {
