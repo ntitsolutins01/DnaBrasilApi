@@ -43,35 +43,35 @@ public class UpdateAlunoCommandHandler : IRequestHandler<UpdateAlunoCommand, boo
 
     public async Task<bool> Handle(UpdateAlunoCommand request, CancellationToken cancellationToken)
     {
-        var entity = await _context.Alunos
-            .FindAsync([request.Id], cancellationToken);
+        //var entity = await _context.Alunos
+        //    .FindAsync([request.Id], cancellationToken);
 
-        Guard.Against.NotFound(request.Id, entity);
+        //Guard.Against.NotFound(request.Id, entity);
 
 
-        var profissional = await _context.Profissionais
-            .FindAsync([request.ProfissionalId], cancellationToken);
+        //var profissional = await _context.Profissionais
+        //    .FindAsync([request.ProfissionalId], cancellationToken);
 
-        Guard.Against.NotFound(request.ProfissionalId, profissional);
+        //Guard.Against.NotFound(request.ProfissionalId, profissional);
 
-        entity.AspNetUserId = request.AspNetUserId;
-        entity.Nome = request.Nome!;
-        entity.Email = request.Email!;
-        entity.Sexo = request.Sexo!;
-        entity.DtNascimento = DateTime.ParseExact(request.DtNascimento!, "dd/MM/yyyy", CultureInfo.CreateSpecificCulture("pt-BR")); ;
-        entity.NomeMae = request.NomeMae;
-        entity.NomePai = request.NomePai;
-        entity.Cpf = request.Cpf;
-        entity.Telefone = request.Telefone;
-        entity.Celular = request.Celular;
-        entity.Endereco = request.Endereco;
-        entity.Numero = request.Numero;
-        entity.Bairro = request.Bairro;
-        entity.Url = request.Url;
-        entity.Status = request.Status;
-        entity.Habilitado = request.Habilitado;
-        entity.Parceiro = request.Parceiro;
-        entity.Profissional = profissional;
+        //entity.AspNetUserId = request.AspNetUserId;
+        //entity.Nome = request.Nome!;
+        //entity.Email = request.Email!;
+        //entity.Sexo = request.Sexo!;
+        //entity.DtNascimento = DateTime.ParseExact(request.DtNascimento!, "dd/MM/yyyy", CultureInfo.CreateSpecificCulture("pt-BR")); ;
+        //entity.NomeMae = request.NomeMae;
+        //entity.NomePai = request.NomePai;
+        //entity.Cpf = request.Cpf;
+        //entity.Telefone = request.Telefone;
+        //entity.Celular = request.Celular;
+        //entity.Endereco = request.Endereco;
+        //entity.Numero = request.Numero;
+        //entity.Bairro = request.Bairro;
+        //entity.Url = request.Url;
+        //entity.Status = request.Status;
+        //entity.Habilitado = request.Habilitado;
+        //entity.Parceiro = request.Parceiro;
+        //entity.Profissional = profissional;
 
         var result = await _context.SaveChangesAsync(cancellationToken);
 

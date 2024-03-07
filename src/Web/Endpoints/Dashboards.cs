@@ -1,5 +1,6 @@
 ﻿using DnaBrasilApi.Application.Alunos.Queries.GetIndicadoresAlunosByFilter;
 using DnaBrasilApi.Application.Dashboards.Queries;
+using DnaBrasilApi.Application.Dashboards.Queries.GrafcioControlePresencaByFilter;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DnaBrasilApi.Web.Endpoints;
@@ -11,6 +12,7 @@ public class Dashboards : EndpointGroupBase
         app.MapGroup(this)
             //.RequireAuthorization()
             .MapPost(GetIndicadoresByFilter, "Indicadores");
+            .MapPost(GetControlePresencaByFilter, "GraficoControlePresencas");
     }
 
     public Task<DashboardIndicadoresDto> GetIndicadoresByFilter(ISender sender, [FromBody] DashboardIndicadoresDto indicadores)
@@ -23,5 +25,14 @@ public class Dashboards : EndpointGroupBase
         indicadores.CadastrosMasculinos = sender.Send(new GetIndicadoresAlunosByFilterQuery() { SearchFilter = indicadores}).Result;
 
         return Task.FromResult(indicadores);
+    }
+    public Task<GraficoControlePresencasDto> GetControlePresencaByFilter(ISender sender, [FromBody] GraficoControlePresencasDto graficoControlePresencas)
+    {
+        var result = new DashboardIndicadoresDto();
+        graficoControlePresencas.ListPresencasAnual = sender.Send(new GrafcioControlePresencaByFilterQuery(){SearchFilter = graficoControlePresencas }).Result;
+
+        graficoControlePresencas.ListFaltasAnual = sender.Send(new GrafcioControlePresencaByFilterQuery() { SearchFilter = graficoControlePresencas }).Result;
+
+        return Task.FromResult(graficoControlePresencas);
     }
 }
