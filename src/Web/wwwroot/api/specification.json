@@ -962,6 +962,39 @@
         }
       }
     },
+    "/api/ControlesPresencas/Filter": {
+      "post": {
+        "tags": [
+          "ControlesPresencas"
+        ],
+        "operationId": "GetControlesPresencasByFilter",
+        "requestBody": {
+          "x-name": "search",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ControlesPresencasFilterDto"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ControlesPresencasFilterDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Dashboards/Indicadores": {
       "post": {
         "tags": [
@@ -7455,6 +7488,43 @@
           },
           "status": {
             "type": "boolean"
+          }
+        }
+      },
+      "ControlesPresencasFilterDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "fomentoId": {
+            "type": "string",
+            "nullable": true
+          },
+          "estado": {
+            "type": "string",
+            "nullable": true
+          },
+          "municipioId": {
+            "type": "string",
+            "nullable": true
+          },
+          "localidadeId": {
+            "type": "string",
+            "nullable": true
+          },
+          "deficienciaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "etnia": {
+            "type": "string",
+            "nullable": true
+          },
+          "controlesPresencas": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ControlePresencaDto"
+            }
           }
         }
       },

@@ -5,7 +5,8 @@ using DnaBrasilApi.Application.ControlesPresencas.Commands.UpdateControlePresenc
 using DnaBrasilApi.Application.ControlesPresencas.Queries;
 using DnaBrasilApi.Application.ControlesPresencas.Queries.GetControlePresencaById;
 using DnaBrasilApi.Application.ControlesPresencas.Queries.GetControlesPresencasByAlunoId;
-using DnaBrasilApi.Application.Laudos.Queries.GetConsumoAlimentarByAluno;
+using DnaBrasilApi.Application.ControlesPresencas.Queries.GetControlesPresencasByFilter;
+using Microsoft.AspNetCore.Mvc;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -20,9 +21,16 @@ public class ControlesPresencas : EndpointGroupBase
             .MapPut(UpdateControlePresenca, "{id}")
             .MapDelete(DeleteControlePresenca, "{id}")
             .MapGet(GetControlePresencaById, "ControlePresenca/{id}")
-            .MapGet(GetControlesPresencasByAlunoId, "ControlePresenca/Aluno/{alunoId}");
+            .MapGet(GetControlesPresencasByAlunoId, "ControlePresenca/Aluno/{alunoId}")
+            .MapPost(GetControlesPresencasByFilter, "Filter");
     }
 
+    public async Task<ControlesPresencasFilterDto> GetControlesPresencasByFilter(ISender sender, [FromBody] ControlesPresencasFilterDto search)
+    {
+        var result = await sender.Send(new GetControlesPresencasByFilterQuery() { SearchFilter = search });
+
+        return new ControlesPresencasFilterDto { ControlesPresencas = result };
+    }
     public async Task<List<ControlePresencaDto>> GetControlesPresencasAll(ISender sender)
     {
         return await sender.Send(new GetControlesPresencasAllQuery());
