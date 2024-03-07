@@ -927,6 +927,41 @@
         }
       }
     },
+    "/api/ControlesPresencas/ControlePresenca/Aluno/{alunoId}": {
+      "get": {
+        "tags": [
+          "ControlesPresencas"
+        ],
+        "operationId": "GetControlesPresencasByAlunoId",
+        "parameters": [
+          {
+            "name": "alunoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ControlePresencaDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Dashboards/Indicadores": {
       "post": {
         "tags": [
@@ -7344,6 +7379,28 @@
             "type": "string",
             "nullable": true
           },
+          "municipioEstado": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeLocalidade": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "type": "string",
+            "nullable": true
+          },
+          "localidadeId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "municipioId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
           "status": {
             "type": "boolean"
           }
@@ -7353,8 +7410,7 @@
         "type": "object",
         "additionalProperties": false,
         "required": [
-          "controle",
-          "justificativa"
+          "controle"
         ],
         "properties": {
           "alunoId": {
@@ -7370,8 +7426,8 @@
           "justificativa": {
             "type": "string",
             "maxLength": 500,
-            "minLength": 1,
-            "nullable": false
+            "minLength": 0,
+            "nullable": true
           },
           "status": {
             "type": "boolean"
@@ -7381,30 +7437,21 @@
       "UpdateControlePresencaCommand": {
         "type": "object",
         "additionalProperties": false,
-        "required": [
-          "controle",
-          "justificativa"
-        ],
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "alunoId": {
             "type": "integer",
             "format": "int32"
           },
           "controle": {
             "type": "string",
             "maxLength": 1,
-            "minLength": 1,
-            "nullable": false
+            "minLength": 0
           },
           "justificativa": {
             "type": "string",
             "maxLength": 500,
-            "minLength": 1,
-            "nullable": false
+            "minLength": 0,
+            "nullable": true
           },
           "status": {
             "type": "boolean"

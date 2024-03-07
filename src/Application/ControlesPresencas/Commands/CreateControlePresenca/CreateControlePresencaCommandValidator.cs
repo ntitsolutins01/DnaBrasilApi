@@ -8,7 +8,6 @@ public class CreateControlePresencaCommandValidator : AbstractValidator<CreateCo
             .MaximumLength(1)
             .NotNull().NotEmpty();
         RuleFor(v => v.Justificativa)
-            .MaximumLength(500)
-            .NotNull().NotEmpty();
+            .MaximumLength(500);
     }
 }

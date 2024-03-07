@@ -5,10 +5,8 @@ public class UpdateControlePresencaCommandValidator : AbstractValidator<UpdateCo
     public UpdateControlePresencaCommandValidator()
     {
         RuleFor(v => v.Controle)
-            .MaximumLength(1)
-            .NotNull().NotEmpty();
+            .MaximumLength(1);
         RuleFor(v => v.Justificativa)
-            .MaximumLength(500)
-            .NotNull().NotEmpty();
+            .MaximumLength(500);
     }
 }
