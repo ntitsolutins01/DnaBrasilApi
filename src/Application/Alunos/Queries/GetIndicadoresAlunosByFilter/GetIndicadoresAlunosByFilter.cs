@@ -8,7 +8,7 @@ namespace DnaBrasilApi.Application.Alunos.Queries.GetIndicadoresAlunosByFilter;
 //[Authorize]
 public record GetIndicadoresAlunosByFilterQuery : IRequest<int>
 {
-    public DashboardIndicadoresDto? SearchFilter { get; init; }
+    public DashboardDto? SearchFilter { get; init; }
 
 }
 
@@ -39,7 +39,7 @@ public class GetIndicadoresAlunosByFilterQueryHandler : IRequestHandler<GetIndic
         return Task.FromResult((result));
     }
 
-    private int FilterAlunos(IQueryable<Aluno> Alunos, DashboardIndicadoresDto search, CancellationToken cancellationToken)
+    private int FilterAlunos(IQueryable<Aluno> Alunos, DashboardDto search, CancellationToken cancellationToken)
     {
         if (!string.IsNullOrWhiteSpace(search.FomentoId))
         {

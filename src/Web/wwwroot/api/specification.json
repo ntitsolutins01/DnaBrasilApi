@@ -995,19 +995,19 @@
         }
       }
     },
-    "/api/Dashboards/Indicadores": {
+    "/api/Dashboards": {
       "post": {
         "tags": [
           "Dashboards"
         ],
-        "operationId": "GetIndicadoresByFilter",
+        "operationId": "GetDashboardByFilter",
         "requestBody": {
-          "x-name": "indicadores",
+          "x-name": "dashboard",
           "description": "",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/DashboardIndicadoresDto"
+                "$ref": "#/components/schemas/DashboardDto"
               }
             }
           },
@@ -1020,7 +1020,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/DashboardIndicadoresDto"
+                  "$ref": "#/components/schemas/DashboardDto"
                 }
               }
             }
@@ -7528,7 +7528,7 @@
           }
         }
       },
-      "DashboardIndicadoresDto": {
+      "DashboardDto": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -7564,6 +7564,22 @@
             "type": "integer",
             "format": "int32"
           },
+          "listPresencasAnual": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          "listFaltasAnual": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
           "sexo": {
             "type": "string",
             "nullable": true
@@ -7589,6 +7605,10 @@
             "nullable": true
           },
           "etnia": {
+            "type": "string",
+            "nullable": true
+          },
+          "controle": {
             "type": "string",
             "nullable": true
           }
@@ -9288,8 +9308,8 @@
             "minLength": 0
           },
           "valorPesoResposta": {
-            "type": "integer",
-            "format": "int32"
+            "type": "number",
+            "format": "decimal"
           }
         }
       },

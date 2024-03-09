@@ -11,28 +11,21 @@ public class Dashboards : EndpointGroupBase
     {
         app.MapGroup(this)
             //.RequireAuthorization()
-            .MapPost(GetIndicadoresByFilter, "Indicadores");
-            .MapPost(GetControlePresencaByFilter, "GraficoControlePresencas");
+            .MapPost(GetDashboardByFilter);
     }
 
-    public Task<DashboardIndicadoresDto> GetIndicadoresByFilter(ISender sender, [FromBody] DashboardIndicadoresDto indicadores)
+    public Task<DashboardDto> GetDashboardByFilter(ISender sender, [FromBody] DashboardDto dashboard)
     {
-        var result = new DashboardIndicadoresDto();
-        indicadores.AlunosCadastrados = sender.Send(new GetIndicadoresAlunosByFilterQuery(){SearchFilter = indicadores }).Result;
-        indicadores.Sexo = "F";
-        indicadores.CadastrosFemininos = sender.Send(new GetIndicadoresAlunosByFilterQuery() { SearchFilter = indicadores }).Result;
-        indicadores.Sexo = "M";
-        indicadores.CadastrosMasculinos = sender.Send(new GetIndicadoresAlunosByFilterQuery() { SearchFilter = indicadores}).Result;
+        dashboard.AlunosCadastrados = sender.Send(new GetIndicadoresAlunosByFilterQuery(){SearchFilter = dashboard }).Result;
+        dashboard.Sexo = "F";
+        dashboard.CadastrosFemininos = sender.Send(new GetIndicadoresAlunosByFilterQuery() { SearchFilter = dashboard }).Result;
+        dashboard.Sexo = "M";
+        dashboard.CadastrosMasculinos = sender.Send(new GetIndicadoresAlunosByFilterQuery() { SearchFilter = dashboard}).Result;
+        dashboard.Controle = "P";
+        dashboard.ListPresencasAnual = sender.Send(new GrafcioControlePresencaByFilterQuery(){SearchFilter = dashboard }).Result;
+        dashboard.Controle = "F";
+        dashboard.ListFaltasAnual = sender.Send(new GrafcioControlePresencaByFilterQuery() { SearchFilter = dashboard }).Result;
 
-        return Task.FromResult(indicadores);
-    }
-    public Task<GraficoControlePresencasDto> GetControlePresencaByFilter(ISender sender, [FromBody] GraficoControlePresencasDto graficoControlePresencas)
-    {
-        var result = new DashboardIndicadoresDto();
-        graficoControlePresencas.ListPresencasAnual = sender.Send(new GrafcioControlePresencaByFilterQuery(){SearchFilter = graficoControlePresencas }).Result;
-
-        graficoControlePresencas.ListFaltasAnual = sender.Send(new GrafcioControlePresencaByFilterQuery() { SearchFilter = graficoControlePresencas }).Result;
-
-        return Task.FromResult(graficoControlePresencas);
+        return Task.FromResult(dashboard);
     }
 }

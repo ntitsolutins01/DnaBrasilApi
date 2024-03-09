@@ -1,18 +1,15 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
-using DnaBrasilApi.Application.Dashboards.Queries;
-using DnaBrasilApi.Application.Fomentos.Queries;
 using DnaBrasilApi.Domain.Entities;
-using MediatR;
 
 namespace DnaBrasilApi.Application.Dashboards.Queries.GrafcioControlePresencaByFilter;
 //[Authorize]
-public record GrafcioControlePresencaByFilterQuery : IRequest<int>
+public record GrafcioControlePresencaByFilterQuery : IRequest<int[]>
 {
-    public GraficoControlePresencasDto? SearchFilter { get; init; }
+    public DashboardDto? SearchFilter { get; init; }
 
 }
 
-public class GrafcioControlePresencaByFilterQueryHandler : IRequestHandler<GrafcioControlePresencaByFilterQuery, int>
+public class GrafcioControlePresencaByFilterQueryHandler : IRequestHandler<GrafcioControlePresencaByFilterQuery, int[]>
 {
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
@@ -23,44 +20,42 @@ public class GrafcioControlePresencaByFilterQueryHandler : IRequestHandler<Grafc
         _mapper = mapper;
     }
 
-    public Task<int> Handle(GrafcioControlePresencaByFilterQuery request, CancellationToken cancellationToken)
+    public Task<int[]> Handle(GrafcioControlePresencaByFilterQuery request, CancellationToken cancellationToken)
     {
-        IQueryable<Aluno> Alunos;
+        IQueryable<ControlePresenca> controlePresencas;
 
-        Alunos = string.IsNullOrWhiteSpace(request.SearchFilter!.Sexo)
-            ? _context.Alunos
-                .AsNoTracking()
-            : _context.Alunos
-                .Where(x => x.Sexo == request.SearchFilter!.Sexo)
+        controlePresencas = _context.ControlesPresencas
+            .Where(x=>x.Controle==request.SearchFilter!.Controle)
+            .Include(i => i.Aluno)
                 .AsNoTracking();
 
-        var result = FilterAlunos(Alunos, request.SearchFilter!, cancellationToken);
+        var result = FilterControlePresencas(controlePresencas, request.SearchFilter!, cancellationToken);
 
         return Task.FromResult(result);
     }
 
-    private int FilterAlunos(IQueryable<Aluno> Alunos, DashboardIndicadoresDto search, CancellationToken cancellationToken)
+    private int[] FilterControlePresencas(IQueryable<ControlePresenca> controlePresencas, DashboardDto search, CancellationToken cancellationToken)
     {
         if (!string.IsNullOrWhiteSpace(search.FomentoId))
         {
             var fomento = _context.Fomentos.Include(i => i.Municipio).First(x => x.Id == Convert.ToInt32(search.FomentoId));
 
-            Alunos = Alunos.Where(u => u.Municipio!.Id == fomento.Municipio!.Id);
+            controlePresencas = controlePresencas.Where(u => u.Aluno.Municipio!.Id == fomento.Municipio!.Id);
         }
 
         if (!string.IsNullOrWhiteSpace(search.Estado))
         {
-            Alunos = Alunos.Where(u => u.Municipio!.Estado!.Sigla!.Contains(search.Estado));
+            controlePresencas = controlePresencas.Where(u => u.Aluno.Municipio!.Estado!.Sigla!.Contains(search.Estado));
         }
 
         if (!string.IsNullOrWhiteSpace(search.MunicipioId))
         {
-            Alunos = Alunos.Where(u => u.Municipio!.Id == Convert.ToInt32(search.MunicipioId));
+            controlePresencas = controlePresencas.Where(u => u.Aluno.Municipio!.Id == Convert.ToInt32(search.MunicipioId));
         }
 
         if (!string.IsNullOrWhiteSpace(search.LocalidadeId))
         {
-            Alunos = Alunos.Where(u => u.Localidade!.Id == Convert.ToInt32(search.LocalidadeId));
+            controlePresencas = controlePresencas.Where(u => u.Aluno.Localidade!.Id == Convert.ToInt32(search.LocalidadeId));
         }
 
         if (!string.IsNullOrWhiteSpace(search.DeficienciaId))
@@ -71,15 +66,19 @@ public class GrafcioControlePresencaByFilterQueryHandler : IRequestHandler<Grafc
 
             var listAlunos = deficiencias.Alunos!.Select(s => s.Id).ToList();
 
-            Alunos = Alunos.Where(u => listAlunos.Contains(u.Id));
+            controlePresencas = controlePresencas.Where(u => listAlunos.Contains(u.Id));
         }
 
         if (!string.IsNullOrWhiteSpace(search.Etnia))
         {
-            Alunos = Alunos.Where(u => u.Etnia!.Equals(search.Etnia));
+            controlePresencas = controlePresencas.Where(u => u.Aluno.Etnia!.Equals(search.Etnia));
         }
 
-        return Alunos.Count();
+        var result = controlePresencas.Where(x => x.Created.Year == DateTime.Now.Year)
+            .GroupBy(x => new { x.Created.Year, x.Created.Month })
+            .Select(grp => new { grp.Key.Year, grp.Key.Month, Count = grp.Count() }).ToList();
+
+        return result.Select(s=>s.Count).ToArray();
     }
 }
 

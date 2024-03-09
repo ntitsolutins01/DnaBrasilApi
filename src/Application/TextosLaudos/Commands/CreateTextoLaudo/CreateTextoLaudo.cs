@@ -25,13 +25,14 @@ public class CreateTextoLaudoCommandHandler : IRequestHandler<CreateTextoLaudoCo
 
     public async Task<int> Handle(CreateTextoLaudoCommand request, CancellationToken cancellationToken)
     {
-        var tipoLaudo = await _context.Profissionais
+        var tipoLaudo = await _context.TipoLaudos
             .FindAsync([request.TipoLaudoId], cancellationToken);
 
         Guard.Against.NotFound((int)request.TipoLaudoId!, tipoLaudo);
 
         var entity = new TextoLaudo
         {
+            TipoLaudo = tipoLaudo,
             Classificacao = request.Classificacao,
             PontoInicial = request.PontoInicial,
             PontoFinal = request.PontoFinal,

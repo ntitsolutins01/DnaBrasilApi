@@ -6,7 +6,7 @@ public record UpdateRespostaCommand : IRequest<bool>
 {
     public int Id { get; init; }
     public required string RespostaQuestionario { get; init; }
-    public required int ValorPesoResposta { get; set; }
+    public required decimal ValorPesoResposta { get; set; }
 
 }
 
