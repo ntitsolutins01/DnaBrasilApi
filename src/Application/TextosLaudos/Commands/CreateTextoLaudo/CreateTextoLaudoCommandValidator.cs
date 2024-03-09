@@ -12,5 +12,7 @@ public class CreateTextoLaudoCommandValidator : AbstractValidator<CreateTextoLau
             .MaximumLength(500);
         RuleFor(v => v.Classificacao)
             .MaximumLength(100);
+        RuleFor(v => v.Sexo)
+            .MaximumLength(1);
     }
 }

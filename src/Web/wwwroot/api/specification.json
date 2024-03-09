@@ -9531,6 +9531,15 @@
             "format": "int32",
             "nullable": true
           },
+          "idade": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "sexo": {
+            "type": "string",
+            "nullable": true
+          },
           "nomeTipoLaudo": {
             "type": "string",
             "nullable": true
@@ -9567,6 +9576,17 @@
           "tipoLaudoId": {
             "type": "integer",
             "format": "int32",
+            "nullable": true
+          },
+          "idade": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "sexo": {
+            "type": "string",
+            "maxLength": 1,
+            "minLength": 0,
             "nullable": true
           },
           "classificacao": {
@@ -9611,6 +9631,17 @@
           "tipoLaudoId": {
             "type": "integer",
             "format": "int32",
+            "nullable": true
+          },
+          "idade": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "sexo": {
+            "type": "string",
+            "maxLength": 1,
+            "minLength": 0,
             "nullable": true
           },
           "classificacao": {

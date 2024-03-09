@@ -2,6 +2,8 @@
 public class TextoLaudo : BaseAuditableEntity
 {
     public TipoLaudo? TipoLaudo { get; set; }
+    public int? Idade { get; set; }
+    public string? Sexo { get; set; }
     public string? Classificacao { get; set; }
     public decimal PontoInicial { get; set; }
     public decimal PontoFinal { get; set; }

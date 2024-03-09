@@ -6,6 +6,8 @@ public record UpdateTextoLaudoCommand : IRequest<bool>
 {
     public int Id { get; init; }
     public int? TipoLaudoId { get; init; }
+    public int? Idade { get; set; }
+    public string? Sexo { get; set; }
     public string? Classificacao { get; init; }
     public decimal PontoInicial { get; init; }
     public decimal PontoFinal { get; init; }
@@ -30,6 +32,8 @@ public class UpdateTextoLaudoCommandHandler : IRequestHandler<UpdateTextoLaudoCo
 
         Guard.Against.NotFound(request.Id, entity);
 
+        entity.Idade = request.Idade;
+        entity.Sexo = request.Sexo; 
         entity.Classificacao = request.Classificacao;
         entity.PontoInicial = request.PontoInicial;
         entity.PontoFinal = request.PontoFinal;

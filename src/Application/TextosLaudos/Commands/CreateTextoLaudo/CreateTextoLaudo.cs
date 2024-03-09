@@ -6,6 +6,8 @@ namespace DnaBrasilApi.Application.TextosLaudos.Commands.CreateTextoLaudo;
 public record CreateTextoLaudoCommand : IRequest<int>
 {
     public int? TipoLaudoId{ get; init; }
+    public int? Idade { get; set; }
+    public string? Sexo { get; set; }
     public string? Classificacao{ get; init; }
     public decimal PontoInicial{ get; init; }
     public decimal PontoFinal { get; init; }
@@ -33,6 +35,8 @@ public class CreateTextoLaudoCommandHandler : IRequestHandler<CreateTextoLaudoCo
         var entity = new TextoLaudo
         {
             TipoLaudo = tipoLaudo,
+            Idade = request.Idade,
+            Sexo = request.Sexo,
             Classificacao = request.Classificacao,
             PontoInicial = request.PontoInicial,
             PontoFinal = request.PontoFinal,

@@ -5,6 +5,8 @@ public class TextoLaudoDto
 {
     public int Id { get; set; }
     public int? TipoLaudoId { get; init; }
+    public int? Idade { get; init; }
+    public string? Sexo { get; init; }
     public string? NomeTipoLaudo { get; init; }
     public string? Classificacao { get; init; }
     public decimal PontoInicial { get; init; }
