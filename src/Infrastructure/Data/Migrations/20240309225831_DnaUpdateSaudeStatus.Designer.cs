@@ -4,6 +4,7 @@ using DnaBrasilApi.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DnaBrasilApi.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240309225831_DnaUpdateSaudeStatus")]
+    partial class DnaUpdateSaudeStatus
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -195,9 +198,6 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.Property<int?>("ProfissionalId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SaudeId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Sexo")
                         .IsRequired()
                         .HasMaxLength(1)
@@ -223,8 +223,6 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.HasIndex("ParceiroId");
 
                     b.HasIndex("ProfissionalId");
-
-                    b.HasIndex("SaudeId");
 
                     b.ToTable("Alunos");
                 });
@@ -656,10 +654,6 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Encaminhamento")
-                        .HasMaxLength(80)
-                        .HasColumnType("nvarchar(80)");
-
                     b.Property<DateTimeOffset>("LastModified")
                         .HasColumnType("datetimeoffset");
 
@@ -674,10 +668,6 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
 
                     b.Property<int?>("SaudeId")
                         .HasColumnType("int");
-
-                    b.Property<string>("StatusLaudo")
-                        .HasMaxLength(1)
-                        .HasColumnType("nvarchar(1)");
 
                     b.Property<string>("StatusQualidadeDeVida")
                         .HasMaxLength(1)
@@ -1373,7 +1363,7 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("Massa")
+                    b.Property<int>("Massa")
                         .HasColumnType("int");
 
                     b.Property<int?>("ProfissionalId")
@@ -2202,10 +2192,6 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                         .WithMany()
                         .HasForeignKey("ProfissionalId");
 
-                    b.HasOne("DnaBrasilApi.Domain.Entities.Saude", "Saude")
-                        .WithMany()
-                        .HasForeignKey("SaudeId");
-
                     b.Navigation("Localidade");
 
                     b.Navigation("Municipio");
@@ -2213,8 +2199,6 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.Navigation("Parceiro");
 
                     b.Navigation("Profissional");
-
-                    b.Navigation("Saude");
                 });
 
             modelBuilder.Entity("DnaBrasilApi.Domain.Entities.ConsumoAlimentar", b =>

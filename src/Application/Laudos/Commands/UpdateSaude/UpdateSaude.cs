@@ -9,6 +9,7 @@ public record UpdateSaudeCommand : IRequest <bool>
     public int? Altura { get; init; }
     public int Massa { get; init; }
     public int? Envergadura { get; init; }
+    public string? StatusSaude { get; set; }
 }
 
 public class UpdateSaudeCommandHandler : IRequestHandler<UpdateSaudeCommand, bool>
@@ -30,6 +31,7 @@ public class UpdateSaudeCommandHandler : IRequestHandler<UpdateSaudeCommand, boo
         entity.Altura = request.Altura;
         entity.Massa = request.Massa;
         entity.Envergadura = request.Envergadura;
+        entity.StatusSaude = request.StatusSaude;
 
         var result = await _context.SaveChangesAsync(cancellationToken);
 

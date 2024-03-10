@@ -10,5 +10,9 @@ public class LaudoConfiguration : IEntityTypeConfiguration<Laudo>
     {
         builder.Property(t => t.StatusQualidadeDeVida)
             .HasMaxLength(1);
+        builder.Property(t => t.StatusLaudo)
+            .HasMaxLength(1);
+        builder.Property(t => t.Encaminhamento)
+            .HasMaxLength(80);
     }
 }

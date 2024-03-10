@@ -1,4 +1,5 @@
 ﻿using DnaBrasilApi.Application.Deficiencias.Queries;
+using DnaBrasilApi.Application.Laudos.Queries;
 using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Alunos.Queries;
@@ -49,6 +50,7 @@ public class AlunoDto
     public string? MunicipioEstado { get; set; }
     public string? Controle { get; set; }
     public string? Estado { get; set; }
+    public SaudeDto? Saude { get; set; }
     private class Mapping : Profile
     {
         public Mapping()

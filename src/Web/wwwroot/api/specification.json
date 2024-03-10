@@ -1735,6 +1735,38 @@
       }
     },
     "/api/Laudos": {
+      "post": {
+        "tags": [
+          "Laudos"
+        ],
+        "operationId": "CreateLaudo",
+        "requestBody": {
+          "x-name": "command",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateLaudoCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      },
       "get": {
         "tags": [
           "Laudos"
@@ -5550,6 +5582,14 @@
           "estado": {
             "type": "string",
             "nullable": true
+          },
+          "saude": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/SaudeDto"
+              }
+            ]
           }
         }
       },
@@ -5694,6 +5734,42 @@
             "nullable": true
           },
           "nomeEstado": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "SaudeDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "profissionalId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeProfissional": {
+            "type": "string",
+            "nullable": true
+          },
+          "altura": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "massa": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "envergadura": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "dataRealizacaoTeste": {
             "type": "string",
             "nullable": true
           }
@@ -6097,6 +6173,14 @@
                 "items": {
                   "$ref": "#/components/schemas/QualidadeDeVida"
                 }
+              },
+              "saude": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Saude"
+                  }
+                ]
               }
             }
           }
@@ -6823,6 +6907,46 @@
               },
               "status": {
                 "type": "boolean"
+              }
+            }
+          }
+        ]
+      },
+      "Saude": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "profissional": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Profissional"
+                  }
+                ]
+              },
+              "altura": {
+                "type": "integer",
+                "format": "int32",
+                "nullable": true
+              },
+              "massa": {
+                "type": "integer",
+                "format": "int32",
+                "nullable": true
+              },
+              "envergadura": {
+                "type": "integer",
+                "format": "int32",
+                "nullable": true
+              },
+              "statusSaude": {
+                "type": "string",
+                "nullable": true
               }
             }
           }
@@ -8080,6 +8204,22 @@
           }
         }
       },
+      "CreateLaudoCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "alunoId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "saudeId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        }
+      },
       "LaudoDto": {
         "type": "object",
         "additionalProperties": false,
@@ -8122,6 +8262,31 @@
           "id": {
             "type": "integer",
             "format": "int32",
+            "nullable": true
+          },
+          "nomeAluno": {
+            "type": "string",
+            "nullable": true
+          },
+          "municipioEstado": {
+            "type": "string",
+            "nullable": true
+          },
+          "localidadeId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "localidade": {
+            "type": "string",
+            "nullable": true
+          },
+          "encaminhamento": {
+            "type": "string",
+            "nullable": true
+          },
+          "statusLaudo": {
+            "type": "string",
             "nullable": true
           }
         }
@@ -9362,35 +9527,30 @@
       "CreateSaudeCommand": {
         "type": "object",
         "additionalProperties": false,
-        "required": [
-          "profissional",
-          "altura",
-          "massa",
-          "envergadura"
-        ],
         "properties": {
-          "profissional": {
-            "minLength": 1,
-            "nullable": false,
-            "$ref": "#/components/schemas/Profissional"
-          },
-          "altura": {
+          "profissionalId": {
             "type": "integer",
             "format": "int32",
-            "minLength": 1,
-            "nullable": false
+            "nullable": true
           },
-          "massa": {
+          "envergaduraSaude": {
             "type": "integer",
             "format": "int32",
-            "minLength": 1,
-            "nullable": false
+            "nullable": true
           },
-          "envergadura": {
+          "massaCorporalSaude": {
             "type": "integer",
             "format": "int32",
-            "minLength": 1,
-            "nullable": false
+            "nullable": true
+          },
+          "alturaSaude": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "statusSaude": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -9424,6 +9584,10 @@
             "format": "int32",
             "minLength": 1,
             "nullable": false
+          },
+          "statusSaude": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
