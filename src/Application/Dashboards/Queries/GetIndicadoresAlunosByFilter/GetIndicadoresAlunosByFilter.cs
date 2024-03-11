@@ -4,7 +4,7 @@ using DnaBrasilApi.Application.Fomentos.Queries;
 using DnaBrasilApi.Domain.Entities;
 using MediatR;
 
-namespace DnaBrasilApi.Application.Alunos.Queries.GetIndicadoresAlunosByFilter;
+namespace DnaBrasilApi.Application.Dashboards.Queries.GetIndicadoresAlunosByFilter;
 //[Authorize]
 public record GetIndicadoresAlunosByFilterQuery : IRequest<int>
 {
@@ -35,8 +35,8 @@ public class GetIndicadoresAlunosByFilterQueryHandler : IRequestHandler<GetIndic
                 .AsNoTracking();
 
         var result = FilterAlunos(Alunos, request.SearchFilter!, cancellationToken);
-            
-        return Task.FromResult((result));
+
+        return Task.FromResult(result);
     }
 
     private int FilterAlunos(IQueryable<Aluno> Alunos, DashboardDto search, CancellationToken cancellationToken)
@@ -66,8 +66,8 @@ public class GetIndicadoresAlunosByFilterQueryHandler : IRequestHandler<GetIndic
         if (!string.IsNullOrWhiteSpace(search.DeficienciaId))
         {
             var deficiencias = _context.Deficiencias
-                .Include(i=>i.Alunos)
-                .First(f=>f.Id == Convert.ToInt32(search.DeficienciaId));
+                .Include(i => i.Alunos)
+                .First(f => f.Id == Convert.ToInt32(search.DeficienciaId));
 
             var listAlunos = deficiencias.Alunos!.Select(s => s.Id).ToList();
 

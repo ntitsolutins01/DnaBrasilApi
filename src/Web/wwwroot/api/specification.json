@@ -5772,6 +5772,10 @@
           "dataRealizacaoTeste": {
             "type": "string",
             "nullable": true
+          },
+          "imc": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -7705,6 +7709,10 @@
             }
           },
           "sexo": {
+            "type": "string",
+            "nullable": true
+          },
+          "statusLaudo": {
             "type": "string",
             "nullable": true
           },

@@ -23,7 +23,7 @@ public class CreateLaudoCommandHandler : IRequestHandler<CreateLaudoCommand, int
         var aluno = await _context.Alunos
             .FindAsync([request.AlunoId!], cancellationToken);
 
-        Guard.Against.NotFound((int)request.AlunoId!, aluno);
+        Guard.Against.NotFound((int)request.SaudeId!, aluno);
 
         Saude? saude = null;
 

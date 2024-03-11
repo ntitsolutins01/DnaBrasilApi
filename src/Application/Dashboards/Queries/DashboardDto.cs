@@ -14,6 +14,7 @@ public class DashboardDto
 
     #region SearchFilter
     public string? Sexo { get; set; }
+    public string? StatusLaudo { get; set; }
     public string? FomentoId { get; set; }
     public string? Estado { get; set; }
     public string? MunicipioId { get; set; }

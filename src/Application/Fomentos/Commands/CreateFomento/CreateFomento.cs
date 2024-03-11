@@ -1,4 +1,5 @@
-﻿using DnaBrasilApi.Application.Common.Interfaces;
+﻿using System.Globalization;
+using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Fomentos.Commands.CreateFomento;
@@ -35,8 +36,8 @@ public class CreateFomentoCommandHandler : IRequestHandler<CreateFomentoCommand,
             Nome = request.Nome,
             Municipio = municipio,
             Localidade = localidade!,
-            DtIni = Convert.ToDateTime(request.DtIni),
-            DtFim = Convert.ToDateTime(request.DtFim)
+            DtIni = DateTime.ParseExact(request.DtIni, "dd/MM/yyyy", CultureInfo.CreateSpecificCulture("pt-BR")),
+            DtFim = DateTime.ParseExact(request.DtFim, "dd/MM/yyyy", CultureInfo.CreateSpecificCulture("pt-BR")),
         };
 
         _context.Fomentos.Add(entity);

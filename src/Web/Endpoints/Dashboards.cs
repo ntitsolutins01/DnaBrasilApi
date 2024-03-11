@@ -1,5 +1,6 @@
-﻿using DnaBrasilApi.Application.Alunos.Queries.GetIndicadoresAlunosByFilter;
-using DnaBrasilApi.Application.Dashboards.Queries;
+﻿using DnaBrasilApi.Application.Dashboards.Queries;
+using DnaBrasilApi.Application.Dashboards.Queries.GetIndicadoresAlunosByFilter;
+using DnaBrasilApi.Application.Dashboards.Queries.GetLaudosAlunosByFilter;
 using DnaBrasilApi.Application.Dashboards.Queries.GrafcioControlePresencaByFilter;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,6 +22,22 @@ public class Dashboards : EndpointGroupBase
         dashboard.CadastrosFemininos = sender.Send(new GetIndicadoresAlunosByFilterQuery() { SearchFilter = dashboard }).Result;
         dashboard.Sexo = "M";
         dashboard.CadastrosMasculinos = sender.Send(new GetIndicadoresAlunosByFilterQuery() { SearchFilter = dashboard}).Result;
+        dashboard.Sexo = "";
+
+        dashboard.StatusLaudo= "A";
+        dashboard.LaudosAndamentos = sender.Send(new GetLaudosAlunosByFilterQuery() { SearchFilter = dashboard }).Result;
+        dashboard.StatusLaudo= "F";
+        dashboard.LaudosFinalizados = sender.Send(new GetLaudosAlunosByFilterQuery() { SearchFilter = dashboard }).Result;
+        dashboard.StatusLaudo = "";
+
+        
+
+        dashboard.Sexo = "F";
+        dashboard.LaudosFemininos = sender.Send(new GetLaudosAlunosByFilterQuery() { SearchFilter = dashboard }).Result;
+        dashboard.Sexo = "M";
+        dashboard.LaudosMasculinos = sender.Send(new GetLaudosAlunosByFilterQuery() { SearchFilter = dashboard }).Result;
+        dashboard.Sexo = "";
+
         dashboard.Controle = "P";
         dashboard.ListPresencasAnual = sender.Send(new GrafcioControlePresencaByFilterQuery(){SearchFilter = dashboard }).Result;
         dashboard.Controle = "F";

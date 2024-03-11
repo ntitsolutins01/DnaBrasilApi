@@ -11,6 +11,7 @@ public class SaudeDto
     public int Massa { get; set; }
     public int? Envergadura { get; set; }
     public string? DataRealizacaoTeste { get; set; }
+    public string? Imc { get; set; }
     private class Mapping : Profile
     {
         public Mapping()
@@ -18,7 +19,27 @@ public class SaudeDto
             CreateMap<Saude, SaudeDto>()
                 .ForMember(dest => dest.ProfissionalId, opt => opt.MapFrom(src => src.Profissional!.Id))
                 .ForMember(dest => dest.NomeProfissional, opt => opt.MapFrom(src => src.Profissional!.Nome))
-                .ForMember(dest => dest.DataRealizacaoTeste, opt => opt.MapFrom(src => src.Created.ToString("dd/MM/yyyy")));
+                .ForMember(dest => dest.DataRealizacaoTeste, opt => opt.MapFrom(src => src.Created.ToString("dd/MM/yyyy")))
+                .ForMember(dest => dest.Imc, opt => opt.MapFrom(src => GetImc(src.Massa, src.Altura)));
+        }
+
+        public static string GetImc(int? massa, int? altura)
+        {
+            try
+            {
+                var inteiro = massa! * 100 * 100;
+                var dividendo = altura * altura;
+                var result = Convert.ToDecimal(inteiro)  / Convert.ToDecimal(dividendo);
+
+                Double doublVal = Convert.ToDouble(String.Format("{0:0.00}", result));
+
+                return doublVal.ToString();
+
+            }
+            catch
+            {
+                return 0.ToString();
+            }
         }
     }
 }
