@@ -12,6 +12,7 @@ public class SaudeConfiguration : IEntityTypeConfiguration<Saude>
 {
     public void Configure(EntityTypeBuilder<Saude> builder)
     {
-        
+        builder.Property(t => t.StatusSaude)
+            .HasMaxLength(1);
     }
 }

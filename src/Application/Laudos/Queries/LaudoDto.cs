@@ -18,6 +18,23 @@ public class LaudoDto
     public string? Localidade { get; init; }
     public string? Encaminhamento { get; init; }
     public string? StatusLaudo { get; set; }
+    public StatusLaudosFinalizadaAndamentos? StatusLaudosDashboard { get; set; }
+
+    public class StatusLaudosFinalizadaAndamentos
+    {
+        public int totTalentoEsportivoFinalizado { get; set; }
+        public int totTalentoEsportivoAndamento { get; set; }
+        public int totSaudeFinalizado { get; set; }
+        public int totSaudeAndamento { get; set; }
+        public int totQualidadeDeVidaFinalizado { get; set; }
+        public int totQualidadeDeVidaAndamento { get; set; }
+        public int totVocacionalFinalizado { get; set; }
+        public int totVocacionalAndamento { get; set; }
+        public int totConsumoAlimentarFinalizado { get; set; }
+        public int totConsumoAlimentarAndamento { get; set; }
+        public int totSaudeBucalFinalizado { get; set; }
+        public int totSaudeBucalAndamento { get; set; }
+    }
 
     private class Mapping : Profile
     {

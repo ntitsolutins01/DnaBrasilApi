@@ -10,4 +10,5 @@ public class QualidadeDeVida : BaseAuditableEntity
     public Profissional? Profissional { get; set; }
     public required Aluno Aluno { get; set; }
     public required Resposta Resposta { get; set; }
+    public string? StatusQualidadeDeVidas { get; set; }
 }

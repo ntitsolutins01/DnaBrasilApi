@@ -14,6 +14,8 @@ public class VocacionalConfigurations : IEntityTypeConfiguration<Vocacional>
     {
         builder.Property(t => t.Resposta)
             .HasMaxLength(100)
-            .IsRequired();
+            .IsRequired(); 
+        builder.Property(t => t.StatusVocacionais)
+            .HasMaxLength(1);
     }
 }

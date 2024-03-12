@@ -17,6 +17,7 @@ public class TalentoEsportivoConfiguration : IEntityTypeConfiguration<TalentoEsp
         builder.Property(t => t.Velocidade).HasPrecision(10, 2);
         builder.Property(t => t.Abdominal).HasPrecision(10, 2);
         builder.Property(t => t.AptidaoFisica).HasPrecision(10, 2);
-        builder.Property(t => t.ImpulsaoHorizontal).HasPrecision(10, 2);
+        builder.Property(t => t.ImpulsaoHorizontal).HasPrecision(10, 2); 
+        builder.Property(t => t.StatusTalentosEsportivos).HasMaxLength(1);
     }
 }

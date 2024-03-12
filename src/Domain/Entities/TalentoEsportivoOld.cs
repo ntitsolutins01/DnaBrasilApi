@@ -30,4 +30,6 @@ public class TalentoEsportivo : BaseAuditableEntity
     public decimal? Altura { get; set; }
     [Column(TypeName = "decimal(10,2)")]
     public decimal? Peso { get; set; }
+
+    public string? StatusTalentosEsportivos { get; set; }
 }

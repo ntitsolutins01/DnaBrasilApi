@@ -6831,6 +6831,10 @@
               },
               "resposta": {
                 "$ref": "#/components/schemas/Resposta"
+              },
+              "statusQualidadeDeVidas": {
+                "type": "string",
+                "nullable": true
               }
             }
           }
@@ -7708,6 +7712,14 @@
               "format": "int32"
             }
           },
+          "statusLaudos": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/StatusLaudosDto"
+              }
+            ]
+          },
           "sexo": {
             "type": "string",
             "nullable": true
@@ -7743,6 +7755,84 @@
           "controle": {
             "type": "string",
             "nullable": true
+          }
+        }
+      },
+      "StatusLaudosDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "totTalentoEsportivoFinalizado": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totTalentoEsportivoAndamento": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totSaudeFinalizado": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totSaudeAndamento": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totQualidadeDeVidaFinalizado": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totQualidadeDeVidaAndamento": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totVocacionalFinalizado": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totVocacionalAndamento": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totConsumoAlimentarFinalizado": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totConsumoAlimentarAndamento": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totSaudeBucalFinalizado": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totSaudeBucalAndamento": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "progressoSaude": {
+            "type": "number",
+            "format": "double"
+          },
+          "progressoTalentoEsportivo": {
+            "type": "number",
+            "format": "double"
+          },
+          "progressoQualidadeDeVida": {
+            "type": "number",
+            "format": "double"
+          },
+          "progressoVocacional": {
+            "type": "number",
+            "format": "double"
+          },
+          "progressoConsumoAlimentar": {
+            "type": "number",
+            "format": "double"
+          },
+          "progressoSaudeBucal": {
+            "type": "number",
+            "format": "double"
           }
         }
       },
@@ -8296,6 +8386,68 @@
           "statusLaudo": {
             "type": "string",
             "nullable": true
+          },
+          "statusLaudosDashboard": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/StatusLaudosFinalizadaAndamentos"
+              }
+            ]
+          }
+        }
+      },
+      "StatusLaudosFinalizadaAndamentos": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "totTalentoEsportivoFinalizado": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totTalentoEsportivoAndamento": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totSaudeFinalizado": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totSaudeAndamento": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totQualidadeDeVidaFinalizado": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totQualidadeDeVidaAndamento": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totVocacionalFinalizado": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totVocacionalAndamento": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totConsumoAlimentarFinalizado": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totConsumoAlimentarAndamento": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totSaudeBucalFinalizado": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totSaudeBucalAndamento": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },

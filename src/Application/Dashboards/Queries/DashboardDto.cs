@@ -1,4 +1,7 @@
-﻿namespace DnaBrasilApi.Application.Dashboards.Queries;
+﻿using DnaBrasilApi.Application.Laudos.Queries;
+using DnaBrasilApi.Application.Parceiros.Queries;
+
+namespace DnaBrasilApi.Application.Dashboards.Queries;
 public class DashboardDto
 {
     public int AvaliacoesDna { get; set; }
@@ -11,6 +14,7 @@ public class DashboardDto
     public int LaudosFemininos { get; set; }
     public int[]? ListPresencasAnual { get; set; }
     public int[]? ListFaltasAnual { get; set; }
+    public StatusLaudosDto? StatusLaudos { get; set; }
 
     #region SearchFilter
     public string? Sexo { get; set; }
@@ -22,5 +26,6 @@ public class DashboardDto
     public string? DeficienciaId { get; set; }
     public string? Etnia { get; set; }
     public string? Controle { get; set; }
+
     #endregion
 }

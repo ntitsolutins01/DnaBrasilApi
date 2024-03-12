@@ -1,7 +1,9 @@
 ﻿using DnaBrasilApi.Application.Dashboards.Queries;
 using DnaBrasilApi.Application.Dashboards.Queries.GetIndicadoresAlunosByFilter;
 using DnaBrasilApi.Application.Dashboards.Queries.GetLaudosAlunosByFilter;
+using DnaBrasilApi.Application.Dashboards.Queries.GetStatusLaudosAll;
 using DnaBrasilApi.Application.Dashboards.Queries.GrafcioControlePresencaByFilter;
+using DnaBrasilApi.Application.Parceiros.Queries.GetParceiroAll;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DnaBrasilApi.Web.Endpoints;
@@ -15,34 +17,34 @@ public class Dashboards : EndpointGroupBase
             .MapPost(GetDashboardByFilter);
     }
 
-    public Task<DashboardDto> GetDashboardByFilter(ISender sender, [FromBody] DashboardDto dashboard)
+    public async Task<DashboardDto> GetDashboardByFilter(ISender sender, [FromBody] DashboardDto dashboard)
     {
-        dashboard.AlunosCadastrados = sender.Send(new GetIndicadoresAlunosByFilterQuery(){SearchFilter = dashboard }).Result;
+        dashboard.AlunosCadastrados = await sender.Send(new GetIndicadoresAlunosByFilterQuery(){SearchFilter = dashboard });
         dashboard.Sexo = "F";
-        dashboard.CadastrosFemininos = sender.Send(new GetIndicadoresAlunosByFilterQuery() { SearchFilter = dashboard }).Result;
+        dashboard.CadastrosFemininos = await sender.Send(new GetIndicadoresAlunosByFilterQuery() { SearchFilter = dashboard });
         dashboard.Sexo = "M";
-        dashboard.CadastrosMasculinos = sender.Send(new GetIndicadoresAlunosByFilterQuery() { SearchFilter = dashboard}).Result;
+        dashboard.CadastrosMasculinos = await sender.Send(new GetIndicadoresAlunosByFilterQuery() { SearchFilter = dashboard});
         dashboard.Sexo = "";
 
         dashboard.StatusLaudo= "A";
-        dashboard.LaudosAndamentos = sender.Send(new GetLaudosAlunosByFilterQuery() { SearchFilter = dashboard }).Result;
+        dashboard.LaudosAndamentos = await sender.Send(new GetLaudosAlunosByFilterQuery() { SearchFilter = dashboard });
         dashboard.StatusLaudo= "F";
-        dashboard.LaudosFinalizados = sender.Send(new GetLaudosAlunosByFilterQuery() { SearchFilter = dashboard }).Result;
+        dashboard.LaudosFinalizados = await sender.Send(new GetLaudosAlunosByFilterQuery() { SearchFilter = dashboard });
         dashboard.StatusLaudo = "";
-
         
-
         dashboard.Sexo = "F";
-        dashboard.LaudosFemininos = sender.Send(new GetLaudosAlunosByFilterQuery() { SearchFilter = dashboard }).Result;
+        dashboard.LaudosFemininos = await sender.Send(new GetLaudosAlunosByFilterQuery() { SearchFilter = dashboard });
         dashboard.Sexo = "M";
-        dashboard.LaudosMasculinos = sender.Send(new GetLaudosAlunosByFilterQuery() { SearchFilter = dashboard }).Result;
+        dashboard.LaudosMasculinos = await sender.Send(new GetLaudosAlunosByFilterQuery() { SearchFilter = dashboard });
         dashboard.Sexo = "";
 
         dashboard.Controle = "P";
-        dashboard.ListPresencasAnual = sender.Send(new GrafcioControlePresencaByFilterQuery(){SearchFilter = dashboard }).Result;
+        dashboard.ListPresencasAnual = await sender.Send(new GrafcioControlePresencaByFilterQuery(){SearchFilter = dashboard });
         dashboard.Controle = "F";
-        dashboard.ListFaltasAnual = sender.Send(new GrafcioControlePresencaByFilterQuery() { SearchFilter = dashboard }).Result;
+        dashboard.ListFaltasAnual = await sender.Send(new GrafcioControlePresencaByFilterQuery() { SearchFilter = dashboard });
 
-        return Task.FromResult(dashboard);
+        dashboard.StatusLaudos = await sender.Send(new GetStatusLaudosAllQuery());
+
+        return await Task.FromResult(dashboard);
     }
 }
