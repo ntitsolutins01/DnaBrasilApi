@@ -39,6 +39,7 @@ public interface IApplicationDbContext
     DbSet<TipoParceria> TiposParcerias { get; }
     DbSet<TextoLaudo> TextosLaudos { get; }
     DbSet<ControlePresenca> ControlesPresencas { get; }
+    DbSet<MetricaImc> MetricasImc { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

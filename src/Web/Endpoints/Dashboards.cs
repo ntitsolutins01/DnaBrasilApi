@@ -1,6 +1,7 @@
 ﻿using DnaBrasilApi.Application.Dashboards.Queries;
 using DnaBrasilApi.Application.Dashboards.Queries.GetIndicadoresAlunosByFilter;
 using DnaBrasilApi.Application.Dashboards.Queries.GetLaudosAlunosByFilter;
+using DnaBrasilApi.Application.Dashboards.Queries.GetLaudosPeriodo;
 using DnaBrasilApi.Application.Dashboards.Queries.GetStatusLaudosAll;
 using DnaBrasilApi.Application.Dashboards.Queries.GrafcioControlePresencaByFilter;
 using DnaBrasilApi.Application.Parceiros.Queries.GetParceiroAll;
@@ -44,6 +45,12 @@ public class Dashboards : EndpointGroupBase
         dashboard.ListFaltasAnual = await sender.Send(new GrafcioControlePresencaByFilterQuery() { SearchFilter = dashboard });
 
         dashboard.StatusLaudos = await sender.Send(new GetStatusLaudosAllQuery());
+
+        var laudosPeriodo = await sender.Send(new GetLaudosPeriodoQuery() { SearchFilter = dashboard });
+
+        dashboard.Ultimos3Meses = laudosPeriodo[0];
+        dashboard.Ultimos6Meses = laudosPeriodo[1];
+        dashboard.Em1Ano = laudosPeriodo[2];
 
         return await Task.FromResult(dashboard);
     }

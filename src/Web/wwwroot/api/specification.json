@@ -7720,6 +7720,18 @@
               }
             ]
           },
+          "ultimos3Meses": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ultimos6Meses": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "em1Ano": {
+            "type": "integer",
+            "format": "int32"
+          },
           "sexo": {
             "type": "string",
             "nullable": true
