@@ -2121,6 +2121,168 @@
         }
       }
     },
+    "/api/MetricasImc": {
+      "get": {
+        "tags": [
+          "MetricasImc"
+        ],
+        "operationId": "GetMetricasImcAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MetricaImcDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "MetricasImc"
+        ],
+        "operationId": "CreateMetricaImc",
+        "requestBody": {
+          "x-name": "command",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateMetricaImcCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/MetricasImc/{id}": {
+      "put": {
+        "tags": [
+          "MetricasImc"
+        ],
+        "operationId": "UpdateMetricaImc",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateMetricaImcCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "MetricasImc"
+        ],
+        "operationId": "DeleteMetricaImc",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/MetricasImc/MetricaImc/{id}": {
+      "get": {
+        "tags": [
+          "MetricasImc"
+        ],
+        "operationId": "GetMetricaImcById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MetricaImcDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Modalidades": {
       "get": {
         "tags": [
@@ -8632,6 +8794,126 @@
           "alunoId": {
             "type": "integer",
             "format": "int32"
+          }
+        }
+      },
+      "MetricaImcDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tipoLaudoId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "idade": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "sexo": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeTipoLaudo": {
+            "type": "string",
+            "nullable": true
+          },
+          "classificacao": {
+            "type": "string",
+            "nullable": true
+          },
+          "valorInicial": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "valorFinal": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "status": {
+            "type": "boolean"
+          }
+        }
+      },
+      "CreateMetricaImcCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "idade": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "sexo": {
+            "type": "string",
+            "maxLength": 1,
+            "minLength": 0,
+            "nullable": true
+          },
+          "classificacao": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 0,
+            "nullable": true
+          },
+          "valorInicial": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "valorFinal": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "status": {
+            "type": "boolean"
+          }
+        }
+      },
+      "UpdateMetricaImcCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tipoLaudoId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "idade": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "sexo": {
+            "type": "string",
+            "maxLength": 1,
+            "minLength": 0,
+            "nullable": true
+          },
+          "classificacao": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 0,
+            "nullable": true
+          },
+          "valorInicial": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "valorFinal": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "status": {
+            "type": "boolean"
           }
         }
       },
