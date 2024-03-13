@@ -16,7 +16,7 @@ public class MetricaImcDto
     {
         public Mapping()
         {
-            CreateMap<MetricaImc, MetricaImcDto>();
+            CreateMap<MetricaImc, MetricaImcDto>().ForMember(dest => dest.Sexo, opt => opt.MapFrom(src => src.Sexo == "F" ? "Feminino" : "Masculino"));
         }
     }
 }
