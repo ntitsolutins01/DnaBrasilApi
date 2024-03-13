@@ -4,10 +4,8 @@ namespace DnaBrasilApi.Application.MetricasImc.Queries;
 public class MetricaImcDto
 {
     public int Id { get; set; }
-    public int? TipoLaudoId { get; init; }
     public int? Idade { get; init; }
     public string? Sexo { get; init; }
-    public string? NomeTipoLaudo { get; init; }
     public string? Classificacao { get; init; }
     public decimal ValorInicial { get; init; }
     public decimal ValorFinal { get; init; }
@@ -16,7 +14,8 @@ public class MetricaImcDto
     {
         public Mapping()
         {
-            CreateMap<MetricaImc, MetricaImcDto>().ForMember(dest => dest.Sexo, opt => opt.MapFrom(src => src.Sexo == "F" ? "Feminino" : "Masculino"));
+            CreateMap<MetricaImc, MetricaImcDto>()
+                .ForMember(dest => dest.Sexo, opt => opt.MapFrom(src => src.Sexo == "F" ? "Feminino" : "Masculino"));
         }
     }
 }

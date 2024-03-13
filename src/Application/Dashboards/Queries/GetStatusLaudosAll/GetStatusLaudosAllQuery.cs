@@ -1,8 +1,4 @@
-﻿using DnaBrasilApi.Application.Alunos.Queries;
-using DnaBrasilApi.Application.Common.Interfaces;
-using DnaBrasilApi.Application.Dashboards.Queries;
-using DnaBrasilApi.Application.Laudos.Queries;
-using DnaBrasilApi.Domain.Entities;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 
 namespace DnaBrasilApi.Application.Dashboards.Queries.GetStatusLaudosAll;
 //[Authorize]

@@ -2,6 +2,7 @@
 using DnaBrasilApi.Application.Dashboards.Queries.GetIndicadoresAlunosByFilter;
 using DnaBrasilApi.Application.Dashboards.Queries.GetLaudosAlunosByFilter;
 using DnaBrasilApi.Application.Dashboards.Queries.GetLaudosPeriodo;
+using DnaBrasilApi.Application.Dashboards.Queries.GetPercentualSaudeAlunos;
 using DnaBrasilApi.Application.Dashboards.Queries.GetStatusLaudosAll;
 using DnaBrasilApi.Application.Dashboards.Queries.GrafcioControlePresencaByFilter;
 using DnaBrasilApi.Application.Parceiros.Queries.GetParceiroAll;
@@ -15,6 +16,7 @@ public class Dashboards : EndpointGroupBase
     {
         app.MapGroup(this)
             //.RequireAuthorization()
+            .MapPost(GetValida,"valida")
             .MapPost(GetDashboardByFilter);
     }
 
@@ -52,6 +54,16 @@ public class Dashboards : EndpointGroupBase
         dashboard.Ultimos6Meses = laudosPeriodo[1];
         dashboard.Em1Ano = laudosPeriodo[2];
 
+        
+
+        //dashboard.
+
         return await Task.FromResult(dashboard);
+    }
+
+
+    public async Task<List<int>> GetValida(ISender sender, [FromBody] DashboardDto dashboard)
+    {
+        return await sender.Send(new GetPercentualSaudeAlunosQuery() { SearchFilter = dashboard });
     }
 }
