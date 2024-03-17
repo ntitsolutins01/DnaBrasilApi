@@ -1020,11 +1020,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "integer",
-                    "format": "int32"
-                  }
+                  "$ref": "#/components/schemas/TotalizadorTalentoDto"
                 }
               }
             }
@@ -8016,6 +8012,52 @@
           }
         }
       },
+      "TotalizadorTalentoDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "percTotalizadorTalentoMasculino": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "number",
+              "format": "decimal"
+            }
+          },
+          "percTotalizadorTalentoFeminino": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "number",
+              "format": "decimal"
+            }
+          },
+          "valorTotalizadorTalentoMasculino": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "number",
+              "format": "decimal"
+            }
+          },
+          "valorTotalizadorTalentoFeminino": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "number",
+              "format": "decimal"
+            }
+          },
+          "percTalento": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "number",
+              "format": "decimal"
+            }
+          }
+        }
+      },
       "DashboardDto": {
         "type": "object",
         "additionalProperties": false,
@@ -8087,6 +8129,30 @@
           "em1Ano": {
             "type": "integer",
             "format": "int32"
+          },
+          "percentualSaude": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "number",
+              "format": "decimal"
+            }
+          },
+          "listTotalizadorSaudeSexo": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/TotalizadorSexoSaudeDto"
+              }
+            ]
+          },
+          "listTotalizadorTalento": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/TotalizadorTalentoDto"
+              }
+            ]
           },
           "sexo": {
             "type": "string",
@@ -8201,6 +8267,44 @@
           "progressoSaudeBucal": {
             "type": "number",
             "format": "double"
+          }
+        }
+      },
+      "TotalizadorSexoSaudeDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "percTotalizadorSaudeMasculino": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "number",
+              "format": "decimal"
+            }
+          },
+          "percTotalizadorSaudeFeminino": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "number",
+              "format": "decimal"
+            }
+          },
+          "valorTotalizadorSaudeMasculino": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "number",
+              "format": "decimal"
+            }
+          },
+          "valorTotalizadorSaudeFeminino": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "number",
+              "format": "decimal"
+            }
           }
         }
       },
@@ -9329,6 +9433,42 @@
             "items": {
               "$ref": "#/components/schemas/ProfissionalDto"
             }
+          },
+          "tipoParceria": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tipoPessoa": {
+            "type": "string",
+            "nullable": true
+          },
+          "cpfCnpj": {
+            "type": "string",
+            "nullable": true
+          },
+          "telefone": {
+            "type": "string",
+            "nullable": true
+          },
+          "celular": {
+            "type": "string",
+            "nullable": true
+          },
+          "cep": {
+            "type": "string",
+            "nullable": true
+          },
+          "endereco": {
+            "type": "string",
+            "nullable": true
+          },
+          "numero": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "bairro": {
+            "type": "string",
+            "nullable": true
           },
           "estadoId": {
             "type": "integer",

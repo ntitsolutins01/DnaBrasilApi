@@ -4,13 +4,13 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace DnaBrasilApi.Application.Dashboards.Queries.GetPercentualSaudeAlunos;
 //[Authorize]
-public record GetPercentualSaudeAlunosQuery : IRequest<List<int>>
+public record GetPercentualSaudeAlunosQuery : IRequest<Dictionary<string, decimal>>
 {
     public DashboardDto? SearchFilter { get; init; }
 
 }
 
-public class GetPercentualSaudeAlunosQueryHandler : IRequestHandler<GetPercentualSaudeAlunosQuery, List<int>>
+public class GetPercentualSaudeAlunosQueryHandler : IRequestHandler<GetPercentualSaudeAlunosQuery, Dictionary<string, decimal>>
 {
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
@@ -21,7 +21,7 @@ public class GetPercentualSaudeAlunosQueryHandler : IRequestHandler<GetPercentua
         _mapper = mapper;
     }
 
-    public  Task<List<int>> Handle(GetPercentualSaudeAlunosQuery request, CancellationToken cancellationToken)
+    public Task<Dictionary<string, decimal>> Handle(GetPercentualSaudeAlunosQuery request, CancellationToken cancellationToken)
     {
         IQueryable<Aluno> alunos;
 
@@ -33,7 +33,7 @@ public class GetPercentualSaudeAlunosQueryHandler : IRequestHandler<GetPercentua
         return Task.FromResult(result);
     }
 
-    private List<int> FilterAlunosPeriodo(IQueryable<Aluno> alunos, DashboardDto search, CancellationToken cancellationToken)
+    private Dictionary<string, decimal> FilterAlunosPeriodo(IQueryable<Aluno> alunos, DashboardDto search, CancellationToken cancellationToken)
     {
         if (!string.IsNullOrWhiteSpace(search.FomentoId))
         {
@@ -76,30 +76,52 @@ public class GetPercentualSaudeAlunosQueryHandler : IRequestHandler<GetPercentua
         var metricasImc = _context.MetricasImc
             .Where(x => x.Sexo!.Equals("G"));
 
-        var verificaAlunos = alunos.Include(i=>i.Saude);
+        var verificaAlunos = alunos.Include(i => i.Saude);
 
         Dictionary<string, decimal> dict = new();
-        int cont = 0;
+        int cont = 1;
 
         foreach (Aluno aluno in verificaAlunos)
         {
             if (aluno.Saude != null)
             {
-                double imc = (double)((aluno.Saude!.Massa * 100 * 100) / (aluno.Saude.Massa * aluno.Saude.Altura))!;
+                double alturaMetros = (double)(aluno.Saude.Altura * 0.01)!;
+                double? imc = (double)aluno.Saude!.Massa! / Math.Pow(alturaMetros, 2);
 
                 foreach (var item in metricasImc)
                 {
+                    if (!dict.ContainsKey(item.Classificacao!))
+                    {
+                        dict.Add(item.Classificacao!, 0);
+                    }
+
                     if (imc >= (double)item.ValorInicial && imc <= (double)item.ValorFinal)
                     {
-                        dict.Add(item.Classificacao!, cont++);
+                        if (dict.ContainsKey(item.Classificacao!))
+                        {
+                            var value = dict[item.Classificacao!];
+
+                            value += 1;
+
+                            dict[item.Classificacao!] = value;
+                        }
+                        else
+                        {
+                            dict.Add(item.Classificacao!, cont);
+                        }
                     }
                 }
             }
         }
 
-        var list = new List<int> { /*totUltimos3Meses, totUltimos6Meses, totdataEm1Ano*/ };
+        var total = dict.Skip(0).Sum(x => x.Value);
 
-        return list;
+        foreach (KeyValuePair<string, decimal> item in dict)
+        {
+            dict[item.Key!] = 100 * item.Value / total;
+        }
+
+        return dict;
     }
 }
 
