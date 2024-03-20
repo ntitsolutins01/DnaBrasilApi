@@ -52,6 +52,7 @@ public class AlunoDto
     public string? Estado { get; set; }
     public SaudeDto? Saude { get; set; }
     public TalentoEsportivoDto? TalentoEsportivo { get; set; }
+    public VocacionalDto? Vocacional { get; set; }
     private class Mapping : Profile
     {
         public Mapping()

@@ -4,6 +4,9 @@ using DnaBrasilApi.Application.Dashboards.Queries.GetLaudosAlunosByFilter;
 using DnaBrasilApi.Application.Dashboards.Queries.GetLaudosPeriodo;
 using DnaBrasilApi.Application.Dashboards.Queries.GetPercentualSaudeAlunos;
 using DnaBrasilApi.Application.Dashboards.Queries.GetStatusLaudosAll;
+using DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorDeficienciaAlunos;
+using DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorDesempenhoAlunos;
+using DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorEtniaAlunos;
 using DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorSaudeSexoAlunos;
 using DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorTalentoEsportivoAlunos;
 using DnaBrasilApi.Application.Dashboards.Queries.GrafcioControlePresencaByFilter;
@@ -62,12 +65,21 @@ public class Dashboards : EndpointGroupBase
         dashboard.ListTotalizadorTalento =
             await sender.Send(new GetTotalizadorTalentoEsportivoAlunosQuery() { SearchFilter = dashboard });
 
+        dashboard.ListTotalizadorDesempenho = 
+            await sender.Send(new GetTotalizadorDesempenhoAlunosQuery() { SearchFilter = dashboard });
+
+        dashboard.ListTotalizadorDeficiencia = 
+            await sender.Send(new GetTotalizadorDeficienciaAlunosQuery() { SearchFilter = dashboard });
+
+        dashboard.ListTotalizadorEtnia =
+            await sender.Send(new GetTotalizadorEtniaAlunosQuery() { SearchFilter = dashboard });
+
         return await Task.FromResult(dashboard);
     }
 
 
-    public async Task<TotalizadorTalentoDto> GetValida(ISender sender, [FromBody] DashboardDto dashboard)
+    public async Task<TotalizadorEtniaDto> GetValida(ISender sender, [FromBody] DashboardDto dashboard)
     {
-        return await sender.Send(new GetTotalizadorTalentoEsportivoAlunosQuery() { SearchFilter = dashboard });
+        return await sender.Send(new GetTotalizadorEtniaAlunosQuery() { SearchFilter = dashboard });
     }
 }

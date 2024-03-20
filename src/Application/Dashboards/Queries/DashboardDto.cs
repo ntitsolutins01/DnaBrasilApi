@@ -21,6 +21,9 @@ public class DashboardDto
     public Dictionary<string, decimal>? PercentualSaude { get; set; }
     public TotalizadorSexoSaudeDto? ListTotalizadorSaudeSexo { get; set; }
     public TotalizadorTalentoDto? ListTotalizadorTalento { get; set; }
+    public TotalizadorDesempenhoDto? ListTotalizadorDesempenho { get; set; }
+    public TotalizadorDeficienciaDto? ListTotalizadorDeficiencia { get; set; }
+    public TotalizadorEtniaDto? ListTotalizadorEtnia { get; set; }
 
     #region SearchFilter
     public string? Sexo { get; set; }
