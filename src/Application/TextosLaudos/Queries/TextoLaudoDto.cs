@@ -20,7 +20,8 @@ public class TextoLaudoDto
         {
             CreateMap<TextoLaudo, TextoLaudoDto>()
                 .ForMember(dest => dest.TipoLaudoId, opt => opt.MapFrom(src => src.TipoLaudo!.Id))
-                .ForMember(dest => dest.NomeTipoLaudo, opt => opt.MapFrom(src => src.TipoLaudo!.Nome));
+                .ForMember(dest => dest.NomeTipoLaudo, opt => opt.MapFrom(src => src.TipoLaudo!.Nome))
+                .ForMember(dest => dest.Sexo, opt => opt.MapFrom(src => src.Sexo == "F" ? "Feminino" : "Masculino"));
         }
     }
 }

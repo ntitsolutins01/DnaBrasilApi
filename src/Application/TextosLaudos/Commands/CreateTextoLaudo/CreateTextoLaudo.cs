@@ -6,8 +6,8 @@ namespace DnaBrasilApi.Application.TextosLaudos.Commands.CreateTextoLaudo;
 public record CreateTextoLaudoCommand : IRequest<int>
 {
     public int? TipoLaudoId{ get; init; }
-    public int? Idade { get; set; }
-    public string? Sexo { get; set; }
+    public int? Idade { get; init; }
+    public string? Sexo { get; init; }
     public string? Classificacao{ get; init; }
     public decimal PontoInicial{ get; init; }
     public decimal PontoFinal { get; init; }
