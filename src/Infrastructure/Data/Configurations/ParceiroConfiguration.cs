@@ -24,9 +24,9 @@ internal class ParceiroConfiguration : IEntityTypeConfiguration<Parceiro>
             .HasMaxLength(18)
             .IsRequired();
         builder.Property(t => t.Telefone)
-            .HasMaxLength(13);
+            .HasMaxLength(14);
         builder.Property(t => t.Celular)
-            .HasMaxLength(13);
+            .HasMaxLength(15);
         builder.Property(t => t.Cep)
             .HasMaxLength(9);
         builder.Property(t => t.Endereco)

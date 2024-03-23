@@ -13,7 +13,7 @@ public class AlunoDto
     public string? DtNascimento { get; set; }
     //public string? NomeMae { get; set; }
     //public string? NomePai { get; set; }
-    //public string? Cpf { get; set; }
+    public string? Cpf { get; set; }
     //public string? Telefone { get; set; }
     //public string? Celular { get; set; }
     //public string? Cep { get; set; }
@@ -50,9 +50,9 @@ public class AlunoDto
     public string? MunicipioEstado { get; set; }
     public string? Controle { get; set; }
     public string? Estado { get; set; }
-    public SaudeDto? Saude { get; set; }
-    public TalentoEsportivoDto? TalentoEsportivo { get; set; }
-    public VocacionalDto? Vocacional { get; set; }
+    //public SaudeDto? Saude { get; set; }
+    //public TalentoEsportivoDto? TalentoEsportivo { get; set; }
+    //public VocacionalDto? Vocacional { get; set; }
     private class Mapping : Profile
     {
         public Mapping()
