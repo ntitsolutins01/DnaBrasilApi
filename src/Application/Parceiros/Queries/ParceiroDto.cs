@@ -1,5 +1,6 @@
 ﻿using DnaBrasilApi.Application.Alunos.Queries;
 using DnaBrasilApi.Application.Profissionais.Queries;
+using DnaBrasilApi.Application.TiposParcerias.Queries;
 using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Parceiros.Queries;
@@ -7,10 +8,8 @@ public class ParceiroDto
 {
     public int Id { get; set; }
     public string? Nome { get; set; }
-    public bool Status { get; set; }
-    public List<AlunoDto>? Alunos { get; set; }
+    public string? Email { get; set; }
     public List<ProfissionalDto> Profissionais { get; } = new();
-    public int TipoParceria { get; set; }
     public string? TipoPessoa { get; set; }
     public string? CpfCnpj { get; set; }
     public string? Telefone { get; set; }
@@ -22,6 +21,10 @@ public class ParceiroDto
     public int EstadoId { get; set; }
     public string? Uf { get; set; }
     public int MunicipioId { get; set; }
+    public bool Status { get; set; }
+    public bool? Habilitado { get; set; }
+    public List<AlunoDto>? Alunos { get; set; }
+    public required TipoParceriaDto? TipoParceria { get; set; }
     private class Mapping : Profile
     {
         public Mapping()
