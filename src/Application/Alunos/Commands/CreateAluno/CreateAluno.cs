@@ -27,7 +27,7 @@ public record CreateAlunoCommand : IRequest<int>
     public int? MunicipioId { get; init; }
     public int? LocalidadeId { get; init; }
     public int? ProfissionalId { get; init; }
-    public string? DeficienciasIds { get; init; }
+    public int? DeficienciaId { get; init; }
     public required string Etnia { get; init; }
     public string? AreasDesejadas { get; init; }
     public string? NomeResponsavel { get; init; }
@@ -48,8 +48,7 @@ public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int
 
         if (request.MunicipioId != null)
         {
-            municipio = await _context.Municipios
-                .FindAsync(new object[] { request.MunicipioId }, cancellationToken);
+            municipio = await _context.Municipios.FindAsync(new object[] { request.MunicipioId }, cancellationToken);
 
             Guard.Against.NotFound((int)request.MunicipioId, municipio);
         }
@@ -58,30 +57,38 @@ public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int
 
         if (request.LocalidadeId != null)
         {
-            localidade = await _context.Localidades
-                .FindAsync(new object[] { request.LocalidadeId }, cancellationToken);
+            localidade = await _context.Localidades.FindAsync(new object[] { request.LocalidadeId }, cancellationToken);
 
             Guard.Against.NotFound((int)request.LocalidadeId, localidade);
         }
 
-        var list = new List<Deficiencia>();
+        Deficiencia? deficiencia = null;
 
-        if (!string.IsNullOrWhiteSpace(request.DeficienciasIds))
+        if (request.DeficienciaId != null)
         {
-            List<int> listIds = request.DeficienciasIds.Split(',').Select(s => Convert.ToInt32(s)).ToList();
+            deficiencia = await _context.Deficiencias.FindAsync(new object[] { request.DeficienciaId }, cancellationToken);
 
-            foreach (int id in listIds)
-            {
-                var deficiencia = await _context.Deficiencias
-                    .FindAsync(new object[] { id }, cancellationToken);
+            Guard.Against.NotFound((int)request.DeficienciaId, deficiencia);
+        }
 
-                list.Add(deficiencia!);
-            }
-        }
-        else
-        {
-            list = null;
-        }
+        //var list = new List<Deficiencia>();
+
+        //if (!string.IsNullOrWhiteSpace(request.DeficienciasIds))
+        //{
+        //    List<int> listIds = request.DeficienciasIds.Split(',').Select(s => Convert.ToInt32(s)).ToList();
+
+        //    foreach (int id in listIds)
+        //    {
+        //        var deficiencia = await _context.Deficiencias
+        //            .FindAsync(new object[] { id }, cancellationToken);
+
+        //        list.Add(deficiencia!);
+        //    }
+        //}
+        //else
+        //{
+        //    list = null;
+        //}
 
         var entity = new Aluno
         {
@@ -104,7 +111,7 @@ public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int
             Habilitado = request.Habilitado,
             Municipio = municipio!,
             Localidade = localidade!,
-            Deficiencias = list,
+            Deficiencia = deficiencia,
             AreasDesejadas = request.AreasDesejadas,
             NomeResponsavel = request.NomeResponsavel,
             

@@ -16,7 +16,7 @@ public record UpdateParceiroCommand : IRequest<bool>
     public string? Celular { get; init; }
     public string? Cep { get; init; }
     public string? Endereco { get; init; }
-    public int Numero { get; init; }
+    public int? Numero { get; init; }
     public string? Bairro { get; init; }
     public bool Status { get; init; }
     public bool? Habilitado { get; init; }
@@ -49,23 +49,29 @@ public class UpdateParceiroCommandHandler : IRequestHandler<UpdateParceiroComman
 
         Guard.Against.NotFound(request.Id, entity);
 
-        entity.Nome = request.Nome;
-        entity.Status = request.Status;
-        entity.Nome = request.Nome;
-        entity.Status = request.Status;
-        entity.Alunos = request.Alunos;
-        entity.Celular = request.Celular;
-        entity.Telefone = request.Telefone;
-        entity.CpfCnpj = request.CpfCnpj;
-        entity.Cep = request.Cep;
-        entity.Endereco = request.Endereco;
-        entity.Municipio = municipio;
-        entity.AspNetUserId = request.AspNetUserId;
-        entity.Habilitado = request.Habilitado;
-        entity.Email = request.Email;
-        entity.Bairro = request.Bairro;
-        entity.Numero = request.Numero;
-
+        if (string.IsNullOrEmpty(entity.AspNetUserId))
+        {
+            entity.AspNetUserId = request.AspNetUserId;
+            entity.Habilitado = true;
+        }
+        else
+        {
+            entity!.Nome = request.Nome;
+            entity.Status = request.Status;
+            entity.Nome = request.Nome;
+            entity.Status = request.Status;
+            entity.Alunos = request.Alunos;
+            entity.Celular = request.Celular;
+            entity.Telefone = request.Telefone;
+            entity.CpfCnpj = request.CpfCnpj;
+            entity.Cep = request.Cep;
+            entity.Endereco = request.Endereco;
+            entity.Municipio = municipio;
+            entity.Habilitado = request.Habilitado;
+            entity.Email = request.Email;
+            entity.Bairro = request.Bairro;
+            entity.Numero = request.Numero;
+        }
 
         var result = await _context.SaveChangesAsync(cancellationToken);
 

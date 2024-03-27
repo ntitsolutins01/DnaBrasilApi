@@ -7,7 +7,8 @@ public record CreateUsuarioCommand : IRequest<int>
 {
     public required string AspNetUserId { get; init; }
     public required string Nome { get; init; }
-    public required string Cpf { get; init; }
+    public required string TipoPessoa { get; init; }
+    public required string CpfCnpj { get; init; }
     public required string Email { get; init; }
     public required string AspNetRoleId { get; init; }
     public required int PerfilId { get; init; }
@@ -31,7 +32,8 @@ public class CreateUsuarioCommandHandler : IRequestHandler<CreateUsuarioCommand,
         {
             Nome = request.Nome,
             AspNetUserId = request.AspNetUserId,
-            Cpf = request.Cpf,
+            TipoPessoa = request.TipoPessoa,
+            CpfCnpj = request.CpfCnpj,
             Email = request.Email,
             AspNetRoleId = request.AspNetRoleId,
             Perfil = perfil!

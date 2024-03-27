@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace DnaBrasilApi.Infrastructure.DataMigrations
+namespace DnaBrasilApi.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240323003843_DnaUpdateParceiroColunaTelefoneCelular")]
-    partial class DnaUpdateParceiroColunaTelefoneCelular
+    [Migration("20240324092706_DnaUpdateTamanhoCampoCpfCnpj")]
+    partial class DnaUpdateTamanhoCampoCpfCnpj
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -1052,8 +1052,8 @@ namespace DnaBrasilApi.Infrastructure.DataMigrations
 
                     b.Property<string>("CpfCnpj")
                         .IsRequired()
-                        .HasMaxLength(18)
-                        .HasColumnType("nvarchar(18)");
+                        .HasMaxLength(19)
+                        .HasColumnType("nvarchar(19)");
 
                     b.Property<DateTimeOffset>("Created")
                         .HasColumnType("datetimeoffset");
@@ -1845,10 +1845,10 @@ namespace DnaBrasilApi.Infrastructure.DataMigrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("Cpf")
+                    b.Property<string>("CpfCnpj")
                         .IsRequired()
-                        .HasMaxLength(14)
-                        .HasColumnType("nvarchar(14)");
+                        .HasMaxLength(19)
+                        .HasColumnType("nvarchar(19)");
 
                     b.Property<DateTimeOffset>("Created")
                         .HasColumnType("datetimeoffset");
@@ -1877,6 +1877,11 @@ namespace DnaBrasilApi.Infrastructure.DataMigrations
 
                     b.Property<bool?>("Status")
                         .HasColumnType("bit");
+
+                    b.Property<string>("TipoPessoa")
+                        .IsRequired()
+                        .HasMaxLength(2)
+                        .HasColumnType("nvarchar(2)");
 
                     b.HasKey("Id");
 

@@ -476,6 +476,111 @@
         }
       }
     },
+    "/api/ConfiguracaoSistema/Funcionalidade/{id}": {
+      "get": {
+        "tags": [
+          "ConfiguracaoSistema"
+        ],
+        "operationId": "GetFuncionalidadeById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FuncionalidadeDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ConfiguracaoSistema"
+        ],
+        "operationId": "UpdateFuncionalidade",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateFuncionalidadeCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ConfiguracaoSistema"
+        ],
+        "operationId": "DeleteFuncionalidade",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/ConfiguracaoSistema/Funcionalidade": {
       "post": {
         "tags": [
@@ -5688,6 +5793,10 @@
             "type": "string",
             "nullable": true
           },
+          "cpf": {
+            "type": "string",
+            "nullable": true
+          },
           "url": {
             "type": "string",
             "nullable": true
@@ -5777,30 +5886,6 @@
           "estado": {
             "type": "string",
             "nullable": true
-          },
-          "saude": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/SaudeDto"
-              }
-            ]
-          },
-          "talentoEsportivo": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/TalentoEsportivoDto"
-              }
-            ]
-          },
-          "vocacional": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/VocacionalDto"
-              }
-            ]
           }
         }
       },
@@ -5947,394 +6032,6 @@
           "nomeEstado": {
             "type": "string",
             "nullable": true
-          }
-        }
-      },
-      "SaudeDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "profissionalId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nomeProfissional": {
-            "type": "string",
-            "nullable": true
-          },
-          "altura": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "massa": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "envergadura": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "dataRealizacaoTeste": {
-            "type": "string",
-            "nullable": true
-          },
-          "imc": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
-      "TalentoEsportivoDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "profissional": {
-            "$ref": "#/components/schemas/ProfissionalDto"
-          },
-          "flexibilidade": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "preensaoManual": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "velocidade": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "impulsaoHorizontal": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "aptidaoFisica": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "abdominal": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "imc": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "quadrado": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "encaminhamento": {
-            "type": "string",
-            "nullable": true
-          },
-          "altura": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "peso": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          }
-        }
-      },
-      "ProfissionalDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "aspNetUserId": {
-            "type": "string",
-            "nullable": true
-          },
-          "nome": {
-            "type": "string"
-          },
-          "dtNascimento": {
-            "type": "string",
-            "nullable": true
-          },
-          "email": {
-            "type": "string"
-          },
-          "sexo": {
-            "type": "string",
-            "nullable": true
-          },
-          "cpfCnpj": {
-            "type": "string"
-          },
-          "telefone": {
-            "type": "string",
-            "nullable": true
-          },
-          "celular": {
-            "type": "string",
-            "nullable": true
-          },
-          "endereco": {
-            "type": "string",
-            "nullable": true
-          },
-          "cep": {
-            "type": "string",
-            "nullable": true
-          },
-          "bairro": {
-            "type": "string",
-            "nullable": true
-          },
-          "status": {
-            "type": "boolean"
-          },
-          "habilitado": {
-            "type": "boolean"
-          },
-          "modalidades": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/ModalidadeDto"
-            }
-          },
-          "estadoId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "uf": {
-            "type": "string",
-            "nullable": true
-          },
-          "municipioId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "localidadeId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          }
-        }
-      },
-      "ModalidadeDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nome": {
-            "type": "string",
-            "nullable": true
-          },
-          "vo2MaxIni": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "vo2MaxFim": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "vinteMetrosIni": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "vinteMetrosFim": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "shutlleRunIni": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "shutlleRunFim": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "flexibilidadeIni": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "flexibilidadeFim": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "preensaoManualIni": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "preensaoManualFim": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "abdominalPranchaIni": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "abdominalPranchaFim": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "impulsaoIni": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "impulsaoFim": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "envergaduraIni": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "envergaduraFim": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "pesoIni": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "pesoFim": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "alturaIni": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "alturaFim": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "status": {
-            "type": "boolean"
-          }
-        }
-      },
-      "VocacionalDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "profissional": {
-            "$ref": "#/components/schemas/ProfissionalDto"
-          },
-          "questionario": {
-            "$ref": "#/components/schemas/QuestionarioDto"
-          },
-          "resposta": {
-            "type": "string"
-          }
-        }
-      },
-      "QuestionarioDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "pergunta": {
-            "type": "string"
-          },
-          "tipoLaudo": {
-            "$ref": "#/components/schemas/TipoLaudoDto"
-          },
-          "respostas": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/RespostaDto"
-            }
-          },
-          "quadrante": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "questao": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "TipoLaudoDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nome": {
-            "type": "string",
-            "nullable": true
-          },
-          "descricao": {
-            "type": "string",
-            "nullable": true
-          },
-          "status": {
-            "type": "boolean"
-          }
-        }
-      },
-      "RespostaDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "questionarioId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "pergunta": {
-            "type": "string"
-          },
-          "tipoLaudoId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nomeTipoLaudo": {
-            "type": "string"
-          },
-          "respostaQuestionario": {
-            "type": "string"
-          },
-          "valorPesoResposta": {
-            "type": "number",
-            "format": "decimal"
           }
         }
       },
@@ -7722,7 +7419,12 @@
             "format": "int32"
           },
           "nome": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
+          },
+          "nomeModulo": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -7761,6 +7463,27 @@
           }
         }
       },
+      "UpdateFuncionalidadeCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "moduloId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "nome": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 0,
+            "nullable": true
+          }
+        }
+      },
       "ConsumoAlimentarDto": {
         "type": "object",
         "additionalProperties": false,
@@ -7777,6 +7500,268 @@
           },
           "resposta": {
             "type": "string"
+          }
+        }
+      },
+      "ProfissionalDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "aspNetUserId": {
+            "type": "string",
+            "nullable": true
+          },
+          "nome": {
+            "type": "string"
+          },
+          "dtNascimento": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string"
+          },
+          "sexo": {
+            "type": "string",
+            "nullable": true
+          },
+          "cpfCnpj": {
+            "type": "string"
+          },
+          "telefone": {
+            "type": "string",
+            "nullable": true
+          },
+          "celular": {
+            "type": "string",
+            "nullable": true
+          },
+          "endereco": {
+            "type": "string",
+            "nullable": true
+          },
+          "cep": {
+            "type": "string",
+            "nullable": true
+          },
+          "bairro": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "boolean"
+          },
+          "habilitado": {
+            "type": "boolean"
+          },
+          "modalidades": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ModalidadeDto"
+            }
+          },
+          "estadoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "uf": {
+            "type": "string",
+            "nullable": true
+          },
+          "municipioId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "localidadeId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        }
+      },
+      "ModalidadeDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true
+          },
+          "vo2MaxIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "vo2MaxFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "vinteMetrosIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "vinteMetrosFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "shutlleRunIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "shutlleRunFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "flexibilidadeIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "flexibilidadeFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "preensaoManualIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "preensaoManualFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "abdominalPranchaIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "abdominalPranchaFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "impulsaoIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "impulsaoFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "envergaduraIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "envergaduraFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pesoIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pesoFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "alturaIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "alturaFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "status": {
+            "type": "boolean"
+          }
+        }
+      },
+      "QuestionarioDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pergunta": {
+            "type": "string"
+          },
+          "tipoLaudo": {
+            "$ref": "#/components/schemas/TipoLaudoDto"
+          },
+          "respostas": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/RespostaDto"
+            }
+          },
+          "quadrante": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "questao": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "TipoLaudoDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true
+          },
+          "descricao": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "boolean"
+          }
+        }
+      },
+      "RespostaDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "questionarioId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pergunta": {
+            "type": "string"
+          },
+          "tipoLaudoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeTipoLaudo": {
+            "type": "string"
+          },
+          "respostaQuestionario": {
+            "type": "string"
+          },
+          "valorPesoResposta": {
+            "type": "number",
+            "format": "decimal"
           }
         }
       },
@@ -9641,25 +9626,15 @@
             "type": "string",
             "nullable": true
           },
-          "status": {
-            "type": "boolean"
-          },
-          "alunos": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/AlunoDto"
-            }
+          "email": {
+            "type": "string",
+            "nullable": true
           },
           "profissionais": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ProfissionalDto"
             }
-          },
-          "tipoParceria": {
-            "type": "integer",
-            "format": "int32"
           },
           "tipoPessoa": {
             "type": "string",
@@ -9704,6 +9679,50 @@
           "municipioId": {
             "type": "integer",
             "format": "int32"
+          },
+          "status": {
+            "type": "boolean"
+          },
+          "habilitado": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "alunos": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/AlunoDto"
+            }
+          },
+          "tipoParceria": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/TipoParceriaDto"
+              }
+            ]
+          }
+        }
+      },
+      "TipoParceriaDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true
+          },
+          "parceria": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "status": {
+            "type": "boolean"
           }
         }
       },
@@ -9828,13 +9847,6 @@
             "pattern": "^[^@]+@[^@]+$",
             "nullable": false
           },
-          "tipoParceriaId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "tipoPessoa": {
-            "type": "string"
-          },
           "cpfCnpj": {
             "type": "string"
           },
@@ -9860,7 +9872,8 @@
           },
           "numero": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "bairro": {
             "type": "string",
@@ -9881,28 +9894,6 @@
             "items": {
               "$ref": "#/components/schemas/Aluno"
             }
-          }
-        }
-      },
-      "TipoParceriaDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nome": {
-            "type": "string",
-            "nullable": true
-          },
-          "parceria": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "status": {
-            "type": "boolean"
           }
         }
       },
@@ -11358,19 +11349,28 @@
             "format": "int32"
           },
           "aspNetUserId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "nome": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
-          "cpf": {
-            "type": "string"
+          "cpfCnpj": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipoPessoa": {
+            "type": "string",
+            "nullable": true
           },
           "email": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "aspNetRoleId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "perfil": {
             "nullable": true,
@@ -11396,7 +11396,10 @@
           "nome": {
             "type": "string"
           },
-          "cpf": {
+          "tipoPessoa": {
+            "type": "string"
+          },
+          "cpfCnpj": {
             "type": "string"
           },
           "email": {

@@ -21,7 +21,7 @@ internal class ParceiroConfiguration : IEntityTypeConfiguration<Parceiro>
         builder.Property(t => t.TipoPessoa)
             .IsRequired();
         builder.Property(t => t.CpfCnpj)
-            .HasMaxLength(18)
+            .HasMaxLength(19)
             .IsRequired();
         builder.Property(t => t.Telefone)
             .HasMaxLength(14);

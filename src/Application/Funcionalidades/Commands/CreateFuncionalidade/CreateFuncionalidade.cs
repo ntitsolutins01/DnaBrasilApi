@@ -1,4 +1,4 @@
-﻿using DnaBrasilApi.Application.Common.Interfaces;
+﻿ using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Funcionalidades.Commands.CreateFuncionalidade;
@@ -7,34 +7,30 @@ public record CreateFuncionalidadeCommand : IRequest<int>
 {
     public required string Nome { get; init; }
     public required int ModuloId { get; init; }
-}
 
-public class CreateFuncionalidadeCommandHandler : IRequestHandler<CreateFuncionalidadeCommand, int>
-{
-    private readonly IApplicationDbContext _context;
-
-    public CreateFuncionalidadeCommandHandler(IApplicationDbContext context)
+    public class CreateFuncionalidadeCommandHandler : IRequestHandler<CreateFuncionalidadeCommand, int>
     {
-        _context = context;
-    }
+        private readonly IApplicationDbContext _context;
 
-    public async Task<int> Handle(CreateFuncionalidadeCommand request, CancellationToken cancellationToken)
-    {
-        var modulo = await _context.Modulos
-            .FindAsync(new object[] { request.ModuloId }, cancellationToken);
-
-        Guard.Against.NotFound(request.ModuloId, modulo);
-
-        var entity = new Funcionalidade
+        public CreateFuncionalidadeCommandHandler(IApplicationDbContext context)
         {
-            Nome = request.Nome,
-            Modulo = modulo,
-        };
+            _context = context;
+        }
 
-        _context.Funcionalidades.Add(entity);
+        public async Task<int> Handle(CreateFuncionalidadeCommand request, CancellationToken cancellationToken)
+        {
+            var modulo = await _context.Modulos
+                .FindAsync(new object[] { request.ModuloId }, cancellationToken);
 
-        await _context.SaveChangesAsync(cancellationToken);
+            Guard.Against.NotFound(request.ModuloId, modulo);
 
-        return entity.Id;
+            var entity = new Funcionalidade { Nome = request.Nome, Modulo = modulo, };
+
+            _context.Funcionalidades.Add(entity);
+
+            await _context.SaveChangesAsync(cancellationToken);
+
+            return entity.Id;
+        }
     }
 }
