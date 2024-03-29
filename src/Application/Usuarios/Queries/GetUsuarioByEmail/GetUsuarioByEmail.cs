@@ -1,7 +1,6 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
-using DnaBrasilApi.Application.Estados.Queries;
 
-namespace DnaBrasilApi.Application.Usuarios.Queries;
+namespace DnaBrasilApi.Application.Usuarios.Queries.GetUsuarioByEmail;
 //[Authorize]
 public record GetUsuarioByEmailQuery : IRequest<UsuarioDto>
 {

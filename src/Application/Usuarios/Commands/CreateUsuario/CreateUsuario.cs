@@ -12,6 +12,8 @@ public record CreateUsuarioCommand : IRequest<int>
     public required string Email { get; init; }
     public required string AspNetRoleId { get; init; }
     public required int PerfilId { get; init; }
+    public required int MunicipioId { get; init; }
+    public required int LocalidadeId { get; init; }
 }
 
 public class CreateUsuarioCommandHandler : IRequestHandler<CreateUsuarioCommand, int>
@@ -25,6 +27,10 @@ public class CreateUsuarioCommandHandler : IRequestHandler<CreateUsuarioCommand,
 
     public async Task<int> Handle(CreateUsuarioCommand request, CancellationToken cancellationToken)
     {
+        var municipio = await _context.Municipios
+            .FindAsync(new object[] { request.MunicipioId }, cancellationToken);
+        var localidade = await _context.Localidades
+            .FindAsync(new object[] { request.LocalidadeId }, cancellationToken);
         var perfil = await _context.Perfis
             .FindAsync(new object[] { request.PerfilId }, cancellationToken);
 
@@ -36,7 +42,9 @@ public class CreateUsuarioCommandHandler : IRequestHandler<CreateUsuarioCommand,
             CpfCnpj = request.CpfCnpj,
             Email = request.Email,
             AspNetRoleId = request.AspNetRoleId,
-            Perfil = perfil!
+            Perfil = perfil!,
+            Municipio = municipio,
+            Localidade = localidade!,
         };
 
         _context.Usuarios.Add(entity);

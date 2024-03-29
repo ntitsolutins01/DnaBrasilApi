@@ -8,13 +8,14 @@ public class AlunoIndexDto
     public string? Nome { get; set; }
     public string? Email { get; set; }
     public string? DtNascimento { get; set; }
+    public string? MunicipioId { get; set; }
     public bool Status { get; set; }
     private class Mapping : Profile
     {
         public Mapping()
         {
             CreateMap<Aluno, AlunoIndexDto>()
-                //.ForMember(dest => dest.AspNetUserId, opt => opt.MapFrom(src => src.AspNetUserId == null : ))
+                .ForMember(dest => dest.MunicipioId, opt => opt.MapFrom(src => src.Municipio.Id))
                 .ForMember(dest => dest.DtNascimento, opt => opt.MapFrom(src => src.DtNascimento.ToString("dd/MM/yyyy")));
         }
     }

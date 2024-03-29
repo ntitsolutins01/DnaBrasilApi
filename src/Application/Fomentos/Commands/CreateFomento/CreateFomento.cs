@@ -24,11 +24,11 @@ public class CreateFomentoCommandHandler : IRequestHandler<CreateFomentoCommand,
 
     public async Task<int> Handle(CreateFomentoCommand request, CancellationToken cancellationToken)
     {
-        
-           var municipio = await _context.Municipios
-                .FindAsync(new object[] { request.MunicipioId }, cancellationToken);
-           var localidade = await _context.Localidades
-                .FindAsync(new object[] { request.LocalidadeId }, cancellationToken);
+
+        var municipio = await _context.Municipios
+             .FindAsync(new object[] { request.MunicipioId }, cancellationToken);
+        var localidade = await _context.Localidades
+             .FindAsync(new object[] { request.LocalidadeId }, cancellationToken);
 
         var entity = new Fomentu
         {

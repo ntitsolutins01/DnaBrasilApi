@@ -7612,6 +7612,10 @@
             "type": "string",
             "nullable": true
           },
+          "municipioId": {
+            "type": "string",
+            "nullable": true
+          },
           "status": {
             "type": "boolean"
           }
@@ -11610,6 +11614,18 @@
           "status": {
             "type": "boolean",
             "nullable": true
+          },
+          "municipioEstado": {
+            "type": "string",
+            "nullable": true
+          },
+          "municipioId": {
+            "type": "string",
+            "nullable": true
+          },
+          "localidade": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -11636,6 +11652,14 @@
             "type": "string"
           },
           "perfilId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "municipioId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "localidadeId": {
             "type": "integer",
             "format": "int32"
           }
