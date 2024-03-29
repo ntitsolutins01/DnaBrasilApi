@@ -167,22 +167,35 @@ public class GetTotalizadorEtniaAlunosQueryHandler : IRequestHandler<GetTotaliza
                         dictTotalizadorEtniaFeminino["AMARELO"] = amareloFem;
                     }
                     break;
+                default:
+                    if (aluno.Sexo.Equals("M"))
+                    {
+                        var amareloMasc = dictTotalizadorEtniaMasculino["AMARELO"];
+                        amareloMasc += 1;
+                        dictTotalizadorEtniaMasculino["AMARELO"] = amareloMasc;
+                    }
+                    else
+                    {
+                        var amareloFem = dictTotalizadorEtniaFeminino["AMARELO"];
+                        amareloFem += 1;
+                        dictTotalizadorEtniaFeminino["AMARELO"] = amareloFem;
+                    }
+                    break;
 
             }
         }
 
-
         var totalMasc = dictTotalizadorEtniaMasculino.Skip(0).Sum(x => x.Value);
 
-        Dictionary<string, decimal> percTotalizadorEtniaMasculino = dictTotalizadorEtniaMasculino.ToDictionary(item => item.Key!, item => 100 * item.Value / totalMasc);
+        Dictionary<string, decimal> percTotalizadorEtniaMasculino = dictTotalizadorEtniaMasculino.Where(item => totalMasc != 0).ToDictionary(item => item.Key!, item => 100 * item.Value / totalMasc);
 
         var totalFem = dictTotalizadorEtniaFeminino.Skip(0).Sum(x => x.Value);
 
-        Dictionary<string, decimal> percTotalizadorEtniaFeminino = dictTotalizadorEtniaFeminino.ToDictionary(item => item.Key!, item => 100 * item.Value / totalFem);
+        Dictionary<string, decimal> percTotalizadorEtniaFeminino = dictTotalizadorEtniaFeminino.Where(item => totalFem != 0).ToDictionary(item => item.Key!, item => 100 * item.Value / totalFem);
 
         var total = dict.Skip(0).Sum(x => x.Value);
 
-        Dictionary<string, decimal> percEtnia = dict.ToDictionary(item => item.Key!, item => 100 * item.Value / total);
+        Dictionary<string, decimal> percEtnia = dict.Where(item => total != 0).ToDictionary(item => item.Key!, item => 100 * item.Value / total);
 
         return new TotalizadorEtniaDto
         {

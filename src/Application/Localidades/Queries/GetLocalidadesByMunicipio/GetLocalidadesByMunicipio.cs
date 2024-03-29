@@ -23,7 +23,7 @@ public class GetLocalidadesByMunicipioQueryHandler : IRequestHandler<GetLocalida
         try
         {
             var result = await _context.Localidades
-                .Where(x => x.Municipio!.Id == request.Id)
+                .Where(x => x.Municipio!.Id == request.Id && x.Status)
                 .AsNoTracking()
                 .ProjectTo<LocalidadeDto>(_mapper.ConfigurationProvider)
                 .OrderBy(t => t.Nome)

@@ -8,7 +8,7 @@ SELECT distinct municipio, escola, estudante, sexo, '', 1, 0, getdate(), GETDATE
 
 select * from [dbo].[Municipios] where id = 324
 
-select * from Alunos
+select top 100 * from Alunos
 
 insert into alunos (MunicipioId, LocalidadeId, Nome, Sexo, Email, [Status], Habilitado, Created, 
 LastModified, Etnia, DtNascimento, IdCliente, AspNetUserId)

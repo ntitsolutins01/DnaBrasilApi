@@ -91,59 +91,53 @@ public class GetTotalizadorDeficienciaAlunosQueryHandler : IRequestHandler<GetTo
 
         }
 
-        foreach (var deficiencia in defici)
+        foreach (var deficiencia in verificaAlunos)            
         {
-            foreach (var item in verificaAlunos)
+            foreach (var aluno in deficiencia.Alunos!)
             {
-                if (item.Nome.Equals(deficiencia))
+
+                if (aluno.Sexo.Equals("M"))
                 {
-                    foreach (var itemAluno in item.Alunos!)
+                    if (dictTotalizadorDeficienciaMasculino.ContainsKey(aluno.Deficiencia!.Nome!))
                     {
-                        if (itemAluno.Sexo.Equals("M"))
-                        {
-                            if (dictTotalizadorDeficienciaMasculino.ContainsKey(item.Nome!))
-                            {
-                                var value = dictTotalizadorDeficienciaMasculino[item.Nome!];
+                        var value = dictTotalizadorDeficienciaMasculino[aluno.Deficiencia!.Nome!];
 
-                                value += 1;
+                        value += 1;
 
-                                dictTotalizadorDeficienciaMasculino[item.Nome!] = value;
-                            }
-                        }
-                        else
-                        {
-                            if (dictTotalizadorDeficienciaFeminino.ContainsKey(item.Nome!))
-                            {
-                                var value = dictTotalizadorDeficienciaFeminino[item.Nome!];
-
-                                value += 1;
-
-                                dictTotalizadorDeficienciaFeminino[item.Nome!] = value;
-                            }
-                        }
-
-                        var valueTotal = dict[item.Nome!];
-
-                        valueTotal += 1;
-
-                        dict[item.Nome!] = valueTotal;
+                        dictTotalizadorDeficienciaMasculino[aluno.Deficiencia!.Nome!] = value;
                     }
-
                 }
+                else
+                {
+                    if (dictTotalizadorDeficienciaFeminino.ContainsKey(aluno.Deficiencia!.Nome!))
+                    {
+                        var value = dictTotalizadorDeficienciaFeminino[aluno.Deficiencia!.Nome!];
+
+                        value += 1;
+
+                        dictTotalizadorDeficienciaFeminino[aluno.Deficiencia!.Nome!] = value;
+                    }
+                }
+
+                var valueTotal = dict[aluno.Deficiencia!.Nome!];
+
+                valueTotal += 1;
+
+                dict[aluno.Deficiencia!.Nome!] = valueTotal;
             }
         }
 
         var totalMasc = dictTotalizadorDeficienciaMasculino.Skip(0).Sum(x => x.Value);
 
-        Dictionary<string, decimal> percTotalizadorDeficienciaMasculino = dictTotalizadorDeficienciaMasculino.ToDictionary(item => item.Key!, item => 100 * item.Value / totalMasc);
+        Dictionary<string, decimal> percTotalizadorDeficienciaMasculino = dictTotalizadorDeficienciaMasculino.Where(item => totalMasc != 0).ToDictionary(item => item.Key!, item => 100 * item.Value / totalMasc);
 
         var totalFem = dictTotalizadorDeficienciaFeminino.Skip(0).Sum(x => x.Value);
 
-        Dictionary<string, decimal> percTotalizadorDeficienciaFeminino = dictTotalizadorDeficienciaFeminino.ToDictionary(item => item.Key!, item => 100 * item.Value / totalFem);
+        Dictionary<string, decimal> percTotalizadorDeficienciaFeminino = dictTotalizadorDeficienciaFeminino.Where(item => totalFem != 0).ToDictionary(item => item.Key!, item => 100 * item.Value / totalFem);
 
         var total = dict.Skip(0).Sum(x => x.Value);
 
-        Dictionary<string, decimal> percDeficiencia = dict.ToDictionary(item => item.Key!, item => 100 * item.Value / total);
+        Dictionary<string, decimal> percDeficiencia = dict.Where(item => total != 0).ToDictionary(item => item.Key!, item => 100 * item.Value / total);
 
         return Task.FromResult(new TotalizadorDeficienciaDto
         {

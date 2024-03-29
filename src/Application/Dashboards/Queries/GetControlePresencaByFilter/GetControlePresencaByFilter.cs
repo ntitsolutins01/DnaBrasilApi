@@ -1,26 +1,26 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasilApi.Application.Dashboards.Queries.GrafcioControlePresencaByFilter;
+namespace DnaBrasilApi.Application.Dashboards.Queries.GetControlePresencaByFilter;
 //[Authorize]
-public record GrafcioControlePresencaByFilterQuery : IRequest<int[]>
+public record GetControlePresencaByFilterQuery : IRequest<int[]>
 {
     public DashboardDto? SearchFilter { get; init; }
 
 }
 
-public class GrafcioControlePresencaByFilterQueryHandler : IRequestHandler<GrafcioControlePresencaByFilterQuery, int[]>
+public class GetControlePresencaByFilterQueryHandler : IRequestHandler<GetControlePresencaByFilterQuery, int[]>
 {
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
 
-    public GrafcioControlePresencaByFilterQueryHandler(IApplicationDbContext context, IMapper mapper)
+    public GetControlePresencaByFilterQueryHandler(IApplicationDbContext context, IMapper mapper)
     {
         _context = context;
         _mapper = mapper;
     }
 
-    public Task<int[]> Handle(GrafcioControlePresencaByFilterQuery request, CancellationToken cancellationToken)
+    public Task<int[]> Handle(GetControlePresencaByFilterQuery request, CancellationToken cancellationToken)
     {
         IQueryable<ControlePresenca> controlePresencas;
 

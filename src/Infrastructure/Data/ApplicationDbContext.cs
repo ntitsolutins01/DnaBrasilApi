@@ -56,14 +56,14 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
         base.OnModelCreating(builder);
 
         #region Basic many-to-many
-        builder.Entity<Aluno>()
-        .HasMany(e => e.Deficiencias)
-        .WithMany(e => e.Alunos)
-        .UsingEntity(
-            "AlunosDeficiencias",
-            r => r.HasOne(typeof(Deficiencia)).WithMany().HasForeignKey("DeficienciaId").HasPrincipalKey(nameof(Deficiencia.Id)),
-            l => l.HasOne(typeof(Aluno)).WithMany().HasForeignKey("AlunoId").HasPrincipalKey(nameof(Aluno.Id)),
-            j => j.HasKey("AlunoId", "DeficienciaId"));
+        //builder.Entity<Aluno>()
+        //.HasMany(e => e.Deficiencias)
+        //.WithMany(e => e.Alunos)
+        //.UsingEntity(
+        //    "AlunosDeficiencias",
+        //    r => r.HasOne(typeof(Deficiencia)).WithMany().HasForeignKey("DeficienciaId").HasPrincipalKey(nameof(Deficiencia.Id)),
+        //    l => l.HasOne(typeof(Aluno)).WithMany().HasForeignKey("AlunoId").HasPrincipalKey(nameof(Aluno.Id)),
+        //    j => j.HasKey("AlunoId", "DeficienciaId"));
 
         builder.Entity<Aluno>()
         .HasMany(e => e.Modalidades)

@@ -22,7 +22,8 @@ public class Aluno : BaseAuditableEntity
     public int? IdCliente { get; set; }
     public required Municipio Municipio { get; set; }
     public required Localidade Localidade { get; set; }
-    public List<Deficiencia>? Deficiencias { get; set; }
+    //public List<Deficiencia>? Deficiencias { get; set; }
+    public Deficiencia? Deficiencia { get; set; }
     public List<Modalidade>? Modalidades { get; set; }
     public Parceiro? Parceiro { get; set; }
     public List<Contrato>? Contratos { get; set; }

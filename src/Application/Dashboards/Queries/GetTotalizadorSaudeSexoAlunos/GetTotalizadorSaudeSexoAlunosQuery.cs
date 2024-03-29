@@ -100,6 +100,11 @@ public class GetTotalizadorSaudeSexoAlunosQueryHandler : IRequestHandler<GetTota
             if (aluno.Saude != null)
             {
                 double alturaMetros = (double)(aluno.Saude.Altura * 0.01)!;
+                if (alturaMetros == 0)
+                {
+                    continue;
+                }
+
                 double? imc = (double)aluno.Saude!.Massa! / Math.Pow(alturaMetros, 2);
 
                 foreach (var item in metricasImc)
@@ -124,15 +129,20 @@ public class GetTotalizadorSaudeSexoAlunosQueryHandler : IRequestHandler<GetTota
                                 case "NORMAL":
                                     if (aluno.Sexo.Equals("M"))
                                     {
-                                        var indicePositivoSaudeMasc = dictTotalizadorSaudeMasculino["indicePositivoSaude"];
+                                        var indicePositivoSaudeMasc =
+                                            dictTotalizadorSaudeMasculino["indicePositivoSaude"];
                                         indicePositivoSaudeMasc += 1;
-                                        dictTotalizadorSaudeMasculino["indicePositivoSaude"] = indicePositivoSaudeMasc;
+                                        dictTotalizadorSaudeMasculino["indicePositivoSaude"] =
+                                            indicePositivoSaudeMasc;
                                     }
                                     else
                                     {
-                                        var indicePositivoSaudeFem = dictTotalizadorSaudeFeminino["indicePositivoSaude"];
-                                        indicePositivoSaudeFem = dictTotalizadorSaudeFeminino["indicePositivoSaude"];
-                                        dictTotalizadorSaudeFeminino["indicePositivoSaude"] = indicePositivoSaudeFem;
+                                        var indicePositivoSaudeFem =
+                                            dictTotalizadorSaudeFeminino["indicePositivoSaude"];
+                                        indicePositivoSaudeFem =
+                                            dictTotalizadorSaudeFeminino["indicePositivoSaude"];
+                                        dictTotalizadorSaudeFeminino["indicePositivoSaude"] =
+                                            indicePositivoSaudeFem;
                                     }
 
                                     break;
@@ -142,30 +152,37 @@ public class GetTotalizadorSaudeSexoAlunosQueryHandler : IRequestHandler<GetTota
                                         var desequilibrioMuscularMasc =
                                             dictTotalizadorSaudeMasculino["desequilibrioMuscular"];
                                         desequilibrioMuscularMasc += 1;
-                                        dictTotalizadorSaudeMasculino["desequilibrioMuscular"] = desequilibrioMuscularMasc;
+                                        dictTotalizadorSaudeMasculino["desequilibrioMuscular"] =
+                                            desequilibrioMuscularMasc;
                                     }
                                     else
                                     {
                                         var desequilibrioMuscularFem =
                                             dictTotalizadorSaudeFeminino["desequilibrioMuscular"];
                                         desequilibrioMuscularFem += 1;
-                                        dictTotalizadorSaudeFeminino["desequilibrioMuscular"] = desequilibrioMuscularFem;
+                                        dictTotalizadorSaudeFeminino["desequilibrioMuscular"] =
+                                            desequilibrioMuscularFem;
                                     }
+
                                     break;
                                 case "SOBREPESO":
                                     if (aluno.Sexo.Equals("M"))
                                     {
-                                        var resistenciaInsulinaMasc = dictTotalizadorSaudeMasculino["resistenciaInsulina"];
+                                        var resistenciaInsulinaMasc =
+                                            dictTotalizadorSaudeMasculino["resistenciaInsulina"];
                                         resistenciaInsulinaMasc += 1;
-                                        dictTotalizadorSaudeMasculino["resistenciaInsulina"] = resistenciaInsulinaMasc;
+                                        dictTotalizadorSaudeMasculino["resistenciaInsulina"] =
+                                            resistenciaInsulinaMasc;
                                     }
                                     else
                                     {
                                         var resistenciaInsulinaFem =
                                             dictTotalizadorSaudeFeminino["resistenciaInsulinaMasc"];
                                         resistenciaInsulinaFem += 1;
-                                        dictTotalizadorSaudeFeminino["resistenciaInsulinaMasc"] = resistenciaInsulinaFem;
+                                        dictTotalizadorSaudeFeminino["resistenciaInsulinaMasc"] =
+                                            resistenciaInsulinaFem;
                                     }
+
                                     break;
                                 case "OBESIDADE":
                                     if (aluno.Sexo.Equals("M"))
@@ -173,30 +190,37 @@ public class GetTotalizadorSaudeSexoAlunosQueryHandler : IRequestHandler<GetTota
                                         var riscoColesterolAltoMasc =
                                             dictTotalizadorSaudeMasculino["riscoColesterolAlto"];
                                         riscoColesterolAltoMasc += 1;
-                                        dictTotalizadorSaudeMasculino["riscoColesterolAlto"] = riscoColesterolAltoMasc;
+                                        dictTotalizadorSaudeMasculino["riscoColesterolAlto"] =
+                                            riscoColesterolAltoMasc;
 
-                                        var riscoHipertensaoMasc = dictTotalizadorSaudeMasculino["riscoHipertensao"];
+                                        var riscoHipertensaoMasc =
+                                            dictTotalizadorSaudeMasculino["riscoHipertensao"];
                                         riscoHipertensaoMasc += 1;
                                         dictTotalizadorSaudeMasculino["riscoHipertensao"] = riscoHipertensaoMasc;
 
-                                        var resistenciaInsulinaMasc = dictTotalizadorSaudeMasculino["resistenciaInsulina"];
+                                        var resistenciaInsulinaMasc =
+                                            dictTotalizadorSaudeMasculino["resistenciaInsulina"];
                                         resistenciaInsulinaMasc += 1;
-                                        dictTotalizadorSaudeMasculino["resistenciaInsulina"] = resistenciaInsulinaMasc;
+                                        dictTotalizadorSaudeMasculino["resistenciaInsulina"] =
+                                            resistenciaInsulinaMasc;
                                     }
                                     else
                                     {
                                         var riscoColesterolAltoFem =
                                             dictTotalizadorSaudeFeminino["riscoColesterolAlto"];
                                         riscoColesterolAltoFem += 1;
-                                        dictTotalizadorSaudeFeminino["riscoColesterolAlto"] = riscoColesterolAltoFem;
+                                        dictTotalizadorSaudeFeminino["riscoColesterolAlto"] =
+                                            riscoColesterolAltoFem;
 
                                         var riscoHipertensaoFem = dictTotalizadorSaudeFeminino["riscoHipertensao"];
                                         riscoHipertensaoFem += 1;
                                         dictTotalizadorSaudeFeminino["riscoHipertensao"] = riscoHipertensaoFem;
 
-                                        var resistenciaInsulinaFem = dictTotalizadorSaudeFeminino["resistenciaInsulina"];
+                                        var resistenciaInsulinaFem =
+                                            dictTotalizadorSaudeFeminino["resistenciaInsulina"];
                                         resistenciaInsulinaFem += 1;
-                                        dictTotalizadorSaudeFeminino["resistenciaInsulina"] = resistenciaInsulinaFem;
+                                        dictTotalizadorSaudeFeminino["resistenciaInsulina"] =
+                                            resistenciaInsulinaFem;
                                     }
 
                                     break;
@@ -215,21 +239,15 @@ public class GetTotalizadorSaudeSexoAlunosQueryHandler : IRequestHandler<GetTota
 
         var valorTotalizadorSaudeFeminino = dictTotalizadorSaudeFeminino;
 
-        Dictionary<string, decimal> percTotalizadorSaudeMasculino = new();
-        Dictionary<string, decimal> percTotalizadorSaudeFeminino = new();
-
         var totalMasc = dictTotalizadorSaudeMasculino.Skip(0).Sum(x => x.Value);
 
-        foreach (KeyValuePair<string, decimal> item in dictTotalizadorSaudeMasculino)
-        {
-            percTotalizadorSaudeMasculino.Add(item.Key!, 100 * item.Value / totalMasc);
-        }
+
+        Dictionary<string, decimal> percTotalizadorSaudeMasculino = dictTotalizadorSaudeMasculino.Where(item => totalMasc != 0).ToDictionary(item => item.Key!, item => 100 * item.Value / totalMasc);
+
         var totalFem = dictTotalizadorSaudeFeminino.Skip(0).Sum(x => x.Value);
 
-        foreach (KeyValuePair<string, decimal> item in dictTotalizadorSaudeFeminino)
-        {
-            percTotalizadorSaudeFeminino.Add(item.Key!, 100 * item.Value / totalFem);
-        }
+        Dictionary<string, decimal> percTotalizadorSaudeFeminino = dictTotalizadorSaudeFeminino.Where(item => totalFem != 0).ToDictionary(item => item.Key!, item => 100 * item.Value / totalFem);
+
 
         return new TotalizadorSexoSaudeDto
         {

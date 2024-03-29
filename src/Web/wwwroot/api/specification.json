@@ -38,6 +38,37 @@
         }
       }
     },
+    "/api/Alunos/Aluno/Email/{email}": {
+      "get": {
+        "tags": [
+          "Alunos"
+        ],
+        "operationId": "GetAlunoByEmail",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AlunoDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Alunos/Localidade/{id}": {
       "get": {
         "tags": [
@@ -1133,12 +1164,177 @@
         }
       }
     },
-    "/api/Dashboards": {
+    "/api/Dashboards/Indicadores": {
       "post": {
         "tags": [
           "Dashboards"
         ],
-        "operationId": "GetDashboardByFilter",
+        "operationId": "GetIndicadoresAlunosByFilter",
+        "requestBody": {
+          "x-name": "dashboard",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DashboardDto"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DashboardDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Dashboards/ControlePresenca": {
+      "post": {
+        "tags": [
+          "Dashboards"
+        ],
+        "operationId": "GetControlePresencaByFilter",
+        "requestBody": {
+          "x-name": "dashboard",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DashboardDto"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DashboardDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Dashboards/LaudosPeriodo": {
+      "post": {
+        "tags": [
+          "Dashboards"
+        ],
+        "operationId": "GetLaudosPeriodoByFilter",
+        "requestBody": {
+          "x-name": "dashboard",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DashboardDto"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DashboardDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Dashboards/StatusLaudos": {
+      "post": {
+        "tags": [
+          "Dashboards"
+        ],
+        "operationId": "GetStatusLaudosByFilter",
+        "requestBody": {
+          "x-name": "dashboard",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DashboardDto"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DashboardDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Dashboards/Evolutivo": {
+      "post": {
+        "tags": [
+          "Dashboards"
+        ],
+        "operationId": "GetEvolutivoByFilter",
+        "requestBody": {
+          "x-name": "dashboard",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DashboardDto"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DashboardDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Dashboards/GraficosPizzaBarra": {
+      "post": {
+        "tags": [
+          "Dashboards"
+        ],
+        "operationId": "GetGraficosPizzaBarraByFilter",
         "requestBody": {
           "x-name": "dashboard",
           "description": "",
@@ -6126,8 +6322,9 @@
             "format": "int32",
             "nullable": true
           },
-          "deficienciasIds": {
-            "type": "string",
+          "deficienciaId": {
+            "type": "integer",
+            "format": "int32",
             "nullable": true
           },
           "etnia": {
@@ -6366,12 +6563,13 @@
               "localidade": {
                 "$ref": "#/components/schemas/Localidade"
               },
-              "deficiencias": {
-                "type": "array",
+              "deficiencia": {
                 "nullable": true,
-                "items": {
-                  "$ref": "#/components/schemas/Deficiencia"
-                }
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Deficiencia"
+                  }
+                ]
               },
               "modalidades": {
                 "type": "array",
@@ -7385,8 +7583,37 @@
             "type": "array",
             "nullable": true,
             "items": {
-              "$ref": "#/components/schemas/AlunoDto"
+              "$ref": "#/components/schemas/AlunoIndexDto"
             }
+          }
+        }
+      },
+      "AlunoIndexDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "aspNetUserId": {
+            "type": "string",
+            "nullable": true
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "dtNascimento": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "boolean"
           }
         }
       },

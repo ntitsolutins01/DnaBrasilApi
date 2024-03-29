@@ -25,9 +25,9 @@ internal class AlunoConfiguration : IEntityTypeConfiguration<Aluno>
         builder.Property(t => t.Cpf)
             .HasMaxLength(14);
         builder.Property(t => t.Telefone)
-            .HasMaxLength(13);
+            .HasMaxLength(20);
         builder.Property(t => t.Celular)
-            .HasMaxLength(13);
+            .HasMaxLength(20);
         builder.Property(t => t.Cep)
             .HasMaxLength(9);
         builder.Property(t => t.Endereco)
