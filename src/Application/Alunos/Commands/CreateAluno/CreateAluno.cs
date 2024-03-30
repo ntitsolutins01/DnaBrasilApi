@@ -31,6 +31,8 @@ public record CreateAlunoCommand : IRequest<int>
     public required string Etnia { get; init; }
     public string? AreasDesejadas { get; init; }
     public string? NomeResponsavel { get; init; }
+    public string? NomeFoto { get; init; }
+    public byte[]? ByteImage { get; init; }
 }
 
 public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int>
@@ -70,25 +72,24 @@ public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int
 
             Guard.Against.NotFound((int)request.DeficienciaId, deficiencia);
         }
+        
+        //Parceiro? parceiro = null;
 
-        //var list = new List<Deficiencia>();
-
-        //if (!string.IsNullOrWhiteSpace(request.DeficienciasIds))
+        //if (request.ParceiroId != null)
         //{
-        //    List<int> listIds = request.DeficienciasIds.Split(',').Select(s => Convert.ToInt32(s)).ToList();
+        //    parceiro = await _context.Parceiros.FindAsync(new object[] { request.ParceiroId }, cancellationToken);
 
-        //    foreach (int id in listIds)
-        //    {
-        //        var deficiencia = await _context.Deficiencias
-        //            .FindAsync(new object[] { id }, cancellationToken);
+        //    Guard.Against.NotFound((int)request.ParceiroId, parceiro);
+        //}
 
-        //        list.Add(deficiencia!);
-        //    }
-        //}
-        //else
-        //{
-        //    list = null;
-        //}
+        Profissional? profissional = null;
+
+        if (request.ProfissionalId != null)
+        {
+            profissional = await _context.Profissionais.FindAsync(new object[] { request.ProfissionalId }, cancellationToken);
+
+            Guard.Against.NotFound((int)request.ProfissionalId, profissional);
+        }
 
         var entity = new Aluno
         {
@@ -106,7 +107,8 @@ public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int
             Endereco = request.Endereco,
             Numero = request.Numero,
             Bairro = request.Bairro,
-            Url = null,
+            NomeFoto = request.NomeFoto,
+            ByteImage = request.ByteImage,
             Status = request.Status,
             Habilitado = request.Habilitado,
             Municipio = municipio!,
@@ -114,7 +116,7 @@ public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int
             Deficiencia = deficiencia,
             AreasDesejadas = request.AreasDesejadas,
             NomeResponsavel = request.NomeResponsavel,
-            
+            Profissional = profissional
         };
 
         _context.Alunos.Add(entity);

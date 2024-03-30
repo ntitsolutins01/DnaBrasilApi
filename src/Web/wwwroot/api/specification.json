@@ -6082,6 +6082,15 @@
           "estado": {
             "type": "string",
             "nullable": true
+          },
+          "nomeFoto": {
+            "type": "string",
+            "nullable": true
+          },
+          "byteImage": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
           }
         }
       },
@@ -6337,6 +6346,15 @@
           "nomeResponsavel": {
             "type": "string",
             "nullable": true
+          },
+          "nomeFoto": {
+            "type": "string",
+            "nullable": true
+          },
+          "byteImage": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
           }
         }
       },
@@ -6408,8 +6426,13 @@
             "type": "string",
             "nullable": true
           },
-          "url": {
+          "nomeFoto": {
             "type": "string",
+            "nullable": true
+          },
+          "byteImage": {
+            "type": "string",
+            "format": "byte",
             "nullable": true
           },
           "status": {
@@ -6418,27 +6441,25 @@
           "habilitado": {
             "type": "boolean"
           },
-          "deficiencias": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/Deficiencia"
-            }
+          "municipioId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
           },
-          "ambientes": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/Modalidade"
-            }
+          "localidadeId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
           },
-          "parceiro": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/Parceiro"
-              }
-            ]
+          "deficienciaId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "parceiroId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
           },
           "etnia": {
             "type": "string",
@@ -6446,11 +6467,29 @@
           },
           "profissionalId": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           }
         }
       },
-      "Deficiencia": {
+      "UpdateAlunoModalidadesCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "alunoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "modalidades": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/Modalidade"
+            }
+          }
+        }
+      },
+      "Modalidade": {
         "allOf": [
           {
             "$ref": "#/components/schemas/BaseAuditableEntity"
@@ -6460,7 +6499,88 @@
             "additionalProperties": false,
             "properties": {
               "nome": {
-                "type": "string"
+                "type": "string",
+                "nullable": true
+              },
+              "vo2MaxIni": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "vo2MaxFim": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "vinteMetrosIni": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "vinteMetrosFim": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "shutlleRunIni": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "shutlleRunFim": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "flexibilidadeIni": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "flexibilidadeFim": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "preensaoManualIni": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "preensaoManualFim": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "abdominalPranchaIni": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "abdominalPranchaFim": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "impulsaoIni": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "impulsaoFim": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "envergaduraIni": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "envergaduraFim": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "pesoIni": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "pesoFim": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "alturaIni": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "alturaFim": {
+                "type": "integer",
+                "format": "int32"
               },
               "status": {
                 "type": "boolean"
@@ -6470,6 +6590,13 @@
                 "nullable": true,
                 "items": {
                   "$ref": "#/components/schemas/Aluno"
+                }
+              },
+              "profissionais": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "$ref": "#/components/schemas/Profissional"
                 }
               }
             }
@@ -6538,8 +6665,13 @@
                 "type": "string",
                 "nullable": true
               },
-              "url": {
+              "nomeFoto": {
                 "type": "string",
+                "nullable": true
+              },
+              "byteImage": {
+                "type": "string",
+                "format": "byte",
                 "nullable": true
               },
               "status": {
@@ -6960,7 +7092,7 @@
           }
         ]
       },
-      "Modalidade": {
+      "Deficiencia": {
         "allOf": [
           {
             "$ref": "#/components/schemas/BaseAuditableEntity"
@@ -6970,88 +7102,7 @@
             "additionalProperties": false,
             "properties": {
               "nome": {
-                "type": "string",
-                "nullable": true
-              },
-              "vo2MaxIni": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "vo2MaxFim": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "vinteMetrosIni": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "vinteMetrosFim": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "shutlleRunIni": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "shutlleRunFim": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "flexibilidadeIni": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "flexibilidadeFim": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "preensaoManualIni": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "preensaoManualFim": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "abdominalPranchaIni": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "abdominalPranchaFim": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "impulsaoIni": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "impulsaoFim": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "envergaduraIni": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "envergaduraFim": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "pesoIni": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "pesoFim": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "alturaIni": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "alturaFim": {
-                "type": "integer",
-                "format": "int32"
+                "type": "string"
               },
               "status": {
                 "type": "boolean"
@@ -7061,13 +7112,6 @@
                 "nullable": true,
                 "items": {
                   "$ref": "#/components/schemas/Aluno"
-                }
-              },
-              "profissionais": {
-                "type": "array",
-                "nullable": true,
-                "items": {
-                  "$ref": "#/components/schemas/Profissional"
                 }
               }
             }
@@ -7529,23 +7573,6 @@
             }
           }
         ]
-      },
-      "UpdateAlunoModalidadesCommand": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "alunoId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "modalidades": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/Modalidade"
-            }
-          }
-        }
       },
       "AlunosFilterDto": {
         "type": "object",
