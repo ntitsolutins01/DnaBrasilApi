@@ -4,8 +4,6 @@ using DnaBrasilApi.Domain.Constants;
 
 namespace DnaBrasilApi.Application.Alunos.Queries.GetAlunosAll;
 
-[Authorize(Roles = Roles.Administrator)]
-[Authorize(Policy = Policies.Consultar)]
 public record GetAlunosAllQuery : IRequest<List<AlunoDto>>;
 
 public class GetAlunosAllQueryHandler : IRequestHandler<GetAlunosAllQuery, List<AlunoDto>>

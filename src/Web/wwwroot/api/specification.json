@@ -6091,6 +6091,11 @@
             "type": "string",
             "format": "byte",
             "nullable": true
+          },
+          "qrCode": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
           }
         }
       },
@@ -6355,6 +6360,11 @@
             "type": "string",
             "format": "byte",
             "nullable": true
+          },
+          "qrCode": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
           }
         }
       },
@@ -6431,6 +6441,11 @@
             "nullable": true
           },
           "byteImage": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "qrCode": {
             "type": "string",
             "format": "byte",
             "nullable": true
@@ -6670,6 +6685,11 @@
                 "nullable": true
               },
               "byteImage": {
+                "type": "string",
+                "format": "byte",
+                "nullable": true
+              },
+              "qrCode": {
                 "type": "string",
                 "format": "byte",
                 "nullable": true

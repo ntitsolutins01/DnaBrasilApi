@@ -55,6 +55,7 @@ public class AlunoDto
     //public VocacionalDto? Vocacional { get; set; }
     public string? NomeFoto { get; set; }
     public byte[]? ByteImage { get; set; }
+    public byte[]? QrCode { get; set; }
     private class Mapping : Profile
     {
         public Mapping()

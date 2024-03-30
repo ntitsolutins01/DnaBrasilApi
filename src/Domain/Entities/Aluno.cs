@@ -17,6 +17,7 @@ public class Aluno : BaseAuditableEntity
     public string? Bairro { get; set; }
     public string? NomeFoto { get; set; }
     public byte[]? ByteImage { get; set; }
+    public byte[]? QrCode { get; set; }
     public bool Status { get; set; }
     public bool Habilitado { get; set; }
     public required string? Etnia { get; set; }

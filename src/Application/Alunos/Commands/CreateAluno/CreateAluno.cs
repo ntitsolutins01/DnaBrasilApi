@@ -33,6 +33,7 @@ public record CreateAlunoCommand : IRequest<int>
     public string? NomeResponsavel { get; init; }
     public string? NomeFoto { get; init; }
     public byte[]? ByteImage { get; init; }
+    public byte[]? QrCode { get; init; }
 }
 
 public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int>
@@ -109,6 +110,7 @@ public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int
             Bairro = request.Bairro,
             NomeFoto = request.NomeFoto,
             ByteImage = request.ByteImage,
+            QrCode = request.QrCode,
             Status = request.Status,
             Habilitado = request.Habilitado,
             Municipio = municipio!,

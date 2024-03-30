@@ -24,6 +24,7 @@ public record UpdateAlunoCommand : IRequest<bool>
     public string? RedeSocial { get; init; }
     public string? NomeFoto { get; init; }
     public byte[]? ByteImage { get; init; }
+    public byte[]? QrCode { get; set; }
     public bool Status { get; init; }
     public bool Habilitado { get; init; }
     public int? MunicipioId { get; init; }
@@ -108,14 +109,13 @@ public class UpdateAlunoCommandHandler : IRequestHandler<UpdateAlunoCommand, boo
         entity.Endereco = request.Endereco;
         entity.Numero = request.Numero;
         entity.Bairro = request.Bairro;
-        entity.NomeFoto = request.NomeFoto;
-        entity.ByteImage = request.ByteImage;
         entity.Status = request.Status;
         entity.Habilitado = request.Habilitado;
         //entity.Parceiro = parceiro;
         entity.Profissional = profissional;
         entity.NomeFoto = request.NomeFoto;
         entity.ByteImage = request.ByteImage;
+        entity.QrCode = request.QrCode;
 
 
         var result = await _context.SaveChangesAsync(cancellationToken);
