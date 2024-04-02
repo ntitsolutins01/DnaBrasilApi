@@ -26,7 +26,10 @@ public class Dashboards : EndpointGroupBase
             .MapPost(GetLaudosPeriodoByFilter, "LaudosPeriodo")
             .MapPost(GetStatusLaudosByFilter, "StatusLaudos")
             .MapPost(GetEvolutivoByFilter, "Evolutivo")
-            .MapPost(GetGraficosPizzaBarraByFilter,"GraficosPizzaBarra");
+            .MapPost(GetGraficosSaudeByFilter, "GraficosSaude")
+            .MapPost(GetGraficosEtniaByFilter, "GraficosEtnia")
+            .MapPost(GetGraficosDeficienciasByFilter, "GraficosDeficiencia")
+            .MapPost(GetGraficosTalentoByFilter,"GraficosTalento");
     }
 
     public async Task<DashboardDto> GetIndicadoresAlunosByFilter(ISender sender, [FromBody] DashboardDto dashboard)
@@ -85,22 +88,41 @@ public class Dashboards : EndpointGroupBase
 
         return await Task.FromResult(dashboard);
     }
-    public async Task<DashboardDto> GetGraficosPizzaBarraByFilter(ISender sender, [FromBody] DashboardDto dashboard)
+    public async Task<DashboardDto> GetGraficosTalentoByFilter(ISender sender, [FromBody] DashboardDto dashboard)
     {
-        dashboard.PercentualSaude = await sender.Send(new GetPercentualSaudeAlunosQuery() { SearchFilter = dashboard });
-        dashboard.ListTotalizadorSaudeSexo = await sender.Send(new GetTotalizadorSaudeSexoAlunosQuery() { SearchFilter = dashboard });
-
         dashboard.ListTotalizadorTalento =
             await sender.Send(new GetTotalizadorTalentoEsportivoAlunosQuery() { SearchFilter = dashboard });
 
         dashboard.ListTotalizadorDesempenho = 
             await sender.Send(new GetTotalizadorDesempenhoAlunosQuery() { SearchFilter = dashboard });
 
-        dashboard.ListTotalizadorDeficiencia = 
-            await sender.Send(new GetTotalizadorDeficienciaAlunosQuery() { SearchFilter = dashboard });
+        return await Task.FromResult(dashboard);
+    }
+    //public async Task<DashboardDto> GetGraficosSaudeBucalByFilter(ISender sender, [FromBody] DashboardDto dashboard)
+    //{
+    //    dashboard.PercentualSaude = await sender.Send(new GetPercentualSaudeAlunosQuery() { SearchFilter = dashboard });
+    //    dashboard.ListTotalizadorSaudeSexo = await sender.Send(new GetTotalizadorSaudeSexoAlunosQuery() { SearchFilter = dashboard });
 
+    //    return await Task.FromResult(dashboard);
+    //}
+    public async Task<DashboardDto> GetGraficosSaudeByFilter(ISender sender, [FromBody] DashboardDto dashboard)
+    {
+        dashboard.PercentualSaude = await sender.Send(new GetPercentualSaudeAlunosQuery() { SearchFilter = dashboard });
+        dashboard.ListTotalizadorSaudeSexo = await sender.Send(new GetTotalizadorSaudeSexoAlunosQuery() { SearchFilter = dashboard });
+
+        return await Task.FromResult(dashboard);
+    }
+    public async Task<DashboardDto> GetGraficosEtniaByFilter(ISender sender, [FromBody] DashboardDto dashboard)
+    {
         dashboard.ListTotalizadorEtnia =
             await sender.Send(new GetTotalizadorEtniaAlunosQuery() { SearchFilter = dashboard });
+
+        return await Task.FromResult(dashboard);
+    }
+    public async Task<DashboardDto> GetGraficosDeficienciasByFilter(ISender sender, [FromBody] DashboardDto dashboard)
+    {
+        dashboard.ListTotalizadorDeficiencia =
+            await sender.Send(new GetTotalizadorDeficienciaAlunosQuery() { SearchFilter = dashboard });
 
         return await Task.FromResult(dashboard);
     }

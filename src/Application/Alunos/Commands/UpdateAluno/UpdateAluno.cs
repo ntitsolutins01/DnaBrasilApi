@@ -96,29 +96,40 @@ public class UpdateAlunoCommandHandler : IRequestHandler<UpdateAlunoCommand, boo
             Guard.Against.NotFound((int)request.ProfissionalId, profissional);
         }
 
-        entity.AspNetUserId = request.AspNetUserId;
-        entity.Nome = request.Nome!;
-        entity.Email = request.Email!;
-        entity.Sexo = request.Sexo!;
-        entity.DtNascimento = DateTime.ParseExact(request.DtNascimento!, "dd/MM/yyyy", CultureInfo.CreateSpecificCulture("pt-BR")); ;
-        entity.NomeMae = request.NomeMae;
-        entity.NomePai = request.NomePai;
-        entity.Cpf = request.Cpf;
-        entity.Telefone = request.Telefone;
-        entity.Celular = request.Celular;
-        entity.Endereco = request.Endereco;
-        entity.Numero = request.Numero;
-        entity.Bairro = request.Bairro;
-        entity.Status = request.Status;
-        entity.Habilitado = request.Habilitado;
-        //entity.Parceiro = parceiro;
-        entity.Profissional = profissional;
-        entity.NomeFoto = request.NomeFoto;
-        entity.ByteImage = request.ByteImage;
-        entity.QrCode = request.QrCode;
+        int result;
+        if (request.QrCode!=null)
+        {
+            entity.QrCode = request.QrCode;
+            result = await _context.SaveChangesAsync(cancellationToken);
+
+            return result == 1;//true
+        }
+        else
+        {
+            entity.AspNetUserId = request.AspNetUserId;
+            entity.Nome = request.Nome!;
+            entity.Email = request.Email!;
+            entity.Sexo = request.Sexo!;
+            entity.DtNascimento = DateTime.ParseExact(request.DtNascimento!, "dd/MM/yyyy", CultureInfo.CreateSpecificCulture("pt-BR")); ;
+            entity.NomeMae = request.NomeMae;
+            entity.NomePai = request.NomePai;
+            entity.Cpf = request.Cpf;
+            entity.Telefone = request.Telefone;
+            entity.Celular = request.Celular;
+            entity.Endereco = request.Endereco;
+            entity.Numero = request.Numero;
+            entity.Bairro = request.Bairro;
+            entity.Status = request.Status;
+            entity.Habilitado = request.Habilitado;
+            //entity.Parceiro = parceiro;
+            entity.Profissional = profissional;
+            entity.NomeFoto = request.NomeFoto;
+            entity.ByteImage = request.ByteImage;
+            entity.QrCode = request.QrCode;
+        }
 
 
-        var result = await _context.SaveChangesAsync(cancellationToken);
+        result = await _context.SaveChangesAsync(cancellationToken);
 
         return result == 1;//true
     }
