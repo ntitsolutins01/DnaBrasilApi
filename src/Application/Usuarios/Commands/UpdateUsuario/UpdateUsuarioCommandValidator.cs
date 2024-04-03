@@ -10,8 +10,5 @@ public class UpdateUsuarioCommandValidator : AbstractValidator<UpdateUsuarioComm
         RuleFor(v => v.Email)
             .MaximumLength(100)
             .NotNull().NotEmpty();
-
-        RuleFor(v => v.Status)
-            .NotNull().NotEmpty();
     }
 }

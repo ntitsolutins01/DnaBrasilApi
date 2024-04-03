@@ -15,13 +15,11 @@ public class UsuarioDto
     public bool? Status { get; set; } = true;
     public string? MunicipioEstado { get; init; }
     public string? MunicipioId { get; init; }
-    public string? Localidade { get; init; }
     private class Mapping : Profile
     {
         public Mapping()
         {
             CreateMap<Usuario, UsuarioDto>()
-                .ForMember(dest => dest.Localidade, opt => opt.MapFrom(src => src.Localidade!.Nome!.ToString()))
                 .ForMember(dest => dest.MunicipioId, opt => opt.MapFrom(src => src.Municipio!.Id.ToString()))
                 .ForMember(dest => dest.MunicipioEstado, opt => opt.MapFrom(src => src.Municipio!.Nome!.ToString() + " / " + src.Municipio!.Estado!.Sigla!.ToString()));
         }

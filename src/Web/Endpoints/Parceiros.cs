@@ -3,6 +3,7 @@ using DnaBrasilApi.Application.Parceiros.Commands.DeleteParceiro;
 using DnaBrasilApi.Application.Parceiros.Commands.UpdateParceiro;
 using DnaBrasilApi.Application.Parceiros.Queries;
 using DnaBrasilApi.Application.Parceiros.Queries.GetParceiroAll;
+using DnaBrasilApi.Application.Parceiros.Queries.GetParceiroByAspNetUserId;
 using DnaBrasilApi.Application.Parceiros.Queries.GetParceiroById;
 
 namespace DnaBrasilApi.Web.Endpoints;
@@ -17,7 +18,8 @@ public class Parceiros : EndpointGroupBase
             .MapPost(CreateParceiro)
             .MapPut(UpdateParceiro, "{id}")
             .MapDelete(DeleteParceiro, "{id}")
-            .MapGet(GetParceiroById, "Parceiro/{id}");
+            .MapGet(GetParceiroById, "Parceiro/{id}")
+            .MapGet(GetParceiroByAspNetUserId, "Parceiro/AspNetUser/{id}");
     }
 
     public async Task<List<ParceiroDto>> GetParceirosAll(ISender sender)
@@ -28,6 +30,11 @@ public class Parceiros : EndpointGroupBase
     public async Task<ParceiroDto> GetParceiroById(ISender sender, int id)
     {
         return await sender.Send(new GetParceiroByIdQuery() { Id = id });
+    }
+
+    public async Task<ParceiroDto> GetParceiroByAspNetUserId(ISender sender, string aspNetUserId)
+    {
+        return await sender.Send(new GetParceiroByAspNetUserIdQuery() { AspNetUserId = aspNetUserId });
     }
 
     public async Task<int> CreateParceiro(ISender sender, CreateParceiroCommand command)

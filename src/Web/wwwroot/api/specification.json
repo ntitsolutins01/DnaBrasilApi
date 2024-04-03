@@ -3040,6 +3040,38 @@
         }
       }
     },
+    "/api/Parceiros/Parceiro/AspNetUser": {
+      "get": {
+        "tags": [
+          "Parceiros"
+        ],
+        "operationId": "GetParceiroByAspNetUserId",
+        "parameters": [
+          {
+            "name": "aspNetUserId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ParceiroDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/TipoParcerias": {
       "get": {
         "tags": [
@@ -11768,10 +11800,6 @@
           "municipioId": {
             "type": "string",
             "nullable": true
-          },
-          "localidade": {
-            "type": "string",
-            "nullable": true
           }
         }
       },
@@ -11804,10 +11832,6 @@
           "municipioId": {
             "type": "integer",
             "format": "int32"
-          },
-          "localidadeId": {
-            "type": "integer",
-            "format": "int32"
           }
         }
       },
@@ -11816,13 +11840,18 @@
         "additionalProperties": false,
         "required": [
           "nome",
-          "email",
-          "status"
+          "email"
         ],
         "properties": {
           "id": {
             "type": "integer",
             "format": "int32"
+          },
+          "status": {
+            "type": "boolean"
+          },
+          "aspNetUserId": {
+            "type": "string"
           },
           "nome": {
             "type": "string",
@@ -11830,23 +11859,28 @@
             "minLength": 1,
             "nullable": false
           },
+          "tipoPessoa": {
+            "type": "string"
+          },
+          "cpfCnpj": {
+            "type": "string"
+          },
           "email": {
             "type": "string",
             "maxLength": 100,
             "minLength": 1,
             "nullable": false
           },
+          "aspNetRoleId": {
+            "type": "string"
+          },
           "perfilId": {
             "type": "integer",
             "format": "int32"
           },
-          "status": {
-            "type": "boolean",
-            "minLength": 1,
-            "nullable": false
-          },
-          "aspNetRoleId": {
-            "type": "string"
+          "municipioId": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },

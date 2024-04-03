@@ -11,5 +11,4 @@ public class Usuario : BaseAuditableEntity
     public required Perfil Perfil { get; set; }
     public bool? Status { get; set; } = true;
     public Municipio? Municipio { get; set; }
-    public Localidade? Localidade { get; set; }
 }
