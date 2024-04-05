@@ -261,6 +261,51 @@
         }
       }
     },
+    "/api/Alunos/UploadFoto/{id}": {
+      "put": {
+        "tags": [
+          "Alunos"
+        ],
+        "operationId": "UpdateAlunoFoto",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAlunoFotoCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Alunos/Modalidades": {
       "put": {
         "tags": [
@@ -2215,6 +2260,168 @@
                   "items": {
                     "$ref": "#/components/schemas/LaudoDto"
                   }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/LinhasAcoes": {
+      "get": {
+        "tags": [
+          "LinhasAcoes"
+        ],
+        "operationId": "GetLinhasAcoesAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LinhaAcaoDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "LinhasAcoes"
+        ],
+        "operationId": "CreateLinhaAcao",
+        "requestBody": {
+          "x-name": "command",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateLinhaAcaoCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/LinhasAcoes/{id}": {
+      "put": {
+        "tags": [
+          "LinhasAcoes"
+        ],
+        "operationId": "UpdateLinhaAcao",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateLinhaAcaoCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "LinhasAcoes"
+        ],
+        "operationId": "DeleteLinhaAcao",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/LinhasAcoes/LinhaAcao/{id}": {
+      "get": {
+        "tags": [
+          "LinhasAcoes"
+        ],
+        "operationId": "GetLinhaAcaoById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LinhaAcaoDto"
                 }
               }
             }
@@ -6214,6 +6421,14 @@
             "type": "string",
             "nullable": true
           },
+          "saude": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/SaudeDto"
+              }
+            ]
+          },
           "nomeFoto": {
             "type": "string",
             "nullable": true
@@ -6226,6 +6441,10 @@
           "qrCode": {
             "type": "string",
             "format": "byte",
+            "nullable": true
+          },
+          "modalidadeLinhaAcao": {
+            "type": "string",
             "nullable": true
           }
         }
@@ -6371,6 +6590,46 @@
             "nullable": true
           },
           "nomeEstado": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "SaudeDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "profissionalId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeProfissional": {
+            "type": "string",
+            "nullable": true
+          },
+          "altura": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "massa": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "envergadura": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "dataRealizacaoTeste": {
+            "type": "string",
+            "nullable": true
+          },
+          "imc": {
             "type": "string",
             "nullable": true
           }
@@ -6618,6 +6877,25 @@
           }
         }
       },
+      "UpdateAlunoFotoCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeFoto": {
+            "type": "string",
+            "nullable": true
+          },
+          "byteImage": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          }
+        }
+      },
       "UpdateAlunoModalidadesCommand": {
         "type": "object",
         "additionalProperties": false,
@@ -6737,6 +7015,14 @@
                 "items": {
                   "$ref": "#/components/schemas/Aluno"
                 }
+              },
+              "linhaAcao": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/LinhaAcao"
+                  }
+                ]
               },
               "profissionais": {
                 "type": "array",
@@ -6938,6 +7224,10 @@
                     "$ref": "#/components/schemas/Vocacional"
                   }
                 ]
+              },
+              "modalidadeLinhaAcao": {
+                "type": "string",
+                "nullable": true
               }
             }
           }
@@ -7725,6 +8015,25 @@
           }
         ]
       },
+      "LinhaAcao": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "nome": {
+                "type": "string"
+              },
+              "status": {
+                "type": "boolean"
+              }
+            }
+          }
+        ]
+      },
       "AlunosFilterDto": {
         "type": "object",
         "additionalProperties": false,
@@ -8085,6 +8394,31 @@
           "alturaFim": {
             "type": "integer",
             "format": "int32"
+          },
+          "status": {
+            "type": "boolean"
+          },
+          "linhaAcao": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/LinhaAcaoDto"
+              }
+            ]
+          }
+        }
+      },
+      "LinhaAcaoDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true
           },
           "status": {
             "type": "boolean"
@@ -9475,68 +9809,42 @@
           "statusLaudo": {
             "type": "string",
             "nullable": true
-          },
-          "statusLaudosDashboard": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/StatusLaudosFinalizadaAndamentos"
-              }
-            ]
           }
         }
       },
-      "StatusLaudosFinalizadaAndamentos": {
+      "CreateLinhaAcaoCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "nome"
+        ],
+        "properties": {
+          "nome": {
+            "type": "string",
+            "maxLength": 300,
+            "minLength": 1,
+            "nullable": false
+          },
+          "status": {
+            "type": "boolean"
+          }
+        }
+      },
+      "UpdateLinhaAcaoCommand": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "totTalentoEsportivoFinalizado": {
+          "id": {
             "type": "integer",
             "format": "int32"
           },
-          "totTalentoEsportivoAndamento": {
-            "type": "integer",
-            "format": "int32"
+          "nome": {
+            "type": "string",
+            "maxLength": 300,
+            "minLength": 0
           },
-          "totSaudeFinalizado": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "totSaudeAndamento": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "totQualidadeDeVidaFinalizado": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "totQualidadeDeVidaAndamento": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "totVocacionalFinalizado": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "totVocacionalAndamento": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "totConsumoAlimentarFinalizado": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "totConsumoAlimentarAndamento": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "totSaudeBucalFinalizado": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "totSaudeBucalAndamento": {
-            "type": "integer",
-            "format": "int32"
+          "status": {
+            "type": "boolean"
           }
         }
       },
@@ -9918,6 +10226,11 @@
           },
           "status": {
             "type": "boolean"
+          },
+          "linhaAcaoId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
           }
         }
       },
@@ -10020,6 +10333,11 @@
           },
           "status": {
             "type": "boolean"
+          },
+          "linhaAcaoId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
           }
         }
       },

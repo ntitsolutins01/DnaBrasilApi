@@ -50,12 +50,13 @@ public class AlunoDto
     public string? MunicipioEstado { get; set; }
     public string? Controle { get; set; }
     public string? Estado { get; set; }
-    //public SaudeDto? Saude { get; set; }
+    public SaudeDto? Saude { get; set; }
     //public TalentoEsportivoDto? TalentoEsportivo { get; set; }
     //public VocacionalDto? Vocacional { get; set; }
     public string? NomeFoto { get; set; }
     public byte[]? ByteImage { get; set; }
     public byte[]? QrCode { get; set; }
+    public string? ModalidadeLinhaAcao { get; set; }
     private class Mapping : Profile
     {
         public Mapping()

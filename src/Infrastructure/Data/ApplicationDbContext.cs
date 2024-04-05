@@ -47,6 +47,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<TextoLaudo> TextosLaudos => Set<TextoLaudo>();
     public DbSet<ControlePresenca> ControlesPresencas => Set<ControlePresenca>();
     public DbSet<MetricaImc> MetricasImc => Set<MetricaImc>();
+    public DbSet<LinhaAcao> LinhasAcoes => Set<LinhaAcao>();
 
 
     protected override void OnModelCreating(ModelBuilder builder)

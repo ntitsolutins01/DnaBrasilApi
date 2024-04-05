@@ -55,9 +55,9 @@ public class UpdateAlunoCommandHandler : IRequestHandler<UpdateAlunoCommand, boo
         if (request.QrCode!=null)
         {
             entity.QrCode = request.QrCode;
-            result = await _context.SaveChangesAsync(cancellationToken);
+            //result = await _context.SaveChangesAsync(cancellationToken);
 
-            return result == 1;//true
+            //return result == 1;//true
         }
         else
         {

@@ -2,6 +2,7 @@
 using DnaBrasilApi.Application.Alunos.Commands.CreateVoucher;
 using DnaBrasilApi.Application.Alunos.Commands.DeleteAluno;
 using DnaBrasilApi.Application.Alunos.Commands.UpdateAluno;
+using DnaBrasilApi.Application.Alunos.Commands.UpdateAlunoFoto;
 using DnaBrasilApi.Application.Alunos.Commands.UpdateAlunoModalidades;
 using DnaBrasilApi.Application.Alunos.Commands.UpdateVoucher;
 using DnaBrasilApi.Application.Alunos.Queries;
@@ -28,6 +29,7 @@ public class Alunos : EndpointGroupBase
             .MapGet(GetAlunosAll)
             .MapPost(CreateAluno)
             .MapPut(UpdateAluno, "{id}")
+            .MapPut(UpdateAlunoFoto, "/UploadFoto/{id}")
             .MapPut(UpdateAlunoModalidades, "/Modalidades")
             .MapDelete(DeleteAluno, "{id}")
             .MapPost(GetAlunosByFilter, "Filter");
@@ -59,6 +61,13 @@ public class Alunos : EndpointGroupBase
     }
 
     public async Task<bool> UpdateAluno(ISender sender, int id, UpdateAlunoCommand command)
+    {
+        if (id != command.Id) return false;
+        var result = await sender.Send(command);
+        return result;
+    }
+
+    public async Task<bool> UpdateAlunoFoto(ISender sender, int id, UpdateAlunoFotoCommand command)
     {
         if (id != command.Id) return false;
         var result = await sender.Send(command);

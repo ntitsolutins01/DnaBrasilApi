@@ -40,6 +40,7 @@ public interface IApplicationDbContext
     DbSet<TextoLaudo> TextosLaudos { get; }
     DbSet<ControlePresenca> ControlesPresencas { get; }
     DbSet<MetricaImc> MetricasImc { get; }
+    DbSet<LinhaAcao> LinhasAcoes { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

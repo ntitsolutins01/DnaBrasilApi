@@ -18,30 +18,13 @@ public class LaudoDto
     public string? Localidade { get; init; }
     public string? Encaminhamento { get; init; }
     public string? StatusLaudo { get; set; }
-    public StatusLaudosFinalizadaAndamentos? StatusLaudosDashboard { get; set; }
-
-    public class StatusLaudosFinalizadaAndamentos
-    {
-        public int totTalentoEsportivoFinalizado { get; set; }
-        public int totTalentoEsportivoAndamento { get; set; }
-        public int totSaudeFinalizado { get; set; }
-        public int totSaudeAndamento { get; set; }
-        public int totQualidadeDeVidaFinalizado { get; set; }
-        public int totQualidadeDeVidaAndamento { get; set; }
-        public int totVocacionalFinalizado { get; set; }
-        public int totVocacionalAndamento { get; set; }
-        public int totConsumoAlimentarFinalizado { get; set; }
-        public int totConsumoAlimentarAndamento { get; set; }
-        public int totSaudeBucalFinalizado { get; set; }
-        public int totSaudeBucalAndamento { get; set; }
-    }
 
     private class Mapping : Profile
     {
         public Mapping()
         {
             CreateMap<Laudo, LaudoDto>()
-                .ForMember(dest => dest.TalentoEsportivoId, opt => opt.MapFrom(src => src.TalentoEsportivo!.Id))
+                .ForMember(dest => dest.Encaminhamento, opt => opt.MapFrom(src => src.Modalidade!.Nome))
                 .ForMember(dest => dest.VocacionalId, opt => opt.MapFrom(src => src.Vocacional!.Id))
                 .ForMember(dest => dest.QualidadeDeVidaId, opt => opt.MapFrom(src => src.QualidadeDeVida!.Id))
                 .ForMember(dest => dest.SaudeId, opt => opt.MapFrom(src => src.Saude!.Id))
