@@ -6331,6 +6331,10 @@
             "type": "string",
             "nullable": true
           },
+          "celular": {
+            "type": "string",
+            "nullable": true
+          },
           "url": {
             "type": "string",
             "nullable": true
