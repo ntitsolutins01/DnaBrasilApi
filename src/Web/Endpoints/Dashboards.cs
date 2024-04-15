@@ -8,6 +8,7 @@ using DnaBrasilApi.Application.Dashboards.Queries.GetStatusLaudosAll;
 using DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorDeficienciaAlunos;
 using DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorDesempenhoAlunos;
 using DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorEtniaAlunos;
+using DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorSaudeBucalAlunos;
 using DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorSaudeSexoAlunos;
 using DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorTalentoEsportivoAlunos;
 using Microsoft.AspNetCore.Mvc;
@@ -28,6 +29,7 @@ public class Dashboards : EndpointGroupBase
             .MapPost(GetEvolutivoByFilter, "Evolutivo")
             .MapPost(GetGraficosSaudeByFilter, "GraficosSaude")
             .MapPost(GetGraficosEtniaByFilter, "GraficosEtnia")
+            .MapPost(GetGraficosSaudeBucalByFilter, "GraficosSaudeBucal")
             .MapPost(GetGraficosDeficienciasByFilter, "GraficosDeficiencia")
             .MapPost(GetGraficosTalentoByFilter,"GraficosTalento");
     }
@@ -98,13 +100,13 @@ public class Dashboards : EndpointGroupBase
 
         return await Task.FromResult(dashboard);
     }
-    //public async Task<DashboardDto> GetGraficosSaudeBucalByFilter(ISender sender, [FromBody] DashboardDto dashboard)
-    //{
-    //    dashboard.PercentualSaude = await sender.Send(new GetPercentualSaudeAlunosQuery() { SearchFilter = dashboard });
-    //    dashboard.ListTotalizadorSaudeSexo = await sender.Send(new GetTotalizadorSaudeSexoAlunosQuery() { SearchFilter = dashboard });
+    public async Task<DashboardDto> GetGraficosSaudeBucalByFilter(ISender sender, [FromBody] DashboardDto dashboard)
+    {
+        dashboard.ListTotalizadorSaudeBucal =
+            await sender.Send(new GetTotalizadorSaudeBucalAlunosQuery() { SearchFilter = dashboard });
 
-    //    return await Task.FromResult(dashboard);
-    //}
+        return await Task.FromResult(dashboard);
+    }
     public async Task<DashboardDto> GetGraficosSaudeByFilter(ISender sender, [FromBody] DashboardDto dashboard)
     {
         dashboard.PercentualSaude = await sender.Send(new GetPercentualSaudeAlunosQuery() { SearchFilter = dashboard });

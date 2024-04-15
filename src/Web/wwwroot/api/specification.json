@@ -1440,6 +1440,39 @@
         }
       }
     },
+    "/api/Dashboards/GraficosSaudeBucal": {
+      "post": {
+        "tags": [
+          "Dashboards"
+        ],
+        "operationId": "GetGraficosSaudeBucalByFilter",
+        "requestBody": {
+          "x-name": "dashboard",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DashboardDto"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DashboardDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Dashboards/GraficosDeficiencia": {
       "post": {
         "tags": [
@@ -6738,8 +6771,9 @@
           "etnia": {
             "type": "string"
           },
-          "areasDesejadas": {
-            "type": "string",
+          "linhaAcaoId": {
+            "type": "integer",
+            "format": "int32",
             "nullable": true
           },
           "nomeResponsavel": {
@@ -7194,9 +7228,13 @@
                 "type": "string",
                 "nullable": true
               },
-              "areasDesejadas": {
-                "type": "string",
-                "nullable": true
+              "linhaAcao": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/LinhaAcao"
+                  }
+                ]
               },
               "qualidadeDeVidas": {
                 "type": "array",
@@ -7228,10 +7266,6 @@
                     "$ref": "#/components/schemas/Vocacional"
                   }
                 ]
-              },
-              "modalidadeLinhaAcao": {
-                "type": "string",
-                "nullable": true
               }
             }
           }
@@ -7768,6 +7802,25 @@
           }
         ]
       },
+      "LinhaAcao": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "nome": {
+                "type": "string"
+              },
+              "status": {
+                "type": "boolean"
+              }
+            }
+          }
+        ]
+      },
       "QualidadeDeVida": {
         "allOf": [
           {
@@ -8014,25 +8067,6 @@
               "statusVocacionais": {
                 "type": "string",
                 "nullable": true
-              }
-            }
-          }
-        ]
-      },
-      "LinhaAcao": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BaseAuditableEntity"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "nome": {
-                "type": "string"
-              },
-              "status": {
-                "type": "boolean"
               }
             }
           }
@@ -8971,6 +9005,14 @@
               }
             ]
           },
+          "listTotalizadorSaudeBucal": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/TotalizadorSaudeBucalDto"
+              }
+            ]
+          },
           "sexo": {
             "type": "string",
             "nullable": true
@@ -9254,6 +9296,52 @@
             }
           },
           "percDeficiencia": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "number",
+              "format": "decimal"
+            }
+          }
+        }
+      },
+      "TotalizadorSaudeBucalDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "percTotalizadorSaudeBucalMasculino": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "number",
+              "format": "decimal"
+            }
+          },
+          "percTotalizadorSaudeBucalFeminino": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "number",
+              "format": "decimal"
+            }
+          },
+          "valorTotalizadorSaudeBucalMasculino": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "number",
+              "format": "decimal"
+            }
+          },
+          "valorTotalizadorSaudeBucalFeminino": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "number",
+              "format": "decimal"
+            }
+          },
+          "percSaudeBucal": {
             "type": "object",
             "nullable": true,
             "additionalProperties": {
@@ -11463,8 +11551,7 @@
         "properties": {
           "tipoLaudoId": {
             "type": "integer",
-            "format": "int32",
-            "nullable": true
+            "format": "int32"
           },
           "idade": {
             "type": "integer",
@@ -11480,28 +11567,27 @@
           "classificacao": {
             "type": "string",
             "maxLength": 100,
-            "minLength": 0,
-            "nullable": true
+            "minLength": 0
           },
           "pontoInicial": {
             "type": "number",
-            "format": "decimal"
+            "format": "decimal",
+            "nullable": true
           },
           "pontoFinal": {
             "type": "number",
-            "format": "decimal"
+            "format": "decimal",
+            "nullable": true
           },
           "aviso": {
             "type": "string",
             "maxLength": 100,
-            "minLength": 0,
-            "nullable": true
+            "minLength": 0
           },
           "texto": {
             "type": "string",
             "maxLength": 500,
-            "minLength": 0,
-            "nullable": true
+            "minLength": 0
           },
           "status": {
             "type": "boolean"
@@ -11518,8 +11604,7 @@
           },
           "tipoLaudoId": {
             "type": "integer",
-            "format": "int32",
-            "nullable": true
+            "format": "int32"
           },
           "idade": {
             "type": "integer",
@@ -11535,28 +11620,27 @@
           "classificacao": {
             "type": "string",
             "maxLength": 100,
-            "minLength": 0,
-            "nullable": true
+            "minLength": 0
           },
           "pontoInicial": {
             "type": "number",
-            "format": "decimal"
+            "format": "decimal",
+            "nullable": true
           },
           "pontoFinal": {
             "type": "number",
-            "format": "decimal"
+            "format": "decimal",
+            "nullable": true
           },
           "aviso": {
             "type": "string",
             "maxLength": 100,
-            "minLength": 0,
-            "nullable": true
+            "minLength": 0
           },
           "texto": {
             "type": "string",
             "maxLength": 500,
-            "minLength": 0,
-            "nullable": true
+            "minLength": 0
           },
           "status": {
             "type": "boolean"

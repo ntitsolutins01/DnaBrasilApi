@@ -34,10 +34,9 @@ public class Aluno : BaseAuditableEntity
     //public Dependencia? Dependencia { get; set; }
     public Profissional? Profissional { get; set; }
     public string? NomeResponsavel { get; set; }
-    public string? AreasDesejadas { get; set; }
+    public LinhaAcao? LinhaAcao { get; set; }
     public List<QualidadeDeVida>? QualidadeDeVidas { get; set; }
     public Saude? Saude { get; set; }
     public TalentoEsportivo? TalentoEsportivo { get; set; }
     public Vocacional? Vocacional { get; set; }
-    public string? ModalidadeLinhaAcao { get; set; }
 }

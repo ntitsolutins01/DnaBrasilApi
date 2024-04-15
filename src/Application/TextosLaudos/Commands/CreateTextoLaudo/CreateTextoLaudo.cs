@@ -5,14 +5,14 @@ namespace DnaBrasilApi.Application.TextosLaudos.Commands.CreateTextoLaudo;
 
 public record CreateTextoLaudoCommand : IRequest<int>
 {
-    public int? TipoLaudoId{ get; init; }
+    public required int TipoLaudoId{ get; init; }
     public int? Idade { get; init; }
     public string? Sexo { get; init; }
-    public string? Classificacao{ get; init; }
-    public decimal PontoInicial{ get; init; }
-    public decimal PontoFinal { get; init; }
-    public string? Aviso { get; init; }
-    public string? Texto { get; init; }
+    public required string Classificacao{ get; init; }
+    public decimal? PontoInicial{ get; init; }
+    public decimal? PontoFinal { get; init; }
+    public required string Aviso { get; init; }
+    public required string Texto { get; init; }
     public bool Status { get; init; } = true;
 }
 

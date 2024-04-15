@@ -29,7 +29,7 @@ public record CreateAlunoCommand : IRequest<int>
     public int? ProfissionalId { get; init; }
     public int? DeficienciaId { get; init; }
     public required string Etnia { get; init; }
-    public string? AreasDesejadas { get; init; }
+    public int? LinhaAcaoId { get; init; }
     public string? NomeResponsavel { get; init; }
     public string? NomeFoto { get; init; }
     public byte[]? ByteImage { get; init; }
@@ -92,6 +92,15 @@ public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int
             Guard.Against.NotFound((int)request.ProfissionalId, profissional);
         }
 
+        LinhaAcao? linhaAcao = null;
+
+        if (request.LinhaAcaoId != null)
+        {
+            linhaAcao = await _context.LinhasAcoes.FindAsync(new object[] { request.LinhaAcaoId }, cancellationToken);
+
+            Guard.Against.NotFound((int)request.LinhaAcaoId, profissional);
+        }
+
         var entity = new Aluno
         {
             AspNetUserId = request.AspNetUserId,
@@ -116,7 +125,7 @@ public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int
             Municipio = municipio!,
             Localidade = localidade!,
             Deficiencia = deficiencia,
-            AreasDesejadas = request.AreasDesejadas,
+            LinhaAcao = linhaAcao,
             NomeResponsavel = request.NomeResponsavel,
             Profissional = profissional
         };

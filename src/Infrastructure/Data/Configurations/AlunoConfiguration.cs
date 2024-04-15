@@ -39,9 +39,5 @@ internal class AlunoConfiguration : IEntityTypeConfiguration<Aluno>
             .IsRequired();
         builder.Property(t => t.NomeResponsavel)
             .HasMaxLength(150);
-        builder.Property(t => t.ModalidadeLinhaAcao)
-            .HasMaxLength(150);
-        builder.Property(t => t.AreasDesejadas)
-            .HasMaxLength(10);
     }
 }

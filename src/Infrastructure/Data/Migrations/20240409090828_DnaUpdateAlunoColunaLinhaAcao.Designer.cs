@@ -4,6 +4,7 @@ using DnaBrasilApi.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DnaBrasilApi.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240409090828_DnaUpdateAlunoColunaLinhaAcao")]
+    partial class DnaUpdateAlunoColunaLinhaAcao
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1659,14 +1662,12 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Aviso")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Classificacao")
-                        .IsRequired()
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<DateTimeOffset>("Created")
                         .HasColumnType("datetimeoffset");
@@ -1683,11 +1684,11 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal?>("PontoFinal")
+                    b.Property<decimal>("PontoFinal")
                         .HasPrecision(10, 2)
                         .HasColumnType("decimal(10,2)");
 
-                    b.Property<decimal?>("PontoInicial")
+                    b.Property<decimal>("PontoInicial")
                         .HasPrecision(10, 2)
                         .HasColumnType("decimal(10,2)");
 
@@ -1698,10 +1699,10 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Texto")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
-                    b.Property<int>("TipoLaudoId")
+                    b.Property<int?>("TipoLaudoId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -2621,9 +2622,7 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                 {
                     b.HasOne("DnaBrasilApi.Domain.Entities.TipoLaudo", "TipoLaudo")
                         .WithMany()
-                        .HasForeignKey("TipoLaudoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TipoLaudoId");
 
                     b.Navigation("TipoLaudo");
                 });

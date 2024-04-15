@@ -75,18 +75,18 @@ public class GetTotalizadorEtniaAlunosQueryHandler : IRequestHandler<GetTotaliza
 
         Dictionary<string, decimal> dict = new()
         {
-            { "PARDO", 0 }, { "BRANCO", 0 }, { "PRETO", 0 }, { "INDÍGENA", 0 },{ "AMARELO", 0 }
+            { "PARDO", 0 }, { "BRANCO", 0 }, { "PRETO", 0 }, { "INDIGENA", 0 },{ "AMARELO", 0 }
         };
         Dictionary<string, decimal> dictTotalizadorEtniaMasculino = new()
         {
-            { "PARDO", 0 }, { "BRANCO", 0 }, { "PRETO", 0 }, { "INDÍGENA", 0 },{ "AMARELO", 0 }
+            { "PARDO", 0 }, { "BRANCO", 0 }, { "PRETO", 0 }, { "INDIGENA", 0 },{ "AMARELO", 0 }
         };
         Dictionary<string, decimal> dictTotalizadorEtniaFeminino = new()
         {
-            { "PARDO", 0 }, { "BRANCO", 0 }, { "PRETO", 0 }, { "INDÍGENA", 0 },{ "AMARELO", 0 }
+            { "PARDO", 0 }, { "BRANCO", 0 }, { "PRETO", 0 }, { "INDIGENA", 0 },{ "AMARELO", 0 }
         };
 
-        foreach (Aluno aluno in alunos.Where(x => x.Etnia != "0"))
+        foreach (Aluno aluno in alunos)
         {
             var value = dict[aluno.Etnia!];
 
@@ -139,18 +139,18 @@ public class GetTotalizadorEtniaAlunosQueryHandler : IRequestHandler<GetTotaliza
                         dictTotalizadorEtniaFeminino["PRETO"] = pretoFem;
                     }
                     break;
-                case "INDÍGENA":
+                case "INDIGENA":
                     if (aluno.Sexo.Equals("M"))
                     {
-                        var indigenaMasc = dictTotalizadorEtniaMasculino["INDÍGENA"];
+                        var indigenaMasc = dictTotalizadorEtniaMasculino["INDIGENA"];
                         indigenaMasc += 1;
-                        dictTotalizadorEtniaMasculino["INDÍGENA"] = indigenaMasc;
+                        dictTotalizadorEtniaMasculino["INDIGENA"] = indigenaMasc;
                     }
                     else
                     {
-                        var indigenaFem = dictTotalizadorEtniaFeminino["INDÍGENA"];
+                        var indigenaFem = dictTotalizadorEtniaFeminino["INDIGENA"];
                         indigenaFem += 1;
-                        dictTotalizadorEtniaFeminino["INDÍGENA"] = indigenaFem;
+                        dictTotalizadorEtniaFeminino["INDIGENA"] = indigenaFem;
                     }
                     break;
                 case "AMARELO":
@@ -167,21 +167,6 @@ public class GetTotalizadorEtniaAlunosQueryHandler : IRequestHandler<GetTotaliza
                         dictTotalizadorEtniaFeminino["AMARELO"] = amareloFem;
                     }
                     break;
-                default:
-                    if (aluno.Sexo.Equals("M"))
-                    {
-                        var amareloMasc = dictTotalizadorEtniaMasculino["AMARELO"];
-                        amareloMasc += 1;
-                        dictTotalizadorEtniaMasculino["AMARELO"] = amareloMasc;
-                    }
-                    else
-                    {
-                        var amareloFem = dictTotalizadorEtniaFeminino["AMARELO"];
-                        amareloFem += 1;
-                        dictTotalizadorEtniaFeminino["AMARELO"] = amareloFem;
-                    }
-                    break;
-
             }
         }
 
