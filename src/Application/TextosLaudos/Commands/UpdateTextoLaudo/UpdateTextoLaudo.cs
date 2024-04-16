@@ -5,7 +5,6 @@ namespace DnaBrasilApi.Application.TextosLaudos.Commands.UpdateTextoLaudo;
 public record UpdateTextoLaudoCommand : IRequest<bool>
 {
     public int Id { get; init; }
-    public required int TipoLaudoId { get; init; }
     public int? Idade { get; init; }
     public string? Sexo { get; init; }
     public required string Classificacao { get; init; }

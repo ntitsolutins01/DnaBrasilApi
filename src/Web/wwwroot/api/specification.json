@@ -11602,10 +11602,6 @@
             "type": "integer",
             "format": "int32"
           },
-          "tipoLaudoId": {
-            "type": "integer",
-            "format": "int32"
-          },
           "idade": {
             "type": "integer",
             "format": "int32",
