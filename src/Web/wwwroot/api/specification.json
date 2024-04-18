@@ -6491,14 +6491,6 @@
             "type": "string",
             "nullable": true
           },
-          "saude": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/SaudeDto"
-              }
-            ]
-          },
           "nomeFoto": {
             "type": "string",
             "nullable": true
@@ -6660,46 +6652,6 @@
             "nullable": true
           },
           "nomeEstado": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
-      "SaudeDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "profissionalId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nomeProfissional": {
-            "type": "string",
-            "nullable": true
-          },
-          "altura": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "massa": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "envergadura": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "dataRealizacaoTeste": {
-            "type": "string",
-            "nullable": true
-          },
-          "imc": {
             "type": "string",
             "nullable": true
           }
@@ -7275,14 +7227,6 @@
                 "items": {
                   "$ref": "#/components/schemas/QualidadeDeVida"
                 }
-              },
-              "saude": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/Saude"
-                  }
-                ]
               },
               "vocacional": {
                 "nullable": true,
@@ -7995,46 +7939,6 @@
           }
         ]
       },
-      "Saude": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BaseAuditableEntity"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "profissional": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/Profissional"
-                  }
-                ]
-              },
-              "altura": {
-                "type": "integer",
-                "format": "int32",
-                "nullable": true
-              },
-              "massa": {
-                "type": "integer",
-                "format": "int32",
-                "nullable": true
-              },
-              "envergadura": {
-                "type": "integer",
-                "format": "int32",
-                "nullable": true
-              },
-              "statusSaude": {
-                "type": "string",
-                "nullable": true
-              }
-            }
-          }
-        ]
-      },
       "Vocacional": {
         "allOf": [
           {
@@ -8213,6 +8117,54 @@
                 "nullable": true
               },
               "statusTalentosEsportivos": {
+                "type": "string",
+                "nullable": true
+              },
+              "aluno": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Aluno"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "Saude": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "profissional": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Profissional"
+                  }
+                ]
+              },
+              "altura": {
+                "type": "integer",
+                "format": "int32",
+                "nullable": true
+              },
+              "massa": {
+                "type": "integer",
+                "format": "int32",
+                "nullable": true
+              },
+              "envergadura": {
+                "type": "integer",
+                "format": "int32",
+                "nullable": true
+              },
+              "statusSaude": {
                 "type": "string",
                 "nullable": true
               },
@@ -10144,6 +10096,14 @@
           "dtNascimento": {
             "type": "string",
             "format": "date-time"
+          },
+          "saude": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/SaudeDto"
+              }
+            ]
           }
         }
       },
@@ -10215,6 +10175,50 @@
           "envergadura": {
             "type": "number",
             "format": "decimal",
+            "nullable": true
+          },
+          "alunoId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "SaudeDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "profissionalId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeProfissional": {
+            "type": "string",
+            "nullable": true
+          },
+          "altura": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "massa": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "envergadura": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "dataRealizacaoTeste": {
+            "type": "string",
+            "nullable": true
+          },
+          "imc": {
+            "type": "string",
             "nullable": true
           },
           "alunoId": {

@@ -36,7 +36,6 @@ public class Aluno : BaseAuditableEntity
     public string? NomeResponsavel { get; set; }
     public LinhaAcao? LinhaAcao { get; set; }
     public List<QualidadeDeVida>? QualidadeDeVidas { get; set; }
-    public Saude? Saude { get; set; }
     public Vocacional? Vocacional { get; set; }
     public List<Laudo>? Laudos { get; set; }
 }

@@ -21,7 +21,6 @@ public class GetAlunoByIdQueryHandler : IRequestHandler<GetAlunoByIdQuery, Aluno
     public async Task<AlunoDto> Handle(GetAlunoByIdQuery request, CancellationToken cancellationToken)
     {
         var result = await _context.Alunos
-            .Include(i=>i.Saude)
             .Where(x => x.Id == request.Id)
             .AsNoTracking()
             .ProjectTo<AlunoDto>(_mapper.ConfigurationProvider)

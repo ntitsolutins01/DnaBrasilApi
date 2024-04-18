@@ -1,4 +1,5 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Application.Laudos.Queries;
 using DnaBrasilApi.Domain.Entities;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -76,7 +77,7 @@ public class GetTotalizadorSaudeSexoAlunosQueryHandler : IRequestHandler<GetTota
         var metricasImc = _context.MetricasImc
             .Where(x => x.Sexo!.Equals("G"));
 
-        var verificaAlunos = alunos.Include(i => i.Saude);
+        var verificaAlunos = alunos.Select(x => x.Id);
 
         Dictionary<string, decimal> dict = new();
         Dictionary<string, decimal> dictTotalizadorSaudeMasculino = new()
@@ -95,7 +96,10 @@ public class GetTotalizadorSaudeSexoAlunosQueryHandler : IRequestHandler<GetTota
         };
         int cont = 1;
 
-        foreach (Aluno aluno in verificaAlunos)
+        var laudos = _context.Laudos.Where(x => verificaAlunos.Contains(x.Aluno.Id)).Include(i => i.Saude).AsNoTracking()
+            .ProjectTo<LaudoDto>(_mapper.ConfigurationProvider);
+
+        foreach (var aluno in laudos)
         {
             if (aluno.Saude != null)
             {
@@ -127,7 +131,7 @@ public class GetTotalizadorSaudeSexoAlunosQueryHandler : IRequestHandler<GetTota
                             switch (item.Classificacao!)
                             {
                                 case "NORMAL":
-                                    if (aluno.Sexo.Equals("M"))
+                                    if (aluno.Equals("M"))
                                     {
                                         var indicePositivoSaudeMasc =
                                             dictTotalizadorSaudeMasculino["indicePositivoSaude"];
@@ -147,7 +151,7 @@ public class GetTotalizadorSaudeSexoAlunosQueryHandler : IRequestHandler<GetTota
 
                                     break;
                                 case "ABAIXODONORMAL":
-                                    if (aluno.Sexo.Equals("M"))
+                                    if (aluno.Equals("M"))
                                     {
                                         var desequilibrioMuscularMasc =
                                             dictTotalizadorSaudeMasculino["desequilibrioMuscular"];
@@ -166,7 +170,7 @@ public class GetTotalizadorSaudeSexoAlunosQueryHandler : IRequestHandler<GetTota
 
                                     break;
                                 case "SOBREPESO":
-                                    if (aluno.Sexo.Equals("M"))
+                                    if (aluno.Equals("M"))
                                     {
                                         var resistenciaInsulinaMasc =
                                             dictTotalizadorSaudeMasculino["resistenciaInsulina"];
@@ -185,7 +189,7 @@ public class GetTotalizadorSaudeSexoAlunosQueryHandler : IRequestHandler<GetTota
 
                                     break;
                                 case "OBESIDADE":
-                                    if (aluno.Sexo.Equals("M"))
+                                    if (aluno.Equals("M"))
                                     {
                                         var riscoColesterolAltoMasc =
                                             dictTotalizadorSaudeMasculino["riscoColesterolAlto"];

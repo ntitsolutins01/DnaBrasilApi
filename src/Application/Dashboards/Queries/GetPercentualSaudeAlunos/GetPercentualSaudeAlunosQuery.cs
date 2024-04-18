@@ -76,12 +76,15 @@ public class GetPercentualSaudeAlunosQueryHandler : IRequestHandler<GetPercentua
         var metricasImc = _context.MetricasImc
             .Where(x => x.Sexo!.Equals("G"));
 
-        var verificaAlunos = alunos.Include(i => i.Saude);
+        var verificaAlunos = alunos.Select(x => x.Id);
+
 
         Dictionary<string, decimal> dict = new();
         int cont = 1;
 
-        foreach (Aluno aluno in verificaAlunos)
+        var laudos = _context.Laudos.Where(x => verificaAlunos.Contains(x.Aluno.Id)).Include(i => i.Saude);
+
+        foreach (var aluno in laudos)
         {
             if (aluno.Saude != null)
             {
