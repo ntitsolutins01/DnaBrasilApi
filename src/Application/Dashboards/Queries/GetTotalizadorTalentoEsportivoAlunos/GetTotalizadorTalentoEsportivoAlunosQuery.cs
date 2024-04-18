@@ -1,4 +1,5 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Application.Laudos.Queries;
 using DnaBrasilApi.Domain.Entities;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -76,7 +77,7 @@ public class GetTotalizadorTalentoEsportivoAlunosQueryHandler : IRequestHandler<
         var modalidades = _context.Modalidades
             .Where(x => x.Status == true);
 
-        var verificaAlunos = alunos.Include(i => i.TalentoEsportivo);
+        var verificaAlunos = alunos.Select(x => x.Id);
 
         Dictionary<string, decimal> dict = new();
         Dictionary<string, decimal> dictTotalizadorTalentoMasculino = new();
@@ -89,15 +90,19 @@ public class GetTotalizadorTalentoEsportivoAlunosQueryHandler : IRequestHandler<
             dict.Add(item.Nome!, 0);
         }
 
-        foreach (Aluno aluno in verificaAlunos)
+        var laudos = _context.Laudos.Where(x => verificaAlunos.Contains(x.Aluno.Id)).Include(i => i.TalentoEsportivo);
+            //.AsNoTracking()
+            //.ProjectTo<LaudoDto>(_mapper.ConfigurationProvider);
+
+        foreach (var aluno in laudos)
         {
             if (aluno.TalentoEsportivo != null)
             {
                 foreach (var item in modalidades)
                 {
-                    if (aluno.TalentoEsportivo.Encaminhamento!.Equals(item.Nome))
+                    if (aluno.TalentoEsportivo.Encaminhamento!= null && aluno.TalentoEsportivo.Encaminhamento.Equals(item.Nome))
                     {
-                        if (aluno.Sexo.Equals("M"))
+                        if (aluno.Aluno.Sexo!.Equals("M"))
                         {
                             if (dictTotalizadorTalentoMasculino.ContainsKey(item.Nome!))
                             {

@@ -84,32 +84,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
                         l => l.HasOne(typeof(Profissional)).WithMany().HasForeignKey("ProfissionalId").HasPrincipalKey(nameof(Profissional.Id)),
                         j => j.HasKey("ProfissionalId", "ModalidadeId"));
 
-        builder.Entity<Contrato>()
-            .HasMany(e => e.Localidades)
-            .WithMany(e => e.Contratos)
-            .UsingEntity(
-                "ContratosLocalidades",
-                r => r.HasOne(typeof(Localidade)).WithMany().HasForeignKey("LocalidadeId").HasPrincipalKey(nameof(Domain.Entities.Localidade.Id)),
-                l => l.HasOne(typeof(Contrato)).WithMany().HasForeignKey("ContratoId").HasPrincipalKey(nameof(Contrato.Id)),
-                j => j.HasKey("ContratoId", "LocalidadeId"));
-
-        builder.Entity<Contrato>()
-            .HasMany(e => e.Alunos)
-            .WithMany(e => e.Contratos)
-            .UsingEntity(
-                "ContratosAlunos",
-                r => r.HasOne(typeof(Aluno)).WithMany().HasForeignKey("AlunoId").HasPrincipalKey(nameof(Aluno.Id)),
-                l => l.HasOne(typeof(Contrato)).WithMany().HasForeignKey("ContratoId").HasPrincipalKey(nameof(Contrato.Id)),
-                j => j.HasKey("ContratoId", "AlunoId"));
-
-        builder.Entity<Contrato>()
-            .HasMany(e => e.Profissionais)
-            .WithMany(e => e.Contratos)
-            .UsingEntity(
-                "ContratosProfissionais",
-                r => r.HasOne(typeof(Profissional)).WithMany().HasForeignKey("ProfissionalId").HasPrincipalKey(nameof(Profissional.Id)),
-                l => l.HasOne(typeof(Contrato)).WithMany().HasForeignKey("ContratoId").HasPrincipalKey(nameof(Contrato.Id)),
-                j => j.HasKey("ContratoId", "ProfissionalId"));
+        
 
         #endregion
 

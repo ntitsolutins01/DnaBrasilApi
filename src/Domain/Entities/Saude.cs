@@ -12,4 +12,5 @@ public class Saude : BaseAuditableEntity
     public int? Massa { get; set; }
     public int? Envergadura { get; set; }
     public string? StatusSaude { get; set; }
+    public Aluno? Aluno { get; set; }
 }

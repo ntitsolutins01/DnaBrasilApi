@@ -8,7 +8,7 @@ public class FuncionalidadeConfiguration : IEntityTypeConfiguration<Funcionalida
     public void Configure(EntityTypeBuilder<Funcionalidade> builder)
     {
         builder.Property(t => t.Nome)
-            .HasMaxLength(50)
+            .HasMaxLength(300)
             .IsRequired();
     }
 }

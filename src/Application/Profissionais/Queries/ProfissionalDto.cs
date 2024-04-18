@@ -1,4 +1,8 @@
 ﻿using DnaBrasilApi.Application.Modalidades.Queries;
+using DnaBrasilApi.Application.Perfis.Queries.GetPerfilByAspNetRoleId;
+using DnaBrasilApi.Application.Usuarios.Queries;
+using DnaBrasilApi.Application.Usuarios.Queries.GetUsuarioByCpf;
+using DnaBrasilApi.Application.Usuarios.Queries.GetUsuarioById;
 using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Profissionais.Queries;
@@ -14,7 +18,7 @@ public class ProfissionalDto
     public string? Telefone { get; set; }
     public string? Celular { get; set; }
     public string? Endereco { get; set; }
-    //public int? Numero { get; set; }
+    public int? Numero { get; set; }
     public string? Cep { get; set; }
     public string? Bairro { get; set; }
     public bool Status { get; set; } = true;
@@ -25,12 +29,14 @@ public class ProfissionalDto
     public string? Uf { get; set; }
     public int? MunicipioId { get; set; }
     public int? LocalidadeId { get; set; }
+    public string? Perfil { get; set; }
     private class Mapping : Profile
     {
         public Mapping()
         {
             CreateMap<Profissional, ProfissionalDto>()
                 .ForMember(dest => dest.MunicipioId, opt => opt.MapFrom(src => src.Municipio!.Id))
+                .ForMember(dest => dest.Perfil, opt => opt.MapFrom(src => src.Perfil!.Nome))
                 .ForMember(dest => dest.LocalidadeId, opt =>opt.MapFrom(src => src.Localidade!.Id))
                 .ForMember(dest => dest.EstadoId, opt => opt.MapFrom(src => src.Municipio!.Estado!.Id))
                 .ForMember(dest => dest.Uf, opt => opt.MapFrom(src => src.Municipio!.Estado!.Sigla))

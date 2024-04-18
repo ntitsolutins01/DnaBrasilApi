@@ -26,7 +26,19 @@ public static class DependencyInjection
         {
             options.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>());
 
-            options.UseSqlServer(connectionString);
+            options.UseSqlServer(connectionString,
+                serverDbContextOptionsBuilder =>
+                {
+                    var minutes = (int)TimeSpan.FromMinutes(3).TotalSeconds;
+                    serverDbContextOptionsBuilder.CommandTimeout(minutes);
+                    serverDbContextOptionsBuilder.EnableRetryOnFailure();
+                }
+                //sqlServerOptions =>
+                //{
+                //    sqlServerOptions.EnableRetryOnFailure();
+                //    sqlServerOptions.CommandTimeout(600);
+                //}
+                );
         });
 
         services.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<ApplicationDbContext>());

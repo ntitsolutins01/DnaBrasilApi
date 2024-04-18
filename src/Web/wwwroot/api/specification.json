@@ -1539,6 +1539,39 @@
         }
       }
     },
+    "/api/Dashboards/GraficoPercDesempenhoFisicoMotor": {
+      "post": {
+        "tags": [
+          "Dashboards"
+        ],
+        "operationId": "GetGraficoPercDesempenhoFisicoMotorByFilter",
+        "requestBody": {
+          "x-name": "dashboard",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DashboardDto"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DashboardDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Deficiencias": {
       "get": {
         "tags": [
@@ -7251,14 +7284,6 @@
                   }
                 ]
               },
-              "talentoEsportivo": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/TalentoEsportivo"
-                  }
-                ]
-              },
               "vocacional": {
                 "nullable": true,
                 "oneOf": [
@@ -7266,6 +7291,13 @@
                     "$ref": "#/components/schemas/Vocacional"
                   }
                 ]
+              },
+              "laudos": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "$ref": "#/components/schemas/Laudo"
+                }
               }
             }
           }
@@ -7566,6 +7598,37 @@
                 "items": {
                   "$ref": "#/components/schemas/Contrato"
                 }
+              },
+              "perfil": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Perfil"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "Perfil": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "nome": {
+                "type": "string"
+              },
+              "descricao": {
+                "type": "string",
+                "nullable": true
+              },
+              "aspNetRoleId": {
+                "type": "string"
               }
             }
           }
@@ -7972,6 +8035,112 @@
           }
         ]
       },
+      "Vocacional": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "profissional": {
+                "$ref": "#/components/schemas/Profissional"
+              },
+              "questionario": {
+                "$ref": "#/components/schemas/Questionario"
+              },
+              "resposta": {
+                "type": "string"
+              },
+              "statusVocacionais": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          }
+        ]
+      },
+      "Laudo": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "talentoEsportivo": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/TalentoEsportivo"
+                  }
+                ]
+              },
+              "vocacional": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Vocacional"
+                  }
+                ]
+              },
+              "qualidadeDeVida": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/QualidadeDeVida"
+                  }
+                ]
+              },
+              "statusQualidadeDeVida": {
+                "type": "string",
+                "nullable": true
+              },
+              "saude": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Saude"
+                  }
+                ]
+              },
+              "consumo": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/ConsumoAlimentar"
+                  }
+                ]
+              },
+              "saudeBucal": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/SaudeBucal"
+                  }
+                ]
+              },
+              "aluno": {
+                "$ref": "#/components/schemas/Aluno"
+              },
+              "modalidade": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Modalidade"
+                  }
+                ]
+              },
+              "statusLaudo": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          }
+        ]
+      },
       "TalentoEsportivo": {
         "allOf": [
           {
@@ -8004,7 +8173,7 @@
                 "format": "decimal",
                 "nullable": true
               },
-              "aptidaoFisica": {
+              "vo2Max": {
                 "type": "number",
                 "format": "decimal",
                 "nullable": true
@@ -8019,7 +8188,7 @@
                 "format": "decimal",
                 "nullable": true
               },
-              "quadrado": {
+              "shuttleRun": {
                 "type": "number",
                 "format": "decimal",
                 "nullable": true
@@ -8038,7 +8207,56 @@
                 "format": "decimal",
                 "nullable": true
               },
+              "envergadura": {
+                "type": "number",
+                "format": "decimal",
+                "nullable": true
+              },
               "statusTalentosEsportivos": {
+                "type": "string",
+                "nullable": true
+              },
+              "aluno": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Aluno"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "ConsumoAlimentar": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "profissional": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Profissional"
+                  }
+                ]
+              },
+              "questionario": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Questionario"
+                  }
+                ]
+              },
+              "resposta": {
+                "type": "string"
+              },
+              "statusConsumoAlimentares": {
                 "type": "string",
                 "nullable": true
               }
@@ -8046,7 +8264,7 @@
           }
         ]
       },
-      "Vocacional": {
+      "SaudeBucal": {
         "allOf": [
           {
             "$ref": "#/components/schemas/BaseAuditableEntity"
@@ -8064,7 +8282,7 @@
               "resposta": {
                 "type": "string"
               },
-              "statusVocacionais": {
+              "statusSaudeBucais": {
                 "type": "string",
                 "nullable": true
               }
@@ -8300,6 +8518,11 @@
             "type": "string",
             "nullable": true
           },
+          "numero": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
           "cep": {
             "type": "string",
             "nullable": true
@@ -8337,6 +8560,10 @@
           "localidadeId": {
             "type": "integer",
             "format": "int32",
+            "nullable": true
+          },
+          "perfil": {
+            "type": "string",
             "nullable": true
           }
         }
@@ -9901,6 +10128,98 @@
           "statusLaudo": {
             "type": "string",
             "nullable": true
+          },
+          "talentoEsportivo": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/TalentoEsportivoDto"
+              }
+            ]
+          },
+          "sexo": {
+            "type": "string",
+            "nullable": true
+          },
+          "dtNascimento": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "TalentoEsportivoDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "profissional": {
+            "$ref": "#/components/schemas/ProfissionalDto"
+          },
+          "flexibilidade": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "preensaoManual": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "velocidade": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "impulsaoHorizontal": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "vo2Max": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "abdominal": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "imc": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "shuttleRun": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "encaminhamento": {
+            "type": "string",
+            "nullable": true
+          },
+          "altura": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "peso": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "envergadura": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "alunoId": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },
@@ -11017,6 +11336,10 @@
           "modalidadesIds": {
             "type": "string",
             "nullable": true
+          },
+          "perfilId": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },

@@ -1,4 +1,5 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Application.Laudos.Queries;
 using DnaBrasilApi.Domain.Entities;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -79,8 +80,6 @@ public class GetTotalizadorDesempenhoAlunosQueryHandler : IRequestHandler<GetTot
             .Distinct()
             .ToListAsync();
 
-        var verificaAlunos = alunos.Include(i => i.TalentoEsportivo).Where(x => x.TalentoEsportivo != null);
-
         Dictionary<string, decimal> dict = new()
         {
             { "velocidade", 0 },
@@ -134,8 +133,19 @@ public class GetTotalizadorDesempenhoAlunosQueryHandler : IRequestHandler<GetTot
         bool pranchaVerificaAluno;
         bool vo2MaxVerificaAluno;
 
-        foreach (Aluno aluno in verificaAlunos)
+        var verificaAlunos = alunos.Select(x => x.Id);
+
+        var laudos = _context.Laudos.Where(x => verificaAlunos.Contains(x.Aluno.Id)).Include(i => i.TalentoEsportivo)
+            .AsNoTracking()
+            .ProjectTo<LaudoDto>(_mapper.ConfigurationProvider);
+
+        foreach (var aluno in laudos)
         {
+            if (aluno.TalentoEsportivo == null)
+            {
+                continue;
+            }
+
             var idade = GetIdade(aluno.DtNascimento, DateTime.Now);
             veloVerificaAluno = false;
             impulsaoVerificaAluno = false;
@@ -162,9 +172,9 @@ public class GetTotalizadorDesempenhoAlunosQueryHandler : IRequestHandler<GetTot
                 {
                     if (!veloVerificaAluno)
                     {
-                        if (aluno.TalentoEsportivo!.Velocidade >= item.PontoInicial && aluno.TalentoEsportivo.Velocidade <= item.PontoFinal)
+                        if (aluno.TalentoEsportivo!.Velocidade >= item.PontoInicial && aluno.TalentoEsportivo!.Velocidade <= item.PontoFinal)
                         {
-                            if (aluno.Sexo.Equals("M"))
+                            if (aluno.Sexo!.Equals("M"))
                             {
                                 if (dictTotalizadorDesempenhoMasculino.ContainsKey("velocidade"))
                                 {
@@ -203,9 +213,9 @@ public class GetTotalizadorDesempenhoAlunosQueryHandler : IRequestHandler<GetTot
 
                     if (!impulsaoVerificaAluno)
                     {
-                        if (aluno.TalentoEsportivo!.ImpulsaoHorizontal >= item.PontoInicial && aluno.TalentoEsportivo.ImpulsaoHorizontal <= item.PontoFinal)
+                        if (aluno.TalentoEsportivo.ImpulsaoHorizontal >= item.PontoInicial && aluno.TalentoEsportivo.ImpulsaoHorizontal <= item.PontoFinal)
                         {
-                            if (aluno.Sexo.Equals("M"))
+                            if (aluno.Sexo!.Equals("M"))
                             {
                                 if (dictTotalizadorDesempenhoMasculino.ContainsKey("forcaExplosiva"))
                                 {
@@ -244,9 +254,9 @@ public class GetTotalizadorDesempenhoAlunosQueryHandler : IRequestHandler<GetTot
 
                     if (!agilidadeVerificaAluno)
                     {
-                        if (aluno.TalentoEsportivo!.Quadrado >= item.PontoInicial && aluno.TalentoEsportivo.Quadrado <= item.PontoFinal)
+                        if (aluno.TalentoEsportivo.ShuttleRun >= item.PontoInicial && aluno.TalentoEsportivo.ShuttleRun <= item.PontoFinal)
                         {
-                            if (aluno.Sexo.Equals("M"))
+                            if (aluno.Sexo!.Equals("M"))
                             {
                                 if (dictTotalizadorDesempenhoMasculino.ContainsKey("agilidade"))
                                 {
@@ -285,9 +295,9 @@ public class GetTotalizadorDesempenhoAlunosQueryHandler : IRequestHandler<GetTot
 
                     if (!shutlleRunVerificaAluno)
                     {
-                        if (aluno.TalentoEsportivo!.Quadrado >= item.PontoInicial && aluno.TalentoEsportivo.Quadrado <= item.PontoFinal)
+                        if (aluno.TalentoEsportivo.ShuttleRun >= item.PontoInicial && aluno.TalentoEsportivo.ShuttleRun <= item.PontoFinal)
                         {
-                            if (aluno.Sexo.Equals("M"))
+                            if (aluno.Sexo!.Equals("M"))
                             {
                                 if (dictTotalizadorDesempenhoMasculino.ContainsKey("shutlleRun"))
                                 {
@@ -326,9 +336,9 @@ public class GetTotalizadorDesempenhoAlunosQueryHandler : IRequestHandler<GetTot
 
                     if (!flexibilidadeMuscularVerificaAluno)
                     {
-                        if (aluno.TalentoEsportivo!.Flexibilidade >= item.PontoInicial && aluno.TalentoEsportivo.Flexibilidade <= item.PontoFinal)
+                        if (aluno.TalentoEsportivo.Flexibilidade >= item.PontoInicial && aluno.TalentoEsportivo.Flexibilidade <= item.PontoFinal)
                         {
-                            if (aluno.Sexo.Equals("M"))
+                            if (aluno.Sexo!.Equals("M"))
                             {
                                 if (dictTotalizadorDesempenhoMasculino.ContainsKey("flexibilidadeMuscular"))
                                 {
@@ -367,9 +377,9 @@ public class GetTotalizadorDesempenhoAlunosQueryHandler : IRequestHandler<GetTot
 
                     if (!forcaMembrosSupVerificaAluno)
                     {
-                        if (aluno.TalentoEsportivo!.PreensaoManual >= item.PontoInicial && aluno.TalentoEsportivo.PreensaoManual <= item.PontoFinal)
+                        if (aluno.TalentoEsportivo.PreensaoManual >= item.PontoInicial && aluno.TalentoEsportivo.PreensaoManual <= item.PontoFinal)
                         {
-                            if (aluno.Sexo.Equals("M"))
+                            if (aluno.Sexo!.Equals("M"))
                             {
                                 if (dictTotalizadorDesempenhoMasculino.ContainsKey("forcaMembrosSup"))
                                 {
@@ -408,9 +418,9 @@ public class GetTotalizadorDesempenhoAlunosQueryHandler : IRequestHandler<GetTot
 
                     if (!aptidaoCardioVerificaAluno)
                     {
-                        if (aluno.TalentoEsportivo!.AptidaoFisica >= item.PontoInicial && aluno.TalentoEsportivo.AptidaoFisica <= item.PontoFinal)
+                        if (aluno.TalentoEsportivo.Vo2Max >= item.PontoInicial && aluno.TalentoEsportivo.Vo2Max <= item.PontoFinal)
                         {
-                            if (aluno.Sexo.Equals("M"))
+                            if (aluno.Sexo!.Equals("M"))
                             {
                                 if (dictTotalizadorDesempenhoMasculino.ContainsKey("aptidaoCardio"))
                                 {
@@ -449,9 +459,9 @@ public class GetTotalizadorDesempenhoAlunosQueryHandler : IRequestHandler<GetTot
 
                     if (!vo2MaxVerificaAluno)
                     {
-                        if (aluno.TalentoEsportivo!.AptidaoFisica >= item.PontoInicial && aluno.TalentoEsportivo.AptidaoFisica <= item.PontoFinal)
+                        if (aluno.TalentoEsportivo.Vo2Max >= item.PontoInicial && aluno.TalentoEsportivo.Vo2Max <= item.PontoFinal)
                         {
-                            if (aluno.Sexo.Equals("M"))
+                            if (aluno.Sexo!.Equals("M"))
                             {
                                 if (dictTotalizadorDesempenhoMasculino.ContainsKey("vo2Max"))
                                 {
@@ -490,9 +500,9 @@ public class GetTotalizadorDesempenhoAlunosQueryHandler : IRequestHandler<GetTot
 
                     if (!resAbdominalVerificaAluno)
                     {
-                        if (aluno.TalentoEsportivo!.Abdominal >= item.PontoInicial && aluno.TalentoEsportivo.Abdominal <= item.PontoFinal)
+                        if (aluno.TalentoEsportivo.Abdominal >= item.PontoInicial && aluno.TalentoEsportivo.Abdominal <= item.PontoFinal)
                         {
-                            if (aluno.Sexo.Equals("M"))
+                            if (aluno.Sexo!.Equals("M"))
                             {
                                 if (dictTotalizadorDesempenhoMasculino.ContainsKey("resAbdominal"))
                                 {
@@ -531,9 +541,9 @@ public class GetTotalizadorDesempenhoAlunosQueryHandler : IRequestHandler<GetTot
 
                     if (!pranchaVerificaAluno)
                     {
-                        if (aluno.TalentoEsportivo!.Abdominal >= item.PontoInicial && aluno.TalentoEsportivo.Abdominal <= item.PontoFinal)
+                        if (aluno.TalentoEsportivo.Abdominal >= item.PontoInicial && aluno.TalentoEsportivo.Abdominal <= item.PontoFinal)
                         {
-                            if (aluno.Sexo.Equals("M"))
+                            if (aluno.Sexo!.Equals("M"))
                             {
                                 if (dictTotalizadorDesempenhoMasculino.ContainsKey("resAbdominal"))
                                 {

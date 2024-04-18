@@ -21,6 +21,7 @@ public record CreateProfissionalCommand : IRequest<int>
     public int? LocalidadeId { get; init; }
     public bool Habilitado { get; init; }
     public string? ModalidadesIds { get; init; }
+    public required int PerfilId { get; set; }
 }
 
 public class CreateProfissionalCommandHandler : IRequestHandler<CreateProfissionalCommand, int>
@@ -34,12 +35,17 @@ public class CreateProfissionalCommandHandler : IRequestHandler<CreateProfission
 
     public async Task<int> Handle(CreateProfissionalCommand request, CancellationToken cancellationToken)
     {
+        var perfil = await _context.Perfis
+            .FindAsync([request.PerfilId], cancellationToken);
+
+        Guard.Against.NotFound(request.PerfilId, perfil);
+
         Municipio? municipio = null;
 
         if (request.MunicipioId != null)
         {
             municipio = await _context.Municipios
-                .FindAsync(new object[] { request.MunicipioId }, cancellationToken);
+                .FindAsync([request.MunicipioId], cancellationToken);
 
             Guard.Against.NotFound((int)request.MunicipioId, municipio);
         }
@@ -49,7 +55,7 @@ public class CreateProfissionalCommandHandler : IRequestHandler<CreateProfission
         if (request.LocalidadeId != null)
         {
             localidade = await _context.Localidades
-                .FindAsync(new object[] { request.LocalidadeId }, cancellationToken);
+                .FindAsync([request.LocalidadeId], cancellationToken);
 
             Guard.Against.NotFound((int)request.LocalidadeId, localidade);
         }
@@ -63,7 +69,7 @@ public class CreateProfissionalCommandHandler : IRequestHandler<CreateProfission
             foreach (int id in listIds)
             {
                 var Modalidade = await _context.Modalidades
-                    .FindAsync(new object[] { id }, cancellationToken);
+                    .FindAsync([id], cancellationToken);
 
                 list.Add(Modalidade!);
             }
@@ -90,7 +96,8 @@ public class CreateProfissionalCommandHandler : IRequestHandler<CreateProfission
             AspNetUserId = request.AspNetUserId,
             Modalidades = list,
             Habilitado = request.Habilitado,
-            Localidade = localidade
+            Localidade = localidade,
+            Perfil = perfil
         };
 
         _context.Profissionais.Add(entity);

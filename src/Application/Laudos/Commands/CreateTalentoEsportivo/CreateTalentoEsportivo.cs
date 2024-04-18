@@ -33,7 +33,7 @@ public class CreateTalentoEsportivoCommandHandler : IRequestHandler<CreateTalent
             PreensaoManual = request.PreensaoManual,
             Velocidade = request.Velocidade,
             ImpulsaoHorizontal = request.ImpulsaoHorizontal,
-            AptidaoFisica = request.AptidaoFisica,
+            Vo2Max = request.AptidaoFisica,
             Abdominal = request.Abdominal
         };
 

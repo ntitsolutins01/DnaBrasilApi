@@ -37,6 +37,6 @@ public class Aluno : BaseAuditableEntity
     public LinhaAcao? LinhaAcao { get; set; }
     public List<QualidadeDeVida>? QualidadeDeVidas { get; set; }
     public Saude? Saude { get; set; }
-    public TalentoEsportivo? TalentoEsportivo { get; set; }
     public Vocacional? Vocacional { get; set; }
+    public List<Laudo>? Laudos { get; set; }
 }

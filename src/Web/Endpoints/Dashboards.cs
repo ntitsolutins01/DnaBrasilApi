@@ -31,7 +31,8 @@ public class Dashboards : EndpointGroupBase
             .MapPost(GetGraficosEtniaByFilter, "GraficosEtnia")
             .MapPost(GetGraficosSaudeBucalByFilter, "GraficosSaudeBucal")
             .MapPost(GetGraficosDeficienciasByFilter, "GraficosDeficiencia")
-            .MapPost(GetGraficosTalentoByFilter,"GraficosTalento");
+            .MapPost(GetGraficosTalentoByFilter,"GraficosTalento")
+            .MapPost(GetGraficoPercDesempenhoFisicoMotorByFilter, "GraficoPercDesempenhoFisicoMotor");
     }
 
     public async Task<DashboardDto> GetIndicadoresAlunosByFilter(ISender sender, [FromBody] DashboardDto dashboard)
@@ -94,6 +95,11 @@ public class Dashboards : EndpointGroupBase
     {
         dashboard.ListTotalizadorTalento =
             await sender.Send(new GetTotalizadorTalentoEsportivoAlunosQuery() { SearchFilter = dashboard });
+        
+        return await Task.FromResult(dashboard);
+    }
+    public async Task<DashboardDto> GetGraficoPercDesempenhoFisicoMotorByFilter(ISender sender, [FromBody] DashboardDto dashboard)
+    {
 
         dashboard.ListTotalizadorDesempenho = 
             await sender.Send(new GetTotalizadorDesempenhoAlunosQuery() { SearchFilter = dashboard });

@@ -18,6 +18,10 @@ public class LaudoDto
     public string? Localidade { get; init; }
     public string? Encaminhamento { get; init; }
     public string? StatusLaudo { get; set; }
+    public TalentoEsportivoDto? TalentoEsportivo { get; set; }
+    public string? Sexo { get; set; }
+    public DateTime DtNascimento { get; set; }
+    public SaudeDto? Saude { get; set; }
 
     private class Mapping : Profile
     {
@@ -34,7 +38,10 @@ public class LaudoDto
                 .ForMember(dest => dest.NomeAluno, opt => opt.MapFrom(src => src.Aluno.Nome))
                 .ForMember(dest => dest.LocalidadeId, opt => opt.MapFrom(src => src.Aluno.Localidade.Id))
                 .ForMember(dest => dest.Localidade, opt => opt.MapFrom(src => src.Aluno.Localidade.Nome))
-                .ForMember(dest => dest.MunicipioEstado, opt => opt.MapFrom(src => src.Aluno.Municipio.Nome!.ToString() + " / " + src.Aluno.Municipio.Estado!.Sigla!.ToString()));
+                .ForMember(dest => dest.MunicipioEstado, opt => opt.MapFrom(src => src.Aluno.Municipio.Nome!.ToString() + " / " + src.Aluno.Municipio.Estado!.Sigla!.ToString()))
+
+                .ForMember(dest => dest.Sexo, opt => opt.MapFrom(src => src.Aluno!.Sexo))
+                .ForMember(dest => dest.DtNascimento, opt => opt.MapFrom(src => src.Aluno!.DtNascimento));
         }
 
 
