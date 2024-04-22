@@ -37,9 +37,9 @@ public class GetLaudosPeriodoQueryHandler : IRequestHandler<GetLaudosPeriodoQuer
     {
         if (!string.IsNullOrWhiteSpace(search.FomentoId))
         {
-            var fomento = _context.Fomentos.Include(i => i.Municipio).First(x => x.Id == Convert.ToInt32(search.FomentoId));
+            var id = Convert.ToInt32(search.FomentoId.Split("-")[0]);
 
-            laudos = laudos.Where(u => u.Aluno.Municipio!.Id == fomento.Municipio!.Id);
+            laudos = laudos.Where(u => u.Aluno.Municipio!.Id == id);
         }
 
         if (!string.IsNullOrWhiteSpace(search.Estado))

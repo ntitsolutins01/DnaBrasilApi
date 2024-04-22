@@ -37,9 +37,9 @@ public class GetPercentualSaudeAlunosQueryHandler : IRequestHandler<GetPercentua
     {
         if (!string.IsNullOrWhiteSpace(search.FomentoId))
         {
-            var fomento = _context.Fomentos.Include(i => i.Municipio).First(x => x.Id == Convert.ToInt32(search.FomentoId));
+            var id = Convert.ToInt32(search.FomentoId.Split("-")[0]);
 
-            alunos = alunos.Where(u => u.Municipio!.Id == fomento.Municipio!.Id);
+            alunos = alunos.Where(u => u.Fomento!.Id == id);
         }
 
         if (!string.IsNullOrWhiteSpace(search.Estado))

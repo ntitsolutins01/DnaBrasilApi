@@ -4,6 +4,7 @@ using DnaBrasilApi.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DnaBrasilApi.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240418235450_DnaUpdateAlunoFomentoColuna")]
+    partial class DnaUpdateAlunoFomentoColuna
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -93,12 +96,6 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.Property<string>("AspNetUserId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool?>("AutorizacaoConsentimentoAssentimento")
-                        .HasColumnType("bit");
-
-                    b.Property<bool?>("AutorizacaoSaida")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Bairro")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -113,9 +110,6 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.Property<string>("Cep")
                         .HasMaxLength(9)
                         .HasColumnType("nvarchar(9)");
-
-                    b.Property<bool?>("CopiaDocAlunoResponsavel")
-                        .HasColumnType("bit");
 
                     b.Property<string>("Cpf")
                         .HasMaxLength(14)
@@ -197,9 +191,6 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.Property<int?>("ParceiroId")
                         .HasColumnType("int");
 
-                    b.Property<bool?>("ParticipacaoProgramaCompartilhamentoDados")
-                        .HasColumnType("bit");
-
                     b.Property<int?>("ProfissionalId")
                         .HasColumnType("int");
 
@@ -217,9 +208,6 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.Property<string>("Telefone")
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
-
-                    b.Property<bool?>("UtilizacaoImagem")
-                        .HasColumnType("bit");
 
                     b.Property<int?>("VocacionalId")
                         .HasColumnType("int");

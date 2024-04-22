@@ -6735,13 +6735,15 @@
           },
           "municipioId": {
             "type": "integer",
-            "format": "int32",
-            "nullable": true
+            "format": "int32"
           },
           "localidadeId": {
             "type": "integer",
-            "format": "int32",
-            "nullable": true
+            "format": "int32"
+          },
+          "fomentoId": {
+            "type": "integer",
+            "format": "int32"
           },
           "profissionalId": {
             "type": "integer",
@@ -7155,6 +7157,9 @@
               "localidade": {
                 "$ref": "#/components/schemas/Localidade"
               },
+              "fomento": {
+                "$ref": "#/components/schemas/Fomentu"
+              },
               "deficiencia": {
                 "nullable": true,
                 "oneOf": [
@@ -7242,6 +7247,26 @@
                 "items": {
                   "$ref": "#/components/schemas/Laudo"
                 }
+              },
+              "autorizacaoSaida": {
+                "type": "boolean",
+                "nullable": true
+              },
+              "autorizacaoConsentimentoAssentimento": {
+                "type": "boolean",
+                "nullable": true
+              },
+              "participacaoProgramaCompartilhamentoDados": {
+                "type": "boolean",
+                "nullable": true
+              },
+              "utilizacaoImagem": {
+                "type": "boolean",
+                "nullable": true
+              },
+              "copiaDocAlunoResponsavel": {
+                "type": "boolean",
+                "nullable": true
               }
             }
           }
@@ -7573,6 +7598,47 @@
               },
               "aspNetRoleId": {
                 "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "Fomentu": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "codigo": {
+                "type": "string"
+              },
+              "nome": {
+                "type": "string"
+              },
+              "status": {
+                "type": "boolean"
+              },
+              "municipio": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Municipio"
+                  }
+                ]
+              },
+              "localidade": {
+                "$ref": "#/components/schemas/Localidade"
+              },
+              "dtIni": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "dtFim": {
+                "type": "string",
+                "format": "date-time"
               }
             }
           }
@@ -9912,6 +9978,10 @@
             "type": "integer",
             "format": "int32"
           },
+          "idIdMunicipio": {
+            "type": "string",
+            "nullable": true
+          },
           "codigo": {
             "type": "string",
             "nullable": true
@@ -9929,6 +9999,10 @@
             "nullable": true
           },
           "localidade": {
+            "type": "string",
+            "nullable": true
+          },
+          "localidadeId": {
             "type": "string",
             "nullable": true
           },

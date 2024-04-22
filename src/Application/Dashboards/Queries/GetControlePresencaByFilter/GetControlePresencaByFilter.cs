@@ -38,9 +38,9 @@ public class GetControlePresencaByFilterQueryHandler : IRequestHandler<GetContro
     {
         if (!string.IsNullOrWhiteSpace(search.FomentoId))
         {
-            var fomento = _context.Fomentos.Include(i => i.Municipio).First(x => x.Id == Convert.ToInt32(search.FomentoId));
+            var id = Convert.ToInt32(search.FomentoId.Split("-")[0]);
 
-            controlePresencas = controlePresencas.Where(u => u.Aluno.Municipio!.Id == fomento.Municipio!.Id);
+            controlePresencas = controlePresencas.Where(u => u.Aluno.Fomento!.Id == id);
         }
 
         if (!string.IsNullOrWhiteSpace(search.Estado))

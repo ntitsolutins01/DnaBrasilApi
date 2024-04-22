@@ -1,4 +1,4 @@
-    using System.Globalization;
+using System.Globalization;
 using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Application.TodoItems.Commands.CreateTodoItem;
 using DnaBrasilApi.Domain.Entities;
@@ -16,16 +16,17 @@ public record CreateAlunoCommand : IRequest<int>
     public string? NomeMae { get; init; }
     public string? NomePai { get; init; }
     public string? Cpf { get; init; }
-    public string? Telefone { get; init;}
-    public string? Celular { get; init;}
-    public string? Cep { get; init;}
-    public string? Endereco { get; init;}
+    public string? Telefone { get; init; }
+    public string? Celular { get; init; }
+    public string? Cep { get; init; }
+    public string? Endereco { get; init; }
     public string? Numero { get; init; }
     public string? Bairro { get; init; }
-    public bool Status { get; init;}
-    public bool Habilitado { get; init;}
-    public int? MunicipioId { get; init; }
-    public int? LocalidadeId { get; init; }
+    public bool Status { get; init; }
+    public bool Habilitado { get; init; }
+    public required int MunicipioId { get; init; }
+    public required int LocalidadeId { get; init; }
+    public required int FomentoId { get; init; }
     public int? ProfissionalId { get; init; }
     public int? DeficienciaId { get; init; }
     public required string Etnia { get; init; }
@@ -47,23 +48,20 @@ public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int
 
     public async Task<int> Handle(CreateAlunoCommand request, CancellationToken cancellationToken)
     {
-        Municipio? municipio = null;
 
-        if (request.MunicipioId != null)
-        {
-            municipio = await _context.Municipios.FindAsync(new object[] { request.MunicipioId }, cancellationToken);
+        var municipio = await _context.Municipios.FindAsync(new object[] { request.MunicipioId }, cancellationToken);
 
-            Guard.Against.NotFound((int)request.MunicipioId, municipio);
-        }
+        Guard.Against.NotFound((int)request.MunicipioId, municipio);
 
-        Localidade? localidade = null;
 
-        if (request.LocalidadeId != null)
-        {
-            localidade = await _context.Localidades.FindAsync(new object[] { request.LocalidadeId }, cancellationToken);
+        var localidade = await _context.Localidades.FindAsync(new object[] { request.LocalidadeId }, cancellationToken);
 
-            Guard.Against.NotFound((int)request.LocalidadeId, localidade);
-        }
+        Guard.Against.NotFound((int)request.LocalidadeId, localidade);
+
+
+        var fomento = await _context.Fomentos.FindAsync(new object[] { request.FomentoId }, cancellationToken);
+
+        Guard.Against.NotFound((int)request.FomentoId, fomento);
 
         Deficiencia? deficiencia = null;
 
@@ -73,7 +71,7 @@ public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int
 
             Guard.Against.NotFound((int)request.DeficienciaId, deficiencia);
         }
-        
+
         //Parceiro? parceiro = null;
 
         //if (request.ParceiroId != null)
@@ -127,7 +125,8 @@ public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int
             Deficiencia = deficiencia,
             LinhaAcao = linhaAcao,
             NomeResponsavel = request.NomeResponsavel,
-            Profissional = profissional
+            Profissional = profissional,
+            Fomento = fomento
         };
 
         _context.Alunos.Add(entity);

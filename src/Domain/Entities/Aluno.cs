@@ -24,7 +24,7 @@ public class Aluno : BaseAuditableEntity
     public int? IdCliente { get; set; }
     public required Municipio Municipio { get; set; }
     public required Localidade Localidade { get; set; }
-    //public List<Deficiencia>? Deficiencias { get; set; }
+    public required Fomentu Fomento { get; set; }
     public Deficiencia? Deficiencia { get; set; }
     public List<Modalidade>? Modalidades { get; set; }
     public Parceiro? Parceiro { get; set; }
@@ -38,4 +38,9 @@ public class Aluno : BaseAuditableEntity
     public List<QualidadeDeVida>? QualidadeDeVidas { get; set; }
     public Vocacional? Vocacional { get; set; }
     public List<Laudo>? Laudos { get; set; }
+    public bool? AutorizacaoSaida { get; set; } = false;
+    public bool? AutorizacaoConsentimentoAssentimento { get; set; } = false;
+    public bool? ParticipacaoProgramaCompartilhamentoDados { get; set; } = false;
+    public bool? UtilizacaoImagem { get; set; } = false;
+    public bool? CopiaDocAlunoResponsavel { get; set; } = false;
 }
