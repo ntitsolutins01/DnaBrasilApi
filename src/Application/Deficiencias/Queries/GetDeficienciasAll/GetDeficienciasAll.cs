@@ -18,7 +18,6 @@ public class GetDeficienciasAllQueryHandler : IRequestHandler<GetDeficienciasAll
     public async Task<List<DeficienciaDto>> Handle(GetDeficienciasAllQuery request, CancellationToken cancellationToken)
     {
         var result = await _context.Deficiencias
-            .Where(s=>s.Status==true)
             .AsNoTracking()
             .ProjectTo<DeficienciaDto>(_mapper.ConfigurationProvider)
             .OrderBy(t => t.Id)

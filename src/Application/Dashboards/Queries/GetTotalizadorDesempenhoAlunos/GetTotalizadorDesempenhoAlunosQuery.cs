@@ -87,7 +87,7 @@ public class GetTotalizadorDesempenhoAlunosQueryHandler : IRequestHandler<GetTot
             { "forcaMembrosSup", 0 },
             { "forcaExplosiva", 0 },
             { "aptidaoCardio", 0 },
-            { "agilidade", 0 },
+            
             { "resAbdominal", 0 },
             { "shutlleRun", 0 },
             { "prancha", 0 },
@@ -101,7 +101,7 @@ public class GetTotalizadorDesempenhoAlunosQueryHandler : IRequestHandler<GetTot
             { "forcaMembrosSup", 0 },
             { "forcaExplosiva", 0 },
             { "aptidaoCardio", 0 },
-            { "agilidade", 0 },
+            
             { "resAbdominal", 0 },
             { "shutlleRun", 0 },
             { "prancha", 0 },
@@ -114,7 +114,7 @@ public class GetTotalizadorDesempenhoAlunosQueryHandler : IRequestHandler<GetTot
             { "forcaMembrosSup", 0 },
             { "forcaExplosiva", 0 },
             { "aptidaoCardio", 0 },
-            { "agilidade", 0 },
+            
             { "resAbdominal", 0 },
             { "shutlleRun", 0 },
             { "prancha", 0 },
@@ -124,7 +124,7 @@ public class GetTotalizadorDesempenhoAlunosQueryHandler : IRequestHandler<GetTot
         List<TextoLaudo> textoLaudo = new();
         bool veloVerificaAluno;
         bool impulsaoVerificaAluno;
-        bool agilidadeVerificaAluno;
+        
         bool shutlleRunVerificaAluno;
         bool flexibilidadeMuscularVerificaAluno;
         bool forcaMembrosSupVerificaAluno;
@@ -149,7 +149,7 @@ public class GetTotalizadorDesempenhoAlunosQueryHandler : IRequestHandler<GetTot
             var idade = GetIdade(aluno.DtNascimento, DateTime.Now);
             veloVerificaAluno = false;
             impulsaoVerificaAluno = false;
-            agilidadeVerificaAluno = false;
+            
             shutlleRunVerificaAluno = false;
             flexibilidadeMuscularVerificaAluno = false;
             forcaMembrosSupVerificaAluno = false;
@@ -247,47 +247,6 @@ public class GetTotalizadorDesempenhoAlunosQueryHandler : IRequestHandler<GetTot
                             valueTotal += 1;
 
                             dict["forcaExplosiva"] = valueTotal;
-
-                            break;
-                        }
-                    }
-
-                    if (!agilidadeVerificaAluno)
-                    {
-                        if (aluno.TalentoEsportivo.ShuttleRun >= item.PontoInicial && aluno.TalentoEsportivo.ShuttleRun <= item.PontoFinal)
-                        {
-                            if (aluno.Sexo!.Equals("M"))
-                            {
-                                if (dictTotalizadorDesempenhoMasculino.ContainsKey("agilidade"))
-                                {
-                                    agilidadeVerificaAluno = true;
-
-                                    var value = dictTotalizadorDesempenhoMasculino["agilidade"];
-
-                                    value += 1;
-
-                                    dictTotalizadorDesempenhoMasculino["agilidade"] = value;
-                                }
-                            }
-                            else
-                            {
-                                if (dictTotalizadorDesempenhoFeminino.ContainsKey("agilidade"))
-                                {
-                                    agilidadeVerificaAluno = true;
-
-                                    var value = dictTotalizadorDesempenhoFeminino["agilidade"];
-
-                                    value += 1;
-
-                                    dictTotalizadorDesempenhoFeminino["agilidade"] = value;
-                                }
-                            }
-
-                            var valueTotal = dict["agilidade"];
-
-                            valueTotal += 1;
-
-                            dict["agilidade"] = valueTotal;
 
                             break;
                         }

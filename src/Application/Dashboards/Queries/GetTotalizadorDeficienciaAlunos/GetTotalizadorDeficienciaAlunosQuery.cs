@@ -59,7 +59,7 @@ public class GetTotalizadorDeficienciaAlunosQueryHandler : IRequestHandler<GetTo
 
         if (!string.IsNullOrWhiteSpace(search.DeficienciaId))
         {
-            var deficiencias = _context.Deficiencias
+            var deficiencias = _context.Deficiencias.Where(x => x.Status)
                 .Include(i => i.Alunos)
                 .First(f => f.Id == Convert.ToInt32(search.DeficienciaId));
 
@@ -73,9 +73,9 @@ public class GetTotalizadorDeficienciaAlunosQueryHandler : IRequestHandler<GetTo
             alunos = alunos.Where(u => u.Etnia!.Equals(search.Etnia));
         }
 
-        var defici = _context.Deficiencias.Select(s=>s.Nome).ToList();
+        var defici = _context.Deficiencias.Where(x => x.Status).Select(s=>s.Nome).ToList();
 
-        var verificaAlunos = _context.Deficiencias
+        var verificaAlunos = _context.Deficiencias.Where(x => x.Status)
             .Include(i => i.Alunos)
             .Where(x => x.Alunos!.Any() && x.Status == true).ToList();
 
