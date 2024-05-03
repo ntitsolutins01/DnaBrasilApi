@@ -256,7 +256,14 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
           }
         }
       }
@@ -6780,6 +6787,26 @@
             "type": "string",
             "format": "byte",
             "nullable": true
+          },
+          "autorizacaoSaida": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "autorizacaoConsentimentoAssentimento": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "participacaoProgramaCompartilhamentoDados": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "utilizacaoImagem": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "copiaDocAlunoResponsavel": {
+            "type": "boolean",
+            "nullable": true
           }
         }
       },
@@ -12584,6 +12611,10 @@
             "type": "string",
             "nullable": true
           },
+          "perfilId": {
+            "type": "integer",
+            "format": "int32"
+          },
           "perfil": {
             "nullable": true,
             "oneOf": [
@@ -12601,6 +12632,10 @@
             "nullable": true
           },
           "municipioId": {
+            "type": "string",
+            "nullable": true
+          },
+          "uf": {
             "type": "string",
             "nullable": true
           }

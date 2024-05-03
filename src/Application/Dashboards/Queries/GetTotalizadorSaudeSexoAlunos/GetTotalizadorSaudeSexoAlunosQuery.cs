@@ -246,11 +246,11 @@ public class GetTotalizadorSaudeSexoAlunosQueryHandler : IRequestHandler<GetTota
         var totalMasc = dictTotalizadorSaudeMasculino.Skip(0).Sum(x => x.Value);
 
 
-        Dictionary<string, decimal> percTotalizadorSaudeMasculino = dictTotalizadorSaudeMasculino.Where(item => totalMasc != 0).ToDictionary(item => item.Key!, item => 100 * item.Value / totalMasc);
+        Dictionary<string, decimal> percTotalizadorSaudeMasculino = dictTotalizadorSaudeMasculino.Where(item => totalMasc != 0).ToDictionary(item => item.Key!, item => Convert.ToDecimal((100 * item.Value / totalMasc).ToString("F")));
 
         var totalFem = dictTotalizadorSaudeFeminino.Skip(0).Sum(x => x.Value);
 
-        Dictionary<string, decimal> percTotalizadorSaudeFeminino = dictTotalizadorSaudeFeminino.Where(item => totalFem != 0).ToDictionary(item => item.Key!, item => 100 * item.Value / totalFem);
+        Dictionary<string, decimal> percTotalizadorSaudeFeminino = dictTotalizadorSaudeFeminino.Where(item => totalFem != 0).ToDictionary(item => item.Key!, item => Convert.ToDecimal((100 * item.Value / totalFem).ToString("F")));
 
 
         return new TotalizadorSexoSaudeDto

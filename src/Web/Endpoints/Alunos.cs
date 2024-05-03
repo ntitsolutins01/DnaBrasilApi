@@ -74,10 +74,9 @@ public class Alunos : EndpointGroupBase
         return result;
     }
 
-    public async Task<IResult> DeleteAluno(ISender sender, int id)
+    public async Task<bool> DeleteAluno(ISender sender, int id)
     {
-        await sender.Send(new DeleteAlunoCommand(id));
-        return Results.NoContent();
+        return await sender.Send(new DeleteAlunoCommand(id));
     }
     public async Task<int> CreateVoucher(ISender sender, CreateVoucherCommand command)
     {

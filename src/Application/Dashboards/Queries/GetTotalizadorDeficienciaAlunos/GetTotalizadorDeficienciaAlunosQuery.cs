@@ -129,15 +129,15 @@ public class GetTotalizadorDeficienciaAlunosQueryHandler : IRequestHandler<GetTo
 
         var totalMasc = dictTotalizadorDeficienciaMasculino.Skip(0).Sum(x => x.Value);
 
-        Dictionary<string, decimal> percTotalizadorDeficienciaMasculino = dictTotalizadorDeficienciaMasculino.Where(item => totalMasc != 0).ToDictionary(item => item.Key!, item => 100 * item.Value / totalMasc);
+        Dictionary<string, decimal> percTotalizadorDeficienciaMasculino = dictTotalizadorDeficienciaMasculino.Where(item => totalMasc != 0).ToDictionary(item => item.Key!, item => Convert.ToDecimal((100 * item.Value / totalMasc).ToString("F")));
 
         var totalFem = dictTotalizadorDeficienciaFeminino.Skip(0).Sum(x => x.Value);
 
-        Dictionary<string, decimal> percTotalizadorDeficienciaFeminino = dictTotalizadorDeficienciaFeminino.Where(item => totalFem != 0).ToDictionary(item => item.Key!, item => 100 * item.Value / totalFem);
+        Dictionary<string, decimal> percTotalizadorDeficienciaFeminino = dictTotalizadorDeficienciaFeminino.Where(item => totalFem != 0).ToDictionary(item => item.Key!, item => Convert.ToDecimal((100 * item.Value / totalFem).ToString("F")));
 
         var total = dict.Skip(0).Sum(x => x.Value);
 
-        Dictionary<string, decimal> percDeficiencia = dict.Where(item => total != 0).ToDictionary(item => item.Key!, item => 100 * item.Value / total);
+        Dictionary<string, decimal> percDeficiencia = dict.Where(item => total != 0).ToDictionary(item => item.Key!, item => Convert.ToDecimal((100 * item.Value / total).ToString("F")));
 
         return Task.FromResult(new TotalizadorDeficienciaDto
         {

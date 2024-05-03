@@ -137,15 +137,15 @@ public class GetTotalizadorTalentoEsportivoAlunosQueryHandler : IRequestHandler<
 
         var totalMasc = dictTotalizadorTalentoMasculino.Skip(0).Sum(x => x.Value);
 
-        Dictionary<string, decimal> percTotalizadorTalentoMasculino = dictTotalizadorTalentoMasculino.Where(item => totalMasc != 0).ToDictionary(item => item.Key!, item => 100 * item.Value / totalMasc);
+        Dictionary<string, decimal> percTotalizadorTalentoMasculino = dictTotalizadorTalentoMasculino.Where(item => totalMasc != 0).ToDictionary(item => item.Key!, item => Convert.ToDecimal((100 * item.Value / totalMasc).ToString("F")));
 
         var totalFem = dictTotalizadorTalentoFeminino.Skip(0).Sum(x => x.Value);
 
-        Dictionary<string, decimal> percTotalizadorTalentoFeminino = dictTotalizadorTalentoFeminino.Where(item => totalFem != 0).ToDictionary(item => item.Key!, item => 100 * item.Value / totalFem);
+        Dictionary<string, decimal> percTotalizadorTalentoFeminino = dictTotalizadorTalentoFeminino.Where(item => totalFem != 0).ToDictionary(item => item.Key!, item => Convert.ToDecimal((100 * item.Value / totalFem).ToString("F")));
 
         var total = dict.Skip(0).Sum(x => x.Value);
 
-        Dictionary<string, decimal> percTalento = dict.Where(item => total != 0).ToDictionary(item => item.Key!, item => 100 * item.Value / total);
+        Dictionary<string, decimal> percTalento = dict.Where(item => total != 0).ToDictionary(item => item.Key!, item => Convert.ToDecimal((100 * item.Value / total).ToString("F")));
 
         return new TotalizadorTalentoDto
         {

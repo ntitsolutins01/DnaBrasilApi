@@ -121,7 +121,7 @@ public class GetPercentualSaudeAlunosQueryHandler : IRequestHandler<GetPercentua
 
         foreach (KeyValuePair<string, decimal> item in dict)
         {
-            dict[item.Key!] = 100 * item.Value / total;
+            dict[item.Key!] = Convert.ToDecimal((100 * item.Value / total).ToString("F"));
         }
 
         return dict;

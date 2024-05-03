@@ -1,8 +1,6 @@
 using System.Globalization;
 using DnaBrasilApi.Application.Common.Interfaces;
-using DnaBrasilApi.Application.TodoItems.Commands.CreateTodoItem;
 using DnaBrasilApi.Domain.Entities;
-using DnaBrasilApi.Domain.Events;
 
 namespace DnaBrasilApi.Application.Alunos.Commands.CreateAluno;
 
@@ -35,6 +33,11 @@ public record CreateAlunoCommand : IRequest<int>
     public string? NomeFoto { get; init; }
     public byte[]? ByteImage { get; init; }
     public byte[]? QrCode { get; init; }
+    public bool? AutorizacaoSaida { get; init; }
+    public bool? AutorizacaoConsentimentoAssentimento { get; init; }
+    public bool? ParticipacaoProgramaCompartilhamentoDados { get; init; }
+    public bool? UtilizacaoImagem { get; init; }
+    public bool? CopiaDocAlunoResponsavel { get; init; }
 }
 
 public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int>
@@ -71,15 +74,6 @@ public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int
 
             Guard.Against.NotFound((int)request.DeficienciaId, deficiencia);
         }
-
-        //Parceiro? parceiro = null;
-
-        //if (request.ParceiroId != null)
-        //{
-        //    parceiro = await _context.Parceiros.FindAsync(new object[] { request.ParceiroId }, cancellationToken);
-
-        //    Guard.Against.NotFound((int)request.ParceiroId, parceiro);
-        //}
 
         Profissional? profissional = null;
 
@@ -120,13 +114,18 @@ public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int
             QrCode = request.QrCode,
             Status = request.Status,
             Habilitado = request.Habilitado,
-            Municipio = municipio!,
-            Localidade = localidade!,
+            Municipio = municipio,
+            Localidade = localidade,
             Deficiencia = deficiencia,
             LinhaAcao = linhaAcao,
             NomeResponsavel = request.NomeResponsavel,
             Profissional = profissional,
-            Fomento = fomento
+            Fomento = fomento,
+            AutorizacaoSaida = request.AutorizacaoSaida,
+            AutorizacaoConsentimentoAssentimento = request.AutorizacaoConsentimentoAssentimento,
+            ParticipacaoProgramaCompartilhamentoDados = request.ParticipacaoProgramaCompartilhamentoDados,
+            UtilizacaoImagem = request.UtilizacaoImagem,
+            CopiaDocAlunoResponsavel = request.CopiaDocAlunoResponsavel
         };
 
         _context.Alunos.Add(entity);
