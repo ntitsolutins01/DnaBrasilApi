@@ -78,8 +78,11 @@ public class GetTotalizadorSaudeSexoAlunosQueryHandler : IRequestHandler<GetTota
             .Where(x => x.Sexo!.Equals("G"));
 
         var verificaAlunos = alunos.Select(x => x.Id);
-
         Dictionary<string, decimal> dict = new();
+        //{
+        //    { "NORMAL", 0 }, { "ABAIXODONORMAL", 0 }, { "SOBREPESO", 0 }, { "OBESIDADE", 0 }
+        //};
+
         Dictionary<string, decimal> dictTotalizadorSaudeMasculino = new()
         {
             { "baixoPeso", 0 }, { "acimaPeso", 0 }, { "riscoColesterolAlto", 0 }, { "riscoHipertensao", 0 },
@@ -103,7 +106,7 @@ public class GetTotalizadorSaudeSexoAlunosQueryHandler : IRequestHandler<GetTota
         {
             if (aluno.Saude != null)
             {
-                double alturaMetros = (double)(aluno.Saude.Altura * 0.01)!;
+                double alturaMetros = (double)(aluno.Saude.Altura * (decimal?)0.01)!;
                 if (alturaMetros == 0)
                 {
                     continue;
@@ -181,9 +184,9 @@ public class GetTotalizadorSaudeSexoAlunosQueryHandler : IRequestHandler<GetTota
                                     else
                                     {
                                         var resistenciaInsulinaFem =
-                                            dictTotalizadorSaudeFeminino["resistenciaInsulinaMasc"];
+                                            dictTotalizadorSaudeFeminino["resistenciaInsulina"];
                                         resistenciaInsulinaFem += 1;
-                                        dictTotalizadorSaudeFeminino["resistenciaInsulinaMasc"] =
+                                        dictTotalizadorSaudeFeminino["resistenciaInsulina"] =
                                             resistenciaInsulinaFem;
                                     }
 

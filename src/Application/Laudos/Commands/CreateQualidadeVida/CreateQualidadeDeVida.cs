@@ -6,8 +6,8 @@ namespace DnaBrasilApi.Application.Laudos.Commands.CreateQualidadeVida;
 public record CreateQualidadeDeVidaCommand : IRequest<int>
 {
     public int ProfissionalId { get; init; }
-    public required int AlunoId { get; init; }
-    public string[]? ListQualidadeDeVida { get; set; }
+    public int AlunoId { get; init; }
+    public required string Resposta { get; init; }
 }
 
 public class CreateQualidadeDeVidaCommandHandler : IRequestHandler<CreateQualidadeDeVidaCommand, int>
@@ -22,34 +22,23 @@ public class CreateQualidadeDeVidaCommandHandler : IRequestHandler<CreateQualida
     public async Task<int> Handle(CreateQualidadeDeVidaCommand request, CancellationToken cancellationToken)
     {
 
-        var profissional = await _context.Profissionais
-            .FindAsync([request.ProfissionalId], cancellationToken);
-
-        Guard.Against.NotFound((int)request.ProfissionalId, profissional);
-
-
-        var aluno = await _context.Alunos
-            .FindAsync([request.AlunoId], cancellationToken);
+        var aluno = await _context.Alunos.FindAsync(new object[] { request.AlunoId }, cancellationToken);
 
         Guard.Against.NotFound((int)request.AlunoId, aluno);
 
-        foreach (string item in request.ListQualidadeDeVida!)
+        var profissional = await _context.Profissionais.FindAsync(new object[] { request.ProfissionalId }, cancellationToken);
+
+        Guard.Against.NotFound((int)request.ProfissionalId, profissional);
+
+        var entity = new QualidadeDeVida
         {
-            var resposta = await _context.Respostas
-                .FindAsync([item], cancellationToken);
+            Profissional = profissional,
+            Aluno = aluno,
+            Resposta = request.Resposta
+        };
 
-            Guard.Against.NotFound(item, resposta);
+        _context.QualidadeDeVidas.Add(entity);
 
-            var entity = new QualidadeDeVida
-            {
-                Profissional = profissional,
-                Aluno = aluno,
-                Resposta = resposta
-            };
-
-            _context.QualidadeDeVidas.Add(entity);
-
-        }
 
         await _context.SaveChangesAsync(cancellationToken);
 

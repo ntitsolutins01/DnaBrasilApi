@@ -6,9 +6,9 @@ namespace DnaBrasilApi.Application.Laudos.Commands.CreateSaude;
 public record CreateSaudeCommand : IRequest<int>
 {
     public int? ProfissionalId { get; init; }
-    public int? EnvergaduraSaude { get; init; }
-    public int? MassaCorporalSaude { get; init; }
-    public int? AlturaSaude { get; init; }
+    public decimal? EnvergaduraSaude { get; init; }
+    public decimal? MassaCorporalSaude { get; init; }
+    public decimal? AlturaSaude { get; init; }
     public string? StatusSaude { get; init; }
 }
 

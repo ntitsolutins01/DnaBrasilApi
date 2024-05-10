@@ -6,9 +6,9 @@ namespace DnaBrasilApi.Application.Laudos.Commands.UpdateSaude;
 public record UpdateSaudeCommand : IRequest <bool>
 {
     public int Id { get; init; }
-    public int? Altura { get; init; }
-    public int Massa { get; init; }
-    public int? Envergadura { get; init; }
+    public decimal? Altura { get; init; }
+    public decimal? Massa { get; init; }
+    public decimal? Envergadura { get; init; }
     public string? StatusSaude { get; set; }
 }
 

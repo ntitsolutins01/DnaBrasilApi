@@ -15,7 +15,29 @@ public class MetricaImcDto
         public Mapping()
         {
             CreateMap<MetricaImc, MetricaImcDto>()
-                .ForMember(dest => dest.Sexo, opt => opt.MapFrom(src => src.Sexo == "F" ? "Feminino" : "Masculino"));
+                .ForMember(dest => dest.Sexo, opt => opt.MapFrom(src => GetSexo(src.Sexo)));
+        }
+    }
+
+    public static string GetSexo(string? sexo)
+    {
+        try
+        {
+            switch (sexo)
+            {
+                case "G":
+                    return "Geral";
+                case "F":
+                    return "Feminino";
+                case "M":
+                    return "Masculino";
+                default:
+                    return "Não Definido";
+            }
+        }
+        catch
+        {
+            return "Erro ao Definir";
         }
     }
 }

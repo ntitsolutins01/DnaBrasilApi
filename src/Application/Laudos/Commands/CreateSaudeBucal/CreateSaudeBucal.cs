@@ -5,8 +5,8 @@ namespace DnaBrasilApi.Application.Laudos.Commands.CreateSaudeBucal;
 
 public record CreateSaudeBucalCommand : IRequest<int>
 {
-    public required Profissional Profissional { get; init; }
-    public required Questionario Questionario { get; init; }
+    public int ProfissionalId { get; init; }
+    public int AlunoId { get; init; }
     public required string Resposta { get; init; }
 }
 
@@ -21,10 +21,18 @@ public class CreateSaudeBucalCommandHandler : IRequestHandler<CreateSaudeBucalCo
 
     public async Task<int> Handle(CreateSaudeBucalCommand request, CancellationToken cancellationToken)
     {
+        var aluno = await _context.Alunos.FindAsync(new object[] { request.AlunoId }, cancellationToken);
+
+        Guard.Against.NotFound((int)request.AlunoId, aluno);
+
+        var profissional = await _context.Profissionais.FindAsync(new object[] { request.ProfissionalId }, cancellationToken);
+
+        Guard.Against.NotFound((int)request.ProfissionalId, profissional);
+
         var entity = new SaudeBucal
         {
-            Profissional = request.Profissional,
-            Questionario = request.Questionario,
+            Profissional = profissional,
+            Aluno = aluno,
             Resposta = request.Resposta
         };
 

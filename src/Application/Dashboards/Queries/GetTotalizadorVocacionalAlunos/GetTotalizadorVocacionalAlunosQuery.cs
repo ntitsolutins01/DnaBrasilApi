@@ -74,7 +74,7 @@ public class GetTotalizadorVocacionalAlunosQueryHandler : IRequestHandler<GetTot
         }
 
 
-        var verificaAlunos = alunos.Include(i => i.Vocacional);
+        //var verificaAlunos = alunos.Include(i => i.Vocacional);
 
         Dictionary<string, decimal> dict = new();
         Dictionary<string, decimal> dictTotalizadorVocacionalMasculino = new();

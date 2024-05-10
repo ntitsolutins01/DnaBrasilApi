@@ -4,6 +4,7 @@ using DnaBrasilApi.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DnaBrasilApi.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240508203922_DnaUpdateConsumoAlimentaresColunas")]
+    partial class DnaUpdateConsumoAlimentaresColunas
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1352,15 +1355,13 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ProfissionalId")
+                    b.Property<int?>("ProfissionalId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Resposta")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
+                    b.Property<int>("RespostaId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("StatusQualidadeDeVida")
+                    b.Property<string>("StatusQualidadeDeVidas")
                         .HasMaxLength(1)
                         .HasColumnType("nvarchar(1)");
 
@@ -1369,6 +1370,8 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.HasIndex("AlunoId");
 
                     b.HasIndex("ProfissionalId");
+
+                    b.HasIndex("RespostaId");
 
                     b.ToTable("QualidadeDeVidas");
                 });
@@ -2569,13 +2572,19 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
 
                     b.HasOne("DnaBrasilApi.Domain.Entities.Profissional", "Profissional")
                         .WithMany()
-                        .HasForeignKey("ProfissionalId")
+                        .HasForeignKey("ProfissionalId");
+
+                    b.HasOne("DnaBrasilApi.Domain.Entities.Resposta", "Resposta")
+                        .WithMany()
+                        .HasForeignKey("RespostaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Aluno");
 
                     b.Navigation("Profissional");
+
+                    b.Navigation("Resposta");
                 });
 
             modelBuilder.Entity("DnaBrasilApi.Domain.Entities.Questionario", b =>

@@ -20,23 +20,26 @@ public class GetStatusLaudosAllQueryHandler : IRequestHandler<GetStatusLaudosAll
         var statusLaudos = new StatusLaudosDto()
         {
             TotTalentoEsportivoFinalizado =
-                _context.TalentosEsportivos.Count(c => c.StatusTalentosEsportivos!.Equals("F")),
+                _context.Laudos.Include(i=>i.TalentoEsportivo).Count(c => c.TalentoEsportivo != null),
             TotTalentoEsportivoAndamento =
-                _context.TalentosEsportivos.Count(c => c.StatusTalentosEsportivos!.Equals("A")),
-            TotSaudeFinalizado = _context.Saudes.Count(c => c.StatusSaude!.Equals("F")),
-            TotSaudeAndamento = _context.Saudes.Count(c => c.StatusSaude!.Equals("A")),
-            TotQualidadeDeVidaFinalizado =
-                _context.QualidadeDeVidas.Count(c => c.StatusQualidadeDeVidas!.Equals("F")),
-            TotQualidadeDeVidaAndamento =
-                _context.QualidadeDeVidas.Count(c => c.StatusQualidadeDeVidas!.Equals("A")),
-            TotVocacionalFinalizado = _context.Vocacionais.Count(c => c.StatusVocacionais!.Equals("F")),
-            TotVocacionalAndamento = _context.Vocacionais.Count(c => c.StatusVocacionais!.Equals("A")),
-            TotConsumoAlimentarFinalizado =
-                _context.ConsumoAlimentares.Count(c => c.StatusConsumoAlimentares!.Equals("F")),
-            TotConsumoAlimentarAndamento =
-                _context.ConsumoAlimentares.Count(c => c.StatusConsumoAlimentares!.Equals("A")),
-            TotSaudeBucalFinalizado = _context.SaudeBucais.Count(c => c.StatusSaudeBucais!.Equals("F")),
-            TotSaudeBucalAndamento = _context.SaudeBucais.Count(c => c.StatusSaudeBucais!.Equals("A")),
+                _context.Laudos.Include(i => i.TalentoEsportivo).Count(c => c.TalentoEsportivo == null),
+
+            TotSaudeFinalizado = _context.Laudos.Include(i=>i.Saude).Count(c => c.Saude != null),
+            TotSaudeAndamento = _context.Laudos.Include(i=>i.Saude).Count(c => c.Saude == null),
+
+            TotConsumoAlimentarFinalizado = _context.Laudos.Include(i=>i.Consumo).Count(c => c.Consumo != null),
+            TotConsumoAlimentarAndamento = _context.Laudos.Include(i=>i.Consumo).Count(c => c.Consumo == null),
+
+
+            TotQualidadeDeVidaFinalizado =_context.Laudos.Include(i => i.QualidadeDeVida).Count(c => c.QualidadeDeVida != null),
+            TotQualidadeDeVidaAndamento =_context.Laudos.Include(i => i.QualidadeDeVida).Count(c => c.QualidadeDeVida == null),
+
+
+            TotVocacionalFinalizado = _context.Laudos.Include(i => i.Vocacional).Count(c => c.Vocacional != null),
+            TotVocacionalAndamento = _context.Laudos.Include(i => i.Vocacional).Count(c => c.Vocacional == null),
+
+            TotSaudeBucalFinalizado = _context.Laudos.Include(i => i.SaudeBucal).Count(c => c.SaudeBucal != null),
+            TotSaudeBucalAndamento = _context.Laudos.Include(i => i.SaudeBucal).Count(c => c.SaudeBucal == null),
         };
 
         statusLaudos.ProgressoSaude =

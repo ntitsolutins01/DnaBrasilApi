@@ -1,5 +1,4 @@
-﻿using DnaBrasilApi.Application.Profissionais.Queries;
-using DnaBrasilApi.Domain.Entities;
+﻿using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Laudos.Queries;
 public class SaudeDto
@@ -7,9 +6,9 @@ public class SaudeDto
     public int Id { get; init; }
     public int ProfissionalId { get; set; }
     public string? NomeProfissional { get; set; }
-    public int? Altura { get; set; }
-    public int Massa { get; set; }
-    public int? Envergadura { get; set; }
+    public decimal? Altura { get; set; }
+    public decimal? Massa { get; set; }
+    public decimal? Envergadura { get; set; }
     public string? DataRealizacaoTeste { get; set; }
     public string? Imc { get; set; }
     public int AlunoId { get; set; }
@@ -25,7 +24,7 @@ public class SaudeDto
                 .ForMember(dest => dest.AlunoId, opt => opt.MapFrom(src => src.Aluno!.Id));
         }
 
-        public static string GetImc(int? massa, int? altura)
+        public static string GetImc(decimal? massa, decimal? altura)
         {
             try
             {

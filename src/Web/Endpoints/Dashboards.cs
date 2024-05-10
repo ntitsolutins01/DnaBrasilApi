@@ -1,4 +1,5 @@
-﻿using DnaBrasilApi.Application.Dashboards.Queries;
+﻿using DnaBrasilApi.Application.Dashboards;
+using DnaBrasilApi.Application.Dashboards.Queries;
 using DnaBrasilApi.Application.Dashboards.Queries.GetControlePresencaByFilter;
 using DnaBrasilApi.Application.Dashboards.Queries.GetIndicadoresAlunosByFilter;
 using DnaBrasilApi.Application.Dashboards.Queries.GetLaudosAlunosByFilter;
@@ -11,6 +12,7 @@ using DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorEtniaAlunos;
 using DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorSaudeBucalAlunos;
 using DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorSaudeSexoAlunos;
 using DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorTalentoEsportivoAlunos;
+using DnaBrasilApi.Application.Fomentos.Commands.CreateFomento;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DnaBrasilApi.Web.Endpoints;
@@ -32,7 +34,8 @@ public class Dashboards : EndpointGroupBase
             .MapPost(GetGraficosSaudeBucalByFilter, "GraficosSaudeBucal")
             .MapPost(GetGraficosDeficienciasByFilter, "GraficosDeficiencia")
             .MapPost(GetGraficosTalentoByFilter,"GraficosTalento")
-            .MapPost(GetGraficoPercDesempenhoFisicoMotorByFilter, "GraficoPercDesempenhoFisicoMotor");
+            .MapPost(GetGraficoPercDesempenhoFisicoMotorByFilter, "GraficoPercDesempenhoFisicoMotor")
+            .MapPost(CreateCarga,"Carga");
     }
 
     public async Task<DashboardDto> GetIndicadoresAlunosByFilter(ISender sender, [FromBody] DashboardDto dashboard)
@@ -50,6 +53,8 @@ public class Dashboards : EndpointGroupBase
         dashboard.StatusLaudo = "F";
         dashboard.LaudosFinalizados = await sender.Send(new GetLaudosAlunosByFilterQuery() { SearchFilter = dashboard });
         dashboard.StatusLaudo = "";
+
+        dashboard.AvaliacoesDna = dashboard.LaudosAndamentos + dashboard.LaudosFinalizados;
 
         dashboard.Sexo = "F";
         dashboard.LaudosFemininos = await sender.Send(new GetLaudosAlunosByFilterQuery() { SearchFilter = dashboard });
@@ -139,5 +144,10 @@ public class Dashboards : EndpointGroupBase
     public async Task<TotalizadorEtniaDto> GetValida(ISender sender, [FromBody] DashboardDto dashboard)
     {
         return await sender.Send(new GetTotalizadorEtniaAlunosQuery() { SearchFilter = dashboard });
+    }
+
+    public async Task<int> CreateCarga(ISender sender, CreateCargaCommand command)
+    {
+        return await sender.Send(command);
     }
 }

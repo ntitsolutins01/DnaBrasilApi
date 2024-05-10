@@ -4,12 +4,8 @@ public class CreateConsumoAlimentarCommandValidator : AbstractValidator<CreateCo
 {
     public CreateConsumoAlimentarCommandValidator()
     {
-        RuleFor(v => v.Profissional)
-            .NotNull();
-        RuleFor(v => v.Questionario)
-            .NotNull();
         RuleFor(v => v.Resposta)
-            .MaximumLength(100)
+            .MaximumLength(500)
             .NotEmpty();
     }
 }

@@ -1,4 +1,5 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Application.Laudos.Queries;
 using DnaBrasilApi.Domain.Entities;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -80,15 +81,25 @@ public class GetPercentualSaudeAlunosQueryHandler : IRequestHandler<GetPercentua
 
 
         Dictionary<string, decimal> dict = new();
+        //{
+        //    { "NORMAL", 0 }, { "ABAIXODONORMAL", 0 }, { "SOBREPESO", 0 }, { "OBESIDADE", 0 }
+        //};
+
         int cont = 1;
 
-        var laudos = _context.Laudos.Where(x => verificaAlunos.Contains(x.Aluno.Id)).Include(i => i.Saude);
+        var laudos = _context.Laudos.Where(x => verificaAlunos.Contains(x.Aluno.Id)).Include(i => i.Saude)
+            .AsNoTracking()
+            .ProjectTo<LaudoDto>(_mapper.ConfigurationProvider);
+
+        int contt = 0;
 
         foreach (var aluno in laudos)
         {
             if (aluno.Saude != null)
             {
-                double alturaMetros = (double)(aluno.Saude.Altura * 0.01)!;
+                
+
+                double alturaMetros = (double)(aluno.Saude.Altura * (decimal?)0.01)!;
                 double? imc = (double)aluno.Saude!.Massa! / Math.Pow(alturaMetros, 2);
 
                 foreach (var item in metricasImc)
@@ -100,6 +111,8 @@ public class GetPercentualSaudeAlunosQueryHandler : IRequestHandler<GetPercentua
 
                     if (imc >= (double)item.ValorInicial && imc <= (double)item.ValorFinal)
                     {
+                        contt++;
+
                         if (dict.ContainsKey(item.Classificacao!))
                         {
                             var value = dict[item.Classificacao!];
