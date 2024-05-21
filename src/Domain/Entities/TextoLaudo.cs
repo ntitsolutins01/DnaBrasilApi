@@ -13,5 +13,6 @@ public class TextoLaudo : BaseAuditableEntity
     public decimal? PontoFinal { get; set; }
     public required string Aviso { get; set; }
     public required string Texto { get; set; }
+    public int? Quadrante { get; set; }
     public bool Status { get; set; } = true;
 }

@@ -1208,7 +1208,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TotalizadorEtniaDto"
+                  "$ref": "#/components/schemas/TotalizadorQualidadeVidaDto"
                 }
               }
             }
@@ -8882,11 +8882,11 @@
           }
         }
       },
-      "TotalizadorEtniaDto": {
+      "TotalizadorQualidadeVidaDto": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "percTotalizadorEtniaMasculino": {
+          "percTotalizadorQualidadeVidaMasculino": {
             "type": "object",
             "nullable": true,
             "additionalProperties": {
@@ -8894,7 +8894,7 @@
               "format": "decimal"
             }
           },
-          "percTotalizadorEtniaFeminino": {
+          "percTotalizadorQualidadeVidaFeminino": {
             "type": "object",
             "nullable": true,
             "additionalProperties": {
@@ -8902,7 +8902,7 @@
               "format": "decimal"
             }
           },
-          "valorTotalizadorEtniaMasculino": {
+          "valorTotalizadorQualidadeVidaMasculino": {
             "type": "object",
             "nullable": true,
             "additionalProperties": {
@@ -8910,15 +8910,7 @@
               "format": "decimal"
             }
           },
-          "valorTotalizadorEtniaFeminino": {
-            "type": "object",
-            "nullable": true,
-            "additionalProperties": {
-              "type": "number",
-              "format": "decimal"
-            }
-          },
-          "percEtnia": {
+          "valorTotalizadorQualidadeVidaFeminino": {
             "type": "object",
             "nullable": true,
             "additionalProperties": {
@@ -9053,6 +9045,14 @@
             "oneOf": [
               {
                 "$ref": "#/components/schemas/TotalizadorSaudeBucalDto"
+              }
+            ]
+          },
+          "listTotalizadorQualidadeVida": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/TotalizadorQualidadeVidaDto"
               }
             ]
           },
@@ -9339,6 +9339,52 @@
             }
           },
           "percDeficiencia": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "number",
+              "format": "decimal"
+            }
+          }
+        }
+      },
+      "TotalizadorEtniaDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "percTotalizadorEtniaMasculino": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "number",
+              "format": "decimal"
+            }
+          },
+          "percTotalizadorEtniaFeminino": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "number",
+              "format": "decimal"
+            }
+          },
+          "valorTotalizadorEtniaMasculino": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "number",
+              "format": "decimal"
+            }
+          },
+          "valorTotalizadorEtniaFeminino": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "number",
+              "format": "decimal"
+            }
+          },
+          "percEtnia": {
             "type": "object",
             "nullable": true,
             "additionalProperties": {

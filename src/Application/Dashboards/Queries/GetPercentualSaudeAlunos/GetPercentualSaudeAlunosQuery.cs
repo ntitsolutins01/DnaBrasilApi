@@ -74,60 +74,75 @@ public class GetPercentualSaudeAlunosQueryHandler : IRequestHandler<GetPercentua
             alunos = alunos.Where(u => u.Etnia!.Equals(search.Etnia));
         }
 
-        var metricasImc = _context.MetricasImc
-            .Where(x => x.Sexo!.Equals("G"));
-
         var verificaAlunos = alunos.Select(x => x.Id);
 
-
         Dictionary<string, decimal> dict = new();
-        //{
-        //    { "NORMAL", 0 }, { "ABAIXODONORMAL", 0 }, { "SOBREPESO", 0 }, { "OBESIDADE", 0 }
-        //};
 
         int cont = 1;
 
-        var laudos = _context.Laudos.Where(x => verificaAlunos.Contains(x.Aluno.Id)).Include(i => i.Saude)
-            .AsNoTracking()
-            .ProjectTo<LaudoDto>(_mapper.ConfigurationProvider);
-
-        int contt = 0;
+        var laudos = _context.Laudos.Where(x => verificaAlunos.Contains(x.Aluno.Id)).Include(i => i.Saude).Include(a=>a.Aluno)
+            .AsNoTracking();
 
         foreach (var aluno in laudos)
         {
-            if (aluno.Saude != null)
+            if (aluno.Saude == null)
             {
-                
-
-                double alturaMetros = (double)(aluno.Saude.Altura * (decimal?)0.01)!;
-                double? imc = (double)aluno.Saude!.Massa! / Math.Pow(alturaMetros, 2);
-
-                foreach (var item in metricasImc)
-                {
-                    if (!dict.ContainsKey(item.Classificacao!))
-                    {
-                        dict.Add(item.Classificacao!, 0);
-                    }
-
-                    if (imc >= (double)item.ValorInicial && imc <= (double)item.ValorFinal)
-                    {
-                        contt++;
-
-                        if (dict.ContainsKey(item.Classificacao!))
-                        {
-                            var value = dict[item.Classificacao!];
-
-                            value += 1;
-
-                            dict[item.Classificacao!] = value;
-                        }
-                        else
-                        {
-                            dict.Add(item.Classificacao!, cont);
-                        }
-                    }
-                }
+                continue;
             }
+
+            double alturaMetros = (double)(aluno.Saude.Altura * (decimal?)0.01)!;
+            var imc = Convert.ToDecimal(((double)aluno.Saude!.Massa! / Math.Pow(alturaMetros, 2)).ToString("F"));
+            var idade = GetIdade(aluno.Aluno!.DtNascimento, DateTime.Now);
+
+            var metricasImc = _context.MetricasImc
+                .Where(x => x.Idade == idade && x.Sexo == (idade == 99 ? "G" : aluno.Aluno.Sexo)).ToList();
+
+            var result = metricasImc.Find(
+                delegate (MetricaImc item)
+                {
+                    return imc >= item.ValorInicial && imc <= item.ValorFinal;
+                }
+            );
+            if (result != null && !dict.ContainsKey(result.Classificacao!))
+            {
+                dict.Add(result.Classificacao!, 0);
+            }
+            if (result != null && dict.ContainsKey(result.Classificacao!))
+            {
+                var value = dict[result.Classificacao!];
+
+                value += 1;
+
+                dict[result.Classificacao!] = value;
+            }
+            else
+            {
+                dict.Add(result!.Classificacao!, cont);
+            }
+
+            //foreach (var item in metricasImc)
+            //{
+            //    if (!dict.ContainsKey(item.Classificacao!))
+            //    {
+            //        dict.Add(item.Classificacao!, 0);
+            //    }
+
+            //    if (imc >= (double)item.ValorInicial && imc <= (double)item.ValorFinal)
+            //    {
+            //        if (dict.ContainsKey(item.Classificacao!))
+            //        {
+            //            var value = dict[item.Classificacao!];
+
+            //            value += 1;
+
+            //            dict[item.Classificacao!] = value;
+            //        }
+            //        else
+            //        {
+            //            dict.Add(item.Classificacao!, cont);
+            //        }
+            //    }
+            //}
         }
 
         var total = dict.Skip(0).Sum(x => x.Value);
@@ -138,6 +153,34 @@ public class GetPercentualSaudeAlunosQueryHandler : IRequestHandler<GetPercentua
         }
 
         return dict;
+    }
+    /// <summary>
+    /// Calcula quantidade de anos passdos com base em duas datas, caso encontre qualquer problema retorna 0 
+    /// </summary>
+    /// <param name="data">Data inicial</param>
+    /// <param name="now">Data final ou deixar nula para data atual</param>
+    /// <returns>Retorna inteiro com quantiadde de anos</returns>
+    private static int GetIdade(DateTime data, DateTime? now = null)
+    {
+        // Carrega a data do dia para comparação caso data informada seja nula
+
+        now = ((now == null) ? DateTime.Now : now);
+
+        try
+        {
+            int YearsOld = (now.Value.Year - data.Year);
+
+            if (now.Value.Month < data.Month || (now.Value.Month == data.Month && now.Value.Day < data.Day))
+            {
+                YearsOld--;
+            }
+
+            return YearsOld > 18 ? 99 : YearsOld < 4 ? 4 : YearsOld;
+        }
+        catch
+        {
+            return 0;
+        }
     }
 }
 

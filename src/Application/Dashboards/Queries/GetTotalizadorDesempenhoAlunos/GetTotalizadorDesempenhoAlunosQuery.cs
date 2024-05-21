@@ -1,7 +1,5 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
-using DnaBrasilApi.Application.Laudos.Queries;
 using DnaBrasilApi.Domain.Entities;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorDesempenhoAlunos;
 //[Authorize]
@@ -132,9 +130,8 @@ public class GetTotalizadorDesempenhoAlunosQueryHandler : IRequestHandler<GetTot
 
         var verificaAlunos = alunos.Select(x => x.Id);
 
-        var laudos = _context.Laudos.Where(x => verificaAlunos.Contains(x.Aluno.Id)).Include(i => i.TalentoEsportivo)
-            .AsNoTracking()
-            .ProjectTo<LaudoDto>(_mapper.ConfigurationProvider);
+        var laudos = _context.Laudos.Where(x => verificaAlunos.Contains(x.Aluno.Id)).Include(i => i.TalentoEsportivo).Include(a => a.Aluno)
+            .AsNoTracking();
 
         foreach (var aluno in laudos)
         {
@@ -143,7 +140,7 @@ public class GetTotalizadorDesempenhoAlunosQueryHandler : IRequestHandler<GetTot
                 continue;
             }
 
-            var idade = GetIdade(aluno.DtNascimento, DateTime.Now);
+            var idade = GetIdade(aluno.Aluno.DtNascimento, DateTime.Now);
             veloVerificaAluno = false;
             impulsaoVerificaAluno = false;
             
@@ -162,336 +159,368 @@ public class GetTotalizadorDesempenhoAlunosQueryHandler : IRequestHandler<GetTot
                     x.Classificacao!.Equals(desempenho) &&
                     x.Idade == idade &&
                     (x.Aviso!.Trim() == "Excelente" || x.Aviso!.Trim() == "Muito Bom" || x.Aviso!.Trim() == "Bom") &&
-                    x.Sexo == aluno.Sexo).ToList();
+                    x.Sexo == (idade == 99 ? "G" : aluno.Aluno.Sexo)).ToList();
 
-                foreach (var item in textoLaudo!)
+                foreach (var item in textoLaudo)
                 {
-                    if (!veloVerificaAluno)
+                    if (!veloVerificaAluno && aluno.TalentoEsportivo!.Velocidade >= item.PontoInicial && aluno.TalentoEsportivo!.Velocidade <= item.PontoFinal)
                     {
-                        if (aluno.TalentoEsportivo!.Velocidade >= item.PontoInicial && aluno.TalentoEsportivo!.Velocidade <= item.PontoFinal)
+                        switch (aluno.Aluno.Sexo!)
                         {
-                            if (aluno.Sexo!.Equals("M"))
-                            {
-                                if (dictTotalizadorDesempenhoMasculino.ContainsKey("velocidade"))
+                            case "M":
                                 {
-                                    veloVerificaAluno = true;
+                                    if (dictTotalizadorDesempenhoMasculino.ContainsKey("velocidade"))
+                                    {
+                                        veloVerificaAluno = true;
 
-                                    var value = dictTotalizadorDesempenhoMasculino["velocidade"];
+                                        var value = dictTotalizadorDesempenhoMasculino["velocidade"];
 
-                                    value += 1;
+                                        value += 1;
 
-                                    dictTotalizadorDesempenhoMasculino["velocidade"] = value;
+                                        dictTotalizadorDesempenhoMasculino["velocidade"] = value;
+                                    }
+
+                                    break;
                                 }
-                            }
-                            else
-                            {
-                                if (dictTotalizadorDesempenhoFeminino.ContainsKey("velocidade"))
+                            default:
                                 {
-                                    veloVerificaAluno = true;
+                                    if (dictTotalizadorDesempenhoFeminino.ContainsKey("velocidade"))
+                                    {
+                                        veloVerificaAluno = true;
 
-                                    var value = dictTotalizadorDesempenhoFeminino["velocidade"];
+                                        var value = dictTotalizadorDesempenhoFeminino["velocidade"];
 
-                                    value += 1;
+                                        value += 1;
 
-                                    dictTotalizadorDesempenhoFeminino["velocidade"] = value;
+                                        dictTotalizadorDesempenhoFeminino["velocidade"] = value;
+                                    }
+
+                                    break;
                                 }
-                            }
-
-                            var valueTotal = dict["velocidade"];
-
-                            valueTotal += 1;
-
-                            dict["velocidade"] = valueTotal;
-
-                            break;
                         }
+
+                        var valueTotal = dict["velocidade"];
+
+                        valueTotal += 1;
+
+                        dict["velocidade"] = valueTotal;
+
+                        break;
                     }
 
-                    if (!impulsaoVerificaAluno)
+                    if (!impulsaoVerificaAluno && aluno.TalentoEsportivo.ImpulsaoHorizontal >= item.PontoInicial && aluno.TalentoEsportivo.ImpulsaoHorizontal <= item.PontoFinal)
                     {
-                        if (aluno.TalentoEsportivo.ImpulsaoHorizontal >= item.PontoInicial && aluno.TalentoEsportivo.ImpulsaoHorizontal <= item.PontoFinal)
+                        switch (aluno.Aluno.Sexo!)
                         {
-                            if (aluno.Sexo!.Equals("M"))
-                            {
-                                if (dictTotalizadorDesempenhoMasculino.ContainsKey("forcaExplosiva"))
+                            case "M":
                                 {
-                                    impulsaoVerificaAluno = true;
+                                    if (dictTotalizadorDesempenhoMasculino.ContainsKey("forcaExplosiva"))
+                                    {
+                                        impulsaoVerificaAluno = true;
 
-                                    var value = dictTotalizadorDesempenhoMasculino["forcaExplosiva"];
+                                        var value = dictTotalizadorDesempenhoMasculino["forcaExplosiva"];
 
-                                    value += 1;
+                                        value += 1;
 
-                                    dictTotalizadorDesempenhoMasculino["forcaExplosiva"] = value;
+                                        dictTotalizadorDesempenhoMasculino["forcaExplosiva"] = value;
+                                    }
+
+                                    break;
                                 }
-                            }
-                            else
-                            {
-                                if (dictTotalizadorDesempenhoFeminino.ContainsKey("forcaExplosiva"))
+                            default:
                                 {
-                                    impulsaoVerificaAluno = true;
+                                    if (dictTotalizadorDesempenhoFeminino.ContainsKey("forcaExplosiva"))
+                                    {
+                                        impulsaoVerificaAluno = true;
 
-                                    var value = dictTotalizadorDesempenhoFeminino["forcaExplosiva"];
+                                        var value = dictTotalizadorDesempenhoFeminino["forcaExplosiva"];
 
-                                    value += 1;
+                                        value += 1;
 
-                                    dictTotalizadorDesempenhoFeminino["forcaExplosiva"] = value;
+                                        dictTotalizadorDesempenhoFeminino["forcaExplosiva"] = value;
+                                    }
+
+                                    break;
                                 }
-                            }
-
-                            var valueTotal = dict["forcaExplosiva"];
-
-                            valueTotal += 1;
-
-                            dict["forcaExplosiva"] = valueTotal;
-
-                            break;
                         }
+
+                        var valueTotal = dict["forcaExplosiva"];
+
+                        valueTotal += 1;
+
+                        dict["forcaExplosiva"] = valueTotal;
+
+                        break;
                     }
 
-                    if (!shutlleRunVerificaAluno)
+                    if (!shutlleRunVerificaAluno && aluno.TalentoEsportivo.ShuttleRun >= item.PontoInicial && aluno.TalentoEsportivo.ShuttleRun <= item.PontoFinal)
                     {
-                        if (aluno.TalentoEsportivo.ShuttleRun >= item.PontoInicial && aluno.TalentoEsportivo.ShuttleRun <= item.PontoFinal)
+                        switch (aluno.Aluno.Sexo!)
                         {
-                            if (aluno.Sexo!.Equals("M"))
-                            {
-                                if (dictTotalizadorDesempenhoMasculino.ContainsKey("shutlleRun"))
+                            case "M":
                                 {
-                                    shutlleRunVerificaAluno = true;
+                                    if (dictTotalizadorDesempenhoMasculino.ContainsKey("shutlleRun"))
+                                    {
+                                        shutlleRunVerificaAluno = true;
 
-                                    var value = dictTotalizadorDesempenhoMasculino["shutlleRun"];
+                                        var value = dictTotalizadorDesempenhoMasculino["shutlleRun"];
 
-                                    value += 1;
+                                        value += 1;
 
-                                    dictTotalizadorDesempenhoMasculino["shutlleRun"] = value;
+                                        dictTotalizadorDesempenhoMasculino["shutlleRun"] = value;
+                                    }
+
+                                    break;
                                 }
-                            }
-                            else
-                            {
-                                if (dictTotalizadorDesempenhoFeminino.ContainsKey("shutlleRun"))
+                            default:
                                 {
-                                    shutlleRunVerificaAluno = true;
+                                    if (dictTotalizadorDesempenhoFeminino.ContainsKey("shutlleRun"))
+                                    {
+                                        shutlleRunVerificaAluno = true;
 
-                                    var value = dictTotalizadorDesempenhoFeminino["shutlleRun"];
+                                        var value = dictTotalizadorDesempenhoFeminino["shutlleRun"];
 
-                                    value += 1;
+                                        value += 1;
 
-                                    dictTotalizadorDesempenhoFeminino["shutlleRun"] = value;
+                                        dictTotalizadorDesempenhoFeminino["shutlleRun"] = value;
+                                    }
+
+                                    break;
                                 }
-                            }
-
-                            var valueTotal = dict["shutlleRun"];
-
-                            valueTotal += 1;
-
-                            dict["shutlleRun"] = valueTotal;
-
-                            break;
                         }
+
+                        var valueTotal = dict["shutlleRun"];
+
+                        valueTotal += 1;
+
+                        dict["shutlleRun"] = valueTotal;
+
+                        break;
                     }
 
-                    if (!flexibilidadeMuscularVerificaAluno)
+                    if (!flexibilidadeMuscularVerificaAluno && aluno.TalentoEsportivo.Flexibilidade >= item.PontoInicial && aluno.TalentoEsportivo.Flexibilidade <= item.PontoFinal)
                     {
-                        if (aluno.TalentoEsportivo.Flexibilidade >= item.PontoInicial && aluno.TalentoEsportivo.Flexibilidade <= item.PontoFinal)
+                        switch (aluno.Aluno.Sexo!)
                         {
-                            if (aluno.Sexo!.Equals("M"))
-                            {
-                                if (dictTotalizadorDesempenhoMasculino.ContainsKey("flexibilidadeMuscular"))
+                            case "M":
                                 {
-                                    flexibilidadeMuscularVerificaAluno = true;
+                                    if (dictTotalizadorDesempenhoMasculino.ContainsKey("flexibilidadeMuscular"))
+                                    {
+                                        flexibilidadeMuscularVerificaAluno = true;
 
-                                    var value = dictTotalizadorDesempenhoMasculino["flexibilidadeMuscular"];
+                                        var value = dictTotalizadorDesempenhoMasculino["flexibilidadeMuscular"];
 
-                                    value += 1;
+                                        value += 1;
 
-                                    dictTotalizadorDesempenhoMasculino["flexibilidadeMuscular"] = value;
+                                        dictTotalizadorDesempenhoMasculino["flexibilidadeMuscular"] = value;
+                                    }
+
+                                    break;
                                 }
-                            }
-                            else
-                            {
-                                if (dictTotalizadorDesempenhoFeminino.ContainsKey("flexibilidadeMuscular"))
+                            default:
                                 {
-                                    flexibilidadeMuscularVerificaAluno = true;
+                                    if (dictTotalizadorDesempenhoFeminino.ContainsKey("flexibilidadeMuscular"))
+                                    {
+                                        flexibilidadeMuscularVerificaAluno = true;
 
-                                    var value = dictTotalizadorDesempenhoFeminino["flexibilidadeMuscular"];
+                                        var value = dictTotalizadorDesempenhoFeminino["flexibilidadeMuscular"];
 
-                                    value += 1;
+                                        value += 1;
 
-                                    dictTotalizadorDesempenhoFeminino["flexibilidadeMuscular"] = value;
+                                        dictTotalizadorDesempenhoFeminino["flexibilidadeMuscular"] = value;
+                                    }
+
+                                    break;
                                 }
-                            }
-
-                            var valueTotal = dict["flexibilidadeMuscular"];
-
-                            valueTotal += 1;
-
-                            dict["flexibilidadeMuscular"] = valueTotal;
-
-                            break;
                         }
+
+                        var valueTotal = dict["flexibilidadeMuscular"];
+
+                        valueTotal += 1;
+
+                        dict["flexibilidadeMuscular"] = valueTotal;
+
+                        break;
                     }
 
-                    if (!forcaMembrosSupVerificaAluno)
+                    if (!forcaMembrosSupVerificaAluno && aluno.TalentoEsportivo.PreensaoManual >= item.PontoInicial && aluno.TalentoEsportivo.PreensaoManual <= item.PontoFinal)
                     {
-                        if (aluno.TalentoEsportivo.PreensaoManual >= item.PontoInicial && aluno.TalentoEsportivo.PreensaoManual <= item.PontoFinal)
+                        switch (aluno.Aluno.Sexo!)
                         {
-                            if (aluno.Sexo!.Equals("M"))
-                            {
-                                if (dictTotalizadorDesempenhoMasculino.ContainsKey("forcaMembrosSup"))
+                            case "M":
                                 {
-                                    forcaMembrosSupVerificaAluno = true;
+                                    if (dictTotalizadorDesempenhoMasculino.ContainsKey("forcaMembrosSup"))
+                                    {
+                                        forcaMembrosSupVerificaAluno = true;
 
-                                    var value = dictTotalizadorDesempenhoMasculino["forcaMembrosSup"];
+                                        var value = dictTotalizadorDesempenhoMasculino["forcaMembrosSup"];
 
-                                    value += 1;
+                                        value += 1;
 
-                                    dictTotalizadorDesempenhoMasculino["forcaMembrosSup"] = value;
+                                        dictTotalizadorDesempenhoMasculino["forcaMembrosSup"] = value;
+                                    }
+
+                                    break;
                                 }
-                            }
-                            else
-                            {
-                                if (dictTotalizadorDesempenhoFeminino.ContainsKey("forcaMembrosSup"))
+                            default:
                                 {
-                                    forcaMembrosSupVerificaAluno = true;
+                                    if (dictTotalizadorDesempenhoFeminino.ContainsKey("forcaMembrosSup"))
+                                    {
+                                        forcaMembrosSupVerificaAluno = true;
 
-                                    var value = dictTotalizadorDesempenhoFeminino["forcaMembrosSup"];
+                                        var value = dictTotalizadorDesempenhoFeminino["forcaMembrosSup"];
 
-                                    value += 1;
+                                        value += 1;
 
-                                    dictTotalizadorDesempenhoFeminino["forcaMembrosSup"] = value;
+                                        dictTotalizadorDesempenhoFeminino["forcaMembrosSup"] = value;
+                                    }
+
+                                    break;
                                 }
-                            }
-
-                            var valueTotal = dict["forcaMembrosSup"];
-
-                            valueTotal += 1;
-
-                            dict["forcaMembrosSup"] = valueTotal;
-
-                            break;
                         }
+
+                        var valueTotal = dict["forcaMembrosSup"];
+
+                        valueTotal += 1;
+
+                        dict["forcaMembrosSup"] = valueTotal;
+
+                        break;
                     }
 
-                    if (!aptidaoCardioVerificaAluno)
+                    if (!aptidaoCardioVerificaAluno && aluno.TalentoEsportivo.Vo2Max >= item.PontoInicial && aluno.TalentoEsportivo.Vo2Max <= item.PontoFinal)
                     {
-                        if (aluno.TalentoEsportivo.Vo2Max >= item.PontoInicial && aluno.TalentoEsportivo.Vo2Max <= item.PontoFinal)
+                        switch (aluno.Aluno.Sexo!)
                         {
-                            if (aluno.Sexo!.Equals("M"))
-                            {
-                                if (dictTotalizadorDesempenhoMasculino.ContainsKey("aptidaoCardio"))
+                            case "M":
                                 {
-                                    aptidaoCardioVerificaAluno = true;
+                                    if (dictTotalizadorDesempenhoMasculino.ContainsKey("aptidaoCardio"))
+                                    {
+                                        aptidaoCardioVerificaAluno = true;
 
-                                    var value = dictTotalizadorDesempenhoMasculino["aptidaoCardio"];
+                                        var value = dictTotalizadorDesempenhoMasculino["aptidaoCardio"];
 
-                                    value += 1;
+                                        value += 1;
 
-                                    dictTotalizadorDesempenhoMasculino["aptidaoCardio"] = value;
+                                        dictTotalizadorDesempenhoMasculino["aptidaoCardio"] = value;
+                                    }
+
+                                    break;
                                 }
-                            }
-                            else
-                            {
-                                if (dictTotalizadorDesempenhoFeminino.ContainsKey("aptidaoCardio"))
+                            default:
                                 {
-                                    aptidaoCardioVerificaAluno = true;
+                                    if (dictTotalizadorDesempenhoFeminino.ContainsKey("aptidaoCardio"))
+                                    {
+                                        aptidaoCardioVerificaAluno = true;
 
-                                    var value = dictTotalizadorDesempenhoFeminino["aptidaoCardio"];
+                                        var value = dictTotalizadorDesempenhoFeminino["aptidaoCardio"];
 
-                                    value += 1;
+                                        value += 1;
 
-                                    dictTotalizadorDesempenhoFeminino["aptidaoCardio"] = value;
+                                        dictTotalizadorDesempenhoFeminino["aptidaoCardio"] = value;
+                                    }
+
+                                    break;
                                 }
-                            }
-
-                            var valueTotal = dict["aptidaoCardio"];
-
-                            valueTotal += 1;
-
-                            dict["aptidaoCardio"] = valueTotal;
-
-                            break;
                         }
+
+                        var valueTotal = dict["aptidaoCardio"];
+
+                        valueTotal += 1;
+
+                        dict["aptidaoCardio"] = valueTotal;
+
+                        break;
                     }
 
-                    if (!vo2MaxVerificaAluno)
+                    if (!vo2MaxVerificaAluno && aluno.TalentoEsportivo.Vo2Max >= item.PontoInicial && aluno.TalentoEsportivo.Vo2Max <= item.PontoFinal)
                     {
-                        if (aluno.TalentoEsportivo.Vo2Max >= item.PontoInicial && aluno.TalentoEsportivo.Vo2Max <= item.PontoFinal)
+                        switch (aluno.Aluno.Sexo!)
                         {
-                            if (aluno.Sexo!.Equals("M"))
-                            {
-                                if (dictTotalizadorDesempenhoMasculino.ContainsKey("vo2Max"))
+                            case "M":
                                 {
-                                    vo2MaxVerificaAluno = true;
+                                    if (dictTotalizadorDesempenhoMasculino.ContainsKey("vo2Max"))
+                                    {
+                                        vo2MaxVerificaAluno = true;
 
-                                    var value = dictTotalizadorDesempenhoMasculino["vo2Max"];
+                                        var value = dictTotalizadorDesempenhoMasculino["vo2Max"];
 
-                                    value += 1;
+                                        value += 1;
 
-                                    dictTotalizadorDesempenhoMasculino["vo2Max"] = value;
+                                        dictTotalizadorDesempenhoMasculino["vo2Max"] = value;
+                                    }
+
+                                    break;
                                 }
-                            }
-                            else
-                            {
-                                if (dictTotalizadorDesempenhoFeminino.ContainsKey("vo2Max"))
+                            default:
                                 {
-                                    vo2MaxVerificaAluno = true;
+                                    if (dictTotalizadorDesempenhoFeminino.ContainsKey("vo2Max"))
+                                    {
+                                        vo2MaxVerificaAluno = true;
 
-                                    var value = dictTotalizadorDesempenhoFeminino["vo2Max"];
+                                        var value = dictTotalizadorDesempenhoFeminino["vo2Max"];
 
-                                    value += 1;
+                                        value += 1;
 
-                                    dictTotalizadorDesempenhoFeminino["vo2Max"] = value;
+                                        dictTotalizadorDesempenhoFeminino["vo2Max"] = value;
+                                    }
+
+                                    break;
                                 }
-                            }
-
-                            var valueTotal = dict["vo2Max"];
-
-                            valueTotal += 1;
-
-                            dict["vo2Max"] = valueTotal;
-
-                            break;
                         }
+
+                        var valueTotal = dict["vo2Max"];
+
+                        valueTotal += 1;
+
+                        dict["vo2Max"] = valueTotal;
+
+                        break;
                     }
 
-                    if (!pranchaVerificaAluno)
+                    if (!pranchaVerificaAluno && aluno.TalentoEsportivo.Abdominal >= item.PontoInicial && aluno.TalentoEsportivo.Abdominal <= item.PontoFinal)
                     {
-                        if (aluno.TalentoEsportivo.Abdominal >= item.PontoInicial && aluno.TalentoEsportivo.Abdominal <= item.PontoFinal)
+                        switch (aluno.Aluno.Sexo!)
                         {
-                            if (aluno.Sexo!.Equals("M"))
-                            {
-                                if (dictTotalizadorDesempenhoMasculino.ContainsKey("prancha"))
+                            case "M":
                                 {
-                                    pranchaVerificaAluno = true;
+                                    if (dictTotalizadorDesempenhoMasculino.ContainsKey("prancha"))
+                                    {
+                                        pranchaVerificaAluno = true;
 
-                                    var value = dictTotalizadorDesempenhoMasculino["prancha"];
+                                        var value = dictTotalizadorDesempenhoMasculino["prancha"];
 
-                                    value += 1;
+                                        value += 1;
 
-                                    dictTotalizadorDesempenhoMasculino["prancha"] = value;
+                                        dictTotalizadorDesempenhoMasculino["prancha"] = value;
+                                    }
+
+                                    break;
                                 }
-                            }
-                            else
-                            {
-                                if (dictTotalizadorDesempenhoFeminino.ContainsKey("prancha"))
+                            default:
                                 {
-                                    pranchaVerificaAluno = true;
+                                    if (dictTotalizadorDesempenhoFeminino.ContainsKey("prancha"))
+                                    {
+                                        pranchaVerificaAluno = true;
 
-                                    var value = dictTotalizadorDesempenhoFeminino["prancha"];
+                                        var value = dictTotalizadorDesempenhoFeminino["prancha"];
 
-                                    value += 1;
+                                        value += 1;
 
-                                    dictTotalizadorDesempenhoFeminino["prancha"] = value;
+                                        dictTotalizadorDesempenhoFeminino["prancha"] = value;
+                                    }
+
+                                    break;
                                 }
-                            }
-
-                            var valueTotal = dict["prancha"];
-
-                            valueTotal += 1;
-
-                            dict["prancha"] = valueTotal;
-
-                            break;
                         }
+
+                        var valueTotal = dict["prancha"];
+
+                        valueTotal += 1;
+
+                        dict["prancha"] = valueTotal;
+
+                        break;
                     }
                 }
             }
@@ -540,7 +569,7 @@ public class GetTotalizadorDesempenhoAlunosQueryHandler : IRequestHandler<GetTot
                 YearsOld--;
             }
 
-            return (YearsOld < 0) ? 0 : YearsOld;
+            return YearsOld > 18 ? 99 : YearsOld < 4 ? 4 : YearsOld;
         }
         catch
         {
