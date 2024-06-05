@@ -26,6 +26,8 @@ public class DashboardDto
     public TotalizadorEtniaDto? ListTotalizadorEtnia { get; set; }
     public TotalizadorSaudeBucalDto? ListTotalizadorSaudeBucal { get; set; }
     public TotalizadorQualidadeVidaDto? ListTotalizadorQualidadeVida { get; set; }
+    public TotalizadorConsumoAlimentarDto? ListTotalizadorConsumoAlimentar { get; set; }
+    public TotalizadorVocacionalDto? ListTotalizadorVocacional { get; set; }
 
     #region SearchFilter
     public string? Sexo { get; set; }

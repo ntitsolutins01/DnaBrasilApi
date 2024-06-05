@@ -13,6 +13,7 @@ public record CreateTextoLaudoCommand : IRequest<int>
     public decimal? PontoFinal { get; init; }
     public required string Aviso { get; init; }
     public required string Texto { get; init; }
+    public required int Quadrante { get; init; }
     public bool Status { get; init; } = true;
 }
 
@@ -42,7 +43,8 @@ public class CreateTextoLaudoCommandHandler : IRequestHandler<CreateTextoLaudoCo
             PontoFinal = request.PontoFinal,
             Aviso = request.Aviso,
             Texto = request.Texto,
-            Status = request.Status
+            Status = request.Status,
+            Quadrante = request.Quadrante
         };
 
         _context.TextosLaudos.Add(entity);

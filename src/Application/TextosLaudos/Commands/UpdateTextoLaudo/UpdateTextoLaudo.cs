@@ -12,6 +12,7 @@ public record UpdateTextoLaudoCommand : IRequest<bool>
     public decimal? PontoFinal { get; init; }
     public required string Aviso { get; init; }
     public required string Texto { get; init; }
+    public required int Quadrante { get; init; }
     public bool Status { get; init; }
 }
 
@@ -32,13 +33,13 @@ public class UpdateTextoLaudoCommandHandler : IRequestHandler<UpdateTextoLaudoCo
         Guard.Against.NotFound(request.Id, entity);
 
         entity.Idade = request.Idade;
-        entity.Sexo = request.Sexo; 
         entity.Classificacao = request.Classificacao;
         entity.PontoInicial = request.PontoInicial;
         entity.PontoFinal = request.PontoFinal;
         entity.Aviso = request.Aviso;
         entity.Texto = request.Texto;
         entity.Status = request.Status;
+        entity.Quadrante = request.Quadrante;
 
         var result = await _context.SaveChangesAsync(cancellationToken);
 

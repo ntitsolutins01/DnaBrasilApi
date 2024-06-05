@@ -26,7 +26,7 @@ public class GetTotalizadorSaudeSexoAlunosQueryHandler : IRequestHandler<GetTota
     {
         IQueryable<Aluno> alunos;
 
-        alunos = _context.Alunos
+        alunos = _context.Alunos//.Where(x=>x.Id== 38438)//37315 - Feminino
             .AsNoTracking();
 
         var result = FilterAlunosPeriodo(alunos, request.SearchFilter!, cancellationToken);
@@ -148,8 +148,7 @@ public class GetTotalizadorSaudeSexoAlunosQueryHandler : IRequestHandler<GetTota
                         {
                             var indicePositivoSaudeFem =
                                 dictTotalizadorSaudeFeminino["indicePositivoSaude"];
-                            indicePositivoSaudeFem =
-                                dictTotalizadorSaudeFeminino["indicePositivoSaude"];
+                            indicePositivoSaudeFem += 1;
                             dictTotalizadorSaudeFeminino["indicePositivoSaude"] =
                                 indicePositivoSaudeFem;
                         }

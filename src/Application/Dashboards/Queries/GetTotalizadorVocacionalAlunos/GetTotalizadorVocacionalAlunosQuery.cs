@@ -1,6 +1,7 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using Boolean = System.Boolean;
 
 namespace DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorVocacionalAlunos;
 //[Authorize]
@@ -25,7 +26,7 @@ public class GetTotalizadorVocacionalAlunosQueryHandler : IRequestHandler<GetTot
     {
         IQueryable<Aluno> alunos;
 
-        alunos = _context.Alunos
+        alunos = _context.Alunos//.Where(x=>x.Id==34493)
             .AsNoTracking();
 
         var result = FilterAlunos(alunos, request.SearchFilter!, cancellationToken);
@@ -74,82 +75,262 @@ public class GetTotalizadorVocacionalAlunosQueryHandler : IRequestHandler<GetTot
         }
 
 
-        //var verificaAlunos = alunos.Include(i => i.Vocacional);
+        var verificaAlunos = alunos.Select(x => x.Id);
 
-        Dictionary<string, decimal> dict = new();
-        Dictionary<string, decimal> dictTotalizadorVocacionalMasculino = new();
-        Dictionary<string, decimal> dictTotalizadorVocacionalFeminino = new();
+        Dictionary<string, decimal> dict = new()
+        {
+            { "TecnologiasAplicadas", 0 },
+            { "CienciasExatasNaturais", 0 },
+            { "Artistico", 0 },
+            { "CienciasHumanas", 0 },
+            { "Empreendedorismo", 0 },
+            { "CienciasContabeisAdministrativas", 0 }
+        };
 
-        //foreach (Modalidade item in modalidades)
-        //{
-        //    dictTotalizadorVocacionalMasculino.Add(item.Nome!, 0);
-        //    dictTotalizadorVocacionalFeminino.Add(item.Nome!, 0);
-        //    dict.Add(item.Nome!, 0);
-        //}
+        Dictionary<string, decimal> dictTotalizadorVocacionalMasculino = new()
+        {
 
-        //foreach (Aluno aluno in verificaAlunos)
-        //{
-        //    if (aluno.Vocacional != null)
-        //    {
-        //        foreach (var item in modalidades)
-        //        {
-        //            if (aluno.Vocacional.!.Equals(item.Nome))
-        //            {
-        //                if (aluno.Sexo.Equals("M"))
-        //                {
-        //                    if (dictTotalizadorVocacionalMasculino.ContainsKey(item.Nome!))
-        //                    {
-        //                        var value = dictTotalizadorVocacionalMasculino[item.Nome!];
+            { "TecnologiasAplicadas", 0 },
+            { "CienciasExatasNaturais", 0 },
+            { "Artistico", 0 },
+            { "CienciasHumanas", 0 },
+            { "Empreendedorismo", 0 },
+            { "CienciasContabeisAdministrativas", 0 }
+        };
 
-        //                        value += 1;
+        Dictionary<string, decimal> dictTotalizadorVocacionalFeminino = new()
+        {
 
-        //                        dictTotalizadorVocacionalMasculino[item.Nome!] = value;
-        //                    }
-        //                }
-        //                else
-        //                {
-        //                    if (dictTotalizadorVocacionalFeminino.ContainsKey(item.Nome!))
-        //                    {
-        //                        var value = dictTotalizadorVocacionalFeminino[item.Nome!];
+            { "TecnologiasAplicadas", 0 },
+            { "CienciasExatasNaturais", 0 },
+            { "Artistico", 0 },
+            { "CienciasHumanas", 0 },
+            { "Empreendedorismo", 0 },
+            { "CienciasContabeisAdministrativas", 0 }
+        };
 
-        //                        value += 1;
+        var laudos = _context.Laudos.Where(x => verificaAlunos.Contains(x.Aluno.Id)).Include(i => i.Vocacional).Where(x => x.Vocacional != null)
+            .Include(a => a.Aluno)
+            .AsNoTracking();
 
-        //                        dictTotalizadorVocacionalFeminino[item.Nome!] = value;
-        //                    }
-        //                }
+        decimal respostas1;
+        decimal respostas2;
+        decimal respostas3;
+        decimal respostas4;
 
-        //                var valueTotal = dict[item.Nome!];
+        var metricas = _context.TextosLaudos
+            .Where(x => x.TipoLaudo.Id == 6).ToList();
 
-        //                valueTotal += 1;
+        foreach (var aluno in laudos)
+        {
+            List<int> listRespostas = aluno.Vocacional!.Resposta.Split(',').Select(item => int.Parse(item)).ToList();
 
-        //                dict[item.Nome!] = valueTotal;
-        //            }
-        //        }
-        //    }
-        //}
+            var respostas = _context.Respostas.Where(x => listRespostas.Contains(x.Id)).Include(i => i.Questionario);
 
-        //var totalMasc = dictTotalizadorVocacionalMasculino.Skip(0).Sum(x => x.Value);
+            respostas1 = respostas.Count(x => x.ValorPesoResposta == 1);
+            respostas2 = respostas.Count(x => x.ValorPesoResposta == 2);
+            respostas3 = respostas.Count(x => x.ValorPesoResposta == 3);
+            respostas4 = respostas.Count(x => x.ValorPesoResposta == 4);
 
-        //Dictionary<string, decimal> percTotalizadorVocacionalMasculino = dictTotalizadorVocacionalMasculino.ToDictionary(item => item.Key!, item => 100 * item.Value / totalMasc);
+            Dictionary<int, decimal> dicRespostas = new()
+            {
+                { 1, respostas1 },
+                { 2, respostas2 },
+                { 3, respostas3 },
+                { 4, respostas4 }
+            };
 
-        //var totalFem = dictTotalizadorVocacionalFeminino.Skip(0).Sum(x => x.Value);
+            var sortedDict = from entry in dicRespostas orderby entry.Value descending select entry;
 
-        //Dictionary<string, decimal> percTotalizadorVocacionalFeminino = dictTotalizadorVocacionalFeminino.ToDictionary(item => item.Key!, item => 100 * item.Value / totalFem);
+            var duplicados = sortedDict.GroupBy(x => x.Value)
+                .Select(x => new { Item = x, HasDuplicates = x.Count() > 1 });
 
-        //var total = dict.Skip(0).Sum(x => x.Value);
+            foreach (var duplicado in duplicados.Where(s=>s.HasDuplicates))
+            {
+                foreach (var dupli in duplicado.Item)
+                {
+                    var result = metricas.Find(
+                        delegate (TextoLaudo item)
 
-        //Dictionary<string, decimal> percVocacional = dict.ToDictionary(item => item.Key!, item => 100 * item.Value / total);
+                        {
+                            if (dupli.Key == 1 && IsPrime((int)dupli.Value))
+                            {
+                                return item.PontoFinal == (decimal?)1.1;
+                            }
+                            else if (dupli.Key == 1 && !IsPrime((int)dupli.Value))
+                            {
+                                return item.PontoFinal == (decimal?)1.2;
+                            }
+                            else if (dupli.Key == 4 && IsPrime((int)dupli.Value))
+                            {
+                                return item.PontoFinal == (decimal?)4.1;
+                            }
+                            else if (dupli.Key == 4 && !IsPrime((int)dupli.Value))
+                            {
+                                return item.PontoFinal == (decimal?)4.2;
+                            }
+                            else if (dupli.Key == 2)
+                            {
+                                return item.PontoFinal == 2;
+                            }
+                            else
+                            {
+                                return item.PontoFinal == 3;
+                            }
+                        }
+                    );
 
-        //return new TotalizadorVocacionalDto
-        //{
-        //    ValorTotalizadorVocacionalMasculino = dictTotalizadorVocacionalMasculino,
-        //    ValorTotalizadorVocacionalFeminino = dictTotalizadorVocacionalFeminino,
-        //    PercTotalizadorVocacionalMasculino = percTotalizadorVocacionalMasculino,
-        //    PercTotalizadorVocacionalFeminino = percTotalizadorVocacionalFeminino,
-        //    PercVocacional = percVocacional
-        //};
+                    if (result == null || !dict.ContainsKey(result.Aviso.Split('.')[0]))
+                    {
+                        continue;
+                    }
 
-        return new TotalizadorVocacionalDto();
+                    var value = dict[result.Aviso.Split('.')[0]];
+
+                    value += 1;
+
+                    dict[result.Aviso.Split('.')[0]] = value;
+
+                    if (aluno.Aluno.Sexo == "M")
+                    {
+                        var valor = dictTotalizadorVocacionalMasculino[result.Aviso.Split('.')[0]];
+
+                        valor += 1;
+
+                        dictTotalizadorVocacionalMasculino[result.Aviso.Split('.')[0]] = valor;
+                    }
+                    else
+                    {
+                        var valor = dictTotalizadorVocacionalFeminino[result.Aviso.Split('.')[0]];
+
+                        valor += 1;
+
+                        dictTotalizadorVocacionalFeminino[result.Aviso.Split('.')[0]] = valor;
+                    }
+                }
+            }
+
+            //var dublicate = sortedDict.ToLookup(x => x.Value, x => x.Key).Where(x => x.Count() > 1);
+
+            //foreach (var i in dublicate)
+            //{
+            //    Console.WriteLine(i.Key);
+            //}
+
+            //var duplicates = sortedDict.GroupBy(i => i.Value).Select(i => new
+            //{
+            //    keys = i.Select(x => x.Key),
+            //    value = i.Key,
+            //    count = i.Count()
+            //});
+
+            //foreach (var duplicate in duplicates)
+            //{
+            //    Console.WriteLine("Value: {0} Count: {1}", duplicate.value, duplicate.count);
+            //    foreach (var key in duplicate.keys)
+            //    {
+            //        Console.WriteLine(" - {0}", key);
+            //    }
+            //}
+
+            //var duplicates2 = sortedDict.GroupBy(g => g.Value)
+            //    .Where(x => x.Count() > 1)
+            //    .Select(x => new { Item = x.First(), Count = x.Count() })
+            //    .ToList();
+
+            //var result = metricas.Find(
+            //    delegate (TextoLaudo item)
+            //    {
+            //        if (sortedDict.First().Key == 1 && IsPrime((int)sortedDict.First().Value))
+            //        {
+            //            return item.PontoFinal == (decimal?)1.1;
+            //        }
+            //        else if (sortedDict.First().Key == 1 && !IsPrime((int)sortedDict.First().Value))
+            //        {
+            //            return item.PontoFinal == (decimal?)1.2;
+            //        }
+            //        else if (sortedDict.First().Key == 4 && IsPrime((int)sortedDict.First().Value))
+            //        {
+            //            return item.PontoFinal == (decimal?)4.1;
+            //        }
+            //        else if (sortedDict.First().Key == 4 && !IsPrime((int)sortedDict.First().Value))
+            //        {
+            //            return item.PontoFinal == (decimal?)4.2;
+            //        }
+            //        else if (sortedDict.First().Key == 2)
+            //        {
+            //            return item.PontoFinal == 2;
+            //        }
+            //        else
+            //        {
+            //            return item.PontoFinal == 3;
+            //        }
+            //    }
+            //);
+
+            //if (result == null || !dict.ContainsKey(result.Aviso.Split('.')[0]))
+            //{
+            //    continue;
+            //}
+
+            //var value = dict[result.Aviso.Split('.')[0]];
+
+            //value += 1;
+
+            //dict[result.Aviso.Split('.')[0]] = value;
+
+            //if (aluno.Aluno.Sexo == "M")
+            //{
+            //    var valor = dictTotalizadorVocacionalMasculino[result.Aviso.Split('.')[0]];
+
+            //    valor += 1;
+
+            //    dictTotalizadorVocacionalMasculino[result.Aviso.Split('.')[0]] = valor;
+            //}
+            //else
+            //{
+            //    var valor = dictTotalizadorVocacionalFeminino[result.Aviso.Split('.')[0]];
+
+            //    valor += 1;
+
+            //    dictTotalizadorVocacionalFeminino[result.Aviso.Split('.')[0]] = valor;
+            //}
+        }
+
+        var totalMasc = dictTotalizadorVocacionalMasculino.Skip(0).Sum(x => x.Value);
+
+        Dictionary<string, decimal> percTotalizadorVocacionalMasculino = dictTotalizadorVocacionalMasculino.Where(item => totalMasc != 0).ToDictionary(item => item.Key!, item => Convert.ToDecimal((100 * item.Value / totalMasc).ToString("F")));
+
+        var totalFem = dictTotalizadorVocacionalFeminino.Skip(0).Sum(x => x.Value);
+
+        Dictionary<string, decimal> percTotalizadorVocacionalFeminino = dictTotalizadorVocacionalFeminino.Where(item => totalFem != 0).ToDictionary(item => item.Key!, item => Convert.ToDecimal((100 * item.Value / totalFem).ToString("F")));
+
+        var total = dict.Skip(0).Sum(x => x.Value);
+
+        Dictionary<string, decimal> percVocacional = dict.Where(item => total != 0).ToDictionary(item => item.Key!, item => Convert.ToDecimal((100 * item.Value / total).ToString("F")));
+
+        return new TotalizadorVocacionalDto()
+        {
+            ValorTotalizadorVocacionalMasculino = dictTotalizadorVocacionalMasculino,
+            ValorTotalizadorVocacionalFeminino = dictTotalizadorVocacionalFeminino,
+            PercTotalizadorVocacionalMasculino = percTotalizadorVocacionalMasculino,
+            PercTotalizadorVocacionalFeminino = percTotalizadorVocacionalFeminino,
+            PercentualVocacional = percVocacional
+        };
+    }
+
+    private Boolean IsPrime(int number)
+    {
+        if (number == 1) return false;
+        if (number == 2) return true;
+
+        var limit = Math.Ceiling(Math.Sqrt(number)); //hoisting the loop limit
+
+        for (int i = 2; i <= limit; ++i)
+            if (number % i == 0)
+                return false;
+        return true;
+
     }
 }
 

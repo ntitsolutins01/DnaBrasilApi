@@ -1208,7 +1208,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TotalizadorQualidadeVidaDto"
+                  "$ref": "#/components/schemas/TotalizadorVocacionalDto"
                 }
               }
             }
@@ -1552,6 +1552,105 @@
           "Dashboards"
         ],
         "operationId": "GetGraficoPercDesempenhoFisicoMotorByFilter",
+        "requestBody": {
+          "x-name": "dashboard",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DashboardDto"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DashboardDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Dashboards/GetGraficosQualidadeVida": {
+      "post": {
+        "tags": [
+          "Dashboards"
+        ],
+        "operationId": "GetGraficosQualidadeVidaByFilter",
+        "requestBody": {
+          "x-name": "dashboard",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DashboardDto"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DashboardDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Dashboards/GetGraficosConsumoAlimentar": {
+      "post": {
+        "tags": [
+          "Dashboards"
+        ],
+        "operationId": "GetGraficosConsumoAlimentarByFilter",
+        "requestBody": {
+          "x-name": "dashboard",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DashboardDto"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DashboardDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Dashboards/GetGraficosVocacional": {
+      "post": {
+        "tags": [
+          "Dashboards"
+        ],
+        "operationId": "GetGraficosVocacionalByFilter",
         "requestBody": {
           "x-name": "dashboard",
           "description": "",
@@ -8882,11 +8981,11 @@
           }
         }
       },
-      "TotalizadorQualidadeVidaDto": {
+      "TotalizadorVocacionalDto": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "percTotalizadorQualidadeVidaMasculino": {
+          "percTotalizadorVocacionalMasculino": {
             "type": "object",
             "nullable": true,
             "additionalProperties": {
@@ -8894,7 +8993,7 @@
               "format": "decimal"
             }
           },
-          "percTotalizadorQualidadeVidaFeminino": {
+          "percTotalizadorVocacionalFeminino": {
             "type": "object",
             "nullable": true,
             "additionalProperties": {
@@ -8902,7 +9001,7 @@
               "format": "decimal"
             }
           },
-          "valorTotalizadorQualidadeVidaMasculino": {
+          "valorTotalizadorVocacionalMasculino": {
             "type": "object",
             "nullable": true,
             "additionalProperties": {
@@ -8910,7 +9009,15 @@
               "format": "decimal"
             }
           },
-          "valorTotalizadorQualidadeVidaFeminino": {
+          "valorTotalizadorVocacionalFeminino": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "number",
+              "format": "decimal"
+            }
+          },
+          "percentualVocacional": {
             "type": "object",
             "nullable": true,
             "additionalProperties": {
@@ -9053,6 +9160,22 @@
             "oneOf": [
               {
                 "$ref": "#/components/schemas/TotalizadorQualidadeVidaDto"
+              }
+            ]
+          },
+          "listTotalizadorConsumoAlimentar": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/TotalizadorConsumoAlimentarDto"
+              }
+            ]
+          },
+          "listTotalizadorVocacional": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/TotalizadorVocacionalDto"
               }
             ]
           },
@@ -9430,7 +9553,99 @@
               "format": "decimal"
             }
           },
-          "percSaudeBucal": {
+          "percentualSaudeBucal": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "number",
+              "format": "decimal"
+            }
+          }
+        }
+      },
+      "TotalizadorQualidadeVidaDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "percTotalizadorQualidadeVidaMasculino": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "number",
+              "format": "decimal"
+            }
+          },
+          "percTotalizadorQualidadeVidaFeminino": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "number",
+              "format": "decimal"
+            }
+          },
+          "valorTotalizadorQualidadeVidaMasculino": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "number",
+              "format": "decimal"
+            }
+          },
+          "valorTotalizadorQualidadeVidaFeminino": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "number",
+              "format": "decimal"
+            }
+          },
+          "percentualQualidade": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "number",
+              "format": "decimal"
+            }
+          }
+        }
+      },
+      "TotalizadorConsumoAlimentarDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "percTotalizadorConsumoAlimentarMasculino": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "number",
+              "format": "decimal"
+            }
+          },
+          "percTotalizadorConsumoAlimentarFeminino": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "number",
+              "format": "decimal"
+            }
+          },
+          "valorTotalizadorConsumoAlimentarMasculino": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "number",
+              "format": "decimal"
+            }
+          },
+          "valorTotalizadorConsumoAlimentarFeminino": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "number",
+              "format": "decimal"
+            }
+          },
+          "percentualConsumoAlimentar": {
             "type": "object",
             "nullable": true,
             "additionalProperties": {
@@ -11634,8 +11849,8 @@
             "format": "int32"
           },
           "valorPesoResposta": {
-            "type": "integer",
-            "format": "int32"
+            "type": "number",
+            "format": "decimal"
           }
         }
       },
@@ -11902,6 +12117,11 @@
           },
           "status": {
             "type": "boolean"
+          },
+          "quadrante": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
           }
         }
       },
@@ -11948,6 +12168,10 @@
             "type": "string",
             "maxLength": 500,
             "minLength": 0
+          },
+          "quadrante": {
+            "type": "integer",
+            "format": "int32"
           },
           "status": {
             "type": "boolean"
@@ -11997,6 +12221,10 @@
             "type": "string",
             "maxLength": 500,
             "minLength": 0
+          },
+          "quadrante": {
+            "type": "integer",
+            "format": "int32"
           },
           "status": {
             "type": "boolean"

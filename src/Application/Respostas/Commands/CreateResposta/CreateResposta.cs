@@ -7,7 +7,7 @@ public record CreateRespostaCommand : IRequest<int>
 {
     public required string RespostaQuestionario { get; init; }
     public required int QuestionarioId { get; init; }
-    public required int ValorPesoResposta { get; init; }
+    public required decimal ValorPesoResposta { get; init; }
 }
 
 public class CreateRespostaCommandHandler : IRequestHandler<CreateRespostaCommand, int>

@@ -24,7 +24,7 @@ public class GetTotalizadorSaudeBucalAlunosQueryHandler : IRequestHandler<GetTot
     {
         IQueryable<Aluno> alunos;
 
-        alunos = _context.Alunos
+        alunos = _context.Alunos.Where(x=>x.Id== 34101)//37315 - Feminino
             .AsNoTracking();
 
         var result = FilterAlunosPeriodo(alunos, request.SearchFilter!, cancellationToken);
@@ -67,174 +67,108 @@ public class GetTotalizadorSaudeBucalAlunosQueryHandler : IRequestHandler<GetTot
             alunos = alunos.Where(u => listAlunos.Contains(u.Id));
         }
 
-        //if (!string.IsNullOrWhiteSpace(search.SaudeBucal))
-        //{
-        //    alunos = alunos.Where(u => u.SaudeBucal!.Equals(search.SaudeBucal));
-        //}
-
-        //Dictionary<string, decimal> dict = new()
-        //{
-        //    { "PARDO", 0 }, { "BRANCO", 0 }, { "PRETO", 0 }, { "INDÍGENA", 0 },{ "AMARELO", 0 }
-        //};
-        //Dictionary<string, decimal> dictTotalizadorSaudeBucalMasculino = new()
-        //{
-        //    { "PARDO", 0 }, { "BRANCO", 0 }, { "PRETO", 0 }, { "INDÍGENA", 0 },{ "AMARELO", 0 }
-        //};
-        //Dictionary<string, decimal> dictTotalizadorSaudeBucalFeminino = new()
-        //{
-        //    { "PARDO", 0 }, { "BRANCO", 0 }, { "PRETO", 0 }, { "INDÍGENA", 0 },{ "AMARELO", 0 }
-        //};
-
-        //foreach (Aluno aluno in alunos.Where(x => x.SaudeBucal != "0"))
-        //{
-        //    var value = dict[aluno.SaudeBucal!];
-
-        //    value += 1;
-
-        //    dict[aluno.SaudeBucal!] = value;
-
-        //    switch (aluno.SaudeBucal)
-        //    {
-        //        case "PARDO":
-        //            if (aluno.Sexo.Equals("M"))
-        //            {
-        //                var pardoMasc = dictTotalizadorSaudeBucalMasculino["PARDO"];
-        //                pardoMasc += 1;
-        //                dictTotalizadorSaudeBucalMasculino["PARDO"] = pardoMasc;
-        //            }
-        //            else
-        //            {
-        //                var pardoFem = dictTotalizadorSaudeBucalFeminino["PARDO"];
-        //                pardoFem += 1;
-        //                dictTotalizadorSaudeBucalFeminino["PARDO"] = pardoFem;
-        //            }
-
-        //            break;
-        //        case "BRANCO":
-        //            if (aluno.Sexo.Equals("M"))
-        //            {
-        //                var brancoMasc = dictTotalizadorSaudeBucalMasculino["BRANCO"];
-        //                brancoMasc += 1;
-        //                dictTotalizadorSaudeBucalMasculino["BRANCO"] = brancoMasc;
-        //            }
-        //            else
-        //            {
-        //                var brancoFem = dictTotalizadorSaudeBucalFeminino["BRANCO"];
-        //                brancoFem += 1;
-        //                dictTotalizadorSaudeBucalFeminino["BRANCO"] = brancoFem;
-        //            }
-        //            break;
-        //        case "PRETO":
-        //            if (aluno.Sexo.Equals("M"))
-        //            {
-        //                var pretoMasc = dictTotalizadorSaudeBucalMasculino["PRETO"];
-        //                pretoMasc += 1;
-        //                dictTotalizadorSaudeBucalMasculino["PRETO"] = pretoMasc;
-        //            }
-        //            else
-        //            {
-        //                var pretoFem = dictTotalizadorSaudeBucalFeminino["PRETO"];
-        //                pretoFem += 1;
-        //                dictTotalizadorSaudeBucalFeminino["PRETO"] = pretoFem;
-        //            }
-        //            break;
-        //        case "INDÍGENA":
-        //            if (aluno.Sexo.Equals("M"))
-        //            {
-        //                var indigenaMasc = dictTotalizadorSaudeBucalMasculino["INDÍGENA"];
-        //                indigenaMasc += 1;
-        //                dictTotalizadorSaudeBucalMasculino["INDÍGENA"] = indigenaMasc;
-        //            }
-        //            else
-        //            {
-        //                var indigenaFem = dictTotalizadorSaudeBucalFeminino["INDÍGENA"];
-        //                indigenaFem += 1;
-        //                dictTotalizadorSaudeBucalFeminino["INDÍGENA"] = indigenaFem;
-        //            }
-        //            break;
-        //        case "AMARELO":
-        //            if (aluno.Sexo.Equals("M"))
-        //            {
-        //                var amareloMasc = dictTotalizadorSaudeBucalMasculino["AMARELO"];
-        //                amareloMasc += 1;
-        //                dictTotalizadorSaudeBucalMasculino["AMARELO"] = amareloMasc;
-        //            }
-        //            else
-        //            {
-        //                var amareloFem = dictTotalizadorSaudeBucalFeminino["AMARELO"];
-        //                amareloFem += 1;
-        //                dictTotalizadorSaudeBucalFeminino["AMARELO"] = amareloFem;
-        //            }
-        //            break;
-        //        default:
-        //            if (aluno.Sexo.Equals("M"))
-        //            {
-        //                var amareloMasc = dictTotalizadorSaudeBucalMasculino["AMARELO"];
-        //                amareloMasc += 1;
-        //                dictTotalizadorSaudeBucalMasculino["AMARELO"] = amareloMasc;
-        //            }
-        //            else
-        //            {
-        //                var amareloFem = dictTotalizadorSaudeBucalFeminino["AMARELO"];
-        //                amareloFem += 1;
-        //                dictTotalizadorSaudeBucalFeminino["AMARELO"] = amareloFem;
-        //            }
-        //            break;
-
-        //    }
-        //}
-
-        //var totalMasc = dictTotalizadorSaudeBucalMasculino.Skip(0).Sum(x => x.Value);
-
-        //Dictionary<string, decimal> percTotalizadorSaudeBucalMasculino = dictTotalizadorSaudeBucalMasculino.Where(item => totalMasc != 0).ToDictionary(item => item.Key!, item => 100 * item.Value / totalMasc);
-
-        //var totalFem = dictTotalizadorSaudeBucalFeminino.Skip(0).Sum(x => x.Value);
-
-        //Dictionary<string, decimal> percTotalizadorSaudeBucalFeminino = dictTotalizadorSaudeBucalFeminino.Where(item => totalFem != 0).ToDictionary(item => item.Key!, item => 100 * item.Value / totalFem);
-
-        //var total = dict.Skip(0).Sum(x => x.Value);
-
-        //Dictionary<string, decimal> percSaudeBucal = dict.Where(item => total != 0).ToDictionary(item => item.Key!, item => 100 * item.Value / total);
-
-        //return new TotalizadorSaudeBucalDto
-        //{
-        //    ValorTotalizadorSaudeBucalMasculino = dictTotalizadorSaudeBucalMasculino,
-        //    ValorTotalizadorSaudeBucalFeminino = dictTotalizadorSaudeBucalFeminino,
-        //    PercTotalizadorSaudeBucalMasculino = percTotalizadorSaudeBucalMasculino,
-        //    PercTotalizadorSaudeBucalFeminino = percTotalizadorSaudeBucalFeminino,
-        //    PercSaudeBucal = percSaudeBucal
-        //};
-
-        return new TotalizadorSaudeBucalDto();
-    }
-
-    /// <summary>
-    /// Calcula quantidade de anos passdos com base em duas datas, caso encontre qualquer problema retorna 0 
-    /// </summary>
-    /// <param name="data">Data inicial</param>
-    /// <param name="now">Data final ou deixar nula para data atual</param>
-    /// <returns>Retorna inteiro com quantiadde de anos</returns>
-    private static int GetIdade(DateTime data, DateTime? now = null)
-    {
-        // Carrega a data do dia para comparação caso data informada seja nula
-
-        now = ((now == null) ? DateTime.Now : now);
-
-        try
+        if (!string.IsNullOrWhiteSpace(search.Etnia))
         {
-            int YearsOld = (now.Value.Year - data.Year);
+            alunos = alunos.Where(u => u.Etnia!.Equals(search.Etnia));
+        }
 
-            if (now.Value.Month < data.Month || (now.Value.Month == data.Month && now.Value.Day < data.Day))
+        var verificaAlunos = alunos.Select(x => x.Id);
+
+        Dictionary<string, decimal> dictSaudeBucal = new()
+        {
+            { "CUIDADO", 0 },
+            { "ATENCAO", 0 },
+            { "MUITOBOM", 0 }
+        };
+
+        Dictionary<string, decimal> dictTotalizadorSaudeBucalMasculino = new()
+        {
+            { "CUIDADO", 0 },
+            { "ATENCAO", 0 },
+            { "MUITOBOM", 0 }
+        };
+
+        Dictionary<string, decimal> dictTotalizadorSaudeBucalFeminino = new()
+        {
+            { "CUIDADO", 0 },
+            { "ATENCAO", 0 },
+            { "MUITOBOM", 0 }
+        };
+
+        var laudos = _context.Laudos.Where(x => verificaAlunos.Contains(x.Aluno.Id)).Include(i => i.SaudeBucal).Where(x => x.SaudeBucal != null)
+            .Include(a => a.Aluno)
+            .AsNoTracking();
+
+        decimal quadrante1;
+
+        var metricas = _context.TextosLaudos
+            .Where(x => x.TipoLaudo.Id == 5).ToList();
+
+        foreach (var aluno in laudos)
+        {
+            List<int> listRespostas = aluno.SaudeBucal!.Resposta.Split(',').Select(item => int.Parse(item)).ToList();
+
+            var respostas = _context.Respostas.Where(x => listRespostas.Contains(x.Id)).Include(i => i.Questionario);
+
+            quadrante1 = respostas.Where(x => x.Questionario.Quadrante == 1).Sum(s => s.ValorPesoResposta);
+
+            var result = metricas.Find(
+                delegate (TextoLaudo item)
+                {
+                    return quadrante1 >= item.PontoInicial && quadrante1 <= item.PontoFinal && item.Quadrante == 1;
+                }
+            );
+
+            if (result == null || !dictSaudeBucal.ContainsKey(result.Aviso.Split('.')[0]))
             {
-                YearsOld--;
+                continue;
             }
 
-            return (YearsOld < 0) ? 0 : YearsOld;
+            var value = dictSaudeBucal[result.Aviso.Split('.')[0]];
+
+            value += 1;
+
+            dictSaudeBucal[result.Aviso.Split('.')[0]] = value;
+
+            if (aluno.Aluno.Sexo == "M")
+            {
+                var valor = dictTotalizadorSaudeBucalMasculino[result.Aviso.Split('.')[0]];
+
+                valor += 1;
+
+                dictTotalizadorSaudeBucalMasculino[result.Aviso.Split('.')[0]] = valor;
+            }
+            else
+            {
+                var valor = dictTotalizadorSaudeBucalFeminino[result.Aviso.Split('.')[0]];
+
+                valor += 1;
+
+                dictTotalizadorSaudeBucalFeminino[result.Aviso.Split('.')[0]] = valor;
+            }
         }
-        catch
+
+        var totalMasc = dictTotalizadorSaudeBucalMasculino.Skip(0).Sum(x => x.Value);
+
+        Dictionary<string, decimal> percTotalizadorSaudeBucalMasculino = dictTotalizadorSaudeBucalMasculino.Where(item => totalMasc != 0).ToDictionary(item => item.Key!, item => Convert.ToDecimal((100 * item.Value / totalMasc).ToString("F")));
+
+        var totalFem = dictTotalizadorSaudeBucalFeminino.Skip(0).Sum(x => x.Value);
+
+        Dictionary<string, decimal> percTotalizadorSaudeBucalFeminino = dictTotalizadorSaudeBucalFeminino.Where(item => totalFem != 0).ToDictionary(item => item.Key!, item => Convert.ToDecimal((100 * item.Value / totalFem).ToString("F")));
+
+        var total = dictSaudeBucal.Skip(0).Sum(x => x.Value);
+
+        Dictionary<string, decimal> percSaudeBucal = dictSaudeBucal.Where(item => total != 0).ToDictionary(item => item.Key!, item => Convert.ToDecimal((100 * item.Value / total).ToString("F")));
+
+        return new TotalizadorSaudeBucalDto()
         {
-            return 0;
-        }
+            ValorTotalizadorSaudeBucalMasculino = dictTotalizadorSaudeBucalMasculino,
+            ValorTotalizadorSaudeBucalFeminino = dictTotalizadorSaudeBucalFeminino,
+            PercTotalizadorSaudeBucalMasculino = percTotalizadorSaudeBucalMasculino,
+            PercTotalizadorSaudeBucalFeminino = percTotalizadorSaudeBucalFeminino,
+            PercentualSaudeBucal = percSaudeBucal
+        };
     }
+
 }
 

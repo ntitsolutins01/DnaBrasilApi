@@ -1,4 +1,5 @@
-﻿using DnaBrasilApi.Application.Common.Interfaces;
+﻿using System.Diagnostics.CodeAnalysis;
+using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadoQualidadeVidaAlunos;
@@ -27,7 +28,7 @@ public class
     {
         IQueryable<Aluno> alunos;
 
-        alunos = _context.Alunos.Where(x => x.Id == 36847)
+        alunos = _context.Alunos
             .AsNoTracking();
 
         var result = FilterAlunosQualidadeVida(alunos, request.SearchFilter!, cancellationToken);
@@ -114,37 +115,40 @@ public class
             { "ContextosNaoFavorecedores", 0 }
         };
         
-        var laudos = _context.Laudos.Where(x => verificaAlunos.Contains(x.Aluno.Id)).Include(i => i.QualidadeDeVida)
+        var laudos = _context.Laudos.Where(x => verificaAlunos.Contains(x.Aluno.Id)).Include(i => i.QualidadeDeVida).Where(x=>x.QualidadeDeVida != null)
             .Include(a => a.Aluno)
             .AsNoTracking();
 
+        int cont = 0;
+        decimal quadrante1;
+        decimal quadrante2;
+        decimal quadrante3;
+        decimal quadrante4;
+
+        var metricas = _context.TextosLaudos
+            .Where(x => x.TipoLaudo.Id == 7).ToList();
+
         foreach (var aluno in laudos)
         {
-            if (aluno.QualidadeDeVida == null)
-            {
-                continue;
-            }
-
-            List<int> listRespostas = aluno.QualidadeDeVida.Resposta.Split(',').Select(item => int.Parse(item)).ToList();
+            List<int> listRespostas = aluno.QualidadeDeVida!.Resposta.Split(',').Select(item => int.Parse(item)).ToList();
 
             var respostas = _context.Respostas.Where(x => listRespostas.Contains(x.Id)).Include(i=>i.Questionario);
             
-            var quadrante1 = respostas.Where(x => x.Questionario.Quadrante == 1).Sum(s => s.ValorPesoResposta);
-            var quadrante2 = respostas.Where(x => x.Questionario.Quadrante == 2).Sum(s => s.ValorPesoResposta);
-            var quadrante3 = respostas.Where(x => x.Questionario.Quadrante == 3).Sum(s => s.ValorPesoResposta);
-            var quadrante4 = respostas.Where(x => x.Questionario.Quadrante == 4).Sum(s => s.ValorPesoResposta);
+            quadrante1 = respostas.Where(x => x.Questionario.Quadrante == 1).Sum(s => s.ValorPesoResposta);
+            quadrante2 = respostas.Where(x => x.Questionario.Quadrante == 2).Sum(s => s.ValorPesoResposta);
+            quadrante3 = respostas.Where(x => x.Questionario.Quadrante == 3).Sum(s => s.ValorPesoResposta);
+            quadrante4 = respostas.Where(x => x.Questionario.Quadrante == 4).Sum(s => s.ValorPesoResposta);
 
             var list = new List<decimal> { quadrante1, quadrante2, quadrante3, quadrante4 };
 
-            var metricas = _context.TextosLaudos
-                .Where(x => x.TipoLaudo.Id == 7).ToList();
-
             foreach (decimal quadrante in list)
             {
+                cont++;
+
                 var result = metricas.Find(
                     delegate (TextoLaudo item)
                     {
-                        return quadrante >= item.PontoInicial && quadrante <= item.PontoFinal;
+                        return quadrante >= item.PontoInicial && quadrante <= item.PontoFinal && item.Quadrante == cont;
                     }
                 );
 
@@ -176,9 +180,34 @@ public class
                     dictTotalizadorQualidadeFeminino[result.Aviso.Split('.')[0]] = valor;
                 }
             }
+
+            cont = 0;
+            quadrante1 = 0;
+            quadrante2 = 0;
+            quadrante3 = 0;
+            quadrante4 = 0;
         }
 
-        return new TotalizadorQualidadeVidaDto();
+        var totalMasc = dictTotalizadorQualidadeMasculino.Skip(0).Sum(x => x.Value);
+
+        Dictionary<string, decimal> percTotalizadorQualidadeVidaMasculino = dictTotalizadorQualidadeMasculino.Where(item => totalMasc != 0).ToDictionary(item => item.Key!, item => Convert.ToDecimal((100 * item.Value / totalMasc).ToString("F")));
+
+        var totalFem = dictTotalizadorQualidadeFeminino.Skip(0).Sum(x => x.Value);
+
+        Dictionary<string, decimal> percTotalizadorQualidadeVidaFeminino = dictTotalizadorQualidadeFeminino.Where(item => totalFem != 0).ToDictionary(item => item.Key!, item => Convert.ToDecimal((100 * item.Value / totalFem).ToString("F")));
+
+        var total = dict.Skip(0).Sum(x => x.Value);
+
+        Dictionary<string, decimal> percQualidadeVida = dict.Where(item => total != 0).ToDictionary(item => item.Key!, item => Convert.ToDecimal((100 * item.Value / total).ToString("F")));
+
+        return new TotalizadorQualidadeVidaDto()
+        {
+            ValorTotalizadorQualidadeVidaMasculino = dictTotalizadorQualidadeMasculino,
+            ValorTotalizadorQualidadeVidaFeminino = dictTotalizadorQualidadeFeminino,
+            PercTotalizadorQualidadeVidaMasculino = percTotalizadorQualidadeVidaMasculino,
+            PercTotalizadorQualidadeVidaFeminino = percTotalizadorQualidadeVidaFeminino,
+            PercentualQualidade = percQualidadeVida
+        };
     }
 
 }
