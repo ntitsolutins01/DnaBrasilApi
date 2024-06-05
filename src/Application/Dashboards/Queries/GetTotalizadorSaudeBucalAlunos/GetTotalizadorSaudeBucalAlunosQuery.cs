@@ -24,7 +24,7 @@ public class GetTotalizadorSaudeBucalAlunosQueryHandler : IRequestHandler<GetTot
     {
         IQueryable<Aluno> alunos;
 
-        alunos = _context.Alunos.Where(x=>x.Id== 34101)//37315 - Feminino
+        alunos = _context.Alunos//.Where(x=>x.Id== 34101)//37315 - Feminino
             .AsNoTracking();
 
         var result = FilterAlunosPeriodo(alunos, request.SearchFilter!, cancellationToken);
