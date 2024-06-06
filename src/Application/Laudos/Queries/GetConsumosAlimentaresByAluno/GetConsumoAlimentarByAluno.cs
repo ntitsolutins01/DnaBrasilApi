@@ -25,15 +25,15 @@ public class GetConsumoAlimentaresByAlunoQueryHandler : IRequestHandler<GetConsu
 
         Guard.Against.NotFound(request.AlunoId, aluno);
 
-        var laudos = aluno.Laudos!.OrderByDescending(o => o.Created).AsQueryable();
+        //var laudos = aluno.Laudos!.OrderByDescending(o => o.Created).AsQueryable();
 
-        var laudoRecente = await laudos
-            .AsNoTracking()
-            .ProjectTo<LaudoDto>(_mapper.ConfigurationProvider)
-            .FirstOrDefaultAsync(cancellationToken);
+        //var laudoRecente = await laudos
+        //    .AsNoTracking()
+        //    .ProjectTo<LaudoDto>(_mapper.ConfigurationProvider)
+        //    .FirstOrDefaultAsync(cancellationToken);
 
         var result = await _context.ConsumoAlimentares
-            .Where(x=>x.Id == laudoRecente!.ConsumoAlimentarId)
+            //.Where(x=>x.Id == laudoRecente!.ConsumoAlimentarId)
             .AsNoTracking()
             .ProjectTo<ConsumoAlimentarDto>(_mapper.ConfigurationProvider)
             .FirstOrDefaultAsync(cancellationToken);

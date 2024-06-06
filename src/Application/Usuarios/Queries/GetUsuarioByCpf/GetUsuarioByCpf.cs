@@ -21,7 +21,7 @@ public class GetUsuarioByCpfQueryHandler : IRequestHandler<GetUsuarioByCpfQuery,
     public async Task<UsuarioDto> Handle(GetUsuarioByCpfQuery request, CancellationToken cancellationToken)
     {
         var result = await _context.Usuarios
-            .Where(x => x.Cpf == request.Cpf)
+            .Where(x => x.CpfCnpj == request.Cpf)
             .AsNoTracking()
             .ProjectTo<UsuarioDto>(_mapper.ConfigurationProvider)
             .OrderBy(t => t.Id)

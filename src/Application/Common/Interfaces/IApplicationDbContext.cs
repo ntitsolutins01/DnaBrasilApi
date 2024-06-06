@@ -37,6 +37,10 @@ public interface IApplicationDbContext
     DbSet<Fomentu> Fomentos { get; }
     DbSet<Resposta> Respostas { get; }
     DbSet<TipoParceria> TiposParcerias { get; }
+    DbSet<TextoLaudo> TextosLaudos { get; }
+    DbSet<ControlePresenca> ControlesPresencas { get; }
+    DbSet<MetricaImc> MetricasImc { get; }
+    DbSet<LinhaAcao> LinhasAcoes { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

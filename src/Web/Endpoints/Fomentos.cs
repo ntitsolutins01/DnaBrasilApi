@@ -17,7 +17,7 @@ public class Fomentos : EndpointGroupBase
             .MapPost(CreateFomento)
             .MapPut(UpdateFomento, "{id}")
             .MapDelete(DeleteFomento, "{id}")
-            .MapGet(GetFomentoById, "Fomento/{id}");
+            .MapGet(GetFomentoById, "/Fomento/{id}");
     }
 
     public async Task<List<FomentoDto>> GetFomentosAll(ISender sender)

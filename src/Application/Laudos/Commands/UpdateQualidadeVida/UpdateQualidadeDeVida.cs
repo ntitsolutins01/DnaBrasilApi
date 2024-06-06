@@ -25,7 +25,7 @@ public class UpdateQualidadeDeVidaCommandHandler : IRequestHandler<UpdateQualida
 
         Guard.Against.NotFound(request.Id, entity);
 
-        entity.Resposta = request.Resposta;
+       // entity.Resposta = request.Resposta;
 
         var result = await _context.SaveChangesAsync(cancellationToken);
 

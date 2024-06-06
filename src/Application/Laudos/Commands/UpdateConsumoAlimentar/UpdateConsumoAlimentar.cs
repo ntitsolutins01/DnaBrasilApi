@@ -8,9 +8,7 @@ public record UpdateConsumoAlimentarCommand : IRequest <bool>
 {
     public int Id { get; init; }
     public required string Resposta { get; init; }
-    public Profissional? Profissional { get; init; }
-    public Questionario? Questionario { get; init; }
-    
+
 }
 
 public class UpdateConsumoAlimentarCommandHandler : IRequestHandler<UpdateConsumoAlimentarCommand, bool>
@@ -30,8 +28,6 @@ public class UpdateConsumoAlimentarCommandHandler : IRequestHandler<UpdateConsum
         Guard.Against.NotFound(request.Id, entity);
 
         entity.Resposta = request.Resposta;
-        entity.Profissional = request.Profissional;
-        entity.Questionario = request.Questionario;
 
         var result = await _context.SaveChangesAsync(cancellationToken);
 

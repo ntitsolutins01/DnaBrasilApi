@@ -1,8 +1,6 @@
-    using System.Globalization;
+using System.Globalization;
 using DnaBrasilApi.Application.Common.Interfaces;
-using DnaBrasilApi.Application.TodoItems.Commands.CreateTodoItem;
 using DnaBrasilApi.Domain.Entities;
-using DnaBrasilApi.Domain.Events;
 
 namespace DnaBrasilApi.Application.Alunos.Commands.CreateAluno;
 
@@ -16,21 +14,30 @@ public record CreateAlunoCommand : IRequest<int>
     public string? NomeMae { get; init; }
     public string? NomePai { get; init; }
     public string? Cpf { get; init; }
-    public string? Telefone { get; init;}
-    public string? Celular { get; init;}
-    public string? Cep { get; init;}
-    public string? Endereco { get; init;}
+    public string? Telefone { get; init; }
+    public string? Celular { get; init; }
+    public string? Cep { get; init; }
+    public string? Endereco { get; init; }
     public string? Numero { get; init; }
     public string? Bairro { get; init; }
-    public bool Status { get; init;}
-    public bool Habilitado { get; init;}
-    public int? MunicipioId { get; init; }
-    public int? LocalidadeId { get; init; }
+    public bool Status { get; init; }
+    public bool Habilitado { get; init; }
+    public required int MunicipioId { get; init; }
+    public required int LocalidadeId { get; init; }
+    public required int FomentoId { get; init; }
     public int? ProfissionalId { get; init; }
-    public string? DeficienciasIds { get; init; }
+    public int? DeficienciaId { get; init; }
     public required string Etnia { get; init; }
-    public string? AreasDesejadas { get; init; }
+    public int? LinhaAcaoId { get; init; }
     public string? NomeResponsavel { get; init; }
+    public string? NomeFoto { get; init; }
+    public byte[]? ByteImage { get; init; }
+    public byte[]? QrCode { get; init; }
+    public bool? AutorizacaoSaida { get; init; }
+    public bool? AutorizacaoConsentimentoAssentimento { get; init; }
+    public bool? ParticipacaoProgramaCompartilhamentoDados { get; init; }
+    public bool? UtilizacaoImagem { get; init; }
+    public bool? CopiaDocAlunoResponsavel { get; init; }
 }
 
 public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int>
@@ -44,43 +51,46 @@ public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int
 
     public async Task<int> Handle(CreateAlunoCommand request, CancellationToken cancellationToken)
     {
-        Municipio? municipio = null;
 
-        if (request.MunicipioId != null)
+        var municipio = await _context.Municipios.FindAsync(new object[] { request.MunicipioId }, cancellationToken);
+
+        Guard.Against.NotFound((int)request.MunicipioId, municipio);
+
+
+        var localidade = await _context.Localidades.FindAsync(new object[] { request.LocalidadeId }, cancellationToken);
+
+        Guard.Against.NotFound((int)request.LocalidadeId, localidade);
+
+
+        var fomento = await _context.Fomentos.FindAsync(new object[] { request.FomentoId }, cancellationToken);
+
+        Guard.Against.NotFound((int)request.FomentoId, fomento);
+
+        Deficiencia? deficiencia = null;
+
+        if (request.DeficienciaId != null)
         {
-            municipio = await _context.Municipios
-                .FindAsync(new object[] { request.MunicipioId }, cancellationToken);
+            deficiencia = await _context.Deficiencias.FindAsync(new object[] { request.DeficienciaId }, cancellationToken);
 
-            Guard.Against.NotFound((int)request.MunicipioId, municipio);
+            Guard.Against.NotFound((int)request.DeficienciaId, deficiencia);
         }
 
-        Localidade? localidade = null;
+        Profissional? profissional = null;
 
-        if (request.LocalidadeId != null)
+        if (request.ProfissionalId != null)
         {
-            localidade = await _context.Localidades
-                .FindAsync(new object[] { request.LocalidadeId }, cancellationToken);
+            profissional = await _context.Profissionais.FindAsync(new object[] { request.ProfissionalId }, cancellationToken);
 
-            Guard.Against.NotFound((int)request.LocalidadeId, localidade);
+            Guard.Against.NotFound((int)request.ProfissionalId, profissional);
         }
 
-        var list = new List<Deficiencia>();
+        LinhaAcao? linhaAcao = null;
 
-        if (!string.IsNullOrWhiteSpace(request.DeficienciasIds))
+        if (request.LinhaAcaoId != null)
         {
-            List<int> listIds = request.DeficienciasIds.Split(',').Select(s => Convert.ToInt32(s)).ToList();
+            linhaAcao = await _context.LinhasAcoes.FindAsync(new object[] { request.LinhaAcaoId }, cancellationToken);
 
-            foreach (int id in listIds)
-            {
-                var deficiencia = await _context.Deficiencias
-                    .FindAsync(new object[] { id }, cancellationToken);
-
-                list.Add(deficiencia!);
-            }
-        }
-        else
-        {
-            list = null;
+            Guard.Against.NotFound((int)request.LinhaAcaoId, profissional);
         }
 
         var entity = new Aluno
@@ -99,15 +109,23 @@ public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int
             Endereco = request.Endereco,
             Numero = request.Numero,
             Bairro = request.Bairro,
-            Url = null,
+            NomeFoto = request.NomeFoto,
+            ByteImage = request.ByteImage,
+            QrCode = request.QrCode,
             Status = request.Status,
             Habilitado = request.Habilitado,
-            Municipio = municipio!,
-            Localidade = localidade!,
-            Deficiencias = list,
-            AreasDesejadas = request.AreasDesejadas,
+            Municipio = municipio,
+            Localidade = localidade,
+            Deficiencia = deficiencia,
+            LinhaAcao = linhaAcao,
             NomeResponsavel = request.NomeResponsavel,
-            
+            Profissional = profissional,
+            Fomento = fomento,
+            AutorizacaoSaida = request.AutorizacaoSaida,
+            AutorizacaoConsentimentoAssentimento = request.AutorizacaoConsentimentoAssentimento,
+            ParticipacaoProgramaCompartilhamentoDados = request.ParticipacaoProgramaCompartilhamentoDados,
+            UtilizacaoImagem = request.UtilizacaoImagem,
+            CopiaDocAlunoResponsavel = request.CopiaDocAlunoResponsavel
         };
 
         _context.Alunos.Add(entity);

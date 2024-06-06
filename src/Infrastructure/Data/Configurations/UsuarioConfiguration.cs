@@ -16,8 +16,11 @@ public class UsuarioConfiguration : IEntityTypeConfiguration<Usuario>
         builder.Property(t => t.Email)
             .HasMaxLength(100)
             .IsRequired();
-        builder.Property(t => t.Cpf)
-            .HasMaxLength(14)
+        builder.Property(t => t.CpfCnpj)
+            .HasMaxLength(19)
+            .IsRequired();
+        builder.Property(t => t.TipoPessoa)
+            .HasMaxLength(2)
             .IsRequired();
         builder.Property(t => t.AspNetRoleId)
             .HasMaxLength(50)

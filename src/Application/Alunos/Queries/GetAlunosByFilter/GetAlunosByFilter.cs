@@ -4,12 +4,12 @@ using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Alunos.Queries.GetAlunosByFilter;
 
-public record GetAlunosByFilterQuery : IRequest<List<AlunoDto>>
+public record GetAlunosByFilterQuery : IRequest<List<AlunoIndexDto>>
 {
     public AlunosFilterDto? SearchFilter { get; init; }
 }
 
-public class GetAlunosByFilterQueryHandler : IRequestHandler<GetAlunosByFilterQuery, List<AlunoDto>>
+public class GetAlunosByFilterQueryHandler : IRequestHandler<GetAlunosByFilterQuery, List<AlunoIndexDto>>
 {
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
@@ -20,13 +20,13 @@ public class GetAlunosByFilterQueryHandler : IRequestHandler<GetAlunosByFilterQu
         _mapper = mapper;
     }
 
-    public async Task<List<AlunoDto>> Handle(GetAlunosByFilterQuery request, CancellationToken cancellationToken)
+    public async Task<List<AlunoIndexDto>> Handle(GetAlunosByFilterQuery request, CancellationToken cancellationToken)
     {
         var Alunos = _context.Alunos
             .AsNoTracking();
 
         var result = FilterAlunos(Alunos, request.SearchFilter!, cancellationToken)
-            .ProjectTo<AlunoDto>(_mapper.ConfigurationProvider)
+            .ProjectTo<AlunoIndexDto>(_mapper.ConfigurationProvider)
             .OrderBy(t => t.Id)
             .ToListAsync(cancellationToken); ;
 

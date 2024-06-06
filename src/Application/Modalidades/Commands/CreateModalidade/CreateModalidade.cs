@@ -27,6 +27,7 @@ public record CreateModalidadeCommand : IRequest<int>
     public int AlturaIni { get; init; }
     public int AlturaFim { get; init; }
     public bool Status { get; init; } = true;
+    public int? LinhaAcaoId { get; init; }
 }
 
 public class CreateModalidadeCommandHandler : IRequestHandler<CreateModalidadeCommand, int>
@@ -40,6 +41,15 @@ public class CreateModalidadeCommandHandler : IRequestHandler<CreateModalidadeCo
 
     public async Task<int> Handle(CreateModalidadeCommand request, CancellationToken cancellationToken)
     {
+        LinhaAcao? linhaAcao = null;
+
+        if (request.LinhaAcaoId != null)
+        {
+            linhaAcao = await _context.LinhasAcoes.FindAsync([request.LinhaAcaoId], cancellationToken);
+
+            Guard.Against.NotFound((int)request.LinhaAcaoId, linhaAcao);
+        }
+
         var entity = new Modalidade
         {
             Nome = request.Nome,
@@ -63,7 +73,8 @@ public class CreateModalidadeCommandHandler : IRequestHandler<CreateModalidadeCo
             PesoFim = request.PesoFim,
             AlturaIni = request.AlturaIni,
             AlturaFim = request.AlturaFim,
-            Status = request.Status
+            Status = request.Status,
+            LinhaAcao = linhaAcao
         };
 
         _context.Modalidades.Add(entity);

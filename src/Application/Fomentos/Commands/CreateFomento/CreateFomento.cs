@@ -1,4 +1,5 @@
-﻿using DnaBrasilApi.Application.Common.Interfaces;
+﻿using System.Globalization;
+using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Fomentos.Commands.CreateFomento;
@@ -23,11 +24,11 @@ public class CreateFomentoCommandHandler : IRequestHandler<CreateFomentoCommand,
 
     public async Task<int> Handle(CreateFomentoCommand request, CancellationToken cancellationToken)
     {
-        
-           var municipio = await _context.Municipios
-                .FindAsync(new object[] { request.MunicipioId }, cancellationToken);
-           var localidade = await _context.Localidades
-                .FindAsync(new object[] { request.LocalidadeId }, cancellationToken);
+
+        var municipio = await _context.Municipios
+             .FindAsync(new object[] { request.MunicipioId }, cancellationToken);
+        var localidade = await _context.Localidades
+             .FindAsync(new object[] { request.LocalidadeId }, cancellationToken);
 
         var entity = new Fomentu
         {
@@ -35,8 +36,8 @@ public class CreateFomentoCommandHandler : IRequestHandler<CreateFomentoCommand,
             Nome = request.Nome,
             Municipio = municipio,
             Localidade = localidade!,
-            DtIni = Convert.ToDateTime(request.DtIni),
-            DtFim = Convert.ToDateTime(request.DtFim)
+            DtIni = DateTime.ParseExact(request.DtIni, "dd/MM/yyyy", CultureInfo.CreateSpecificCulture("pt-BR")),
+            DtFim = DateTime.ParseExact(request.DtFim, "dd/MM/yyyy", CultureInfo.CreateSpecificCulture("pt-BR")),
         };
 
         _context.Fomentos.Add(entity);

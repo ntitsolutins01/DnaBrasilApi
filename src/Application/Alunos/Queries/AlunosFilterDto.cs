@@ -14,5 +14,5 @@ public class AlunosFilterDto
     public string? Etnia { get; set; }
     #endregion
 
-    public List<AlunoDto>? Alunos { get; set; }
+    public List<AlunoIndexDto>? Alunos { get; set; }
 }

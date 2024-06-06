@@ -1,4 +1,5 @@
 ﻿using DnaBrasilApi.Application.Alunos.Queries;
+using DnaBrasilApi.Application.LinhasAcoes.Queries;
 using DnaBrasilApi.Application.Profissionais.Queries;
 using DnaBrasilApi.Domain.Entities;
 
@@ -28,6 +29,7 @@ public class ModalidadeDto
     public int AlturaIni { get; set; }
     public int AlturaFim { get; set; }
     public bool Status { get; set; } = true;
+    public LinhaAcaoDto? LinhaAcao { get; set; }
     private class Mapping : Profile
     {
         public Mapping()

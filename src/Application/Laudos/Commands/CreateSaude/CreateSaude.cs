@@ -5,10 +5,11 @@ namespace DnaBrasilApi.Application.Laudos.Commands.CreateSaude;
 
 public record CreateSaudeCommand : IRequest<int>
 {
-    public required Profissional Profissional { get; init; }
-    public int? Altura { get; init; }
-    public int Massa { get; init; }
-    public int? Envergadura { get; init; }
+    public int? ProfissionalId { get; init; }
+    public decimal? EnvergaduraSaude { get; init; }
+    public decimal? MassaCorporalSaude { get; init; }
+    public decimal? AlturaSaude { get; init; }
+    public string? StatusSaude { get; init; }
 }
 
 public class CreateSaudeCommandHandler : IRequestHandler<CreateSaudeCommand, int>
@@ -22,12 +23,24 @@ public class CreateSaudeCommandHandler : IRequestHandler<CreateSaudeCommand, int
 
     public async Task<int> Handle(CreateSaudeCommand request, CancellationToken cancellationToken)
     {
+
+        Profissional? profissional = null;
+
+        if (request.ProfissionalId != null)
+        {
+            profissional = await _context.Profissionais
+                .FindAsync([request.ProfissionalId!], cancellationToken);
+
+            Guard.Against.NotFound((int)request.ProfissionalId!, profissional);
+        }
+
         var entity = new Saude
         {
-            Profissional = request.Profissional,
-            Altura = request.Altura,
-            Massa = request.Massa,
-            Envergadura = request.Envergadura
+            Profissional = profissional,
+            Altura = request.AlturaSaude,
+            Massa = request.MassaCorporalSaude,
+            Envergadura = request.EnvergaduraSaude,
+            StatusSaude = request.StatusSaude
         };
 
         _context.Saudes.Add(entity);

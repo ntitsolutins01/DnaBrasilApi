@@ -1,9 +1,9 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
 
 namespace DnaBrasilApi.Application.Alunos.Commands.DeleteAluno;
-public record DeleteAlunoCommand(int Id) : IRequest;
+public record DeleteAlunoCommand(int Id) : IRequest<bool>;
 
-public class DeleteAlunoCommandHandler : IRequestHandler<DeleteAlunoCommand>
+public class DeleteAlunoCommandHandler : IRequestHandler<DeleteAlunoCommand, bool>
 {
     private readonly IApplicationDbContext _context;
 
@@ -12,7 +12,7 @@ public class DeleteAlunoCommandHandler : IRequestHandler<DeleteAlunoCommand>
         _context = context;
     }
 
-    public async Task Handle(DeleteAlunoCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(DeleteAlunoCommand request, CancellationToken cancellationToken)
     {
         var entity = await _context.Alunos
             .FindAsync(new object[] { request.Id }, cancellationToken);
@@ -21,9 +21,8 @@ public class DeleteAlunoCommandHandler : IRequestHandler<DeleteAlunoCommand>
 
         _context.Alunos.Remove(entity);
 
-        //entity.AddDomainEvent(new AlunoDeletedEvent(entity));
-
-        await _context.SaveChangesAsync(cancellationToken);
+        var result = await _context.SaveChangesAsync(cancellationToken);
+        return result == 1;
     }
 
 }

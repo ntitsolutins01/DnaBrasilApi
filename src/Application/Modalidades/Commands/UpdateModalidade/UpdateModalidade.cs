@@ -1,4 +1,5 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Modalidades.Commands.UpdateModalidade;
 
@@ -27,6 +28,7 @@ public record UpdateModalidadeCommand : IRequest<bool>
     public int AlturaIni { get; init; }
     public int AlturaFim { get; init; }
     public bool Status { get; init; }
+    public int? LinhaAcaoId { get; init; }
 }
 
 public class UpdateModalidadeCommandHandler : IRequestHandler<UpdateModalidadeCommand, bool>
@@ -44,6 +46,16 @@ public class UpdateModalidadeCommandHandler : IRequestHandler<UpdateModalidadeCo
             .FindAsync(new object[] { request.Id }, cancellationToken);
 
         Guard.Against.NotFound(request.Id, entity);
+
+
+        LinhaAcao? linhaAcao = null;
+
+        if (request.LinhaAcaoId != null)
+        {
+            linhaAcao = await _context.LinhasAcoes.FindAsync([request.LinhaAcaoId], cancellationToken);
+
+            Guard.Against.NotFound((int)request.LinhaAcaoId, linhaAcao);
+        }
 
         entity.Nome = request.Nome;
         entity.Vo2MaxIni = request.Vo2MaxIni;
@@ -67,6 +79,7 @@ public class UpdateModalidadeCommandHandler : IRequestHandler<UpdateModalidadeCo
         entity.AlturaIni = request.AlturaIni;
         entity.AlturaFim = request.AlturaFim;
         entity.Status = request.Status;
+        entity.LinhaAcao = linhaAcao;
 
         var result = await _context.SaveChangesAsync(cancellationToken);
 

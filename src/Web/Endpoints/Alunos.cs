@@ -2,10 +2,11 @@
 using DnaBrasilApi.Application.Alunos.Commands.CreateVoucher;
 using DnaBrasilApi.Application.Alunos.Commands.DeleteAluno;
 using DnaBrasilApi.Application.Alunos.Commands.UpdateAluno;
+using DnaBrasilApi.Application.Alunos.Commands.UpdateAlunoFoto;
 using DnaBrasilApi.Application.Alunos.Commands.UpdateAlunoModalidades;
-using DnaBrasilApi.Application.Alunos.Commands.UpdateAlunoDeficiencias;
 using DnaBrasilApi.Application.Alunos.Commands.UpdateVoucher;
 using DnaBrasilApi.Application.Alunos.Queries;
+using DnaBrasilApi.Application.Alunos.Queries.GetAlunoByEmail;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunoById;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunosAll;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunosByFilter;
@@ -22,11 +23,13 @@ public class Alunos : EndpointGroupBase
             //.RequireAuthorization()
             //.MapGet(GetAlunosByFilter)
             .MapGet(GetAlunoById, "Aluno/{id}")
+            .MapGet(GetAlunoByEmail, "Aluno/Email/{email}")
             .MapGet(GetAlunosByLocalidade, "/Localidade/{id}")
             .MapGet(GetNomeAlunosAll, "/NomeAlunos/{id}")
             .MapGet(GetAlunosAll)
             .MapPost(CreateAluno)
             .MapPut(UpdateAluno, "{id}")
+            .MapPut(UpdateAlunoFoto, "/UploadFoto/{id}")
             .MapPut(UpdateAlunoModalidades, "/Modalidades")
             .MapDelete(DeleteAluno, "{id}")
             .MapPost(GetAlunosByFilter, "Filter");
@@ -42,6 +45,10 @@ public class Alunos : EndpointGroupBase
     public async Task<AlunoDto> GetAlunoById(ISender sender, int id)
     {
         return await sender.Send(new GetAlunoByIdQuery() { Id = id });
+    }
+    public async Task<AlunoDto> GetAlunoByEmail(ISender sender, string email)
+    {
+        return await sender.Send(new GetAlunoByEmailQuery() { Email = email });
     }
     public async Task<List<AlunoDto>> GetAlunosAll(ISender sender)
     {
@@ -60,10 +67,16 @@ public class Alunos : EndpointGroupBase
         return result;
     }
 
-    public async Task<IResult> DeleteAluno(ISender sender, int id)
+    public async Task<bool> UpdateAlunoFoto(ISender sender, int id, UpdateAlunoFotoCommand command)
     {
-        await sender.Send(new DeleteAlunoCommand(id));
-        return Results.NoContent();
+        if (id != command.Id) return false;
+        var result = await sender.Send(command);
+        return result;
+    }
+
+    public async Task<bool> DeleteAluno(ISender sender, int id)
+    {
+        return await sender.Send(new DeleteAlunoCommand(id));
     }
     public async Task<int> CreateVoucher(ISender sender, CreateVoucherCommand command)
     {
@@ -74,13 +87,6 @@ public class Alunos : EndpointGroupBase
     {
         if (id != command.Id) return Results.BadRequest();
         await sender.Send(command);
-        return Results.NoContent();
-    }
-
-    public async Task<IResult> UpdateAlunoDeficiencias(ISender sender, UpdateAlunoDeficienciasCommand command)
-    {
-        await sender.Send(command);
-
         return Results.NoContent();
     }
 

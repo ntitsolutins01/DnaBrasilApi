@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DnaBrasilApi.Domain.Entities;
+﻿using DnaBrasilApi.Domain.Entities;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,7 +8,9 @@ public class SaudeBucalConfiguration : IEntityTypeConfiguration<SaudeBucal>
     public void Configure(EntityTypeBuilder<SaudeBucal> builder)
     {
         builder.Property(t => t.Resposta)
-            .HasMaxLength(80)
-            .IsRequired();
+            .HasMaxLength(500)
+            .IsRequired(); 
+        builder.Property(t => t.StatusSaudeBucal)
+            .HasMaxLength(1);
     }
 }

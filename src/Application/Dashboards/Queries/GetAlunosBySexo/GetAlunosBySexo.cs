@@ -7,7 +7,7 @@ namespace DnaBrasilApi.Application.Dashboards.Queries.GetAlunosBySexo;
 
 public record GetAlunosBySexoQuery : IRequest<int>
 {
-    public DashboardIndicadoresDto? SearchFilter { get; init; }
+    public DashboardDto? SearchFilter { get; init; }
 }
 
 public class GetAlunosBySexoQueryHandler : IRequestHandler<GetAlunosBySexoQuery, int>
@@ -37,7 +37,7 @@ public class GetAlunosBySexoQueryHandler : IRequestHandler<GetAlunosBySexoQuery,
         return result;
     }
 
-    private int FilterAlunos(IQueryable<Aluno> Alunos, DashboardIndicadoresDto search, CancellationToken cancellationToken)
+    private int FilterAlunos(IQueryable<Aluno> Alunos, DashboardDto search, CancellationToken cancellationToken)
     {
         if (!string.IsNullOrWhiteSpace(search.FomentoId))
         {
