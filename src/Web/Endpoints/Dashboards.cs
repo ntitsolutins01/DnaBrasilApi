@@ -1,4 +1,5 @@
 ﻿using DnaBrasilApi.Application.Dashboards;
+using DnaBrasilApi.Application.Dashboards.Commands.UpdateEncaminhamentoAlunos;
 using DnaBrasilApi.Application.Dashboards.Queries;
 using DnaBrasilApi.Application.Dashboards.Queries.GetControlePresencaByFilter;
 using DnaBrasilApi.Application.Dashboards.Queries.GetIndicadoresAlunosByFilter;
@@ -43,6 +44,7 @@ public class Dashboards : EndpointGroupBase
             .MapPost(GetGraficosVocacionalByFilter, "GetGraficosVocacional")
             .MapPost(CreateCarga,"Carga");
     }
+
 
     public async Task<DashboardDto> GetIndicadoresAlunosByFilter(ISender sender, [FromBody] DashboardDto dashboard)
     {

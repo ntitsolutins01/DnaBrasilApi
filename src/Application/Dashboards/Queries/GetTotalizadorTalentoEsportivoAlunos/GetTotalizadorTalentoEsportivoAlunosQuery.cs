@@ -26,7 +26,7 @@ public class GetTotalizadorTalentoEsportivoAlunosQueryHandler : IRequestHandler<
     {
         IQueryable<Aluno> alunos;
 
-        alunos = _context.Alunos
+        alunos = _context.Alunos//.Where(x=>x.Id== 38438)//37315 - Feminino
             .AsNoTracking();
 
         var result = FilterAlunosPeriodo(alunos, request.SearchFilter!, cancellationToken);
@@ -75,7 +75,7 @@ public class GetTotalizadorTalentoEsportivoAlunosQueryHandler : IRequestHandler<
         }
 
         var modalidades = _context.Modalidades
-            .Where(x => x.Status == true);
+            .Where(x => x.Status == true).ToList();
 
         var verificaAlunos = alunos.Select(x => x.Id);
 
@@ -90,47 +90,44 @@ public class GetTotalizadorTalentoEsportivoAlunosQueryHandler : IRequestHandler<
             dict.Add(item.Nome!, 0);
         }
 
-        var laudos = _context.Laudos.Where(x => verificaAlunos.Contains(x.Aluno.Id)).Include(i => i.TalentoEsportivo);
-            //.AsNoTracking()
-            //.ProjectTo<LaudoDto>(_mapper.ConfigurationProvider);
+        var laudos = _context.Laudos.Where(x => verificaAlunos.Contains(x.Aluno.Id)).Include(i => i.TalentoEsportivo).Where(x => x.TalentoEsportivo != null)
+            .Include(a => a.Aluno)
+            .AsNoTracking();
 
         foreach (var aluno in laudos)
         {
-            if (aluno.TalentoEsportivo != null)
+            foreach (var item in modalidades)
             {
-                foreach (var item in modalidades)
+                if (aluno.TalentoEsportivo!.Encaminhamento != null && aluno.TalentoEsportivo.Encaminhamento.Equals(item.Nome))
                 {
-                    if (aluno.TalentoEsportivo.Encaminhamento!= null && aluno.TalentoEsportivo.Encaminhamento.Equals(item.Nome))
+                    if (aluno.Aluno.Sexo!.Equals("M"))
                     {
-                        if (aluno.Aluno.Sexo!.Equals("M"))
+                        if (dictTotalizadorTalentoMasculino.ContainsKey(item.Nome!))
                         {
-                            if (dictTotalizadorTalentoMasculino.ContainsKey(item.Nome!))
-                            {
-                                var value = dictTotalizadorTalentoMasculino[item.Nome!];
+                            var value = dictTotalizadorTalentoMasculino[item.Nome!];
 
-                                value += 1;
+                            value += 1;
 
-                                dictTotalizadorTalentoMasculino[item.Nome!] = value;
-                            }
+                            dictTotalizadorTalentoMasculino[item.Nome!] = value;
                         }
-                        else
-                        {
-                            if (dictTotalizadorTalentoFeminino.ContainsKey(item.Nome!))
-                            {
-                                var value = dictTotalizadorTalentoFeminino[item.Nome!];
-
-                                value += 1;
-
-                                dictTotalizadorTalentoFeminino[item.Nome!] = value;
-                            }
-                        }
-
-                        var valueTotal = dict[item.Nome!];
-
-                        valueTotal += 1;
-
-                        dict[item.Nome!] = valueTotal;
                     }
+                    else
+                    {
+                        if (dictTotalizadorTalentoFeminino.ContainsKey(item.Nome!))
+                        {
+                            var value = dictTotalizadorTalentoFeminino[item.Nome!];
+
+                            value += 1;
+
+                            dictTotalizadorTalentoFeminino[item.Nome!] = value;
+                        }
+                    }
+
+                    var valueTotal = dict[item.Nome!];
+
+                    valueTotal += 1;
+
+                    dict[item.Nome!] = valueTotal;
                 }
             }
         }
