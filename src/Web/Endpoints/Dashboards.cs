@@ -1,5 +1,4 @@
 ﻿using DnaBrasilApi.Application.Dashboards;
-using DnaBrasilApi.Application.Dashboards.Commands.UpdateEncaminhamentoAlunos;
 using DnaBrasilApi.Application.Dashboards.Queries;
 using DnaBrasilApi.Application.Dashboards.Queries.GetControlePresencaByFilter;
 using DnaBrasilApi.Application.Dashboards.Queries.GetIndicadoresAlunosByFilter;
@@ -16,7 +15,6 @@ using DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorSaudeBucalAlunos
 using DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorSaudeSexoAlunos;
 using DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorTalentoEsportivoAlunos;
 using DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorVocacionalAlunos;
-using DnaBrasilApi.Application.Fomentos.Commands.CreateFomento;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DnaBrasilApi.Web.Endpoints;

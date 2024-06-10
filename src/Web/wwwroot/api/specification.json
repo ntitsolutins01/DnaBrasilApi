@@ -2473,6 +2473,39 @@
         }
       }
     },
+    "/api/Laudos/EncaminhamentoAlunos": {
+      "put": {
+        "tags": [
+          "Laudos"
+        ],
+        "operationId": "UpdateEncaminhamentoAlunos",
+        "requestBody": {
+          "x-name": "command",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEncaminhamentoAlunosCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/LinhasAcoes": {
       "get": {
         "tags": [
@@ -10171,6 +10204,10 @@
             "nullable": true
           }
         }
+      },
+      "UpdateEncaminhamentoAlunosCommand": {
+        "type": "object",
+        "additionalProperties": false
       },
       "LaudoDto": {
         "type": "object",
