@@ -48,6 +48,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<ControlePresenca> ControlesPresencas => Set<ControlePresenca>();
     public DbSet<MetricaImc> MetricasImc => Set<MetricaImc>();
     public DbSet<LinhaAcao> LinhasAcoes => Set<LinhaAcao>();
+    public DbSet<TipoCurso> TipoCursos => Set<TipoCurso>();
+    public DbSet<Curso> Cursos => Set<Curso>();
 
 
     protected override void OnModelCreating(ModelBuilder builder)
