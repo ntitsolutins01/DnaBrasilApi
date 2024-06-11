@@ -42,6 +42,7 @@ public interface IApplicationDbContext
     DbSet<MetricaImc> MetricasImc { get; }
     DbSet<LinhaAcao> LinhasAcoes { get; }
     DbSet<TipoCurso> TipoCursos { get; }
+    DbSet<Curso> Cursos { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }
