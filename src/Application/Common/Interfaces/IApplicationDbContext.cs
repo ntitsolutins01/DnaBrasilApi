@@ -43,6 +43,7 @@ public interface IApplicationDbContext
     DbSet<LinhaAcao> LinhasAcoes { get; }
     DbSet<TipoCurso> TipoCursos { get; }
     DbSet<Curso> Cursos { get; }
+    DbSet<Disciplina> Disciplinas { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }
