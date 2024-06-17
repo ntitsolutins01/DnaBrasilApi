@@ -3648,6 +3648,168 @@
         }
       }
     },
+    "/api/Notas": {
+      "get": {
+        "tags": [
+          "Notas"
+        ],
+        "operationId": "GetNotasAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/NotaDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Notas"
+        ],
+        "operationId": "CreateNota",
+        "requestBody": {
+          "x-name": "command",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateNotaCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Notas/{id}": {
+      "put": {
+        "tags": [
+          "Notas"
+        ],
+        "operationId": "UpdateNota",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateNotaCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Notas"
+        ],
+        "operationId": "DeleteNota",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Notas/Nota/{id}": {
+      "get": {
+        "tags": [
+          "Notas"
+        ],
+        "operationId": "GetNotaById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotaDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Parceiros": {
       "get": {
         "tags": [
@@ -11684,6 +11846,153 @@
             "type": "integer",
             "format": "int32",
             "nullable": true
+          }
+        }
+      },
+      "NotaDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "aluno": {
+            "$ref": "#/components/schemas/Aluno"
+          },
+          "disciplina": {
+            "$ref": "#/components/schemas/Disciplina"
+          },
+          "primeiroBimestre": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "segundoBimestre": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "terceiroBimestre": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "quartoBimestre": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "media": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "status": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Disciplina": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "nome": {
+                "type": "string"
+              },
+              "descricao": {
+                "type": "string",
+                "nullable": true
+              },
+              "status": {
+                "type": "boolean"
+              }
+            }
+          }
+        ]
+      },
+      "CreateNotaCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "alunoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "disciplinaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "primeiroBimestre": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "segundoBimestre": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "terceiroBimestre": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "quartoBimestre": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "media": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "status": {
+            "type": "boolean"
+          }
+        }
+      },
+      "UpdateNotaCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "primeiroBimestre": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "segundoBimestre": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "terceiroBimestre": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "quartoBimestre": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "media": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "status": {
+            "type": "boolean"
           }
         }
       },

@@ -51,6 +51,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<TipoCurso> TipoCursos => Set<TipoCurso>();
     public DbSet<Curso> Cursos => Set<Curso>();
     public DbSet<Disciplina> Disciplinas => Set<Disciplina>();
+    public DbSet<Nota> Notas => Set<Nota>();
 
 
     protected override void OnModelCreating(ModelBuilder builder)
