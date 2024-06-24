@@ -53,6 +53,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<Disciplina> Disciplinas => Set<Disciplina>();
     public DbSet<Nota> Notas => Set<Nota>();
     public DbSet<ModuloEad> ModulosEad => Set<ModuloEad>();
+    public DbSet<Aula> Aulas => Set<Aula>();
 
 
     protected override void OnModelCreating(ModelBuilder builder)
