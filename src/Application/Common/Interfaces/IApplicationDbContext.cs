@@ -45,6 +45,7 @@ public interface IApplicationDbContext
     DbSet<Curso> Cursos { get; }
     DbSet<Disciplina> Disciplinas { get; }
     DbSet<Nota> Notas { get; }
+    DbSet<ModuloEad> ModulosEad { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }
