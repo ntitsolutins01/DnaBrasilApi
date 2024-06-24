@@ -4,6 +4,7 @@ using DnaBrasilApi.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DnaBrasilApi.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240617220241_DnaNotaCreateTable")]
+    partial class DnaNotaCreateTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1112,54 +1115,6 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Modulos");
-                });
-
-            modelBuilder.Entity("DnaBrasilApi.Domain.Entities.ModuloEad", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CargaHoraria")
-                        .HasColumnType("int");
-
-                    b.Property<DateTimeOffset>("Created")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("CursoId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Descricao")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTimeOffset>("LastModified")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ProfessorId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Titulo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CursoId");
-
-                    b.HasIndex("ProfessorId");
-
-                    b.ToTable("ModulosEad");
                 });
 
             modelBuilder.Entity("DnaBrasilApi.Domain.Entities.Municipio", b =>
@@ -2761,25 +2716,6 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                         .HasForeignKey("LinhaAcaoId");
 
                     b.Navigation("LinhaAcao");
-                });
-
-            modelBuilder.Entity("DnaBrasilApi.Domain.Entities.ModuloEad", b =>
-                {
-                    b.HasOne("DnaBrasilApi.Domain.Entities.Curso", "Curso")
-                        .WithMany()
-                        .HasForeignKey("CursoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DnaBrasilApi.Domain.Entities.Usuario", "Professor")
-                        .WithMany()
-                        .HasForeignKey("ProfessorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Curso");
-
-                    b.Navigation("Professor");
                 });
 
             modelBuilder.Entity("DnaBrasilApi.Domain.Entities.Municipio", b =>
