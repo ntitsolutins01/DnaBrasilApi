@@ -23,12 +23,14 @@ public class NotaDto
     [Column(TypeName = "decimal(10,2)")]
     public decimal? Media { get; set; }
     public bool Status { get; set; }
+    public string? LocalidadeMunicipioUf { get; set; }
 
     private class Mapping : Profile
     {
         public Mapping()
         {
-            CreateMap<Nota, NotaDto>();
+            CreateMap<Nota, NotaDto>()
+                .ForMember(dest => dest.LocalidadeMunicipioUf, opt => opt.MapFrom(src => src.Aluno.Localidade.Nome + " - " +src.Aluno.Municipio!.Nome!.ToString() + " / " + src.Aluno.Municipio!.Estado!.Sigla!.ToString()));
         }
     }
 }

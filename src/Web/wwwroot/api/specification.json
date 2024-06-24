@@ -12136,6 +12136,10 @@
           },
           "status": {
             "type": "boolean"
+          },
+          "localidadeMunicipioUf": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
