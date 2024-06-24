@@ -21,7 +21,7 @@ public class UpdateEncaminhamentoAlunosCommandHandler : IRequestHandler<UpdateEn
     {
         IQueryable<Aluno> alunos;
 
-        alunos = _context.Alunos//.Where(x => x.Id == 37297)//37315 - Feminino 38438
+        alunos = _context.Alunos//.Where(x => x.Id == 34425)//37315 - Feminino 38438
             .AsNoTracking();
 
         var desempenhos = await _context.TextosLaudos
@@ -203,20 +203,32 @@ public class UpdateEncaminhamentoAlunosCommandHandler : IRequestHandler<UpdateEn
                 }
             }
 
-            var q = from x in encaminhamento
+
+                var entity = await _context.TalentosEsportivos
+                    .FindAsync([aluno.TalentoEsportivo.Id], cancellationToken);
+
+                Guard.Against.NotFound(aluno.TalentoEsportivo.Id, entity);
+
+            if (encaminhamento.Count>0)
+            {
+                var q = from x in encaminhamento
                     group x by x into g
                     let count = g.Count()
                     orderby count descending
                     select new { Value = g.Key, Count = count };
 
-            var entity = await _context.TalentosEsportivos
-                .FindAsync([aluno.TalentoEsportivo.Id], cancellationToken);
+                entity.Encaminhamento = q.FirstOrDefault()!.Value;
 
-            Guard.Against.NotFound(aluno.TalentoEsportivo.Id, entity);
+                var result = await _context.SaveChangesAsync(cancellationToken);
+            }
+            else
+            {
+                entity.Encaminhamento = "Em Desenvolvimento";
 
-            entity.Encaminhamento = q.FirstOrDefault()!.Value;
+                var result = await _context.SaveChangesAsync(cancellationToken);
+            }
 
-            var result = await _context.SaveChangesAsync(cancellationToken);
+            
 
             encaminhamento = new List<string>();
         }
