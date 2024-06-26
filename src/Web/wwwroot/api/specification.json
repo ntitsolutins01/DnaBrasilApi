@@ -13350,13 +13350,11 @@
             "type": "integer",
             "format": "int32"
           },
-          "aulaId": {
-            "type": "integer",
-            "format": "int32"
+          "aula": {
+            "$ref": "#/components/schemas/Aula"
           },
           "titulo": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "provaRequisito": {
             "type": "boolean"
@@ -13370,21 +13368,199 @@
             "format": "int32"
           },
           "liberacaoProva": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
-          "dataLiberacaoId": {
-            "type": "integer",
-            "format": "int32"
+          "dataLiberacao": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "duracaoProva": {
+            "type": "string",
+            "format": "duration"
           },
           "dataEncerramento": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "permitirTentativas": {
+            "type": "boolean"
+          },
+          "tentativas": {
             "type": "integer",
             "format": "int32"
+          },
+          "liberarTentativa": {
+            "type": "boolean"
           },
           "status": {
             "type": "boolean"
           }
         }
+      },
+      "Aula": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "cargaHoraria": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "professor": {
+                "$ref": "#/components/schemas/Usuario"
+              },
+              "moduloEad": {
+                "$ref": "#/components/schemas/ModuloEad"
+              },
+              "titulo": {
+                "type": "string"
+              },
+              "descricao": {
+                "type": "string",
+                "nullable": true
+              },
+              "status": {
+                "type": "boolean"
+              }
+            }
+          }
+        ]
+      },
+      "Usuario": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "aspNetUserId": {
+                "type": "string"
+              },
+              "nome": {
+                "type": "string"
+              },
+              "cpfCnpj": {
+                "type": "string"
+              },
+              "tipoPessoa": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "aspNetRoleId": {
+                "type": "string"
+              },
+              "perfil": {
+                "$ref": "#/components/schemas/Perfil"
+              },
+              "status": {
+                "type": "boolean",
+                "nullable": true
+              },
+              "municipio": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Municipio"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "ModuloEad": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "cargaHoraria": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "professor": {
+                "$ref": "#/components/schemas/Usuario"
+              },
+              "curso": {
+                "$ref": "#/components/schemas/Curso"
+              },
+              "titulo": {
+                "type": "string"
+              },
+              "descricao": {
+                "type": "string",
+                "nullable": true
+              },
+              "status": {
+                "type": "boolean"
+              }
+            }
+          }
+        ]
+      },
+      "Curso": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "tipoCurso": {
+                "$ref": "#/components/schemas/TipoCurso"
+              },
+              "usuario": {
+                "$ref": "#/components/schemas/Usuario"
+              },
+              "titulo": {
+                "type": "string"
+              },
+              "cargaHoraria": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "descricao": {
+                "type": "string",
+                "nullable": true
+              },
+              "status": {
+                "type": "boolean"
+              }
+            }
+          }
+        ]
+      },
+      "TipoCurso": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "nome": {
+                "type": "string"
+              },
+              "status": {
+                "type": "boolean"
+              }
+            }
+          }
+        ]
       },
       "CreateProvaCommand": {
         "type": "object",
@@ -13412,12 +13588,24 @@
             "type": "string"
           },
           "dataLiberacao": {
-            "type": "string",
-            "format": "date-time"
+            "type": "string"
+          },
+          "duracaoProva": {
+            "type": "string"
           },
           "dataEncerramento": {
             "type": "string",
-            "format": "date-time"
+            "nullable": true
+          },
+          "permitirTentativas": {
+            "type": "boolean"
+          },
+          "tentativas": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "liberarTentativa": {
+            "type": "boolean"
           },
           "status": {
             "type": "boolean"
@@ -13429,6 +13617,10 @@
         "additionalProperties": false,
         "properties": {
           "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "aulaId": {
             "type": "integer",
             "format": "int32"
           },
@@ -13452,8 +13644,22 @@
           "dataLiberacao": {
             "type": "string"
           },
-          "dataEncerramento": {
+          "duracaoProva": {
             "type": "string"
+          },
+          "dataEncerramento": {
+            "type": "string",
+            "nullable": true
+          },
+          "permitirTentativas": {
+            "type": "boolean"
+          },
+          "tentativas": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "liberarTentativa": {
+            "type": "boolean"
           },
           "status": {
             "type": "boolean"
