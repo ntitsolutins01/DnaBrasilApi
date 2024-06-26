@@ -5103,6 +5103,168 @@
         }
       }
     },
+    "/api/Provas": {
+      "get": {
+        "tags": [
+          "Provas"
+        ],
+        "operationId": "GetProvasAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProvaDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Provas"
+        ],
+        "operationId": "CreateProva",
+        "requestBody": {
+          "x-name": "command",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateProvaCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Provas/{id}": {
+      "put": {
+        "tags": [
+          "Provas"
+        ],
+        "operationId": "UpdateProva",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateProvaCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Provas"
+        ],
+        "operationId": "DeleteProva",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Provas/Prova/{id}": {
+      "get": {
+        "tags": [
+          "Provas"
+        ],
+        "operationId": "GetProvaById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProvaDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/QualidadeDeVidas": {
       "get": {
         "tags": [
@@ -13177,6 +13339,124 @@
           "ambientesIds": {
             "type": "string",
             "nullable": true
+          }
+        }
+      },
+      "ProvaDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "aulaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "titulo": {
+            "type": "string",
+            "nullable": true
+          },
+          "provaRequisito": {
+            "type": "boolean"
+          },
+          "peso": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "mediaAprovacao": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "liberacaoProva": {
+            "type": "string",
+            "nullable": true
+          },
+          "dataLiberacaoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dataEncerramento": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "status": {
+            "type": "boolean"
+          }
+        }
+      },
+      "CreateProvaCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "aulaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "titulo": {
+            "type": "string"
+          },
+          "provaRequisito": {
+            "type": "boolean"
+          },
+          "peso": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "mediaAprovacao": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "liberacaoProva": {
+            "type": "string"
+          },
+          "dataLiberacao": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "dataEncerramento": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "boolean"
+          }
+        }
+      },
+      "UpdateProvaCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "titulo": {
+            "type": "string"
+          },
+          "provaRequisito": {
+            "type": "boolean"
+          },
+          "peso": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "mediaAprovacao": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "liberacaoProva": {
+            "type": "string"
+          },
+          "dataLiberacao": {
+            "type": "string"
+          },
+          "dataEncerramento": {
+            "type": "string"
+          },
+          "status": {
+            "type": "boolean"
           }
         }
       },
