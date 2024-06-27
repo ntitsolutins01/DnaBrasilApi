@@ -20,9 +20,10 @@ public class RespostaDto
         {
             CreateMap<Resposta, RespostaDto>()
                 .ForMember(dest => dest.QuestionarioId, opt => opt.MapFrom(src => src.Questionario!.Id))
-                .ForMember(dest => dest.Pergunta, opt => opt.MapFrom(src => src.Questionario!.Pergunta))
-                .ForMember(dest => dest.TipoLaudoId, opt => opt.MapFrom(src => src.Questionario!.TipoLaudo.Id))
-                .ForMember(dest => dest.NomeTipoLaudo, opt => opt.MapFrom(src => src.Questionario!.TipoLaudo.Nome));
+                .ForMember(dest => dest.Pergunta, opt => opt.MapFrom(src =>
+                    $"{src.Questionario.Questao}. {src.Questionario.Pergunta}"))
+                .ForMember(dest => dest.TipoLaudoId, opt => opt.MapFrom(src => src.Questionario.TipoLaudo.Id))
+                .ForMember(dest => dest.NomeTipoLaudo, opt => opt.MapFrom(src => src.Questionario.TipoLaudo.Nome));
         }
     }
 }

@@ -2,7 +2,7 @@
 using DnaBrasilApi.Application.TipoLaudos.Queries;
 using DnaBrasilApi.Application.TipoLaudos.Commands.CreateTipoLaudos;
 using DnaBrasilApi.Application.TipoLaudos.Commands.DeleteTipoLaudos;
-using DnaBrasilApi.Application.TipoLaudos.Commands.UpdateTipoLaudo;
+using DnaBrasilApi.Application.TipoLaudos.Commands.UpdateTipoLaudos;
 using DnaBrasilApi.Application.TipoLaudos.Queries.GetTipoLaudosAll;
 
 namespace DnaBrasilApi.Web.Endpoints;

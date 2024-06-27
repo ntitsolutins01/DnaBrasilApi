@@ -2,8 +2,8 @@
 using DnaBrasilApi.Application.Alunos.Commands.CreateVoucher;
 using DnaBrasilApi.Application.Alunos.Commands.DeleteAluno;
 using DnaBrasilApi.Application.Alunos.Commands.UpdateAluno;
+using DnaBrasilApi.Application.Alunos.Commands.UpdateAlunoAmbientes;
 using DnaBrasilApi.Application.Alunos.Commands.UpdateAlunoFoto;
-using DnaBrasilApi.Application.Alunos.Commands.UpdateAlunoModalidades;
 using DnaBrasilApi.Application.Alunos.Commands.UpdateVoucher;
 using DnaBrasilApi.Application.Alunos.Queries;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunoByEmail;

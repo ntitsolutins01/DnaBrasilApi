@@ -9752,8 +9752,7 @@
             "format": "int32"
           },
           "nome": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "descricao": {
             "type": "string",
@@ -13759,7 +13758,8 @@
             "type": "string"
           },
           "descricao": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "status": {
             "type": "boolean"

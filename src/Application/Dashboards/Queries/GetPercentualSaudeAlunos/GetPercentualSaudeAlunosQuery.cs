@@ -40,7 +40,7 @@ public class GetPercentualSaudeAlunosQueryHandler : IRequestHandler<GetPercentua
         {
             var id = Convert.ToInt32(search.FomentoId.Split("-")[0]);
 
-            alunos = alunos.Where(u => u.Fomento!.Id == id);
+            alunos = alunos.Where(u => u.Fomento.Id == id);
         }
 
         if (!string.IsNullOrWhiteSpace(search.Estado))

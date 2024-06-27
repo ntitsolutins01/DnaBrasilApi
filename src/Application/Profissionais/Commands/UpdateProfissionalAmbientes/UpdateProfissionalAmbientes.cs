@@ -1,7 +1,7 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasilApi.Application.Profissionais.Commands.UpdateProfissionalModalidades;
+namespace DnaBrasilApi.Application.Profissionais.Commands.UpdateProfissionalAmbientes;
 public record UpdateProfissionalModalidadesCommand : IRequest
 {
     public int Id { get; init; }

@@ -1,6 +1,6 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasilApi.Application.Usuarios.Queries;
+namespace DnaBrasilApi.Application.Usuarios.Queries.GetUsuariosAll;
 //[Authorize]
 public record GetUsuariosAllQuery : IRequest<List<UsuarioDto>>;
 

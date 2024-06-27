@@ -40,7 +40,7 @@ public class GetControlePresencaByFilterQueryHandler : IRequestHandler<GetContro
         {
             var id = Convert.ToInt32(search.FomentoId.Split("-")[0]);
 
-            controlePresencas = controlePresencas.Where(u => u.Aluno.Fomento!.Id == id);
+            controlePresencas = controlePresencas.Where(u => u.Aluno.Fomento.Id == id);
         }
 
         if (!string.IsNullOrWhiteSpace(search.Estado))
