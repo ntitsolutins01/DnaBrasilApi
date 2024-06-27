@@ -8,8 +8,8 @@ public record UpdateControleAcessoAulaCommand : IRequest <bool>
     public required int Id { get; init; }
     public required int AulaId { get; init; }
     public bool IdentificacaoAluno { get; init; } = false;
-    public bool AulaRequisito { get; init; } = false;
-    public bool PermanenciaAula { get; init; } = false;
+    public bool AulaRequisito { get; init; }
+    public bool PermanenciaAula { get; init; }
     public required string TempoPermanecia { get; init; }
     public required string LiberacaoAula { get; init; }
     public required string DataLiberacao { get; init; }
