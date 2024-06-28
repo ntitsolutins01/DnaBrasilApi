@@ -6,7 +6,7 @@ public class Prova : BaseAuditableEntity
 {
     public required Aula Aula { get; set; }
     public required string Titulo  { get; set; }
-    public bool ProvaRequisito { get; set; } = false;
+    public bool ProvaRequisito { get; set; }
     public required int Peso { get; set; } 
     public required int MediaAprovacao { get; set; }
     public required string LiberacaoProva { get; set; }
