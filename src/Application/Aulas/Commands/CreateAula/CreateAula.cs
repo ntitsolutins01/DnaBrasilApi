@@ -6,7 +6,7 @@ public record CreateAulaCommand : IRequest<int>
 {
     public required int CargaHoraria { get; set; }
     public required int ProfessorId { get; set; }
-    public required int MuduloEadId { get; set; }
+    public required int ModuloEadId { get; set; }
     public required string Titulo { get; set; }
     public string? Descricao { get; set; }
     public bool Status { get; init; } = true;
@@ -29,9 +29,9 @@ public class CreateAulaCommandHandler : IRequestHandler<CreateAulaCommand, int>
         Guard.Against.NotFound(request.ProfessorId, professor);
 
         var moduloEad = await _context.ModulosEad
-            .FindAsync([request.MuduloEadId], cancellationToken);
+            .FindAsync([request.ModuloEadId], cancellationToken);
 
-        Guard.Against.NotFound(request.MuduloEadId, moduloEad);
+        Guard.Against.NotFound(request.ModuloEadId, moduloEad);
 
         var entity = new Aula
         {
