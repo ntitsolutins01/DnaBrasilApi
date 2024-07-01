@@ -9832,7 +9832,7 @@
             "type": "integer",
             "format": "int32"
           },
-          "muduloEadId": {
+          "moduloEadId": {
             "type": "integer",
             "format": "int32"
           },
@@ -12066,7 +12066,7 @@
             "format": "int32"
           },
           "localidade": {
-            "$ref": "#/components/schemas/Localidade"
+            "type": "string"
           },
           "titulo": {
             "type": "string"
@@ -12076,8 +12076,7 @@
             "nullable": true
           },
           "dataEvento": {
-            "type": "string",
-            "format": "date-time"
+            "type": "string"
           },
           "status": {
             "type": "boolean"
