@@ -10708,6 +10708,11 @@
             "type": "integer",
             "format": "int32"
           },
+          "eventoId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
           "nomeAluno": {
             "type": "string"
           },
@@ -10732,13 +10737,11 @@
           },
           "localidadeId": {
             "type": "integer",
-            "format": "int32",
-            "nullable": true
+            "format": "int32"
           },
           "municipioId": {
             "type": "integer",
-            "format": "int32",
-            "nullable": true
+            "format": "int32"
           },
           "status": {
             "type": "boolean"
@@ -10753,6 +10756,10 @@
         ],
         "properties": {
           "alunoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "eventoId": {
             "type": "integer",
             "format": "int32"
           },
@@ -12064,6 +12071,21 @@
           "id": {
             "type": "integer",
             "format": "int32"
+          },
+          "estadoId": {
+            "type": "string"
+          },
+          "estado": {
+            "type": "string"
+          },
+          "municipioId": {
+            "type": "string"
+          },
+          "municipio": {
+            "type": "string"
+          },
+          "localidadeId": {
+            "type": "string"
           },
           "localidade": {
             "type": "string"
