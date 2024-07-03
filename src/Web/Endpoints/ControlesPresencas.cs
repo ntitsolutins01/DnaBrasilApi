@@ -7,6 +7,7 @@ using DnaBrasilApi.Application.ControlesPresencas.Queries.GetControlePresencaByI
 using DnaBrasilApi.Application.ControlesPresencas.Queries.GetControlesPresencasByAlunoId;
 using DnaBrasilApi.Application.ControlesPresencas.Queries.GetControlesPresencasByFilter;
 using Microsoft.AspNetCore.Mvc;
+using DnaBrasilApi.Application.ControlesPresencas.Queries.GetControlesPresencasByEventoId;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -22,6 +23,7 @@ public class ControlesPresencas : EndpointGroupBase
             .MapDelete(DeleteControlePresenca, "{id}")
             .MapGet(GetControlePresencaById, "ControlePresenca/{id}")
             .MapGet(GetControlesPresencasByAlunoId, "ControlePresenca/Aluno/{alunoId}")
+            .MapGet(GetControlesPresencasByEventoId, "ControlePresenca/Evento/{eventoId}")
             .MapPost(GetControlesPresencasByFilter, "Filter");
     }
 
@@ -39,6 +41,12 @@ public class ControlesPresencas : EndpointGroupBase
     public async Task<ControlePresencaDto> GetControlePresencaById(ISender sender, int id)
     {
         return await sender.Send(new GetControlePresencaByIdQuery() { Id = id });
+    }
+
+
+    public async Task<List<ControlePresencaDto>> GetControlesPresencasByEventoId(ISender sender, int eventoId)
+    {
+        return await sender.Send(new GetControlesPresencasByEventoIdQuery() { EventoId = eventoId });
     }
     public async Task<List<ControlePresencaDto>> GetControlesPresencasByAlunoId(ISender sender, int alunoId)
     {

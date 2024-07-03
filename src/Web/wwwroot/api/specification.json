@@ -1474,6 +1474,41 @@
         }
       }
     },
+    "/api/ControlesPresencas/ControlePresenca/Evento/{eventoId}": {
+      "get": {
+        "tags": [
+          "ControlesPresencas"
+        ],
+        "operationId": "GetControlesPresencasByEventoId",
+        "parameters": [
+          {
+            "name": "eventoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ControlePresencaDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/ControlesPresencas/Filter": {
       "post": {
         "tags": [
@@ -9746,6 +9781,10 @@
             "type": "string",
             "nullable": true
           },
+          "nome": {
+            "type": "string",
+            "nullable": true
+          },
           "alunos": {
             "type": "array",
             "nullable": true,
@@ -12133,10 +12172,6 @@
         "additionalProperties": false,
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "localidadeId": {
             "type": "integer",
             "format": "int32"
           },
