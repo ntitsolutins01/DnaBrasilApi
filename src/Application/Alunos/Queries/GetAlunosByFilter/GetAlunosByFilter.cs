@@ -37,9 +37,14 @@ public class GetAlunosByFilterQueryHandler : IRequestHandler<GetAlunosByFilterQu
     {
         if (!string.IsNullOrWhiteSpace(search.FomentoId))
         {
-            var fomento = _context.Fomentos.Include(i=>i.Municipio).First(x => x.Id == Convert.ToInt32(search.FomentoId));
+            var fomento = Convert.ToInt32(search.FomentoId);
 
-            Alunos = Alunos.Where(u => u.Municipio!.Id == fomento.Municipio!.Id);
+            Alunos = Alunos.Where(u => u.Fomento!.Id == fomento);
+        }
+
+        if (!string.IsNullOrWhiteSpace(search.Nome))
+        {
+            Alunos = Alunos.Where(u => u.Nome.Contains(search.Nome));
         }
 
         if (!string.IsNullOrWhiteSpace(search.Estado))

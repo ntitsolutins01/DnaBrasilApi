@@ -1474,6 +1474,41 @@
         }
       }
     },
+    "/api/ControlesPresencas/ControlePresenca/Evento/{eventoId}": {
+      "get": {
+        "tags": [
+          "ControlesPresencas"
+        ],
+        "operationId": "GetControlesPresencasByEventoId",
+        "parameters": [
+          {
+            "name": "eventoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ControlePresencaDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/ControlesPresencas/Filter": {
       "post": {
         "tags": [
@@ -9746,6 +9781,10 @@
             "type": "string",
             "nullable": true
           },
+          "nome": {
+            "type": "string",
+            "nullable": true
+          },
           "alunos": {
             "type": "array",
             "nullable": true,
@@ -9832,7 +9871,7 @@
             "type": "integer",
             "format": "int32"
           },
-          "muduloEadId": {
+          "moduloEadId": {
             "type": "integer",
             "format": "int32"
           },
@@ -10707,6 +10746,11 @@
             "type": "integer",
             "format": "int32"
           },
+          "eventoId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
           "nomeAluno": {
             "type": "string"
           },
@@ -10731,13 +10775,11 @@
           },
           "localidadeId": {
             "type": "integer",
-            "format": "int32",
-            "nullable": true
+            "format": "int32"
           },
           "municipioId": {
             "type": "integer",
-            "format": "int32",
-            "nullable": true
+            "format": "int32"
           },
           "status": {
             "type": "boolean"
@@ -10752,6 +10794,10 @@
         ],
         "properties": {
           "alunoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "eventoId": {
             "type": "integer",
             "format": "int32"
           },
@@ -12064,8 +12110,23 @@
             "type": "integer",
             "format": "int32"
           },
+          "estadoId": {
+            "type": "string"
+          },
+          "estado": {
+            "type": "string"
+          },
+          "municipioId": {
+            "type": "string"
+          },
+          "municipio": {
+            "type": "string"
+          },
+          "localidadeId": {
+            "type": "string"
+          },
           "localidade": {
-            "$ref": "#/components/schemas/Localidade"
+            "type": "string"
           },
           "titulo": {
             "type": "string"
@@ -12075,8 +12136,7 @@
             "nullable": true
           },
           "dataEvento": {
-            "type": "string",
-            "format": "date-time"
+            "type": "string"
           },
           "status": {
             "type": "boolean"
@@ -12111,10 +12171,6 @@
         "additionalProperties": false,
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "localidadeId": {
             "type": "integer",
             "format": "int32"
           },

@@ -9,5 +9,8 @@ internal class CreateEventoCommandValidator : AbstractValidator<CreateEventoComm
             .MaximumLength(250)
             .NotEmpty()
             .WithMessage("O título é obrigatório.");
+        RuleFor(v => v.Descricao)
+            .MaximumLength(500)
+            .WithMessage("A Descrição é obrigatória.");
     }
 }

@@ -18,6 +18,8 @@ public class GetControlesPresencasAllQueryHandler : IRequestHandler<GetControles
     public async Task<List<ControlePresencaDto>> Handle(GetControlesPresencasAllQuery request, CancellationToken cancellationToken)
     {
         var result = await _context.ControlesPresencas
+            .Include(i => i.Evento)
+            .Where(x => x.Evento == null)
             .AsNoTracking()
             .ProjectTo<ControlePresencaDto>(_mapper.ConfigurationProvider)
             .OrderBy(t => t.Id)
