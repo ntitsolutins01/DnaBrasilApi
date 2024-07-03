@@ -1,7 +1,6 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
-using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasilApi.Application.Dependencias.Commands.UpdateDependencia;
+namespace DnaBrasilApi.Application.Alunos.Commands.UpdateDependencia;
 
 public record UpdateDependenciaCommand : IRequest<bool>
 {

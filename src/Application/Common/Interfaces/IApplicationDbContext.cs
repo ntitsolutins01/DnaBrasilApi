@@ -41,6 +41,16 @@ public interface IApplicationDbContext
     DbSet<ControlePresenca> ControlesPresencas { get; }
     DbSet<MetricaImc> MetricasImc { get; }
     DbSet<LinhaAcao> LinhasAcoes { get; }
+    DbSet<TipoCurso> TipoCursos { get; }
+    DbSet<Curso> Cursos { get; }
+    DbSet<Disciplina> Disciplinas { get; }
+    DbSet<Nota> Notas { get; }
+    DbSet<ModuloEad> ModulosEad { get; }
+    DbSet<Aula> Aulas { get; }
+    DbSet<Prova> Provas { get; }
+    DbSet<ControleAcessoAula> ControlesAcessosAulas { get; }
+    DbSet<Evento> Eventos { get; }
+   
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

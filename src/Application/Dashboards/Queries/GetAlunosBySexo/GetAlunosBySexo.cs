@@ -23,9 +23,7 @@ public class GetAlunosBySexoQueryHandler : IRequestHandler<GetAlunosBySexoQuery,
 
     public async Task<int> Handle(GetAlunosBySexoQuery request, CancellationToken cancellationToken)
     {
-        int result = 0;
-
-        result = string.IsNullOrWhiteSpace(request.SearchFilter!.Sexo)
+        int result = string.IsNullOrWhiteSpace(request.SearchFilter!.Sexo)
             ? await _context.Alunos
                 .AsNoTracking()
                 .CountAsync(cancellationToken)
@@ -37,33 +35,30 @@ public class GetAlunosBySexoQueryHandler : IRequestHandler<GetAlunosBySexoQuery,
         return result;
     }
 
-    private int FilterAlunos(IQueryable<Aluno> Alunos, DashboardDto search, CancellationToken cancellationToken)
+    private int FilterAlunos(IQueryable<Aluno> alunos, DashboardDto search, CancellationToken cancellationToken)
     {
         if (!string.IsNullOrWhiteSpace(search.FomentoId))
         {
-            var fomento = _context.Fomentos.Where(x => x.Id == Convert.ToInt32(search.FomentoId))
-                .AsNoTracking()
-                .ProjectTo<FomentoDto>(_mapper.ConfigurationProvider)
-                .FirstOrDefaultAsync(cancellationToken);
+            var id = Convert.ToInt32(search.FomentoId.Split("-")[0]);
 
-            Alunos = Alunos.Where(u => u.Municipio!.Id.Equals(fomento.Id));
+            alunos = alunos.Where(u => u.Fomento.Id == id);
         }
 
         if (!string.IsNullOrWhiteSpace(search.Estado))
         {
-            Alunos = Alunos.Where(u => u.Municipio!.Estado!.Sigla!.Contains(search.Estado));
+            alunos = alunos.Where(u => u.Municipio!.Estado!.Sigla!.Contains(search.Estado));
         }
 
         if (!string.IsNullOrWhiteSpace(search.MunicipioId))
         {
-            Alunos = Alunos.Where(u => u.Municipio!.Id.Equals(search.MunicipioId));
+            alunos = alunos.Where(u => u.Municipio!.Id.Equals(search.MunicipioId));
         }
 
         if (!string.IsNullOrWhiteSpace(search.LocalidadeId))
         {
-            Alunos = Alunos.Where(u => u.Localidade!.Id.Equals(search.LocalidadeId));
+            alunos = alunos.Where(u => u.Localidade!.Id.Equals(search.LocalidadeId));
         }
 
-        return Alunos.Count();
+        return alunos.Count();
     }
 }

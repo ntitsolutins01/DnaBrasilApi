@@ -40,7 +40,7 @@ public class GetPercentualSaudeAlunosQueryHandler : IRequestHandler<GetPercentua
         {
             var id = Convert.ToInt32(search.FomentoId.Split("-")[0]);
 
-            alunos = alunos.Where(u => u.Fomento!.Id == id);
+            alunos = alunos.Where(u => u.Fomento.Id == id);
         }
 
         if (!string.IsNullOrWhiteSpace(search.Estado))
@@ -78,7 +78,7 @@ public class GetPercentualSaudeAlunosQueryHandler : IRequestHandler<GetPercentua
 
         Dictionary<string, decimal> dict = new();
 
-        int cont = 1;
+        //int cont = 1;
 
         var laudos = _context.Laudos.Where(x => verificaAlunos.Contains(x.Aluno.Id)).Include(i => i.Saude).Include(a=>a.Aluno)
             .AsNoTracking();
@@ -115,10 +115,10 @@ public class GetPercentualSaudeAlunosQueryHandler : IRequestHandler<GetPercentua
 
                 dict[result.Classificacao!] = value;
             }
-            else
-            {
-                dict.Add(result!.Classificacao!, cont);
-            }
+            //else
+            //{
+            //    dict.Add(result!.Classificacao!, cont);
+            //}
 
             //foreach (var item in metricasImc)
             //{

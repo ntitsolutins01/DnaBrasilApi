@@ -45,7 +45,7 @@ public class GetLaudosAlunosByFilterQueryHandler : IRequestHandler<GetLaudosAlun
         {
             var id = Convert.ToInt32(search.FomentoId.Split("-")[0]);
 
-            laudos = laudos.Where(u => u.Aluno.Fomento!.Id == id);
+            laudos = laudos.Where(u => u.Aluno.Fomento.Id == id);
         }
 
         if (!string.IsNullOrWhiteSpace(search.Sexo))

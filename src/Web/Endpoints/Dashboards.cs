@@ -15,7 +15,6 @@ using DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorSaudeBucalAlunos
 using DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorSaudeSexoAlunos;
 using DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorTalentoEsportivoAlunos;
 using DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorVocacionalAlunos;
-using DnaBrasilApi.Application.Fomentos.Commands.CreateFomento;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DnaBrasilApi.Web.Endpoints;
@@ -43,6 +42,7 @@ public class Dashboards : EndpointGroupBase
             .MapPost(GetGraficosVocacionalByFilter, "GetGraficosVocacional")
             .MapPost(CreateCarga,"Carga");
     }
+
 
     public async Task<DashboardDto> GetIndicadoresAlunosByFilter(ISender sender, [FromBody] DashboardDto dashboard)
     {
@@ -92,7 +92,7 @@ public class Dashboards : EndpointGroupBase
     }
     public async Task<DashboardDto> GetStatusLaudosByFilter(ISender sender, [FromBody] DashboardDto dashboard)
     {
-        dashboard.StatusLaudos = await sender.Send(new GetStatusLaudosAllQuery());
+        dashboard.StatusLaudos = await sender.Send(new GetStatusLaudosAllQuery() { SearchFilter = dashboard });
 
         return await Task.FromResult(dashboard);
     }

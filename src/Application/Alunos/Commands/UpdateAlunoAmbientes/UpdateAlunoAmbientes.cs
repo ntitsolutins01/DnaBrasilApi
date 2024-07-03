@@ -1,7 +1,7 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasilApi.Application.Alunos.Commands.UpdateAlunoModalidades;
+namespace DnaBrasilApi.Application.Alunos.Commands.UpdateAlunoAmbientes;
 
 public record UpdateAlunoModalidadesCommand : IRequest
 {
