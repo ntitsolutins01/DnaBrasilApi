@@ -5,6 +5,7 @@ using DnaBrasilApi.Application.Usuarios.Queries;
 using DnaBrasilApi.Application.Usuarios.Queries.GetUsuarioByCpf;
 using DnaBrasilApi.Application.Usuarios.Queries.GetUsuarioByEmail;
 using DnaBrasilApi.Application.Usuarios.Queries.GetUsuarioById;
+using DnaBrasilApi.Application.Usuarios.Queries.GetUsuariosAll;
 
 namespace DnaBrasilApi.Web.Endpoints;
 

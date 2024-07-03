@@ -1,4 +1,4 @@
-﻿namespace DnaBrasilApi.Application.Laudos.Commands.UpdateQualidadeDeVida;
+﻿namespace DnaBrasilApi.Application.Laudos.Commands.UpdateQualidadeVida;
 
 public class UpdateQualidadeDeVidaCommandValidator : AbstractValidator<UpdateQualidadeDeVidaCommand>
 {

@@ -92,7 +92,7 @@ public class Dashboards : EndpointGroupBase
     }
     public async Task<DashboardDto> GetStatusLaudosByFilter(ISender sender, [FromBody] DashboardDto dashboard)
     {
-        dashboard.StatusLaudos = await sender.Send(new GetStatusLaudosAllQuery());
+        dashboard.StatusLaudos = await sender.Send(new GetStatusLaudosAllQuery() { SearchFilter = dashboard });
 
         return await Task.FromResult(dashboard);
     }

@@ -9,9 +9,9 @@ public class TipoLaudoConfiguration : IEntityTypeConfiguration<TipoLaudo>
     public void Configure(EntityTypeBuilder<TipoLaudo> builder)
     {
         builder.Property(t => t.Nome)
-            .HasMaxLength(50)
+            .HasMaxLength(100)
             .IsRequired();
         builder.Property(t => t.Descricao)
-            .HasMaxLength(150);
+            .HasMaxLength(300);
     }
 }

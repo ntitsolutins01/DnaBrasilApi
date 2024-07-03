@@ -5,14 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
-using DnaBrasilApi.Domain.Events;
 
 namespace DnaBrasilApi.Application.TipoLaudos.Commands.CreateTipoLaudos;
 public record CreateTipoLaudosCommand : IRequest<int>
 {
     public required string Nome { get; init; }
-    public required string Descricao { get; init; }
-    public bool Status { get; init; }
+    public string? Descricao { get; init; }
+    public bool Status { get; init; } = true;
 }
 
 public class CreateTipoLaudosCommandHandler : IRequestHandler<CreateTipoLaudosCommand, int>
@@ -29,8 +28,7 @@ public class CreateTipoLaudosCommandHandler : IRequestHandler<CreateTipoLaudosCo
         var entity = new TipoLaudo
         {
             Nome = request.Nome,
-            Descricao = request.Descricao,
-            Status = request.Status
+            Descricao = request.Descricao
         };
 
         _context.TipoLaudos.Add(entity);

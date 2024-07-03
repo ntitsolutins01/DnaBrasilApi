@@ -1,8 +1,8 @@
 ﻿using DnaBrasilApi.Application.Alunos.Commands.CreateDependencia;
+using DnaBrasilApi.Application.Alunos.Commands.UpdateDependencia;
 using DnaBrasilApi.Application.Alunos.Queries;
 using DnaBrasilApi.Application.Alunos.Queries.GetDependenciaById;
 using DnaBrasilApi.Application.Alunos.Queries.GetDependenciasAll;
-using DnaBrasilApi.Application.Dependencias.Commands.UpdateDependencia;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
