@@ -10799,7 +10799,8 @@
           },
           "eventoId": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "controle": {
             "type": "string",
@@ -12140,6 +12141,14 @@
           },
           "status": {
             "type": "boolean"
+          },
+          "totalConvidado": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalAluno": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },
@@ -12378,14 +12387,6 @@
             "type": "string",
             "nullable": true
           },
-          "talentoEsportivo": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/TalentoEsportivoDto"
-              }
-            ]
-          },
           "sexo": {
             "type": "string",
             "nullable": true
@@ -12393,135 +12394,6 @@
           "dtNascimento": {
             "type": "string",
             "format": "date-time"
-          },
-          "saude": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/SaudeDto"
-              }
-            ]
-          }
-        }
-      },
-      "TalentoEsportivoDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "profissional": {
-            "$ref": "#/components/schemas/ProfissionalDto"
-          },
-          "flexibilidade": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "preensaoManual": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "velocidade": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "impulsaoHorizontal": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "vo2Max": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "abdominal": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "imc": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "shuttleRun": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "encaminhamento": {
-            "type": "string",
-            "nullable": true
-          },
-          "altura": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "peso": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "envergadura": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "alunoId": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "SaudeDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "profissionalId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nomeProfissional": {
-            "type": "string",
-            "nullable": true
-          },
-          "altura": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "massa": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "envergadura": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "dataRealizacaoTeste": {
-            "type": "string",
-            "nullable": true
-          },
-          "imc": {
-            "type": "string",
-            "nullable": true
-          },
-          "alunoId": {
-            "type": "integer",
-            "format": "int32"
           }
         }
       },

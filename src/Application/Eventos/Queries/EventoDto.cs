@@ -15,6 +15,8 @@ public class EventoDto
     public string? Descricao { get; set; }
     public required string DataEvento { get; set; }
     public bool Status { get; set; }
+    public int TotalConvidado { get; set; }
+    public int TotalAluno { get; set; }
    
 
     private class Mapping : Profile
@@ -28,6 +30,10 @@ public class EventoDto
                 .ForMember(dest => dest.Estado, opt => opt.MapFrom(src => src.Localidade.Municipio!.Estado!.Nome))
                 .ForMember(dest => dest.LocalidadeId, opt => opt.MapFrom(src => src.Localidade.Id))
                 .ForMember(dest => dest.Localidade, opt => opt.MapFrom(src => src.Localidade!.Nome))
+                .ForMember(dest => dest.TotalAluno, opt => opt.MapFrom(src => src.ControlesPresencas == null ? 0 : src.ControlesPresencas
+                    .Where(x => x.Evento != null && x.Evento.Id == src.Id).Count(c=>c.Justificativa == "")))
+                .ForMember(dest => dest.TotalConvidado, opt => opt.MapFrom(src => src.ControlesPresencas == null ? 0 :  src.ControlesPresencas
+                    .Where(x => x.Evento != null && x.Evento.Id == src.Id).Count(c=>c.Justificativa != "")))
                 .ForMember(dest => dest.DataEvento, opt => opt.MapFrom(src => src.DataEvento.ToString("dd/MM/yyyy")));
         }
     }
