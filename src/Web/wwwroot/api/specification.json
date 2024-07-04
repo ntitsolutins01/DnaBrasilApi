@@ -95,7 +95,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/AlunoDto"
+                    "$ref": "#/components/schemas/AlunoIndexDto"
                   }
                 }
               }
@@ -8181,6 +8181,39 @@
           }
         }
       },
+      "AlunoIndexDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "aspNetUserId": {
+            "type": "string",
+            "nullable": true
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "dtNascimento": {
+            "type": "string",
+            "nullable": true
+          },
+          "municipioId": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "boolean"
+          }
+        }
+      },
       "SelectListDto": {
         "type": "object",
         "additionalProperties": false,
@@ -9791,39 +9824,6 @@
             "items": {
               "$ref": "#/components/schemas/AlunoIndexDto"
             }
-          }
-        }
-      },
-      "AlunoIndexDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "aspNetUserId": {
-            "type": "string",
-            "nullable": true
-          },
-          "nome": {
-            "type": "string",
-            "nullable": true
-          },
-          "email": {
-            "type": "string",
-            "nullable": true
-          },
-          "dtNascimento": {
-            "type": "string",
-            "nullable": true
-          },
-          "municipioId": {
-            "type": "string",
-            "nullable": true
-          },
-          "status": {
-            "type": "boolean"
           }
         }
       },
@@ -13192,28 +13192,23 @@
           },
           "primeiroBimestre": {
             "type": "number",
-            "format": "decimal",
-            "nullable": true
+            "format": "decimal"
           },
           "segundoBimestre": {
             "type": "number",
-            "format": "decimal",
-            "nullable": true
+            "format": "decimal"
           },
           "terceiroBimestre": {
             "type": "number",
-            "format": "decimal",
-            "nullable": true
+            "format": "decimal"
           },
           "quartoBimestre": {
             "type": "number",
-            "format": "decimal",
-            "nullable": true
+            "format": "decimal"
           },
           "media": {
             "type": "number",
-            "format": "decimal",
-            "nullable": true
+            "format": "decimal"
           },
           "status": {
             "type": "boolean"

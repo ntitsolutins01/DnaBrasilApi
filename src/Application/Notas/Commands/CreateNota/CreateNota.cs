@@ -5,19 +5,12 @@ namespace DnaBrasilApi.Application.Notas.Commands.CreateNota;
 public record CreateNotaCommand : IRequest<int>
 {
     public required int AlunoId { get; init; }
-
     public required int DisciplinaId { get; init; }
-
-    public decimal? PrimeiroBimestre { get; init; }
-
-    public decimal? SegundoBimestre { get; init; }
-
-    public decimal? TerceiroBimestre { get; init; }
-
-    public decimal? QuartoBimestre { get; init; }
-
-    public decimal? Media { get; init; }
-
+    public decimal PrimeiroBimestre { get; init; }
+    public decimal SegundoBimestre { get; init; }
+    public decimal TerceiroBimestre { get; init; }
+    public decimal QuartoBimestre { get; init; }
+    public decimal Media { get; init; }
     public bool Status { get; init; } = true;
 }
 
@@ -42,6 +35,9 @@ public class CreateNotaCommandHandler : IRequestHandler<CreateNotaCommand, int>
 
         Guard.Against.NotFound(request.DisciplinaId, disciplina);
 
+        var media = (request.PrimeiroBimestre + request.SegundoBimestre + request.TerceiroBimestre +
+                    request.QuartoBimestre) / 4;
+
         var entity = new Nota
         {
             Aluno = aluno,
@@ -50,7 +46,7 @@ public class CreateNotaCommandHandler : IRequestHandler<CreateNotaCommand, int>
             SegundoBimestre = request.SegundoBimestre,
             TerceiroBimestre = request.TerceiroBimestre,
             QuartoBimestre = request.QuartoBimestre,
-            Media = request.Media,
+            Media = media,
             Status = request.Status
         };
 
