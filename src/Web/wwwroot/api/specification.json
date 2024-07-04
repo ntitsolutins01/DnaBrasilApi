@@ -10948,14 +10948,6 @@
             "type": "integer",
             "format": "int32"
           },
-          "tipoCursoId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "usuarioId": {
-            "type": "integer",
-            "format": "int32"
-          },
           "titulo": {
             "type": "string"
           },

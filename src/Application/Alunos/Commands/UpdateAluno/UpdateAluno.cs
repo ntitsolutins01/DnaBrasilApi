@@ -114,6 +114,7 @@ public class UpdateAlunoCommandHandler : IRequestHandler<UpdateAlunoCommand, boo
             entity.NomeMae = request.NomeMae;
             entity.NomePai = request.NomePai;
             entity.Cpf = request.Cpf;
+            entity.Cep = request.Cep;
             entity.Telefone = request.Telefone;
             entity.Celular = request.Celular;
             entity.Endereco = request.Endereco;
