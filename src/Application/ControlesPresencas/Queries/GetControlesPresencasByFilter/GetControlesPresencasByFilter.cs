@@ -22,6 +22,8 @@ public class GetControlesPresencasByFilterQueryHandler : IRequestHandler<GetCont
     public async Task<List<ControlePresencaDto>> Handle(GetControlesPresencasByFilterQuery request, CancellationToken cancellationToken)
     {
         var ControlePresencas = _context.ControlesPresencas
+            .Include(i=>i.Evento)
+            .Where(x=>x.Evento==null)
             .AsNoTracking();
 
         var result = FilterControlePresencas(ControlePresencas, request.SearchFilter!, cancellationToken)

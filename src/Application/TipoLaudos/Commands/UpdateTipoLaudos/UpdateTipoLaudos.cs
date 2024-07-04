@@ -1,7 +1,6 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
-using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasilApi.Application.TipoLaudos.Commands.UpdateTipoLaudo;
+namespace DnaBrasilApi.Application.TipoLaudos.Commands.UpdateTipoLaudos;
 
 public record UpdateTipoLaudoCommand : IRequest <bool>
 {

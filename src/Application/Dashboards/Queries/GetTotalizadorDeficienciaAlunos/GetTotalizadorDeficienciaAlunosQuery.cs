@@ -1,4 +1,5 @@
-﻿using DnaBrasilApi.Application.Common.Interfaces;
+﻿using System.Linq;
+using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -26,6 +27,7 @@ public class GetTotalizadorDeficienciaAlunosQueryHandler : IRequestHandler<GetTo
         IQueryable<Aluno> alunos;
 
         alunos = _context.Alunos
+            .Include(i=>i.Deficiencia)
             .AsNoTracking();
 
         var result = FilterAlunos(alunos, request.SearchFilter!, cancellationToken);
@@ -39,7 +41,7 @@ public class GetTotalizadorDeficienciaAlunosQueryHandler : IRequestHandler<GetTo
         {
             var id = Convert.ToInt32(search.FomentoId.Split("-")[0]);
 
-            alunos = alunos.Where(u => u.Fomento!.Id == id);
+            alunos = alunos.Where(u => u.Fomento.Id == id);
         }
 
         if (!string.IsNullOrWhiteSpace(search.Estado))
@@ -75,10 +77,6 @@ public class GetTotalizadorDeficienciaAlunosQueryHandler : IRequestHandler<GetTo
 
         var defici = _context.Deficiencias.Where(x => x.Status).Select(s=>s.Nome).ToList();
 
-        var verificaAlunos = _context.Deficiencias.Where(x => x.Status)
-            .Include(i => i.Alunos)
-            .Where(x => x.Alunos!.Any() && x.Status == true).ToList();
-
         Dictionary<string, decimal> dict = new();
         Dictionary<string, decimal> dictTotalizadorDeficienciaMasculino = new();
         Dictionary<string, decimal> dictTotalizadorDeficienciaFeminino = new();
@@ -91,40 +89,36 @@ public class GetTotalizadorDeficienciaAlunosQueryHandler : IRequestHandler<GetTo
 
         }
 
-        foreach (var deficiencia in verificaAlunos)            
+        foreach (var aluno in alunos)
         {
-            foreach (var aluno in deficiencia.Alunos!)
+            if (aluno.Sexo.Equals("M"))
             {
-
-                if (aluno.Sexo.Equals("M"))
+                if (dictTotalizadorDeficienciaMasculino.ContainsKey(aluno.Deficiencia!.Nome!))
                 {
-                    if (dictTotalizadorDeficienciaMasculino.ContainsKey(aluno.Deficiencia!.Nome!))
-                    {
-                        var value = dictTotalizadorDeficienciaMasculino[aluno.Deficiencia!.Nome!];
+                    var value = dictTotalizadorDeficienciaMasculino[aluno.Deficiencia!.Nome!];
 
-                        value += 1;
+                    value += 1;
 
-                        dictTotalizadorDeficienciaMasculino[aluno.Deficiencia!.Nome!] = value;
-                    }
+                    dictTotalizadorDeficienciaMasculino[aluno.Deficiencia!.Nome!] = value;
                 }
-                else
-                {
-                    if (dictTotalizadorDeficienciaFeminino.ContainsKey(aluno.Deficiencia!.Nome!))
-                    {
-                        var value = dictTotalizadorDeficienciaFeminino[aluno.Deficiencia!.Nome!];
-
-                        value += 1;
-
-                        dictTotalizadorDeficienciaFeminino[aluno.Deficiencia!.Nome!] = value;
-                    }
-                }
-
-                var valueTotal = dict[aluno.Deficiencia!.Nome!];
-
-                valueTotal += 1;
-
-                dict[aluno.Deficiencia!.Nome!] = valueTotal;
             }
+            else
+            {
+                if (dictTotalizadorDeficienciaFeminino.ContainsKey(aluno.Deficiencia!.Nome!))
+                {
+                    var value = dictTotalizadorDeficienciaFeminino[aluno.Deficiencia!.Nome!];
+
+                    value += 1;
+
+                    dictTotalizadorDeficienciaFeminino[aluno.Deficiencia!.Nome!] = value;
+                }
+            }
+
+            var valueTotal = dict[aluno.Deficiencia!.Nome!];
+
+            valueTotal += 1;
+
+            dict[aluno.Deficiencia!.Nome!] = valueTotal;
         }
 
         var totalMasc = dictTotalizadorDeficienciaMasculino.Skip(0).Sum(x => x.Value);

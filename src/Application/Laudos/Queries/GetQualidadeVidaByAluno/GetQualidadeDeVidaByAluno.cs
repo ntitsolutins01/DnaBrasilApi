@@ -1,5 +1,4 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
-using DnaBrasilApi.Application.Laudos.Queries.GetConsumoAlimentarByAluno;
 
 namespace DnaBrasilApi.Application.Laudos.Queries.GetQualidadeVidaByAluno;
 

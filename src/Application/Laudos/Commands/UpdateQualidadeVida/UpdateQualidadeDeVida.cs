@@ -1,7 +1,6 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
-using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasilApi.Application.Laudos.Commands.UpdateQualidadeDeVida;
+namespace DnaBrasilApi.Application.Laudos.Commands.UpdateQualidadeVida;
 
 public record UpdateQualidadeDeVidaCommand : IRequest <bool>
 {

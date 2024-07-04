@@ -1,7 +1,7 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Application.Modalidades.Queries;
 
-namespace DnaBrasilApi.Application.Alunos.Queries.GetModalidadesByAluno;
+namespace DnaBrasilApi.Application.Alunos.Queries.GetAmbientesByAluno;
 
 public record GetModalidadesByAlunoQuery : IRequest<List<ModalidadeDto>>
 {
