@@ -6,7 +6,7 @@ namespace DnaBrasilApi.Application.ControlesPresencas.Commands.CreateControlePre
 public record CreateControlePresencaCommand : IRequest<int>
 {
     public required int AlunoId { get; init; }
-    public required int EventoId { get; init; }
+    public int? EventoId { get; init; }
     public required string Controle { get; init; }
     public string? Justificativa { get; init; }
     public bool Status { get; init; } = true;
@@ -29,10 +29,14 @@ public class CreateControlePresencaCommandHandler : IRequestHandler<CreateContro
 
         Guard.Against.NotFound(request.AlunoId, aluno);
 
-        var evento = await _context.Eventos
-            .FindAsync([request.EventoId], cancellationToken);
+        Evento? evento = null;
 
-        Guard.Against.NotFound(request.EventoId, evento);
+        if (request.EventoId != null)
+        {
+            evento = await _context.Eventos.FindAsync(new object[] { request.EventoId }, cancellationToken);
+
+            Guard.Against.NotFound((int)request.EventoId, evento);
+        }
 
         var entity = new ControlePresenca
         {
