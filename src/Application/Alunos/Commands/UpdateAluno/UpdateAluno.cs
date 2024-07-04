@@ -52,15 +52,15 @@ public class UpdateAlunoCommandHandler : IRequestHandler<UpdateAlunoCommand, boo
         Guard.Against.NotFound(request.Id, entity);
 
         int result;
-        if (request.QrCode!=null)
-        {
+        //if (request.QrCode!=null)
+        //{
             entity.QrCode = request.QrCode;
             //result = await _context.SaveChangesAsync(cancellationToken);
 
             //return result == 1;//true
-        }
-        else
-        {
+        //}
+        //else
+        //{
             Municipio? municipio = null;
 
             if (request.MunicipioId != null)
@@ -114,6 +114,7 @@ public class UpdateAlunoCommandHandler : IRequestHandler<UpdateAlunoCommand, boo
             entity.NomeMae = request.NomeMae;
             entity.NomePai = request.NomePai;
             entity.Cpf = request.Cpf;
+            entity.Cep = request.Cep;
             entity.Telefone = request.Telefone;
             entity.Celular = request.Celular;
             entity.Endereco = request.Endereco;
@@ -126,7 +127,7 @@ public class UpdateAlunoCommandHandler : IRequestHandler<UpdateAlunoCommand, boo
             entity.NomeFoto = request.NomeFoto;
             entity.ByteImage = request.ByteImage;
             entity.QrCode = request.QrCode;
-        }
+        //}
 
 
         result = await _context.SaveChangesAsync(cancellationToken);
