@@ -10892,9 +10892,15 @@
             "type": "integer",
             "format": "int32"
           },
+          "tituloTipoCurso": {
+            "type": "string"
+          },
           "usuarioId": {
             "type": "integer",
             "format": "int32"
+          },
+          "nomeProfissional": {
+            "type": "string"
           },
           "titulo": {
             "type": "string"
