@@ -18,10 +18,8 @@ public class LaudoDto
     public string? Localidade { get; init; }
     public string? Encaminhamento { get; init; }
     public string? StatusLaudo { get; set; }
-    public TalentoEsportivoDto? TalentoEsportivo { get; set; }
     public string? Sexo { get; set; }
     public DateTime DtNascimento { get; set; }
-    public SaudeDto? Saude { get; set; }
 
     private class Mapping : Profile
     {
