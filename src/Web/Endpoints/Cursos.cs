@@ -4,6 +4,7 @@ using DnaBrasilApi.Application.Cursos.Commands.CreateCurso;
 using DnaBrasilApi.Application.Cursos.Commands.DeleteCurso;
 using DnaBrasilApi.Application.Cursos.Commands.UpdateCurso;
 using DnaBrasilApi.Application.Cursos.Queries.GetCursosAll;
+using DnaBrasilApi.Application.Cursos.Queries.GetCursosAllByTipoCursoId;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -19,7 +20,8 @@ public class Cursos : EndpointGroupBase
             .MapPost(CreateCurso)
             .MapPut(UpdateCurso, "{id}")
             .MapDelete(DeleteCurso, "{id}")
-            .MapGet(GetCursoById, "Curso/{id}");
+            .MapGet(GetCursoById, "Curso/{id}")
+            .MapGet(GetCursosAllByTipoCursoId, "Curso/TipoCurso/{tipoCursoId}");
     }
 
     #endregion
@@ -55,6 +57,10 @@ public class Cursos : EndpointGroupBase
     public async Task<CursoDto> GetCursoById(ISender sender, int id)
     {
         return await sender.Send(new GetCursoByIdQuery() { Id = id });
+    }
+    public async Task<List<CursoDto>> GetCursosAllByTipoCursoId(ISender sender, int tipoCursoId)
+    {
+        return await sender.Send(new GetCursosAllByTipoCursoIdQuery() { TipoCursoId = tipoCursoId });
     }
 
     #endregion

@@ -1704,6 +1704,41 @@
         }
       }
     },
+    "/api/Cursos/Curso/TipoCurso/{tipoCursoId}": {
+      "get": {
+        "tags": [
+          "Cursos"
+        ],
+        "operationId": "GetCursosAllByTipoCursoId",
+        "parameters": [
+          {
+            "name": "tipoCursoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CursoDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Dashboards/valida": {
       "post": {
         "tags": [
@@ -10759,9 +10794,6 @@
                 "type": "integer",
                 "format": "int32"
               },
-              "professor": {
-                "$ref": "#/components/schemas/Usuario"
-              },
               "curso": {
                 "$ref": "#/components/schemas/Curso"
               },
@@ -13257,10 +13289,6 @@
             "type": "integer",
             "format": "int32"
           },
-          "professorId": {
-            "type": "integer",
-            "format": "int32"
-          },
           "cursoId": {
             "type": "integer",
             "format": "int32"
@@ -13274,6 +13302,9 @@
           },
           "status": {
             "type": "boolean"
+          },
+          "nomeTipoCurso": {
+            "type": "string"
           }
         }
       },
@@ -13282,10 +13313,6 @@
         "additionalProperties": false,
         "properties": {
           "cargaHoraria": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "professorId": {
             "type": "integer",
             "format": "int32"
           },
