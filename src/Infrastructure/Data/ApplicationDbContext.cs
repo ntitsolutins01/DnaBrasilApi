@@ -57,6 +57,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<Prova> Provas => Set<Prova>();
     public DbSet<ControleAcessoAula> ControlesAcessosAulas => Set<ControleAcessoAula>();
     public DbSet<Evento> Eventos => Set<Evento>();
+    public DbSet<FotoEvento> FotosEvento => Set<FotoEvento>();
+    public DbSet<Encaminhamento> Encaminhamentos=> Set<Encaminhamento>();
 
 
     protected override void OnModelCreating(ModelBuilder builder)

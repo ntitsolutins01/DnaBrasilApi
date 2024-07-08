@@ -1,5 +1,5 @@
 ﻿namespace DnaBrasilApi.Application.Dashboards.Queries;
-public class TotalizadorVocacionalDto
+public class VocacionalDto
 {
     public Dictionary<string, decimal>? PercTotalizadorVocacionalMasculino { get; set; }
     public Dictionary<string, decimal>? PercTotalizadorVocacionalFeminino { get; set; }

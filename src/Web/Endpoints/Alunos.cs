@@ -97,7 +97,7 @@ public class Alunos : EndpointGroupBase
         return Results.NoContent();
     }
 
-    public async Task<List<AlunoDto>> GetAlunosByLocalidade(ISender sender, int id)
+    public async Task<List<AlunoIndexDto>> GetAlunosByLocalidade(ISender sender, int id)
     {
         return await sender.Send(new GetAlunosByLocalidadeQuery { LocalidadeId = id });
     }

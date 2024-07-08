@@ -95,7 +95,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/AlunoDto"
+                    "$ref": "#/components/schemas/AlunoIndexDto"
                   }
                 }
               }
@@ -1764,7 +1764,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TotalizadorVocacionalDto"
+                  "$ref": "#/components/schemas/VocacionalDto"
                 }
               }
             }
@@ -2207,6 +2207,39 @@
           "Dashboards"
         ],
         "operationId": "GetGraficosVocacionalByFilter",
+        "requestBody": {
+          "x-name": "dashboard",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DashboardDto"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DashboardDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Dashboards/GetRelatorioVocacional": {
+      "post": {
+        "tags": [
+          "Dashboards"
+        ],
+        "operationId": "GetRelatorioVocacionalByFilter",
         "requestBody": {
           "x-name": "dashboard",
           "description": "",
@@ -3291,6 +3324,142 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/FomentoDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/FotosEvento/Evento/{eventoId}": {
+      "get": {
+        "tags": [
+          "FotosEvento"
+        ],
+        "operationId": "GetFotosAllByEventoId",
+        "parameters": [
+          {
+            "name": "eventoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FotoEventoDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/FotosEvento": {
+      "post": {
+        "tags": [
+          "FotosEvento"
+        ],
+        "operationId": "CreateFotoEvento",
+        "requestBody": {
+          "x-name": "list",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CreateFotoEventoDto"
+                }
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/FotosEvento/{id}": {
+      "delete": {
+        "tags": [
+          "FotosEvento"
+        ],
+        "operationId": "DeleteFotoEvento",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/FotosEvento/Foto/{id}": {
+      "get": {
+        "tags": [
+          "FotosEvento"
+        ],
+        "operationId": "GetFotoEventoById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FotoEventoDto"
                 }
               }
             }
@@ -8216,6 +8385,39 @@
           }
         }
       },
+      "AlunoIndexDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "aspNetUserId": {
+            "type": "string",
+            "nullable": true
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "dtNascimento": {
+            "type": "string",
+            "nullable": true
+          },
+          "municipioId": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "boolean"
+          }
+        }
+      },
       "SelectListDto": {
         "type": "object",
         "additionalProperties": false,
@@ -9829,39 +10031,6 @@
           }
         }
       },
-      "AlunoIndexDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "aspNetUserId": {
-            "type": "string",
-            "nullable": true
-          },
-          "nome": {
-            "type": "string",
-            "nullable": true
-          },
-          "email": {
-            "type": "string",
-            "nullable": true
-          },
-          "dtNascimento": {
-            "type": "string",
-            "nullable": true
-          },
-          "municipioId": {
-            "type": "string",
-            "nullable": true
-          },
-          "status": {
-            "type": "boolean"
-          }
-        }
-      },
       "AulaDto": {
         "type": "object",
         "additionalProperties": false,
@@ -10924,9 +11093,15 @@
             "type": "integer",
             "format": "int32"
           },
+          "tituloTipoCurso": {
+            "type": "string"
+          },
           "usuarioId": {
             "type": "integer",
             "format": "int32"
+          },
+          "nomeProfissional": {
+            "type": "string"
           },
           "titulo": {
             "type": "string"
@@ -10996,7 +11171,7 @@
           }
         }
       },
-      "TotalizadorVocacionalDto": {
+      "VocacionalDto": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -11190,7 +11365,7 @@
             "nullable": true,
             "oneOf": [
               {
-                "$ref": "#/components/schemas/TotalizadorVocacionalDto"
+                "$ref": "#/components/schemas/VocacionalDto"
               }
             ]
           },
@@ -11229,6 +11404,14 @@
           "controle": {
             "type": "string",
             "nullable": true
+          },
+          "relatorioVocacional": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/VocacionalDto"
+              }
+            ]
           }
         }
       },
@@ -12173,6 +12356,35 @@
           "totalAluno": {
             "type": "integer",
             "format": "int32"
+          },
+          "fotos": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/FotoEventoDto"
+            }
+          }
+        }
+      },
+      "FotoEventoDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeEvento": {
+            "type": "string"
+          },
+          "nomeArquivo": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "status": {
+            "type": "boolean"
           }
         }
       },
@@ -12318,6 +12530,22 @@
             "type": "string"
           },
           "dtFim": {
+            "type": "string"
+          }
+        }
+      },
+      "CreateFotoEventoDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "eventoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeArquivo": {
+            "type": "string"
+          },
+          "url": {
             "type": "string"
           }
         }
@@ -13213,28 +13441,23 @@
           },
           "primeiroBimestre": {
             "type": "number",
-            "format": "decimal",
-            "nullable": true
+            "format": "decimal"
           },
           "segundoBimestre": {
             "type": "number",
-            "format": "decimal",
-            "nullable": true
+            "format": "decimal"
           },
           "terceiroBimestre": {
             "type": "number",
-            "format": "decimal",
-            "nullable": true
+            "format": "decimal"
           },
           "quartoBimestre": {
             "type": "number",
-            "format": "decimal",
-            "nullable": true
+            "format": "decimal"
           },
           "media": {
             "type": "number",
-            "format": "decimal",
-            "nullable": true
+            "format": "decimal"
           },
           "status": {
             "type": "boolean"
