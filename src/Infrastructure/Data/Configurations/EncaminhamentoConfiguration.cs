@@ -9,9 +9,11 @@ public class EncaminhamentoConfiguration : IEntityTypeConfiguration<Encaminhamen
     public void Configure(EntityTypeBuilder<Encaminhamento> builder)
     {
         builder.Property(t => t.Nome)
-            .HasMaxLength(300)
+            .HasMaxLength(150)
             .IsRequired();
         builder.Property(t => t.Parametro)
             .HasMaxLength(150);
+        builder.Property(t => t.Descricao)
+            .HasMaxLength(500);
     }
 }
