@@ -4,6 +4,7 @@ using DnaBrasilApi.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DnaBrasilApi.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240708181252_DnaEncaminhamentoVocacionalConfig")]
+    partial class DnaEncaminhamentoVocacionalConfig
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -689,7 +692,7 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.ToTable("Disciplinas");
                 });
 
-            modelBuilder.Entity("DnaBrasilApi.Domain.Entities.Encaminhamento", b =>
+            modelBuilder.Entity("DnaBrasilApi.Domain.Entities.EncaminhamentoVocacional", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -722,14 +725,9 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
 
-                    b.Property<int>("TipoLaudoId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("TipoLaudoId");
-
-                    b.ToTable("Encaminhamentos");
+                    b.ToTable("EncaminhamentosVocacional");
                 });
 
             modelBuilder.Entity("DnaBrasilApi.Domain.Entities.Escolaridade", b =>
@@ -2998,17 +2996,6 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                         .HasForeignKey("AlunoId");
 
                     b.Navigation("Aluno");
-                });
-
-            modelBuilder.Entity("DnaBrasilApi.Domain.Entities.Encaminhamento", b =>
-                {
-                    b.HasOne("DnaBrasilApi.Domain.Entities.TipoLaudo", "TipoLaudo")
-                        .WithMany()
-                        .HasForeignKey("TipoLaudoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("TipoLaudo");
                 });
 
             modelBuilder.Entity("DnaBrasilApi.Domain.Entities.Evento", b =>

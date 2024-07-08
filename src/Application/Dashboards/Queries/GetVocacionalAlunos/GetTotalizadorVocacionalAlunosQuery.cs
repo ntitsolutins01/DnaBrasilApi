@@ -1,17 +1,16 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 using Boolean = System.Boolean;
 
-namespace DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorVocacionalAlunos;
+namespace DnaBrasilApi.Application.Dashboards.Queries.GetVocacionalAlunos;
 //[Authorize]
-public record GetTotalizadorVocacionalAlunosQuery : IRequest<TotalizadorVocacionalDto>
+public record GetTotalizadorVocacionalAlunosQuery : IRequest<VocacionalDto>
 {
     public DashboardDto? SearchFilter { get; init; }
 
 }
 
-public class GetTotalizadorVocacionalAlunosQueryHandler : IRequestHandler<GetTotalizadorVocacionalAlunosQuery, TotalizadorVocacionalDto>
+public class GetTotalizadorVocacionalAlunosQueryHandler : IRequestHandler<GetTotalizadorVocacionalAlunosQuery, VocacionalDto>
 {
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
@@ -22,7 +21,7 @@ public class GetTotalizadorVocacionalAlunosQueryHandler : IRequestHandler<GetTot
         _mapper = mapper;
     }
 
-    public Task<TotalizadorVocacionalDto> Handle(GetTotalizadorVocacionalAlunosQuery request, CancellationToken cancellationToken)
+    public Task<VocacionalDto> Handle(GetTotalizadorVocacionalAlunosQuery request, CancellationToken cancellationToken)
     {
         IQueryable<Aluno> alunos;
 
@@ -34,7 +33,7 @@ public class GetTotalizadorVocacionalAlunosQueryHandler : IRequestHandler<GetTot
         return Task.FromResult(result);
     }
 
-    private TotalizadorVocacionalDto FilterAlunos(IQueryable<Aluno> alunos, DashboardDto search, CancellationToken cancellationToken)
+    private VocacionalDto FilterAlunos(IQueryable<Aluno> alunos, DashboardDto search, CancellationToken cancellationToken)
     {
         if (!string.IsNullOrWhiteSpace(search.FomentoId))
         {
@@ -309,7 +308,7 @@ public class GetTotalizadorVocacionalAlunosQueryHandler : IRequestHandler<GetTot
 
         Dictionary<string, decimal> percVocacional = dict.Where(item => total != 0).ToDictionary(item => item.Key!, item => Convert.ToDecimal((100 * item.Value / total).ToString("F")));
 
-        return new TotalizadorVocacionalDto()
+        return new VocacionalDto()
         {
             ValorTotalizadorVocacionalMasculino = dictTotalizadorVocacionalMasculino,
             ValorTotalizadorVocacionalFeminino = dictTotalizadorVocacionalFeminino,

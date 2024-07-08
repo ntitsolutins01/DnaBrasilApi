@@ -50,6 +50,8 @@ public interface IApplicationDbContext
     DbSet<Prova> Provas { get; }
     DbSet<ControleAcessoAula> ControlesAcessosAulas { get; }
     DbSet<Evento> Eventos { get; }
+    DbSet<FotoEvento> FotosEvento { get; }
+    DbSet<Encaminhamento> Encaminhamentos { get; }
    
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
