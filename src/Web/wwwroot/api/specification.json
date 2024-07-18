@@ -3717,6 +3717,39 @@
         }
       }
     },
+    "/api/Laudos/UpdateEncaminhamentoVocacional": {
+      "put": {
+        "tags": [
+          "Laudos"
+        ],
+        "operationId": "UpdateEncaminhamentoVocacional",
+        "requestBody": {
+          "x-name": "command",
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEncaminhamentoVocacionalCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/LinhasAcoes": {
       "get": {
         "tags": [
@@ -10037,12 +10070,72 @@
               "aluno": {
                 "$ref": "#/components/schemas/Aluno"
               },
+              "encaminhamento": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Encaminhamento"
+                  }
+                ]
+              },
               "resposta": {
                 "type": "string"
               },
               "statusVocacionail": {
                 "type": "string",
                 "nullable": true
+              }
+            }
+          }
+        ]
+      },
+      "Encaminhamento": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "tipoLaudo": {
+                "$ref": "#/components/schemas/TipoLaudo"
+              },
+              "nome": {
+                "type": "string"
+              },
+              "parametro": {
+                "type": "string"
+              },
+              "descricao": {
+                "type": "string",
+                "nullable": true
+              },
+              "status": {
+                "type": "boolean"
+              }
+            }
+          }
+        ]
+      },
+      "TipoLaudo": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "nome": {
+                "type": "string"
+              },
+              "descricao": {
+                "type": "string",
+                "nullable": true
+              },
+              "status": {
+                "type": "boolean"
               }
             }
           }
@@ -12824,6 +12917,10 @@
         }
       },
       "UpdateEncaminhamentoAlunosCommand": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "UpdateEncaminhamentoVocacionalCommand": {
         "type": "object",
         "additionalProperties": false
       },
