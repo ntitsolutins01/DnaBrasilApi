@@ -7,6 +7,6 @@ public static class PossuiAlunosGuard
     public static void PossuiAlunos(this IGuardClause guardClause,bool input)
     {
         if (input)
-            throw new ArgumentException("O Prodissional possui alunos vinculados.");
+            throw new ArgumentException("Este profissional não pode ser excluído pois possui alunos vinculados.");
     }
 }

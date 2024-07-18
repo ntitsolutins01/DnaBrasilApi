@@ -24,8 +24,7 @@ public class DeleteProfissionalCommandHandler : IRequestHandler<DeleteProfission
 
         var possuiAlunos = _context.Alunos.Any(x => x.Profissional != null && x.Profissional.Id == request.Id);
 
-        Guard.Against.Null(possuiAlunos, nameof(possuiAlunos), "Engine cannot be null!");
-
+        Guard.Against.PossuiAlunos(possuiAlunos);
 
         _context.Profissionais.Remove(entity);
 
