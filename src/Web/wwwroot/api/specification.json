@@ -12508,29 +12508,6 @@
           }
         }
       },
-      "TipoLaudo": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BaseAuditableEntity"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "nome": {
-                "type": "string"
-              },
-              "descricao": {
-                "type": "string",
-                "nullable": true
-              },
-              "status": {
-                "type": "boolean"
-              }
-            }
-          }
-        ]
-      },
       "CreateEncaminhamentoCommand": {
         "type": "object",
         "additionalProperties": false,
