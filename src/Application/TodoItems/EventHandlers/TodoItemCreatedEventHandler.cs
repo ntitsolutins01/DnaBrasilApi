@@ -14,7 +14,7 @@ public class TodoItemCreatedEventHandler : INotificationHandler<TodoItemCreatedE
 
     public Task Handle(TodoItemCreatedEvent notification, CancellationToken cancellationToken)
     {
-        _logger.LogInformation("DnaBrasil Domain Event: {DomainEvent}", notification.GetType().Name);
+        _logger.LogInformation("DnaBrasilApi Domain Event: {DomainEvent}", notification.GetType().Name);
 
         return Task.CompletedTask;
     }

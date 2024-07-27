@@ -5,7 +5,7 @@ using DnaBrasilApi.Domain.Constants;
 namespace DnaBrasilApi.Application.TodoLists.Commands.PurgeTodoLists;
 
 [Authorize(Roles = Roles.Administrator)]
-[Authorize(Policy = Policies.Consultar)]
+[Authorize(Policy = Policies.CanPurge)]
 public record PurgeTodoListsCommand : IRequest;
 
 public class PurgeTodoListsCommandHandler : IRequestHandler<PurgeTodoListsCommand>

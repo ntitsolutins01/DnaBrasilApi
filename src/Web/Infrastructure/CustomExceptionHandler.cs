@@ -1,8 +1,6 @@
-﻿using System;
-using DnaBrasilApi.Application.Common.Exceptions;
+﻿using DnaBrasilApi.Application.Common.Exceptions;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using ArgumentException = System.ArgumentException;
 
 namespace DnaBrasilApi.Web.Infrastructure;
 
@@ -19,7 +17,6 @@ public class CustomExceptionHandler : IExceptionHandler
                 { typeof(NotFoundException), HandleNotFoundException },
                 { typeof(UnauthorizedAccessException), HandleUnauthorizedAccessException },
                 { typeof(ForbiddenAccessException), HandleForbiddenAccessException },
-                { typeof(ArgumentException), HandleSystemArgumentException },
             };
     }
 
@@ -85,19 +82,6 @@ public class CustomExceptionHandler : IExceptionHandler
             Status = StatusCodes.Status403Forbidden,
             Title = "Forbidden",
             Type = "https://tools.ietf.org/html/rfc7231#section-6.5.3"
-        });
-    }
-
-    private async Task HandleSystemArgumentException(HttpContext httpContext, Exception ex)
-    {
-        httpContext.Response.StatusCode = StatusCodes.Status409Conflict;
-
-        await httpContext.Response.WriteAsJsonAsync(new ProblemDetails
-        {
-            Status = StatusCodes.Status409Conflict,
-            Title = "Conflict",
-            Type = "https://tools.ietf.org/html/rfc7231#section-6.5.8",
-            Detail = ex.Message
         });
     }
 }
