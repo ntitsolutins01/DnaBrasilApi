@@ -1,7 +1,4 @@
-using DnaBrasilApi.Application;
-using DnaBrasilApi.Infrastructure;
 using DnaBrasilApi.Infrastructure.Data;
-using DnaBrasilApi.Web;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,7 +26,7 @@ app.UseHealthChecks("/health");
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
-app.UseSwaggerUi3(settings =>
+app.UseSwaggerUi(settings =>
 {
     settings.Path = "/api";
     settings.DocumentPath = "/api/specification.json";
@@ -51,7 +48,4 @@ app.MapEndpoints();
 
 app.Run();
 
-namespace DnaBrasilApi.Web
-{
-    public partial class Program { }
-}
+public partial class Program { }

@@ -7,9 +7,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 
-namespace DnaBrasilApi.Infrastructure;
+namespace Microsoft.Extensions.DependencyInjection;
 
 public static class DependencyInjection
 {
@@ -26,19 +25,7 @@ public static class DependencyInjection
         {
             options.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>());
 
-            options.UseSqlServer(connectionString,
-                serverDbContextOptionsBuilder =>
-                {
-                    var minutes = (int)TimeSpan.FromMinutes(3).TotalSeconds;
-                    serverDbContextOptionsBuilder.CommandTimeout(minutes);
-                    serverDbContextOptionsBuilder.EnableRetryOnFailure();
-                }
-                //sqlServerOptions =>
-                //{
-                //    sqlServerOptions.EnableRetryOnFailure();
-                //    sqlServerOptions.CommandTimeout(600);
-                //}
-                );
+            options.UseSqlServer(connectionString);
         });
 
         services.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<ApplicationDbContext>());
@@ -60,7 +47,7 @@ public static class DependencyInjection
         services.AddTransient<IIdentityService, IdentityService>();
 
         services.AddAuthorization(options =>
-            options.AddPolicy(Policies.Consultar, policy => policy.RequireRole(Roles.Administrator)));
+            options.AddPolicy(Policies.CanPurge, policy => policy.RequireRole(Roles.Administrator)));
 
         return services;
     }

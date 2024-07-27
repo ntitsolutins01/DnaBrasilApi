@@ -1,7 +1,6 @@
 ﻿using System.Data.Common;
 using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Infrastructure.Data;
-using DnaBrasilApi.Web;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
