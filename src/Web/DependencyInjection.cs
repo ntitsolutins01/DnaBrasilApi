@@ -3,11 +3,11 @@ using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Infrastructure.Data;
 using DnaBrasilApi.Web.Services;
 using Microsoft.AspNetCore.Mvc;
+
 using NSwag;
 using NSwag.Generation.Processors.Security;
-using ZymLabs.NSwag.FluentValidation;
 
-namespace DnaBrasilApi.Web;
+namespace Microsoft.Extensions.DependencyInjection;
 
 public static class DependencyInjection
 {
@@ -26,14 +26,6 @@ public static class DependencyInjection
 
         services.AddRazorPages();
 
-        services.AddScoped(provider =>
-        {
-            var validationRules = provider.GetService<IEnumerable<FluentValidationRule>>();
-            var loggerFactory = provider.GetService<ILoggerFactory>();
-
-            return new FluentValidationSchemaProcessor(provider, validationRules, loggerFactory);
-        });
-
         // Customise default API behaviour
         services.Configure<ApiBehaviorOptions>(options =>
             options.SuppressModelStateInvalidFilter = true);
@@ -42,13 +34,7 @@ public static class DependencyInjection
 
         services.AddOpenApiDocument((configure, sp) =>
         {
-            configure.Title = "DnaBrasil API";
-
-            // Add the fluent validations schema processor
-            var fluentValidationSchemaProcessor = 
-                sp.CreateScope().ServiceProvider.GetRequiredService<FluentValidationSchemaProcessor>();
-
-            configure.SchemaProcessors.Add(fluentValidationSchemaProcessor);
+            configure.Title = "DnaBrasilApi API";
 
             // Add JWT
             configure.AddSecurity("JWT", Enumerable.Empty<string>(), new OpenApiSecurityScheme
