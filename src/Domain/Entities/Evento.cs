@@ -7,5 +7,6 @@ public class Evento : BaseAuditableEntity
    public string? Descricao { get; set; }
    public required DateTime DataEvento { get; set; }
    public List<ControlePresenca>? ControlesPresencas { get; set; }
+   public List<FotoEvento>? Fotos { get; set; }
    public bool Status { get; set; } = true;
 }

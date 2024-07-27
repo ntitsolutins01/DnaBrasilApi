@@ -4,6 +4,7 @@ using DnaBrasilApi.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DnaBrasilApi.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240704205103_DnaModuloEadRemoveColumn")]
+    partial class DnaModuloEadRemoveColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -689,53 +692,6 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.ToTable("Disciplinas");
                 });
 
-            modelBuilder.Entity("DnaBrasilApi.Domain.Entities.Encaminhamento", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTimeOffset>("Created")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Descricao")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<DateTimeOffset>("LastModified")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
-
-                    b.Property<string>("Parametro")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("TipoLaudoId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TipoLaudoId");
-
-                    b.ToTable("Encaminhamentos");
-                });
-
             modelBuilder.Entity("DnaBrasilApi.Domain.Entities.Escolaridade", b =>
                 {
                     b.Property<int>("Id")
@@ -905,49 +861,6 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.HasIndex("MunicipioId");
 
                     b.ToTable("Fomentos");
-                });
-
-            modelBuilder.Entity("DnaBrasilApi.Domain.Entities.FotoEvento", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTimeOffset>("Created")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("EventoId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTimeOffset>("LastModified")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NomeArquivo")
-                        .IsRequired()
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Url")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EventoId");
-
-                    b.ToTable("FotosEvento");
                 });
 
             modelBuilder.Entity("DnaBrasilApi.Domain.Entities.Funcionalidade", b =>
@@ -2514,9 +2427,6 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("EncaminhamentoId")
-                        .HasColumnType("int");
-
                     b.Property<DateTimeOffset>("LastModified")
                         .HasColumnType("datetimeoffset");
 
@@ -2538,8 +2448,6 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AlunoId");
-
-                    b.HasIndex("EncaminhamentoId");
 
                     b.HasIndex("ProfissionalId");
 
@@ -3004,17 +2912,6 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.Navigation("Aluno");
                 });
 
-            modelBuilder.Entity("DnaBrasilApi.Domain.Entities.Encaminhamento", b =>
-                {
-                    b.HasOne("DnaBrasilApi.Domain.Entities.TipoLaudo", "TipoLaudo")
-                        .WithMany()
-                        .HasForeignKey("TipoLaudoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("TipoLaudo");
-                });
-
             modelBuilder.Entity("DnaBrasilApi.Domain.Entities.Evento", b =>
                 {
                     b.HasOne("DnaBrasilApi.Domain.Entities.Localidade", "Localidade")
@@ -3041,17 +2938,6 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.Navigation("Localidade");
 
                     b.Navigation("Municipio");
-                });
-
-            modelBuilder.Entity("DnaBrasilApi.Domain.Entities.FotoEvento", b =>
-                {
-                    b.HasOne("DnaBrasilApi.Domain.Entities.Evento", "Evento")
-                        .WithMany("Fotos")
-                        .HasForeignKey("EventoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Evento");
                 });
 
             modelBuilder.Entity("DnaBrasilApi.Domain.Entities.Funcionalidade", b =>
@@ -3395,10 +3281,6 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DnaBrasilApi.Domain.Entities.Encaminhamento", "Encaminhamento")
-                        .WithMany()
-                        .HasForeignKey("EncaminhamentoId");
-
                     b.HasOne("DnaBrasilApi.Domain.Entities.Profissional", "Profissional")
                         .WithMany()
                         .HasForeignKey("ProfissionalId")
@@ -3406,8 +3288,6 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Aluno");
-
-                    b.Navigation("Encaminhamento");
 
                     b.Navigation("Profissional");
                 });
@@ -3519,8 +3399,6 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
             modelBuilder.Entity("DnaBrasilApi.Domain.Entities.Evento", b =>
                 {
                     b.Navigation("ControlesPresencas");
-
-                    b.Navigation("Fotos");
                 });
 
             modelBuilder.Entity("DnaBrasilApi.Domain.Entities.Modulo", b =>

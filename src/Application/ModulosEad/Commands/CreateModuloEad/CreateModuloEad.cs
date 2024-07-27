@@ -5,7 +5,6 @@ namespace DnaBrasilApi.Application.ModulosEad.Commands.CreateModuloEad;
 public record CreateModuloEadCommand : IRequest<int>
 {
     public required int CargaHoraria { get; set; }
-    public required int ProfessorId { get; set; }
     public required int CursoId { get; set; }
     public required string Titulo { get; set; }
     public string? Descricao { get; set; }
@@ -23,10 +22,6 @@ public class CreateModuloEadCommandHandler : IRequestHandler<CreateModuloEadComm
 
     public async Task<int> Handle(CreateModuloEadCommand request, CancellationToken cancellationToken)
     {
-        var professor = await _context.Usuarios
-            .FindAsync([request.ProfessorId], cancellationToken);
-
-        Guard.Against.NotFound(request.ProfessorId, professor);
 
         var curso = await _context.Cursos
             .FindAsync([request.CursoId], cancellationToken);
@@ -36,7 +31,6 @@ public class CreateModuloEadCommandHandler : IRequestHandler<CreateModuloEadComm
         var entity = new ModuloEad
         {
             CargaHoraria = request.CargaHoraria,
-            Professor = professor,
             Curso = curso,
             Titulo = request.Titulo,
             Descricao = request.Descricao,

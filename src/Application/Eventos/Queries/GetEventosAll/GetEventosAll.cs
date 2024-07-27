@@ -18,6 +18,7 @@ public class GetEventosAllQueryHandler : IRequestHandler<GetEventosAllQuery, Lis
     public async Task<List<EventoDto>> Handle(GetEventosAllQuery request, CancellationToken cancellationToken)
     {
         var result = await _context.Eventos
+            .Include(i=>i.Fotos)
             .AsNoTracking()
             .ProjectTo<EventoDto>(_mapper.ConfigurationProvider)
             .OrderBy(t => t.Id)

@@ -1,4 +1,5 @@
-﻿using DnaBrasilApi.Domain.Entities;
+﻿using DnaBrasilApi.Application.FotosEvento.Queries;
+using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Eventos.Queries;
 
@@ -17,7 +18,8 @@ public class EventoDto
     public bool Status { get; set; }
     public int TotalConvidado { get; set; }
     public int TotalAluno { get; set; }
-   
+    public List<FotoEventoDto>? Fotos { get; set; }
+
 
     private class Mapping : Profile
     {

@@ -14,7 +14,7 @@ using DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorEtniaAlunos;
 using DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorSaudeBucalAlunos;
 using DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorSaudeSexoAlunos;
 using DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorTalentoEsportivoAlunos;
-using DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorVocacionalAlunos;
+using DnaBrasilApi.Application.Dashboards.Queries.GetVocacionalAlunos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DnaBrasilApi.Web.Endpoints;
@@ -40,6 +40,7 @@ public class Dashboards : EndpointGroupBase
             .MapPost(GetGraficosQualidadeVidaByFilter, "GetGraficosQualidadeVida")
             .MapPost(GetGraficosConsumoAlimentarByFilter, "GetGraficosConsumoAlimentar")
             .MapPost(GetGraficosVocacionalByFilter, "GetGraficosVocacional")
+            .MapPost(GetRelatorioVocacionalByFilter, "GetRelatorioVocacional")
             .MapPost(CreateCarga,"Carga");
     }
 
@@ -166,9 +167,16 @@ public class Dashboards : EndpointGroupBase
 
         return await Task.FromResult(dashboard);
     }
+    public async Task<DashboardDto> GetRelatorioVocacionalByFilter(ISender sender, [FromBody] DashboardDto dashboard)
+    {
+        dashboard.RelatorioVocacional =
+            await sender.Send(new GetRelatorioVocacionalQuery() { SearchFilter = dashboard });
+
+        return await Task.FromResult(dashboard);
+    }
 
 
-    public async Task<TotalizadorVocacionalDto> GetValida(ISender sender, [FromBody] DashboardDto dashboard)
+    public async Task<VocacionalDto> GetValida(ISender sender, [FromBody] DashboardDto dashboard)
     {
         return await sender.Send(new GetTotalizadorVocacionalAlunosQuery() { SearchFilter = dashboard });
     }

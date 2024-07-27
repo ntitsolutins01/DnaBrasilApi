@@ -116,6 +116,9 @@ function CreateWorkloadIdentity {
     $environmentName
   )
 
+  # set correct subscription id
+  az account set --name $AzureSubscriptionId
+
   # Create Azure AD Application Registration
   $applicationRegistrationDetails=$(az ad app create --display-name "$ProjectName$environmentAbbr") | ConvertFrom-Json
 
@@ -170,7 +173,7 @@ function GenerateRandomPassword {
     [int]$Length = 16
   )
 
-  $ValidChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!#^_-+=?<>|~"
+  $ValidChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!#^_-+=?<>|~".ToCharArray()
   $Password = -join ((Get-Random -Count $Length -InputObject $ValidChars) | Get-Random -Count $Length)
 
   return $Password
