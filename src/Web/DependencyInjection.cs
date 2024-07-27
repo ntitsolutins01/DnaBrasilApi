@@ -1,14 +1,13 @@
 ﻿using Azure.Identity;
-using DnaBrasil.Application.Common.Interfaces;
-using DnaBrasil.Infrastructure.Data;
-using DnaBrasil.Web.Services;
+using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Infrastructure.Data;
+using DnaBrasilApi.Web.Services;
 using Microsoft.AspNetCore.Mvc;
-
 using NSwag;
 using NSwag.Generation.Processors.Security;
 using ZymLabs.NSwag.FluentValidation;
 
-namespace Microsoft.Extensions.DependencyInjection;
+namespace DnaBrasilApi.Web;
 
 public static class DependencyInjection
 {

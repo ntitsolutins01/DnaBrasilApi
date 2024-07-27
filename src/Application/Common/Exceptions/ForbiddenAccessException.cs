@@ -1,4 +1,4 @@
-﻿namespace DnaBrasil.Application.Common.Exceptions;
+﻿namespace DnaBrasilApi.Application.Common.Exceptions;
 
 public class ForbiddenAccessException : Exception
 {

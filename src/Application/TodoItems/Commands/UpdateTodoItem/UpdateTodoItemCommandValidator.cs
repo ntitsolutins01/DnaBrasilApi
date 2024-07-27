@@ -1,4 +1,4 @@
-﻿namespace DnaBrasil.Application.TodoItems.Commands.UpdateTodoItem;
+﻿namespace DnaBrasilApi.Application.TodoItems.Commands.UpdateTodoItem;
 
 public class UpdateTodoItemCommandValidator : AbstractValidator<UpdateTodoItemCommand>
 {

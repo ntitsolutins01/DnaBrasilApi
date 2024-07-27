@@ -1,11 +1,11 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
-using DnaBrasil.Application.Common.Security;
-using DnaBrasil.Domain.Constants;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Application.Common.Security;
+using DnaBrasilApi.Domain.Constants;
 
-namespace DnaBrasil.Application.TodoLists.Commands.PurgeTodoLists;
+namespace DnaBrasilApi.Application.TodoLists.Commands.PurgeTodoLists;
 
 [Authorize(Roles = Roles.Administrator)]
-[Authorize(Policy = Policies.CanPurge)]
+[Authorize(Policy = Policies.Consultar)]
 public record PurgeTodoListsCommand : IRequest;
 
 public class PurgeTodoListsCommandHandler : IRequestHandler<PurgeTodoListsCommand>

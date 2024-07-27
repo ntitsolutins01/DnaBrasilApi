@@ -1,14 +1,15 @@
-﻿using DnaBrasil.Application.Common.Interfaces;
-using DnaBrasil.Domain.Constants;
-using DnaBrasil.Infrastructure.Data;
-using DnaBrasil.Infrastructure.Data.Interceptors;
-using DnaBrasil.Infrastructure.Identity;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Domain.Constants;
+using DnaBrasilApi.Infrastructure.Data;
+using DnaBrasilApi.Infrastructure.Data.Interceptors;
+using DnaBrasilApi.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace Microsoft.Extensions.DependencyInjection;
+namespace DnaBrasilApi.Infrastructure;
 
 public static class DependencyInjection
 {
@@ -25,7 +26,19 @@ public static class DependencyInjection
         {
             options.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>());
 
-            options.UseSqlServer(connectionString);
+            options.UseSqlServer(connectionString,
+                serverDbContextOptionsBuilder =>
+                {
+                    var minutes = (int)TimeSpan.FromMinutes(3).TotalSeconds;
+                    serverDbContextOptionsBuilder.CommandTimeout(minutes);
+                    serverDbContextOptionsBuilder.EnableRetryOnFailure();
+                }
+                //sqlServerOptions =>
+                //{
+                //    sqlServerOptions.EnableRetryOnFailure();
+                //    sqlServerOptions.CommandTimeout(600);
+                //}
+                );
         });
 
         services.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<ApplicationDbContext>());
@@ -47,7 +60,7 @@ public static class DependencyInjection
         services.AddTransient<IIdentityService, IdentityService>();
 
         services.AddAuthorization(options =>
-            options.AddPolicy(Policies.CanPurge, policy => policy.RequireRole(Roles.Administrator)));
+            options.AddPolicy(Policies.Consultar, policy => policy.RequireRole(Roles.Administrator)));
 
         return services;
     }

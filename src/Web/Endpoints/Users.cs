@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Infrastructure.Identity;
+﻿using DnaBrasilApi.Infrastructure.Identity;
 
-namespace DnaBrasil.Web.Endpoints;
+namespace DnaBrasilApi.Web.Endpoints;
 
 public class Users : EndpointGroupBase
 {

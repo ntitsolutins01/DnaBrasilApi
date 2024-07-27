@@ -1,4 +1,4 @@
-﻿namespace DnaBrasil.Application.Common.Models;
+﻿namespace DnaBrasilApi.Application.Common.Models;
 
 public class Result
 {

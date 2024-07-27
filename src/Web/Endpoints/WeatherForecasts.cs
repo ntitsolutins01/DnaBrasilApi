@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Application.WeatherForecasts.Queries.GetWeatherForecasts;
+﻿using DnaBrasilApi.Application.WeatherForecasts.Queries.GetWeatherForecasts;
 
-namespace DnaBrasil.Web.Endpoints;
+namespace DnaBrasilApi.Web.Endpoints;
 
 public class WeatherForecasts : EndpointGroupBase
 {

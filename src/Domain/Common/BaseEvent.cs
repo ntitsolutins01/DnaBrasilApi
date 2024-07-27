@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace DnaBrasil.Domain.Common;
+namespace DnaBrasilApi.Domain.Common;
 
 public abstract class BaseEvent : INotification
 {

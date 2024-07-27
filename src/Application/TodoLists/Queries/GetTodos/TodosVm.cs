@@ -1,6 +1,6 @@
-﻿using DnaBrasil.Application.Common.Models;
+﻿using DnaBrasilApi.Application.Common.Models;
 
-namespace DnaBrasil.Application.TodoLists.Queries.GetTodos;
+namespace DnaBrasilApi.Application.TodoLists.Queries.GetTodos;
 
 public class TodosVm
 {

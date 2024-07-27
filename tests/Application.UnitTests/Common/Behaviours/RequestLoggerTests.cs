@@ -1,11 +1,11 @@
-﻿using DnaBrasil.Application.Common.Behaviours;
-using DnaBrasil.Application.Common.Interfaces;
-using DnaBrasil.Application.TodoItems.Commands.CreateTodoItem;
+﻿using DnaBrasilApi.Application.Common.Behaviours;
+using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Application.TodoItems.Commands.CreateTodoItem;
 using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
 
-namespace DnaBrasil.Application.UnitTests.Common.Behaviours;
+namespace DnaBrasilApi.Application.UnitTests.Common.Behaviours;
 
 public class RequestLoggerTests
 {

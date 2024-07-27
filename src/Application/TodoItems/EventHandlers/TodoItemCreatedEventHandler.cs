@@ -1,7 +1,7 @@
-﻿using DnaBrasil.Domain.Events;
+﻿using DnaBrasilApi.Domain.Events;
 using Microsoft.Extensions.Logging;
 
-namespace DnaBrasil.Application.TodoItems.EventHandlers;
+namespace DnaBrasilApi.Application.TodoItems.EventHandlers;
 
 public class TodoItemCreatedEventHandler : INotificationHandler<TodoItemCreatedEvent>
 {

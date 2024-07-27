@@ -1,9 +1,9 @@
-﻿using DnaBrasil.Application.TodoItems.Commands.CreateTodoItem;
-using DnaBrasil.Application.TodoItems.Commands.DeleteTodoItem;
-using DnaBrasil.Application.TodoLists.Commands.CreateTodoList;
-using DnaBrasil.Domain.Entities;
+﻿using DnaBrasilApi.Application.TodoItems.Commands.CreateTodoItem;
+using DnaBrasilApi.Application.TodoItems.Commands.DeleteTodoItem;
+using DnaBrasilApi.Application.TodoLists.Commands.CreateTodoList;
+using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasil.Application.FunctionalTests.TodoItems.Commands;
+namespace DnaBrasilApi.Application.FunctionalTests.TodoItems.Commands;
 
 using static Testing;
 

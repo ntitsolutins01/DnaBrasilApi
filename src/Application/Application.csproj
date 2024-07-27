@@ -1,9 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <RootNamespace>DnaBrasil.Application</RootNamespace>
-    <AssemblyName>DnaBrasil.Application</AssemblyName>
+    <RootNamespace>DnaBrasilApi.Application</RootNamespace>
+    <AssemblyName>DnaBrasilApi.Application</AssemblyName>
+    <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Alunos\Commands\DeleteAlunoDependencias\**" />
+    <Compile Remove="Alunos\Commands\UpdateAlunoDependencias\**" />
+    <Compile Remove="Dependencias\**" />
+    <EmbeddedResource Remove="Alunos\Commands\DeleteAlunoDependencias\**" />
+    <EmbeddedResource Remove="Alunos\Commands\UpdateAlunoDependencias\**" />
+    <EmbeddedResource Remove="Dependencias\**" />
+    <None Remove="Alunos\Commands\DeleteAlunoDependencias\**" />
+    <None Remove="Alunos\Commands\UpdateAlunoDependencias\**" />
+    <None Remove="Dependencias\**" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Ardalis.GuardClauses" />
@@ -14,6 +27,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Dashboards\Commands\" />
   </ItemGroup>
 
 </Project>

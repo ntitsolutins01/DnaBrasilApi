@@ -1,11 +1,11 @@
 ﻿using System.Data.Common;
-using DnaBrasil.Infrastructure.Data;
+using DnaBrasilApi.Infrastructure.Data;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Respawn;
 using Testcontainers.MsSql;
 
-namespace DnaBrasil.Application.FunctionalTests;
+namespace DnaBrasilApi.Application.FunctionalTests;
 
 public class TestcontainersTestDatabase : ITestDatabase
 {

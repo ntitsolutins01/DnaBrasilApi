@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <RootNamespace>DnaBrasil.Application.FunctionalTests</RootNamespace>
-        <AssemblyName>DnaBrasil.Application.FunctionalTests</AssemblyName>
+        <RootNamespace>DnaBrasilApi.Application.FunctionalTests</RootNamespace>
+        <AssemblyName>DnaBrasilApi.Application.FunctionalTests</AssemblyName>
     </PropertyGroup>
 
     <ItemGroup>
