@@ -20,7 +20,7 @@ public class TalentoEsportivo : BaseAuditableEntity
     public decimal? Imc { get; set; }
     [Column(TypeName = "decimal(10,2)")]
     public decimal? ShuttleRun { get; set; }
-    public string? Encaminhamento { get; set; }
+    public string? EncaminhamentoTexo { get; set; }
     [Column(TypeName = "decimal(10,2)")]
     public decimal? Altura { get; set; }
     [Column(TypeName = "decimal(10,2)")]

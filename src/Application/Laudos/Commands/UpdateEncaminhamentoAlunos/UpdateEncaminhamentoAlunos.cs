@@ -217,13 +217,13 @@ public class UpdateEncaminhamentoAlunosCommandHandler : IRequestHandler<UpdateEn
                     orderby count descending
                     select new { Value = g.Key, Count = count };
 
-                entity.Encaminhamento = q.FirstOrDefault()!.Value;
+                entity.EncaminhamentoTexo = q.FirstOrDefault()!.Value;
 
                 var result = await _context.SaveChangesAsync(cancellationToken);
             }
             else
             {
-                entity.Encaminhamento = "Em Desenvolvimento";
+                entity.EncaminhamentoTexo = "Em Desenvolvimento";
 
                 var result = await _context.SaveChangesAsync(cancellationToken);
             }

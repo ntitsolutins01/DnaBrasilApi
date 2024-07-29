@@ -9898,7 +9898,7 @@
                 "format": "decimal",
                 "nullable": true
               },
-              "encaminhamento": {
+              "encaminhamentoTexo": {
                 "type": "string",
                 "nullable": true
               },
