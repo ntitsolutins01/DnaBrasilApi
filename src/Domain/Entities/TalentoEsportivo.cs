@@ -4,6 +4,7 @@ namespace DnaBrasilApi.Domain.Entities;
 public class TalentoEsportivo : BaseAuditableEntity
 {
     public required Profissional Profissional { get; set; }
+    public Encaminhamento? Encaminhamento { get; set; }
     [Column(TypeName = "decimal(10,2)")]
     public decimal? Flexibilidade { get; set; }
     [Column(TypeName = "decimal(10,2)")]

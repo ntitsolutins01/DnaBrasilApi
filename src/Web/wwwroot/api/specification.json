@@ -9858,6 +9858,14 @@
               "profissional": {
                 "$ref": "#/components/schemas/Profissional"
               },
+              "encaminhamento": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Encaminhamento"
+                  }
+                ]
+              },
               "flexibilidade": {
                 "type": "number",
                 "format": "decimal",
@@ -9933,40 +9941,6 @@
           }
         ]
       },
-      "Vocacional": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BaseAuditableEntity"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "profissional": {
-                "$ref": "#/components/schemas/Profissional"
-              },
-              "aluno": {
-                "$ref": "#/components/schemas/Aluno"
-              },
-              "encaminhamento": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/Encaminhamento"
-                  }
-                ]
-              },
-              "resposta": {
-                "type": "string"
-              },
-              "statusVocacionail": {
-                "type": "string",
-                "nullable": true
-              }
-            }
-          }
-        ]
-      },
       "Encaminhamento": {
         "allOf": [
           {
@@ -10014,6 +9988,40 @@
               },
               "status": {
                 "type": "boolean"
+              }
+            }
+          }
+        ]
+      },
+      "Vocacional": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "profissional": {
+                "$ref": "#/components/schemas/Profissional"
+              },
+              "aluno": {
+                "$ref": "#/components/schemas/Aluno"
+              },
+              "encaminhamento": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Encaminhamento"
+                  }
+                ]
+              },
+              "resposta": {
+                "type": "string"
+              },
+              "statusVocacionail": {
+                "type": "string",
+                "nullable": true
               }
             }
           }
