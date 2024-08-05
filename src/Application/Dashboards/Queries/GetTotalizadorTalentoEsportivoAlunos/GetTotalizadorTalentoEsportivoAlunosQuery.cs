@@ -96,9 +96,17 @@ public class GetTotalizadorTalentoEsportivoAlunosQueryHandler : IRequestHandler<
 
         foreach (var aluno in laudos)
         {
+            var result = modalidades.Find(
+                delegate (Modalidade item)
+
+                {
+                    return item.Nome == aluno.TalentoEsportivo!.EncaminhamentoTexo;
+                }
+            );
+
             foreach (var item in modalidades)
             {
-                if (aluno.TalentoEsportivo!.Encaminhamento != null && aluno.TalentoEsportivo.Encaminhamento.Equals(item.Nome))
+                if (aluno.TalentoEsportivo!.EncaminhamentoTexo != null && aluno.TalentoEsportivo.EncaminhamentoTexo.Equals(item.Nome))
                 {
                     if (aluno.Aluno.Sexo!.Equals("M"))
                     {

@@ -4,6 +4,7 @@ namespace DnaBrasilApi.Domain.Entities;
 public class TalentoEsportivo : BaseAuditableEntity
 {
     public required Profissional Profissional { get; set; }
+    public Encaminhamento? Encaminhamento { get; set; }
     [Column(TypeName = "decimal(10,2)")]
     public decimal? Flexibilidade { get; set; }
     [Column(TypeName = "decimal(10,2)")]
@@ -20,7 +21,7 @@ public class TalentoEsportivo : BaseAuditableEntity
     public decimal? Imc { get; set; }
     [Column(TypeName = "decimal(10,2)")]
     public decimal? ShuttleRun { get; set; }
-    public string? Encaminhamento { get; set; }
+    public string? EncaminhamentoTexo { get; set; }
     [Column(TypeName = "decimal(10,2)")]
     public decimal? Altura { get; set; }
     [Column(TypeName = "decimal(10,2)")]
