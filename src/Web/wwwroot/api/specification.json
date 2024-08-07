@@ -12335,10 +12335,10 @@
             "type": "integer",
             "format": "int32"
           },
-          "tipoLaudo": {
-            "$ref": "#/components/schemas/TipoLaudo"
-          },
           "nome": {
+            "type": "string"
+          },
+          "nomeTipoLaudo": {
             "type": "string"
           },
           "parametro": {
