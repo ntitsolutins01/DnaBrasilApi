@@ -25,7 +25,7 @@ public class GetControlePresencaByFilterQueryHandler : IRequestHandler<GetContro
         IQueryable<ControlePresenca> controlePresencas;
 
         controlePresencas = _context.ControlesPresencas
-            .Where(x=>x.Controle==request.SearchFilter!.Controle)
+            .Where(x=>x.Controle==request.SearchFilter!.Controle && x.Evento == null)
             .Include(i => i.Aluno)
                 .AsNoTracking();
 

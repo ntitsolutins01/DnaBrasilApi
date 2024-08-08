@@ -7,4 +7,5 @@ public class ModuloEad : BaseAuditableEntity
     public required string Titulo { get; set; }    
     public string?  Descricao { get; set; }  
     public bool Status { get; set; } = true;
- }
+    public required string Nome { get; set; }
+}
