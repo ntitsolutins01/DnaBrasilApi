@@ -10184,9 +10184,8 @@
             "type": "integer",
             "format": "int32"
           },
-          "professorId": {
-            "type": "integer",
-            "format": "int32"
+          "nomeProfessor": {
+            "type": "string"
           },
           "moduloEadId": {
             "type": "integer",
