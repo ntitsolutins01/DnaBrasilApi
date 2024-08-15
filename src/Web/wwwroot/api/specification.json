@@ -8740,6 +8740,11 @@
             "format": "int32",
             "nullable": true
           },
+          "linhaAcaoId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
           "parceiroId": {
             "type": "integer",
             "format": "int32",
@@ -10187,9 +10192,8 @@
           "nomeProfessor": {
             "type": "string"
           },
-          "moduloEadId": {
-            "type": "integer",
-            "format": "int32"
+          "nomeModuloEad": {
+            "type": "string"
           },
           "titulo": {
             "type": "string"
@@ -10932,6 +10936,9 @@
               },
               "status": {
                 "type": "boolean"
+              },
+              "nome": {
+                "type": "string"
               }
             }
           }
@@ -13441,6 +13448,9 @@
             "format": "int32"
           },
           "titulo": {
+            "type": "string"
+          },
+          "nome": {
             "type": "string"
           },
           "descricao": {
