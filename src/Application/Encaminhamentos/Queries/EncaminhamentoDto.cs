@@ -4,12 +4,12 @@ namespace DnaBrasilApi.Application.Encaminhamentos.Queries;
 
 public class EncaminhamentoDto
 {
-    public required int Id { get; set; }
+    public required int Id { get; init; }
     public required string Nome { get; init; }
     public required string NomeTipoLaudo { get; init; }
     public required string Parametro { get; init; }
     public string? Descricao { get; init; }
-    public bool Status { get; set; }
+    public bool Status { get; init; }
    
 
     private class Mapping : Profile
