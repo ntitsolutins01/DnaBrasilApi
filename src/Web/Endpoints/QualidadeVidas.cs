@@ -30,9 +30,9 @@ public class QualidadeDeVidas : EndpointGroupBase
         return await sender.Send(command);
     }
 
-    public async Task<bool> UpdateQualidadeDeVida(ISender sender, int id, UpdateQualidadeDeVidaCommand command)
+    public async Task<bool> UpdateQualidadeDeVida(ISender sender, int id, UpdateEncaminhamentoQualidadeDeVidaCommand command)
     {
-        if (id != command.Id) return false;
+        if (id != command.AlunoId) return false;
         var result = await sender.Send(command);
         return result;
     }

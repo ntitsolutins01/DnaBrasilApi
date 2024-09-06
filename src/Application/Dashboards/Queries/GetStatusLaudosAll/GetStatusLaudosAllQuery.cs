@@ -40,8 +40,8 @@ public class GetStatusLaudosAllQueryHandler : IRequestHandler<GetStatusLaudosAll
             TotSaudeFinalizado = result.Include(i=>i.Saude).Count(c => c.Saude != null),
             TotSaudeAndamento = result.Include(i=>i.Saude).Count(c => c.Saude == null),
 
-            TotConsumoAlimentarFinalizado = result.Include(i=>i.Consumo).Count(c => c.Consumo != null),
-            TotConsumoAlimentarAndamento = result.Include(i=>i.Consumo).Count(c => c.Consumo == null),
+            TotConsumoAlimentarFinalizado = result.Include(i=>i.ConsumoAlimentar).Count(c => c.ConsumoAlimentar != null),
+            TotConsumoAlimentarAndamento = result.Include(i=>i.ConsumoAlimentar).Count(c => c.ConsumoAlimentar == null),
 
 
             TotQualidadeDeVidaFinalizado =result.Include(i => i.QualidadeDeVida).Count(c => c.QualidadeDeVida != null),

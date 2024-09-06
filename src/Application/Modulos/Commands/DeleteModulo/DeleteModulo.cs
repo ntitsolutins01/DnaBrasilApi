@@ -1,4 +1,5 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Domain.GuardClauses;
 
 namespace DnaBrasilApi.Application.Modulos.Commands.DeleteModulo;
 public record DeleteModuloCommand(int Id) : IRequest<bool>;
@@ -18,6 +19,10 @@ public class DeleteModuloCommandHandler : IRequestHandler<DeleteModuloCommand, b
             .FindAsync(new object[] { request.Id }, cancellationToken);
 
         Guard.Against.NotFound(request.Id, entity);
+
+        var possuiFuncionalidades = _context.Funcionalidades.Any(x => x.Modulo != null && x.Modulo.Id == request.Id);
+
+        Guard.Against.PossuiFuncionalidades(possuiFuncionalidades);
 
         _context.Modulos.Remove(entity);
 
