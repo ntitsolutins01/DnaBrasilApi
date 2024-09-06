@@ -90,8 +90,6 @@ public class UpdateEncaminhamentoQualidadeDeVidaCommandHandler : IRequestHandler
                     var parametro = result.Aviso.Split('.').First();
 
                     encaminhamento.Add(encaminhamentos.First(x => x.Parametro == parametro).Id);
-
-                    
                 }
                 else
                 {
