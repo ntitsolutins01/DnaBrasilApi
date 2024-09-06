@@ -52,6 +52,7 @@ public interface IApplicationDbContext
     DbSet<Evento> Eventos { get; }
     DbSet<FotoEvento> FotosEvento { get; }
     DbSet<Encaminhamento> Encaminhamentos { get; }
+    DbSet<ControleMaterial> ControlesMateriais { get; }
    
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
