@@ -18,7 +18,7 @@ public class Disciplinas : EndpointGroupBase
     public override void Map(WebApplication app)
     {
         app.MapGroup(this)
-            //.RequireAuthorization()
+            .RequireAuthorization()
             .MapGet(GetDisciplinasAll)
             .MapPost(CreateDisciplina)
             .MapPut(UpdateDisciplina, "{id}")

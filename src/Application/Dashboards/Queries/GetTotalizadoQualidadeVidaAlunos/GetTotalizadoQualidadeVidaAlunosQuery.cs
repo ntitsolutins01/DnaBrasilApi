@@ -1,13 +1,12 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using DnaBrasilApi.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
+using DnaBrasilApi.Domain.Enums;
 
 namespace DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadoQualidadeVidaAlunos;
 //[Authorize]
 public record GetTotalizadoQualidadeVidaAlunosQuery : IRequest<TotalizadorQualidadeVidaDto>
 {
     public DashboardDto? SearchFilter { get; init; }
-
 }
 
 public class
@@ -28,7 +27,7 @@ public class
     {
         IQueryable<Aluno> alunos;
 
-        alunos = _context.Alunos
+        alunos = _context.Alunos.Where(x=>x.Id==37051)
             .AsNoTracking();
 
         var result = FilterAlunosQualidadeVida(alunos, request.SearchFilter!, cancellationToken);
@@ -114,78 +113,48 @@ public class
             { "ContextosFavorecedores", 0 },
             { "ContextosNaoFavorecedores", 0 }
         };
-        
+
+
         var laudos = _context.Laudos.Where(x => verificaAlunos.Contains(x.Aluno.Id)).Include(i => i.QualidadeDeVida).Where(x=>x.QualidadeDeVida != null)
             .Include(a => a.Aluno)
             .AsNoTracking();
 
-        int cont = 0;
-        decimal quadrante1;
-        decimal quadrante2;
-        decimal quadrante3;
-        decimal quadrante4;
-
-        var metricas = _context.TextosLaudos
-            .Where(x => x.TipoLaudo.Id == 7).ToList();
-
-        foreach (var aluno in laudos)
+        foreach (var laudo in laudos)
         {
-            List<int> listRespostas = aluno.QualidadeDeVida!.Resposta.Split(',').Select(item => int.Parse(item)).ToList();
+            var encaminhamentos = laudo.QualidadeDeVida!.Encaminhamentos!.Split(',').Select(item => int.Parse(item)).ToList();
 
-            var respostas = _context.Respostas.Where(x => listRespostas.Contains(x.Id)).Include(i=>i.Questionario);
-            
-            quadrante1 = respostas.Where(x => x.Questionario.Quadrante == 1).Sum(s => s.ValorPesoResposta);
-            quadrante2 = respostas.Where(x => x.Questionario.Quadrante == 2).Sum(s => s.ValorPesoResposta);
-            quadrante3 = respostas.Where(x => x.Questionario.Quadrante == 3).Sum(s => s.ValorPesoResposta);
-            quadrante4 = respostas.Where(x => x.Questionario.Quadrante == 4).Sum(s => s.ValorPesoResposta);
-
-            var list = new List<decimal> { quadrante1, quadrante2, quadrante3, quadrante4 };
-
-            foreach (decimal quadrante in list)
+            foreach (int encaminhamento in encaminhamentos)
             {
-                cont++;
-
-                var result = metricas.Find(
-                    delegate (TextoLaudo item)
+                var result = _context.Encaminhamentos.Where(x => x.TipoLaudo.Id == (int)EnumTipoLaudo.QualidadeVida).ToList().Find(
+                    delegate (Encaminhamento item)
                     {
-                        return quadrante >= item.PontoInicial && quadrante <= item.PontoFinal && item.Quadrante == cont;
+                        return item.Id == encaminhamento;
                     }
                 );
 
-                if (result == null || !dict.ContainsKey(result.Aviso.Split('.')[0]))
-                {
-                    continue;
-                }
-
-                var value = dict[result.Aviso.Split('.')[0]];
+                var value = dict[result!.Parametro];
 
                 value += 1;
 
-                dict[result.Aviso.Split('.')[0]] = value;
+                dict[result!.Parametro] = value;
 
-                if (aluno.Aluno.Sexo == "M")
+                if (laudo.Aluno.Sexo == "M")
                 {
-                    var valor = dictTotalizadorQualidadeMasculino[result.Aviso.Split('.')[0]];
+                    var valor = dictTotalizadorQualidadeMasculino[result!.Parametro];
 
                     valor += 1;
 
-                    dictTotalizadorQualidadeMasculino[result.Aviso.Split('.')[0]] = valor;
+                    dictTotalizadorQualidadeMasculino[result!.Parametro] = valor;
                 }
                 else
                 {
-                    var valor = dictTotalizadorQualidadeFeminino[result.Aviso.Split('.')[0]];
+                    var valor = dictTotalizadorQualidadeFeminino[result!.Parametro];
 
                     valor += 1;
 
-                    dictTotalizadorQualidadeFeminino[result.Aviso.Split('.')[0]] = valor;
+                    dictTotalizadorQualidadeFeminino[result!.Parametro] = valor;
                 }
             }
-
-            cont = 0;
-            quadrante1 = 0;
-            quadrante2 = 0;
-            quadrante3 = 0;
-            quadrante4 = 0;
         }
 
         var totalMasc = dictTotalizadorQualidadeMasculino.Skip(0).Sum(x => x.Value);

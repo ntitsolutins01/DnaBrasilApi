@@ -23,7 +23,7 @@ public class CreateCargaCommandHandler : IRequestHandler<CreateCargaCommand, int
             .Include(i => i.Aluno)
             .Include(i => i.QualidadeDeVida)
             .Include(i => i.Vocacional)
-            .Include(i => i.Consumo)
+            .Include(i => i.ConsumoAlimentar)
             .Include(i => i.TalentoEsportivo)
             .Include(i => i.Saude)
             .Include(i => i.SaudeBucal)
@@ -161,7 +161,7 @@ public class CreateCargaCommandHandler : IRequestHandler<CreateCargaCommand, int
                 &&
                 item.Saude != null
                 &&
-                item.Consumo != null
+                item.ConsumoAlimentar != null
                 &&
                 item.SaudeBucal != null
                 &&
