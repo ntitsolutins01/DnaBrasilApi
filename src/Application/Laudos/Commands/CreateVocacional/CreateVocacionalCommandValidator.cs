@@ -4,7 +4,7 @@ public class CreateVocacionalCommandValidator : AbstractValidator<CreateVocacion
 {
     public CreateVocacionalCommandValidator()
     {
-        RuleFor(v => v.Resposta)
+        RuleFor(v => v.Respostas)
             .MaximumLength(500)
             .NotEmpty();
     }

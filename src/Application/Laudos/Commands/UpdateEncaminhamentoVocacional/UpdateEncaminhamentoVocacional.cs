@@ -5,7 +5,7 @@ namespace DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoVocaciona
 
 public record UpdateEncaminhamentoVocacionalCommand : IRequest<bool>
 {
-
+    public int? AlunoId { get; init; }
 }
 
 public class UpdateEncaminhamentoVocacionalCommandHandler : IRequestHandler<UpdateEncaminhamentoVocacionalCommand, bool>
@@ -21,7 +21,7 @@ public class UpdateEncaminhamentoVocacionalCommandHandler : IRequestHandler<Upda
     {
         IQueryable<Aluno> alunos;
 
-        alunos = _context.Alunos.Where(x => x.Id == 36305)//37315 - Feminino 38438
+        alunos = _context.Alunos//.Where(x => x.Id == request.AlunoId)//37315 - Feminino 38438
             .AsNoTracking();
 
         Dictionary<string, decimal> dict = new()
@@ -52,7 +52,7 @@ public class UpdateEncaminhamentoVocacionalCommandHandler : IRequestHandler<Upda
 
         foreach (var aluno in laudos)
         {
-            List<int> listRespostas = aluno.Vocacional!.Resposta.Split(',').Select(item => int.Parse(item)).ToList();
+            List<int> listRespostas = aluno.Vocacional!.Respostas.Split(',').Select(item => int.Parse(item)).ToList();
 
             var respostas = _context.Respostas.Where(x => listRespostas.Contains(x.Id)).Include(i => i.Questionario);
 
@@ -94,8 +94,6 @@ public class UpdateEncaminhamentoVocacionalCommandHandler : IRequestHandler<Upda
 
                 if (aluno.Aluno.Sexo == "M")
                 {
-                    //var valor = dictTotalizadorVocacionalMasculino[result.Aviso.Split('.')[0]];
-
                     var parametro = result.Aviso.Split('.').First();
 
                     var encaminhamentoVocacional = encaminhamentos.First(x => x.Parametro == parametro);
@@ -109,14 +107,10 @@ public class UpdateEncaminhamentoVocacionalCommandHandler : IRequestHandler<Upda
 
                     var final = await _context.SaveChangesAsync(cancellationToken);
 
-                    //valor += 1;
-
-                    //dictTotalizadorVocacionalMasculino[result.Aviso.Split('.')[0]] = valor;
+                    return final == 1;
                 }
                 else
                 {
-                    //var valor = dictTotalizadorVocacionalFeminino[result.Aviso.Split('.')[0]];
-
                     var parametro = result.Aviso.Split('.').First();
 
                     var encaminhamentoVocacional = encaminhamentos.First(x => x.Parametro == parametro);
@@ -130,9 +124,7 @@ public class UpdateEncaminhamentoVocacionalCommandHandler : IRequestHandler<Upda
 
                     var final = await _context.SaveChangesAsync(cancellationToken);
 
-                    //valor += 1;
-
-                    //dictTotalizadorVocacionalFeminino[result.Aviso.Split('.')[0]] = valor;
+                    return final == 1;
                 }
             }
             else
@@ -171,8 +163,6 @@ public class UpdateEncaminhamentoVocacionalCommandHandler : IRequestHandler<Upda
 
                 if (aluno.Aluno.Sexo == "M")
                 {
-                    //var valor = dictTotalizadorVocacionalMasculino[result.Aviso.Split('.')[0]];
-
                     var parametro = result.Aviso.Split('.').First();
 
                     var encaminhamentoVocacional = encaminhamentos.First(x => x.Parametro == parametro);
@@ -186,14 +176,10 @@ public class UpdateEncaminhamentoVocacionalCommandHandler : IRequestHandler<Upda
 
                     var final = await _context.SaveChangesAsync(cancellationToken);
 
-                    //valor += 1;
-
-                    //dictTotalizadorVocacionalMasculino[result.Aviso.Split('.')[0]] = valor;
+                    return final == 1;
                 }
                 else
                 {
-                    //var valor = dictTotalizadorVocacionalFeminino[result.Aviso.Split('.')[0]];
-
                     var parametro = result.Aviso.Split('.').First();
 
                     var encaminhamentoVocacional = encaminhamentos.First(x => x.Parametro == parametro);
@@ -207,14 +193,12 @@ public class UpdateEncaminhamentoVocacionalCommandHandler : IRequestHandler<Upda
 
                     var final = await _context.SaveChangesAsync(cancellationToken);
 
-                    //valor += 1;
-
-                    //dictTotalizadorVocacionalFeminino[result.Aviso.Split('.')[0]] = valor;
+                    return final == 1;
                 }
             }
         }
 
-        return true;
+        return false;
     }
 
     private Boolean IsPrime(int number)

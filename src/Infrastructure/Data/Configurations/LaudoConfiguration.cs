@@ -8,8 +8,6 @@ public class LaudoConfiguration : IEntityTypeConfiguration<Laudo>
 {
     public void Configure(EntityTypeBuilder<Laudo> builder)
     {
-        builder.Property(t => t.StatusQualidadeDeVida)
-            .HasMaxLength(1);
         builder.Property(t => t.StatusLaudo)
             .HasMaxLength(1);
     }

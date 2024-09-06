@@ -2572,7 +2572,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
       },
       "post": {
         "tags": [
@@ -2603,7 +2608,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
       }
     },
     "/api/Disciplinas/{id}": {
@@ -2647,7 +2657,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
       },
       "delete": {
         "tags": [
@@ -2677,7 +2692,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
       }
     },
     "/api/Disciplinas/Disciplina/{id}": {
@@ -2709,7 +2729,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
       }
     },
     "/api/DivisoesAdministrativas/Estados": {
@@ -3661,12 +3686,24 @@
         }
       }
     },
-    "/api/Laudos/UpdateEncaminhamentoVocacional": {
+    "/api/Laudos/EncaminhamentoVocacional/{alunoId}": {
       "put": {
         "tags": [
           "Laudos"
         ],
         "operationId": "UpdateEncaminhamentoVocacional",
+        "parameters": [
+          {
+            "name": "alunoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
         "requestBody": {
           "x-name": "command",
           "content": {
@@ -3677,7 +3714,51 @@
             }
           },
           "required": true,
-          "x-position": 1
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Laudos/EncaminhamentoQualidadeDeVida/{alunoId}": {
+      "put": {
+        "tags": [
+          "Laudos"
+        ],
+        "operationId": "UpdateEncaminhamentoQualidadeDeVida",
+        "parameters": [
+          {
+            "name": "alunoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEncaminhamentoQualidadeDeVidaCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
         },
         "responses": {
           "200": {
@@ -6015,7 +6096,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateQualidadeDeVidaCommand"
+                "$ref": "#/components/schemas/UpdateEncaminhamentoQualidadeDeVidaCommand"
               }
             }
           },
@@ -8740,11 +8821,6 @@
             "format": "int32",
             "nullable": true
           },
-          "linhaAcaoId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
           "parceiroId": {
             "type": "integer",
             "format": "int32",
@@ -9760,7 +9836,11 @@
               "aluno": {
                 "$ref": "#/components/schemas/Aluno"
               },
-              "resposta": {
+              "encaminhamentos": {
+                "type": "string",
+                "nullable": true
+              },
+              "respostas": {
                 "type": "string"
               },
               "statusQualidadeDeVida": {
@@ -9804,10 +9884,6 @@
                   }
                 ]
               },
-              "statusQualidadeDeVida": {
-                "type": "string",
-                "nullable": true
-              },
               "saude": {
                 "nullable": true,
                 "oneOf": [
@@ -9816,7 +9892,7 @@
                   }
                 ]
               },
-              "consumo": {
+              "consumoAlimentar": {
                 "nullable": true,
                 "oneOf": [
                   {
@@ -9834,14 +9910,6 @@
               },
               "aluno": {
                 "$ref": "#/components/schemas/Aluno"
-              },
-              "modalidade": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/Modalidade"
-                  }
-                ]
               },
               "statusLaudo": {
                 "type": "string",
@@ -10021,10 +10089,10 @@
                   }
                 ]
               },
-              "resposta": {
+              "respostas": {
                 "type": "string"
               },
-              "statusVocacionail": {
+              "statusVocacional": {
                 "type": "string",
                 "nullable": true
               }
@@ -10192,8 +10260,9 @@
           "nomeProfessor": {
             "type": "string"
           },
-          "nomeModuloEad": {
-            "type": "string"
+          "moduloEadId": {
+            "type": "integer",
+            "format": "int32"
           },
           "titulo": {
             "type": "string"
@@ -10936,9 +11005,6 @@
               },
               "status": {
                 "type": "boolean"
-              },
-              "nome": {
-                "type": "string"
               }
             }
           }
@@ -12736,12 +12802,35 @@
       },
       "UpdateEncaminhamentoVocacionalCommand": {
         "type": "object",
-        "additionalProperties": false
+        "additionalProperties": false,
+        "properties": {
+          "alunoId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        }
+      },
+      "UpdateEncaminhamentoQualidadeDeVidaCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "alunoId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        }
       },
       "LaudoDto": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
           "talentoEsportivoId": {
             "type": "integer",
             "format": "int32",
@@ -12777,33 +12866,18 @@
             "format": "int32",
             "nullable": true
           },
-          "id": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
           "nomeAluno": {
-            "type": "string",
-            "nullable": true
-          },
-          "municipioEstado": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "localidadeId": {
             "type": "integer",
             "format": "int32",
             "nullable": true
           },
-          "localidade": {
-            "type": "string",
-            "nullable": true
+          "nomeLocalidade": {
+            "type": "string"
           },
-          "encaminhamento": {
-            "type": "string",
-            "nullable": true
-          },
-          "statusLaudo": {
+          "municipioEstado": {
             "type": "string",
             "nullable": true
           },
@@ -12811,9 +12885,14 @@
             "type": "string",
             "nullable": true
           },
+          "statusLaudo": {
+            "type": "string",
+            "nullable": true
+          },
           "dtNascimento": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "nullable": true
           }
         }
       },
@@ -13448,9 +13527,6 @@
             "format": "int32"
           },
           "titulo": {
-            "type": "string"
-          },
-          "nome": {
             "type": "string"
           },
           "descricao": {
@@ -14410,20 +14486,10 @@
             "type": "integer",
             "format": "int32"
           },
-          "resposta": {
+          "respostas": {
             "type": "string"
-          }
-        }
-      },
-      "UpdateQualidadeDeVidaCommand": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
           },
-          "resposta": {
+          "statusQualidadeDeVida": {
             "type": "string"
           }
         }
@@ -15512,7 +15578,10 @@
             "type": "integer",
             "format": "int32"
           },
-          "resposta": {
+          "respostas": {
+            "type": "string"
+          },
+          "statusVocacional": {
             "type": "string"
           }
         }

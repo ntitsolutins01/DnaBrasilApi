@@ -103,7 +103,7 @@ public class
             { "BonsHabitosAlimentares", 0 }
         };
         
-        var laudos = _context.Laudos.Where(x => verificaAlunos.Contains(x.Aluno.Id)).Include(i => i.Consumo).Where(x=>x.Consumo != null)
+        var laudos = _context.Laudos.Where(x => verificaAlunos.Contains(x.Aluno.Id)).Include(i => i.ConsumoAlimentar).Where(x=>x.ConsumoAlimentar != null)
             .Include(a => a.Aluno)
             .AsNoTracking();
 
@@ -114,7 +114,7 @@ public class
 
         foreach (var aluno in laudos)
         {
-            List<int> listRespostas = aluno.Consumo!.Resposta.Split(',').Select(item => int.Parse(item)).ToList();
+            List<int> listRespostas = aluno.ConsumoAlimentar!.Resposta.Split(',').Select(item => int.Parse(item)).ToList();
 
             var respostas = _context.Respostas.Where(x => listRespostas.Contains(x.Id)).Include(i=>i.Questionario);
             

@@ -12,9 +12,9 @@ public class VocacionalConfigurations : IEntityTypeConfiguration<Vocacional>
 {
     public void Configure(EntityTypeBuilder<Vocacional> builder)
     {
-        builder.Property(t => t.Resposta)
+        builder.Property(t => t.Respostas)
             .HasMaxLength(500);
-        builder.Property(t => t.StatusVocacionail)
+        builder.Property(t => t.StatusVocacional)
             .HasMaxLength(1);
     }
 }

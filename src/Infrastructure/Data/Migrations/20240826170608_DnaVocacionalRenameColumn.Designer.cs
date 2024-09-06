@@ -4,6 +4,7 @@ using DnaBrasilApi.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DnaBrasilApi.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240826170608_DnaVocacionalRenameColumn")]
+    partial class DnaVocacionalRenameColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -996,7 +999,7 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.Property<int>("AlunoId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ConsumoAlimentarId")
+                    b.Property<int?>("ConsumoId")
                         .HasColumnType("int");
 
                     b.Property<DateTimeOffset>("Created")
@@ -1011,6 +1014,9 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("ModalidadeId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("QualidadeDeVidaId")
                         .HasColumnType("int");
 
@@ -1024,6 +1030,10 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                         .HasMaxLength(1)
                         .HasColumnType("nvarchar(1)");
 
+                    b.Property<string>("StatusQualidadeDeVida")
+                        .HasMaxLength(1)
+                        .HasColumnType("nvarchar(1)");
+
                     b.Property<int?>("TalentoEsportivoId")
                         .HasColumnType("int");
 
@@ -1034,7 +1044,9 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
 
                     b.HasIndex("AlunoId");
 
-                    b.HasIndex("ConsumoAlimentarId");
+                    b.HasIndex("ConsumoId");
+
+                    b.HasIndex("ModalidadeId");
 
                     b.HasIndex("QualidadeDeVidaId");
 
@@ -1841,9 +1853,6 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Encaminhamentos")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTimeOffset>("LastModified")
                         .HasColumnType("datetimeoffset");
 
@@ -1853,7 +1862,7 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.Property<int>("ProfissionalId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Respostas")
+                    b.Property<string>("Resposta")
                         .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
@@ -3072,9 +3081,13 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DnaBrasilApi.Domain.Entities.ConsumoAlimentar", "ConsumoAlimentar")
+                    b.HasOne("DnaBrasilApi.Domain.Entities.ConsumoAlimentar", "Consumo")
                         .WithMany()
-                        .HasForeignKey("ConsumoAlimentarId");
+                        .HasForeignKey("ConsumoId");
+
+                    b.HasOne("DnaBrasilApi.Domain.Entities.Modalidade", "Modalidade")
+                        .WithMany()
+                        .HasForeignKey("ModalidadeId");
 
                     b.HasOne("DnaBrasilApi.Domain.Entities.QualidadeDeVida", "QualidadeDeVida")
                         .WithMany()
@@ -3098,7 +3111,9 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
 
                     b.Navigation("Aluno");
 
-                    b.Navigation("ConsumoAlimentar");
+                    b.Navigation("Consumo");
+
+                    b.Navigation("Modalidade");
 
                     b.Navigation("QualidadeDeVida");
 

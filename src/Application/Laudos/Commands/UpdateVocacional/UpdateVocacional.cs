@@ -24,7 +24,7 @@ public class UpdateVocacionalCommandHandler : IRequestHandler<UpdateVocacionalCo
 
         Guard.Against.NotFound(request.Id, entity);
 
-        entity.Resposta = request.Resposta;
+        entity.Respostas = request.Resposta;
 
         await _context.SaveChangesAsync(cancellationToken);
         var result = await _context.SaveChangesAsync(cancellationToken);
