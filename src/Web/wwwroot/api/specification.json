@@ -1260,6 +1260,166 @@
         }
       }
     },
+    "/api/ControlesMateriais": {
+      "get": {
+        "tags": [
+          "ControlesMateriais"
+        ],
+        "operationId": "GetControlesMateriaisAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ControleMaterialDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "ControlesMateriais"
+        ],
+        "operationId": "CreateControleMaterial",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateControleMaterialCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ControlesMateriais/{id}": {
+      "put": {
+        "tags": [
+          "ControlesMateriais"
+        ],
+        "operationId": "UpdateControleMaterial",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateControleMaterialCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ControlesMateriais"
+        ],
+        "operationId": "DeleteControleMaterial",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ControlesMateriais/ControleMaterial/{id}": {
+      "get": {
+        "tags": [
+          "ControlesMateriais"
+        ],
+        "operationId": "GetControleMaterialById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ControleMaterialDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/ControlesPresencas": {
       "get": {
         "tags": [
@@ -8821,6 +8981,11 @@
             "format": "int32",
             "nullable": true
           },
+          "linhaAcaoId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
           "parceiroId": {
             "type": "integer",
             "format": "int32",
@@ -10260,9 +10425,8 @@
           "nomeProfessor": {
             "type": "string"
           },
-          "moduloEadId": {
-            "type": "integer",
-            "format": "int32"
+          "nomeModuloEad": {
+            "type": "string"
           },
           "titulo": {
             "type": "string"
@@ -11005,6 +11169,9 @@
               },
               "status": {
                 "type": "boolean"
+              },
+              "nome": {
+                "type": "string"
               }
             }
           }
@@ -11128,6 +11295,108 @@
           },
           "dataEncerramento": {
             "type": "string"
+          },
+          "status": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ControleMaterialDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeLinhaAcao": {
+            "type": "string"
+          },
+          "descricao": {
+            "type": "string"
+          },
+          "unidadeMedida": {
+            "type": "string"
+          },
+          "quantidade": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "saida": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "disponivel": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "status": {
+            "type": "boolean"
+          }
+        }
+      },
+      "CreateControleMaterialCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "linhaAcaoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "descricao": {
+            "type": "string"
+          },
+          "unidadeMedida": {
+            "type": "string"
+          },
+          "quantidade": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "saida": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "disponivel": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "status": {
+            "type": "boolean"
+          }
+        }
+      },
+      "UpdateControleMaterialCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "descricao": {
+            "type": "string"
+          },
+          "unidadeMedida": {
+            "type": "string"
+          },
+          "quantidade": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "saida": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "disponivel": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
           },
           "status": {
             "type": "boolean"
@@ -13527,6 +13796,9 @@
             "format": "int32"
           },
           "titulo": {
+            "type": "string"
+          },
+          "nome": {
             "type": "string"
           },
           "descricao": {
