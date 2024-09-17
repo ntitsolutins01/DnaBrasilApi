@@ -3934,7 +3934,7 @@
         }
       }
     },
-    "/api/Laudos/LaudoByAluno/{alunoId}": {
+    "/api/Laudos/LaudoByAluno/{Id}": {
       "get": {
         "tags": [
           "Laudos"
@@ -3942,7 +3942,7 @@
         "operationId": "GetLaudoByAluno",
         "parameters": [
           {
-            "name": "alunoId",
+            "name": "Id",
             "in": "path",
             "required": true,
             "schema": {

@@ -22,7 +22,7 @@ public class Laudos : EndpointGroupBase
             .MapPut(UpdateEncaminhamentoVocacional, "EncaminhamentoVocacional/{alunoId}")
             .MapPut(UpdateEncaminhamentoQualidadeDeVida, "EncaminhamentoQualidadeDeVida/{alunoId}")
             .MapGet(GetLaudosAll)
-            .MapGet(GetLaudoByAluno, "LaudoByAluno/{alunoId}");
+            .MapGet(GetLaudoByAluno, "LaudoByAluno/{Id}");
     }
     public async Task<int> CreateLaudo(ISender sender, CreateLaudoCommand command)
     {
@@ -49,8 +49,8 @@ public class Laudos : EndpointGroupBase
     {
         return await sender.Send(new GetLaudosAllQuery());
     }
-    public async Task<LaudoDto> GetLaudoByAluno(ISender sender, int alunoId)
+    public async Task<LaudoDto> GetLaudoByAluno(ISender sender, int Id)
     {
-        return await sender.Send(new GetLaudoByAlunoQuery(alunoId));
+        return await sender.Send(new GetLaudoByAlunoQuery(Id));
     }
 }
