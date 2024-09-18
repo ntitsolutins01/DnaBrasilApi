@@ -1,6 +1,6 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasilApi.Application.RespostasEad.Queries.GetRespostaEadAll;
+namespace DnaBrasilApi.Application.RespostasEad.Queries.GetRespostasEadAll;
 //[Authorize]
 public record GetRespostasEadAllQuery : IRequest<List<RespostaEadDto>>;
 

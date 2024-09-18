@@ -5,9 +5,11 @@ namespace DnaBrasilApi.Application.RespostasEad.Commands.CreateRespostaEad;
 
 public record CreateRespostaEadCommand : IRequest<int>
 {
-    public required string RespostaQuestionarioEad { get; init; }
-    public required int QuestionarioEadId { get; init; }
-    public required decimal ValorPesoRespostaEad { get; init; }
+    public required int QuestaoId { get; init; }
+    public required string TipoResposta { get; init; }
+    public string? TipoAlternativa { get; init; }
+    public required string Resposta { get; init; }
+    public required decimal ValorPesoResposta { get; init; }
 }
 
 public class CreateRespostaEadCommandHandler : IRequestHandler<CreateRespostaEadCommand, int>
@@ -21,16 +23,18 @@ public class CreateRespostaEadCommandHandler : IRequestHandler<CreateRespostaEad
 
     public async Task<int> Handle(CreateRespostaEadCommand request, CancellationToken cancellationToken)
     {
-        var questionarioEad = await _context.QuestionariosEad
-            .FindAsync(new object[] { request.QuestionarioEadId }, cancellationToken);
+        var questao = await _context.QuestoesEad
+            .FindAsync(new object[] { request.QuestaoId }, cancellationToken);
 
-        Guard.Against.NotFound(request.QuestionarioEadId, questionarioEad);
+        Guard.Against.NotFound(request.QuestaoId, questao);
 
         var entity = new RespostaEad
         {
-            RespostaQuestionarioEad = request.RespostaQuestionarioEad,
-            QuestionarioEad = questionarioEad!,
-            ValorPesoRespostaEad = request.ValorPesoRespostaEad
+            Questao = questao,
+            TipoResposta = request.TipoResposta,
+            TipoAlternativa = request.TipoAlternativa,
+            Resposta = request.Resposta,
+            ValorPesoResposta = request.ValorPesoResposta
         };
 
         _context.RespostasEad.Add(entity);

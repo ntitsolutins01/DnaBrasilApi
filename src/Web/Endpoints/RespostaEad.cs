@@ -2,8 +2,8 @@
 using DnaBrasilApi.Application.RespostasEad.Commands.DeleteRespostaEad;
 using DnaBrasilApi.Application.RespostasEad.Commands.UpdateRespostaEad;
 using DnaBrasilApi.Application.RespostasEad.Queries;
-using DnaBrasilApi.Application.RespostasEad.Queries.GetRespostaEadAll;
 using DnaBrasilApi.Application.RespostasEad.Queries.GetRespostaEadById;
+using DnaBrasilApi.Application.RespostasEad.Queries.GetRespostasEadAll;
 
 namespace DnaBrasilApi.Web.Endpoints;
 

@@ -3,7 +3,7 @@
 namespace DnaBrasilApi.Application.RespostasEad.Commands.DeleteRespostaEad;
 public record DeleteRespostaEadCommand(int Id) : IRequest<bool>;
 
-public class DeleteRespostaEadCommandHandler : IRequestHandler<RespostasEad.Commands.DeleteRespostaEad.DeleteRespostaEadCommand, bool>
+public class DeleteRespostaEadCommandHandler : IRequestHandler<DeleteRespostaEadCommand, bool>
 {
     private readonly IApplicationDbContext _context;
 
@@ -12,7 +12,7 @@ public class DeleteRespostaEadCommandHandler : IRequestHandler<RespostasEad.Comm
         _context = context;
     }
 
-    public async Task<bool> Handle(RespostasEad.Commands.DeleteRespostaEad.DeleteRespostaEadCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(DeleteRespostaEadCommand request, CancellationToken cancellationToken)
     {
         var entity = await _context.RespostasEad
             .FindAsync(new object[] { request.Id }, cancellationToken);

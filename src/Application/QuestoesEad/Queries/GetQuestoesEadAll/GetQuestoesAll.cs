@@ -2,9 +2,9 @@
 
 namespace DnaBrasilApi.Application.QuestionariosEad.Queries.GetQuestionarioEadAll;
 //[Authorize]
-public record GetQuestionariosEadAllQuery : IRequest<List<QuestionarioEadDto>>;
+public record GetQuestionariosEadAllQuery : IRequest<List<QuestaoEadDto>>;
 
-public class GetQuestionariosEadAllQueryHandler : IRequestHandler<GetQuestionariosEadAllQuery, List<QuestionarioEadDto>>
+public class GetQuestionariosEadAllQueryHandler : IRequestHandler<GetQuestionariosEadAllQuery, List<QuestaoEadDto>>
 {
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
@@ -15,11 +15,11 @@ public class GetQuestionariosEadAllQueryHandler : IRequestHandler<GetQuestionari
         _mapper = mapper;
     }
 
-    public async Task<List<QuestionarioEadDto>> Handle(GetQuestionariosEadAllQuery request, CancellationToken cancellationToken)
+    public async Task<List<QuestaoEadDto>> Handle(GetQuestionariosEadAllQuery request, CancellationToken cancellationToken)
     {
-        var result = await _context.QuestionariosEad
+        var result = await _context.QuestoesEad
             .AsNoTracking()
-            .ProjectTo<QuestionarioEadDto>(_mapper.ConfigurationProvider)
+            .ProjectTo<QuestaoEadDto>(_mapper.ConfigurationProvider)
             .ToListAsync(cancellationToken);
 
         return result == null ? throw new ArgumentNullException(nameof(result)) : result;

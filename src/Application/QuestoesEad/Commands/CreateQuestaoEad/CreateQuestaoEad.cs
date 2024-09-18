@@ -1,13 +1,13 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasilApi.Application.QuestionarioEadsEad.Commands.CreateQuestionarioEad;
-
+namespace DnaBrasilApi.Application.QuestoesEad.Commands.CreateQuestaoEad;
+//todo: lutercio revizar crud
 public record CreateQuestionarioEadCommand : IRequest<int>
 {
     public required List<string>? Urls { get; init; }
     public required string Pergunta { get; init; }
-    public required int Quadrante { get; init; }
+    public required string Referencia { get; init; }
     public required int Questao { get; init; }
 }
 
@@ -22,14 +22,14 @@ public class CreateQuestionarioEadCommandHandler : IRequestHandler<CreateQuestio
 
     public async Task<int> Handle(CreateQuestionarioEadCommand request, CancellationToken cancellationToken)
     {
-        var entity = new QuestionarioEad
+        var entity = new QuestaoEad
         {
-            Pergunta = request.Pergunta,
-            Quadrante = request.Quadrante,
-            Questao = request.Questao
+            Enunciado = request.Pergunta,
+            Questao = request.Questao,
+            Referencia = request.Referencia
         };
 
-        _context.QuestionariosEad.Add(entity);
+        _context.QuestoesEad.Add(entity);
 
         await _context.SaveChangesAsync(cancellationToken);
 

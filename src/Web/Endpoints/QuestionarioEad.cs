@@ -1,9 +1,9 @@
-﻿using DnaBrasilApi.Application.QuestionarioEadsEad.Commands.CreateQuestionarioEad;
-using DnaBrasilApi.Application.QuestionariosEad.Queries.GetQuestionarioEadById;
-using DnaBrasilApi.Application.QuestionariosEad.Commands.DeleteQuestionarioEad;
-using DnaBrasilApi.Application.QuestionariosEad.Commands.UpdateQuestionarioEad;
+﻿using DnaBrasilApi.Application.QuestionariosEad.Queries.GetQuestionarioEadById;
 using DnaBrasilApi.Application.QuestionariosEad.Queries;
 using DnaBrasilApi.Application.QuestionariosEad.Queries.GetQuestionarioEadAll;
+using DnaBrasilApi.Application.QuestoesEad.Commands.CreateQuestaoEad;
+using DnaBrasilApi.Application.QuestoesEad.Commands.DeleteQuestaoEad;
+using DnaBrasilApi.Application.QuestoesEad.Commands.UpdateQuestaoEad;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -20,12 +20,12 @@ public class QuestionariosEad : EndpointGroupBase
             .MapGet(GetQuestionarioEadById, "QuestionarioEad/{id}");
     }
 
-    public async Task<List<QuestionarioEadDto>> GetQuestionariosEadAll(ISender sender)
+    public async Task<List<QuestaoEadDto>> GetQuestionariosEadAll(ISender sender)
     {
         return await sender.Send(new GetQuestionariosEadAllQuery());
     }
 
-    public async Task<QuestionarioEadDto> GetQuestionarioEadById(ISender sender, int id)
+    public async Task<QuestaoEadDto> GetQuestionarioEadById(ISender sender, int id)
     {
         return await sender.Send(new GetQuestionarioEadByIdQuery() { Id = id });
     }

@@ -3,7 +3,7 @@ using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.QuestionariosEad.Queries;
 
-public class QuestionarioEadDto
+public class QuestaoEadDto
 {
     public int Id { get; init; }
        
@@ -17,7 +17,7 @@ public class QuestionarioEadDto
     {
         public Mapping()
         {
-            CreateMap<QuestionarioEad, QuestionarioEadDto>();
+            CreateMap<QuestaoEad, QuestaoEadDto>();
         }
     }
 }

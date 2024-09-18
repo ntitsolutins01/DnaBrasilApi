@@ -1,13 +1,12 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
-using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasilApi.Application.QuestionariosEad.Commands.UpdateQuestionarioEad;
+namespace DnaBrasilApi.Application.QuestoesEad.Commands.UpdateQuestaoEad;
 
 public record UpdateQuestionarioEadCommand : IRequest<bool>
 {
     public int Id { get; init; }
     public required string Pergunta { get; init; }
-    public required int Quadrante { get; init; }
+    public required string Referencia { get; init; }
     public required int Questao { get; init; }
 
 }
@@ -23,13 +22,13 @@ public class UpdateQuestionarioEadCommandHandler : IRequestHandler<UpdateQuestio
 
     public async Task<bool> Handle(UpdateQuestionarioEadCommand request, CancellationToken cancellationToken)
     {
-        var entity = await _context.QuestionariosEad
+        var entity = await _context.QuestoesEad
             .FindAsync(new object[] { request.Id }, cancellationToken);
 
         Guard.Against.NotFound(request.Id, entity);
 
-        entity.Pergunta = request.Pergunta;
-        entity.Quadrante = request.Quadrante;
+        entity.Enunciado = request.Pergunta;
+        entity.Referencia = request.Referencia;
         entity.Questao = request.Questao;
         
         var result = await _context.SaveChangesAsync(cancellationToken);

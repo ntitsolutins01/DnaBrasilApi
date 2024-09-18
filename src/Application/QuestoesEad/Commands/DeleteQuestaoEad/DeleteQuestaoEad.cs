@@ -1,9 +1,9 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasilApi.Application.QuestionariosEad.Commands.DeleteQuestionarioEad;
+namespace DnaBrasilApi.Application.QuestoesEad.Commands.DeleteQuestaoEad;
 public record DeleteQuestionarioEadCommand(int Id) : IRequest<bool>;
 
-public class DeleteQuestionarioEadCommandHandler : IRequestHandler<QuestionariosEad.Commands.DeleteQuestionarioEad.DeleteQuestionarioEadCommand, bool>
+public class DeleteQuestionarioEadCommandHandler : IRequestHandler<DeleteQuestionarioEadCommand, bool>
 {
     private readonly IApplicationDbContext _context;
 
@@ -12,14 +12,14 @@ public class DeleteQuestionarioEadCommandHandler : IRequestHandler<Questionarios
         _context = context;
     }
 
-    public async Task<bool> Handle(QuestionariosEad.Commands.DeleteQuestionarioEad.DeleteQuestionarioEadCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(DeleteQuestionarioEadCommand request, CancellationToken cancellationToken)
     {
-        var entity = await _context.QuestionariosEad
+        var entity = await _context.QuestoesEad
             .FindAsync(new object[] { request.Id }, cancellationToken);
 
         Guard.Against.NotFound(request.Id, entity);
 
-        _context.QuestionariosEad.Remove(entity);
+        _context.QuestoesEad.Remove(entity);
 
         var result = await _context.SaveChangesAsync(cancellationToken);
         return result == 1;

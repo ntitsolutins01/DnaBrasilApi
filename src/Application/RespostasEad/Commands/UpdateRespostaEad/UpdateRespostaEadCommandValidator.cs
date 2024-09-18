@@ -4,7 +4,7 @@ public class UpdateRespostaEadCommandValidator : AbstractValidator<UpdateRespost
 {
     public UpdateRespostaEadCommandValidator()
     {
-        RuleFor(v => v.RespostaQuestionarioEad)
-            .MaximumLength(300);
+        //RuleFor(v => v.)
+        //    .MaximumLength(300);
     }
 }

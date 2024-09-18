@@ -5,8 +5,10 @@ namespace DnaBrasilApi.Application.RespostasEad.Commands.UpdateRespostaEad;
 public record UpdateRespostaEadCommand : IRequest<bool>
 {
     public int Id { get; init; }
-    public required string RespostaQuestionarioEad { get; init; }
-    public required decimal ValorPesoRespostaEad { get; set; }
+    public required string TipoResposta { get; init; }
+    public string? TipoAlternativa { get; init; }
+    public required string Resposta { get; init; }
+    public required decimal ValorPesoResposta { get; init; }
 
 }
 
@@ -26,9 +28,7 @@ public class UpdateRespostaEadCommandHandler : IRequestHandler<UpdateRespostaEad
 
         Guard.Against.NotFound(request.Id, entity);
 
-        entity.RespostaQuestionarioEad = request.RespostaQuestionarioEad;
-        entity.ValorPesoRespostaEad = request.ValorPesoRespostaEad;
-        
+        //todo: Lutercio implementar 
 
         var result = await _context.SaveChangesAsync(cancellationToken);
 

@@ -4,8 +4,13 @@ public class CreateRespostaEadCommandValidator : AbstractValidator<CreateRespost
 {
     public CreateRespostaEadCommandValidator()
     {
-        RuleFor(v => v.RespostaQuestionarioEad)
-            .MaximumLength(300)
+        RuleFor(v => v.Resposta)
+            .MaximumLength(1000)
             .NotEmpty();
+        RuleFor(v => v.TipoResposta)
+            .MaximumLength(1)
+            .NotEmpty();
+        RuleFor(v => v.TipoAlternativa)
+            .MaximumLength(6);
     }
 }
