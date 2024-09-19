@@ -1,18 +1,18 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
 
 namespace DnaBrasilApi.Application.QuestoesEad.Commands.DeleteQuestaoEad;
-public record DeleteQuestionarioEadCommand(int Id) : IRequest<bool>;
+public record DeleteQuestaoEadCommand(int Id) : IRequest<bool>;
 
-public class DeleteQuestionarioEadCommandHandler : IRequestHandler<DeleteQuestionarioEadCommand, bool>
+public class DeleteQuestaoEadCommandHandler : IRequestHandler<DeleteQuestaoEadCommand, bool>
 {
     private readonly IApplicationDbContext _context;
 
-    public DeleteQuestionarioEadCommandHandler(IApplicationDbContext context)
+    public DeleteQuestaoEadCommandHandler(IApplicationDbContext context)
     {
         _context = context;
     }
 
-    public async Task<bool> Handle(DeleteQuestionarioEadCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(DeleteQuestaoEadCommand request, CancellationToken cancellationToken)
     {
         var entity = await _context.QuestoesEad
             .FindAsync(new object[] { request.Id }, cancellationToken);

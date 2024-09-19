@@ -1,10 +1,16 @@
 ﻿namespace DnaBrasilApi.Application.RespostasEad.Commands.UpdateRespostaEad;
-//todo: verificar rules validators
+
 public class UpdateRespostaEadCommandValidator : AbstractValidator<UpdateRespostaEadCommand>
 {
     public UpdateRespostaEadCommandValidator()
     {
-        //RuleFor(v => v.)
-        //    .MaximumLength(300);
+        RuleFor(v => v.Resposta)
+            .MaximumLength(1000)
+            .NotEmpty();
+        RuleFor(v => v.TipoResposta)
+            .MaximumLength(1)
+            .NotEmpty();
+        RuleFor(v => v.TipoAlternativa)
+            .MaximumLength(6);
     }
 }

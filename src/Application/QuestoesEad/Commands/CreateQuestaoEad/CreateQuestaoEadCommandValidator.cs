@@ -1,6 +1,6 @@
 ﻿namespace DnaBrasilApi.Application.QuestoesEad.Commands.CreateQuestaoEad;
 
-public class CreateQuestaoEadCommandValidator : AbstractValidator<CreateQuestionarioEadCommand>
+public class CreateQuestaoEadCommandValidator : AbstractValidator<CreateQuestaoEadCommand>
 {
     public CreateQuestaoEadCommandValidator()
     {

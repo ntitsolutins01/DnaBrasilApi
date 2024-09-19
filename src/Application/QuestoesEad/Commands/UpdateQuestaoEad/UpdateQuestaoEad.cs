@@ -2,7 +2,7 @@
 
 namespace DnaBrasilApi.Application.QuestoesEad.Commands.UpdateQuestaoEad;
 
-public record UpdateQuestionarioEadCommand : IRequest<bool>
+public record UpdateQuestaoEadCommand : IRequest<bool>
 {
     public int Id { get; init; }
     public required string Pergunta { get; init; }
@@ -11,16 +11,16 @@ public record UpdateQuestionarioEadCommand : IRequest<bool>
 
 }
 
-public class UpdateQuestionarioEadCommandHandler : IRequestHandler<UpdateQuestionarioEadCommand, bool>
+public class UpdateQuestaoEadCommandHandler : IRequestHandler<UpdateQuestaoEadCommand, bool>
 {
     private readonly IApplicationDbContext _context;
 
-    public UpdateQuestionarioEadCommandHandler(IApplicationDbContext context)
+    public UpdateQuestaoEadCommandHandler(IApplicationDbContext context)
     {
         _context = context;
     }
 
-    public async Task<bool> Handle(UpdateQuestionarioEadCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(UpdateQuestaoEadCommand request, CancellationToken cancellationToken)
     {
         var entity = await _context.QuestoesEad
             .FindAsync(new object[] { request.Id }, cancellationToken);

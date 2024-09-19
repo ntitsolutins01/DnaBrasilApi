@@ -28,7 +28,10 @@ public class UpdateRespostaEadCommandHandler : IRequestHandler<UpdateRespostaEad
 
         Guard.Against.NotFound(request.Id, entity);
 
-        //todo: Lutercio implementar 
+        entity.TipoResposta = request.TipoResposta;
+        entity.TipoAlternativa = request.TipoAlternativa;
+        entity.Resposta = request.Resposta;
+        entity.ValorPesoResposta = request.ValorPesoResposta;
 
         var result = await _context.SaveChangesAsync(cancellationToken);
 

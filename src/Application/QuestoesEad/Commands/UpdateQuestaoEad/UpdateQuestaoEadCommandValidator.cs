@@ -1,6 +1,6 @@
 ﻿namespace DnaBrasilApi.Application.QuestoesEad.Commands.UpdateQuestaoEad;
 
-public class UpdateQuestaoEadCommandValidator : AbstractValidator<UpdateQuestionarioEadCommand>
+public class UpdateQuestaoEadCommandValidator : AbstractValidator<UpdateQuestaoEadCommand>
 {
     public UpdateQuestaoEadCommandValidator()
     {

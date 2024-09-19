@@ -2,31 +2,29 @@
 using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.QuestoesEad.Commands.CreateQuestaoEad;
-//todo: lutercio revizar crud
-public record CreateQuestionarioEadCommand : IRequest<int>
+public record CreateQuestaoEadCommand : IRequest<int>
 {
-    public required List<string>? Urls { get; init; }
     public required string Pergunta { get; init; }
     public required string Referencia { get; init; }
     public required int Questao { get; init; }
 }
 
-public class CreateQuestionarioEadCommandHandler : IRequestHandler<CreateQuestionarioEadCommand, int>
+public class CreateQuestaoEadCommandHandler : IRequestHandler<CreateQuestaoEadCommand, int>
 {
     private readonly IApplicationDbContext _context;
 
-    public CreateQuestionarioEadCommandHandler(IApplicationDbContext context)
+    public CreateQuestaoEadCommandHandler(IApplicationDbContext context)
     {
         _context = context;
     }
 
-    public async Task<int> Handle(CreateQuestionarioEadCommand request, CancellationToken cancellationToken)
+    public async Task<int> Handle(CreateQuestaoEadCommand request, CancellationToken cancellationToken)
     {
         var entity = new QuestaoEad
         {
             Enunciado = request.Pergunta,
-            Questao = request.Questao,
-            Referencia = request.Referencia
+            Referencia = request.Referencia,
+            Questao = request.Questao
         };
 
         _context.QuestoesEad.Add(entity);

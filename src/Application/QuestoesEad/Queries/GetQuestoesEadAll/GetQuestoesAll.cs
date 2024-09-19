@@ -1,21 +1,21 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasilApi.Application.QuestionariosEad.Queries.GetQuestionarioEadAll;
+namespace DnaBrasilApi.Application.QuestoesEad.Queries.GetQuestoesEadAll;
 //[Authorize]
-public record GetQuestionariosEadAllQuery : IRequest<List<QuestaoEadDto>>;
+public record GetQuestoesEadAllQuery : IRequest<List<QuestaoEadDto>>;
 
-public class GetQuestionariosEadAllQueryHandler : IRequestHandler<GetQuestionariosEadAllQuery, List<QuestaoEadDto>>
+public class GetQuestoesEadAllQueryHandler : IRequestHandler<GetQuestoesEadAllQuery, List<QuestaoEadDto>>
 {
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
 
-    public GetQuestionariosEadAllQueryHandler(IApplicationDbContext context, IMapper mapper)
+    public GetQuestoesEadAllQueryHandler(IApplicationDbContext context, IMapper mapper)
     {
         _context = context;
         _mapper = mapper;
     }
 
-    public async Task<List<QuestaoEadDto>> Handle(GetQuestionariosEadAllQuery request, CancellationToken cancellationToken)
+    public async Task<List<QuestaoEadDto>> Handle(GetQuestoesEadAllQuery request, CancellationToken cancellationToken)
     {
         var result = await _context.QuestoesEad
             .AsNoTracking()
