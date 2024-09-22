@@ -60,6 +60,9 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<FotoEvento> FotosEvento => Set<FotoEvento>();
     public DbSet<Encaminhamento> Encaminhamentos=> Set<Encaminhamento>();
     public DbSet<ControleMaterial> ControlesMateriais => Set<ControleMaterial>();
+    public DbSet<QuestaoEad> QuestoesEad => Set<QuestaoEad>();
+    public DbSet<RespostaEad> RespostasEad => Set<RespostaEad>();
+
 
 
     protected override void OnModelCreating(ModelBuilder builder)

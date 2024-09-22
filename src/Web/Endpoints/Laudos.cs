@@ -6,6 +6,8 @@ using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoVocacional;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateQualidadeVida;
 using DnaBrasilApi.Application.Laudos.Queries;
 using DnaBrasilApi.Application.Laudos.Queries.GetLaudosAll;
+using DnaBrasilApi.Application.Laudos.Queries.GetLaudoByAluno;
+using DnaBrasilApi.Application.Laudos.Queries.GetSaudeByAluno;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -19,14 +21,13 @@ public class Laudos : EndpointGroupBase
             .MapPut(UpdateEncaminhamentoAlunos, "EncaminhamentoAlunos")
             .MapPut(UpdateEncaminhamentoVocacional, "EncaminhamentoVocacional/{alunoId}")
             .MapPut(UpdateEncaminhamentoQualidadeDeVida, "EncaminhamentoQualidadeDeVida/{alunoId}")
-            .MapGet(GetLaudosAll);
+            .MapGet(GetLaudosAll)
+            .MapGet(GetLaudoByAluno, "LaudoByAluno/{Id}");
     }
-
     public async Task<int> CreateLaudo(ISender sender, CreateLaudoCommand command)
     {
         return await sender.Send(command);
     }
-
     public async Task<bool> UpdateEncaminhamentoAlunos(ISender sender, UpdateEncaminhamentoAlunosCommand command)
     {
         var result = await sender.Send(command);
@@ -47,5 +48,9 @@ public class Laudos : EndpointGroupBase
     public async Task<List<LaudoDto>> GetLaudosAll(ISender sender)
     {
         return await sender.Send(new GetLaudosAllQuery());
+    }
+    public async Task<LaudoDto> GetLaudoByAluno(ISender sender, int Id)
+    {
+        return await sender.Send(new GetLaudoByAlunoQuery(Id));
     }
 }
