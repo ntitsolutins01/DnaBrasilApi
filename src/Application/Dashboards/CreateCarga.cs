@@ -20,13 +20,13 @@ public class CreateCargaCommandHandler : IRequestHandler<CreateCargaCommand, int
     {
 
         var laudos = await _context.Laudos
-            .Include(i => i.Aluno)
-            .Include(i => i.QualidadeDeVida)
-            .Include(i => i.Vocacional)
+            //.Include(i => i.Aluno)
+            //.Include(i => i.QualidadeDeVida)
+            //.Include(i => i.Vocacional)
             .Include(i => i.ConsumoAlimentar)
-            .Include(i => i.TalentoEsportivo)
-            .Include(i => i.Saude)
-            .Include(i => i.SaudeBucal)
+            //.Include(i => i.TalentoEsportivo)
+            //.Include(i => i.Saude)
+            //.Include(i => i.SaudeBucal)
             .AsNoTracking()
             .ToListAsync(cancellationToken);
 

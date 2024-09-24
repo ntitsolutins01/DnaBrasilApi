@@ -45,7 +45,8 @@ public class UpdateEncaminhamentoQualidadeDeVidaCommandHandler : IRequestHandler
 
         var laudos = _context.Laudos.Where(x => verificaAlunos.Contains(x.Aluno.Id)).Include(i => i.QualidadeDeVida).Where(x => x.QualidadeDeVida != null)
             .Include(a => a.Aluno)
-            .AsNoTracking();
+            .AsNoTracking()
+            .OrderBy(t => t.QualidadeDeVida!.Id);
 
         int cont = 0;
         decimal quadrante1;
@@ -99,6 +100,8 @@ public class UpdateEncaminhamentoQualidadeDeVidaCommandHandler : IRequestHandler
                 }
             }
 
+            cont = 0;
+
             var entity = await _context.QualidadeDeVidas
                 .FindAsync([laudo.QualidadeDeVida.Id], cancellationToken);
 
@@ -106,9 +109,10 @@ public class UpdateEncaminhamentoQualidadeDeVidaCommandHandler : IRequestHandler
 
             entity.Encaminhamentos = string.Join(",", encaminhamento); ;
 
-            var final = await _context.SaveChangesAsync(cancellationToken);
+            await _context.SaveChangesAsync(cancellationToken);
 
-            return final == 1;
+            encaminhamento = new List<int>();
+            //return final == 1;
         }
 
         return false;
