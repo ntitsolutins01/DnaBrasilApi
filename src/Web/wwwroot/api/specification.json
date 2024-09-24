@@ -3934,6 +3934,50 @@
         }
       }
     },
+    "/api/Laudos/EncaminhamentoConsumoAlimentar/{alunoId}": {
+      "put": {
+        "tags": [
+          "Laudos"
+        ],
+        "operationId": "UpdateEncaminhamentoConsumoAlimentar",
+        "parameters": [
+          {
+            "name": "alunoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEncaminhamentoConsumoAlimentarCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Laudos/LaudoByAluno/{Id}": {
       "get": {
         "tags": [
