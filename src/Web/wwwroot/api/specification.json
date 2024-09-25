@@ -1808,9 +1808,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Cursos/Curso/{id}": {
+      },
       "get": {
         "tags": [
           "Cursos"
@@ -1842,7 +1840,7 @@
         }
       }
     },
-    "/api/Cursos/Curso/TipoCurso/{tipoCursoId}": {
+    "/api/Cursos/TipoCurso/{tipoCursoId}": {
       "get": {
         "tags": [
           "Cursos"
@@ -3934,50 +3932,6 @@
         }
       }
     },
-    "/api/Laudos/EncaminhamentoConsumoAlimentar/{alunoId}": {
-      "put": {
-        "tags": [
-          "Laudos"
-        ],
-        "operationId": "UpdateEncaminhamentoConsumoAlimentar",
-        "parameters": [
-          {
-            "name": "alunoId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "x-position": 1
-          }
-        ],
-        "requestBody": {
-          "x-name": "command",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateEncaminhamentoConsumoAlimentarCommand"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 2
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "boolean"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/Laudos/LaudoByAluno/{Id}": {
       "get": {
         "tags": [
@@ -4971,6 +4925,41 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ModuloEadDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ModulosEad/Curso/{cursoId}": {
+      "get": {
+        "tags": [
+          "ModulosEad"
+        ],
+        "operationId": "GetModulosEadAllByCursoId",
+        "parameters": [
+          {
+            "name": "cursoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ModuloEadDto"
+                  }
                 }
               }
             }
@@ -10724,6 +10713,14 @@
               "aluno": {
                 "$ref": "#/components/schemas/Aluno"
               },
+              "encaminhamento": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Encaminhamento"
+                  }
+                ]
+              },
               "resposta": {
                 "type": "string"
               },
@@ -10821,7 +10818,7 @@
           "nomeProfessor": {
             "type": "string"
           },
-          "nomeModuloEad": {
+          "tituloModuloEad": {
             "type": "string"
           },
           "titulo": {
@@ -11565,9 +11562,6 @@
               },
               "status": {
                 "type": "boolean"
-              },
-              "nome": {
-                "type": "string"
               }
             }
           }
@@ -14160,10 +14154,6 @@
             "type": "integer",
             "format": "int32"
           },
-          "cursoId": {
-            "type": "integer",
-            "format": "int32"
-          },
           "titulo": {
             "type": "string"
           },
@@ -14174,7 +14164,11 @@
           "status": {
             "type": "boolean"
           },
-          "nomeTipoCurso": {
+          "cursoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tituloCurso": {
             "type": "string"
           }
         }
@@ -14192,9 +14186,6 @@
             "format": "int32"
           },
           "titulo": {
-            "type": "string"
-          },
-          "nome": {
             "type": "string"
           },
           "descricao": {

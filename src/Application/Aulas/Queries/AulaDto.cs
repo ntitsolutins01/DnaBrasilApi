@@ -8,7 +8,7 @@ public class AulaDto
     public required int Id { get; set; }
     public required int CargaHoraria { get; set; }
     public required string NomeProfessor { get; set; }
-    public required string NomeModuloEad { get; set; }
+    public required string TituloModuloEad { get; set; }
     public required string Titulo { get; set; }
     public string? Descricao { get; set; }
     public bool Status { get; set; }
@@ -19,7 +19,7 @@ public class AulaDto
         {
             CreateMap<Aula, AulaDto>()
                 .ForMember(dest => dest.NomeProfessor, opt => opt.MapFrom(src => src.Professor.Nome))
-                .ForMember(dest => dest.NomeModuloEad, opt => opt.MapFrom(src => src.ModuloEad.Nome));
+                .ForMember(dest => dest.TituloModuloEad, opt => opt.MapFrom(src => src.ModuloEad.Titulo));
         }
     }
 }
