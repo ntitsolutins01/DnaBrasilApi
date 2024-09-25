@@ -18,6 +18,7 @@ public class GetModulosEadAllQueryHandler : IRequestHandler<GetModulosEadAllQuer
     public async Task<List<ModuloEadDto>> Handle(GetModulosEadAllQuery request, CancellationToken cancellationToken)
     {
         var result = await _context.ModulosEad
+            .Include(i=>i.Curso.TipoCurso)
             .AsNoTracking()
             .ProjectTo<ModuloEadDto>(_mapper.ConfigurationProvider)
             .OrderBy(t => t.Id)

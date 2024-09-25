@@ -4,15 +4,15 @@ namespace DnaBrasilApi.Application.Cursos.Queries;
 
 public class CursoDto
 {
-    public required int Id { get; set; }
-    public required int TipoCursoId { get; set; }
-    public required string TituloTipoCurso { get; set; }
-    public required int UsuarioId { get; set; }
-    public required string NomeProfissional { get; set; }
-    public required string Titulo { get; set; }
-    public required int CargaHoraria { get; set; }
-    public string? Descricao { get; set; }
-    public bool Status { get; set; }
+    public required int Id { get; init; }
+    public required int TipoCursoId { get; init; }
+    public required string TituloTipoCurso { get; init; }
+    public required int UsuarioId { get; init; }
+    public required string NomeProfissional { get; init; }
+    public required string Titulo { get; init; }
+    public required int CargaHoraria { get; init; }
+    public string? Descricao { get; init; }
+    public bool Status { get; init; }
 
     private class Mapping : Profile
     {
