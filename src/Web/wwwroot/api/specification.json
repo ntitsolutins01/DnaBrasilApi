@@ -1814,9 +1814,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Cursos/Curso/{id}": {
+      },
       "get": {
         "tags": [
           "Cursos"
@@ -1848,7 +1846,7 @@
         }
       }
     },
-    "/api/Cursos/Curso/TipoCurso/{tipoCursoId}": {
+    "/api/Cursos/TipoCurso/{tipoCursoId}": {
       "get": {
         "tags": [
           "Cursos"
@@ -5012,6 +5010,41 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ModuloEadDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ModulosEad/Curso/{cursoId}": {
+      "get": {
+        "tags": [
+          "ModulosEad"
+        ],
+        "operationId": "GetModulosEadAllByCursoId",
+        "parameters": [
+          {
+            "name": "cursoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ModuloEadDto"
+                  }
                 }
               }
             }
@@ -10510,6 +10543,14 @@
                   }
                 ]
               },
+              "dependencia": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Dependencia"
+                  }
+                ]
+              },
               "aluno": {
                 "$ref": "#/components/schemas/Aluno"
               },
@@ -10810,6 +10851,83 @@
           }
         ]
       },
+      "Dependencia": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "doencas": {
+                "type": "string",
+                "nullable": true
+              },
+              "nacionalidade": {
+                "type": "string",
+                "nullable": true
+              },
+              "naturalidade": {
+                "type": "string",
+                "nullable": true
+              },
+              "nomeEscola": {
+                "type": "string",
+                "nullable": true
+              },
+              "tipoEscola": {
+                "type": "string",
+                "nullable": true
+              },
+              "tipoEscolaridade": {
+                "type": "string",
+                "nullable": true
+              },
+              "turno": {
+                "type": "string",
+                "nullable": true
+              },
+              "serie": {
+                "type": "string",
+                "nullable": true
+              },
+              "ano": {
+                "type": "string",
+                "nullable": true
+              },
+              "turma": {
+                "type": "string",
+                "nullable": true
+              },
+              "termoCompromisso": {
+                "type": "boolean",
+                "nullable": true
+              },
+              "autorizacaoUsoImagemAudio": {
+                "type": "boolean",
+                "nullable": true
+              },
+              "autorizacaoUsoIndicadores": {
+                "type": "boolean",
+                "nullable": true
+              },
+              "autorizacaoSaida": {
+                "type": "boolean",
+                "nullable": true
+              },
+              "aluno": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Aluno"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
       "AlunosFilterDto": {
         "type": "object",
         "additionalProperties": false,
@@ -10870,7 +10988,7 @@
           "nomeProfessor": {
             "type": "string"
           },
-          "nomeModuloEad": {
+          "tituloModuloEad": {
             "type": "string"
           },
           "titulo": {
@@ -11601,9 +11719,6 @@
               },
               "status": {
                 "type": "boolean"
-              },
-              "nome": {
-                "type": "string"
               }
             }
           }
@@ -12862,6 +12977,10 @@
           },
           "aluno": {
             "$ref": "#/components/schemas/AlunoDto"
+          },
+          "alunoId": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },
@@ -13605,6 +13724,32 @@
             "type": "string",
             "format": "date-time",
             "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "qrCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "estatura": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "massa": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "byteImage": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeFoto": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -14207,10 +14352,6 @@
             "type": "integer",
             "format": "int32"
           },
-          "cursoId": {
-            "type": "integer",
-            "format": "int32"
-          },
           "titulo": {
             "type": "string"
           },
@@ -14221,7 +14362,11 @@
           "status": {
             "type": "boolean"
           },
-          "nomeTipoCurso": {
+          "cursoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tituloCurso": {
             "type": "string"
           }
         }
@@ -14239,9 +14384,6 @@
             "format": "int32"
           },
           "titulo": {
-            "type": "string"
-          },
-          "nome": {
             "type": "string"
           },
           "descricao": {
