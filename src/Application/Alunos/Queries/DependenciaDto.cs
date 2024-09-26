@@ -19,11 +19,13 @@ public class DependenciaDto
     public bool? AutorizacaoUsoIndicadores { get; set; }
     public bool? AutorizacaoSaida { get; set; } = false;
     public required AlunoDto Aluno { get; set; }
+    public int AlunoId { get; set; }
     private class Mapping : Profile
     {
         public Mapping()
         {
-            CreateMap<Dependencia, DependenciaDto>();
+            CreateMap<Dependencia, DependenciaDto>()
+                .ForMember(dest => dest.AlunoId, opt => opt.MapFrom(src => src.Aluno!.Id));
         }
     }
 }
