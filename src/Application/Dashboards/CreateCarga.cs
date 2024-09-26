@@ -27,6 +27,7 @@ public class CreateCargaCommandHandler : IRequestHandler<CreateCargaCommand, int
             .Include(i => i.TalentoEsportivo)
             .Include(i => i.Saude)
             .Include(i => i.SaudeBucal)
+            .Include(i => i.Dependencia)
             .AsNoTracking()
             .ToListAsync(cancellationToken);
 
