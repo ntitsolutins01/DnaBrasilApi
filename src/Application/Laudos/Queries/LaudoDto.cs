@@ -4,6 +4,7 @@ namespace DnaBrasilApi.Application.Laudos.Queries;
 public class LaudoDto
 {
     public int? Id { get; init; }
+    //public int? DependenciaId { get; init; }
     public int? TalentoEsportivoId { get; init; }
     public int? VocacionalId { get; init; }
     public int? QualidadeDeVidaId { get; init; }
@@ -26,7 +27,9 @@ public class LaudoDto
     public string? NomeFoto { get; init; }
     //public string? Serie { get; init; }
     //public string? Turma { get; init; }
-    //public int? DependenciaId { get; init; }
+    //public int? MunicipioId { get; init; }
+    //public string? NomeMunicipio { get; init; }
+
 
     private class Mapping : Profile
     {
@@ -46,7 +49,9 @@ public class LaudoDto
                 .ForMember(dest => dest.Estatura, opt => opt.MapFrom(src => src.Saude!.Altura))
                 .ForMember(dest => dest.Massa, opt => opt.MapFrom(src => src.Saude!.Massa))
                 .ForMember(dest => dest.ByteImage, opt => opt.MapFrom(src => src.Aluno.ByteImage))
-                .ForMember(dest => dest.NomeFoto, opt => opt.MapFrom(src => src.Aluno.NomeFoto));
+                .ForMember(dest => dest.NomeFoto, opt => opt.MapFrom(src => src.Aluno.NomeFoto))
+                .ForMember(dest => dest.LocalidadeId, opt => opt.MapFrom(src => src.Aluno.Localidade.Id))
+                .ForMember(dest => dest.NomeLocalidade, opt => opt.MapFrom(src => src.Aluno.Localidade.Nome));
             //.ForMember(dest => dest.DependenciaId, opt => opt.MapFrom(src => src.Dependencia!.Id))
             //.ForMember(dest => dest.Serie, opt => opt.MapFrom(src => src.Dependencia!.Serie))
             //.ForMember(dest => dest.Turma, opt => opt.MapFrom(src => src.Dependencia!.Turma));
