@@ -10543,14 +10543,6 @@
                   }
                 ]
               },
-              "dependencia": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/Dependencia"
-                  }
-                ]
-              },
               "aluno": {
                 "$ref": "#/components/schemas/Aluno"
               },
@@ -10851,83 +10843,6 @@
           }
         ]
       },
-      "Dependencia": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BaseAuditableEntity"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "doencas": {
-                "type": "string",
-                "nullable": true
-              },
-              "nacionalidade": {
-                "type": "string",
-                "nullable": true
-              },
-              "naturalidade": {
-                "type": "string",
-                "nullable": true
-              },
-              "nomeEscola": {
-                "type": "string",
-                "nullable": true
-              },
-              "tipoEscola": {
-                "type": "string",
-                "nullable": true
-              },
-              "tipoEscolaridade": {
-                "type": "string",
-                "nullable": true
-              },
-              "turno": {
-                "type": "string",
-                "nullable": true
-              },
-              "serie": {
-                "type": "string",
-                "nullable": true
-              },
-              "ano": {
-                "type": "string",
-                "nullable": true
-              },
-              "turma": {
-                "type": "string",
-                "nullable": true
-              },
-              "termoCompromisso": {
-                "type": "boolean",
-                "nullable": true
-              },
-              "autorizacaoUsoImagemAudio": {
-                "type": "boolean",
-                "nullable": true
-              },
-              "autorizacaoUsoIndicadores": {
-                "type": "boolean",
-                "nullable": true
-              },
-              "autorizacaoSaida": {
-                "type": "boolean",
-                "nullable": true
-              },
-              "aluno": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/Aluno"
-                  }
-                ]
-              }
-            }
-          }
-        ]
-      },
       "AlunosFilterDto": {
         "type": "object",
         "additionalProperties": false,
@@ -10988,6 +10903,10 @@
           "nomeProfessor": {
             "type": "string"
           },
+          "professorId": {
+            "type": "integer",
+            "format": "int32"
+          },
           "tituloModuloEad": {
             "type": "string"
           },
@@ -11036,6 +10955,10 @@
         "additionalProperties": false,
         "properties": {
           "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "professorId": {
             "type": "integer",
             "format": "int32"
           },
@@ -12099,11 +12022,11 @@
           "tituloTipoCurso": {
             "type": "string"
           },
-          "usuarioId": {
+          "coordenadorId": {
             "type": "integer",
             "format": "int32"
           },
-          "nomeProfissional": {
+          "nomeCoordenador": {
             "type": "string"
           },
           "titulo": {
@@ -12130,7 +12053,7 @@
             "type": "integer",
             "format": "int32"
           },
-          "usuarioId": {
+          "coordenadorId": {
             "type": "integer",
             "format": "int32"
           },
@@ -13692,6 +13615,11 @@
             "format": "int32",
             "nullable": true
           },
+          "localidadeId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
           "alunoId": {
             "type": "integer",
             "format": "int32",
@@ -13699,11 +13627,6 @@
           },
           "nomeAluno": {
             "type": "string"
-          },
-          "localidadeId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
           },
           "nomeLocalidade": {
             "type": "string"
@@ -13731,6 +13654,7 @@
           },
           "qrCode": {
             "type": "string",
+            "format": "byte",
             "nullable": true
           },
           "estatura": {
@@ -13745,9 +13669,14 @@
           },
           "byteImage": {
             "type": "string",
+            "format": "byte",
             "nullable": true
           },
           "nomeFoto": {
+            "type": "string",
+            "nullable": true
+          },
+          "modalidade": {
             "type": "string",
             "nullable": true
           }
