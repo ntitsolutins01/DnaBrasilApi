@@ -8,7 +8,10 @@ public class LaudoDto
     #region Ids
 
     //public int? DependenciaId { get; init; }
+    #region Talento Esportivo
     public int? TalentoEsportivoId { get; init; }
+
+    #endregion
     public int? VocacionalId { get; init; }
     public int? QualidadeDeVidaId { get; init; }
     public int? SaudeId { get; init; }
