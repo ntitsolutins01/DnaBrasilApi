@@ -9,6 +9,7 @@ public record UpdateCursoCommand : IRequest <bool>
     public required int CargaHoraria { get; init; }
     public string? Descricao { get; init; }
     public bool Status { get; init; }
+    public required int CoordenadorId { get; init; }
 }
 
 public class UpdateCursoCommandHandler : IRequestHandler<UpdateCursoCommand, bool>
@@ -27,10 +28,16 @@ public class UpdateCursoCommandHandler : IRequestHandler<UpdateCursoCommand, boo
 
         Guard.Against.NotFound(request.Id, entity);
 
+        var coordenador = await _context.Usuarios
+            .FindAsync([request.CoordenadorId], cancellationToken);
+
+        Guard.Against.NotFound(request.CoordenadorId, coordenador);
+
         entity.Titulo = request.Titulo;
         entity.CargaHoraria = request.CargaHoraria;
         entity.Descricao = request.Descricao;
         entity.Status = request.Status;
+        entity.Usuario = coordenador;
 
         var result = await _context.SaveChangesAsync(cancellationToken);
 
