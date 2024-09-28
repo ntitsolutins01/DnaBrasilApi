@@ -10873,6 +10873,10 @@
             "type": "integer",
             "format": "int32"
           },
+          "professorId": {
+            "type": "integer",
+            "format": "int32"
+          },
           "cargaHoraria": {
             "type": "integer",
             "format": "int32"
@@ -13528,6 +13532,11 @@
             "format": "int32",
             "nullable": true
           },
+          "localidadeId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
           "alunoId": {
             "type": "integer",
             "format": "int32",
@@ -13535,11 +13544,6 @@
           },
           "nomeAluno": {
             "type": "string"
-          },
-          "localidadeId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
           },
           "nomeLocalidade": {
             "type": "string"
@@ -13567,6 +13571,7 @@
           },
           "qrCode": {
             "type": "string",
+            "format": "byte",
             "nullable": true
           },
           "estatura": {
@@ -13581,9 +13586,14 @@
           },
           "byteImage": {
             "type": "string",
+            "format": "byte",
             "nullable": true
           },
           "nomeFoto": {
+            "type": "string",
+            "nullable": true
+          },
+          "modalidade": {
             "type": "string",
             "nullable": true
           }

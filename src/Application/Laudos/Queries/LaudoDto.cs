@@ -4,6 +4,9 @@ namespace DnaBrasilApi.Application.Laudos.Queries;
 public class LaudoDto
 {
     public int? Id { get; init; }
+
+    #region Ids
+
     //public int? DependenciaId { get; init; }
     public int? TalentoEsportivoId { get; init; }
     public int? VocacionalId { get; init; }
@@ -11,25 +14,38 @@ public class LaudoDto
     public int? SaudeId { get; init; }
     public int? ConsumoAlimentarId { get; init; }
     public int? SaudeBucalId { get; init; }
-    public int? AlunoId { get; init; }
-    public required string NomeAluno { get; init; }
     public int? LocalidadeId { get; init; }
+    public int? AlunoId { get; init; }
+
+    #endregion
+
+    #region Cabeçalho
+
+    public required string NomeAluno { get; init; }
     public required string NomeLocalidade { get; init; }
     public string? MunicipioEstado { get; init; }
     public string? Sexo { get; init; }
     public string? StatusLaudo { get; init; }
     public DateTime? DtNascimento { get; init; }
     public string? Email { get; init; }
-    public string? QrCode { get; init; }
+    public byte[]? QrCode { get; init; }
     public decimal? Estatura { get; init; }
     public decimal? Massa { get; init; }
-    public string? ByteImage { get; init; }
+    public byte[]? ByteImage { get; init; }
     public string? NomeFoto { get; init; }
+    public string? Modalidade { get; init; }
     //public string? Serie { get; init; }
     //public string? Turma { get; init; }
     //public int? MunicipioId { get; init; }
     //public string? NomeMunicipio { get; init; }
 
+    #endregion
+
+    #region Vocacional
+
+    
+
+    #endregion
 
     private class Mapping : Profile
     {
@@ -51,7 +67,8 @@ public class LaudoDto
                 .ForMember(dest => dest.ByteImage, opt => opt.MapFrom(src => src.Aluno.ByteImage))
                 .ForMember(dest => dest.NomeFoto, opt => opt.MapFrom(src => src.Aluno.NomeFoto))
                 .ForMember(dest => dest.LocalidadeId, opt => opt.MapFrom(src => src.Aluno.Localidade.Id))
-                .ForMember(dest => dest.NomeLocalidade, opt => opt.MapFrom(src => src.Aluno.Localidade.Nome));
+                .ForMember(dest => dest.NomeLocalidade, opt => opt.MapFrom(src => src.Aluno.Localidade.Nome))
+                .ForMember(dest => dest.Modalidade, opt => opt.MapFrom(src => src.TalentoEsportivo!.EncaminhamentoTexo));
             //.ForMember(dest => dest.DependenciaId, opt => opt.MapFrom(src => src.Dependencia!.Id))
             //.ForMember(dest => dest.Serie, opt => opt.MapFrom(src => src.Dependencia!.Serie))
             //.ForMember(dest => dest.Turma, opt => opt.MapFrom(src => src.Dependencia!.Turma));
