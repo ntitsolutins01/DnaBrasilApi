@@ -11950,11 +11950,11 @@
           "tituloTipoCurso": {
             "type": "string"
           },
-          "usuarioId": {
+          "coordenadorId": {
             "type": "integer",
             "format": "int32"
           },
-          "nomeProfissional": {
+          "nomeCoordenador": {
             "type": "string"
           },
           "titulo": {
@@ -11981,7 +11981,7 @@
             "type": "integer",
             "format": "int32"
           },
-          "usuarioId": {
+          "coordenadorId": {
             "type": "integer",
             "format": "int32"
           },
