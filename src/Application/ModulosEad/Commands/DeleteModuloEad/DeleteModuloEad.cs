@@ -1,4 +1,5 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Domain.GuardClauses;
 
 namespace DnaBrasilApi.Application.ModulosEad.Commands.DeleteModuloEad;
 public record DeleteModuloEadCommand(int Id) : IRequest<bool>;
@@ -18,6 +19,10 @@ public class DeleteModuloEadCommandHandler : IRequestHandler<DeleteModuloEadComm
             .FindAsync(new object[] { request.Id }, cancellationToken);
 
         Guard.Against.NotFound(request.Id, entity);
+
+        var possuiAulas = _context.Aulas.Any(x => x.ModuloEad != null && x.ModuloEad.Id == request.Id);
+
+        Guard.Against.PossuiAulas(possuiAulas);
 
         _context.ModulosEad.Remove(entity);
 

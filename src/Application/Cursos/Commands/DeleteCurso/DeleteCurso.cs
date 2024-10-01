@@ -1,4 +1,5 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Domain.GuardClauses;
 
 namespace DnaBrasilApi.Application.Cursos.Commands.DeleteCurso;
 public record DeleteCursoCommand(int Id) : IRequest<bool>;
@@ -18,6 +19,10 @@ public class DeleteCursoCommandHandler : IRequestHandler<DeleteCursoCommand, boo
             .FindAsync(new object[] { request.Id }, cancellationToken);
 
         Guard.Against.NotFound(request.Id, entity);
+
+        var possuiModulosEad = _context.ModulosEad.Any(x => x.Curso != null && x.Curso.Id == request.Id);
+
+        Guard.Against.PossuiModulosEad(possuiModulosEad);
 
         _context.Cursos.Remove(entity);
 

@@ -12094,6 +12094,10 @@
           },
           "status": {
             "type": "boolean"
+          },
+          "coordenadorId": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },
