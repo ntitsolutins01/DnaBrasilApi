@@ -8,6 +8,7 @@ public class SaudeBucal : BaseAuditableEntity
 {
     public required Profissional Profissional { get; set; }
     public required Aluno Aluno { get; set; }
+    public Encaminhamento? Encaminhamento { get; set; }
     public required string Resposta { get; set; }
     public string? StatusSaudeBucal { get; set; }
 }
