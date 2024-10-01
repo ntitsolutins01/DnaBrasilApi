@@ -1,4 +1,5 @@
-﻿using DnaBrasilApi.Application.Laudos.Commands.CreateLaudo;
+﻿using DnaBrasilApi.Application.Dashboards.Queries.GetVocacionalAlunos;
+using DnaBrasilApi.Application.Laudos.Commands.CreateLaudo;
 using DnaBrasilApi.Application.Laudos.Commands.CreateSaude;
 using DnaBrasilApi.Application.Laudos.Commands.CreateVocacional;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoAlunos;
@@ -8,6 +9,7 @@ using DnaBrasilApi.Application.Laudos.Queries;
 using DnaBrasilApi.Application.Laudos.Queries.GetLaudosAll;
 using DnaBrasilApi.Application.Laudos.Queries.GetLaudoByAluno;
 using DnaBrasilApi.Application.Laudos.Queries.GetSaudeByAluno;
+using DnaBrasilApi.Application.Dashboards.Queries;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -51,6 +53,8 @@ public class Laudos : EndpointGroupBase
     }
     public async Task<LaudoDto> GetLaudoByAluno(ISender sender, int Id)
     {
-        return await sender.Send(new GetLaudoByAlunoQuery(Id));
+        var laudo = await sender.Send(new GetLaudoByAlunoQuery(Id));
+
+        return laudo;
     }
 }

@@ -10747,6 +10747,14 @@
               "aluno": {
                 "$ref": "#/components/schemas/Aluno"
               },
+              "encaminhamento": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Encaminhamento"
+                  }
+                ]
+              },
               "resposta": {
                 "type": "string"
               },
@@ -13503,8 +13511,7 @@
         "properties": {
           "id": {
             "type": "integer",
-            "format": "int32",
-            "nullable": true
+            "format": "int32"
           },
           "talentoEsportivoId": {
             "type": "integer",
@@ -13542,6 +13549,26 @@
             "nullable": true
           },
           "alunoId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "encaminhamentoVocacionalId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "encaminhamentoQualidadeVidaId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "encaminhamentoConsumoAlimentarId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "encaminhamentoSaudeBucalId": {
             "type": "integer",
             "format": "int32",
             "nullable": true
@@ -13598,6 +13625,44 @@
             "nullable": true
           },
           "modalidade": {
+            "type": "string",
+            "nullable": true
+          },
+          "velocidade": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "impulsao": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "flexibilidade": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "preensaoManual": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "aerobica": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "abdominal": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "imcEsporte": {
+            "type": "string",
+            "nullable": true
+          },
+          "imcSaude": {
             "type": "string",
             "nullable": true
           }
