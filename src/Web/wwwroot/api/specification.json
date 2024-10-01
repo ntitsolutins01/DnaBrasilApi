@@ -3149,6 +3149,41 @@
         }
       }
     },
+    "/api/Encaminhamentos/Encaminhamento/TipoLaudo/{id}": {
+      "get": {
+        "tags": [
+          "Encaminhamentos"
+        ],
+        "operationId": "GetEncaminhamentosByTipoLaudoId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EncaminhamentoDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Escolaridades": {
       "get": {
         "tags": [
@@ -3794,12 +3829,7 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
+        }
       },
       "get": {
         "tags": [
@@ -3820,12 +3850,7 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
+        }
       }
     },
     "/api/Laudos/EncaminhamentoAlunos": {
@@ -3857,12 +3882,7 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
+        }
       }
     },
     "/api/Laudos/EncaminhamentoVocacional/{alunoId}": {
@@ -3906,12 +3926,7 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
+        }
       }
     },
     "/api/Laudos/EncaminhamentoQualidadeDeVida/{alunoId}": {
@@ -3955,12 +3970,7 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
+        }
       }
     },
     "/api/Laudos/EncaminhamentoConsumoAlimentar/{alunoId}": {
@@ -4004,12 +4014,7 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
+        }
       }
     },
     "/api/Laudos/LaudoByAluno/{Id}": {
@@ -4041,12 +4046,7 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
+        }
       }
     },
     "/api/LinhasAcoes": {

@@ -15,7 +15,7 @@ public class Laudos : EndpointGroupBase
     public override void Map(WebApplication app)
     {
         app.MapGroup(this)
-            .RequireAuthorization()
+            //.RequireAuthorization()
             .MapPost(CreateLaudo)
             .MapPut(UpdateEncaminhamentoAlunos, "EncaminhamentoAlunos")
             .MapPut(UpdateEncaminhamentoVocacional, "EncaminhamentoVocacional/{alunoId}")
