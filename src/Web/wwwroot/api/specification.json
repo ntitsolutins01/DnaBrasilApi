@@ -4017,7 +4017,6 @@
         }
       }
     },
-    
     "/api/Laudos/Laudo/Aluno/{id}": {
       "get": {
         "tags": [
