@@ -7,7 +7,6 @@ public class LaudoDto
 
     #region Ids
 
-    //public int? DependenciaId { get; init; }
     public int? TalentoEsportivoId { get; init; }
     public int? VocacionalId { get; init; }
     public int? QualidadeDeVidaId { get; init; }
@@ -20,6 +19,7 @@ public class LaudoDto
     public int? EncaminhamentoQualidadeVidaId { get; init; }
     public int? EncaminhamentoConsumoAlimentarId { get; init; }
     public int? EncaminhamentoSaudeBucalId { get; init; }
+    public int? EncaminhamentoTalentoEsportivoId { get; init; }
 
     #endregion
 
@@ -42,18 +42,6 @@ public class LaudoDto
     //public string? Turma { get; init; }
     //public int? MunicipioId { get; init; }
     //public string? NomeMunicipio { get; init; }
-
-    #endregion
-
-    #region Talento Esportivo
-
-    public decimal? Velocidade { get; init; }
-    public decimal? Impulsao { get; init; }
-    public decimal? Flexibilidade { get; init; }
-    public decimal? PreensaoManual { get; init; }
-    public decimal? Aerobica { get; init; } // Vo2
-    public decimal? Abdominal { get; init; }
-    public string? ImcEsporte { get; init; }
 
     #endregion
 
@@ -84,17 +72,11 @@ public class LaudoDto
                 .ForMember(dest => dest.NomeFoto, opt => opt.MapFrom(src => src.Aluno.NomeFoto))
                 .ForMember(dest => dest.LocalidadeId, opt => opt.MapFrom(src => src.Aluno.Localidade.Id))
                 .ForMember(dest => dest.NomeLocalidade, opt => opt.MapFrom(src => src.Aluno.Localidade.Nome))
-                .ForMember(dest => dest.Velocidade, opt => opt.MapFrom(src => src.TalentoEsportivo!.Velocidade))
-                .ForMember(dest => dest.Impulsao, opt => opt.MapFrom(src => src.TalentoEsportivo!.ImpulsaoHorizontal))
-                .ForMember(dest => dest.Flexibilidade, opt => opt.MapFrom(src => src.TalentoEsportivo!.Flexibilidade))
-                .ForMember(dest => dest.PreensaoManual, opt => opt.MapFrom(src => src.TalentoEsportivo!.PreensaoManual))
-                .ForMember(dest => dest.Aerobica, opt => opt.MapFrom(src => src.TalentoEsportivo!.Vo2Max))
-                .ForMember(dest => dest.Abdominal, opt => opt.MapFrom(src => src.TalentoEsportivo!.Abdominal))
-                .ForMember(dest => dest.ImcEsporte, opt => opt.MapFrom(src => GetImc(src.Saude!.Massa, src.Saude!.Altura)))
                 .ForMember(dest => dest.EncaminhamentoVocacionalId, opt => opt.MapFrom(src => src.Vocacional!.Encaminhamento!.Id))
                 .ForMember(dest => dest.EncaminhamentoQualidadeVidaId, opt => opt.MapFrom(src => src.QualidadeDeVida!.Encaminhamentos!))
                 .ForMember(dest => dest.EncaminhamentoConsumoAlimentarId, opt => opt.MapFrom(src => src.ConsumoAlimentar!.Encaminhamento!.Id))
-                //.ForMember(dest => dest.EncaminhamentoConsumoAlimentarId, opt => opt.MapFrom(src => src.SaudeBucal!.!))
+                .ForMember(dest => dest.EncaminhamentoConsumoAlimentarId, opt => opt.MapFrom(src => src.SaudeBucal!.Encaminhamento!.Id))
+                .ForMember(dest => dest.EncaminhamentoTalentoEsportivoId, opt => opt.MapFrom(src => src.TalentoEsportivo!.Encaminhamento!.Id))
                 .ForMember(dest => dest.ImcSaude, opt => opt.MapFrom(src => GetImc(src.Saude!.Massa, src.Saude!.Altura)));
             //.ForMember(dest => dest.DependenciaId, opt => opt.MapFrom(src => src.Dependencia!.Id))
             //.ForMember(dest => dest.Serie, opt => opt.MapFrom(src => src.Dependencia!.Serie))

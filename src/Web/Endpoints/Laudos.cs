@@ -1,15 +1,12 @@
-﻿using DnaBrasilApi.Application.Dashboards.Queries.GetVocacionalAlunos;
+﻿using DnaBrasilApi.Application.Encaminhamentos.Queries;
 using DnaBrasilApi.Application.Laudos.Commands.CreateLaudo;
-using DnaBrasilApi.Application.Laudos.Commands.CreateSaude;
-using DnaBrasilApi.Application.Laudos.Commands.CreateVocacional;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoAlunos;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoVocacional;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateQualidadeVida;
 using DnaBrasilApi.Application.Laudos.Queries;
 using DnaBrasilApi.Application.Laudos.Queries.GetLaudosAll;
 using DnaBrasilApi.Application.Laudos.Queries.GetLaudoByAluno;
-using DnaBrasilApi.Application.Laudos.Queries.GetSaudeByAluno;
-using DnaBrasilApi.Application.Dashboards.Queries;
+using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoBySaudeId;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -24,7 +21,8 @@ public class Laudos : EndpointGroupBase
             .MapPut(UpdateEncaminhamentoVocacional, "EncaminhamentoVocacional/{alunoId}")
             .MapPut(UpdateEncaminhamentoQualidadeDeVida, "EncaminhamentoQualidadeDeVida/{alunoId}")
             .MapGet(GetLaudosAll)
-            .MapGet(GetLaudoByAluno, "LaudoByAluno/{Id}");
+            .MapGet(GetLaudoByAluno, "Laudo/Aluno/{id}")
+            .MapGet(GetEncaminhamentoBySaudeId, "EncaminhamentoSaude/{id}");
     }
     public async Task<int> CreateLaudo(ISender sender, CreateLaudoCommand command)
     {
@@ -51,10 +49,13 @@ public class Laudos : EndpointGroupBase
     {
         return await sender.Send(new GetLaudosAllQuery());
     }
-    public async Task<LaudoDto> GetLaudoByAluno(ISender sender, int Id)
+    public async Task<LaudoDto> GetLaudoByAluno(ISender sender, int id)
     {
-        var laudo = await sender.Send(new GetLaudoByAlunoQuery(Id));
+        var laudo = await sender.Send(new GetLaudoByAlunoQuery(id));
 
         return laudo;
+    }public async Task<EncaminhamentoDto> GetEncaminhamentoBySaudeId(ISender sender, int id)
+    {
+        return await sender.Send(new GetEncaminhamentoBySaudeIdQuery(id));
     }
 }
