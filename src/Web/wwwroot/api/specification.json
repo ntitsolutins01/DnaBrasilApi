@@ -4017,7 +4017,8 @@
         }
       }
     },
-    "/api/Laudos/LaudoByAluno/{Id}": {
+    
+    "/api/Laudos/Laudo/Aluno/{id}": {
       "get": {
         "tags": [
           "Laudos"
@@ -4025,7 +4026,7 @@
         "operationId": "GetLaudoByAluno",
         "parameters": [
           {
-            "name": "Id",
+            "name": "id",
             "in": "path",
             "required": true,
             "schema": {
@@ -4042,6 +4043,38 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/LaudoDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Laudos/EncaminhamentoSaude/{id}": {
+      "get": {
+        "tags": [
+          "Laudos"
+        ],
+        "operationId": "GetEncaminhamentoBySaudeId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EncaminhamentoDto"
                 }
               }
             }
@@ -13656,6 +13689,11 @@
             "format": "int32",
             "nullable": true
           },
+          "encaminhamentoTalentoEsportivoId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
           "nomeAluno": {
             "type": "string"
           },
@@ -13708,40 +13746,6 @@
             "nullable": true
           },
           "modalidade": {
-            "type": "string",
-            "nullable": true
-          },
-          "velocidade": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "impulsao": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "flexibilidade": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "preensaoManual": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "aerobica": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "abdominal": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "imcEsporte": {
             "type": "string",
             "nullable": true
           },
