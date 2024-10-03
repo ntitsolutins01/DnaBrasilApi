@@ -547,7 +547,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
       }
     },
     "/api/ConfiguracaoSistema/Modulo/{id}": {
@@ -579,7 +584,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
       }
     },
     "/api/ConfiguracaoSistema/Modulo": {
@@ -612,7 +622,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
       }
     },
     "/api/ConfiguracaoSistema/{id}": {
@@ -656,7 +671,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
       },
       "delete": {
         "tags": [
@@ -686,7 +706,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
       }
     },
     "/api/ConfiguracaoSistema/Funcionalidades": {
@@ -709,7 +734,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
       }
     },
     "/api/ConfiguracaoSistema/Funcionalidade/{id}": {
@@ -741,7 +771,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
       },
       "put": {
         "tags": [
@@ -783,7 +818,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
       },
       "delete": {
         "tags": [
@@ -813,7 +853,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
       }
     },
     "/api/ConfiguracaoSistema/Funcionalidade": {
@@ -846,7 +891,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
       }
     },
     "/api/ConsumosAlimentares": {
@@ -896,50 +946,6 @@
                 "schema": {
                   "type": "integer",
                   "format": "int32"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/ConsumosAlimentares/{id}": {
-      "put": {
-        "tags": [
-          "ConsumosAlimentares"
-        ],
-        "operationId": "UpdateConsumoAlimentar",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "x-position": 1
-          }
-        ],
-        "requestBody": {
-          "x-name": "command",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateConsumoAlimentarCommand"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 2
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "boolean"
                 }
               }
             }
@@ -1808,9 +1814,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Cursos/Curso/{id}": {
+      },
       "get": {
         "tags": [
           "Cursos"
@@ -1842,7 +1846,7 @@
         }
       }
     },
-    "/api/Cursos/Curso/TipoCurso/{tipoCursoId}": {
+    "/api/Cursos/TipoCurso/{tipoCursoId}": {
       "get": {
         "tags": [
           "Cursos"
@@ -3145,6 +3149,41 @@
         }
       }
     },
+    "/api/Encaminhamentos/Encaminhamento/TipoLaudo/{id}": {
+      "get": {
+        "tags": [
+          "Encaminhamentos"
+        ],
+        "operationId": "GetEncaminhamentosByTipoLaudoId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EncaminhamentoDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Escolaridades": {
       "get": {
         "tags": [
@@ -3927,6 +3966,114 @@
               "application/json": {
                 "schema": {
                   "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Laudos/EncaminhamentoConsumoAlimentar/{alunoId}": {
+      "put": {
+        "tags": [
+          "Laudos"
+        ],
+        "operationId": "UpdateEncaminhamentoConsumoAlimentar",
+        "parameters": [
+          {
+            "name": "alunoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEncaminhamentoConsumoAlimentarCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Laudos/Laudo/Aluno/{id}": {
+      "get": {
+        "tags": [
+          "Laudos"
+        ],
+        "operationId": "GetLaudoByAluno",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LaudoDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Laudos/EncaminhamentoSaude/{id}": {
+      "get": {
+        "tags": [
+          "Laudos"
+        ],
+        "operationId": "GetEncaminhamentoBySaudeId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EncaminhamentoDto"
                 }
               }
             }
@@ -4895,6 +5042,41 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ModuloEadDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ModulosEad/Curso/{cursoId}": {
+      "get": {
+        "tags": [
+          "ModulosEad"
+        ],
+        "operationId": "GetModulosEadAllByCursoId",
+        "parameters": [
+          {
+            "name": "cursoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ModuloEadDto"
+                  }
                 }
               }
             }
@@ -6277,6 +6459,166 @@
         }
       }
     },
+    "/api/QuestoesEad": {
+      "get": {
+        "tags": [
+          "QuestoesEad"
+        ],
+        "operationId": "GetQuestoesEadAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/QuestaoEadDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "QuestoesEad"
+        ],
+        "operationId": "CreateQuestaoEad",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateQuestaoEadCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/QuestoesEad/{id}": {
+      "put": {
+        "tags": [
+          "QuestoesEad"
+        ],
+        "operationId": "UpdateQuestaoEad",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateQuestaoEadCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "QuestoesEad"
+        ],
+        "operationId": "DeleteQuestaoEad",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/QuestoesEad/QuestaoEad/{id}": {
+      "get": {
+        "tags": [
+          "QuestoesEad"
+        ],
+        "operationId": "GetQuestaoEadById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuestaoEadDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Questionarios": {
       "get": {
         "tags": [
@@ -6625,6 +6967,166 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/RespostaDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/RespostasEad": {
+      "get": {
+        "tags": [
+          "RespostasEad"
+        ],
+        "operationId": "GetRespostasEadAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RespostaEadDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "RespostasEad"
+        ],
+        "operationId": "CreateRespostaEad",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRespostaEadCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/RespostasEad/{id}": {
+      "put": {
+        "tags": [
+          "RespostasEad"
+        ],
+        "operationId": "UpdateRespostaEad",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateRespostaEadCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "RespostasEad"
+        ],
+        "operationId": "DeleteRespostaEad",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/RespostasEad/RespostaEad/{id}": {
+      "get": {
+        "tags": [
+          "RespostasEad"
+        ],
+        "operationId": "GetRespostaEadById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaEadDto"
                 }
               }
             }
@@ -10328,6 +10830,14 @@
               "aluno": {
                 "$ref": "#/components/schemas/Aluno"
               },
+              "encaminhamento": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Encaminhamento"
+                  }
+                ]
+              },
               "resposta": {
                 "type": "string"
               },
@@ -10353,6 +10863,14 @@
               },
               "aluno": {
                 "$ref": "#/components/schemas/Aluno"
+              },
+              "encaminhamento": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Encaminhamento"
+                  }
+                ]
               },
               "resposta": {
                 "type": "string"
@@ -10425,7 +10943,11 @@
           "nomeProfessor": {
             "type": "string"
           },
-          "nomeModuloEad": {
+          "professorId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tituloModuloEad": {
             "type": "string"
           },
           "titulo": {
@@ -10473,6 +10995,10 @@
         "additionalProperties": false,
         "properties": {
           "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "professorId": {
             "type": "integer",
             "format": "int32"
           },
@@ -10915,19 +11441,6 @@
           }
         }
       },
-      "UpdateConsumoAlimentarCommand": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "resposta": {
-            "type": "string"
-          }
-        }
-      },
       "ContratoDto": {
         "type": "object",
         "additionalProperties": false,
@@ -11169,9 +11682,6 @@
               },
               "status": {
                 "type": "boolean"
-              },
-              "nome": {
-                "type": "string"
               }
             }
           }
@@ -11552,11 +12062,11 @@
           "tituloTipoCurso": {
             "type": "string"
           },
-          "usuarioId": {
+          "coordenadorId": {
             "type": "integer",
             "format": "int32"
           },
-          "nomeProfissional": {
+          "nomeCoordenador": {
             "type": "string"
           },
           "titulo": {
@@ -11583,7 +12093,7 @@
             "type": "integer",
             "format": "int32"
           },
-          "usuarioId": {
+          "coordenadorId": {
             "type": "integer",
             "format": "int32"
           },
@@ -11624,6 +12134,10 @@
           },
           "status": {
             "type": "boolean"
+          },
+          "coordenadorId": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },
@@ -12430,6 +12944,10 @@
           },
           "aluno": {
             "$ref": "#/components/schemas/AlunoDto"
+          },
+          "alunoId": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },
@@ -13091,14 +13609,24 @@
           }
         }
       },
+      "UpdateEncaminhamentoConsumoAlimentarCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "alunoId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        }
+      },
       "LaudoDto": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
           "id": {
             "type": "integer",
-            "format": "int32",
-            "nullable": true
+            "format": "int32"
           },
           "talentoEsportivoId": {
             "type": "integer",
@@ -13130,18 +13658,43 @@
             "format": "int32",
             "nullable": true
           },
+          "localidadeId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
           "alunoId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "encaminhamentoVocacionalId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "encaminhamentoQualidadeVidaId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "encaminhamentoConsumoAlimentarId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "encaminhamentoSaudeBucalId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "encaminhamentoTalentoEsportivoId": {
             "type": "integer",
             "format": "int32",
             "nullable": true
           },
           "nomeAluno": {
             "type": "string"
-          },
-          "localidadeId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
           },
           "nomeLocalidade": {
             "type": "string"
@@ -13161,6 +13714,42 @@
           "dtNascimento": {
             "type": "string",
             "format": "date-time",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "qrCode": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "estatura": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "massa": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "byteImage": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "nomeFoto": {
+            "type": "string",
+            "nullable": true
+          },
+          "modalidade": {
+            "type": "string",
+            "nullable": true
+          },
+          "imcSaude": {
+            "type": "string",
             "nullable": true
           }
         }
@@ -13764,10 +14353,6 @@
             "type": "integer",
             "format": "int32"
           },
-          "cursoId": {
-            "type": "integer",
-            "format": "int32"
-          },
           "titulo": {
             "type": "string"
           },
@@ -13778,7 +14363,11 @@
           "status": {
             "type": "boolean"
           },
-          "nomeTipoCurso": {
+          "cursoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tituloCurso": {
             "type": "string"
           }
         }
@@ -13796,9 +14385,6 @@
             "format": "int32"
           },
           "titulo": {
-            "type": "string"
-          },
-          "nome": {
             "type": "string"
           },
           "descricao": {
@@ -14766,6 +15352,120 @@
           }
         }
       },
+      "QuestaoEadDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pergunta": {
+            "type": "string"
+          },
+          "respostas": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/RespostaEadDto"
+            }
+          },
+          "quadrante": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "questao": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "RespostaEadDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "questao": {
+            "$ref": "#/components/schemas/QuestaoEad"
+          },
+          "tipoResposta": {
+            "type": "string"
+          },
+          "tipoAlternativa": {
+            "type": "string",
+            "nullable": true
+          },
+          "resposta": {
+            "type": "string"
+          },
+          "valorPesoResposta": {
+            "type": "number",
+            "format": "decimal"
+          }
+        }
+      },
+      "QuestaoEad": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "enunciado": {
+                "type": "string"
+              },
+              "referencia": {
+                "type": "string"
+              },
+              "questao": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          }
+        ]
+      },
+      "CreateQuestaoEadCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "pergunta": {
+            "type": "string"
+          },
+          "referencia": {
+            "type": "string"
+          },
+          "questao": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "UpdateQuestaoEadCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pergunta": {
+            "type": "string"
+          },
+          "referencia": {
+            "type": "string"
+          },
+          "questao": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
       "CreateQuestionarioCommand": {
         "type": "object",
         "additionalProperties": false,
@@ -14838,6 +15538,54 @@
             "format": "int32"
           },
           "respostaQuestionario": {
+            "type": "string"
+          },
+          "valorPesoResposta": {
+            "type": "number",
+            "format": "decimal"
+          }
+        }
+      },
+      "CreateRespostaEadCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "questaoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tipoResposta": {
+            "type": "string"
+          },
+          "tipoAlternativa": {
+            "type": "string",
+            "nullable": true
+          },
+          "resposta": {
+            "type": "string"
+          },
+          "valorPesoResposta": {
+            "type": "number",
+            "format": "decimal"
+          }
+        }
+      },
+      "UpdateRespostaEadCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tipoResposta": {
+            "type": "string"
+          },
+          "tipoAlternativa": {
+            "type": "string",
+            "nullable": true
+          },
+          "resposta": {
             "type": "string"
           },
           "valorPesoResposta": {

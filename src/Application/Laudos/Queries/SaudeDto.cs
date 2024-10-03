@@ -10,6 +10,8 @@ public class SaudeDto
     public decimal? Massa { get; set; }
     public decimal? Envergadura { get; set; }
     public string? DataRealizacaoTeste { get; set; }
+    public DateTime DtNascimento { get; set; }
+    public string? Sexo { get; set; }
     public string? Imc { get; set; }
     public int AlunoId { get; set; }
     private class Mapping : Profile
@@ -20,6 +22,8 @@ public class SaudeDto
                 .ForMember(dest => dest.ProfissionalId, opt => opt.MapFrom(src => src.Profissional!.Id))
                 .ForMember(dest => dest.NomeProfissional, opt => opt.MapFrom(src => src.Profissional!.Nome))
                 .ForMember(dest => dest.DataRealizacaoTeste, opt => opt.MapFrom(src => src.Created.ToString("dd/MM/yyyy")))
+                .ForMember(dest => dest.DtNascimento, opt => opt.MapFrom(src => src.Aluno!.DtNascimento))
+                .ForMember(dest => dest.Sexo, opt => opt.MapFrom(src => src.Aluno!.Sexo))
                 .ForMember(dest => dest.Imc, opt => opt.MapFrom(src => GetImc(src.Massa, src.Altura)))
                 .ForMember(dest => dest.AlunoId, opt => opt.MapFrom(src => src.Aluno!.Id));
         }

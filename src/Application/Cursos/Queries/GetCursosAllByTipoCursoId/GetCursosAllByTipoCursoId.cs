@@ -21,10 +21,12 @@ public class GetCursosAllByTipoCursoIdQueryHandler : IRequestHandler<GetCursosAl
     public async Task<List<CursoDto>> Handle(GetCursosAllByTipoCursoIdQuery request, CancellationToken cancellationToken)
     {
         var result = await _context.Cursos
+            .Include(i=>i.TipoCurso)
+            .Include(i=>i.Usuario)
             .Where(x => x.TipoCurso.Id == request.TipoCursoId)
             .AsNoTracking()
-            .ProjectTo<List<CursoDto>>(_mapper.ConfigurationProvider)
-            .FirstOrDefaultAsync(cancellationToken);
+            .ProjectTo<CursoDto>(_mapper.ConfigurationProvider)
+            .ToListAsync(cancellationToken);
 
         return result! == null ? throw new ArgumentNullException(nameof(result)) : result;
     }

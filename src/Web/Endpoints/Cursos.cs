@@ -20,8 +20,8 @@ public class Cursos : EndpointGroupBase
             .MapPost(CreateCurso)
             .MapPut(UpdateCurso, "{id}")
             .MapDelete(DeleteCurso, "{id}")
-            .MapGet(GetCursoById, "Curso/{id}")
-            .MapGet(GetCursosAllByTipoCursoId, "Curso/TipoCurso/{tipoCursoId}");
+            .MapGet(GetCursoById, "{id}")
+            .MapGet(GetCursosAllByTipoCursoId, "TipoCurso/{tipoCursoId}");
     }
 
     #endregion
