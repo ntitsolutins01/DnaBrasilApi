@@ -1,4 +1,4 @@
-﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
 using DnaBrasilApi.Domain.Enums;
 
@@ -36,14 +36,14 @@ public class UpdateEncaminhamentoConsumoAlimentarCommandHandler : IRequestHandle
             { "BonsHabitosAlimentares", 0 }
         };
         
-        var laudos = _context.Laudos.Where(x => verificaAlunos.Contains(x.Aluno.Id)).Include(i => i.ConsumoAlimentar).Where(x => x.ConsumoAlimentar == null)
+        var laudos = _context.Laudos.Where(x => verificaAlunos.Contains(x.Aluno.Id)).Include(i => i.ConsumoAlimentar).Where(x => x.ConsumoAlimentar != null)
             .Include(a => a.Aluno)
             .AsNoTracking()
             .OrderBy(o=>o.ConsumoAlimentar!.Id);
 
         decimal quadrante1;
 
-        var encaminhamentos = _context.Encaminhamentos.Where(x => x.TipoLaudo.Id == (int)EnumTipoLaudo.ConsumoAlimentar);
+        var encaminhamentos = _context.Encaminhamentos.Where(x => x.TipoLaudo.Id == (int)EnumTipoLaudo.QualidadeVida);
 
         var metricas = _context.TextosLaudos
             .Where(x => x.TipoLaudo.Id == 8).ToList();

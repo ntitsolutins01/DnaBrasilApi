@@ -4,7 +4,7 @@ using DnaBrasilApi.Domain.Enums;
 
 namespace DnaBrasilApi.Application.Laudos.Commands.UpdateQualidadeVida;
 
-public record UpdateEncaminhamentoQualidadeDeVidaCommand : IRequest <bool>
+public record UpdateEncaminhamentoQualidadeDeVidaCommand : IRequest<bool>
 {
     public int? AlunoId { get; init; }
 }
@@ -43,9 +43,15 @@ public class UpdateEncaminhamentoQualidadeDeVidaCommandHandler : IRequestHandler
 
         var verificaAlunos = alunos.Select(x => x.Id);
 
-        var laudos = _context.Laudos.Where(x => verificaAlunos.Contains(x.Aluno.Id)).Include(i => i.QualidadeDeVida).Where(x => x.QualidadeDeVida != null)
+        var laudos = _context.Laudos.Where(x => verificaAlunos.Contains(x.Aluno.Id))
+            .Include(i => i.QualidadeDeVida)
             .Include(a => a.Aluno)
-            .AsNoTracking();
+            .AsNoTracking()
+            .OrderByDescending(t => t.QualidadeDeVida!.Id);
+
+        var listQualidadeDeVida = _context.QualidadeDeVidas
+            .AsNoTracking()
+            .OrderByDescending(t => t.Id);
 
         int cont = 0;
         decimal quadrante1;
@@ -56,9 +62,11 @@ public class UpdateEncaminhamentoQualidadeDeVidaCommandHandler : IRequestHandler
         var metricas = _context.TextosLaudos
             .Where(x => x.TipoLaudo.Id == (int)EnumTipoLaudo.QualidadeVida).ToList();
 
-        foreach (var laudo in laudos)
+        var tot = listQualidadeDeVida.Count();
+
+        foreach (var qualidadeDeVida in listQualidadeDeVida)
         {
-            List<int> listRespostas = laudo.QualidadeDeVida!.Respostas.Split(',').Select(item => int.Parse(item)).ToList();
+            List<int> listRespostas = qualidadeDeVida.Respostas.Split(',').Select(item => int.Parse(item)).ToList();
 
             var respostas = _context.Respostas.Where(x => listRespostas.Contains(x.Id)).Include(i => i.Questionario);
 
@@ -85,30 +93,24 @@ public class UpdateEncaminhamentoQualidadeDeVidaCommandHandler : IRequestHandler
                     continue;
                 }
 
-                if (laudo.Aluno.Sexo == "M")
-                {
-                    var parametro = result.Aviso.Split('.').First();
+                var parametro = result.Aviso.Split('.').First();
 
-                    encaminhamento.Add(encaminhamentos.First(x => x.Parametro == parametro).Id);
-                }
-                else
-                {
-                    var parametro = result.Aviso.Split('.').First();
-
-                    encaminhamento.Add(encaminhamentos.First(x => x.Parametro == parametro).Id);
-                }
+                encaminhamento.Add(encaminhamentos.First(x => x.Parametro == parametro).Id);
             }
 
-            var entity = await _context.QualidadeDeVidas
-                .FindAsync([laudo.QualidadeDeVida.Id], cancellationToken);
+            cont = 0;
 
-            Guard.Against.NotFound(laudo.QualidadeDeVida.Id, entity);
+            var entity = await _context.QualidadeDeVidas
+                .FindAsync([qualidadeDeVida.Id], cancellationToken);
+
+            Guard.Against.NotFound(qualidadeDeVida.Id, entity);
 
             entity.Encaminhamentos = string.Join(",", encaminhamento); ;
 
-            var final = await _context.SaveChangesAsync(cancellationToken);
+            await _context.SaveChangesAsync(cancellationToken);
 
-            return final == 1;
+            encaminhamento = new List<int>();
+            //return final == 1;
         }
 
         return false;

@@ -1,5 +1,6 @@
-﻿using DnaBrasilApi.Application.Encaminhamentos.Queries;
+using DnaBrasilApi.Application.Encaminhamentos.Queries;
 using DnaBrasilApi.Application.Laudos.Commands.CreateLaudo;
+using DnaBrasilApi.Application.Laudos.Commands.UpdateConsumoAlimentar;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoAlunos;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoVocacional;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateQualidadeVida;
@@ -20,6 +21,7 @@ public class Laudos : EndpointGroupBase
             .MapPut(UpdateEncaminhamentoAlunos, "EncaminhamentoAlunos")
             .MapPut(UpdateEncaminhamentoVocacional, "EncaminhamentoVocacional/{alunoId}")
             .MapPut(UpdateEncaminhamentoQualidadeDeVida, "EncaminhamentoQualidadeDeVida/{alunoId}")
+            .MapPut(UpdateEncaminhamentoConsumoAlimentar, "EncaminhamentoConsumoAlimentar/{alunoId}")
             .MapGet(GetLaudosAll)
             .MapGet(GetLaudoByAluno, "Laudo/Aluno/{id}")
             .MapGet(GetEncaminhamentoBySaudeId, "EncaminhamentoSaude/{id}");
@@ -40,6 +42,12 @@ public class Laudos : EndpointGroupBase
         return result;
     }
     public async Task<bool> UpdateEncaminhamentoQualidadeDeVida(ISender sender, int alunoId, UpdateEncaminhamentoQualidadeDeVidaCommand command)
+    {
+        if (alunoId != command.AlunoId) return false;
+        var result = await sender.Send(command);
+        return result;
+    }
+    public async Task<bool> UpdateEncaminhamentoConsumoAlimentar(ISender sender, int alunoId, UpdateEncaminhamentoConsumoAlimentarCommand command)
     {
         if (alunoId != command.AlunoId) return false;
         var result = await sender.Send(command);

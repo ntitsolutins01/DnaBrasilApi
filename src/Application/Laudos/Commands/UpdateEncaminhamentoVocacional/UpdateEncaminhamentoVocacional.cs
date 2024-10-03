@@ -21,7 +21,7 @@ public class UpdateEncaminhamentoVocacionalCommandHandler : IRequestHandler<Upda
     {
         IQueryable<Aluno> alunos;
 
-        alunos = _context.Alunos//.Where(x => x.Id == request.AlunoId)//37315 - Feminino 38438
+        alunos = _context.Alunos.Where(x => x.Id == 37315)//37315 - Feminino 38438
             .AsNoTracking();
 
         Dictionary<string, decimal> dict = new()
