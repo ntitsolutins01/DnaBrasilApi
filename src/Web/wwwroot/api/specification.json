@@ -4081,6 +4081,38 @@
         }
       }
     },
+    "/api/Laudos/Laudo/TalentoEsportivo/{id}": {
+      "get": {
+        "tags": [
+          "Laudos"
+        ],
+        "operationId": "GetTalentoEsportivoByAluno",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TalentoEsportivoDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/LinhasAcoes": {
       "get": {
         "tags": [
@@ -13743,9 +13775,90 @@
             "type": "string",
             "nullable": true
           },
+          "idade": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
           "imcSaude": {
             "type": "string",
             "nullable": true
+          }
+        }
+      },
+      "TalentoEsportivoDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "profissional": {
+            "$ref": "#/components/schemas/ProfissionalDto"
+          },
+          "flexibilidade": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "preensaoManual": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "velocidade": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "impulsaoHorizontal": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "vo2Max": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "abdominal": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "imc": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "shuttleRun": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "encaminhamento": {
+            "type": "string",
+            "nullable": true
+          },
+          "altura": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "peso": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "envergadura": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "alunoId": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },

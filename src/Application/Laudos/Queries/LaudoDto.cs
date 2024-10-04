@@ -38,6 +38,7 @@ public class LaudoDto
     public byte[]? ByteImage { get; init; }
     public string? NomeFoto { get; init; }
     public string? Modalidade { get; init; }
+    public int? Idade { get; init; }
     //public string? Serie { get; init; }
     //public string? Turma { get; init; }
     //public int? MunicipioId { get; init; }
@@ -65,6 +66,8 @@ public class LaudoDto
                 .ForMember(dest => dest.AlunoId, opt => opt.MapFrom(src => src.Aluno!.Id))
                 .ForMember(dest => dest.NomeAluno, opt => opt.MapFrom(src => src.Aluno.Nome))
                 .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Aluno.Email))
+                .ForMember(dest => dest.Idade, opt => opt.MapFrom(src => GetIdade(src.Aluno!.DtNascimento, null)))
+                .ForMember(dest => dest.Modalidade, opt => opt.MapFrom(src => src.TalentoEsportivo!.EncaminhamentoTexo))
                 //.ForMember(dest => dest.QrCode, opt => opt.MapFrom(src => src.Aluno.QrCode))
                 .ForMember(dest => dest.Estatura, opt => opt.MapFrom(src => src.Saude!.Altura))
                 .ForMember(dest => dest.Massa, opt => opt.MapFrom(src => src.Saude!.Massa))
@@ -106,6 +109,28 @@ public class LaudoDto
             catch
             {
                 return 0.ToString();
+            }
+        }
+        public static int GetIdade(DateTime data, DateTime? now = null)
+        {
+            // Carrega a data do dia para comparação caso data informada seja nula
+
+            now = ((now == null) ? DateTime.Now : now);
+
+            try
+            {
+                int YearsOld = (now.Value.Year - data.Year);
+
+                if (now.Value.Month < data.Month || (now.Value.Month == data.Month && now.Value.Day < data.Day))
+                {
+                    YearsOld--;
+                }
+
+                return (YearsOld < 0) ? 0 : YearsOld;
+            }
+            catch
+            {
+                return 0;
             }
         }
     }
