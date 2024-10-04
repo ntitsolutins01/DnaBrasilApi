@@ -2,23 +2,20 @@
 
 namespace DnaBrasilApi.Application.Laudos.Queries.GetTalentoEsportivoByAluno;
 
-public record GetVocacionalByAlunoQuery : IRequest<VocacionalDto?>
-{
-    public int AlunoId { get; set; }
-}
+public record GetTalentoEsportivoByAlunoQuery(int AlunoId) : IRequest<TalentoEsportivoDto>;
 
-public class GetVocacionalByAlunoQueryHandler : IRequestHandler<GetVocacionalByAlunoQuery, VocacionalDto?>
+public class GetTalentoEsportivoByAlunoQueryHandler : IRequestHandler<GetTalentoEsportivoByAlunoQuery, TalentoEsportivoDto>
 {
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
 
-    public GetVocacionalByAlunoQueryHandler(IApplicationDbContext context, IMapper mapper)
+    public GetTalentoEsportivoByAlunoQueryHandler(IApplicationDbContext context, IMapper mapper)
     {
         _context = context;
         _mapper = mapper;
     }
 
-    public async Task<VocacionalDto?> Handle(GetVocacionalByAlunoQuery request, CancellationToken cancellationToken)
+    public async Task<TalentoEsportivoDto> Handle(GetTalentoEsportivoByAlunoQuery request, CancellationToken cancellationToken)
     {
         var aluno = await _context.Alunos
             .FindAsync(new object[] { request.AlunoId }, cancellationToken);
@@ -32,10 +29,10 @@ public class GetVocacionalByAlunoQueryHandler : IRequestHandler<GetVocacionalByA
         //    .ProjectTo<LaudoDto>(_mapper.ConfigurationProvider)
         //    .FirstOrDefaultAsync(cancellationToken);
 
-        var result = await _context.Vocacionais
-            //.Where(x => x.Id == laudoRecente!.VocacionalId)
+        var result = await _context.TalentosEsportivos
+            .Where(x => x.Aluno!.Id == request.AlunoId)
             .AsNoTracking()
-            .ProjectTo<VocacionalDto>(_mapper.ConfigurationProvider)
+            .ProjectTo<TalentoEsportivoDto>(_mapper.ConfigurationProvider)
             .FirstOrDefaultAsync(cancellationToken);
 
         return result == null ? throw new ArgumentNullException(nameof(result)) : result;
