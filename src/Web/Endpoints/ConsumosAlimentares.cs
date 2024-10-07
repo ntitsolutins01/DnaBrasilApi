@@ -1,5 +1,4 @@
 ﻿using DnaBrasilApi.Application.Laudos.Commands.CreateConsumoAlimentar;
-using DnaBrasilApi.Application.Laudos.Commands.UpdateConsumoAlimentar;
 using DnaBrasilApi.Application.Laudos.Queries;
 using DnaBrasilApi.Application.Laudos.Queries.GetConsumosAlimentaresAll;
 

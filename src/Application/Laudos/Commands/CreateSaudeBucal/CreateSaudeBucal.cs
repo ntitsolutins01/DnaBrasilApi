@@ -33,7 +33,7 @@ public class CreateSaudeBucalCommandHandler : IRequestHandler<CreateSaudeBucalCo
         {
             Profissional = profissional,
             Aluno = aluno,
-            Resposta = request.Resposta
+            Respostas = request.Resposta
         };
 
         _context.SaudeBucais.Add(entity);
