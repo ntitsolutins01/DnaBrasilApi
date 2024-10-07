@@ -1,7 +1,7 @@
 using DnaBrasilApi.Application.Encaminhamentos.Queries;
 using DnaBrasilApi.Application.Laudos.Commands.CreateLaudo;
+using DnaBrasilApi.Application.Laudos.Commands.UpdateConsumoAlimentar;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoAlunos;
-using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoConsumoAlimentar;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoVocacional;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateQualidadeVida;
 using DnaBrasilApi.Application.Laudos.Queries;
@@ -9,6 +9,7 @@ using DnaBrasilApi.Application.Laudos.Queries.GetLaudosAll;
 using DnaBrasilApi.Application.Laudos.Queries.GetLaudoByAluno;
 using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoBySaudeId;
 using DnaBrasilApi.Application.Laudos.Queries.GetTalentoEsportivoByAluno;
+using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoByQualidadeDeVidaId;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -20,13 +21,14 @@ public class Laudos : EndpointGroupBase
             //.RequireAuthorization()
             .MapPost(CreateLaudo)
             .MapPut(UpdateEncaminhamentoAlunos, "EncaminhamentoAlunos")
-            .MapPut(UpdateEncaminhamentoVocacional, "EncaminhamentoVocacional/{alunoId}")
-            .MapPut(UpdateEncaminhamentoQualidadeDeVida, "EncaminhamentoQualidadeDeVida/{alunoId}")
-            .MapPut(UpdateEncaminhamentoConsumoAlimentar, "EncaminhamentoConsumoAlimentar/{alunoId}")
+            .MapPut(UpdateEncaminhamentoVocacional, "Encaminhamento/Vocacional/{alunoId}")
+            .MapPut(UpdateEncaminhamentoQualidadeDeVida, "Encaminhamento/QualidadeDeVida/{alunoId}")
+            .MapPut(UpdateEncaminhamentoConsumoAlimentar, "Encaminhamento/ConsumoAlimentar/{alunoId}")
             .MapGet(GetLaudosAll)
-            .MapGet(GetLaudoByAluno, "Laudo/Aluno/{id}")
-            .MapGet(GetTalentoEsportivoByAlunoQuery, "Laudo/TalentoEsportivo/Aluno/{id}")
-            .MapGet(GetEncaminhamentoBySaudeId, "EncaminhamentoSaude/{id}");
+            .MapGet(GetLaudoByAluno, "Aluno/{id}")
+            .MapGet(GetTalentoEsportivoByAlunoQuery, "TalentoEsportivo/Aluno/{id}")
+            .MapGet(GetEncaminhamentoBySaudeId, "Encaminhamento/Saude/{id}")
+            .MapGet(GetEncaminhamentoByQualidadeDeVidaId, "Encaminhamento/QualidadeDeVida/{id}");
     }
     public async Task<int> CreateLaudo(ISender sender, CreateLaudoCommand command)
     {
@@ -72,5 +74,9 @@ public class Laudos : EndpointGroupBase
     public async Task<TalentoEsportivoDto> GetTalentoEsportivoByAlunoQuery(ISender sender, int id)
     {
         return await sender.Send(new GetTalentoEsportivoByAlunoQuery(id));
+    }
+    public async Task<List<EncaminhamentoDto>> GetEncaminhamentoByQualidadeDeVidaId(ISender sender, int id)
+    {
+        return await sender.Send(new GetEncaminhamentoByQualidadeDeVidaIdQuery(id));
     }
 }
