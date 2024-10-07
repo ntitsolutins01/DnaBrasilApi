@@ -1,23 +1,24 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
+using DnaBrasilApi.Domain.Enums;
 
-namespace DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoAlunos;
+namespace DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoTalentoEsportivo;
 
-public record UpdateEncaminhamentoAlunosCommand : IRequest<bool>
+public record UpdateEncaminhamentoTalentoEsportivoCommand : IRequest<bool>
 {
-
+    public int? AlunoId { get; init; }
 }
 
-public class UpdateEncaminhamentoAlunosCommandHandler : IRequestHandler<UpdateEncaminhamentoAlunosCommand, bool>
+public class UpdateEncaminhamentoTalentoEsportivoCommandHandler : IRequestHandler<UpdateEncaminhamentoTalentoEsportivoCommand, bool>
 {
     private readonly IApplicationDbContext _context;
 
-    public UpdateEncaminhamentoAlunosCommandHandler(IApplicationDbContext context)
+    public UpdateEncaminhamentoTalentoEsportivoCommandHandler(IApplicationDbContext context)
     {
         _context = context;
     }
 
-    public async Task<bool> Handle(UpdateEncaminhamentoAlunosCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(UpdateEncaminhamentoTalentoEsportivoCommand request, CancellationToken cancellationToken)
     {
         IQueryable<Aluno> alunos;
 
@@ -25,7 +26,7 @@ public class UpdateEncaminhamentoAlunosCommandHandler : IRequestHandler<UpdateEn
             .AsNoTracking();
 
         var desempenhos = await _context.TextosLaudos
-            .Where(x => x.Status && x.TipoLaudo!.Id == 4)
+            .Where(x => x.Status && x.TipoLaudo!.Id == (int)EnumTipoLaudo.TalentoEsportivo)
             .Select(s => s.Classificacao)
             .Distinct()
             .ToListAsync();
@@ -33,20 +34,22 @@ public class UpdateEncaminhamentoAlunosCommandHandler : IRequestHandler<UpdateEn
         List<TextoLaudo> textoLaudo = new();
         List<string>? encaminhamento = new List<string>();
 
-        var verificaAlunos = alunos.Select(x => x.Id);
 
-        var laudos = _context.Laudos.Where(x => verificaAlunos.Contains(x.Aluno.Id)).Include(i => i.TalentoEsportivo).Where(x => x.TalentoEsportivo != null)
-            .Include(a => a.Aluno)
-            .AsNoTracking();
+        //var laudos = _context.Laudos.Where(x => verificaAlunos.Contains(x.Aluno.Id)).Include(i => i.TalentoEsportivo).Where(x => x.TalentoEsportivo != null)
+        //    .Include(a => a.Aluno)
+        //    .AsNoTracking();
 
-        foreach (var aluno in laudos)
+        var encaminhamentos = _context.Encaminhamentos
+            .Where(x => x.TipoLaudo.Id == (int)EnumTipoLaudo.TalentoEsportivo);
+
+        var listTalentoEsportivo = _context.TalentosEsportivos
+            .Include(i => i.Aluno)
+            .AsNoTracking()
+            .OrderByDescending(o => o.Id);
+
+        foreach (var talentoEsportivo in listTalentoEsportivo)
         {
-            if (aluno.TalentoEsportivo == null)
-            {
-                continue;
-            }
-
-            var idade = GetIdade(aluno.Aluno.DtNascimento, DateTime.Now);
+            var idade = GetIdade(talentoEsportivo.Aluno!.DtNascimento, DateTime.Now);
 
             var modalidades = _context.Modalidades
                 .Where(x => x.Status == true).ToList();
@@ -58,15 +61,15 @@ public class UpdateEncaminhamentoAlunosCommandHandler : IRequestHandler<UpdateEn
                     x.Classificacao!.Equals(desempenho) &&
                     x.Idade == idade &&
                     (x.Aviso!.Trim() == "Excelente" || x.Aviso!.Trim() == "Muito Bom" || x.Aviso!.Trim() == "Bom") &&
-                    x.Sexo == (idade == 99 ? "G" : aluno.Aluno.Sexo)).ToList();
+                    x.Sexo == (idade == 99 ? "G" : talentoEsportivo.Aluno.Sexo)).ToList();
 
                 foreach (var item in textoLaudo)
                 {
                     switch (item.Classificacao)
                     {
                         case "Velocidade" when
-                            aluno.TalentoEsportivo.Velocidade >= item.PontoInicial &&
-                            aluno.TalentoEsportivo.Velocidade <= item.PontoFinal:
+                            talentoEsportivo.Velocidade >= item.PontoInicial &&
+                            talentoEsportivo.Velocidade <= item.PontoFinal:
                             {
                                 var nota = item.Aviso;
 
@@ -84,8 +87,8 @@ public class UpdateEncaminhamentoAlunosCommandHandler : IRequestHandler<UpdateEn
                                 break;
                             }
                         case "Impulsão" when
-                            aluno.TalentoEsportivo.ImpulsaoHorizontal >= item.PontoInicial &&
-                            aluno.TalentoEsportivo.ImpulsaoHorizontal <= item.PontoFinal:
+                            talentoEsportivo.ImpulsaoHorizontal >= item.PontoInicial &&
+                            talentoEsportivo.ImpulsaoHorizontal <= item.PontoFinal:
                             {
                                 var nota = item.Aviso;
 
@@ -103,8 +106,8 @@ public class UpdateEncaminhamentoAlunosCommandHandler : IRequestHandler<UpdateEn
                                 break;
                             }
                         case "Agilidade ou Shuttle run" when
-                            aluno.TalentoEsportivo.ShuttleRun >= item.PontoInicial &&
-                            aluno.TalentoEsportivo.ShuttleRun <= item.PontoFinal:
+                            talentoEsportivo.ShuttleRun >= item.PontoInicial &&
+                            talentoEsportivo.ShuttleRun <= item.PontoFinal:
                             {
                                 var nota = item.Aviso;
 
@@ -122,8 +125,8 @@ public class UpdateEncaminhamentoAlunosCommandHandler : IRequestHandler<UpdateEn
                                 break;
                             }
                         case "Flexibilidade" when
-                            aluno.TalentoEsportivo.Flexibilidade >= item.PontoInicial &&
-                            aluno.TalentoEsportivo.Flexibilidade <= item.PontoFinal:
+                            talentoEsportivo.Flexibilidade >= item.PontoInicial &&
+                            talentoEsportivo.Flexibilidade <= item.PontoFinal:
                             {
                                 var nota = item.Aviso;
 
@@ -142,8 +145,8 @@ public class UpdateEncaminhamentoAlunosCommandHandler : IRequestHandler<UpdateEn
                                 break;
                             }
                         case "Preensão Manual" when
-                            aluno.TalentoEsportivo.PreensaoManual >= item.PontoInicial &&
-                            aluno.TalentoEsportivo.PreensaoManual <= item.PontoFinal:
+                            talentoEsportivo.PreensaoManual >= item.PontoInicial &&
+                            talentoEsportivo.PreensaoManual <= item.PontoFinal:
                             {
                                 var nota = item.Aviso;
 
@@ -162,8 +165,8 @@ public class UpdateEncaminhamentoAlunosCommandHandler : IRequestHandler<UpdateEn
                                 break;
                             }
                         case "Vo2 Max" when
-                            aluno.TalentoEsportivo.Vo2Max >= item.PontoInicial &&
-                            aluno.TalentoEsportivo.Vo2Max <= item.PontoFinal:
+                            talentoEsportivo.Vo2Max >= item.PontoInicial &&
+                            talentoEsportivo.Vo2Max <= item.PontoFinal:
                             {
                                 var nota = item.Aviso;
 
@@ -181,8 +184,8 @@ public class UpdateEncaminhamentoAlunosCommandHandler : IRequestHandler<UpdateEn
                                 break;
                             }
                         case "Prancha (ABD)" when
-                            aluno.TalentoEsportivo.Abdominal >= item.PontoInicial &&
-                            aluno.TalentoEsportivo.Abdominal <= item.PontoFinal:
+                            talentoEsportivo.Abdominal >= item.PontoInicial &&
+                            talentoEsportivo.Abdominal <= item.PontoFinal:
                             {
                                 var nota = item.Aviso;
 
@@ -203,21 +206,25 @@ public class UpdateEncaminhamentoAlunosCommandHandler : IRequestHandler<UpdateEn
                 }
             }
 
+            var entity = await _context.TalentosEsportivos
+                .FindAsync([talentoEsportivo.Id], cancellationToken);
 
-                var entity = await _context.TalentosEsportivos
-                    .FindAsync([aluno.TalentoEsportivo.Id], cancellationToken);
+            Guard.Against.NotFound(talentoEsportivo.Id, entity);
 
-                Guard.Against.NotFound(aluno.TalentoEsportivo.Id, entity);
-
-            if (encaminhamento.Count>0)
+            if (encaminhamento.Count > 0)
             {
                 var q = from x in encaminhamento
-                    group x by x into g
-                    let count = g.Count()
-                    orderby count descending
-                    select new { Value = g.Key, Count = count };
+                        group x by x into g
+                        let count = g.Count()
+                        orderby count descending
+                        select new { Value = g.Key, Count = count };
 
-                entity.EncaminhamentoTexo = q.FirstOrDefault()!.Value;
+                var nome = q.FirstOrDefault()!.Value;
+
+                var encaminhamentoTalentoEsportivo = encaminhamentos.First(x => x.Nome == nome);
+
+                entity.Encaminhamento = encaminhamentoTalentoEsportivo;
+                entity.Imc = GetImc((decimal)talentoEsportivo.Altura!, (decimal)talentoEsportivo.Peso!);
 
                 var result = await _context.SaveChangesAsync(cancellationToken);
             }
@@ -227,8 +234,6 @@ public class UpdateEncaminhamentoAlunosCommandHandler : IRequestHandler<UpdateEn
 
                 var result = await _context.SaveChangesAsync(cancellationToken);
             }
-
-            
 
             encaminhamento = new List<string>();
         }
@@ -258,6 +263,25 @@ public class UpdateEncaminhamentoAlunosCommandHandler : IRequestHandler<UpdateEn
             }
 
             return YearsOld >= 18 ? 99 : YearsOld < 4 ? 4 : YearsOld;
+        }
+        catch
+        {
+            return 0;
+        }
+    }
+
+    /// <summary>
+    /// Calcula Imc
+    /// </summary>
+    private static decimal GetImc(decimal altura, decimal massa)
+    {
+
+        try
+        {
+            double alturaMetros = (double)(altura * (decimal?)0.01)!;
+            var imc = Convert.ToDecimal(((double)massa / Math.Pow(alturaMetros, 2)).ToString("F"));
+
+            return imc;
         }
         catch
         {

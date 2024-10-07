@@ -1,4 +1,4 @@
-﻿namespace DnaBrasilApi.Application.Laudos.Commands.UpdateConsumoAlimentar;
+﻿namespace DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoConsumoAlimentar;
 
 public class UpdateEncaminhamentoConsumoAlimentarCommandValidator : AbstractValidator<UpdateEncaminhamentoConsumoAlimentarCommand>
 {

@@ -33,7 +33,7 @@ public class CreateConsumoAlimentarCommandHandler : IRequestHandler<CreateConsum
         {
             Profissional = profissional,
             Aluno = aluno,
-            Resposta = request.Resposta
+            Respostas = request.Resposta
         };
 
         _context.ConsumoAlimentares.Add(entity);

@@ -3853,23 +3853,35 @@
         }
       }
     },
-    "/api/Laudos/EncaminhamentoAlunos": {
+    "/api/Laudos/EncaminhamentoTalentoEsportivo/{alunoId}": {
       "put": {
         "tags": [
           "Laudos"
         ],
-        "operationId": "UpdateEncaminhamentoAlunos",
+        "operationId": "UpdateEncaminhamentoTalentoEsportivo",
+        "parameters": [
+          {
+            "name": "alunoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
         "requestBody": {
           "x-name": "command",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateEncaminhamentoAlunosCommand"
+                "$ref": "#/components/schemas/UpdateEncaminhamentoTalentoEsportivoCommand"
               }
             }
           },
           "required": true,
-          "x-position": 1
+          "x-position": 2
         },
         "responses": {
           "200": {
@@ -4017,6 +4029,50 @@
         }
       }
     },
+    "/api/Laudos/EncaminhamentoSaudeBucal/{alunoId}": {
+      "put": {
+        "tags": [
+          "Laudos"
+        ],
+        "operationId": "UpdateEncaminhamentoSaudeBucal",
+        "parameters": [
+          {
+            "name": "alunoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEncaminhamentoSaudeBucalCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Laudos/Laudo/Aluno/{id}": {
       "get": {
         "tags": [
@@ -4042,6 +4098,38 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/LaudoDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Laudos/Laudo/TalentoEsportivo/Aluno/{id}": {
+      "get": {
+        "tags": [
+          "Laudos"
+        ],
+        "operationId": "GetTalentoEsportivoByAlunoQuery",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TalentoEsportivoDto"
                 }
               }
             }
@@ -10838,7 +10926,7 @@
                   }
                 ]
               },
-              "resposta": {
+              "respostas": {
                 "type": "string"
               },
               "statusConsumoAlimentar": {
@@ -10872,7 +10960,7 @@
                   }
                 ]
               },
-              "resposta": {
+              "respostas": {
                 "type": "string"
               },
               "statusSaudeBucal": {
@@ -13583,9 +13671,16 @@
           }
         }
       },
-      "UpdateEncaminhamentoAlunosCommand": {
+      "UpdateEncaminhamentoTalentoEsportivoCommand": {
         "type": "object",
-        "additionalProperties": false
+        "additionalProperties": false,
+        "properties": {
+          "alunoId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        }
       },
       "UpdateEncaminhamentoVocacionalCommand": {
         "type": "object",
@@ -13610,6 +13705,17 @@
         }
       },
       "UpdateEncaminhamentoConsumoAlimentarCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "alunoId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        }
+      },
+      "UpdateEncaminhamentoSaudeBucalCommand": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -13751,6 +13857,82 @@
           "imcSaude": {
             "type": "string",
             "nullable": true
+          }
+        }
+      },
+      "TalentoEsportivoDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "profissional": {
+            "$ref": "#/components/schemas/ProfissionalDto"
+          },
+          "flexibilidade": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "preensaoManual": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "velocidade": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "impulsaoHorizontal": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "vo2Max": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "abdominal": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "imc": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "shuttleRun": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "encaminhamento": {
+            "type": "string",
+            "nullable": true
+          },
+          "altura": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "peso": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "envergadura": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "alunoId": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },
