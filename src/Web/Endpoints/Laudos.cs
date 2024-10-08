@@ -11,6 +11,7 @@ using DnaBrasilApi.Application.Laudos.Queries.GetLaudosAll;
 using DnaBrasilApi.Application.Laudos.Queries.GetLaudoByAluno;
 using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoBySaudeId;
 using DnaBrasilApi.Application.Laudos.Queries.GetTalentoEsportivoByAluno;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -36,10 +37,9 @@ public class Laudos : EndpointGroupBase
     {
         return await sender.Send(command);
     }
-    public async Task<bool> UpdateEncaminhamentoTalentoEsportivo(ISender sender, int alunoId, UpdateEncaminhamentoTalentoEsportivoCommand command)
+    public async Task<bool> UpdateEncaminhamentoTalentoEsportivo(ISender sender, int alunoId)
     {
-        if (alunoId != command.AlunoId) return false;
-        var result = await sender.Send(command);
+        var result = await sender.Send(new UpdateEncaminhamentoTalentoEsportivoCommand(alunoId));
         return result;
     }
     public async Task<bool> UpdateEncaminhamentoTalentoEsportivoV1(ISender sender, int alunoId, UpdateEncaminhamentoTalentoEsportivoV1Command command)
