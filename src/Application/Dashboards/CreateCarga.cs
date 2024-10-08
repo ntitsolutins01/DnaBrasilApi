@@ -45,7 +45,12 @@ public class CreateCargaCommandHandler : IRequestHandler<CreateCargaCommand, int
         //    .AsNoTracking()
         //    .ToListAsync(cancellationToken);
 
-        var list = await _context.SaudeBucais
+        //var list = await _context.SaudeBucais
+        //    .Include(i => i.Aluno)
+        //    .AsNoTracking()
+        //    .ToListAsync(cancellationToken);
+
+        var list = await _context.TalentosEsportivos
             .Include(i => i.Aluno)
             .AsNoTracking()
             .ToListAsync(cancellationToken);
@@ -77,8 +82,14 @@ public class CreateCargaCommandHandler : IRequestHandler<CreateCargaCommand, int
             //        return bk.Aluno!.Id == aluno.Id;
             //    }
             //);
+            //var find = list.Find(
+            //    delegate (SaudeBucal bk)
+            //    {
+            //        return bk.Aluno!.Id == aluno.Id;
+            //    }
+            //);
             var find = list.Find(
-                delegate (SaudeBucal bk)
+                delegate (TalentoEsportivo bk)
                 {
                     return bk.Aluno!.Id == aluno.Id;
                 }
@@ -99,7 +110,9 @@ public class CreateCargaCommandHandler : IRequestHandler<CreateCargaCommand, int
                 //    .FindAsync(new object[] { find!.Id }, cancellationToken);
                 //var obj = await _context.ConsumoAlimentares
                 //    .FindAsync(new object[] { find!.Id }, cancellationToken);
-                var obj = await _context.SaudeBucais
+                //var obj = await _context.SaudeBucais
+                //    .FindAsync(new object[] { find!.Id }, cancellationToken);
+                var obj = await _context.TalentosEsportivos
                     .FindAsync(new object[] { find!.Id }, cancellationToken);
 
                 if (findLaudos != null)
@@ -133,7 +146,8 @@ public class CreateCargaCommandHandler : IRequestHandler<CreateCargaCommand, int
                         //entity.Vocacional = obj;
                         //entity.QualidadeDeVida = obj;
                         //entity.ConsumoAlimentar = obj;
-                        entity.SaudeBucal = obj;
+                        //entity.SaudeBucal = obj;
+                        entity.TalentoEsportivo = obj;
 
 
                         var results = await _context.SaveChangesAsync(cancellationToken);
@@ -147,7 +161,8 @@ public class CreateCargaCommandHandler : IRequestHandler<CreateCargaCommand, int
                         //Vocacional = obj
                         //QualidadeDeVida = obj
                         //ConsumoAlimentar = obj
-                        SaudeBucal = obj
+                        //SaudeBucal = obj
+                        TalentoEsportivo = obj
                     };
 
                     _context.Laudos.Add(entityLaudo);

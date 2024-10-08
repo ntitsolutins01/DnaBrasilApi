@@ -3,6 +3,7 @@ using DnaBrasilApi.Application.Laudos.Commands.CreateLaudo;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoConsumoAlimentar;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoSaudeBucal;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoTalentoEsportivo;
+using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoTalentoEsportivoV1;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoVocacional;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateQualidadeVida;
 using DnaBrasilApi.Application.Laudos.Queries;
@@ -21,6 +22,7 @@ public class Laudos : EndpointGroupBase
             //.RequireAuthorization()
             .MapPost(CreateLaudo)
             .MapPut(UpdateEncaminhamentoTalentoEsportivo, "EncaminhamentoTalentoEsportivo/{alunoId}")
+            .MapPut(UpdateEncaminhamentoTalentoEsportivoV1, "v1/EncaminhamentoTalentoEsportivo/{alunoId}")
             .MapPut(UpdateEncaminhamentoVocacional, "EncaminhamentoVocacional/{alunoId}")
             .MapPut(UpdateEncaminhamentoQualidadeDeVida, "EncaminhamentoQualidadeDeVida/{alunoId}")
             .MapPut(UpdateEncaminhamentoConsumoAlimentar, "EncaminhamentoConsumoAlimentar/{alunoId}")
@@ -37,6 +39,11 @@ public class Laudos : EndpointGroupBase
     public async Task<bool> UpdateEncaminhamentoTalentoEsportivo(ISender sender, int alunoId, UpdateEncaminhamentoTalentoEsportivoCommand command)
     {
         if (alunoId != command.AlunoId) return false;
+        var result = await sender.Send(command);
+        return result;
+    }
+    public async Task<bool> UpdateEncaminhamentoTalentoEsportivoV1(ISender sender, int alunoId, UpdateEncaminhamentoTalentoEsportivoV1Command command)
+    {
         var result = await sender.Send(command);
         return result;
     }
