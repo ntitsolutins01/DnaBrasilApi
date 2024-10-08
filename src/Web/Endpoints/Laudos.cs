@@ -1,10 +1,13 @@
 using DnaBrasilApi.Application.Encaminhamentos.Queries;
 using DnaBrasilApi.Application.Laudos.Commands.CreateLaudo;
-using DnaBrasilApi.Application.Laudos.Commands.UpdateConsumoAlimentar;
-using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoAlunos;
+using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoConsumoAlimentar;
+using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoSaudeBucal;
+using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoTalentoEsportivo;
+using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoTalentoEsportivoV1;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoVocacional;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateQualidadeVida;
 using DnaBrasilApi.Application.Laudos.Queries;
+using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoByQualidadeDeVidaId;
 using DnaBrasilApi.Application.Laudos.Queries.GetLaudosAll;
 using DnaBrasilApi.Application.Laudos.Queries.GetLaudoByAluno;
 using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoBySaudeId;
@@ -21,7 +24,9 @@ public class Laudos : EndpointGroupBase
         app.MapGroup(this)
             //.RequireAuthorization()
             .MapPost(CreateLaudo)
-            .MapPut(UpdateEncaminhamentoAlunos, "EncaminhamentoAlunos")
+            .MapPut(UpdateEncaminhamentoTalentoEsportivo, "Encaminhamento/TalentoEsportivo/{alunoId}")
+            .MapPut(UpdateEncaminhamentoTalentoEsportivoV1, "v1/Encaminhamento/TalentoEsportivo/{alunoId}")
+            .MapPut(UpdateEncaminhamentoSaudeBucal, "Encaminhamento/SaudeBucal/{alunoId}")
             .MapPut(UpdateEncaminhamentoVocacional, "Encaminhamento/Vocacional/{alunoId}")
             .MapPut(UpdateEncaminhamentoQualidadeDeVida, "Encaminhamento/QualidadeDeVida/{alunoId}")
             .MapPut(UpdateEncaminhamentoConsumoAlimentar, "Encaminhamento/ConsumoAlimentar/{alunoId}")
@@ -36,7 +41,12 @@ public class Laudos : EndpointGroupBase
     {
         return await sender.Send(command);
     }
-    public async Task<bool> UpdateEncaminhamentoAlunos(ISender sender, UpdateEncaminhamentoAlunosCommand command)
+    public async Task<bool> UpdateEncaminhamentoTalentoEsportivo(ISender sender, int alunoId)
+    {
+        var result = await sender.Send(new UpdateEncaminhamentoTalentoEsportivoCommand(alunoId));
+        return result;
+    }
+    public async Task<bool> UpdateEncaminhamentoTalentoEsportivoV1(ISender sender, int alunoId, UpdateEncaminhamentoTalentoEsportivoV1Command command)
     {
         var result = await sender.Send(command);
         return result;
@@ -59,6 +69,12 @@ public class Laudos : EndpointGroupBase
         var result = await sender.Send(command);
         return result;
     }
+    public async Task<bool> UpdateEncaminhamentoSaudeBucal(ISender sender, int alunoId, UpdateEncaminhamentoSaudeBucalCommand command)
+    {
+        if (alunoId != command.AlunoId) return false;
+        var result = await sender.Send(command);
+        return result;
+    }
     public async Task<List<LaudoDto>> GetLaudosAll(ISender sender)
     {
         return await sender.Send(new GetLaudosAllQuery());
@@ -66,7 +82,6 @@ public class Laudos : EndpointGroupBase
     public async Task<LaudoDto> GetLaudoByAluno(ISender sender, int id)
     {
         var laudo = await sender.Send(new GetLaudoByAlunoQuery(id));
-
         return laudo;
     }
     public async Task<EncaminhamentoDto> GetEncaminhamentoBySaudeId(ISender sender, int id)

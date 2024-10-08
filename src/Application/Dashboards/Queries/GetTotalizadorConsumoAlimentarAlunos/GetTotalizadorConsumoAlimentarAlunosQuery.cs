@@ -114,7 +114,7 @@ public class
 
         foreach (var aluno in laudos)
         {
-            List<int> listRespostas = aluno.ConsumoAlimentar!.Resposta.Split(',').Select(item => int.Parse(item)).ToList();
+            List<int> listRespostas = aluno.ConsumoAlimentar!.Respostas.Split(',').Select(item => int.Parse(item)).ToList();
 
             var respostas = _context.Respostas.Where(x => listRespostas.Contains(x.Id)).Include(i=>i.Questionario);
             

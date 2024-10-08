@@ -25,7 +25,7 @@ public class UpdateSaudeBucalCommandHandler : IRequestHandler<UpdateSaudeBucalCo
 
         Guard.Against.NotFound(request.Id, entity);
 
-        entity.Resposta = request.Resposta;
+        entity.Respostas = request.Resposta;
 
         var result = await _context.SaveChangesAsync(cancellationToken);
 
