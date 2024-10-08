@@ -16,7 +16,6 @@ public class LaudoDto
     public int? LocalidadeId { get; init; }
     public int? AlunoId { get; init; }
     public int? EncaminhamentoVocacionalId { get; init; }
-    //public int? EncaminhamentoQualidadeVidaId { get; init; }
     public int? EncaminhamentoConsumoAlimentarId { get; init; }
     public int? EncaminhamentoSaudeBucalId { get; init; }
     public int? EncaminhamentoTalentoEsportivoId { get; init; }
@@ -39,11 +38,6 @@ public class LaudoDto
     public byte[]? ByteImage { get; init; }
     public string? NomeFoto { get; init; }
     public string? Modalidade { get; init; }
-    //public string? Serie { get; init; }
-    //public string? Turma { get; init; }
-    //public int? MunicipioId { get; init; }
-    //public string? NomeMunicipio { get; init; }
-
     #endregion
 
     #region Saude
