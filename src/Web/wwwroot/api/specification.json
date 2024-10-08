@@ -7603,6 +7603,39 @@
         }
       }
     },
+    "/api/TalentosEsportivos": {
+      "post": {
+        "tags": [
+          "TalentosEsportivos"
+        ],
+        "operationId": "CreateTalentoEsportivo",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTalentoEsportivoCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/TextosLaudos": {
       "get": {
         "tags": [
@@ -11606,7 +11639,10 @@
             "type": "integer",
             "format": "int32"
           },
-          "resposta": {
+          "respostas": {
+            "type": "string"
+          },
+          "statusConsumoAlimentar": {
             "type": "string"
           }
         }
@@ -13748,12 +13784,40 @@
         "properties": {
           "alunoId": {
             "type": "integer",
-            "format": "int32",
-            "nullable": true
+            "format": "int32"
           },
           "saudeId": {
             "type": "integer",
             "format": "int32",
+            "nullable": true
+          },
+          "vocacionalId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "consumoAlimentarId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "qualidadeDeVidaId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "saudeBucalId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "talentoEsportivoId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "statusLaudo": {
+            "type": "string",
             "nullable": true
           }
         }
@@ -15860,7 +15924,10 @@
             "type": "integer",
             "format": "int32"
           },
-          "resposta": {
+          "respostas": {
+            "type": "string"
+          },
+          "statusSaudeBucal": {
             "type": "string"
           }
         }
@@ -16025,6 +16092,68 @@
           },
           "status": {
             "type": "boolean"
+          }
+        }
+      },
+      "CreateTalentoEsportivoCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "alunoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "profissionalId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "altura": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "massaCorporal": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "flexibilidade": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "preensaoManual": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "velocidade": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "impulsaoHorizontal": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "aptidaoFisica": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "agilidade": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "abdominal": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "statusTalentosEsportivos": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
