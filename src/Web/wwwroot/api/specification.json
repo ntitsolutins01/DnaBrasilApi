@@ -3929,7 +3929,7 @@
         }
       }
     },
-    "/api/Laudos/EncaminhamentoVocacional/{alunoId}": {
+    "/api/Laudos/Encaminhamento/Vocacional/{alunoId}": {
       "put": {
         "tags": [
           "Laudos"
@@ -3973,7 +3973,7 @@
         }
       }
     },
-    "/api/Laudos/EncaminhamentoQualidadeDeVida/{alunoId}": {
+    "/api/Laudos/Encaminhamento/QualidadeDeVida/{alunoId}": {
       "put": {
         "tags": [
           "Laudos"
@@ -4017,7 +4017,7 @@
         }
       }
     },
-    "/api/Laudos/EncaminhamentoConsumoAlimentar/{alunoId}": {
+    "/api/Laudos/Encaminhamento/ConsumoAlimentar/{alunoId}": {
       "put": {
         "tags": [
           "Laudos"
@@ -4174,6 +4174,38 @@
         "tags": [
           "Laudos"
         ],
+        "operationId": "GetTalentoEsportivoByAlunoQuery",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TalentoEsportivoDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Laudos/Encaminhamento/Saude/{id}": {
+      "get": {
+        "tags": [
+          "Laudos"
+        ],
         "operationId": "GetEncaminhamentoBySaudeId",
         "parameters": [
           {
@@ -4194,6 +4226,41 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/EncaminhamentoDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Laudos/Encaminhamento/QualidadeDeVida/{id}": {
+      "get": {
+        "tags": [
+          "Laudos"
+        ],
+        "operationId": "GetEncaminhamentoByQualidadeDeVidaId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EncaminhamentoDto"
+                  }
                 }
               }
             }
@@ -13842,6 +13909,11 @@
             "format": "date-time",
             "nullable": true
           },
+          "idade": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
           "email": {
             "type": "string",
             "nullable": true
@@ -15513,24 +15585,16 @@
             "type": "integer",
             "format": "int32"
           },
-          "profissionalId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nomeProfissional": {
+          "encaminhamentos": {
             "type": "string",
             "nullable": true
           },
-          "alunoId": {
-            "type": "integer",
-            "format": "int32"
+          "respostas": {
+            "type": "string"
           },
-          "nomeAluno": {
+          "statusQualidadeDeVida": {
             "type": "string",
             "nullable": true
-          },
-          "resposta": {
-            "$ref": "#/components/schemas/RespostaDto"
           }
         }
       },
