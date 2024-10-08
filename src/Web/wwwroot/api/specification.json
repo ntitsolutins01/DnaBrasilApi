@@ -13817,8 +13817,7 @@
             "nullable": true
           },
           "statusLaudo": {
-            "type": "integer",
-            "format": "int32",
+            "type": "string",
             "nullable": true
           }
         }
