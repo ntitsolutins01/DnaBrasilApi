@@ -12,6 +12,8 @@ using DnaBrasilApi.Application.Laudos.Queries.GetLaudosAll;
 using DnaBrasilApi.Application.Laudos.Queries.GetLaudoByAluno;
 using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoBySaudeId;
 using DnaBrasilApi.Application.Laudos.Queries.GetTalentoEsportivoByAluno;
+using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoByVocacionalId;
+using DnaBrasilApi.Application.Common.Models;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -32,7 +34,8 @@ public class Laudos : EndpointGroupBase
             .MapGet(GetLaudoByAluno, "Aluno/{id}")
             .MapGet(GetTalentoEsportivoByAlunoQuery, "TalentoEsportivo/Aluno/{id}")
             .MapGet(GetEncaminhamentoBySaudeId, "Encaminhamento/Saude/{id}")
-            .MapGet(GetEncaminhamentoByQualidadeDeVidaId, "Encaminhamento/QualidadeDeVida/{id}");
+            .MapGet(GetEncaminhamentoByQualidadeDeVidaId, "Encaminhamento/QualidadeDeVida/{id}")
+            .MapGet(GetEncaminhamentoByVocacionalId, "Encaminhamentos/Vocacional");
     }
     public async Task<int> CreateLaudo(ISender sender, CreateLaudoCommand command)
     {
@@ -72,9 +75,9 @@ public class Laudos : EndpointGroupBase
         var result = await sender.Send(command);
         return result;
     }
-    public async Task<List<LaudoDto>> GetLaudosAll(ISender sender)
+    public async Task<PaginatedList<LaudoDto>> GetLaudosAll(ISender sender, [AsParameters] GetLaudosAllQuery query)
     {
-        return await sender.Send(new GetLaudosAllQuery());
+        return await sender.Send(query);
     }
     public async Task<LaudoDto> GetLaudoByAluno(ISender sender, int id)
     {
@@ -92,5 +95,9 @@ public class Laudos : EndpointGroupBase
     public async Task<List<EncaminhamentoDto>> GetEncaminhamentoByQualidadeDeVidaId(ISender sender, int id)
     {
         return await sender.Send(new GetEncaminhamentoByQualidadeDeVidaIdQuery(id));
+    }
+    public async Task<List<EncaminhamentoDto>> GetEncaminhamentoByVocacionalId(ISender sender)
+    {
+        return await sender.Send(new GetEncaminhamentoByVocacionalIdQuery());
     }
 }
