@@ -4,7 +4,7 @@ public class CreateConsumoAlimentarCommandValidator : AbstractValidator<CreateCo
 {
     public CreateConsumoAlimentarCommandValidator()
     {
-        RuleFor(v => v.Resposta)
+        RuleFor(v => v.Respostas)
             .MaximumLength(500)
             .NotEmpty();
     }

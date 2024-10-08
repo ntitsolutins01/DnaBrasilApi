@@ -6,8 +6,8 @@ namespace DnaBrasilApi.Application.Laudos.Commands.CreateSaudeBucal;
 
 public record CreateSaudeBucalCommand : IRequest<int>
 {
-    public required  int ProfissionalId { get; init; }
-    public required  int AlunoId { get; init; }
+    public required int ProfissionalId { get; init; }
+    public required int AlunoId { get; init; }
     public required string Respostas { get; init; }
     public required string StatusSaudeBucal { get; init; }
 }

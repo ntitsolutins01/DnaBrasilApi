@@ -4,8 +4,8 @@ public class CreateTalentoEsportivoCommandValidator : AbstractValidator<CreateTa
 {
     public CreateTalentoEsportivoCommandValidator()
     {
-        RuleFor(v => v.Profissional)
-            .NotEmpty();
+        //RuleFor(v => v.Profissional)
+        //    .NotEmpty();
         //RuleFor(v => v.Flexibilidade);
         //RuleFor(v => v.PreensaoManual);
         //RuleFor(v => v.Velocidade);

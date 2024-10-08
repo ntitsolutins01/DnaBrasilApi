@@ -4,7 +4,7 @@ public class CreateSaudeBucalCommandValidator : AbstractValidator<CreateSaudeBuc
 {
     public CreateSaudeBucalCommandValidator()
     {
-        RuleFor(v => v.Resposta)
+        RuleFor(v => v.Respostas)
             .MaximumLength(500);
     }
 }
