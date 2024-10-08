@@ -3871,12 +3871,44 @@
             "x-position": 1
           }
         ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Laudos/v1/EncaminhamentoTalentoEsportivo/{alunoId}": {
+      "put": {
+        "tags": [
+          "Laudos"
+        ],
+        "operationId": "UpdateEncaminhamentoTalentoEsportivoV1",
+        "parameters": [
+          {
+            "name": "alunoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
         "requestBody": {
           "x-name": "command",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateEncaminhamentoTalentoEsportivoCommand"
+                "$ref": "#/components/schemas/UpdateEncaminhamentoTalentoEsportivoV1Command"
               }
             }
           },
@@ -13671,16 +13703,9 @@
           }
         }
       },
-      "UpdateEncaminhamentoTalentoEsportivoCommand": {
+      "UpdateEncaminhamentoTalentoEsportivoV1Command": {
         "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "alunoId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          }
-        }
+        "additionalProperties": false
       },
       "UpdateEncaminhamentoVocacionalCommand": {
         "type": "object",

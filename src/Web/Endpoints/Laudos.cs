@@ -3,6 +3,7 @@ using DnaBrasilApi.Application.Laudos.Commands.CreateLaudo;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoConsumoAlimentar;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoSaudeBucal;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoTalentoEsportivo;
+using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoTalentoEsportivoV1;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoVocacional;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateQualidadeVida;
 using DnaBrasilApi.Application.Laudos.Queries;
@@ -10,6 +11,7 @@ using DnaBrasilApi.Application.Laudos.Queries.GetLaudosAll;
 using DnaBrasilApi.Application.Laudos.Queries.GetLaudoByAluno;
 using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoBySaudeId;
 using DnaBrasilApi.Application.Laudos.Queries.GetTalentoEsportivoByAluno;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -20,7 +22,8 @@ public class Laudos : EndpointGroupBase
         app.MapGroup(this)
             //.RequireAuthorization()
             .MapPost(CreateLaudo)
-            .MapPut(UpdateEncaminhamentoTalentoEsportivo, "EncaminhamentoTalentoEsportivo/{alunoId}")
+            .MapPut(UpdateEncaminhamentoTalentoEsportivo, "Encaminhamento/TalentoEsportivo/{alunoId}")
+            .MapPut(UpdateEncaminhamentoTalentoEsportivoV1, "v1/Encaminhamento/TalentoEsportivo/{alunoId}")
             .MapPut(UpdateEncaminhamentoVocacional, "EncaminhamentoVocacional/{alunoId}")
             .MapPut(UpdateEncaminhamentoQualidadeDeVida, "EncaminhamentoQualidadeDeVida/{alunoId}")
             .MapPut(UpdateEncaminhamentoConsumoAlimentar, "EncaminhamentoConsumoAlimentar/{alunoId}")
@@ -34,9 +37,13 @@ public class Laudos : EndpointGroupBase
     {
         return await sender.Send(command);
     }
-    public async Task<bool> UpdateEncaminhamentoTalentoEsportivo(ISender sender, int alunoId, UpdateEncaminhamentoTalentoEsportivoCommand command)
+    public async Task<bool> UpdateEncaminhamentoTalentoEsportivo(ISender sender, int alunoId)
     {
-        if (alunoId != command.AlunoId) return false;
+        var result = await sender.Send(new UpdateEncaminhamentoTalentoEsportivoCommand(alunoId));
+        return result;
+    }
+    public async Task<bool> UpdateEncaminhamentoTalentoEsportivoV1(ISender sender, int alunoId, UpdateEncaminhamentoTalentoEsportivoV1Command command)
+    {
         var result = await sender.Send(command);
         return result;
     }
