@@ -58,7 +58,7 @@ public class LaudoDto
         {
             CreateMap<Laudo, LaudoDto>()
                 .ForMember(dest => dest.TalentoEsportivoId, opt => opt.MapFrom(src => src.TalentoEsportivo!.Id))
-                .ForMember(dest => dest.VocacionalId, opt => opt.MapFrom(src => src.Vocacional!.Id))
+                .ForMember(dest => dest.VocacionalId, opt => opt.MapFrom(src => src.Vocacional!.Encaminhamento!.Id))
                 .ForMember(dest => dest.QualidadeDeVidaId, opt => opt.MapFrom(src => src.QualidadeDeVida!.Id))
                 .ForMember(dest => dest.SaudeId, opt => opt.MapFrom(src => src.Saude!.Id))
                 .ForMember(dest => dest.ConsumoAlimentarId, opt => opt.MapFrom(src => src.ConsumoAlimentar!.Id))
@@ -76,7 +76,6 @@ public class LaudoDto
                 .ForMember(dest => dest.NomeLocalidade, opt => opt.MapFrom(src => src.Aluno.Localidade.Nome))
                 .ForMember(dest => dest.Modalidade, opt => opt.MapFrom(src => src.TalentoEsportivo!.EncaminhamentoTexo))
                 .ForMember(dest => dest.EncaminhamentoVocacionalId, opt => opt.MapFrom(src => src.Vocacional!.Encaminhamento!.Id))
-                //.ForMember(dest => dest.EncaminhamentoQualidadeVidaId, opt => opt.MapFrom(src => src.QualidadeDeVida!.Encaminhamentos!))
                 .ForMember(dest => dest.EncaminhamentoConsumoAlimentarId, opt => opt.MapFrom(src => src.ConsumoAlimentar!.Encaminhamento!.Id))
                 .ForMember(dest => dest.EncaminhamentoConsumoAlimentarId, opt => opt.MapFrom(src => src.SaudeBucal!.Encaminhamento!.Id))
                 .ForMember(dest => dest.EncaminhamentoTalentoEsportivoId, opt => opt.MapFrom(src => src.TalentoEsportivo!.Encaminhamento!.Id))

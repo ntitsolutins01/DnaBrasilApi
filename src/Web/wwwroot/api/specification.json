@@ -4148,6 +4148,29 @@
         }
       }
     },
+    "/api/Laudos/Encaminhamentos/Vocacional": {
+      "get": {
+        "tags": [
+          "Laudos"
+        ],
+        "operationId": "GetEncaminhamentoByVocacionalId",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EncaminhamentoDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/LinhasAcoes": {
       "get": {
         "tags": [
