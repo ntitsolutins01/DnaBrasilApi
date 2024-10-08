@@ -4260,7 +4260,7 @@
         "tags": [
           "Laudos"
         ],
-        "operationId": "GetEncaminhamentoByVocacionalId",
+        "operationId": "GetEncaminhamentoByVocacional",
         "responses": {
           "200": {
             "description": "",
