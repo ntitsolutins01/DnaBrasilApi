@@ -26,4 +26,5 @@ public class Modalidade : BaseAuditableEntity
     public List<Aluno>? Alunos { get; set; }
     public LinhaAcao? LinhaAcao { get; set; }
     public List<Profissional>? Profissionais { get; set; }
+    public byte[]? ByteImage { get; set; }
 }

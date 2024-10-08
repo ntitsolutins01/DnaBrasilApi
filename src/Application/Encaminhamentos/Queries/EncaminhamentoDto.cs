@@ -10,7 +10,8 @@ public class EncaminhamentoDto
     public required string Parametro { get; init; }
     public string? Descricao { get; init; }
     public bool Status { get; init; }
-   
+    public byte[]? ByteImage { get; set; }
+
 
     private class Mapping : Profile
     {

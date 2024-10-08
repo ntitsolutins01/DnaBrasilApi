@@ -7,9 +7,11 @@ using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoTalentoEsport
 using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoVocacional;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateQualidadeVida;
 using DnaBrasilApi.Application.Laudos.Queries;
+using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoByQualidadeDeVidaId;
 using DnaBrasilApi.Application.Laudos.Queries.GetLaudosAll;
 using DnaBrasilApi.Application.Laudos.Queries.GetLaudoByAluno;
 using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoBySaudeId;
+using DnaBrasilApi.Application.Laudos.Queries.GetTalentoEsportivoByAluno;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -22,16 +24,11 @@ public class Laudos : EndpointGroupBase
             .MapPost(CreateLaudo)
             .MapPut(UpdateEncaminhamentoTalentoEsportivo, "Encaminhamento/TalentoEsportivo/{alunoId}")
             .MapPut(UpdateEncaminhamentoTalentoEsportivoV1, "v1/Encaminhamento/TalentoEsportivo/{alunoId}")
-
             .MapPut(UpdateEncaminhamentoSaudeBucal, "Encaminhamento/SaudeBucal/{alunoId}")
-
             .MapPut(UpdateEncaminhamentoVocacional, "Encaminhamento/Vocacional/{alunoId}")
             .MapPut(UpdateEncaminhamentoQualidadeDeVida, "Encaminhamento/QualidadeDeVida/{alunoId}")
             .MapPut(UpdateEncaminhamentoConsumoAlimentar, "Encaminhamento/ConsumoAlimentar/{alunoId}")
             .MapGet(GetLaudosAll)
-
-
-
             .MapGet(GetLaudoByAluno, "Aluno/{id}")
             .MapGet(GetTalentoEsportivoByAlunoQuery, "TalentoEsportivo/Aluno/{id}")
             .MapGet(GetEncaminhamentoBySaudeId, "Encaminhamento/Saude/{id}")
@@ -82,7 +79,6 @@ public class Laudos : EndpointGroupBase
     public async Task<LaudoDto> GetLaudoByAluno(ISender sender, int id)
     {
         var laudo = await sender.Send(new GetLaudoByAlunoQuery(id));
-
         return laudo;
     }
     public async Task<EncaminhamentoDto> GetEncaminhamentoBySaudeId(ISender sender, int id)
@@ -96,9 +92,5 @@ public class Laudos : EndpointGroupBase
     public async Task<List<EncaminhamentoDto>> GetEncaminhamentoByQualidadeDeVidaId(ISender sender, int id)
     {
         return await sender.Send(new GetEncaminhamentoByQualidadeDeVidaIdQuery(id));
-    }
-    public async Task<TalentoEsportivoDto> GetTalentoEsportivoByAlunoQuery(ISender sender, int id)
-    {
-        return await sender.Send(new GetTalentoEsportivoByAlunoQuery(id));
     }
 }

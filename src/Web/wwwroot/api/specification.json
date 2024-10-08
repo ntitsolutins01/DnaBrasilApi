@@ -3853,7 +3853,7 @@
         }
       }
     },
-    "/api/Laudos/EncaminhamentoTalentoEsportivo/{alunoId}": {
+    "/api/Laudos/Encaminhamento/TalentoEsportivo/{alunoId}": {
       "put": {
         "tags": [
           "Laudos"
@@ -3885,7 +3885,7 @@
         }
       }
     },
-    "/api/Laudos/v1/EncaminhamentoTalentoEsportivo/{alunoId}": {
+    "/api/Laudos/v1/Encaminhamento/TalentoEsportivo/{alunoId}": {
       "put": {
         "tags": [
           "Laudos"
@@ -3909,6 +3909,50 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/UpdateEncaminhamentoTalentoEsportivoV1Command"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Laudos/Encaminhamento/SaudeBucal/{alunoId}": {
+      "put": {
+        "tags": [
+          "Laudos"
+        ],
+        "operationId": "UpdateEncaminhamentoSaudeBucal",
+        "parameters": [
+          {
+            "name": "alunoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEncaminhamentoSaudeBucalCommand"
               }
             }
           },
@@ -4061,51 +4105,7 @@
         }
       }
     },
-    "/api/Laudos/EncaminhamentoSaudeBucal/{alunoId}": {
-      "put": {
-        "tags": [
-          "Laudos"
-        ],
-        "operationId": "UpdateEncaminhamentoSaudeBucal",
-        "parameters": [
-          {
-            "name": "alunoId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "x-position": 1
-          }
-        ],
-        "requestBody": {
-          "x-name": "command",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateEncaminhamentoSaudeBucalCommand"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 2
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "boolean"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/Laudos/Laudo/Aluno/{id}": {
+    "/api/Laudos/Aluno/{id}": {
       "get": {
         "tags": [
           "Laudos"
@@ -4137,39 +4137,7 @@
         }
       }
     },
-    "/api/Laudos/Laudo/TalentoEsportivo/Aluno/{id}": {
-      "get": {
-        "tags": [
-          "Laudos"
-        ],
-        "operationId": "GetTalentoEsportivoByAlunoQuery",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "x-position": 1
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TalentoEsportivoDto"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/Laudos/EncaminhamentoSaude/{id}": {
+    "/api/Laudos/TalentoEsportivo/Aluno/{id}": {
       "get": {
         "tags": [
           "Laudos"
@@ -9844,6 +9812,11 @@
                 "items": {
                   "$ref": "#/components/schemas/Profissional"
                 }
+              },
+              "byteImage": {
+                "type": "string",
+                "format": "byte",
+                "nullable": true
               }
             }
           }
@@ -10892,6 +10865,11 @@
               },
               "status": {
                 "type": "boolean"
+              },
+              "byteImage": {
+                "type": "string",
+                "format": "byte",
+                "nullable": true
               }
             }
           }
@@ -11509,6 +11487,11 @@
                 "$ref": "#/components/schemas/LinhaAcaoDto"
               }
             ]
+          },
+          "byteImage": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
           }
         }
       },
@@ -13396,6 +13379,11 @@
           },
           "status": {
             "type": "boolean"
+          },
+          "byteImage": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
           }
         }
       },
@@ -13774,6 +13762,17 @@
         "type": "object",
         "additionalProperties": false
       },
+      "UpdateEncaminhamentoSaudeBucalCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "alunoId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        }
+      },
       "UpdateEncaminhamentoVocacionalCommand": {
         "type": "object",
         "additionalProperties": false,
@@ -13797,17 +13796,6 @@
         }
       },
       "UpdateEncaminhamentoConsumoAlimentarCommand": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "alunoId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          }
-        }
-      },
-      "UpdateEncaminhamentoSaudeBucalCommand": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
