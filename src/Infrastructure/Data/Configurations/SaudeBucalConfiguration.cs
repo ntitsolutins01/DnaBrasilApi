@@ -7,7 +7,7 @@ public class SaudeBucalConfiguration : IEntityTypeConfiguration<SaudeBucal>
 {
     public void Configure(EntityTypeBuilder<SaudeBucal> builder)
     {
-        builder.Property(t => t.Resposta)
+        builder.Property(t => t.Respostas)
             .HasMaxLength(500)
             .IsRequired(); 
         builder.Property(t => t.StatusSaudeBucal)

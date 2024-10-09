@@ -16,7 +16,6 @@ public class LaudoDto
     public int? LocalidadeId { get; init; }
     public int? AlunoId { get; init; }
     public int? EncaminhamentoVocacionalId { get; init; }
-    //public int? EncaminhamentoQualidadeVidaId { get; init; }
     public int? EncaminhamentoConsumoAlimentarId { get; init; }
     public int? EncaminhamentoSaudeBucalId { get; init; }
     public int? EncaminhamentoTalentoEsportivoId { get; init; }
@@ -31,6 +30,7 @@ public class LaudoDto
     public string? Sexo { get; init; }
     public string? StatusLaudo { get; init; }
     public DateTime? DtNascimento { get; init; }
+    public int? Idade { get; init; }
     public string? Email { get; init; }
     public byte[]? QrCode { get; init; }
     public decimal? Estatura { get; init; }
@@ -38,11 +38,6 @@ public class LaudoDto
     public byte[]? ByteImage { get; init; }
     public string? NomeFoto { get; init; }
     public string? Modalidade { get; init; }
-    //public string? Serie { get; init; }
-    //public string? Turma { get; init; }
-    //public int? MunicipioId { get; init; }
-    //public string? NomeMunicipio { get; init; }
-
     #endregion
 
     #region Saude
@@ -57,23 +52,24 @@ public class LaudoDto
         {
             CreateMap<Laudo, LaudoDto>()
                 .ForMember(dest => dest.TalentoEsportivoId, opt => opt.MapFrom(src => src.TalentoEsportivo!.Id))
-                .ForMember(dest => dest.VocacionalId, opt => opt.MapFrom(src => src.Vocacional!.Id))
+                .ForMember(dest => dest.VocacionalId, opt => opt.MapFrom(src => src.Vocacional!.Encaminhamento!.Id))
                 .ForMember(dest => dest.QualidadeDeVidaId, opt => opt.MapFrom(src => src.QualidadeDeVida!.Id))
                 .ForMember(dest => dest.SaudeId, opt => opt.MapFrom(src => src.Saude!.Id))
-                .ForMember(dest => dest.ConsumoAlimentarId, opt => opt.MapFrom(src => src.ConsumoAlimentar!.Id))
-                .ForMember(dest => dest.SaudeBucalId, opt => opt.MapFrom(src => src.SaudeBucal!.Id))
+                .ForMember(dest => dest.ConsumoAlimentarId, opt => opt.MapFrom(src => src.ConsumoAlimentar!.Encaminhamento!.Id))
+                .ForMember(dest => dest.SaudeBucalId, opt => opt.MapFrom(src => src.SaudeBucal!.Encaminhamento!.Id))
                 .ForMember(dest => dest.AlunoId, opt => opt.MapFrom(src => src.Aluno!.Id))
                 .ForMember(dest => dest.NomeAluno, opt => opt.MapFrom(src => src.Aluno.Nome))
+                .ForMember(dest => dest.Idade, opt => opt.MapFrom(src => GetIdade(src.Aluno!.DtNascimento, null)))
                 .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Aluno.Email))
-                //.ForMember(dest => dest.QrCode, opt => opt.MapFrom(src => src.Aluno.QrCode))
+                .ForMember(dest => dest.QrCode, opt => opt.MapFrom(src => src.Aluno.QrCode))
                 .ForMember(dest => dest.Estatura, opt => opt.MapFrom(src => src.Saude!.Altura))
                 .ForMember(dest => dest.Massa, opt => opt.MapFrom(src => src.Saude!.Massa))
-                //.ForMember(dest => dest.ByteImage, opt => opt.MapFrom(src => src.Aluno.ByteImage))
+                .ForMember(dest => dest.ByteImage, opt => opt.MapFrom(src => src.Aluno.ByteImage))
                 .ForMember(dest => dest.NomeFoto, opt => opt.MapFrom(src => src.Aluno.NomeFoto))
                 .ForMember(dest => dest.LocalidadeId, opt => opt.MapFrom(src => src.Aluno.Localidade.Id))
                 .ForMember(dest => dest.NomeLocalidade, opt => opt.MapFrom(src => src.Aluno.Localidade.Nome))
+                .ForMember(dest => dest.Modalidade, opt => opt.MapFrom(src => src.TalentoEsportivo!.EncaminhamentoTexo))
                 .ForMember(dest => dest.EncaminhamentoVocacionalId, opt => opt.MapFrom(src => src.Vocacional!.Encaminhamento!.Id))
-                //.ForMember(dest => dest.EncaminhamentoQualidadeVidaId, opt => opt.MapFrom(src => src.QualidadeDeVida!.Encaminhamentos!))
                 .ForMember(dest => dest.EncaminhamentoConsumoAlimentarId, opt => opt.MapFrom(src => src.ConsumoAlimentar!.Encaminhamento!.Id))
                 .ForMember(dest => dest.EncaminhamentoConsumoAlimentarId, opt => opt.MapFrom(src => src.SaudeBucal!.Encaminhamento!.Id))
                 .ForMember(dest => dest.EncaminhamentoTalentoEsportivoId, opt => opt.MapFrom(src => src.TalentoEsportivo!.Encaminhamento!.Id))
@@ -106,6 +102,28 @@ public class LaudoDto
             catch
             {
                 return 0.ToString();
+            }
+        }
+        public static int GetIdade(DateTime data, DateTime? now = null)
+        {
+            // Carrega a data do dia para comparação caso data informada seja nula
+
+            now = ((now == null) ? DateTime.Now : now);
+
+            try
+            {
+                int YearsOld = (now.Value.Year - data.Year);
+
+                if (now.Value.Month < data.Month || (now.Value.Month == data.Month && now.Value.Day < data.Day))
+                {
+                    YearsOld--;
+                }
+
+                return (YearsOld < 0) ? 0 : YearsOld;
+            }
+            catch
+            {
+                return 0;
             }
         }
     }

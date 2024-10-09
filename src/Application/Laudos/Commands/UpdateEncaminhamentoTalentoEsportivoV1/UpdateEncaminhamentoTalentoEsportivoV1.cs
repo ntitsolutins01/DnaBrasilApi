@@ -1,28 +1,36 @@
-ï»¿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
+using DnaBrasilApi.Domain.Enums;
 
-namespace DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoAlunos;
+namespace DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoTalentoEsportivoV1;
 
-public record UpdateEncaminhamentoAlunosCommand : IRequest<bool>
+public record UpdateEncaminhamentoTalentoEsportivoV1Command : IRequest<bool>
 {
 
 }
 
-public class UpdateEncaminhamentoAlunosCommandHandler : IRequestHandler<UpdateEncaminhamentoAlunosCommand, bool>
+public class UpdateEncaminhamentoTalentoEsportivoV1CommandHandler : IRequestHandler<UpdateEncaminhamentoTalentoEsportivoV1Command, bool>
 {
     private readonly IApplicationDbContext _context;
 
-    public UpdateEncaminhamentoAlunosCommandHandler(IApplicationDbContext context)
+    public UpdateEncaminhamentoTalentoEsportivoV1CommandHandler(IApplicationDbContext context)
     {
         _context = context;
     }
 
-    public async Task<bool> Handle(UpdateEncaminhamentoAlunosCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(UpdateEncaminhamentoTalentoEsportivoV1Command request, CancellationToken cancellationToken)
     {
         IQueryable<Aluno> alunos;
 
-        alunos = _context.Alunos//.Where(x => x.Id == 34425)//37315 - Feminino 38438
+        var arr = new int[]
+        {
+            34906
+        };
+
+        alunos = _context.Alunos.Where(x => arr.Contains(x.Id))//37315 - Feminino 38438
             .AsNoTracking();
+
+        var ct = alunos.Count();
 
         var desempenhos = await _context.TextosLaudos
             .Where(x => x.Status && x.TipoLaudo!.Id == 4)
@@ -35,9 +43,14 @@ public class UpdateEncaminhamentoAlunosCommandHandler : IRequestHandler<UpdateEn
 
         var verificaAlunos = alunos.Select(x => x.Id);
 
-        var laudos = _context.Laudos.Where(x => verificaAlunos.Contains(x.Aluno.Id)).Include(i => i.TalentoEsportivo).Where(x => x.TalentoEsportivo != null)
+        var laudos = _context.Laudos.Where(x => verificaAlunos.Contains(x.Aluno.Id))
+            .Include(i => i.TalentoEsportivo)
+            //.Where(x => x.TalentoEsportivo == null)
             .Include(a => a.Aluno)
             .AsNoTracking();
+
+        var encaminhamentos = _context.Encaminhamentos
+            .Where(x => x.TipoLaudo.Id == (int)EnumTipoLaudo.TalentoEsportivo);
 
         foreach (var aluno in laudos)
         {
@@ -83,7 +96,7 @@ public class UpdateEncaminhamentoAlunosCommandHandler : IRequestHandler<UpdateEn
                                     .Select(s => s.Nome).ToList()!);
                                 break;
                             }
-                        case "ImpulsÃ£o" when
+                        case "Impulsão" when
                             aluno.TalentoEsportivo.ImpulsaoHorizontal >= item.PontoInicial &&
                             aluno.TalentoEsportivo.ImpulsaoHorizontal <= item.PontoFinal:
                             {
@@ -141,7 +154,7 @@ public class UpdateEncaminhamentoAlunosCommandHandler : IRequestHandler<UpdateEn
                                 .Select(s => s.Nome).ToList()!);
                                 break;
                             }
-                        case "PreensÃ£o Manual" when
+                        case "Preensão Manual" when
                             aluno.TalentoEsportivo.PreensaoManual >= item.PontoInicial &&
                             aluno.TalentoEsportivo.PreensaoManual <= item.PontoFinal:
                             {
@@ -204,36 +217,63 @@ public class UpdateEncaminhamentoAlunosCommandHandler : IRequestHandler<UpdateEn
             }
 
 
-                var entity = await _context.TalentosEsportivos
-                    .FindAsync([aluno.TalentoEsportivo.Id], cancellationToken);
+            var entity = await _context.TalentosEsportivos
+                .FindAsync([aluno.TalentoEsportivo.Id], cancellationToken);
 
-                Guard.Against.NotFound(aluno.TalentoEsportivo.Id, entity);
+            Guard.Against.NotFound(aluno.TalentoEsportivo.Id, entity);
 
-            if (encaminhamento.Count>0)
+            if (encaminhamento.Count > 0)
             {
                 var q = from x in encaminhamento
-                    group x by x into g
-                    let count = g.Count()
-                    orderby count descending
-                    select new { Value = g.Key, Count = count };
+                        group x by x into g
+                        let count = g.Count()
+                        orderby count descending
+                        select new { Value = g.Key, Count = count };
 
                 entity.EncaminhamentoTexo = q.FirstOrDefault()!.Value;
+                var encaminhamentoTalentoEsportivo = encaminhamentos.First(x => x.Nome == q.FirstOrDefault()!.Value);
+
+                entity.Encaminhamento = encaminhamentoTalentoEsportivo;
+                entity.Imc = GetImc((decimal)aluno.TalentoEsportivo.Altura!, (decimal)aluno.TalentoEsportivo.Peso!);
 
                 var result = await _context.SaveChangesAsync(cancellationToken);
             }
             else
             {
+                var encaminhamentoTalentoEsportivo = encaminhamentos.First(x => x.Id == 23);
+
+                entity.Encaminhamento = encaminhamentoTalentoEsportivo;
+                entity.Imc = GetImc((decimal)aluno.TalentoEsportivo.Altura!, (decimal)aluno.TalentoEsportivo.Peso!);
                 entity.EncaminhamentoTexo = "Em Desenvolvimento";
 
                 var result = await _context.SaveChangesAsync(cancellationToken);
             }
 
-            
+
 
             encaminhamento = new List<string>();
         }
 
         return true;
+    }
+
+    /// <summary>
+    /// Calcula Imc
+    /// </summary>
+    private static decimal GetImc(decimal altura, decimal massa)
+    {
+
+        try
+        {
+            double alturaMetros = (double)(altura * (decimal?)0.01)!;
+            var imc = Convert.ToDecimal(((double)massa / Math.Pow(alturaMetros, 2)).ToString("F"));
+
+            return imc;
+        }
+        catch
+        {
+            return 0;
+        }
     }
 
     /// <summary>
@@ -244,7 +284,7 @@ public class UpdateEncaminhamentoAlunosCommandHandler : IRequestHandler<UpdateEn
     /// <returns>Retorna inteiro com quantiadde de anos</returns>
     private static int GetIdade(DateTime data, DateTime? now = null)
     {
-        // Carrega a data do dia para comparaÃ§Ã£o caso data informada seja nula
+        // Carrega a data do dia para comparação caso data informada seja nula
 
         now = now == null ? DateTime.Now : now;
 
