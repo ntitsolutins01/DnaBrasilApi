@@ -1,8 +1,11 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Application.Common.Models;
+using DnaBrasilApi.Application.Cursos.Queries;
 using DnaBrasilApi.Application.Dashboards.Queries;
+using DnaBrasilApi.Application.MetricasImc.Queries.GetMetricaImcById;
 using DnaBrasilApi.Domain.Entities;
 using MediatR;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace DnaBrasilApi.Application.Laudos.Queries.GetDesempenhoAlunos;
 //[Authorize]
@@ -22,21 +25,32 @@ public class GetDesempenhoAlunosQueryHandler : IRequestHandler<GetDesempenhoAlun
     public Task<DesempenhoDto> Handle(GetDesempenhoAlunosQuery request, CancellationToken cancellationToken)
     {
         IQueryable<Aluno> alunos;
+        IQueryable<Laudo> laudo;
 
         alunos = _context.Alunos
             .Where(x => x.Id == request.id)//37315 - Feminino 38438
             .AsNoTracking();
 
-        var result = FilterDesempenhoAlunos(alunos, cancellationToken);
+        laudo = _context.Laudos
+            .AsNoTracking()
+            .Where(x => x.Aluno.Id == request.id);
+
+        var result = FilterDesempenhoAlunos(alunos, laudo, cancellationToken);
 
         return result;
     }
 
     private async Task<DesempenhoDto> FilterDesempenhoAlunos(IQueryable<Aluno> alunos,
-        CancellationToken cancellationToken)
+        IQueryable<Laudo> laudo, CancellationToken cancellationToken)
     {
-        var desempenhos = await _context.TextosLaudos
+        var desempenhosEsportivos = await _context.TextosLaudos
             .Where(x => x.Status && x.TipoLaudo!.Id == 4)
+            .Select(s => s.Classificacao)
+            .Distinct()
+            .ToListAsync();
+
+        var desempenhosImcs = await _context.TextosLaudos
+            .Where(x => x.Status && x.TipoLaudo!.Id == 9)
             .Select(s => s.Classificacao)
             .Distinct()
             .ToListAsync();
@@ -51,7 +65,9 @@ public class GetDesempenhoAlunosQueryHandler : IRequestHandler<GetDesempenhoAlun
             
             { "shutlleRun", 0 },
             { "prancha", 0 },
-            { "vo2Max", 0 }
+            { "vo2Max", 0 },
+
+            { "imc", 0}
         };
 
         Dictionary<string, decimal> dictDesempenhoMasculino = new()
@@ -64,7 +80,9 @@ public class GetDesempenhoAlunosQueryHandler : IRequestHandler<GetDesempenhoAlun
             
             { "shutlleRun", 0 },
             { "prancha", 0 },
-            { "vo2Max", 0 }
+            { "vo2Max", 0 },
+
+            { "imc", 0}
         };
         Dictionary<string, decimal> dictDesempenhoFeminino = new()
         {
@@ -73,11 +91,12 @@ public class GetDesempenhoAlunosQueryHandler : IRequestHandler<GetDesempenhoAlun
             { "forcaMembrosSup", 0 },
             { "forcaExplosiva", 0 },
             { "aptidaoCardio", 0 },
-            
-            { "resAbdominal", 0 },
+
             { "shutlleRun", 0 },
             { "prancha", 0 },
-            { "vo2Max", 0 }
+            { "vo2Max", 0 },
+
+            { "imc", 0}
         };
 
         List<TextoLaudo> textoLaudo = new();
@@ -85,7 +104,11 @@ public class GetDesempenhoAlunosQueryHandler : IRequestHandler<GetDesempenhoAlun
 
         var verificaAlunos = alunos.Select(x => x.Id);
 
-        var laudos = _context.Laudos.Where(x => verificaAlunos.Contains(x.Aluno.Id)).Include(i => i.TalentoEsportivo).Where(x => x.TalentoEsportivo != null)
+        var laudosEsportvios = _context.Laudos.Where(x => verificaAlunos.Contains(x.Aluno.Id)).Include(i => i.TalentoEsportivo).Where(x => x.TalentoEsportivo != null)
+            .Include(a => a.Aluno)
+            .AsNoTracking();
+
+        var laudosImcs = _context.Laudos.Where(x => verificaAlunos.Contains(x.Aluno.Id)).Include(i => i.Saude).Where(x => x.Saude != null)
             .Include(a => a.Aluno)
             .AsNoTracking();
 
@@ -99,7 +122,9 @@ public class GetDesempenhoAlunosQueryHandler : IRequestHandler<GetDesempenhoAlun
         double aptidaoCardio = 0;
         double prancha = 0;
 
-        foreach (var aluno in laudos)
+        int imcSaude = 0;
+
+        foreach (var aluno in laudosEsportvios)
         {
             if (aluno.TalentoEsportivo == null)
             {
@@ -111,7 +136,7 @@ public class GetDesempenhoAlunosQueryHandler : IRequestHandler<GetDesempenhoAlun
             //var modalidades = _context.Modalidades
             //    .Where(x => x.Status == true).ToList();
 
-            foreach (var desempenho in desempenhos)
+            foreach (var desempenho in desempenhosEsportivos)
             {
                 textoLaudo = _context.TextosLaudos.Where(x =>
                     x.Status &&
@@ -531,11 +556,106 @@ public class GetDesempenhoAlunosQueryHandler : IRequestHandler<GetDesempenhoAlun
             }
         }
 
+        foreach (var aluno in laudosImcs)
+        {
+            if (aluno.Saude == null)
+            {
+                continue;
+            }
+
+            var idade = GetIdade(aluno.Aluno.DtNascimento, DateTime.Now);
+
+            var imc = GetImc(aluno.Saude!.Massa, aluno.Saude!.Altura);
+            var decimalImc = Convert.ToDecimal(imc);
+
+            //var modalidades = _context.Modalidades
+            //    .Where(x => x.Status == true).ToList();
+
+            foreach (var desempenho in desempenhosImcs)
+            {
+                textoLaudo = _context.TextosLaudos.Where(x =>
+                    x.Status &&
+                    x.Classificacao!.Equals(desempenho) &&
+                    x.Idade == idade &&
+                    (x.Aviso!.Trim() == "ABAIXODONORMAL" || x.Aviso!.Trim() == "NORMAL" || x.Aviso!.Trim() == "OBESIDADE" ||
+                     x.Aviso!.Trim() == "SOBREPESO") &&
+                    x.Sexo == (idade == 99 ? "G" : aluno.Aluno.Sexo)).ToList();
+
+                foreach (var item in textoLaudo)
+                {
+                    if (decimalImc >= item.PontoInicial && decimalImc <= item.PontoFinal)
+                    {
+                        var nota = item.Aviso;
+
+                        switch (aluno.Aluno.Sexo!)
+                        {
+                            case "M":
+                                {
+                                    if (dictDesempenhoMasculino.ContainsKey("imc"))
+                                    {
+                                        var value = dictDesempenhoMasculino["imc"];
+                                        value += 1;
+                                        dictDesempenhoMasculino["imc"] = value;
+                                    }
+                                    break;
+                                }
+                            default:
+                                {
+                                    if (dictDesempenhoFeminino.ContainsKey("imc"))
+                                    {
+                                        var value = dictDesempenhoFeminino["imc"];
+                                        value += 1;
+                                        dictDesempenhoFeminino["imc"] = value;
+                                    }
+                                    break;
+                                }
+                        }
+
+                        if (dict.ContainsKey("imc"))
+                        {
+                            var valueTotal = dict["imc"];
+                            valueTotal += 1;
+                            dict["imc"] = valueTotal;
+                        }
+
+                        imcSaude = nota switch
+                        {
+                            "ABAIXODONORMAL" => 50,
+                            "NORMAL" => 100,
+                            "OBESIDADE" => 25,
+                            "SOBREPESO" => 0,
+                            _ => 0
+                        };
+
+                        break;
+                    }
+                }
+
+            }
+        }
+
+        var scoreVocacional = 0;
+
+        if (laudo.Any(x => x.Vocacional != null))
+        {
+            scoreVocacional = 100;
+        }
+
+
         var scoreTalentoEsportivo = velocidade + impulsao + shutlleRun + flexibilidadeMuscular
                                     + forcaMembrosSup + aptidaoCardio + prancha;
 
-        return new DesempenhoDto() { ScoreTalentoEsportivo = (int)scoreTalentoEsportivo };
-    }
+        var scoreSaude = imcSaude;
+
+            return new DesempenhoDto()
+            {
+                ScoreTalentoEsportivo = Round(scoreTalentoEsportivo),
+                ScoreSaude = scoreSaude,
+
+                ScoreVocacional = scoreVocacional,
+                ScoreDna = Round(scoreTalentoEsportivo + scoreSaude + scoreVocacional)
+            };
+        }
 
     /// <summary>
     /// Calcula quantidade de anos passdos com base em duas datas, caso encontre qualquer problema retorna 0 
@@ -565,5 +685,35 @@ public class GetDesempenhoAlunosQueryHandler : IRequestHandler<GetDesempenhoAlun
             return 0;
         }
     }
-}
+    private static int Round(double number)
+    {
+        if (number - (int)number >= 0.5)
+        {
+            number = (int)number + 1;
+        }
+        else
+        {
+            number = (int)number;
+        }
 
+        return (int)number;
+    }
+    public static string GetImc(decimal? massa, decimal? altura)
+    {
+        try
+        {
+            var inteiro = massa! * 100 * 100;
+            var dividendo = altura * altura;
+            var result = Convert.ToDecimal(inteiro) / Convert.ToDecimal(dividendo);
+
+            Double doublVal = Convert.ToDouble(String.Format("{0:0.00}", result));
+
+            return doublVal.ToString();
+
+        }
+        catch
+        {
+            return 0.ToString();
+        }
+    }
+}
