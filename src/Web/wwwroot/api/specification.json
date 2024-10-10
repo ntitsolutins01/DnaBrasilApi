@@ -4297,6 +4297,38 @@
         }
       }
     },
+    "/api/Laudos/Desempenho/{id}": {
+      "get": {
+        "tags": [
+          "Laudos"
+        ],
+        "operationId": "GetDesempenhoAlunos",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DesempenhoDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/LinhasAcoes": {
       "get": {
         "tags": [
@@ -14122,6 +14154,97 @@
           "imcSaude": {
             "type": "string",
             "nullable": true
+          },
+          "listTotalizadorSaudeSexo": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/TotalizadorSexoSaudeDto"
+              }
+            ]
+          },
+          "listTotalizadorTalento": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/TotalizadorTalentoDto"
+              }
+            ]
+          },
+          "listTotalizadorDesempenho": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/TotalizadorDesempenhoDto"
+              }
+            ]
+          },
+          "listTotalizadorDeficiencia": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/TotalizadorDeficienciaDto"
+              }
+            ]
+          },
+          "listTotalizadorEtnia": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/TotalizadorEtniaDto"
+              }
+            ]
+          },
+          "listTotalizadorSaudeBucal": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/TotalizadorSaudeBucalDto"
+              }
+            ]
+          },
+          "listTotalizadorQualidadeVida": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/TotalizadorQualidadeVidaDto"
+              }
+            ]
+          },
+          "listTotalizadorConsumoAlimentar": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/TotalizadorConsumoAlimentarDto"
+              }
+            ]
+          },
+          "listTotalizadorVocacional": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/VocacionalDto2"
+              }
+            ]
+          }
+        }
+      },
+      "VocacionalDto2": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "profissional": {
+            "$ref": "#/components/schemas/ProfissionalDto"
+          },
+          "questionario": {
+            "$ref": "#/components/schemas/QuestionarioDto"
+          },
+          "resposta": {
+            "type": "string"
           }
         }
       },
@@ -14196,6 +14319,36 @@
             "nullable": true
           },
           "alunoId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "DesempenhoDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "scoreTalentoEsportivo": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "scoreSaude": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "scoreVida": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "scoreVocacional": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "scoreConsumoAlimentar": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "scoreSaudeBucal": {
             "type": "integer",
             "format": "int32"
           }
