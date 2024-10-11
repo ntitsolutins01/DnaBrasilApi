@@ -1,24 +1,22 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
-using DnaBrasilApi.Application.Encaminhamentos.Queries;
-using System.Threading;
 
-namespace DnaBrasilApi.Application.Laudos.Queries.GetDesempenhoAlunos;
+namespace DnaBrasilApi.Application.Laudos.Queries.GetDesempenhoByAluno;
 //[Authorize]
-public record GetDesempenhoAlunosQuery(int id) : IRequest<DesempenhoDto>;
+public record GetDesempenhoByAlunoQuery(int id) : IRequest<DesempenhoDto>;
 
-public class GetDesempenhoAlunosQueryHandler : IRequestHandler<GetDesempenhoAlunosQuery, DesempenhoDto>
+public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByAlunoQuery, DesempenhoDto>
 {
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
 
-    public GetDesempenhoAlunosQueryHandler(IApplicationDbContext context, IMapper mapper)
+    public GetDesempenhoByAlunoQueryHandler(IApplicationDbContext context, IMapper mapper)
     {
         _context = context;
         _mapper = mapper;
     }
 
-    public Task<DesempenhoDto> Handle(GetDesempenhoAlunosQuery request, CancellationToken cancellationToken)
+    public Task<DesempenhoDto> Handle(GetDesempenhoByAlunoQuery request, CancellationToken cancellationToken)
     {
         IQueryable<Aluno> aluno;
         IQueryable<Laudo> laudo;

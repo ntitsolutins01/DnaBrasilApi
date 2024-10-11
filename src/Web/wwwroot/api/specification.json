@@ -4302,7 +4302,7 @@
         "tags": [
           "Laudos"
         ],
-        "operationId": "GetDesempenhoAlunos",
+        "operationId": "GetDesempenhoByAluno",
         "parameters": [
           {
             "name": "id",
