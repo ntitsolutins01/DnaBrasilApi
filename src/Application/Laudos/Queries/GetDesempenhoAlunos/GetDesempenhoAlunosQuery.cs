@@ -29,9 +29,12 @@ public class GetDesempenhoAlunosQueryHandler : IRequestHandler<GetDesempenhoAlun
 
         laudo = _context.Laudos
             .AsNoTracking()
-            .Include(x => x.Aluno) // Carrega o relacionamento com Aluno
-            .Include(x => x.SaudeBucal) // Exemplo de outra propriedade relacionada
-            .Include(x => x.SaudeBucal!.Encaminhamento) // Exemplo de outra propriedade relacionada
+            .Include(x => x.Aluno)
+            .Include(x => x.SaudeBucal) 
+            .Include(x => x.SaudeBucal!.Encaminhamento)
+            .Include(x => x.ConsumoAlimentar)
+            .Include(x => x.ConsumoAlimentar!.Encaminhamento)
+            .Include(x => x.QualidadeDeVida)
             .Where(x => x.Aluno.Id == request.id);
 
 
@@ -49,6 +52,12 @@ public class GetDesempenhoAlunosQueryHandler : IRequestHandler<GetDesempenhoAlun
             .Distinct()
             .ToListAsync();
 
+        var desempenhoVida = await _context.TextosLaudos
+            .Where(x => x.TipoLaudo!.Id == 7)
+            .Select(s => s.Classificacao)
+            .Distinct()
+            .ToListAsync();
+
         var desempenhoImc = await _context.TextosLaudos
             .Where(x => x.Status && x.TipoLaudo!.Id == 9)
             .Select(s => s.Classificacao)
@@ -57,6 +66,12 @@ public class GetDesempenhoAlunosQueryHandler : IRequestHandler<GetDesempenhoAlun
 
         var desempenhoSaudeBucal = await _context.TextosLaudos
             .Where(x => x.TipoLaudo!.Id == 5)
+            .Select(s => s.Classificacao)
+            .Distinct()
+            .ToListAsync();
+
+        var desempenhoConsumoAlimentar = await _context.TextosLaudos
+            .Where(x => x.TipoLaudo!.Id == 8)
             .Select(s => s.Classificacao)
             .Distinct()
             .ToListAsync();
@@ -75,7 +90,9 @@ public class GetDesempenhoAlunosQueryHandler : IRequestHandler<GetDesempenhoAlun
 
             { "imc", 0 },
 
-            { "saudeBucal", 0 }
+            { "saudeBucal", 0 },
+
+            { "consumoAlimentar", 0 }
         };
 
         Dictionary<string, decimal> dictDesempenhoMasculino = new()
@@ -92,7 +109,9 @@ public class GetDesempenhoAlunosQueryHandler : IRequestHandler<GetDesempenhoAlun
 
             { "imc", 0 },
 
-            { "saudeBucal", 0 }
+            { "saudeBucal", 0 },
+
+            { "consumoAlimentar", 0 }
         };
         Dictionary<string, decimal> dictDesempenhoFeminino = new()
         {
@@ -108,15 +127,20 @@ public class GetDesempenhoAlunosQueryHandler : IRequestHandler<GetDesempenhoAlun
 
             { "imc", 0 },
 
-            { "saudeBucal", 0 }
+            { "saudeBucal", 0 },
+
+            { "consumoAlimentar", 0 }
         };
 
         List<TextoLaudo> textoLaudo = new();
-        //List<string>? encaminhamento = new List<string>();
 
         var verificaAluno = aluno.Select(x => x.Id);
 
         var laudoEsportivo = _context.Laudos.Where(x => verificaAluno.Contains(x.Aluno.Id)).Include(i => i.TalentoEsportivo).Where(x => x.TalentoEsportivo != null)
+            .Include(a => a.Aluno)
+            .AsNoTracking();
+
+        var laudoVida = _context.Laudos.Where(x => verificaAluno.Contains(x.Aluno.Id)).Include(i => i.QualidadeDeVida).Where(x => x.QualidadeDeVida != null)
             .Include(a => a.Aluno)
             .AsNoTracking();
 
@@ -125,6 +149,10 @@ public class GetDesempenhoAlunosQueryHandler : IRequestHandler<GetDesempenhoAlun
             .AsNoTracking();
 
         var laudoSaudeBucal = _context.Laudos.Where(x => verificaAluno.Contains(x.Aluno.Id)).Include(i => i.SaudeBucal).Where(x => x.SaudeBucal != null)
+            .Include(a => a.Aluno)
+            .AsNoTracking();
+
+        var laudoConsumoAlimentar = _context.Laudos.Where(x => verificaAluno.Contains(x.Aluno.Id)).Include(i => i.ConsumoAlimentar).Where(x => x.ConsumoAlimentar != null)
             .Include(a => a.Aluno)
             .AsNoTracking();
 
@@ -141,6 +169,8 @@ public class GetDesempenhoAlunosQueryHandler : IRequestHandler<GetDesempenhoAlun
         int imcSaude = 0;
 
         int saudeBucal = 0;
+
+        int consumoAlimentar = 0;
 
         var alunoEportivo = laudoEsportivo.FirstOrDefault();
         if (alunoEportivo?.TalentoEsportivo != null)
@@ -576,7 +606,6 @@ public class GetDesempenhoAlunosQueryHandler : IRequestHandler<GetDesempenhoAlun
             var decimalImc = Convert.ToDecimal(imc);
 
             var desempenho = desempenhoImc.FirstOrDefault();
-
             if (desempenho != null)
             {
                 textoLaudo = _context.TextosLaudos.Where(x =>
@@ -625,11 +654,84 @@ public class GetDesempenhoAlunosQueryHandler : IRequestHandler<GetDesempenhoAlun
             }
         }
 
+        int scoreQualidadeVida = 0;
+
+        var alunoVida = laudoVida.FirstOrDefault();
+
+        if (alunoVida?.QualidadeDeVida != null)
+        {
+            var desempenho = desempenhoVida.FirstOrDefault();
+            if (desempenho != null)
+            {
+                textoLaudo = _context.TextosLaudos
+                    .Where(x =>
+                        x.Classificacao!.Equals(desempenho) &&
+                        (x.Aviso!.Trim().Equals("BemEstarFisico.Bem estar físico") ||
+                         x.Aviso.Trim().Equals("MalEstarFisico.Mal estar físico") ||
+                         x.Aviso.Trim().Equals("AutoEstima.Autoestima e estabilidade emocional") ||
+                         x.Aviso.Trim().Equals("BaixaAutoEstima.Baixa autoestima e dificuldades emocionais") ||
+                         x.Aviso.Trim().Equals("FuncionamentoHarmonico.Funcionamento harmônico familiar") ||
+                         x.Aviso.Trim().Equals("Conflitos.Conflitos no contexto familiar") ||
+                         x.Aviso.Trim().Equals("ContextosFavorecedores.Contextos favorecedores do desenvolvimento") ||
+                         x.Aviso.Trim().Equals("ContextosNaoFavorecedores.Contextos não favorecedores do desenvolvimento")))
+                    .ToList();
+
+                var encaminhamentos = laudo.FirstOrDefault()?.QualidadeDeVida?.Encaminhamentos;
+
+                if (encaminhamentos != null && textoLaudo.Any())
+                {
+                    foreach (var param in encaminhamentos.Split(','))
+                    {
+                        var paramNormalized = param switch
+                        {
+                            "40" => "BEMESTARFISICO.BEM ESTAR FÍSICO",
+                            "58" => "MALESTARFISICO.MAL ESTAR FÍSICO",
+                            "62" => "AUTOESTIMA.AUTOESTIMA E ESTABILIDADE EMOCIONAL",
+                            "64" => "BAIXAAUTOESTIMA.BAIXA AUTOESTIMA E DIFICULDADES EMOCIONAIS",
+                            "66" => "FUNCIONAMENTOHARMONICO.FUNCIONAMENTO HARMÔNICO FAMILIAR",
+                            "67" => "CONFLITOS.CONFLITOS NO CONTEXTO FAMILIAR",
+                            "68" => "CONTEXTOSFAVORECEDORES.CONTEXTOS FAVORECEDORES DO DESENVOLVIMENTO",
+                            "77" => "CONTEXTOSNAOFAVORECEDORES.CONTEXTOS NÃO FAVORECEDORES DO DESENVOLVIMENTO",
+                            _ => param.Trim()
+                        };
+
+
+                        foreach (var laudoItem in textoLaudo)
+                        {
+                            var avisoLaudo = laudoItem.Aviso?.Trim().ToUpper();
+
+                            if (avisoLaudo!.Equals(paramNormalized))
+                            {
+                                var nota = laudoItem.Aviso;
+
+                                int qualidadeVida = nota switch
+                                {
+                                    "BemEstarFisico.Bem estar físico" => 25,
+                                    "MalEstarFisico.Mal estar físico" => 0,
+                                    "AutoEstima.Autoestima e estabilidade emocional" => 25,
+                                    "BaixaAutoEstima.Baixa autoestima e dificuldades emocionais" => 0,
+                                    "FuncionamentoHarmonico.Funcionamento harmônico familiar" => 25,
+                                    "Conflitos.Conflitos no contexto familiar" => 0,
+                                    "ContextosFavorecedores.Contextos favorecedores do desenvolvimento" => 25,
+                                    "ContextosNaoFavorecedores.Contextos não favorecedores do desenvolvimento" => 0,
+                                    _ => 0
+                                };
+
+                                scoreQualidadeVida += qualidadeVida;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+
         var alunoSaudeBucal = laudoSaudeBucal.FirstOrDefault();
 
         if (alunoSaudeBucal?.SaudeBucal != null)
         {
-            foreach (var desempenho in desempenhoSaudeBucal)
+            var desempenho = desempenhoSaudeBucal.FirstOrDefault();
+            if (desempenho != null)
             {
                 textoLaudo = _context.TextosLaudos
                     .Where(x =>
@@ -659,26 +761,6 @@ public class GetDesempenhoAlunosQueryHandler : IRequestHandler<GetDesempenhoAlun
                         {
                             var nota = laudoItem.Aviso;
 
-                            if (alunoSaudeBucal.Aluno.Sexo == "M")
-                            {
-                                if (dictDesempenhoMasculino.ContainsKey("saudeBucal"))
-                                {
-                                    dictDesempenhoMasculino["saudeBucal"] += 1;
-                                }
-                            }
-                            else
-                            {
-                                if (dictDesempenhoFeminino.ContainsKey("saudeBucal"))
-                                {
-                                    dictDesempenhoFeminino["saudeBucal"] += 1;
-                                }
-                            }
-
-                            if (dict.ContainsKey("saudeBucal"))
-                            {
-                                dict["saudeBucal"] += 1;
-                            }
-
                             saudeBucal = nota switch
                             {
                                 "CUIDADO.CUIDADO" => 25,
@@ -691,13 +773,61 @@ public class GetDesempenhoAlunosQueryHandler : IRequestHandler<GetDesempenhoAlun
                         }
                     }
                 }
-
-
             }
         }
 
+        var alunoConsumoAlimentar = laudoConsumoAlimentar.FirstOrDefault();
 
+        if (alunoConsumoAlimentar?.ConsumoAlimentar != null)
+        {
+            var desempenho = desempenhoConsumoAlimentar.FirstOrDefault();
+            if (desempenho != null)
+            {
+                textoLaudo = _context.TextosLaudos
+                    .Where(x =>
+                        x.Classificacao!.Equals(desempenho) &&
+                        (x.Aviso!.Trim().Equals("HabitosNaoSaudaveis.Hábitos não saudáveis") ||
+                         x.Aviso.Trim().Equals("HabitosSatisfatorios.Hábitos satisfatórios") ||
+                         x.Aviso.Trim().Equals("BonsHabitosAlimentares.Bons Hábitos alimentares") ||
+                         x.Aviso.Trim().Equals("HabitosSaudaveis.Hábitos Saudáveis ")))
+                    .ToList();
 
+                var param = laudo.FirstOrDefault()?.ConsumoAlimentar?.Encaminhamento?.Parametro?.Trim();
+
+                var paramNormalized = param switch
+                {
+                    "HabitosNaoSaudaveis" => "HabitosNaoSaudaveis.Hábitos não saudáveis",
+                    "HabitosSatisfatorios" => "HabitosSatisfatorios.Hábitos satisfatórios",
+                    "BonsHabitosAlimentares" => "BonsHabitosAlimentares.Bons Hábitos alimentares",
+                    "HabitosSaudaveis" => "HabitosSaudaveis.Hábitos Saudáveis ",
+                    _ => param
+                };
+
+                if (textoLaudo.Any())
+                {
+                    foreach (var laudoItem in textoLaudo)
+                    {
+                        var avisoLaudo = laudoItem.Aviso?.Trim();
+
+                        if (avisoLaudo!.Equals(paramNormalized))
+                        {
+                            var nota = laudoItem.Aviso;
+
+                            consumoAlimentar = nota switch
+                            {
+                                "HabitosNaoSaudaveis.Hábitos não saudáveis" => 20,
+                                "HabitosSatisfatorios.Hábitos satisfatórios" => 40,
+                                "BonsHabitosAlimentares.Bons Hábitos alimentares" => 70,
+                                "HabitosSaudaveis.Hábitos Saudáveis " => 100,
+                                _ => 0
+                            };
+
+                            break;
+                        }
+                    }
+                }
+            }
+        }
 
         var scoreVocacional = 0;
         if (laudo.Any(x => x.Vocacional != null))
@@ -714,10 +844,11 @@ public class GetDesempenhoAlunosQueryHandler : IRequestHandler<GetDesempenhoAlun
             {
                 ScoreTalentoEsportivo = Round(scoreTalentoEsportivo),
                 ScoreSaude = scoreSaude,
-
+                ScoreVida = scoreQualidadeVida,
                 ScoreVocacional = scoreVocacional,
                 ScoreSaudeBucal = saudeBucal,
-                ScoreDna = Round(scoreTalentoEsportivo + scoreSaude + scoreVocacional + saudeBucal)
+                ScoreConsumoAlimentar = consumoAlimentar,
+                ScoreDna = Round(scoreTalentoEsportivo + scoreSaude + scoreVocacional + saudeBucal + consumoAlimentar + scoreQualidadeVida)
             };
         }
 
