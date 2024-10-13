@@ -28,6 +28,8 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
         laudo = _context.Laudos
             .AsNoTracking()
             .Include(x => x.Aluno)
+            .Include(x => x.Vocacional)
+            .Include(x => x.Vocacional!.Encaminhamento)
             .Include(x => x.SaudeBucal) 
             .Include(x => x.SaudeBucal!.Encaminhamento)
             .Include(x => x.ConsumoAlimentar)
@@ -62,6 +64,12 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
             .Distinct()
             .ToListAsync();
 
+        var desempenhoVocacional = await _context.TextosLaudos
+            .Where(x => x.TipoLaudo!.Id == 6)
+            .Select(s => s.Classificacao)
+            .Distinct()
+            .ToListAsync();
+
         var desempenhoSaudeBucal = await _context.TextosLaudos
             .Where(x => x.TipoLaudo!.Id == 5)
             .Select(s => s.Classificacao)
@@ -86,11 +94,7 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
             { "prancha", 0 },
             { "vo2Max", 0 },
 
-            { "imc", 0 },
-
-            { "saudeBucal", 0 },
-
-            { "consumoAlimentar", 0 }
+            { "imc", 0 }
         };
 
         Dictionary<string, decimal> dictDesempenhoMasculino = new()
@@ -105,11 +109,7 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
             { "prancha", 0 },
             { "vo2Max", 0 },
 
-            { "imc", 0 },
-
-            { "saudeBucal", 0 },
-
-            { "consumoAlimentar", 0 }
+            { "imc", 0 }
         };
         Dictionary<string, decimal> dictDesempenhoFeminino = new()
         {
@@ -123,11 +123,7 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
             { "prancha", 0 },
             { "vo2Max", 0 },
 
-            { "imc", 0 },
-
-            { "saudeBucal", 0 },
-
-            { "consumoAlimentar", 0 }
+            { "imc", 0 }
         };
 
         List<TextoLaudo> textoLaudo = new();
@@ -143,6 +139,10 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
             .AsNoTracking();
 
         var laudoImc = _context.Laudos.Where(x => verificaAluno.Contains(x.Aluno.Id)).Include(i => i.Saude).Where(x => x.Saude != null)
+            .Include(a => a.Aluno)
+            .AsNoTracking();
+
+        var laudoVocacional = _context.Laudos.Where(x => verificaAluno.Contains(x.Aluno.Id)).Include(i => i.Vocacional).Where(x => x.Vocacional != null)
             .Include(a => a.Aluno)
             .AsNoTracking();
 
@@ -170,6 +170,28 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
 
         int consumoAlimentar = 0;
 
+        string textoVelocidade = "";
+        string textoImpulsao = "";
+        string textoShuttleRun = "";
+        string textoFlexibilidadeMuscular = "";
+        string textoForcaMembrosSup = "";
+        string textoAptidaoCardio = "";
+        string textoPrancha = "";
+
+        string textoImc = "";
+
+        string textoVocacional = "";
+
+        string textoBemEstar = "";
+        string textoAutoestima = "";
+        string textoFamilia = "";
+        string textoContexto = "";
+
+        string textoSaudeBucal = "";
+
+        string textoConsumoAlimentar = "";
+
+        // -------------------------------------------------- Talento Espotivo ------------------------------------
         var alunoEportivo = laudoEsportivo.FirstOrDefault();
         if (alunoEportivo?.TalentoEsportivo != null)
         {
@@ -192,7 +214,7 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
                             alunoEportivo.TalentoEsportivo.Velocidade >= item.PontoInicial &&
                             alunoEportivo.TalentoEsportivo.Velocidade <= item.PontoFinal:
                             {
-                                var nota = item.Aviso;
+                                var nota = item.Aviso.Trim();
                                 switch (alunoEportivo.Aluno.Sexo!)
                                 {
                                     case "M":
@@ -229,15 +251,15 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
 
                                 dict["velocidade"] = valueTotal;
 
-                                velocidade = nota switch
+                                (textoVelocidade, velocidade) = nota switch
                                 {
-                                    "Muito fraco" => 0,
-                                    "Fraco" => 5,
-                                    "Razoavel" => 7,
-                                    "Bom" => 9,
-                                    "Muito Bom" => 12,
-                                    "Excelente" => 14.28,
-                                    _ => 0
+                                    "Muito fraco" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Muito fraco")?.Texto ?? "", 0),
+                                    "Fraco" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Fraco")?.Texto ?? "", 5),
+                                    "Razoavel" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Razoavel")?.Texto ?? "", 7),
+                                    "Bom" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Bom")?.Texto ?? "", 9),
+                                    "Muito Bom" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Muito Bom")?.Texto ?? "", 12),
+                                    "Excelente" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Excelente")?.Texto ?? "", 14.28),
+                                    _ => (nota, 0)
                                 };
 
                                 //encaminhamento!.AddRange(modalidades
@@ -250,7 +272,7 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
                             alunoEportivo.TalentoEsportivo.ImpulsaoHorizontal >= item.PontoInicial &&
                             alunoEportivo.TalentoEsportivo.ImpulsaoHorizontal <= item.PontoFinal:
                             {
-                                var nota = item.Aviso;
+                                var nota = item.Aviso.Trim();
                                 switch (alunoEportivo.Aluno.Sexo!)
                                 {
                                     case "M":
@@ -287,15 +309,15 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
 
                                 dict["forcaExplosiva"] = valueTotal;
 
-                                impulsao = nota switch
-                                {   
-                                    "Muito fraco" => 0,
-                                    "Fraco" => 5,
-                                    "Razoavel" => 7,
-                                    "Bom" => 9,
-                                    "Muito Bom" => 12,
-                                    "Excelente" => 14.28,
-                                    _ => 0
+                                (textoImpulsao, impulsao) = nota switch
+                                {
+                                    "Muito fraco" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Muito fraco")?.Texto ?? "", 0),
+                                    "Fraco" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Fraco")?.Texto ?? "", 5),
+                                    "Razoavel" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Razoavel")?.Texto ?? "", 7),
+                                    "Bom" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Bom")?.Texto ?? "", 9),
+                                    "Muito Bom" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Muito Bom")?.Texto ?? "", 12),
+                                    "Excelente" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Excelente")?.Texto ?? "", 14.28),
+                                    _ => (nota, 0)
                                 };
 
                                 //encaminhamento!.AddRange(modalidades
@@ -307,7 +329,7 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
                             alunoEportivo.TalentoEsportivo.ShuttleRun >= item.PontoInicial &&
                             alunoEportivo.TalentoEsportivo.ShuttleRun <= item.PontoFinal:
                             {
-                                var nota = item.Aviso;
+                                var nota = item.Aviso.Trim();
                                 switch (alunoEportivo.Aluno.Sexo!)
                                 {
                                     case "M":
@@ -344,15 +366,15 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
 
                                 dict["shutlleRun"] = valueTotal;
 
-                                shutlleRun = nota switch
+                                (textoShuttleRun, shutlleRun) = nota switch
                                 {
-                                    "Muito fraco" => 0,
-                                    "Fraco" => 5,
-                                    "Razoavel" => 7,
-                                    "Bom" => 9,
-                                    "Muito Bom" => 12,
-                                    "Excelente" => 14.28,
-                                    _ => 0
+                                    "Muito fraco" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Muito fraco")?.Texto ?? "", 0),
+                                    "Fraco" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Fraco")?.Texto ?? "", 5),
+                                    "Razoavel" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Razoavel")?.Texto ?? "", 7),
+                                    "Bom" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Bom")?.Texto ?? "", 9),
+                                    "Muito Bom" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Muito Bom")?.Texto ?? "", 12),
+                                    "Excelente" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Excelente")?.Texto ?? "", 14.28),
+                                    _ => (nota, 0)
                                 };
 
                                 //encaminhamento!.AddRange(modalidades
@@ -364,7 +386,7 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
                             alunoEportivo.TalentoEsportivo.Flexibilidade >= item.PontoInicial &&
                             alunoEportivo.TalentoEsportivo.Flexibilidade <= item.PontoFinal:
                             {
-                                var nota = item.Aviso;
+                                var nota = item.Aviso.Trim();
                                 switch (alunoEportivo.Aluno.Sexo!)
                                 {
                                     case "M":
@@ -401,28 +423,28 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
 
                                 dict["flexibilidadeMuscular"] = valueTotal;
 
-                                flexibilidadeMuscular = nota switch
+                                (textoFlexibilidadeMuscular, flexibilidadeMuscular) = nota switch
                                 {
-                                    "Muito fraco" => 0,
-                                    "Fraco" => 5,
-                                    "Razoavel" => 7,
-                                    "Bom" => 9,
-                                    "Muito Bom" => 12,
-                                    "Excelente" => 14.28,
-                                    _ => 0
+                                    "Muito fraco" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Muito fraco")?.Texto ?? "", 0),
+                                    "Fraco" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Fraco")?.Texto ?? "", 5),
+                                    "Razoavel" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Razoavel")?.Texto ?? "", 7),
+                                    "Bom" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Bom")?.Texto ?? "", 9),
+                                    "Muito Bom" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Muito Bom")?.Texto ?? "", 12),
+                                    "Excelente" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Excelente")?.Texto ?? "", 14.28),
+                                    _ => (nota, 0)
                                 };
 
                                 //encaminhamento!.AddRange(modalidades
                                 //    .Where(x => flexibilidadeMuscular >= x.FlexibilidadeIni &&
                                 //                flexibilidadeMuscular <= x.FlexibilidadeFim)
-                                    //.Select(s => s.Nome).ToList()!);
+                                //.Select(s => s.Nome).ToList()!);
                                 break;
                             }
                         case "Preensão Manual" when
                             alunoEportivo.TalentoEsportivo.PreensaoManual >= item.PontoInicial &&
                             alunoEportivo.TalentoEsportivo.PreensaoManual <= item.PontoFinal:
                             {
-                                var nota = item.Aviso;
+                                var nota = item.Aviso.Trim();
                                 switch (alunoEportivo.Aluno.Sexo!)
                                 {
                                     case "M":
@@ -459,15 +481,15 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
 
                                 dict["forcaMembrosSup"] = valueTotal;
 
-                                forcaMembrosSup = nota switch
+                                (textoForcaMembrosSup, forcaMembrosSup) = nota switch
                                 {
-                                    "Muito fraco" => 0,
-                                    "Fraco" => 5,
-                                    "Razoavel" => 7,
-                                    "Bom" => 9,
-                                    "Muito Bom" => 12,
-                                    "Excelente" => 14.28,
-                                    _ => 0
+                                    "Muito fraco" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Muito fraco")?.Texto ?? "", 0),
+                                    "Fraco" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Fraco")?.Texto ?? "", 5),
+                                    "Razoavel" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Razoavel")?.Texto ?? "", 7),
+                                    "Bom" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Bom")?.Texto ?? "", 9),
+                                    "Muito Bom" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Muito Bom")?.Texto ?? "", 12),
+                                    "Excelente" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Excelente")?.Texto ?? "", 14.28),
+                                    _ => (nota, 0)
                                 };
 
                                 //encaminhamento!.AddRange(modalidades
@@ -517,15 +539,15 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
 
                                 dict["aptidaoCardio"] = valueTotal;
 
-                                aptidaoCardio = nota switch
+                                (textoAptidaoCardio, aptidaoCardio) = nota switch
                                 {
-                                    "Muito fraco" => 0,
-                                    "Fraco" => 5,
-                                    "Razoavel" => 7,
-                                    "Bom" => 9,
-                                    "Muito Bom" => 12,
-                                    "Excelente" => 14.28,
-                                    _ => 0
+                                    "Muito fraco" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Muito fraco")?.Texto ?? "", 0),
+                                    "Fraco" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Fraco")?.Texto ?? "", 5),
+                                    "Razoavel" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Razoavel")?.Texto ?? "", 7),
+                                    "Bom" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Bom")?.Texto ?? "", 9),
+                                    "Muito Bom" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Muito Bom")?.Texto ?? "", 12),
+                                    "Excelente" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Excelente")?.Texto ?? "", 14.28),
+                                    _ => (nota, 0)
                                 };
 
                                 //encaminhamento!.AddRange(modalidades
@@ -537,7 +559,7 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
                             alunoEportivo.TalentoEsportivo.Abdominal >= item.PontoInicial &&
                             alunoEportivo.TalentoEsportivo.Abdominal <= item.PontoFinal:
                             {
-                                var nota = item.Aviso;
+                                var nota = item.Aviso.Trim();
                                 switch (alunoEportivo.Aluno.Sexo!)
                                 {
                                     case "M":
@@ -574,17 +596,17 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
 
                                 dict["prancha"] = valueTotal;
 
-                                prancha = nota switch
+                                (textoPrancha, prancha) = nota switch
                                 {
-                                    "Muito fraco" => 0,
-                                    "Fraco" => 5,
-                                    "Razoavel" => 7,
-                                    "Bom" => 9,
-                                    "Muito Bom" => 12,
-                                    "Excelente" => 14.28,
-                                    _ => 0
+                                    "Muito fraco" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Muito fraco")?.Texto ?? "", 0),
+                                    "Fraco" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Fraco")?.Texto ?? "", 5),
+                                    "Razoavel" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Razoavel")?.Texto ?? "", 7),
+                                    "Bom" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Bom")?.Texto ?? "", 9),
+                                    "Muito Bom" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Muito Bom")?.Texto ?? "", 12),
+                                    "Excelente" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Excelente")?.Texto ?? "", 14.28),
+                                    _ => (nota, 0)
                                 };
-                               
+
                                 //encaminhamento!.AddRange(modalidades
                                 //    .Where(x => prancha >= x.AbdominalPranchaIni && prancha <= x.AbdominalPranchaFim)
                                 //    .Select(s => s.Nome).ToList()!);
@@ -595,6 +617,7 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
             }
         }
 
+        // -------------------------------------------------- Saude ------------------------------------
         var alunoSaude = laudoImc.FirstOrDefault();
         if (alunoSaude?.Saude != null)
         {
@@ -640,18 +663,25 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
                         dict["imc"] += 1;
                     }
 
-                    imcSaude = nota switch
+                    // Define o texto e o valor de imcSaude em uma única estrutura switch
+                    (textoImc, imcSaude) = nota switch
                     {
-                        "ABAIXODONORMAL" => 50,
-                        "NORMAL" => 100,
-                        "OBESIDADE" => 25,
-                        "SOBREPESO" => 0,
-                        _ => 0
+                        "ABAIXODONORMAL" => (
+                            textoLaudo.FirstOrDefault(t => t.Aviso.Trim().ToUpper() == "ABAIXODONORMAL")?.Texto ?? "", 50),
+                        "NORMAL" => (
+                            textoLaudo.FirstOrDefault(t => t.Aviso.Trim().ToUpper() == "NORMAL")?.Texto ?? "", 100),
+                        "OBESIDADE" => (
+                            textoLaudo.FirstOrDefault(t => t.Aviso.Trim().ToUpper() == "OBESIDADE")?.Texto ?? "", 25),
+                        "SOBREPESO" => (
+                            textoLaudo.FirstOrDefault(t => t.Aviso.Trim().ToUpper() == "SOBREPESO")?.Texto ?? "", 0),
+                        _ => ("", 0)
                     };
+
                 }
             }
         }
 
+        // -------------------------------------------------- Qualidade de Vida ------------------------------------
         int scoreQualidadeVida = 0;
 
         var alunoVida = laudoVida.FirstOrDefault();
@@ -700,7 +730,7 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
 
                             if (avisoLaudo!.Equals(paramNormalized))
                             {
-                                var nota = laudoItem.Aviso;
+                                var nota = laudoItem.Aviso?.Trim();
 
                                 int qualidadeVida = nota switch
                                 {
@@ -716,6 +746,34 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
                                 };
 
                                 scoreQualidadeVida += qualidadeVida;
+
+                                textoBemEstar = (nota switch
+                                {
+                                    "BemEstarFisico.Bem estar físico" => textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "BemEstarFisico.Bem estar físico")?.Texto,
+                                    "MalEstarFisico.Mal estar físico" => textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "MalEstarFisico.Mal estar físico")?.Texto,
+                                    _ => textoBemEstar
+                                })!;
+
+                                textoAutoestima = (nota switch
+                                {
+                                    "AutoEstima.Autoestima e estabilidade emocional" => textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "AutoEstima.Autoestima e estabilidade emocional")?.Texto,
+                                    "BaixaAutoEstima.Baixa autoestima e dificuldades emocionais" => textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "BaixaAutoEstima.Baixa autoestima e dificuldades emocionais")?.Texto,
+                                    _ => textoAutoestima
+                                })!;
+
+                                textoFamilia = (nota switch
+                                {
+                                    "FuncionamentoHarmonico.Funcionamento harmônico familiar" => textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "FuncionamentoHarmonico.Funcionamento harmônico familiar")?.Texto,
+                                    "Conflitos.Conflitos no contexto familiar" => textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Conflitos.Conflitos no contexto familiar")?.Texto,
+                                    _ => textoFamilia
+                                })!;
+
+                                textoContexto = (nota switch
+                                {
+                                    "ContextosFavorecedores.Contextos favorecedores do desenvolvimento" => textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "ContextosFavorecedores.Contextos favorecedores do desenvolvimento")?.Texto,
+                                    "ContextosNaoFavorecedores.Contextos não favorecedores do desenvolvimento" => textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "ContextosNaoFavorecedores.Contextos não favorecedores do desenvolvimento")?.Texto,
+                                    _ => textoContexto
+                                })!;
                             }
                         }
                     }
@@ -723,7 +781,7 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
             }
         }
 
-
+        // -------------------------------------------------- Saude Bucal ------------------------------------
         var alunoSaudeBucal = laudoSaudeBucal.FirstOrDefault();
 
         if (alunoSaudeBucal?.SaudeBucal != null)
@@ -757,15 +815,16 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
 
                         if (avisoLaudo!.Equals(paramNormalized))
                         {
-                            var nota = laudoItem.Aviso;
+                            var nota = laudoItem.Aviso?.Trim();
 
-                            saudeBucal = nota switch
+                            (textoSaudeBucal, saudeBucal) = nota switch
                             {
-                                "CUIDADO.CUIDADO" => 25,
-                                "ATENCAO.ATENÇÃO" => 50,
-                                "MUITOBOM.MUITO BOM" => 100,
-                                _ => 0
+                                "CUIDADO.CUIDADO" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim().ToUpper() == "CUIDADO.CUIDADO")?.Texto ?? "", 25),
+                                "ATENCAO.ATENÇÃO" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim().ToUpper() == "ATENCAO.ATENÇÃO")?.Texto ?? "", 50),
+                                "MUITOBOM.MUITO BOM" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim().ToUpper() == "MUITOBOM.MUITO BOM")?.Texto ?? "", 100),
+                                _ => ("", 0)
                             };
+
 
                             break;
                         }
@@ -774,6 +833,7 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
             }
         }
 
+        // -------------------------------------------------- Consumo Alimentar ------------------------------------
         var alunoConsumoAlimentar = laudoConsumoAlimentar.FirstOrDefault();
 
         if (alunoConsumoAlimentar?.ConsumoAlimentar != null)
@@ -787,7 +847,7 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
                         (x.Aviso!.Trim().Equals("HabitosNaoSaudaveis.Hábitos não saudáveis") ||
                          x.Aviso.Trim().Equals("HabitosSatisfatorios.Hábitos satisfatórios") ||
                          x.Aviso.Trim().Equals("BonsHabitosAlimentares.Bons Hábitos alimentares") ||
-                         x.Aviso.Trim().Equals("HabitosSaudaveis.Hábitos Saudáveis ")))
+                         x.Aviso.Trim().Equals("HabitosSaudaveis.Hábitos Saudáveis")))
                     .ToList();
 
                 var param = laudo.FirstOrDefault()?.ConsumoAlimentar?.Encaminhamento?.Parametro?.Trim();
@@ -811,13 +871,13 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
                         {
                             var nota = laudoItem.Aviso;
 
-                            consumoAlimentar = nota switch
+                            (textoConsumoAlimentar, consumoAlimentar) = nota switch
                             {
-                                "HabitosNaoSaudaveis.Hábitos não saudáveis" => 20,
-                                "HabitosSatisfatorios.Hábitos satisfatórios" => 40,
-                                "BonsHabitosAlimentares.Bons Hábitos alimentares" => 70,
-                                "HabitosSaudaveis.Hábitos Saudáveis " => 100,
-                                _ => 0
+                                "HabitosNaoSaudaveis.Hábitos não saudáveis" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim().ToUpper() == "HABITOSNAOSAUDAVEIS.HÁBITOS NÃO SAUDÁVEIS")?.Texto ?? "", 20),
+                                "HabitosSatisfatorios.Hábitos satisfatórios" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim().ToUpper() == "HABITOSSATISFATORIOS.HÁBITOS SATISFATÓRIOS")?.Texto ?? "", 40),
+                                "BonsHabitosAlimentares.Bons Hábitos alimentares" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim().ToUpper() == "BONSHABITOSALIMENTARES.BONS HÁBITOS ALIMENTARES")?.Texto ?? "", 70),
+                                "HabitosSaudaveis.Hábitos Saudáveis " => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim().ToUpper() == "HABITOSSAUDAVEIS.HÁBITOS SAUDÁVEIS")?.Texto ?? "", 100),
+                                _ => ("", 0)
                             };
 
                             break;
@@ -827,12 +887,73 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
             }
         }
 
+        // -------------------------------------------------- Vocacional ------------------------------------
         var scoreVocacional = 0;
         if (laudo.Any(x => x.Vocacional != null))
         {
             scoreVocacional = 100;
         }
 
+        var alunoVocacional = laudoVocacional.FirstOrDefault();
+
+        if (alunoVocacional?.Vocacional != null)
+        {
+            var desempenho = desempenhoVocacional.FirstOrDefault();
+            if (desempenho != null)
+            {
+                textoLaudo = _context.TextosLaudos
+                    .Where(x =>
+                        x.Classificacao!.Equals(desempenho) &&
+                        (x.Aviso!.Trim().Equals("Artistico.Interesse Artistico") ||
+                         x.Aviso.Trim().Equals("Empreendedorismo.Interesse Empreendedor") ||
+                         x.Aviso.Trim().Equals("CienciasExatasNaturais.Ciências Exatas e Naturais") ||
+                         x.Aviso.Trim().Equals("CienciasHumanas.Ciências Humanas") ||
+                         x.Aviso.Trim().Equals("CienciasContabeisAdministrativas.Ciências Contábeis e Administrativas") ||
+                         x.Aviso.Trim().Equals("TecnologiasAplicadas.Tecnologias Aplicadas")))
+                    .ToList();
+
+                var param = laudo.FirstOrDefault()?.Vocacional?.Encaminhamento?.Parametro?.Trim();
+
+                var paramNormalized = param switch
+                {
+                    "Artistico" => "Artistico.Interesse Artistico",
+                    "Empreendedorismo" => "Empreendedorismo.Interesse Empreendedor",
+                    "CienciasExatasNaturais" => "CienciasExatasNaturais.Ciências Exatas e Naturais",
+                    "CienciasHumanas" => "CienciasHumanas.Ciências Humanas",
+                    "CienciasContabeisAdministrativas" => "CienciasContabeisAdministrativas.Ciências Contábeis e Administrativas",
+                    "TecnologiasAplicadas" => "TecnologiasAplicadas.Tecnologias Aplicadas",
+                    _ => param
+                };
+
+                if (textoLaudo.Any())
+                {
+                    foreach (var laudoItem in textoLaudo)
+                    {
+                        var avisoLaudo = laudoItem.Aviso?.Trim();
+
+                        if (avisoLaudo!.Equals(paramNormalized))
+                        {
+                            var nota = laudoItem.Aviso;
+
+                            textoVocacional = nota switch
+                            {
+                                "Artistico.Interesse Artistico" => textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Artistico.Interesse Artistico")?.Texto ?? "",
+                                "Empreendedorismo.Interesse Empreendedor" => textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Empreendedorismo.Interesse Empreendedor")?.Texto ?? "",
+                                "CienciasExatasNaturais.Ciências Exatas e Naturais" => textoLaudo.FirstOrDefault(t => t.Aviso == "CienciasExatasNaturais.Ciências Exatas e Naturais")?.Texto ?? "",
+                                "CienciasHumanas.Ciências Humanas" => textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "CienciasHumanas.Ciências Humanas")?.Texto ?? "",
+                                "CienciasContabeisAdministrativas.Ciências Contábeis e Administrativas" => textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "CienciasContabeisAdministrativas.Ciências Contábeis e Administrativas")?.Texto ?? "",
+                                "TecnologiasAplicadas.Tecnologias Aplicada" => textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "TecnologiasAplicadas.Tecnologias Aplicada")?.Texto ?? "",
+                                _ => ""
+                            };
+
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        // -------------------------------------------------- Calculo Scores ------------------------------------
         var scoreTalentoEsportivo = velocidade + impulsao + shutlleRun + flexibilidadeMuscular
                                     + forcaMembrosSup + aptidaoCardio + prancha;
 
@@ -846,7 +967,22 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
                 ScoreVocacional = scoreVocacional,
                 ScoreSaudeBucal = saudeBucal,
                 ScoreConsumoAlimentar = consumoAlimentar,
-                ScoreDna = Round(scoreTalentoEsportivo + scoreSaude + scoreVocacional + saudeBucal + consumoAlimentar + scoreQualidadeVida)
+                ScoreDna = Round(scoreTalentoEsportivo + scoreSaude + scoreVocacional + saudeBucal + consumoAlimentar + scoreQualidadeVida),
+                TextoVelocidade = textoVelocidade,
+                TextoImpulsao = textoImpulsao,
+                TextoShuttleRun = textoShuttleRun,
+                TextoFlexibilidadeMuscular = textoFlexibilidadeMuscular,
+                TextoForcaMembrosSup = textoForcaMembrosSup,
+                TextoAptidaoCardio = textoAptidaoCardio,
+                TextoPrancha = textoPrancha,
+                TextoImc = textoImc,
+                TextoVocacional = textoVocacional,
+                TextoBemEstar = textoBemEstar,
+                TextoAutoestima = textoAutoestima,
+                TextoFamilia = textoFamilia,
+                TextoContexto = textoContexto,
+                TextoConsumoAlimentar = textoConsumoAlimentar,
+                TextoSaudeBucal = textoSaudeBucal,
             };
         }
 

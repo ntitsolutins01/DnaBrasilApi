@@ -14264,6 +14264,66 @@
           "scoreDna": {
             "type": "integer",
             "format": "int32"
+          },
+          "textoVelocidade": {
+            "type": "string",
+            "nullable": true
+          },
+          "textoImpulsao": {
+            "type": "string",
+            "nullable": true
+          },
+          "textoShuttleRun": {
+            "type": "string",
+            "nullable": true
+          },
+          "textoFlexibilidadeMuscular": {
+            "type": "string",
+            "nullable": true
+          },
+          "textoForcaMembrosSup": {
+            "type": "string",
+            "nullable": true
+          },
+          "textoAptidaoCardio": {
+            "type": "string",
+            "nullable": true
+          },
+          "textoPrancha": {
+            "type": "string",
+            "nullable": true
+          },
+          "textoImc": {
+            "type": "string",
+            "nullable": true
+          },
+          "textoBemEstar": {
+            "type": "string",
+            "nullable": true
+          },
+          "textoAutoestima": {
+            "type": "string",
+            "nullable": true
+          },
+          "textoFamilia": {
+            "type": "string",
+            "nullable": true
+          },
+          "textoContexto": {
+            "type": "string",
+            "nullable": true
+          },
+          "textoVocacional": {
+            "type": "string",
+            "nullable": true
+          },
+          "textoConsumoAlimentar": {
+            "type": "string",
+            "nullable": true
+          },
+          "textoSaudeBucal": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
