@@ -4297,6 +4297,38 @@
         }
       }
     },
+    "/api/Laudos/Filter": {
+      "post": {
+        "tags": [
+          "Laudos"
+        ],
+        "operationId": "GetLaudosByFilter",
+        "requestBody": {
+          "x-name": "search",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LaudosFilterDto"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LaudosFilterDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/LinhasAcoes": {
       "get": {
         "tags": [
@@ -14198,6 +14230,52 @@
           "alunoId": {
             "type": "integer",
             "format": "int32"
+          }
+        }
+      },
+      "LaudosFilterDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "pageNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fomentoId": {
+            "type": "string",
+            "nullable": true
+          },
+          "estado": {
+            "type": "string",
+            "nullable": true
+          },
+          "municipioId": {
+            "type": "string",
+            "nullable": true
+          },
+          "localidadeId": {
+            "type": "string",
+            "nullable": true
+          },
+          "alunoId": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipoLaudoId": {
+            "type": "string",
+            "nullable": true
+          },
+          "laudos": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/PaginatedListOfLaudoDto"
+              }
+            ]
           }
         }
       },
