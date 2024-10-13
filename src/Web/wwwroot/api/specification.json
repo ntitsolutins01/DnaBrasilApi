@@ -14253,17 +14253,57 @@
             "type": "integer",
             "format": "int32"
           },
-          "scoreConsumoAlimentar": {
+          "scoreSaudeBucal": {
             "type": "integer",
             "format": "int32"
           },
-          "scoreSaudeBucal": {
+          "scoreConsumoAlimentar": {
             "type": "integer",
             "format": "int32"
           },
           "scoreDna": {
             "type": "integer",
             "format": "int32"
+          },
+          "avisoVelocidade": {
+            "type": "string",
+            "nullable": true
+          },
+          "avisoImpulsao": {
+            "type": "string",
+            "nullable": true
+          },
+          "avisoShuttleRun": {
+            "type": "string",
+            "nullable": true
+          },
+          "avisoFlexibilidadeMuscular": {
+            "type": "string",
+            "nullable": true
+          },
+          "avisoForcaMembrosSup": {
+            "type": "string",
+            "nullable": true
+          },
+          "avisoAptidaoCardio": {
+            "type": "string",
+            "nullable": true
+          },
+          "avisoPrancha": {
+            "type": "string",
+            "nullable": true
+          },
+          "avisoImc": {
+            "type": "string",
+            "nullable": true
+          },
+          "avisoSaudeBucal": {
+            "type": "string",
+            "nullable": true
+          },
+          "avisoConsumoAlimentar": {
+            "type": "string",
+            "nullable": true
           },
           "textoVelocidade": {
             "type": "string",

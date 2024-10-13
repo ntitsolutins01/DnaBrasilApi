@@ -170,6 +170,20 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
 
         int consumoAlimentar = 0;
 
+        string avisoVelocidade = "";
+        string avisoImpulsao = "";
+        string avisoShutlleRun = "";
+        string avisoFlexibilidadeMuscular = "";
+        string avisoForcaMembrosSup = "";
+        string avisoAptidaoCardio = "";
+        string avisoPrancha = "";
+
+        string avisoImc = "";
+
+        string avisoSaudeBucal = "";
+
+        string avisoConsumoAlimentar = "";
+
         string textoVelocidade = "";
         string textoImpulsao = "";
         string textoShuttleRun = "";
@@ -251,15 +265,15 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
 
                                 dict["velocidade"] = valueTotal;
 
-                                (textoVelocidade, velocidade) = nota switch
+                                (textoVelocidade, velocidade, avisoVelocidade) = nota switch
                                 {
-                                    "Muito fraco" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Muito fraco")?.Texto ?? "", 0),
-                                    "Fraco" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Fraco")?.Texto ?? "", 5),
-                                    "Razoavel" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Razoavel")?.Texto ?? "", 7),
-                                    "Bom" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Bom")?.Texto ?? "", 9),
-                                    "Muito Bom" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Muito Bom")?.Texto ?? "", 12),
-                                    "Excelente" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Excelente")?.Texto ?? "", 14.28),
-                                    _ => (nota, 0)
+                                    "Muito fraco" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Muito fraco")?.Texto ?? "", 0, nota),
+                                    "Fraco" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Fraco")?.Texto ?? "", 5, nota),
+                                    "Razoavel" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Razoavel")?.Texto ?? "", 7, nota),
+                                    "Bom" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Bom")?.Texto ?? "", 9, nota),
+                                    "Muito Bom" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Muito Bom")?.Texto ?? "", 12, nota),
+                                    "Excelente" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Excelente")?.Texto ?? "", 14.28, nota),
+                                    _ => (nota, 0, avisoVelocidade)
                                 };
 
                                 //encaminhamento!.AddRange(modalidades
@@ -309,15 +323,15 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
 
                                 dict["forcaExplosiva"] = valueTotal;
 
-                                (textoImpulsao, impulsao) = nota switch
+                                (textoImpulsao, impulsao, avisoImpulsao) = nota switch
                                 {
-                                    "Muito fraco" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Muito fraco")?.Texto ?? "", 0),
-                                    "Fraco" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Fraco")?.Texto ?? "", 5),
-                                    "Razoavel" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Razoavel")?.Texto ?? "", 7),
-                                    "Bom" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Bom")?.Texto ?? "", 9),
-                                    "Muito Bom" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Muito Bom")?.Texto ?? "", 12),
-                                    "Excelente" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Excelente")?.Texto ?? "", 14.28),
-                                    _ => (nota, 0)
+                                    "Muito fraco" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Muito fraco")?.Texto ?? "", 0, nota),
+                                    "Fraco" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Fraco")?.Texto ?? "", 5, nota),
+                                    "Razoavel" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Razoavel")?.Texto ?? "", 7, nota),
+                                    "Bom" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Bom")?.Texto ?? "", 9, nota),
+                                    "Muito Bom" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Muito Bom")?.Texto ?? "", 12, nota),
+                                    "Excelente" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Excelente")?.Texto ?? "", 14.28, nota),
+                                    _ => (nota, 0, avisoImpulsao)
                                 };
 
                                 //encaminhamento!.AddRange(modalidades
@@ -366,15 +380,15 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
 
                                 dict["shutlleRun"] = valueTotal;
 
-                                (textoShuttleRun, shutlleRun) = nota switch
+                                (textoShuttleRun, shutlleRun, avisoShutlleRun) = nota switch
                                 {
-                                    "Muito fraco" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Muito fraco")?.Texto ?? "", 0),
-                                    "Fraco" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Fraco")?.Texto ?? "", 5),
-                                    "Razoavel" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Razoavel")?.Texto ?? "", 7),
-                                    "Bom" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Bom")?.Texto ?? "", 9),
-                                    "Muito Bom" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Muito Bom")?.Texto ?? "", 12),
-                                    "Excelente" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Excelente")?.Texto ?? "", 14.28),
-                                    _ => (nota, 0)
+                                    "Muito fraco" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Muito fraco")?.Texto ?? "", 0, nota),
+                                    "Fraco" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Fraco")?.Texto ?? "", 5, nota),
+                                    "Razoavel" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Razoavel")?.Texto ?? "", 7, nota),
+                                    "Bom" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Bom")?.Texto ?? "", 9, nota),
+                                    "Muito Bom" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Muito Bom")?.Texto ?? "", 12, nota),
+                                    "Excelente" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Excelente")?.Texto ?? "", 14.28, nota),
+                                    _ => (nota, 0, avisoShutlleRun)
                                 };
 
                                 //encaminhamento!.AddRange(modalidades
@@ -423,15 +437,15 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
 
                                 dict["flexibilidadeMuscular"] = valueTotal;
 
-                                (textoFlexibilidadeMuscular, flexibilidadeMuscular) = nota switch
+                                (textoFlexibilidadeMuscular, flexibilidadeMuscular, avisoFlexibilidadeMuscular) = nota switch
                                 {
-                                    "Muito fraco" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Muito fraco")?.Texto ?? "", 0),
-                                    "Fraco" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Fraco")?.Texto ?? "", 5),
-                                    "Razoavel" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Razoavel")?.Texto ?? "", 7),
-                                    "Bom" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Bom")?.Texto ?? "", 9),
-                                    "Muito Bom" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Muito Bom")?.Texto ?? "", 12),
-                                    "Excelente" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Excelente")?.Texto ?? "", 14.28),
-                                    _ => (nota, 0)
+                                    "Muito fraco" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Muito fraco")?.Texto ?? "", 0, nota),
+                                    "Fraco" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Fraco")?.Texto ?? "", 5, nota),
+                                    "Razoavel" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Razoavel")?.Texto ?? "", 7, nota),
+                                    "Bom" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Bom")?.Texto ?? "", 9, nota),
+                                    "Muito Bom" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Muito Bom")?.Texto ?? "", 12, nota),
+                                    "Excelente" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Excelente")?.Texto ?? "", 14.28, nota),
+                                    _ => (nota, 0, avisoFlexibilidadeMuscular)
                                 };
 
                                 //encaminhamento!.AddRange(modalidades
@@ -481,15 +495,15 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
 
                                 dict["forcaMembrosSup"] = valueTotal;
 
-                                (textoForcaMembrosSup, forcaMembrosSup) = nota switch
+                                (textoForcaMembrosSup, forcaMembrosSup, avisoForcaMembrosSup) = nota switch
                                 {
-                                    "Muito fraco" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Muito fraco")?.Texto ?? "", 0),
-                                    "Fraco" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Fraco")?.Texto ?? "", 5),
-                                    "Razoavel" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Razoavel")?.Texto ?? "", 7),
-                                    "Bom" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Bom")?.Texto ?? "", 9),
-                                    "Muito Bom" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Muito Bom")?.Texto ?? "", 12),
-                                    "Excelente" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Excelente")?.Texto ?? "", 14.28),
-                                    _ => (nota, 0)
+                                    "Muito fraco" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Muito fraco")?.Texto ?? "", 0, nota),
+                                    "Fraco" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Fraco")?.Texto ?? "", 5, nota),
+                                    "Razoavel" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Razoavel")?.Texto ?? "", 7, nota),
+                                    "Bom" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Bom")?.Texto ?? "", 9, nota),
+                                    "Muito Bom" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Muito Bom")?.Texto ?? "", 12, nota),
+                                    "Excelente" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Excelente")?.Texto ?? "", 14.28, nota),
+                                    _ => (nota, 0, avisoForcaMembrosSup)
                                 };
 
                                 //encaminhamento!.AddRange(modalidades
@@ -539,15 +553,15 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
 
                                 dict["aptidaoCardio"] = valueTotal;
 
-                                (textoAptidaoCardio, aptidaoCardio) = nota switch
+                                (textoAptidaoCardio, aptidaoCardio, avisoAptidaoCardio) = nota switch
                                 {
-                                    "Muito fraco" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Muito fraco")?.Texto ?? "", 0),
-                                    "Fraco" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Fraco")?.Texto ?? "", 5),
-                                    "Razoavel" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Razoavel")?.Texto ?? "", 7),
-                                    "Bom" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Bom")?.Texto ?? "", 9),
-                                    "Muito Bom" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Muito Bom")?.Texto ?? "", 12),
-                                    "Excelente" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Excelente")?.Texto ?? "", 14.28),
-                                    _ => (nota, 0)
+                                    "Muito fraco" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Muito fraco")?.Texto ?? "", 0, nota),
+                                    "Fraco" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Fraco")?.Texto ?? "", 5, nota),
+                                    "Razoavel" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Razoavel")?.Texto ?? "", 7, nota),
+                                    "Bom" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Bom")?.Texto ?? "", 9, nota),
+                                    "Muito Bom" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Muito Bom")?.Texto ?? "", 12, nota),
+                                    "Excelente" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Excelente")?.Texto ?? "", 14.28, nota),
+                                    _ => (nota, 0, avisoAptidaoCardio)
                                 };
 
                                 //encaminhamento!.AddRange(modalidades
@@ -596,15 +610,15 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
 
                                 dict["prancha"] = valueTotal;
 
-                                (textoPrancha, prancha) = nota switch
+                                (textoPrancha, prancha, avisoPrancha) = nota switch
                                 {
-                                    "Muito fraco" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Muito fraco")?.Texto ?? "", 0),
-                                    "Fraco" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Fraco")?.Texto ?? "", 5),
-                                    "Razoavel" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Razoavel")?.Texto ?? "", 7),
-                                    "Bom" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Bom")?.Texto ?? "", 9),
-                                    "Muito Bom" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Muito Bom")?.Texto ?? "", 12),
-                                    "Excelente" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Excelente")?.Texto ?? "", 14.28),
-                                    _ => (nota, 0)
+                                    "Muito fraco" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Muito fraco")?.Texto ?? "", 0, nota),
+                                    "Fraco" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Fraco")?.Texto ?? "", 5, nota),
+                                    "Razoavel" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Razoavel")?.Texto ?? "", 7, nota),
+                                    "Bom" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Bom")?.Texto ?? "", 9, nota),
+                                    "Muito Bom" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Muito Bom")?.Texto ?? "", 12, nota),
+                                    "Excelente" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Excelente")?.Texto ?? "", 14.28, nota),
+                                    _ => (nota, 0, avisoPrancha)
                                 };
 
                                 //encaminhamento!.AddRange(modalidades
@@ -641,6 +655,15 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
 
                 if (item != null)
                 {
+                    avisoImc = item.Aviso switch
+                    {
+                        "ABAIXODONORMAL" => "Abaixo do Normal",
+                        "NORMAL" => "Normal",
+                        "OBESIDADE" => "Obesidade",
+                        "SOBREPESO" => "Sobrepeso",
+                        _ => item.Aviso
+                    };
+
                     var nota = item.Aviso;
 
                     if (alunoSaude.Aluno.Sexo == "M")
@@ -798,14 +821,18 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
                     .ToList();
 
                 var param = laudo.FirstOrDefault()?.SaudeBucal?.Encaminhamento?.Parametro?.Trim();
+                var paramNormalized = "";
 
-                var paramNormalized = param switch
+                if (param != null)
                 {
-                    "ATENCAO" => "ATENCAO.ATENÇÃO",
-                    "CUIDADO" => "CUIDADO.CUIDADO",
-                    "MUITOBOM" => "MUITOBOM.MUITO BOM",
-                    _ => param
-                };
+                    (avisoSaudeBucal, paramNormalized) = param switch
+                    {
+                        "ATENCAO" => ("Atenção", "ATENCAO.ATENÇÃO"),
+                        "CUIDADO" => ("Cuidado", "CUIDADO.CUIDADO"),
+                        "MUITOBOM" => ("Muito Bom", "MUITOBOM.MUITO BOM"),
+                        _ => (param, param)
+                    };
+                }
 
                 if (textoLaudo.Any())
                 {
@@ -851,15 +878,19 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
                     .ToList();
 
                 var param = laudo.FirstOrDefault()?.ConsumoAlimentar?.Encaminhamento?.Parametro?.Trim();
+                var paramNormalized = "";
 
-                var paramNormalized = param switch
+                if (param != null)
                 {
-                    "HabitosNaoSaudaveis" => "HabitosNaoSaudaveis.Hábitos não saudáveis",
-                    "HabitosSatisfatorios" => "HabitosSatisfatorios.Hábitos satisfatórios",
-                    "BonsHabitosAlimentares" => "BonsHabitosAlimentares.Bons Hábitos alimentares",
-                    "HabitosSaudaveis" => "HabitosSaudaveis.Hábitos Saudáveis ",
-                    _ => param
-                };
+                    (avisoConsumoAlimentar, paramNormalized) = param switch
+                    {
+                        "HabitosNaoSaudaveis" => ("Hábitos não saudáveis", "HabitosNaoSaudaveis.Hábitos não saudáveis"),
+                        "HabitosSatisfatorios" => ("Hábitos satisfatórios", "HabitosSatisfatorios.Hábitos satisfatórios"),
+                        "BonsHabitosAlimentares" => ("Bons hábitos alimentares", "BonsHabitosAlimentares.Bons Hábitos alimentares"),
+                        "HabitosSaudaveis" => ("Hábitos saudáveis", "HabitosSaudaveis.Hábitos Saudáveis"),
+                        _ => (param, param)
+                    };
+                }
 
                 if (textoLaudo.Any())
                 {
@@ -968,6 +999,16 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
                 ScoreSaudeBucal = saudeBucal,
                 ScoreConsumoAlimentar = consumoAlimentar,
                 ScoreDna = Round(scoreTalentoEsportivo + scoreSaude + scoreVocacional + saudeBucal + consumoAlimentar + scoreQualidadeVida),
+                AvisoVelocidade = avisoVelocidade,
+                AvisoImpulsao = avisoImpulsao,
+                AvisoShuttleRun = avisoShutlleRun,
+                AvisoFlexibilidadeMuscular = avisoFlexibilidadeMuscular,
+                AvisoForcaMembrosSup = avisoForcaMembrosSup,
+                AvisoAptidaoCardio = avisoAptidaoCardio,
+                AvisoPrancha = avisoPrancha,
+                AvisoImc = avisoImc,
+                AvisoSaudeBucal = avisoSaudeBucal,
+                AvisoConsumoAlimentar = avisoConsumoAlimentar,
                 TextoVelocidade = textoVelocidade,
                 TextoImpulsao = textoImpulsao,
                 TextoShuttleRun = textoShuttleRun,
