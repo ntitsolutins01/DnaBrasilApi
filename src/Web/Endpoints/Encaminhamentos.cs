@@ -4,6 +4,7 @@ using DnaBrasilApi.Application.Encaminhamentos.Commands.DeleteEncaminhamento;
 using DnaBrasilApi.Application.Encaminhamentos.Commands.UpdateEncaminhamento;
 using DnaBrasilApi.Application.Encaminhamentos.Queries;
 using DnaBrasilApi.Application.Encaminhamentos.Queries.GetEncaminhamentosAll;
+using DnaBrasilApi.Application.Encaminhamentos.Queries.GetEncaminhamentosByTipoLaudoId;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -23,7 +24,8 @@ public class Encaminhamentos : EndpointGroupBase
             .MapPost(CreateEncaminhamento)
             .MapPut(UpdateEncaminhamento, "{id}")
             .MapDelete(DeleteEncaminhamento, "{id}")
-            .MapGet(GetEncaminhamentoById, "Encaminhamento/{id}");
+            .MapGet(GetEncaminhamentoById, "Encaminhamento/{id}")
+            .MapGet(GetEncaminhamentosByTipoLaudoId, "Encaminhamento/TipoLaudo/{id}");
     }
     #endregion
 
@@ -88,6 +90,16 @@ public class Encaminhamentos : EndpointGroupBase
     public async Task<EncaminhamentoDto> GetEncaminhamentoById(ISender sender, int id)
     {
         return await sender.Send(new GetEncaminhamentoByIdQuery() { Id = id });
+    }
+    /// <summary>
+    /// Endpoint que busca todos os encaminhamentos por tipo laudo
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="id">Id do tipo laudo</param>
+    /// <returns>Retorna a lista de encaminhamentos</returns>
+    public async Task<List<EncaminhamentoDto>> GetEncaminhamentosByTipoLaudoId(ISender sender, int id)
+    {
+        return await sender.Send(new GetEncaminhamentosByTipoLaudoIdQuery() { Id = id });
     }
     #endregion
 

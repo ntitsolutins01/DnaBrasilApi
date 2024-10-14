@@ -22,7 +22,6 @@ public class CreateModuloEadCommandHandler : IRequestHandler<CreateModuloEadComm
 
     public async Task<int> Handle(CreateModuloEadCommand request, CancellationToken cancellationToken)
     {
-
         var curso = await _context.Cursos
             .FindAsync([request.CursoId], cancellationToken);
 

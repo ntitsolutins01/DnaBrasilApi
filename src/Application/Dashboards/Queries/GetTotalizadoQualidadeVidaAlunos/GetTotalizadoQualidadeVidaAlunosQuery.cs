@@ -27,7 +27,7 @@ public class
     {
         IQueryable<Aluno> alunos;
 
-        alunos = _context.Alunos.Where(x=>x.Id==37051)
+        alunos = _context.Alunos//.Where(x=>x.Id==37051)
             .AsNoTracking();
 
         var result = FilterAlunosQualidadeVida(alunos, request.SearchFilter!, cancellationToken);
@@ -117,7 +117,8 @@ public class
 
         var laudos = _context.Laudos.Where(x => verificaAlunos.Contains(x.Aluno.Id)).Include(i => i.QualidadeDeVida).Where(x=>x.QualidadeDeVida != null)
             .Include(a => a.Aluno)
-            .AsNoTracking();
+            .AsNoTracking()
+            .OrderBy(o=>o.QualidadeDeVida!.Id);
 
         foreach (var laudo in laudos)
         {

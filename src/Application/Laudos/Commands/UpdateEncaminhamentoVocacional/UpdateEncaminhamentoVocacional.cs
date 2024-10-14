@@ -19,28 +19,14 @@ public class UpdateEncaminhamentoVocacionalCommandHandler : IRequestHandler<Upda
 
     public async Task<bool> Handle(UpdateEncaminhamentoVocacionalCommand request, CancellationToken cancellationToken)
     {
-        IQueryable<Aluno> alunos;
-
-        alunos = _context.Alunos//.Where(x => x.Id == request.AlunoId)//37315 - Feminino 38438
-            .AsNoTracking();
-
-        Dictionary<string, decimal> dict = new()
-        {
-            { "TecnologiasAplicadas", 0 },
-            { "CienciasExatasNaturais", 0 },
-            { "Artistico", 0 },
-            { "CienciasHumanas", 0 },
-            { "Empreendedorismo", 0 },
-            { "CienciasContabeisAdministrativas", 0 }
-        };
-
         var encaminhamentos = _context.Encaminhamentos.Where(x => x.TipoLaudo.Id == 6);
 
-        var verificaAlunos = alunos.Select(x => x.Id);
+        var listVocacionais = _context.Vocacionais
+            //.Where(x=>x.Id == 357)
+            .AsNoTracking()
+            .OrderByDescending(t => t.Id);
 
-        var laudos = _context.Laudos.Where(x => verificaAlunos.Contains(x.Aluno.Id)).Include(i => i.Vocacional).Where(x => x.Vocacional != null)
-            .Include(a => a.Aluno)
-            .AsNoTracking();
+        var tot = listVocacionais.Count();
 
         decimal respostas1;
         decimal respostas2;
@@ -50,9 +36,9 @@ public class UpdateEncaminhamentoVocacionalCommandHandler : IRequestHandler<Upda
         var metricas = _context.TextosLaudos
             .Where(x => x.TipoLaudo.Id == 6).ToList();
 
-        foreach (var aluno in laudos)
+        foreach (var vocacional in listVocacionais)
         {
-            List<int> listRespostas = aluno.Vocacional!.Respostas.Split(',').Select(item => int.Parse(item)).ToList();
+            List<int> listRespostas = vocacional.Respostas.Split(',').Select(item => int.Parse(item)).ToList();
 
             var respostas = _context.Respostas.Where(x => listRespostas.Contains(x.Id)).Include(i => i.Questionario);
 
@@ -81,51 +67,24 @@ public class UpdateEncaminhamentoVocacionalCommandHandler : IRequestHandler<Upda
                     }
                 );
 
-                if (result == null || !dict.ContainsKey(result.Aviso.Split('.')[0]))
+                if (result == null)
                 {
                     continue;
                 }
 
-                var value = dict[result.Aviso.Split('.')[0]];
+                var parametro = result.Aviso.Split('.').First();
 
-                value += 1;
+                var encaminhamentoVocacional = encaminhamentos.First(x => x.Parametro == parametro);
 
-                dict[result.Aviso.Split('.')[0]] = value;
+                var entity = await _context.Vocacionais
+                    .FindAsync([vocacional.Id], cancellationToken);
 
-                if (aluno.Aluno.Sexo == "M")
-                {
-                    var parametro = result.Aviso.Split('.').First();
+                Guard.Against.NotFound(vocacional.Id, entity);
 
-                    var encaminhamentoVocacional = encaminhamentos.First(x => x.Parametro == parametro);
+                entity.Encaminhamento = encaminhamentoVocacional;
 
-                    var entity = await _context.Vocacionais
-                        .FindAsync([aluno.Vocacional.Id], cancellationToken);
+                await _context.SaveChangesAsync(cancellationToken);
 
-                    Guard.Against.NotFound(aluno.Vocacional.Id, entity);
-
-                    entity.Encaminhamento = encaminhamentoVocacional;
-
-                    var final = await _context.SaveChangesAsync(cancellationToken);
-
-                    return final == 1;
-                }
-                else
-                {
-                    var parametro = result.Aviso.Split('.').First();
-
-                    var encaminhamentoVocacional = encaminhamentos.First(x => x.Parametro == parametro);
-
-                    var entity = await _context.Vocacionais
-                        .FindAsync([aluno.Vocacional.Id], cancellationToken);
-
-                    Guard.Against.NotFound(aluno.Vocacional.Id, entity);
-
-                    entity.Encaminhamento = encaminhamentoVocacional;
-
-                    var final = await _context.SaveChangesAsync(cancellationToken);
-
-                    return final == 1;
-                }
             }
             else
             {
@@ -149,56 +108,27 @@ public class UpdateEncaminhamentoVocacionalCommandHandler : IRequestHandler<Upda
                     }
                 );
 
-                if (result == null || !dict.ContainsKey(result.Aviso.Split('.')[0]))
+                if (result == null)
                 {
                     continue;
                 }
 
+                var parametro = result.Aviso.Split('.').First();
 
-                var value = dict[result.Aviso.Split('.')[0]];
+                var encaminhamentoVocacional = encaminhamentos.First(x => x.Parametro == parametro);
 
-                value += 1;
+                var entity = await _context.Vocacionais
+                    .FindAsync([vocacional.Id], cancellationToken);
 
-                dict[result.Aviso.Split('.')[0]] = value;
+                Guard.Against.NotFound(vocacional.Id, entity);
 
-                if (aluno.Aluno.Sexo == "M")
-                {
-                    var parametro = result.Aviso.Split('.').First();
+                entity.Encaminhamento = encaminhamentoVocacional;
 
-                    var encaminhamentoVocacional = encaminhamentos.First(x => x.Parametro == parametro);
-
-                    var entity = await _context.Vocacionais
-                        .FindAsync([aluno.Vocacional.Id], cancellationToken);
-
-                    Guard.Against.NotFound(aluno.Vocacional.Id, entity);
-
-                    entity.Encaminhamento = encaminhamentoVocacional;
-
-                    var final = await _context.SaveChangesAsync(cancellationToken);
-
-                    return final == 1;
-                }
-                else
-                {
-                    var parametro = result.Aviso.Split('.').First();
-
-                    var encaminhamentoVocacional = encaminhamentos.First(x => x.Parametro == parametro);
-
-                    var entity = await _context.Vocacionais
-                        .FindAsync([aluno.Vocacional.Id], cancellationToken);
-
-                    Guard.Against.NotFound(aluno.Vocacional.Id, entity);
-
-                    entity.Encaminhamento = encaminhamentoVocacional;
-
-                    var final = await _context.SaveChangesAsync(cancellationToken);
-
-                    return final == 1;
-                }
+                await _context.SaveChangesAsync(cancellationToken);
             }
         }
 
-        return false;
+        return true;
     }
 
     private Boolean IsPrime(int number)

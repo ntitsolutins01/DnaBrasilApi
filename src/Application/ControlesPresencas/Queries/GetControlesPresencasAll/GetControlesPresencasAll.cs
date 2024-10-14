@@ -1,10 +1,16 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Application.Common.Mappings;
+using DnaBrasilApi.Application.Common.Models;
 
 namespace DnaBrasilApi.Application.ControlesPresencas.Queries.GetControlesPresencasAll;
 //[Authorize]
-public record GetControlesPresencasAllQuery : IRequest<List<ControlePresencaDto>>;
+public record GetControlesPresencasAllQuery : IRequest<PaginatedList<ControlePresencaDto>>
+{
+    public int PageNumber { get; init; } = 1;
+    public int PageSize { get; init; } = 10;
+}
 
-public class GetControlesPresencasAllQueryHandler : IRequestHandler<GetControlesPresencasAllQuery, List<ControlePresencaDto>>
+public class GetControlesPresencasAllQueryHandler : IRequestHandler<GetControlesPresencasAllQuery, PaginatedList<ControlePresencaDto>>
 {
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
@@ -15,15 +21,14 @@ public class GetControlesPresencasAllQueryHandler : IRequestHandler<GetControles
         _mapper = mapper;
     }
 
-    public async Task<List<ControlePresencaDto>> Handle(GetControlesPresencasAllQuery request, CancellationToken cancellationToken)
+    public async Task<PaginatedList<ControlePresencaDto>> Handle(GetControlesPresencasAllQuery request, CancellationToken cancellationToken)
     {
         var result = await _context.ControlesPresencas
             .Include(i => i.Evento)
             .Where(x => x.Evento == null)
             .AsNoTracking()
             .ProjectTo<ControlePresencaDto>(_mapper.ConfigurationProvider)
-            .OrderBy(t => t.Id)
-            .ToListAsync(cancellationToken);
+            .PaginatedListAsync(request.PageNumber, request.PageSize);
 
         return result == null ? throw new ArgumentNullException(nameof(result)) : result;
     }

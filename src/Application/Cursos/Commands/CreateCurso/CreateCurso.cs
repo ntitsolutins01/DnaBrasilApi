@@ -5,7 +5,7 @@ namespace DnaBrasilApi.Application.Cursos.Commands.CreateCurso;
 public record CreateCursoCommand : IRequest<int>
 {
     public required int TipoCursoId { get; init; }
-    public required int UsuarioId { get; init; }
+    public required int CoordenadorId { get; init; }
     public required string Titulo { get; init; }
     public required int CargaHoraria { get; init; }
     public string? Descricao { get; init; }
@@ -28,15 +28,15 @@ public class CreateCursoCommandHandler : IRequestHandler<CreateCursoCommand, int
 
         Guard.Against.NotFound(request.TipoCursoId, tipoCurso);
 
-        var usuario = await _context.Usuarios
-            .FindAsync([request.UsuarioId], cancellationToken);
+        var coordenador = await _context.Usuarios
+            .FindAsync([request.CoordenadorId], cancellationToken);
 
-        Guard.Against.NotFound(request.UsuarioId, usuario);
+        Guard.Against.NotFound(request.CoordenadorId, coordenador);
 
         var entity = new Curso
         {
             TipoCurso = tipoCurso,
-            Usuario = usuario,
+            Usuario = coordenador,
             Titulo = request.Titulo,
             CargaHoraria = request.CargaHoraria,
             Descricao = request.Descricao,

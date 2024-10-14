@@ -1,4 +1,4 @@
-﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Dashboards;
@@ -35,10 +35,25 @@ public class CreateCargaCommandHandler : IRequestHandler<CreateCargaCommand, int
         //    .AsNoTracking()
         //    .ToListAsync(cancellationToken);
 
-        var list = await _context.Saudes
-            .Include(i => i.Aluno)
-            .AsNoTracking()
-            .ToListAsync(cancellationToken);
+        //var list = await _context.ConsumoAlimentares
+        //    .Include(i => i.Aluno)
+        //    .AsNoTracking()
+        //    .ToListAsync(cancellationToken);
+
+        //var list = await _context.Vocacionais
+        //    .Include(i => i.Aluno)
+        //    .AsNoTracking()
+        //    .ToListAsync(cancellationToken);
+
+        //var list = await _context.SaudeBucais
+        //    .Include(i => i.Aluno)
+        //    .AsNoTracking()
+        //    .ToListAsync(cancellationToken);
+
+        //var list = await _context.TalentosEsportivos
+        //    .Include(i => i.Aluno)
+        //    .AsNoTracking()
+        //    .ToListAsync(cancellationToken);
 
         var alunos = await _context.Alunos
             .AsNoTracking()
@@ -50,13 +65,31 @@ public class CreateCargaCommandHandler : IRequestHandler<CreateCargaCommand, int
         //        .FindAsync(new object[] { aluno!.Id }, cancellationToken);
 
         //    //var find = list.Find(
+        //    //    delegate (Vocacional bk)
+        //    //    {
+        //    //        return bk.Aluno!.Id == aluno.Id;
+        //    //    }
+        //    //);
+        //    //var find = list.Find(
         //    //    delegate (QualidadeDeVida bk)
         //    //    {
         //    //        return bk.Aluno!.Id == aluno.Id;
         //    //    }
         //    //);
+        //    //var find = list.Find(
+        //    //    delegate (ConsumoAlimentar bk)
+        //    //    {
+        //    //        return bk.Aluno!.Id == aluno.Id;
+        //    //    }
+        //    //);
+        //    //var find = list.Find(
+        //    //    delegate (SaudeBucal bk)
+        //    //    {
+        //    //        return bk.Aluno!.Id == aluno.Id;
+        //    //    }
+        //    //);
         //    var find = list.Find(
-        //        delegate (Saude bk)
+        //        delegate (TalentoEsportivo bk)
         //        {
         //            return bk.Aluno!.Id == aluno.Id;
         //        }
@@ -71,10 +104,16 @@ public class CreateCargaCommandHandler : IRequestHandler<CreateCargaCommand, int
         //            }
         //        );
 
-        //            //var obj = await _context.QualidadeDeVidas
-        //            //    .FindAsync(new object[] { find!.Id }, cancellationToken);
-        //            var obj = await _context.Saudes
-        //                .FindAsync(new object[] { find!.Id }, cancellationToken);
+        //        //var obj = await _context.Vocacionais
+        //        //    .FindAsync(new object[] { find!.Id }, cancellationToken);
+        //        //var obj = await _context.QualidadeDeVidas
+        //        //    .FindAsync(new object[] { find!.Id }, cancellationToken);
+        //        //var obj = await _context.ConsumoAlimentares
+        //        //    .FindAsync(new object[] { find!.Id }, cancellationToken);
+        //        //var obj = await _context.SaudeBucais
+        //        //    .FindAsync(new object[] { find!.Id }, cancellationToken);
+        //        var obj = await _context.TalentosEsportivos
+        //            .FindAsync(new object[] { find!.Id }, cancellationToken);
 
         //        if (findLaudos != null)
         //        {
@@ -84,40 +123,46 @@ public class CreateCargaCommandHandler : IRequestHandler<CreateCargaCommand, int
 
         //            Guard.Against.NotFound(request.Id, entity);
 
-        //            if (
+        //            //if (
         //                //findLaudos.QualidadeDeVida == null
         //                //&&
         //                //findLaudos.Vocacional == null
         //                //&&
-        //                findLaudos.Saude == null 
+        //                //findLaudos.Saude == null
         //                //&&
-        //                //findLaudos.Consumo == null 
+        //                //findLaudos.ConsumoAlimentar == null 
         //                //&&
         //                //findLaudos.SaudeBucal == null 
         //                //&&
         //                //findLaudos.TalentoEsportivo == null
-        //                )
-        //            {
-        //                //entity.StatusLaudo = "F";
+        //             //   )
+        //            //{
+        //                //entity.StatusLaudo = "A";
 
         //                //var results = await _context.SaveChangesAsync(cancellationToken);
 
         //                //var teste = results == 1;//true
 
+        //                //entity.Vocacional = obj;
         //                //entity.QualidadeDeVida = obj;
-        //                entity.Saude = obj;
+        //                //entity.ConsumoAlimentar = obj;
+        //                //entity.SaudeBucal = obj;
+        //                entity.TalentoEsportivo = obj;
 
 
         //                var results = await _context.SaveChangesAsync(cancellationToken);
-        //            }
+        //           // }
         //        }
         //        else
         //        {
         //            var entityLaudo = new Laudo()
         //            {
         //                Aluno = alunoObj!,
+        //                //Vocacional = obj
         //                //QualidadeDeVida = obj
-        //                Saude = obj
+        //                //ConsumoAlimentar = obj
+        //                //SaudeBucal = obj
+        //                TalentoEsportivo = obj
         //            };
 
         //            _context.Laudos.Add(entityLaudo);
@@ -173,18 +218,18 @@ public class CreateCargaCommandHandler : IRequestHandler<CreateCargaCommand, int
                 var results = await _context.SaveChangesAsync(cancellationToken);
 
                 var teste = results == 1;//true
+            }
+            else
+            {
+                entity.StatusLaudo = "A";
 
-                //entity.QualidadeDeVida = obj;
+                var results = await _context.SaveChangesAsync(cancellationToken);
 
-
-                //var results = await _context.SaveChangesAsync(cancellationToken);
+                var teste = results == 1;//true
             }
 
 
-
         }
-
-       // var result = await _context.SaveChangesAsync(cancellationToken);
 
         return 1;//true
     }
