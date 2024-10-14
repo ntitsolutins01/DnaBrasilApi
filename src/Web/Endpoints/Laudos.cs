@@ -39,7 +39,7 @@ public class Laudos : EndpointGroupBase
             .MapGet(GetEncaminhamentoBySaudeId, "Encaminhamento/Saude/{id}")
             .MapGet(GetEncaminhamentoByQualidadeDeVidaId, "Encaminhamento/QualidadeDeVida/{id}")
             .MapGet(GetEncaminhamentoByVocacional, "Encaminhamentos/Vocacional")
-            .MapGet(GetDesempenhoByAluno, "Desempenho/{id}");
+            .MapGet(GetDesempenhoByAluno, "Desempenho/{id}")
             .MapPost(GetLaudosByFilter, "Filter");
     }
     public async Task<int> CreateLaudo(ISender sender, CreateLaudoCommand command)
