@@ -28,6 +28,7 @@ public record CreateModalidadeCommand : IRequest<int>
     public int AlturaFim { get; init; }
     public bool Status { get; init; } = true;
     public int? LinhaAcaoId { get; init; }
+    public byte[]? ByteImage { get; init; }
 }
 
 public class CreateModalidadeCommandHandler : IRequestHandler<CreateModalidadeCommand, int>
@@ -74,7 +75,8 @@ public class CreateModalidadeCommandHandler : IRequestHandler<CreateModalidadeCo
             AlturaIni = request.AlturaIni,
             AlturaFim = request.AlturaFim,
             Status = request.Status,
-            LinhaAcao = linhaAcao
+            LinhaAcao = linhaAcao,
+            ByteImage = request.ByteImage
         };
 
         _context.Modalidades.Add(entity);

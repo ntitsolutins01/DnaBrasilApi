@@ -9,6 +9,7 @@ public record CreateEncaminhamentoCommand : IRequest<int>
     public required string Parametro { get; init; }
     public string? Descricao { get; init; }
     public bool Status { get; init; } = true;
+    public byte[]? ByteImage { get; init; }
 }
 
 public class CreateEncaminhamentoCommandHandler : IRequestHandler<CreateEncaminhamentoCommand, int>
@@ -33,7 +34,8 @@ public class CreateEncaminhamentoCommandHandler : IRequestHandler<CreateEncaminh
             Nome = request.Nome,
             Parametro = request.Parametro,
             Descricao = request.Descricao,
-            Status = request.Status
+            Status = request.Status,
+            ByteImage = request.ByteImage
         };
 
         _context.Encaminhamentos.Add(entity);
