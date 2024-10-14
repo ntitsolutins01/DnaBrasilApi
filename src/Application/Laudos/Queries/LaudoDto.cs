@@ -59,6 +59,7 @@ public class LaudoDto
                 .ForMember(dest => dest.SaudeBucalId, opt => opt.MapFrom(src => src.SaudeBucal!.Encaminhamento!.Id))
                 .ForMember(dest => dest.AlunoId, opt => opt.MapFrom(src => src.Aluno!.Id))
                 .ForMember(dest => dest.NomeAluno, opt => opt.MapFrom(src => src.Aluno.Nome))
+                .ForMember(dest => dest.Sexo, opt => opt.MapFrom(src => GetSexo(src.Aluno.Sexo)))
                 .ForMember(dest => dest.Idade, opt => opt.MapFrom(src => GetIdade(src.Aluno!.DtNascimento, null)))
                 .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Aluno.Email))
                 .ForMember(dest => dest.QrCode, opt => opt.MapFrom(src => src.Aluno.QrCode))
@@ -125,6 +126,15 @@ public class LaudoDto
             {
                 return 0;
             }
+        }
+        public static string GetSexo(string sigla)
+        {
+            return sigla switch
+            {
+                "F" => "Feminino",
+                "M" => "Masculino",
+                _ => "Não Definido"
+            };
         }
     }
 }
