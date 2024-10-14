@@ -4297,6 +4297,38 @@
         }
       }
     },
+    "/api/Laudos/Desempenho/{id}": {
+      "get": {
+        "tags": [
+          "Laudos"
+        ],
+        "operationId": "GetDesempenhoByAluno",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DesempenhoDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/LinhasAcoes": {
       "get": {
         "tags": [
@@ -14198,6 +14230,140 @@
           "alunoId": {
             "type": "integer",
             "format": "int32"
+          }
+        }
+      },
+      "DesempenhoDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "scoreTalentoEsportivo": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "scoreSaude": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "scoreVida": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "scoreVocacional": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "scoreSaudeBucal": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "scoreConsumoAlimentar": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "scoreDna": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "avisoVelocidade": {
+            "type": "string",
+            "nullable": true
+          },
+          "avisoImpulsao": {
+            "type": "string",
+            "nullable": true
+          },
+          "avisoShuttleRun": {
+            "type": "string",
+            "nullable": true
+          },
+          "avisoFlexibilidadeMuscular": {
+            "type": "string",
+            "nullable": true
+          },
+          "avisoForcaMembrosSup": {
+            "type": "string",
+            "nullable": true
+          },
+          "avisoAptidaoCardio": {
+            "type": "string",
+            "nullable": true
+          },
+          "avisoPrancha": {
+            "type": "string",
+            "nullable": true
+          },
+          "avisoImc": {
+            "type": "string",
+            "nullable": true
+          },
+          "avisoSaudeBucal": {
+            "type": "string",
+            "nullable": true
+          },
+          "avisoConsumoAlimentar": {
+            "type": "string",
+            "nullable": true
+          },
+          "textoVelocidade": {
+            "type": "string",
+            "nullable": true
+          },
+          "textoImpulsao": {
+            "type": "string",
+            "nullable": true
+          },
+          "textoShuttleRun": {
+            "type": "string",
+            "nullable": true
+          },
+          "textoFlexibilidadeMuscular": {
+            "type": "string",
+            "nullable": true
+          },
+          "textoForcaMembrosSup": {
+            "type": "string",
+            "nullable": true
+          },
+          "textoAptidaoCardio": {
+            "type": "string",
+            "nullable": true
+          },
+          "textoPrancha": {
+            "type": "string",
+            "nullable": true
+          },
+          "textoImc": {
+            "type": "string",
+            "nullable": true
+          },
+          "textoBemEstar": {
+            "type": "string",
+            "nullable": true
+          },
+          "textoAutoestima": {
+            "type": "string",
+            "nullable": true
+          },
+          "textoFamilia": {
+            "type": "string",
+            "nullable": true
+          },
+          "textoContexto": {
+            "type": "string",
+            "nullable": true
+          },
+          "textoVocacional": {
+            "type": "string",
+            "nullable": true
+          },
+          "textoConsumoAlimentar": {
+            "type": "string",
+            "nullable": true
+          },
+          "textoSaudeBucal": {
+            "type": "string",
+            "nullable": true
           }
         }
       },

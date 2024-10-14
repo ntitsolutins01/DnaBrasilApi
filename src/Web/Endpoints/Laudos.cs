@@ -14,6 +14,7 @@ using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoBySaudeId;
 using DnaBrasilApi.Application.Laudos.Queries.GetTalentoEsportivoByAluno;
 using DnaBrasilApi.Application.Common.Models;
 using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoByVocacional;
+using DnaBrasilApi.Application.Laudos.Queries.GetDesempenhoByAluno;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -35,7 +36,8 @@ public class Laudos : EndpointGroupBase
             .MapGet(GetTalentoEsportivoByAlunoQuery, "TalentoEsportivo/Aluno/{id}")
             .MapGet(GetEncaminhamentoBySaudeId, "Encaminhamento/Saude/{id}")
             .MapGet(GetEncaminhamentoByQualidadeDeVidaId, "Encaminhamento/QualidadeDeVida/{id}")
-            .MapGet(GetEncaminhamentoByVocacional, "Encaminhamentos/Vocacional");
+            .MapGet(GetEncaminhamentoByVocacional, "Encaminhamentos/Vocacional")
+            .MapGet(GetDesempenhoByAluno, "Desempenho/{id}");
     }
     public async Task<int> CreateLaudo(ISender sender, CreateLaudoCommand command)
     {
@@ -99,5 +101,10 @@ public class Laudos : EndpointGroupBase
     public async Task<List<EncaminhamentoDto>> GetEncaminhamentoByVocacional(ISender sender)
     {
         return await sender.Send(new GetEncaminhamentoByVocacionalQuery());
+    }
+    public async Task<DesempenhoDto> GetDesempenhoByAluno(ISender sender, int id)
+    {
+        return await sender.Send(new GetDesempenhoByAlunoQuery(id));
+
     }
 }
