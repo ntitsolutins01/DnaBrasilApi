@@ -16,6 +16,10 @@ public class DesempenhoDto
     public string? AvisoAptidaoCardio { get; init; }
     public string? AvisoPrancha { get; init; }
     public string? AvisoImc { get; init; }
+    public string? AvisoBemEstar { get; init; }
+    public string? AvisoAutoestima { get; init; }
+    public string? AvisoFamilia { get; init; }
+    public string? AvisoContexto { get; init; }
     public string? AvisoSaudeBucal { get; init; }
     public string? AvisoConsumoAlimentar { get; init; }
     public string? TextoVelocidade { get; init; }

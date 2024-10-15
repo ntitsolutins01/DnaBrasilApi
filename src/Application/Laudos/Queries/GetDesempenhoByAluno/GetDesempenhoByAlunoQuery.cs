@@ -180,6 +180,11 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
 
         string avisoImc = "";
 
+        string avisoBemEstar = "";
+        string avisoAutoestima = "";
+        string avisoFamilia = "";
+        string avisoContexto = "";
+
         string avisoSaudeBucal = "";
 
         string avisoConsumoAlimentar = "";
@@ -770,33 +775,33 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
 
                                 scoreQualidadeVida += qualidadeVida;
 
-                                textoBemEstar = (nota switch
+                                (textoBemEstar, avisoBemEstar) = nota switch
                                 {
-                                    "BemEstarFisico.Bem estar físico" => textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "BemEstarFisico.Bem estar físico")?.Texto,
-                                    "MalEstarFisico.Mal estar físico" => textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "MalEstarFisico.Mal estar físico")?.Texto,
-                                    _ => textoBemEstar
-                                })!;
+                                    "BemEstarFisico.Bem estar físico" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "BemEstarFisico.Bem estar físico")?.Texto ?? "", "Excelente"),
+                                    "MalEstarFisico.Mal estar físico" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "MalEstarFisico.Mal estar físico")?.Texto ?? "", "Necessita Melhorar"),
+                                    _ => (textoBemEstar ?? "", avisoBemEstar ?? "")
+                                };
 
-                                textoAutoestima = (nota switch
+                                (textoAutoestima, avisoAutoestima) = nota switch
                                 {
-                                    "AutoEstima.Autoestima e estabilidade emocional" => textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "AutoEstima.Autoestima e estabilidade emocional")?.Texto,
-                                    "BaixaAutoEstima.Baixa autoestima e dificuldades emocionais" => textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "BaixaAutoEstima.Baixa autoestima e dificuldades emocionais")?.Texto,
-                                    _ => textoAutoestima
-                                })!;
+                                    "AutoEstima.Autoestima e estabilidade emocional" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "AutoEstima.Autoestima e estabilidade emocional")?.Texto ?? "", "Excelente"),
+                                    "BaixaAutoEstima.Baixa autoestima e dificuldades emocionais" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "BaixaAutoEstima.Baixa autoestima e dificuldades emocionais")?.Texto ?? "", "Necessita Melhorar"),
+                                    _ => (textoAutoestima ?? "", avisoAutoestima ?? "")
+                                };
 
-                                textoFamilia = (nota switch
+                                (textoFamilia, avisoFamilia) = nota switch
                                 {
-                                    "FuncionamentoHarmonico.Funcionamento harmônico familiar" => textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "FuncionamentoHarmonico.Funcionamento harmônico familiar")?.Texto,
-                                    "Conflitos.Conflitos no contexto familiar" => textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Conflitos.Conflitos no contexto familiar")?.Texto,
-                                    _ => textoFamilia
-                                })!;
+                                    "FuncionamentoHarmonico.Funcionamento harmônico familiar" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "FuncionamentoHarmonico.Funcionamento harmônico familiar")?.Texto ?? "", "Excelente"),
+                                    "Conflitos.Conflitos no contexto familiar" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Conflitos.Conflitos no contexto familiar")?.Texto ?? "", "Necessita Melhorar"),
+                                    _ => (textoFamilia ?? "", avisoFamilia ?? "")
+                                };
 
-                                textoContexto = (nota switch
+                                (textoContexto, avisoContexto) = nota switch
                                 {
-                                    "ContextosFavorecedores.Contextos favorecedores do desenvolvimento" => textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "ContextosFavorecedores.Contextos favorecedores do desenvolvimento")?.Texto,
-                                    "ContextosNaoFavorecedores.Contextos não favorecedores do desenvolvimento" => textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "ContextosNaoFavorecedores.Contextos não favorecedores do desenvolvimento")?.Texto,
-                                    _ => textoContexto
-                                })!;
+                                    "ContextosFavorecedores.Contextos favorecedores do desenvolvimento" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "ContextosFavorecedores.Contextos favorecedores do desenvolvimento")?.Texto ?? "", "Excelente"),
+                                    "ContextosNaoFavorecedores.Contextos não favorecedores do desenvolvimento" => (textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "ContextosNaoFavorecedores.Contextos não favorecedores do desenvolvimento")?.Texto ?? "", "Necessita Melhorar"),
+                                    _ => (textoContexto ?? "", avisoContexto ?? "")
+                                };
                             }
                         }
                     }
@@ -1007,6 +1012,10 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
                 AvisoAptidaoCardio = avisoAptidaoCardio,
                 AvisoPrancha = avisoPrancha,
                 AvisoImc = avisoImc,
+                AvisoBemEstar = avisoBemEstar,
+                AvisoAutoestima = avisoAutoestima,
+                AvisoFamilia = avisoFamilia,
+                AvisoContexto = avisoContexto,
                 AvisoSaudeBucal = avisoSaudeBucal,
                 AvisoConsumoAlimentar = avisoConsumoAlimentar,
                 TextoVelocidade = textoVelocidade,

@@ -14297,6 +14297,22 @@
             "type": "string",
             "nullable": true
           },
+          "avisoBemEstar": {
+            "type": "string",
+            "nullable": true
+          },
+          "avisoAutoestima": {
+            "type": "string",
+            "nullable": true
+          },
+          "avisoFamilia": {
+            "type": "string",
+            "nullable": true
+          },
+          "avisoContexto": {
+            "type": "string",
+            "nullable": true
+          },
           "avisoSaudeBucal": {
             "type": "string",
             "nullable": true
