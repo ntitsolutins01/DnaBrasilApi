@@ -15,6 +15,8 @@ using DnaBrasilApi.Application.Laudos.Queries.GetTalentoEsportivoByAluno;
 using DnaBrasilApi.Application.Common.Models;
 using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoByVocacional;
 using DnaBrasilApi.Application.Laudos.Queries.GetDesempenhoByAluno;
+using DnaBrasilApi.Application.Laudos.Queries.GetLaudosByFilter;
+using Microsoft.AspNetCore.Mvc;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -37,7 +39,8 @@ public class Laudos : EndpointGroupBase
             .MapGet(GetEncaminhamentoBySaudeId, "Encaminhamento/Saude/{id}")
             .MapGet(GetEncaminhamentoByQualidadeDeVidaId, "Encaminhamento/QualidadeDeVida/{id}")
             .MapGet(GetEncaminhamentoByVocacional, "Encaminhamentos/Vocacional")
-            .MapGet(GetDesempenhoByAluno, "Desempenho/{id}");
+            .MapGet(GetDesempenhoByAluno, "Desempenho/{id}")
+            .MapPost(GetLaudosByFilter, "Filter");
     }
     public async Task<int> CreateLaudo(ISender sender, CreateLaudoCommand command)
     {
@@ -106,5 +109,13 @@ public class Laudos : EndpointGroupBase
     {
         return await sender.Send(new GetDesempenhoByAlunoQuery(id));
 
+    }
+    public async Task<LaudosFilterDto> GetLaudosByFilter(ISender sender, [FromBody] LaudosFilterDto search)
+    {
+        var result = await sender.Send(new GetLaudosByFilterQuery() { SearchFilter = search });
+
+        search.Laudos = result;
+
+        return search;
     }
 }
