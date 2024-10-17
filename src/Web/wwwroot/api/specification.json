@@ -547,12 +547,7 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
+        }
       }
     },
     "/api/ConfiguracaoSistema/Modulo/{id}": {
@@ -584,12 +579,7 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
+        }
       }
     },
     "/api/ConfiguracaoSistema/Modulo": {
@@ -622,12 +612,7 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
+        }
       }
     },
     "/api/ConfiguracaoSistema/{id}": {
@@ -671,12 +656,7 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
+        }
       },
       "delete": {
         "tags": [
@@ -706,12 +686,7 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
+        }
       }
     },
     "/api/ConfiguracaoSistema/Funcionalidades": {
@@ -734,12 +709,7 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
+        }
       }
     },
     "/api/ConfiguracaoSistema/Funcionalidade/{id}": {
@@ -771,12 +741,7 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
+        }
       },
       "put": {
         "tags": [
@@ -818,12 +783,7 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
+        }
       },
       "delete": {
         "tags": [
@@ -853,12 +813,7 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
+        }
       }
     },
     "/api/ConfiguracaoSistema/Funcionalidade": {
@@ -891,12 +846,7 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
+        }
       }
     },
     "/api/ConsumosAlimentares": {
@@ -14319,6 +14269,36 @@
           },
           "avisoConsumoAlimentar": {
             "type": "string",
+            "nullable": true
+          },
+          "dataTalentoEsportivo": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "dataSaude": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "dataVida": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "dataVocacional": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "dataConsumoAlimentar": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "dataSaudeBucal": {
+            "type": "string",
+            "format": "date-time",
             "nullable": true
           },
           "textoVelocidade": {
