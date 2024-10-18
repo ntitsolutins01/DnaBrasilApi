@@ -547,12 +547,7 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
+        }
       }
     },
     "/api/ConfiguracaoSistema/Modulo/{id}": {
@@ -584,12 +579,7 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
+        }
       }
     },
     "/api/ConfiguracaoSistema/Modulo": {
@@ -622,12 +612,7 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
+        }
       }
     },
     "/api/ConfiguracaoSistema/{id}": {
@@ -671,12 +656,7 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
+        }
       },
       "delete": {
         "tags": [
@@ -706,12 +686,7 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
+        }
       }
     },
     "/api/ConfiguracaoSistema/Funcionalidades": {
@@ -734,12 +709,7 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
+        }
       }
     },
     "/api/ConfiguracaoSistema/Funcionalidade/{id}": {
@@ -771,12 +741,7 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
+        }
       },
       "put": {
         "tags": [
@@ -818,12 +783,7 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
+        }
       },
       "delete": {
         "tags": [
@@ -853,12 +813,7 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
+        }
       }
     },
     "/api/ConfiguracaoSistema/Funcionalidade": {
@@ -891,12 +846,7 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
+        }
       }
     },
     "/api/ConsumosAlimentares": {
@@ -3811,6 +3761,38 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/FotoEventoDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Laudos/{id}": {
+      "get": {
+        "tags": [
+          "Laudos"
+        ],
+        "operationId": "GetLaudoById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LaudoDto"
                 }
               }
             }
@@ -13943,128 +13925,6 @@
           }
         }
       },
-      "CreateLaudoCommand": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "alunoId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "saudeId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "vocacionalId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "consumoAlimentarId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "qualidadeDeVidaId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "saudeBucalId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "talentoEsportivoId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "statusLaudo": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
-      "UpdateEncaminhamentoTalentoEsportivoV1Command": {
-        "type": "object",
-        "additionalProperties": false
-      },
-      "UpdateEncaminhamentoSaudeBucalCommand": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "alunoId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          }
-        }
-      },
-      "UpdateEncaminhamentoVocacionalCommand": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "alunoId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          }
-        }
-      },
-      "UpdateEncaminhamentoQualidadeDeVidaCommand": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "alunoId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          }
-        }
-      },
-      "UpdateEncaminhamentoConsumoAlimentarCommand": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "alunoId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          }
-        }
-      },
-      "PaginatedListOfLaudoDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "items": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/LaudoDto"
-            }
-          },
-          "pageNumber": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "totalPages": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "totalCount": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "hasPreviousPage": {
-            "type": "boolean"
-          },
-          "hasNextPage": {
-            "type": "boolean"
-          }
-        }
-      },
       "LaudoDto": {
         "type": "object",
         "additionalProperties": false,
@@ -14196,6 +14056,128 @@
           "imcSaude": {
             "type": "string",
             "nullable": true
+          }
+        }
+      },
+      "CreateLaudoCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "alunoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "saudeId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "vocacionalId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "consumoAlimentarId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "qualidadeDeVidaId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "saudeBucalId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "talentoEsportivoId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "statusLaudo": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "UpdateEncaminhamentoTalentoEsportivoV1Command": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "UpdateEncaminhamentoSaudeBucalCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "alunoId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        }
+      },
+      "UpdateEncaminhamentoVocacionalCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "alunoId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        }
+      },
+      "UpdateEncaminhamentoQualidadeDeVidaCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "alunoId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        }
+      },
+      "UpdateEncaminhamentoConsumoAlimentarCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "alunoId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        }
+      },
+      "PaginatedListOfLaudoDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LaudoDto"
+            }
+          },
+          "pageNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "hasPreviousPage": {
+            "type": "boolean"
+          },
+          "hasNextPage": {
+            "type": "boolean"
           }
         }
       },

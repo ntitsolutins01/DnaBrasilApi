@@ -15,6 +15,7 @@ using DnaBrasilApi.Application.Laudos.Queries.GetTalentoEsportivoByAluno;
 using DnaBrasilApi.Application.Common.Models;
 using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoByVocacional;
 using DnaBrasilApi.Application.Laudos.Queries.GetDesempenhoByAluno;
+using DnaBrasilApi.Application.Laudos.Queries.GetLaudoById;
 using DnaBrasilApi.Application.Laudos.Queries.GetLaudosByFilter;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,7 +26,8 @@ public class Laudos : EndpointGroupBase
     public override void Map(WebApplication app)
     {
         app.MapGroup(this)
-            //.RequireAuthorization()
+            //.RequireAuthorization() 
+            .MapGet(GetLaudoById, "{id}")
             .MapPost(CreateLaudo)
             .MapPut(UpdateEncaminhamentoTalentoEsportivo, "Encaminhamento/TalentoEsportivo/{alunoId}")
             .MapPut(UpdateEncaminhamentoTalentoEsportivoV1, "v1/Encaminhamento/TalentoEsportivo/{alunoId}")
@@ -87,6 +89,11 @@ public class Laudos : EndpointGroupBase
     public async Task<LaudoDto> GetLaudoByAluno(ISender sender, int id)
     {
         var laudo = await sender.Send(new GetLaudoByAlunoQuery(id));
+        return laudo;
+    }
+    public async Task<LaudoDto> GetLaudoById(ISender sender, int id)
+    {
+        var laudo = await sender.Send(new GetLaudoByIdQuery(id));
         return laudo;
     }
     public async Task<EncaminhamentoDto> GetEncaminhamentoBySaudeId(ISender sender, int id)
