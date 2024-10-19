@@ -17,7 +17,7 @@ public class ConfiguracaoSistema : EndpointGroupBase
     public override void Map(WebApplication app)
     {
         app.MapGroup(this)
-            .RequireAuthorization()
+            //.RequireAuthorization()
             .MapGet(GetModulosAll, "Modulos")
             .MapGet(GetModuloById, "Modulo/{id}")
             .MapPost(CreateModulo, "Modulo")
