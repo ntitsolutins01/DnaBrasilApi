@@ -11,7 +11,6 @@ using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoByQualidadeDeVida
 using DnaBrasilApi.Application.Laudos.Queries.GetLaudosAll;
 using DnaBrasilApi.Application.Laudos.Queries.GetLaudoByAluno;
 using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoBySaudeId;
-using DnaBrasilApi.Application.Laudos.Queries.GetTalentoEsportivoByAluno;
 using DnaBrasilApi.Application.Common.Models;
 using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoByVocacional;
 using DnaBrasilApi.Application.Laudos.Queries.GetDesempenhoByAluno;
@@ -37,7 +36,6 @@ public class Laudos : EndpointGroupBase
             .MapPut(UpdateEncaminhamentoConsumoAlimentar, "Encaminhamento/ConsumoAlimentar/{alunoId}")
             .MapGet(GetLaudosAll)
             .MapGet(GetLaudoByAluno, "Aluno/{id}")
-            .MapGet(GetTalentoEsportivoByAlunoQuery, "TalentoEsportivo/Aluno/{id}")
             .MapGet(GetEncaminhamentoBySaudeId, "Encaminhamento/Saude/{id}")
             .MapGet(GetEncaminhamentoByQualidadeDeVidaId, "Encaminhamento/QualidadeDeVida/{id}")
             .MapGet(GetEncaminhamentoByVocacional, "Encaminhamentos/Vocacional")
@@ -99,10 +97,6 @@ public class Laudos : EndpointGroupBase
     public async Task<EncaminhamentoDto> GetEncaminhamentoBySaudeId(ISender sender, int id)
     {
         return await sender.Send(new GetEncaminhamentoBySaudeIdQuery(id));
-    }
-    public async Task<TalentoEsportivoDto> GetTalentoEsportivoByAlunoQuery(ISender sender, int id)
-    {
-        return await sender.Send(new GetTalentoEsportivoByAlunoQuery(id));
     }
     public async Task<List<EncaminhamentoDto>> GetEncaminhamentoByQualidadeDeVidaId(ISender sender, int id)
     {

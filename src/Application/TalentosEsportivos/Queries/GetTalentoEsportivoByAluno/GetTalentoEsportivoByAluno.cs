@@ -1,6 +1,6 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasilApi.Application.Laudos.Queries.GetTalentoEsportivoByAluno;
+namespace DnaBrasilApi.Application.TalentosEsportivos.Queries.GetTalentoEsportivoByAluno;
 
 public record GetTalentoEsportivoByAlunoQuery(int AlunoId) : IRequest<TalentoEsportivoDto>;
 

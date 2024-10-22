@@ -1,7 +1,7 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasilApi.Application.Laudos.Commands.CreateTalentoEsportivo;
+namespace DnaBrasilApi.Application.TalentosEsportivos.Commands.CreateTalentoEsportivo;
 
 public record CreateTalentoEsportivoCommand : IRequest<int>
 {
@@ -32,11 +32,11 @@ public class CreateTalentoEsportivoCommandHandler : IRequestHandler<CreateTalent
     {
         var aluno = await _context.Alunos.FindAsync(new object[] { request.AlunoId }, cancellationToken);
 
-        Guard.Against.NotFound((int)request.AlunoId, aluno);
+        Guard.Against.NotFound(request.AlunoId, aluno);
 
         var profissional = await _context.Profissionais.FindAsync(new object[] { request.ProfissionalId }, cancellationToken);
 
-        Guard.Against.NotFound((int)request.ProfissionalId, profissional);
+        Guard.Against.NotFound(request.ProfissionalId, profissional);
 
         var entity = new TalentoEsportivo
         {

@@ -4157,38 +4157,6 @@
         }
       }
     },
-    "/api/Laudos/TalentoEsportivo/Aluno/{id}": {
-      "get": {
-        "tags": [
-          "Laudos"
-        ],
-        "operationId": "GetTalentoEsportivoByAlunoQuery",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "x-position": 1
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TalentoEsportivoDto"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/Laudos/Encaminhamento/Saude/{id}": {
       "get": {
         "tags": [
@@ -7736,6 +7704,112 @@
                 "schema": {
                   "type": "integer",
                   "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/TalentosEsportivos/{id}": {
+      "put": {
+        "tags": [
+          "TalentosEsportivos"
+        ],
+        "operationId": "UpdateTalentoEsportivo",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTalentoEsportivoCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "TalentosEsportivos"
+        ],
+        "operationId": "GetTalentoEsportivoByIdQuery",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TalentoEsportivoDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/TalentosEsportivos/Aluno/{alunoId}": {
+      "get": {
+        "tags": [
+          "TalentosEsportivos"
+        ],
+        "operationId": "GetTalentoEsportivoByAlunoQuery",
+        "parameters": [
+          {
+            "name": "alunoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TalentoEsportivoDto"
                 }
               }
             }
@@ -14064,6 +14138,10 @@
           "imcSaude": {
             "type": "string",
             "nullable": true
+          },
+          "uf": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -14186,82 +14264,6 @@
           },
           "hasNextPage": {
             "type": "boolean"
-          }
-        }
-      },
-      "TalentoEsportivoDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "profissional": {
-            "$ref": "#/components/schemas/ProfissionalDto"
-          },
-          "flexibilidade": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "preensaoManual": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "velocidade": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "impulsaoHorizontal": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "vo2Max": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "abdominal": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "imc": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "shuttleRun": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "encaminhamento": {
-            "type": "string",
-            "nullable": true
-          },
-          "altura": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "peso": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "envergadura": {
-            "type": "number",
-            "format": "decimal",
-            "nullable": true
-          },
-          "alunoId": {
-            "type": "integer",
-            "format": "int32"
           }
         }
       },
@@ -16575,6 +16577,127 @@
           "statusTalentosEsportivos": {
             "type": "string",
             "nullable": true
+          }
+        }
+      },
+      "UpdateTalentoEsportivoCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "flexibilidade": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "preensaoManual": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "velocidade": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "impulsaoHorizontal": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "aptidaoFisica": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "agilidade": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "abdominal": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        }
+      },
+      "TalentoEsportivoDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "profissional": {
+            "$ref": "#/components/schemas/ProfissionalDto"
+          },
+          "flexibilidade": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "preensaoManual": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "velocidade": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "impulsaoHorizontal": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "vo2Max": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "abdominal": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "imc": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "shuttleRun": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "encaminhamento": {
+            "type": "string",
+            "nullable": true
+          },
+          "altura": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "peso": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "envergadura": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "alunoId": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },

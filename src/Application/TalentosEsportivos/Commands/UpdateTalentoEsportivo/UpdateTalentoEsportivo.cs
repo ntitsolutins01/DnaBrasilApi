@@ -1,9 +1,9 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasilApi.Application.Laudos.Commands.UpdateTalentoEsportivo;
+namespace DnaBrasilApi.Application.TalentosEsportivos.Commands.UpdateTalentoEsportivo;
 
-public record UpdateTalentoEsportivoCommand : IRequest
+public record UpdateTalentoEsportivoCommand : IRequest<bool>
 {
     public int Id { get; init; }
     public int? Flexibilidade { get; init; }
@@ -15,7 +15,7 @@ public record UpdateTalentoEsportivoCommand : IRequest
     public int? Abdominal { get; init; }
 }
 
-public class UpdateTalentoEsportivoCommandHandler : IRequestHandler<UpdateTalentoEsportivoCommand>
+public class UpdateTalentoEsportivoCommandHandler : IRequestHandler<UpdateTalentoEsportivoCommand, bool>
 {
     private readonly IApplicationDbContext _context;
 
@@ -24,7 +24,7 @@ public class UpdateTalentoEsportivoCommandHandler : IRequestHandler<UpdateTalent
         _context = context;
     }
 
-    public async Task Handle(UpdateTalentoEsportivoCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(UpdateTalentoEsportivoCommand request, CancellationToken cancellationToken)
     {
         var entity = await _context.TalentosEsportivos
             .FindAsync(new object[] { request.Id }, cancellationToken);
@@ -38,6 +38,8 @@ public class UpdateTalentoEsportivoCommandHandler : IRequestHandler<UpdateTalent
         entity.Vo2Max = request.AptidaoFisica;
         entity.Abdominal = request.Abdominal;
 
-        await _context.SaveChangesAsync(cancellationToken);
+        var result = await _context.SaveChangesAsync(cancellationToken);
+
+        return result == 1;//true
     }
 }
