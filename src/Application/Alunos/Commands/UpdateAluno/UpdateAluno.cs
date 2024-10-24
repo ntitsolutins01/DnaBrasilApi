@@ -55,13 +55,26 @@ public class UpdateAlunoCommandHandler : IRequestHandler<UpdateAlunoCommand, boo
         int result;
         //if (request.QrCode!=null)
         //{
-        entity.QrCode = request.QrCode;
+        //entity.QrCode = request.QrCode;
         //result = await _context.SaveChangesAsync(cancellationToken);
 
         //return result == 1;//true
         //}
         //else
         //{
+        if (request.QrCode != null)
+        {
+            entity.QrCode = request.QrCode;
+            result = await _context.SaveChangesAsync(cancellationToken);
+            return result > 0;
+        }
+        Deficiencia? deficiencia = null;
+        if (request.DeficienciaId.HasValue && request.DeficienciaId.Value > 0)
+        {
+            deficiencia = await _context.Deficiencias.FindAsync(new object[] { request.DeficienciaId }, cancellationToken);
+            Guard.Against.NotFound(request.DeficienciaId.Value, deficiencia);
+        }
+
         Municipio? municipio = null;
 
         if (request.MunicipioId != null)
@@ -80,14 +93,14 @@ public class UpdateAlunoCommandHandler : IRequestHandler<UpdateAlunoCommand, boo
             Guard.Against.NotFound((int)request.LocalidadeId, localidade);
         }
 
-        Deficiencia? deficiencia = null;
+        /*Deficiencia? deficiencia = null;
 
         if (request.DeficienciaId != null)
         {
             deficiencia = await _context.Deficiencias.FindAsync(new object[] { request.DeficienciaId }, cancellationToken);
 
             Guard.Against.NotFound((int)request.DeficienciaId, deficiencia);
-        }
+        }*/
 
         //Parceiro? parceiro = null;
 
