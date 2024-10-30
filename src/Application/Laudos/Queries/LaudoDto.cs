@@ -28,6 +28,7 @@ public class LaudoDto
     public required string NomeLocalidade { get; init; }
     public string? MunicipioEstado { get; init; }
     public string? Sexo { get; init; }
+    public string? Etnia { get; init; }
     public string? StatusLaudo { get; init; }
     public DateTime? DtNascimento { get; init; }
     public int? Idade { get; init; }
@@ -61,6 +62,7 @@ public class LaudoDto
                 .ForMember(dest => dest.AlunoId, opt => opt.MapFrom(src => src.Aluno!.Id))
                 .ForMember(dest => dest.NomeAluno, opt => opt.MapFrom(src => src.Aluno.Nome))
                 .ForMember(dest => dest.Sexo, opt => opt.MapFrom(src => GetSexo(src.Aluno.Sexo)))
+                .ForMember(dest => dest.Etnia, opt => opt.MapFrom(src => src.Aluno.Etnia))
                 .ForMember(dest => dest.Idade, opt => opt.MapFrom(src => GetIdade(src.Aluno!.DtNascimento, null)))
                 .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Aluno.Email))
                 .ForMember(dest => dest.QrCode, opt => opt.MapFrom(src => src.Aluno.QrCode))
