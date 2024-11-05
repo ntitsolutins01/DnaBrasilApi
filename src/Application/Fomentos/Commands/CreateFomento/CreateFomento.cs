@@ -11,6 +11,7 @@ public record CreateFomentoCommand : IRequest<int>
     public required string Codigo { get; set; }
     public required string DtIni { get; set; }
     public required string DtFim { get; set; }
+    public required string LinhaAcoes { get; init; }
 }
 
 public class CreateFomentoCommandHandler : IRequestHandler<CreateFomentoCommand, int>
@@ -27,6 +28,7 @@ public class CreateFomentoCommandHandler : IRequestHandler<CreateFomentoCommand,
 
         var municipio = await _context.Municipios
              .FindAsync(new object[] { request.MunicipioId }, cancellationToken);
+
         var localidade = await _context.Localidades
              .FindAsync(new object[] { request.LocalidadeId }, cancellationToken);
 

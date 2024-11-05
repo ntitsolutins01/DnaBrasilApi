@@ -13963,6 +13963,9 @@
           },
           "dtFim": {
             "type": "string"
+          },
+          "linhaAcoes": {
+            "type": "string"
           }
         }
       },
@@ -13987,6 +13990,9 @@
             "type": "string"
           },
           "dtFim": {
+            "type": "string"
+          },
+          "linhaAcoes": {
             "type": "string"
           }
         }
@@ -14494,6 +14500,10 @@
                 "$ref": "#/components/schemas/PaginatedListOfLaudoDto"
               }
             ]
+          },
+          "usuarioEmail": {
+            "type": "string",
+            "nullable": true
           }
         }
       },

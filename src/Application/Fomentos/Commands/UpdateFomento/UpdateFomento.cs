@@ -9,8 +9,9 @@ public record UpdateFomentoCommand : IRequest <bool>
     public required string Nome { get; init; }
     public required string Codigo { get; init; }
     public bool Status { get; init; }
-    public required string DtIni { get; set; }
-    public required string DtFim { get; set; }
+    public required string DtIni { get; init; }
+    public required string DtFim { get; init; }
+    public required string LinhaAcoes { get; init; }
 }
 
 public class UpdateFomentoCommandHandler : IRequestHandler<UpdateFomentoCommand, bool>
