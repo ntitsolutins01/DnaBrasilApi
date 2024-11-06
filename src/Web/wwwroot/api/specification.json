@@ -14152,6 +14152,14 @@
           "uf": {
             "type": "string",
             "nullable": true
+          },
+          "telefone": {
+            "type": "string",
+            "nullable": true
+          },
+          "celular": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
