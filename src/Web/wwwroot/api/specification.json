@@ -16161,6 +16161,9 @@
             "type": "object",
             "additionalProperties": false,
             "properties": {
+              "aula": {
+                "$ref": "#/components/schemas/Aula"
+              },
               "enunciado": {
                 "type": "string"
               },
@@ -16186,6 +16189,10 @@
             "type": "string"
           },
           "questao": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "aulaId": {
             "type": "integer",
             "format": "int32"
           }
