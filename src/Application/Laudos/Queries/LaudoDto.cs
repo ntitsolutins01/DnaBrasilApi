@@ -1,4 +1,4 @@
-﻿using DnaBrasilApi.Domain.Entities;
+using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Laudos.Queries;
 public class LaudoDto

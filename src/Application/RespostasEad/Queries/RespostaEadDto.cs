@@ -11,7 +11,6 @@ public class RespostaEadDto
     public required string Resposta { get; init; }
     public required decimal ValorPesoResposta { get; init; }
 
-
     private class Mapping : Profile
     {
         public Mapping()
