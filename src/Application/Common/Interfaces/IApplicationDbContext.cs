@@ -55,6 +55,7 @@ public interface IApplicationDbContext
     DbSet<ControleMaterial> ControlesMateriais { get; }
     DbSet<QuestaoEad> QuestoesEad { get; }
     DbSet<RespostaEad> RespostasEad { get; }
+    DbSet<TextoQuestao> TextosQuestoes { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }
