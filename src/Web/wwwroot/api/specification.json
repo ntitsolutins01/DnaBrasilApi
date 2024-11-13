@@ -9870,6 +9870,11 @@
             "type": "integer",
             "format": "int32",
             "nullable": true
+          },
+          "modalidadeId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
           }
         }
       },
@@ -10607,6 +10612,39 @@
               "dtFim": {
                 "type": "string",
                 "format": "date-time"
+              },
+              "linhasAcoes": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "$ref": "#/components/schemas/LinhaAcao"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "LinhaAcao": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "nome": {
+                "type": "string"
+              },
+              "status": {
+                "type": "boolean"
+              },
+              "fomentos": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "$ref": "#/components/schemas/Fomentu"
+                }
               }
             }
           }
@@ -10838,25 +10876,6 @@
               },
               "aluno": {
                 "$ref": "#/components/schemas/Aluno"
-              }
-            }
-          }
-        ]
-      },
-      "LinhaAcao": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BaseAuditableEntity"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "nome": {
-                "type": "string"
-              },
-              "status": {
-                "type": "boolean"
               }
             }
           }
@@ -13937,6 +13956,14 @@
           },
           "status": {
             "type": "boolean"
+          },
+          "sigla": {
+            "type": "string",
+            "nullable": true
+          },
+          "linhaAcoes": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -13974,6 +14001,14 @@
         "additionalProperties": false,
         "properties": {
           "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "municipioId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "localidadeId": {
             "type": "integer",
             "format": "int32"
           },

@@ -8,4 +8,5 @@ public class Fomentu : BaseAuditableEntity
     public required Localidade Localidade { get; set; }
     public required DateTime DtIni { get; set; }
     public required DateTime DtFim { get; set; }
+    public List<LinhaAcao>? LinhasAcoes { get; set; }
 }
