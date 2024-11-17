@@ -16265,6 +16265,9 @@
             "type": "integer",
             "format": "int32"
           },
+          "nomeAula": {
+            "type": "string"
+          },
           "pergunta": {
             "type": "string"
           },
@@ -16274,10 +16277,6 @@
             "items": {
               "$ref": "#/components/schemas/RespostaEadDto"
             }
-          },
-          "quadrante": {
-            "type": "integer",
-            "format": "int32"
           },
           "questao": {
             "type": "integer",
