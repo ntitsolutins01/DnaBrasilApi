@@ -16268,6 +16268,10 @@
           "nomeAula": {
             "type": "string"
           },
+          "referencia": {
+            "type": "string",
+            "nullable": true
+          },
           "pergunta": {
             "type": "string"
           },
@@ -16327,7 +16331,8 @@
                 "type": "string"
               },
               "referencia": {
-                "type": "string"
+                "type": "string",
+                "nullable": true
               },
               "questao": {
                 "type": "integer",
@@ -16345,7 +16350,8 @@
             "type": "string"
           },
           "referencia": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "questao": {
             "type": "integer",
