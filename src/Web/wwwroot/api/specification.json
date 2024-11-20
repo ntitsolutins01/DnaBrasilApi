@@ -6689,166 +6689,6 @@
         }
       }
     },
-    "/api/QuestoesEad": {
-      "get": {
-        "tags": [
-          "QuestoesEad"
-        ],
-        "operationId": "GetQuestoesEadAll",
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/QuestaoEadDto"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "QuestoesEad"
-        ],
-        "operationId": "CreateQuestaoEad",
-        "requestBody": {
-          "x-name": "command",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateQuestaoEadCommand"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 1
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/QuestoesEad/{id}": {
-      "put": {
-        "tags": [
-          "QuestoesEad"
-        ],
-        "operationId": "UpdateQuestaoEad",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "x-position": 1
-          }
-        ],
-        "requestBody": {
-          "x-name": "command",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateQuestaoEadCommand"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 2
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "boolean"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "QuestoesEad"
-        ],
-        "operationId": "DeleteQuestaoEad",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "x-position": 1
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "boolean"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/QuestoesEad/QuestaoEad/{id}": {
-      "get": {
-        "tags": [
-          "QuestoesEad"
-        ],
-        "operationId": "GetQuestaoEadById",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "x-position": 1
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/QuestaoEadDto"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/Questionarios": {
       "get": {
         "tags": [
@@ -7037,6 +6877,166 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/QuestionarioDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/QuestoesEad": {
+      "get": {
+        "tags": [
+          "QuestoesEad"
+        ],
+        "operationId": "GetQuestoesEadAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/QuestaoEadDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "QuestoesEad"
+        ],
+        "operationId": "CreateQuestaoEad",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateQuestaoEadCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/QuestoesEad/{id}": {
+      "put": {
+        "tags": [
+          "QuestoesEad"
+        ],
+        "operationId": "UpdateQuestaoEad",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateQuestaoEadCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "QuestoesEad"
+        ],
+        "operationId": "DeleteQuestaoEad",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/QuestoesEad/QuestaoEad/{id}": {
+      "get": {
+        "tags": [
+          "QuestoesEad"
+        ],
+        "operationId": "GetQuestaoEadById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuestaoEadDto"
                 }
               }
             }
@@ -14097,6 +14097,10 @@
             "type": "string",
             "nullable": true
           },
+          "etnia": {
+            "type": "string",
+            "nullable": true
+          },
           "statusLaudo": {
             "type": "string",
             "nullable": true
@@ -16051,6 +16055,52 @@
           }
         }
       },
+      "CreateQuestionarioCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "pergunta": {
+            "type": "string"
+          },
+          "tipoLaudoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "quadrante": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "questao": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "UpdateQuestionarioCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pergunta": {
+            "type": "string"
+          },
+          "tipoLaudoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "quadrante": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "questao": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
       "QuestaoEadDto": {
         "type": "object",
         "additionalProperties": false,
@@ -16115,6 +16165,9 @@
             "type": "object",
             "additionalProperties": false,
             "properties": {
+              "aula": {
+                "$ref": "#/components/schemas/Aula"
+              },
               "enunciado": {
                 "type": "string"
               },
@@ -16142,6 +16195,10 @@
           "questao": {
             "type": "integer",
             "format": "int32"
+          },
+          "aulaId": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },
@@ -16158,52 +16215,6 @@
           },
           "referencia": {
             "type": "string"
-          },
-          "questao": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "CreateQuestionarioCommand": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "pergunta": {
-            "type": "string"
-          },
-          "tipoLaudoId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "quadrante": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "questao": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "UpdateQuestionarioCommand": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "pergunta": {
-            "type": "string"
-          },
-          "tipoLaudoId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "quadrante": {
-            "type": "integer",
-            "format": "int32"
           },
           "questao": {
             "type": "integer",
