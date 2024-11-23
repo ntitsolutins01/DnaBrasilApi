@@ -12,6 +12,8 @@ public class CursoDto
     public required string Titulo { get; init; }
     public required int CargaHoraria { get; init; }
     public string? Descricao { get; init; }
+    public string? Imagem { get; init; }
+    public string? NomeImagem { get; init; }
     public bool Status { get; init; }
 
     private class Mapping : Profile

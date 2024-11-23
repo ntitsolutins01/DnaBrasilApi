@@ -13,6 +13,9 @@ public class AulaDto
     public required string Titulo { get; init; }
     public string? Descricao { get; init; }
     public bool Status { get; init; }
+    public string? Material { get; init; }
+    public string? NomeMaterial { get; init; }
+    public string? Video { get; init; }
 
     private class Mapping : Profile
     {
