@@ -25,7 +25,7 @@ public class Aulas : EndpointGroupBase
             .MapPut(UpdateAula, "{id}")
             .MapDelete(DeleteAula, "{id}")
             .MapGet(GetAulaById, "Aula/{id}")
-            .MapGet(GetAulasAllByModuloEadId, "ModuloEad/{moduloEadId}");
+            .MapGet(GetAulasAllByModuloEadId, "ModuloEad/{id}");
     }
     #endregion
 
@@ -92,9 +92,15 @@ public class Aulas : EndpointGroupBase
         return await sender.Send(new GetAulaByIdQuery() { Id = id });
     }
 
-    public async Task<List<AulaDto>> GetAulasAllByModuloEadId(ISender sender, int moduloEadId)
+    /// <summary>
+    /// Endpoint que busca uma lista de aulas
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="id">Id do módulo Ead</param>
+    /// <returns>Retorna uma lista de Aulas</returns>
+    public async Task<List<AulaDto>> GetAulasAllByModuloEadId(ISender sender, int id)
     {
-        return await sender.Send(new GetAulasAllByModuloEadIdQuery() { ModuloEadId = moduloEadId });
+        return await sender.Send(new GetAulasAllByModuloEadIdQuery() { ModuloEadId = id });
     }
     #endregion
 

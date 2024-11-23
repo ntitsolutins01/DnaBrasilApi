@@ -527,7 +527,7 @@
         }
       }
     },
-    "/api/Aulas/ModuloEad/{moduloEadId}": {
+    "/api/Aulas/ModuloEad": {
       "get": {
         "tags": [
           "Aulas"
@@ -536,7 +536,7 @@
         "parameters": [
           {
             "name": "moduloEadId",
-            "in": "path",
+            "in": "query",
             "required": true,
             "schema": {
               "type": "integer",

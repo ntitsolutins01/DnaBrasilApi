@@ -22,7 +22,6 @@ public class GetAulasAllByModuloEadIdQueryHandler : IRequestHandler<GetAulasAllB
     {
         var result = await _context.Aulas
             .Include(i => i.ModuloEad)
-            //.Include(i=>i.Usuario)
             .Where(x => x.ModuloEad.Id == request.ModuloEadId)
             .AsNoTracking()
             .ProjectTo<AulaDto>(_mapper.ConfigurationProvider)
