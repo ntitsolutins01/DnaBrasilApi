@@ -47,6 +47,15 @@ public class LaudoDto
 
     #endregion
 
+    #region Edição de Laudo
+    public string? Uf { get; init; }
+    #endregion
+
+    #region Exportacao
+    public string? Telefone { get; set; }
+    public string? Celular { get; set; }
+
+    #endregion
     private class Mapping : Profile
     {
         public Mapping()
@@ -85,10 +94,10 @@ public class LaudoDto
                     opt => opt.MapFrom(src => GetImc(src.Saude!.Massa, src.Saude!.Altura)))
                 .ForMember(dest => dest.MunicipioEstado,
                     opt => opt.MapFrom(src =>
-                        src.Aluno.Municipio.Nome!.ToString() + " / " + src.Aluno.Municipio.Estado!.Sigla!.ToString()));
-            //.ForMember(dest => dest.DependenciaId, opt => opt.MapFrom(src => src.Dependencia!.Id))
-            //.ForMember(dest => dest.Serie, opt => opt.MapFrom(src => src.Dependencia!.Serie))
-            //.ForMember(dest => dest.Turma, opt => opt.MapFrom(src => src.Dependencia!.Turma));
+                        src.Aluno.Municipio.Nome!.ToString() + " / " + src.Aluno.Municipio.Estado!.Sigla!.ToString()))
+                .ForMember(dest => dest.Uf, opt => opt.MapFrom(src => src.Aluno.Localidade.Municipio!.Estado!.Sigla))
+            .ForMember(dest => dest.Telefone, opt => opt.MapFrom(src => src.Aluno.Telefone))
+            .ForMember(dest => dest.Celular, opt => opt.MapFrom(src => src.Aluno.Celular));
             //.ForMember(dest => dest.LocalidadeId, opt => opt.MapFrom(src => src.Aluno.Localidade.Id))
             //.ForMember(dest => dest.NomeLocalidade, opt => opt.MapFrom(src => src.Aluno.Localidade.Nome))
 

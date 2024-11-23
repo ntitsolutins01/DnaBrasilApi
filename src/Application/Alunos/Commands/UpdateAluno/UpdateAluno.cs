@@ -34,6 +34,7 @@ public record UpdateAlunoCommand : IRequest<bool>
     public int? ParceiroId { get; init; }
     public string? Etnia { get; set; }
     public int? ProfissionalId { get; set; }
+    public int? ModalidadeId { get; set; }
 }
 
 public class UpdateAlunoCommandHandler : IRequestHandler<UpdateAlunoCommand, bool>
@@ -129,6 +130,15 @@ public class UpdateAlunoCommandHandler : IRequestHandler<UpdateAlunoCommand, boo
             Guard.Against.NotFound((int)request.LinhaAcaoId, profissional);
         }
 
+        Modalidade? modalidade = null;
+
+        if (request.ModalidadeId != null)
+        {
+            modalidade = await _context.Modalidades.FindAsync(new object[] { request.ModalidadeId }, cancellationToken);
+
+            Guard.Against.NotFound((int)request.ModalidadeId, profissional);
+        }
+
 
         entity.AspNetUserId = request.AspNetUserId;
         entity.Nome = request.Nome!;
@@ -154,6 +164,7 @@ public class UpdateAlunoCommandHandler : IRequestHandler<UpdateAlunoCommand, boo
         entity.NomeFoto = request.NomeFoto;
         entity.ByteImage = request.ByteImage;
         entity.QrCode = request.QrCode;
+        //entity.Modalidades
         //}
 
 
