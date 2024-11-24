@@ -12,6 +12,8 @@ public record CreateTipoLaudosCommand : IRequest<int>
     public required string Nome { get; init; }
     public string? Descricao { get; init; }
     public bool Status { get; init; } = true;
+    public required int IdadeMinima { get; init; }
+
 }
 
 public class CreateTipoLaudosCommandHandler : IRequestHandler<CreateTipoLaudosCommand, int>
@@ -28,7 +30,8 @@ public class CreateTipoLaudosCommandHandler : IRequestHandler<CreateTipoLaudosCo
         var entity = new TipoLaudo
         {
             Nome = request.Nome,
-            Descricao = request.Descricao
+            Descricao = request.Descricao,
+            IdadeMinima = request.IdadeMinima
         };
 
         _context.TipoLaudos.Add(entity);

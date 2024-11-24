@@ -9,6 +9,8 @@ public record CreateCursoCommand : IRequest<int>
     public required string Titulo { get; init; }
     public required int CargaHoraria { get; init; }
     public string? Descricao { get; init; }
+    public string? Imagem { get; init; }
+    public string? NomeImagem { get; init; }
     public bool Status { get; init; } = true;
 }
 
@@ -40,6 +42,8 @@ public class CreateCursoCommandHandler : IRequestHandler<CreateCursoCommand, int
             Titulo = request.Titulo,
             CargaHoraria = request.CargaHoraria,
             Descricao = request.Descricao,
+            Imagem = request.Imagem,
+            NomeImagem = request.NomeImagem
         };
 
         _context.Cursos.Add(entity);
