@@ -16,6 +16,8 @@ using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoByVocacional;
 using DnaBrasilApi.Application.Laudos.Queries.GetDesempenhoByAluno;
 using DnaBrasilApi.Application.Laudos.Queries.GetLaudoById;
 using DnaBrasilApi.Application.Laudos.Queries.GetLaudosByFilter;
+using DnaBrasilApi.Application.Usuarios.Queries.GetUsuarioByEmail;
+using DnaBrasilApi.Application.Usuarios.Queries.GetUsuarioById;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DnaBrasilApi.Web.Endpoints;
@@ -113,6 +115,11 @@ public class Laudos : EndpointGroupBase
     }
     public async Task<LaudosFilterDto> GetLaudosByFilter(ISender sender, [FromBody] LaudosFilterDto search)
     {
+        var usuario = await sender.Send(new GetUsuarioByEmailQuery() { Email = search.UsuarioEmail! });
+
+        search.MunicipioId = usuario.MunicipioId;
+        search.Estado = usuario.Uf;
+
         var result = await sender.Send(new GetLaudosByFilterQuery() { SearchFilter = search });
 
         search.Laudos = result;

@@ -17,4 +17,5 @@ public class LaudosFilterDto
     #endregion
 
     public PaginatedList<LaudoDto>? Laudos { get; set; }
+    public string? UsuarioEmail { get; set; }
 }

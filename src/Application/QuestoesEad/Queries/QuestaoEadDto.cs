@@ -11,7 +11,6 @@ public class QuestaoEadDto
     public required int Quadrante { get; init; }
     public required int Questao { get; init; }
 
-
     private class Mapping : Profile
     {
         public Mapping()

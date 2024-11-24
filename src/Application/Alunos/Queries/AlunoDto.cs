@@ -44,6 +44,7 @@ public class AlunoDto
         public Mapping()
         {
             CreateMap<Aluno, AlunoDto>()
+                .ForMember(dest => dest.Nome, opt => opt.MapFrom(src => src.Nome.ToUpper()))
                 .ForMember(dest => dest.DeficienciaId, opt => opt.MapFrom(src => src.Deficiencia!.Id.ToString()))
                 .ForMember(dest => dest.ModalidadeLinhaAcao, opt => opt.MapFrom(src => src.LinhaAcao!.Nome))
                 .ForMember(dest => dest.ProfissionalId, opt => opt.MapFrom(src => src.Profissional!.Id.ToString()))

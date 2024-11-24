@@ -62,7 +62,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<ControleMaterial> ControlesMateriais => Set<ControleMaterial>();
     public DbSet<QuestaoEad> QuestoesEad => Set<QuestaoEad>();
     public DbSet<RespostaEad> RespostasEad => Set<RespostaEad>();
-
+    public DbSet<TextoQuestao> TextosQuestoes => Set<TextoQuestao>();
 
 
     protected override void OnModelCreating(ModelBuilder builder)
@@ -72,14 +72,14 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
         base.OnModelCreating(builder);
 
         #region Basic many-to-many
-        //builder.Entity<Aluno>()
-        //.HasMany(e => e.Deficiencias)
-        //.WithMany(e => e.Alunos)
-        //.UsingEntity(
-        //    "AlunosDeficiencias",
-        //    r => r.HasOne(typeof(Deficiencia)).WithMany().HasForeignKey("DeficienciaId").HasPrincipalKey(nameof(Deficiencia.Id)),
-        //    l => l.HasOne(typeof(Aluno)).WithMany().HasForeignKey("AlunoId").HasPrincipalKey(nameof(Aluno.Id)),
-        //    j => j.HasKey("AlunoId", "DeficienciaId"));
+        builder.Entity<Fomentu>()
+        .HasMany(e => e.LinhasAcoes)
+        .WithMany(e => e.Fomentos)
+        .UsingEntity(
+            "FomentosLinhasAcoes",
+            r => r.HasOne(typeof(LinhaAcao)).WithMany().HasForeignKey("LinhaAcaoId").HasPrincipalKey(nameof(LinhaAcao.Id)),
+            l => l.HasOne(typeof(Fomentu)).WithMany().HasForeignKey("FomentoId").HasPrincipalKey(nameof(Fomentu.Id)),
+            j => j.HasKey("FomentoId", "LinhaAcaoId"));
 
         builder.Entity<Aluno>()
         .HasMany(e => e.Modalidades)
