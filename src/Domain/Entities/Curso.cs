@@ -8,4 +8,6 @@ public class Curso : BaseAuditableEntity
     public required int CargaHoraria { get; set; }
     public string? Descricao { get; set; }
     public bool Status { get; set; } = true;
+    public string? Imagem { get; set; }
+    public string? NomeImagem { get; set; }
 }

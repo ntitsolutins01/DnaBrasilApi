@@ -11361,6 +11361,18 @@
           },
           "status": {
             "type": "boolean"
+          },
+          "material": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeMaterial": {
+            "type": "string",
+            "nullable": true
+          },
+          "video": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -11389,6 +11401,18 @@
           },
           "status": {
             "type": "boolean"
+          },
+          "material": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeMaterial": {
+            "type": "string",
+            "nullable": true
+          },
+          "video": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -11417,6 +11441,18 @@
           },
           "status": {
             "type": "boolean"
+          },
+          "material": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeMaterial": {
+            "type": "string",
+            "nullable": true
+          },
+          "video": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -12020,6 +12056,18 @@
               },
               "status": {
                 "type": "boolean"
+              },
+              "material": {
+                "type": "string",
+                "nullable": true
+              },
+              "nomeMaterial": {
+                "type": "string",
+                "nullable": true
+              },
+              "video": {
+                "type": "string",
+                "nullable": true
               }
             }
           }
@@ -12129,6 +12177,14 @@
               },
               "status": {
                 "type": "boolean"
+              },
+              "imagem": {
+                "type": "string",
+                "nullable": true
+              },
+              "nomeImagem": {
+                "type": "string",
+                "nullable": true
               }
             }
           }
@@ -12524,6 +12580,14 @@
             "type": "string",
             "nullable": true
           },
+          "imagem": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeImagem": {
+            "type": "string",
+            "nullable": true
+          },
           "status": {
             "type": "boolean"
           }
@@ -12552,6 +12616,14 @@
             "type": "string",
             "nullable": true
           },
+          "imagem": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeImagem": {
+            "type": "string",
+            "nullable": true
+          },
           "status": {
             "type": "boolean"
           }
@@ -12573,6 +12645,14 @@
             "format": "int32"
           },
           "descricao": {
+            "type": "string",
+            "nullable": true
+          },
+          "imagem": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeImagem": {
             "type": "string",
             "nullable": true
           },

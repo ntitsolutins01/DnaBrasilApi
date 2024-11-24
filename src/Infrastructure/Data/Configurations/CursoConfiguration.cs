@@ -14,5 +14,9 @@ public class CursoConfiguration : IEntityTypeConfiguration<Curso>
         builder.Property(t => t.Descricao)
             .HasMaxLength(500)
             .IsRequired();
+        builder.Property(t => t.Imagem)
+            .HasMaxLength(200);
+        builder.Property(t => t.NomeImagem)
+            .HasMaxLength(100);
     }
 }
