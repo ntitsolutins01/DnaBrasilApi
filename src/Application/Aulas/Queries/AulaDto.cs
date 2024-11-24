@@ -24,7 +24,8 @@ public class AulaDto
             CreateMap<Aula, AulaDto>()
                 .ForMember(dest => dest.NomeProfessor, opt => opt.MapFrom(src => src.Professor.Nome))
                 .ForMember(dest => dest.ProfessorId, opt => opt.MapFrom(src => src.Professor.Id))
-                .ForMember(dest => dest.TituloModuloEad, opt => opt.MapFrom(src => src.ModuloEad.Titulo));
+                .ForMember(dest => dest.TituloModuloEad, opt => opt.MapFrom(src => src.ModuloEad.Titulo))
+                .ForMember(dest => dest.Material, opt => opt.MapFrom(src => Path.GetFileName(src.Material)));
         }
     }
 }

@@ -24,6 +24,7 @@ public class CursoDto
                 .ForMember(dest => dest.TipoCursoId, opt => opt.MapFrom(src => src.TipoCurso.Id))
                 .ForMember(dest => dest.TituloTipoCurso, opt => opt.MapFrom(src => src.TipoCurso.Nome))
                 .ForMember(dest => dest.CoordenadorId, opt => opt.MapFrom(src => src.Usuario.Id))
+                .ForMember(dest => dest.Imagem, opt => opt.MapFrom(src => Path.GetFileName(src.Imagem)))
                 .ForMember(dest => dest.NomeCoordenador, opt => opt.MapFrom(src => src.Usuario.Nome));
         }
     }
