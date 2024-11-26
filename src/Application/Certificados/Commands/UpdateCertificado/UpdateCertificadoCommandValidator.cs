@@ -1,19 +1,15 @@
-﻿namespace DnaBrasilApi.Application.Aulas.Commands.UpdateAula;
-internal class UpdateAulaCommandValidator : AbstractValidator<UpdateAulaCommand>
+﻿namespace DnaBrasilApi.Application.Certificados.Commands.UpdateCertificado;
+internal class UpdateCertificadoCommandValidator : AbstractValidator<UpdateCertificadoCommand>
 {
-    public UpdateAulaCommandValidator()
+    public UpdateCertificadoCommandValidator()
     {
-        RuleFor(v => v.Titulo)
-            .MaximumLength(250)
+        RuleFor(v => v.HtmlFrente)
+            .MaximumLength(2000)
             .NotEmpty()
-            .WithMessage("O título é obrigatório.");
-        RuleFor(v => v.Descricao)
-            .MaximumLength(500)
-            .WithMessage("A quantidade máxima de caracteres permitidos são de 500.");
-        RuleFor(v => v.CargaHoraria)
-           .GreaterThan(0)
-            .WithMessage("A carga horária deve ser maior que zero.")
+            .WithMessage("O html é obrigatório.");
+        RuleFor(v => v.HtmlVerso)
+            .MaximumLength(2000)
             .NotEmpty()
-            .WithMessage("A carga horária é obrigatória.");
+            .WithMessage("O html é obrigatório.");
     }
 }
