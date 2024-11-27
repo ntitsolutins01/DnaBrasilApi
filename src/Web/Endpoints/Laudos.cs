@@ -115,10 +115,10 @@ public class Laudos : EndpointGroupBase
     }
     public async Task<LaudosFilterDto> GetLaudosByFilter(ISender sender, [FromBody] LaudosFilterDto search)
     {
-        var usuario = await sender.Send(new GetUsuarioByEmailQuery() { Email = search.UsuarioEmail! });
+        //var usuario = await sender.Send(new GetUsuarioByEmailQuery() { Email = search.UsuarioEmail! });
 
-        search.MunicipioId = usuario.MunicipioId;
-        search.Estado = usuario.Uf;
+        //search.MunicipioId = usuario.MunicipioId;
+        //search.Estado = usuario.Uf;
 
         var result = await sender.Send(new GetLaudosByFilterQuery() { SearchFilter = search });
 
