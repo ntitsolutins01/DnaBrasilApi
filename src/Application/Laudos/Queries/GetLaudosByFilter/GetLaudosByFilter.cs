@@ -85,6 +85,16 @@ public class GetLaudosByFilterQueryHandler : IRequestHandler<GetLaudosByFilterQu
             };
         }
 
+        if (search.PossuiFoto)
+        {
+            laudos = laudos.Where(u => u.Aluno.ByteImage != null);
+        }
+
+        if (search.Finalizado)
+        {
+            laudos = laudos.Where(u => u.StatusLaudo == "F");
+        }
+
         return laudos;
     }
 }
