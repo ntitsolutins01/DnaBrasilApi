@@ -5,7 +5,8 @@ namespace DnaBrasilApi.Application.Laudos.Commands.CreateSaude;
 
 public record CreateSaudeCommand : IRequest<int>
 {
-    public int? ProfissionalId { get; init; }
+    public required int? AlunoId { get; init; }
+    public required int? ProfissionalId { get; init; }
     public decimal? EnvergaduraSaude { get; init; }
     public decimal? MassaCorporalSaude { get; init; }
     public decimal? AlturaSaude { get; init; }
@@ -24,6 +25,16 @@ public class CreateSaudeCommandHandler : IRequestHandler<CreateSaudeCommand, int
     public async Task<int> Handle(CreateSaudeCommand request, CancellationToken cancellationToken)
     {
 
+        Aluno? aluno = null;
+
+        if (request.ProfissionalId != null)
+        {
+            aluno = await _context.Alunos
+                .FindAsync([request.AlunoId!], cancellationToken);
+
+            Guard.Against.NotFound((int)request.ProfissionalId!, aluno);
+        }
+
         Profissional? profissional = null;
 
         if (request.ProfissionalId != null)
@@ -36,6 +47,7 @@ public class CreateSaudeCommandHandler : IRequestHandler<CreateSaudeCommand, int
 
         var entity = new Saude
         {
+            Aluno = aluno,
             Profissional = profissional,
             Altura = request.AlturaSaude,
             Massa = request.MassaCorporalSaude,

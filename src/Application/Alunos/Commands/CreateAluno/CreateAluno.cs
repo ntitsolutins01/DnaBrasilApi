@@ -103,6 +103,7 @@ public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int
             Etnia = request.Etnia,
             NomeMae = request.NomeMae,
             NomePai = request.NomePai,
+            Cep = request.Cep,
             Cpf = request.Cpf,
             Telefone = request.Telefone,
             Celular = request.Celular,
