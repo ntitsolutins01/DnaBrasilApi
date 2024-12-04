@@ -16229,17 +16229,17 @@
             "type": "integer",
             "format": "int32"
           },
-          "altura": {
+          "envergaduraSaude": {
             "type": "number",
             "format": "decimal",
             "nullable": true
           },
-          "massa": {
+          "massaCorporalSaude": {
             "type": "number",
             "format": "decimal",
             "nullable": true
           },
-          "envergadura": {
+          "alturaSaude": {
             "type": "number",
             "format": "decimal",
             "nullable": true

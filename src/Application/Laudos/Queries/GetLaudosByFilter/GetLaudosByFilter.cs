@@ -89,18 +89,10 @@ public class GetLaudosByFilterQueryHandler : IRequestHandler<GetLaudosByFilterQu
         {
             laudos = laudos.Where(u => u.Aluno.ByteImage != null);
         }
-        else
-        {
-            laudos = laudos.Where(u => u.Aluno.ByteImage == null);
-        }
 
         if (search.Finalizado)
         {
             laudos = laudos.Where(u => u.StatusLaudo == "F");
-        }
-        else
-        {
-            laudos = laudos.Where(u => u.StatusLaudo != "F");
         }
 
 
