@@ -2457,12 +2457,7 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
+        }
       },
       "post": {
         "tags": [
@@ -2493,12 +2488,7 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
+        }
       }
     },
     "/api/Disciplinas/{id}": {
@@ -2542,12 +2532,7 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
+        }
       },
       "delete": {
         "tags": [
@@ -2577,12 +2562,7 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
+        }
       }
     },
     "/api/Disciplinas/Disciplina/{id}": {
@@ -2614,12 +2594,7 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
+        }
       }
     },
     "/api/DivisoesAdministrativas/Estados": {
@@ -3346,6 +3321,38 @@
               "application/json": {
                 "schema": {
                   "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Fomentos/Localidade/{id}": {
+      "get": {
+        "tags": [
+          "Fomentos"
+        ],
+        "operationId": "GetFomentoByLocalidadeId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FomentoDto"
                 }
               }
             }
@@ -9584,6 +9591,9 @@
           },
           "status": {
             "type": "boolean"
+          },
+          "convidado": {
+            "type": "boolean"
           }
         }
       },
@@ -9728,6 +9738,10 @@
             "nullable": true
           },
           "copiaDocAlunoResponsavel": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "convidado": {
             "type": "boolean",
             "nullable": true
           }
@@ -10051,6 +10065,19 @@
                 "type": "string",
                 "format": "date-time"
               },
+              "municipio": {
+                "$ref": "#/components/schemas/Municipio"
+              },
+              "localidade": {
+                "$ref": "#/components/schemas/Localidade"
+              },
+              "fomento": {
+                "$ref": "#/components/schemas/Fomentu"
+              },
+              "etnia": {
+                "type": "string",
+                "nullable": true
+              },
               "nomeMae": {
                 "type": "string",
                 "nullable": true
@@ -10107,23 +10134,10 @@
               "habilitado": {
                 "type": "boolean"
               },
-              "etnia": {
-                "type": "string",
-                "nullable": true
-              },
               "idCliente": {
                 "type": "integer",
                 "format": "int32",
                 "nullable": true
-              },
-              "municipio": {
-                "$ref": "#/components/schemas/Municipio"
-              },
-              "localidade": {
-                "$ref": "#/components/schemas/Localidade"
-              },
-              "fomento": {
-                "$ref": "#/components/schemas/Fomentu"
               },
               "deficiencia": {
                 "nullable": true,
@@ -10217,6 +10231,9 @@
               "copiaDocAlunoResponsavel": {
                 "type": "boolean",
                 "nullable": true
+              },
+              "convidado": {
+                "type": "boolean"
               }
             }
           }

@@ -3,13 +3,14 @@
 namespace DnaBrasilApi.Application.Alunos.Queries;
 public class AlunoIndexDto
 {
-    public int Id { get; set; }
-    public string? AspNetUserId { get; set; }
-    public string? Nome { get; set; }
-    public string? Email { get; set; }
-    public string? DtNascimento { get; set; }
-    public string? MunicipioId { get; set; }
-    public bool Status { get; set; }
+    public int Id { get; init; }
+    public string? AspNetUserId { get; init; }
+    public string? Nome { get; init; }
+    public string? Email { get; init; }
+    public string? DtNascimento { get; init; }
+    public string? MunicipioId { get; init; }
+    public bool Status { get; init; }
+    public bool Convidado { get; init; }
     private class Mapping : Profile
     {
         public Mapping()
