@@ -6,10 +6,10 @@ namespace DnaBrasilApi.Application.Laudos.Commands.UpdateSaude;
 public record UpdateSaudeCommand : IRequest <bool>
 {
     public int Id { get; init; }
-    public decimal? Altura { get; init; }
-    public decimal? Massa { get; init; }
-    public decimal? Envergadura { get; init; }
-    public string? StatusSaude { get; set; }
+    public decimal? EnvergaduraSaude { get; init; }
+    public decimal? MassaCorporalSaude { get; init; }
+    public decimal? AlturaSaude { get; init; }
+    public string? StatusSaude { get; init; }
 }
 
 public class UpdateSaudeCommandHandler : IRequestHandler<UpdateSaudeCommand, bool>
@@ -28,9 +28,9 @@ public class UpdateSaudeCommandHandler : IRequestHandler<UpdateSaudeCommand, boo
 
         Guard.Against.NotFound(request.Id, entity);
 
-        entity.Altura = request.Altura;
-        entity.Massa = request.Massa;
-        entity.Envergadura = request.Envergadura;
+        entity.Altura = request.AlturaSaude;
+        entity.Massa = request.MassaCorporalSaude;
+        entity.Envergadura = request.EnvergaduraSaude;
         entity.StatusSaude = request.StatusSaude;
 
         var result = await _context.SaveChangesAsync(cancellationToken);

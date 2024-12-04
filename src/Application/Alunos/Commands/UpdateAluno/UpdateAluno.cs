@@ -34,6 +34,7 @@ public record UpdateAlunoCommand : IRequest<bool>
     public int? ParceiroId { get; init; }
     public string? Etnia { get; set; }
     public int? ProfissionalId { get; set; }
+    public int? ModalidadeId { get; set; }
 }
 
 public class UpdateAlunoCommandHandler : IRequestHandler<UpdateAlunoCommand, bool>
@@ -53,22 +54,9 @@ public class UpdateAlunoCommandHandler : IRequestHandler<UpdateAlunoCommand, boo
         Guard.Against.NotFound(request.Id, entity);
 
         int result;
-        //if (request.QrCode!=null)
-        //{
-        //entity.QrCode = request.QrCode;
-        //result = await _context.SaveChangesAsync(cancellationToken);
-
-        //return result == 1;//true
-        //}
-        //else
-        //{
-        if (request.QrCode != null)
-        {
-            entity.QrCode = request.QrCode;
-            result = await _context.SaveChangesAsync(cancellationToken);
-            return result > 0;
-        }
+        
         Deficiencia? deficiencia = null;
+
         if (request.DeficienciaId.HasValue && request.DeficienciaId.Value > 0)
         {
             deficiencia = await _context.Deficiencias.FindAsync(new object[] { request.DeficienciaId }, cancellationToken);
@@ -93,24 +81,6 @@ public class UpdateAlunoCommandHandler : IRequestHandler<UpdateAlunoCommand, boo
             Guard.Against.NotFound((int)request.LocalidadeId, localidade);
         }
 
-        /*Deficiencia? deficiencia = null;
-
-        if (request.DeficienciaId != null)
-        {
-            deficiencia = await _context.Deficiencias.FindAsync(new object[] { request.DeficienciaId }, cancellationToken);
-
-            Guard.Against.NotFound((int)request.DeficienciaId, deficiencia);
-        }*/
-
-        //Parceiro? parceiro = null;
-
-        //if (request.ParceiroId != null)
-        //{
-        //    parceiro = await _context.Parceiros.FindAsync(new object[] { request.ParceiroId }, cancellationToken);
-
-        //    Guard.Against.NotFound((int)request.ParceiroId, parceiro);
-        //}
-
         Profissional? profissional = null;
 
         if (request.ProfissionalId != null)
@@ -127,6 +97,15 @@ public class UpdateAlunoCommandHandler : IRequestHandler<UpdateAlunoCommand, boo
             linhaAcao = await _context.LinhasAcoes.FindAsync(new object[] { request.LinhaAcaoId }, cancellationToken);
 
             Guard.Against.NotFound((int)request.LinhaAcaoId, profissional);
+        }
+
+        Modalidade? modalidade = null;
+
+        if (request.ModalidadeId != null)
+        {
+            modalidade = await _context.Modalidades.FindAsync(new object[] { request.ModalidadeId }, cancellationToken);
+
+            Guard.Against.NotFound((int)request.ModalidadeId, profissional);
         }
 
 
@@ -149,12 +128,12 @@ public class UpdateAlunoCommandHandler : IRequestHandler<UpdateAlunoCommand, boo
         entity.Deficiencia = deficiencia;
         entity.LinhaAcao = linhaAcao;
         entity.Habilitado = request.Habilitado;
-        //entity.Parceiro = parceiro;
         entity.Profissional = profissional;
         entity.NomeFoto = request.NomeFoto;
-        entity.ByteImage = request.ByteImage;
-        entity.QrCode = request.QrCode;
-        //}
+        if (request.ByteImage != null)
+        {
+            entity.ByteImage = request.ByteImage;
+        }
 
 
         result = await _context.SaveChangesAsync(cancellationToken);

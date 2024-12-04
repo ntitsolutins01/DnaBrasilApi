@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
+using DnaBrasilApi.Domain.GuardClauses;
 
 namespace DnaBrasilApi.Application.Fomentos.Commands.CreateFomento;
 public record CreateFomentoCommand : IRequest<int>
@@ -8,9 +9,10 @@ public record CreateFomentoCommand : IRequest<int>
     public required string Nome { get; init; }
     public required int MunicipioId { get; init; }
     public required int LocalidadeId { get; init; }
-    public required string Codigo { get; set; }
-    public required string DtIni { get; set; }
-    public required string DtFim { get; set; }
+    public required string Codigo { get; init; }
+    public required string DtIni { get; init; }
+    public required string DtFim { get; init; }
+    public required string LinhaAcoes { get; init; }
 }
 
 public class CreateFomentoCommandHandler : IRequestHandler<CreateFomentoCommand, int>
@@ -24,11 +26,33 @@ public class CreateFomentoCommandHandler : IRequestHandler<CreateFomentoCommand,
 
     public async Task<int> Handle(CreateFomentoCommand request, CancellationToken cancellationToken)
     {
-
         var municipio = await _context.Municipios
-             .FindAsync(new object[] { request.MunicipioId }, cancellationToken);
+            .FindAsync([request.MunicipioId], cancellationToken);
+
+        Guard.Against.NotFound(request.MunicipioId, municipio);
+
         var localidade = await _context.Localidades
-             .FindAsync(new object[] { request.LocalidadeId }, cancellationToken);
+            .FindAsync([request.LocalidadeId], cancellationToken);
+
+        Guard.Against.NotFound(request.LocalidadeId, localidade);
+
+        var listLinhasAcoes = new List<LinhaAcao>();
+
+        if (!string.IsNullOrEmpty(request.LinhaAcoes))
+        {
+            int[] ia = request.LinhaAcoes.Split(',').Select(n => Convert.ToInt32(n)).ToArray();
+
+            foreach (var item in ia)
+            {
+                var linhaAcao = await _context.LinhasAcoes
+                    .FindAsync([item], cancellationToken);
+
+                if (linhaAcao != null)
+                {
+                    listLinhasAcoes.Add(linhaAcao);
+                }
+            }
+        }
 
         var entity = new Fomentu
         {
@@ -38,6 +62,7 @@ public class CreateFomentoCommandHandler : IRequestHandler<CreateFomentoCommand,
             Localidade = localidade!,
             DtIni = DateTime.ParseExact(request.DtIni, "dd/MM/yyyy", CultureInfo.CreateSpecificCulture("pt-BR")),
             DtFim = DateTime.ParseExact(request.DtFim, "dd/MM/yyyy", CultureInfo.CreateSpecificCulture("pt-BR")),
+            LinhasAcoes = listLinhasAcoes
         };
 
         _context.Fomentos.Add(entity);

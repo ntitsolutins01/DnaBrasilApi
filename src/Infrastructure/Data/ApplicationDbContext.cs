@@ -28,13 +28,11 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<ConsumoAlimentar> ConsumoAlimentares => Set<ConsumoAlimentar>();
     public DbSet<Vocacional> Vocacionais => Set<Vocacional>();
     public DbSet<Aluno> Alunos => Set<Aluno>();
-    public DbSet<Dependencia> Dependencias => Set<Dependencia>();
     public DbSet<Matricula> Matriculas => Set<Matricula>();
     public DbSet<Voucher> Vouchers => Set<Voucher>();
     public DbSet<Parceiro> Parceiros => Set<Parceiro>();
     public DbSet<PlanoAula> PlanosAulas => Set<PlanoAula>();
     public DbSet<Questionario> Questionarios => Set<Questionario>();
-    public DbSet<Contrato> Contratos => Set<Contrato>();
     public DbSet<Laudo> Laudos => Set<Laudo>();
     public DbSet<Usuario> Usuarios => Set<Usuario>();
     public DbSet<Perfil> Perfis => Set<Perfil>();
@@ -73,14 +71,14 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
         base.OnModelCreating(builder);
 
         #region Basic many-to-many
-        //builder.Entity<Aluno>()
-        //.HasMany(e => e.Deficiencias)
-        //.WithMany(e => e.Alunos)
-        //.UsingEntity(
-        //    "AlunosDeficiencias",
-        //    r => r.HasOne(typeof(Deficiencia)).WithMany().HasForeignKey("DeficienciaId").HasPrincipalKey(nameof(Deficiencia.Id)),
-        //    l => l.HasOne(typeof(Aluno)).WithMany().HasForeignKey("AlunoId").HasPrincipalKey(nameof(Aluno.Id)),
-        //    j => j.HasKey("AlunoId", "DeficienciaId"));
+        builder.Entity<Fomentu>()
+        .HasMany(e => e.LinhasAcoes)
+        .WithMany(e => e.Fomentos)
+        .UsingEntity(
+            "FomentosLinhasAcoes",
+            r => r.HasOne(typeof(LinhaAcao)).WithMany().HasForeignKey("LinhaAcaoId").HasPrincipalKey(nameof(LinhaAcao.Id)),
+            l => l.HasOne(typeof(Fomentu)).WithMany().HasForeignKey("FomentoId").HasPrincipalKey(nameof(Fomentu.Id)),
+            j => j.HasKey("FomentoId", "LinhaAcaoId"));
 
         builder.Entity<Aluno>()
         .HasMany(e => e.Modalidades)
