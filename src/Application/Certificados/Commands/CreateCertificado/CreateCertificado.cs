@@ -31,8 +31,8 @@ public class CreateCertificadoCommandHandler : IRequestHandler<CreateCertificado
         var entity = new Certificado
         {
             Curso = curso,
-            ImgFrente = request.ImgFrente,
-            ImgVerso = request.ImgVerso,
+            ImagemFrente = request.ImgFrente,
+            ImagemVerso = request.ImgVerso,
             HtmlFrente = request.HtmlFrente,
             HtmlVerso = request.HtmlVerso,
             Status = request.Status

@@ -35,8 +35,8 @@ public class UpdateCertificadoCommandHandler : IRequestHandler<UpdateCertificado
         Guard.Against.NotFound(request.CursoId, curso);
 
         entity.Curso = curso;
-        entity.ImgFrente = request.ImgFrente;
-        entity.ImgVerso = request.ImgVerso;
+        entity.ImagemFrente = request.ImgFrente;
+        entity.ImagemVerso = request.ImgVerso;
         entity.HtmlFrente = request.HtmlFrente;
         entity.HtmlVerso = request.HtmlVerso;
         entity.Status = request.Status;

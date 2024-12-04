@@ -11556,11 +11556,11 @@
             "type": "integer",
             "format": "int32"
           },
-          "imgFrente": {
+          "imagemFrente": {
             "type": "string",
             "format": "byte"
           },
-          "imgVerso": {
+          "imagemVerso": {
             "type": "string",
             "format": "byte",
             "nullable": true
