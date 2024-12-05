@@ -13867,6 +13867,11 @@
             "format": "int32",
             "nullable": true
           },
+          "profissionalId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
           "encaminhamentoVocacionalId": {
             "type": "integer",
             "format": "int32",
@@ -16585,8 +16590,9 @@
             "type": "integer",
             "format": "int32"
           },
-          "profissional": {
-            "$ref": "#/components/schemas/ProfissionalDto"
+          "profissionalId": {
+            "type": "integer",
+            "format": "int32"
           },
           "flexibilidade": {
             "type": "number",

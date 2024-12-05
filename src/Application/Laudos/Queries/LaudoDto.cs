@@ -15,6 +15,7 @@ public class LaudoDto
     public int? SaudeBucalId { get; init; }
     public int? LocalidadeId { get; init; }
     public int? AlunoId { get; init; }
+    public int? ProfissionalId { get; init; }
     public int? EncaminhamentoVocacionalId { get; init; }
     public int? EncaminhamentoConsumoAlimentarId { get; init; }
     public int? EncaminhamentoSaudeBucalId { get; init; }
@@ -97,8 +98,8 @@ public class LaudoDto
                         src.Aluno.Municipio.Nome!.ToString() + " / " + src.Aluno.Municipio.Estado!.Sigla!.ToString()))
                 .ForMember(dest => dest.Uf, opt => opt.MapFrom(src => src.Aluno.Localidade.Municipio!.Estado!.Sigla))
             .ForMember(dest => dest.Telefone, opt => opt.MapFrom(src => src.Aluno.Telefone))
-            .ForMember(dest => dest.Celular, opt => opt.MapFrom(src => src.Aluno.Celular));
-            //.ForMember(dest => dest.LocalidadeId, opt => opt.MapFrom(src => src.Aluno.Localidade.Id))
+            .ForMember(dest => dest.Celular, opt => opt.MapFrom(src => src.Aluno.Celular))
+            .ForMember(dest => dest.ProfissionalId, opt => opt.MapFrom(src => src.Aluno.Profissional!.Id));
             //.ForMember(dest => dest.NomeLocalidade, opt => opt.MapFrom(src => src.Aluno.Localidade.Nome))
 
             //.ForMember(dest => dest.Sexo, opt => opt.MapFrom(src => src.Aluno!.Sexo))
