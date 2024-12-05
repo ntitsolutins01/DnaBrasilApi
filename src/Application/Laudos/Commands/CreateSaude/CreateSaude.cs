@@ -5,11 +5,12 @@ namespace DnaBrasilApi.Application.Laudos.Commands.CreateSaude;
 
 public record CreateSaudeCommand : IRequest<int>
 {
-    public int? ProfissionalId { get; init; }
-    public decimal? EnvergaduraSaude { get; init; }
-    public decimal? MassaCorporalSaude { get; init; }
-    public decimal? AlturaSaude { get; init; }
-    public string? StatusSaude { get; init; }
+    public required int AlunoId { get; init; }
+    public required int ProfissionalId { get; init; }
+    public required  decimal EnvergaduraSaude { get; init; }
+    public required  decimal MassaCorporalSaude { get; init; }
+    public required  decimal AlturaSaude { get; init; }
+    public required  string StatusSaude { get; init; }
 }
 
 public class CreateSaudeCommandHandler : IRequestHandler<CreateSaudeCommand, int>
@@ -24,18 +25,17 @@ public class CreateSaudeCommandHandler : IRequestHandler<CreateSaudeCommand, int
     public async Task<int> Handle(CreateSaudeCommand request, CancellationToken cancellationToken)
     {
 
-        Profissional? profissional = null;
+        var aluno = await _context.Alunos.FindAsync([request.AlunoId], cancellationToken);
 
-        if (request.ProfissionalId != null)
-        {
-            profissional = await _context.Profissionais
-                .FindAsync([request.ProfissionalId!], cancellationToken);
+        Guard.Against.NotFound(request.AlunoId, aluno);
 
-            Guard.Against.NotFound((int)request.ProfissionalId!, profissional);
-        }
+        var profissional = await _context.Profissionais.FindAsync([request.ProfissionalId], cancellationToken);
+
+        Guard.Against.NotFound(request.ProfissionalId, profissional);
 
         var entity = new Saude
         {
+            Aluno = aluno,
             Profissional = profissional,
             Altura = request.AlturaSaude,
             Massa = request.MassaCorporalSaude,

@@ -18,6 +18,5 @@ public class Profissional : BaseAuditableEntity
     public Municipio? Municipio { get; set; }
     public Localidade? Localidade { get; set; }
     public List<Modalidade>? Modalidades { get; set; }
-    public List<Contrato>? Contratos { get; set; }
     public Perfil? Perfil { get; set; }
 }

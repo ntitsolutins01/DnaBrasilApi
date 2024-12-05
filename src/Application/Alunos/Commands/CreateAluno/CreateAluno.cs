@@ -38,6 +38,7 @@ public record CreateAlunoCommand : IRequest<int>
     public bool? ParticipacaoProgramaCompartilhamentoDados { get; init; }
     public bool? UtilizacaoImagem { get; init; }
     public bool? CopiaDocAlunoResponsavel { get; init; }
+    public bool? Convidado { get; init; } = false;
 }
 
 public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int>
@@ -103,6 +104,7 @@ public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int
             Etnia = request.Etnia,
             NomeMae = request.NomeMae,
             NomePai = request.NomePai,
+            Cep = request.Cep,
             Cpf = request.Cpf,
             Telefone = request.Telefone,
             Celular = request.Celular,
@@ -125,7 +127,8 @@ public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int
             AutorizacaoConsentimentoAssentimento = request.AutorizacaoConsentimentoAssentimento,
             ParticipacaoProgramaCompartilhamentoDados = request.ParticipacaoProgramaCompartilhamentoDados,
             UtilizacaoImagem = request.UtilizacaoImagem,
-            CopiaDocAlunoResponsavel = request.CopiaDocAlunoResponsavel
+            CopiaDocAlunoResponsavel = request.CopiaDocAlunoResponsavel,
+            Convidado = (bool)request.Convidado!
         };
 
         _context.Alunos.Add(entity);

@@ -1,0 +1,83 @@
+﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Domain.Entities;
+using DnaBrasilApi.Domain.Enums;
+
+namespace DnaBrasilApi.Application.Laudos.Commands.UpdateConsumoAlimentar;
+
+public record UpdateConsumoAlimentarCommand : IRequest <bool>
+{
+    public required  int Id { get; init; }
+    public required int ProfissionalId { get; init; }
+    public required string Respostas { get; init; }
+    public required string StatusConsumoAlimentar { get; init; }
+}
+
+public class UpdateConsumoAlimentarCommandHandler : IRequestHandler<UpdateConsumoAlimentarCommand, bool>
+{
+    private readonly IApplicationDbContext _context;
+
+    public UpdateConsumoAlimentarCommandHandler(IApplicationDbContext context)
+    {
+        _context = context;
+    }
+
+    public async Task <bool> Handle(UpdateConsumoAlimentarCommand request, CancellationToken cancellationToken)
+    {
+        var entity = await _context.ConsumoAlimentares
+            .FindAsync([request.Id], cancellationToken);
+
+        Guard.Against.NotFound(request.Id, entity);
+
+        var profissional = await _context.Profissionais.FindAsync([request.ProfissionalId], cancellationToken);
+
+        Guard.Against.NotFound(request.ProfissionalId, profissional);
+
+        entity.Profissional = profissional;
+        entity.Respostas = request.Respostas;
+        entity.StatusConsumoAlimentar = request.StatusConsumoAlimentar;
+        entity.Encaminhamento = GetEncaminhamento(request.Respostas);
+
+        var result = await _context.SaveChangesAsync(cancellationToken);
+
+        return result == 1;//true
+    }
+
+
+    private Encaminhamento? GetEncaminhamento(string strRespostas)
+    {
+
+        decimal quadrante1;
+
+        var encaminhamentos = _context.Encaminhamentos.Where(x => x.TipoLaudo.Id == (int)EnumTipoLaudo.ConsumoAlimentar);
+
+        var metricas = _context.TextosLaudos
+            .Where(x => x.TipoLaudo.Id == (int)EnumTipoLaudo.ConsumoAlimentar).ToList();
+
+        List<int> listRespostas = strRespostas.Split(',').Select(item => int.Parse(item)).ToList();
+
+        var respostas = _context.Respostas.Where(x => listRespostas.Contains(x.Id)).Include(i => i.Questionario);
+
+        quadrante1 = respostas.Where(x => x.Questionario.Quadrante == 1).Sum(s => s.ValorPesoResposta);
+
+        var result = metricas.Find(
+            delegate (TextoLaudo item)
+            {
+                return quadrante1 >= item.PontoInicial && quadrante1 <= item.PontoFinal && item.Quadrante == 1;
+            }
+        );
+
+        if (result == null)
+        {
+            return null;
+        }
+
+        var parametro = result.Aviso.Split('.').First();
+
+        var encaminhamentoConsumoAlimentar = encaminhamentos.First(x => x.Parametro == parametro);
+
+        return encaminhamentoConsumoAlimentar;
+
+    }
+
+
+}

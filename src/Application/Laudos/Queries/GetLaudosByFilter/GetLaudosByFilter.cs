@@ -25,7 +25,7 @@ public class GetLaudosByFilterQueryHandler : IRequestHandler<GetLaudosByFilterQu
     public async Task<PaginatedList<LaudoDto>> Handle(GetLaudosByFilterQuery request, CancellationToken cancellationToken)
     {
         var laudos = _context.Laudos
-            .Include(i => i.Aluno)
+            .Include(i => i.Aluno.Localidade)
             .Include(i => i.QualidadeDeVida)
             .Include(i => i.Vocacional)
             .Include(i => i.ConsumoAlimentar)
@@ -84,6 +84,17 @@ public class GetLaudosByFilterQueryHandler : IRequestHandler<GetLaudosByFilterQu
                 _ => laudos
             };
         }
+
+        if (search.PossuiFoto)
+        {
+            laudos = laudos.Where(u => u.Aluno.ByteImage != null);
+        }
+
+        if (search.Finalizado)
+        {
+            laudos = laudos.Where(u => u.StatusLaudo == "F");
+        }
+
 
         return laudos;
     }

@@ -28,13 +28,11 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<ConsumoAlimentar> ConsumoAlimentares => Set<ConsumoAlimentar>();
     public DbSet<Vocacional> Vocacionais => Set<Vocacional>();
     public DbSet<Aluno> Alunos => Set<Aluno>();
-    public DbSet<Dependencia> Dependencias => Set<Dependencia>();
     public DbSet<Matricula> Matriculas => Set<Matricula>();
     public DbSet<Voucher> Vouchers => Set<Voucher>();
     public DbSet<Parceiro> Parceiros => Set<Parceiro>();
     public DbSet<PlanoAula> PlanosAulas => Set<PlanoAula>();
     public DbSet<Questionario> Questionarios => Set<Questionario>();
-    public DbSet<Contrato> Contratos => Set<Contrato>();
     public DbSet<Laudo> Laudos => Set<Laudo>();
     public DbSet<Usuario> Usuarios => Set<Usuario>();
     public DbSet<Perfil> Perfis => Set<Perfil>();

@@ -6,6 +6,8 @@ namespace DnaBrasilApi.Application.TalentosEsportivos.Commands.UpdateTalentoEspo
 public record UpdateTalentoEsportivoCommand : IRequest<bool>
 {
     public int Id { get; init; }
+    public required int AlunoId { get; init; }
+    public required int ProfissionalId { get; init; }
     public int? Flexibilidade { get; init; }
     public int? PreensaoManual { get; init; }
     public int? Velocidade { get; init; }
@@ -31,6 +33,11 @@ public class UpdateTalentoEsportivoCommandHandler : IRequestHandler<UpdateTalent
 
         Guard.Against.NotFound(request.Id, entity);
 
+        var profissional = await _context.Profissionais.FindAsync(new object[] { request.ProfissionalId }, cancellationToken);
+
+        Guard.Against.NotFound(request.ProfissionalId, profissional);
+
+        entity.Profissional = profissional;
         entity.Flexibilidade = request.Flexibilidade;
         entity.PreensaoManual = request.PreensaoManual;
         entity.Velocidade = request.Velocidade;

@@ -4,16 +4,16 @@ namespace DnaBrasilApi.Application.Laudos.Queries;
 public class SaudeDto
 {
     public int Id { get; init; }
-    public int ProfissionalId { get; set; }
-    public string? NomeProfissional { get; set; }
-    public decimal? Altura { get; set; }
-    public decimal? Massa { get; set; }
-    public decimal? Envergadura { get; set; }
-    public string? DataRealizacaoTeste { get; set; }
-    public DateTime DtNascimento { get; set; }
-    public string? Sexo { get; set; }
-    public string? Imc { get; set; }
-    public int AlunoId { get; set; }
+    public int ProfissionalId { get; init; }
+    public string? NomeProfissional { get; init; }
+    public decimal? Altura { get; init; }
+    public decimal? Massa { get; init; }
+    public decimal? Envergadura { get; init; }
+    public string? DataRealizacaoTeste { get; init; }
+    public DateTime DtNascimento { get; init; }
+    public string? Sexo { get; init; }
+    public string? Imc { get; init; }
+    public int AlunoId { get; init; }
     private class Mapping : Profile
     {
         public Mapping()
