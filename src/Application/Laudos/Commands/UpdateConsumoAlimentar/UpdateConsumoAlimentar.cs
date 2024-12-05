@@ -2,28 +2,29 @@
 using DnaBrasilApi.Domain.Entities;
 using DnaBrasilApi.Domain.Enums;
 
-namespace DnaBrasilApi.Application.Laudos.Commands.UpdateSaudeBucal;
+namespace DnaBrasilApi.Application.Laudos.Commands.UpdateConsumoAlimentar;
 
-public record UpdateSaudeBucalCommand : IRequest <bool>
+public record UpdateConsumoAlimentarCommand : IRequest <bool>
 {
     public required  int Id { get; init; }
     public required int ProfissionalId { get; init; }
     public required string Respostas { get; init; }
-    public required string StatusSaudeBucal { get; init; }
+    public required string StatusConsumoAlimentar { get; init; }
 }
 
-public class UpdateSaudeBucalCommandHandler : IRequestHandler<UpdateSaudeBucalCommand, bool>
+public class UpdateConsumoAlimentarCommandHandler : IRequestHandler<UpdateConsumoAlimentarCommand, bool>
 {
     private readonly IApplicationDbContext _context;
 
-    public UpdateSaudeBucalCommandHandler(IApplicationDbContext context)
+    public UpdateConsumoAlimentarCommandHandler(IApplicationDbContext context)
     {
         _context = context;
     }
 
-    public async Task<bool> Handle(UpdateSaudeBucalCommand request, CancellationToken cancellationToken)
+    public async Task <bool> Handle(UpdateConsumoAlimentarCommand request, CancellationToken cancellationToken)
     {
-        var entity = await _context.SaudeBucais.FindAsync([request.Id], cancellationToken);
+        var entity = await _context.ConsumoAlimentares
+            .FindAsync([request.Id], cancellationToken);
 
         Guard.Against.NotFound(request.Id, entity);
 
@@ -33,7 +34,7 @@ public class UpdateSaudeBucalCommandHandler : IRequestHandler<UpdateSaudeBucalCo
 
         entity.Profissional = profissional;
         entity.Respostas = request.Respostas;
-        entity.StatusSaudeBucal = request.StatusSaudeBucal;
+        entity.StatusConsumoAlimentar = request.StatusConsumoAlimentar;
         entity.Encaminhamento = GetEncaminhamento(request.Respostas);
 
         var result = await _context.SaveChangesAsync(cancellationToken);
@@ -41,14 +42,16 @@ public class UpdateSaudeBucalCommandHandler : IRequestHandler<UpdateSaudeBucalCo
         return result == 1;//true
     }
 
+
     private Encaminhamento? GetEncaminhamento(string strRespostas)
     {
-        var encaminhamentos = _context.Encaminhamentos.Where(x => x.TipoLaudo.Id == (int)EnumTipoLaudo.SaudeBucal);
 
         decimal quadrante1;
 
+        var encaminhamentos = _context.Encaminhamentos.Where(x => x.TipoLaudo.Id == (int)EnumTipoLaudo.ConsumoAlimentar);
+
         var metricas = _context.TextosLaudos
-            .Where(x => x.TipoLaudo.Id == (int)EnumTipoLaudo.SaudeBucal).ToList();
+            .Where(x => x.TipoLaudo.Id == (int)EnumTipoLaudo.ConsumoAlimentar).ToList();
 
         List<int> listRespostas = strRespostas.Split(',').Select(item => int.Parse(item)).ToList();
 
@@ -70,8 +73,11 @@ public class UpdateSaudeBucalCommandHandler : IRequestHandler<UpdateSaudeBucalCo
 
         var parametro = result.Aviso.Split('.').First();
 
-        var encaminhamentoSaudeBucal = encaminhamentos.First(x => x.Parametro == parametro);
+        var encaminhamentoConsumoAlimentar = encaminhamentos.First(x => x.Parametro == parametro);
 
-        return encaminhamentoSaudeBucal;
+        return encaminhamentoConsumoAlimentar;
+
     }
+
+
 }

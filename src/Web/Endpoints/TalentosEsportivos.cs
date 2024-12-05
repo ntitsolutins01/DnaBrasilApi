@@ -33,16 +33,22 @@ public class TalentosEsportivos : EndpointGroupBase
 
         if (updateResult)
         {
-            return result;
+            throw new ValidationException();
         }
 
-        throw new ValidationException();
+        return result;
     }
 
     public async Task<bool> UpdateTalentoEsportivo(ISender sender, int id, UpdateTalentoEsportivoCommand command)
     {
         if (id != command.Id) return false;
         var result = await sender.Send(command);
+        var updateResult = await sender.Send(new UpdateEncaminhamentoTalentoEsportivoCommand(command.AlunoId));
+
+        if (updateResult)
+        {
+            throw new ValidationException();
+        }
         return result;
     }
     #endregion

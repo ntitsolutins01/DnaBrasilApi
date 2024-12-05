@@ -982,6 +982,50 @@
         }
       }
     },
+    "/api/ConsumosAlimentares/{id}": {
+      "put": {
+        "tags": [
+          "ConsumosAlimentares"
+        ],
+        "operationId": "UpdateConsumoAlimentar",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateConsumoAlimentarCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/ControlesAcessosAulas": {
       "get": {
         "tags": [
@@ -11878,6 +11922,26 @@
           }
         }
       },
+      "UpdateConsumoAlimentarCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "profissionalId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "respostas": {
+            "type": "string"
+          },
+          "statusConsumoAlimentar": {
+            "type": "string"
+          }
+        }
+      },
       "ControleAcessoAulaDto": {
         "type": "object",
         "additionalProperties": false,
@@ -16262,7 +16326,14 @@
             "type": "integer",
             "format": "int32"
           },
-          "resposta": {
+          "profissionalId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "respostas": {
+            "type": "string"
+          },
+          "statusSaudeBucal": {
             "type": "string"
           }
         }
@@ -16273,32 +16344,26 @@
         "properties": {
           "alunoId": {
             "type": "integer",
-            "format": "int32",
-            "nullable": true
+            "format": "int32"
           },
           "profissionalId": {
             "type": "integer",
-            "format": "int32",
-            "nullable": true
+            "format": "int32"
           },
           "envergaduraSaude": {
             "type": "number",
-            "format": "decimal",
-            "nullable": true
+            "format": "decimal"
           },
           "massaCorporalSaude": {
             "type": "number",
-            "format": "decimal",
-            "nullable": true
+            "format": "decimal"
           },
           "alturaSaude": {
             "type": "number",
-            "format": "decimal",
-            "nullable": true
+            "format": "decimal"
           },
           "statusSaude": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           }
         }
       },
@@ -16312,22 +16377,18 @@
           },
           "envergaduraSaude": {
             "type": "number",
-            "format": "decimal",
-            "nullable": true
+            "format": "decimal"
           },
           "massaCorporalSaude": {
             "type": "number",
-            "format": "decimal",
-            "nullable": true
+            "format": "decimal"
           },
           "alturaSaude": {
             "type": "number",
-            "format": "decimal",
-            "nullable": true
+            "format": "decimal"
           },
           "statusSaude": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           }
         }
       },
@@ -16542,6 +16603,14 @@
         "additionalProperties": false,
         "properties": {
           "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "alunoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "profissionalId": {
             "type": "integer",
             "format": "int32"
           },
@@ -17568,7 +17637,18 @@
             "type": "integer",
             "format": "int32"
           },
-          "resposta": {
+          "profissionalId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "alunoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "respostas": {
+            "type": "string"
+          },
+          "statusVocacional": {
             "type": "string"
           }
         }

@@ -2,50 +2,44 @@
 using DnaBrasilApi.Domain.Entities;
 using DnaBrasilApi.Domain.Enums;
 
-namespace DnaBrasilApi.Application.Laudos.Commands.CreateQualidadeVida;
+namespace DnaBrasilApi.Application.Laudos.Commands.UpdateQualidadeVida;
 
-public record CreateQualidadeDeVidaCommand : IRequest<int>
+public record UpdateQualidadeVidaCommand : IRequest <bool>
 {
+    public required  int Id { get; init; }
     public required int ProfissionalId { get; init; }
-    public required int AlunoId { get; init; }
     public required string Respostas { get; init; }
     public required string StatusQualidadeDeVida { get; init; }
 }
 
-public class CreateQualidadeDeVidaCommandHandler : IRequestHandler<CreateQualidadeDeVidaCommand, int>
+public class UpdateQualidadeVidaCommandHandler : IRequestHandler<UpdateQualidadeVidaCommand, bool>
 {
     private readonly IApplicationDbContext _context;
 
-    public CreateQualidadeDeVidaCommandHandler(IApplicationDbContext context)
+    public UpdateQualidadeVidaCommandHandler(IApplicationDbContext context)
     {
         _context = context;
     }
 
-    public async Task<int> Handle(CreateQualidadeDeVidaCommand request, CancellationToken cancellationToken)
+    public async Task <bool> Handle(UpdateQualidadeVidaCommand request, CancellationToken cancellationToken)
     {
-        var aluno = await _context.Alunos.FindAsync(new object[] { request.AlunoId }, cancellationToken);
+        var entity = await _context.QualidadeDeVidas
+            .FindAsync([request.Id], cancellationToken);
 
-        Guard.Against.NotFound((int)request.AlunoId, aluno);
+        Guard.Against.NotFound(request.Id, entity);
 
-        var profissional =
-            await _context.Profissionais.FindAsync(new object[] { request.ProfissionalId }, cancellationToken);
+        var profissional = await _context.Profissionais.FindAsync([request.ProfissionalId], cancellationToken);
 
-        Guard.Against.NotFound((int)request.ProfissionalId, profissional);
+        Guard.Against.NotFound(request.ProfissionalId, profissional);
 
-        var entity = new QualidadeDeVida
-        {
-            Profissional = profissional,
-            Aluno = aluno,
-            Respostas = request.Respostas,
-            StatusQualidadeDeVida = request.StatusQualidadeDeVida,
-            Encaminhamentos = GetEncaminhamento(request.Respostas)
-        };
+        entity.Profissional = profissional;
+        entity.Respostas = request.Respostas;
+        entity.StatusQualidadeDeVida = request.StatusQualidadeDeVida;
+        entity.Encaminhamentos = GetEncaminhamento(request.Respostas);
 
-        _context.QualidadeDeVidas.Add(entity);
+        var result = await _context.SaveChangesAsync(cancellationToken);
 
-        await _context.SaveChangesAsync(cancellationToken);
-
-        return entity.Id;
+        return result == 1;//true
     }
 
     private string GetEncaminhamento(string strRespostas)
@@ -84,7 +78,7 @@ public class CreateQualidadeDeVidaCommandHandler : IRequestHandler<CreateQualida
             cont++;
 
             var result = metricas.Find(
-                delegate(TextoLaudo item)
+                delegate (TextoLaudo item)
                 {
                     return quadrante.Value >= item.PontoInicial && quadrante.Value <= item.PontoFinal &&
                            item.Quadrante == quadrante.Key;
@@ -103,5 +97,6 @@ public class CreateQualidadeDeVidaCommandHandler : IRequestHandler<CreateQualida
         }
         return string.Join(",", encaminhamento);
     }
+
 
 }

@@ -1,5 +1,5 @@
 ﻿using DnaBrasilApi.Application.Laudos.Commands.CreateQualidadeVida;
-using DnaBrasilApi.Application.Laudos.Commands.UpdateQualidadeVida;
+using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoQualidadeVida;
 using DnaBrasilApi.Application.Laudos.Queries;
 using DnaBrasilApi.Application.Laudos.Queries.GetQualidadeDeVidasAll;
 using DnaBrasilApi.Application.Modalidades.Queries.GetAmbientesAll;

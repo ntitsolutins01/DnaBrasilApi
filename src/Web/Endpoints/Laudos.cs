@@ -5,7 +5,6 @@ using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoSaudeBucal;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoTalentoEsportivo;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoTalentoEsportivoV1;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoVocacional;
-using DnaBrasilApi.Application.Laudos.Commands.UpdateQualidadeVida;
 using DnaBrasilApi.Application.Laudos.Queries;
 using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoByQualidadeDeVidaId;
 using DnaBrasilApi.Application.Laudos.Queries.GetLaudosAll;
@@ -17,10 +16,8 @@ using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoByVocacional;
 using DnaBrasilApi.Application.Laudos.Queries.GetDesempenhoByAluno;
 using DnaBrasilApi.Application.Laudos.Queries.GetLaudoById;
 using DnaBrasilApi.Application.Laudos.Queries.GetLaudosByFilter;
-using DnaBrasilApi.Application.Usuarios.Queries.GetUsuarioByEmail;
-using DnaBrasilApi.Application.Usuarios.Queries.GetUsuarioById;
 using Microsoft.AspNetCore.Mvc;
-using DnaBrasilApi.Application.Cursos.Commands.UpdateCurso;
+using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoQualidadeVida;
 
 namespace DnaBrasilApi.Web.Endpoints;
 

@@ -1,4 +1,6 @@
 ﻿using DnaBrasilApi.Application.Laudos.Commands.CreateConsumoAlimentar;
+using DnaBrasilApi.Application.Laudos.Commands.UpdateConsumoAlimentar;
+using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoConsumoAlimentar;
 using DnaBrasilApi.Application.Laudos.Queries;
 using DnaBrasilApi.Application.Laudos.Queries.GetConsumosAlimentaresAll;
 
@@ -11,8 +13,8 @@ public class ConsumosAlimentares : EndpointGroupBase
         app.MapGroup(this)
             //.RequireAuthorization()
             .MapGet(GetConsumosAlimentaresAll)
-            .MapPost(CreateConsumoAlimentar);
-        //.MapPut(UpdateConsumoAlimentar, "{id}");
+            .MapPost(CreateConsumoAlimentar)
+            .MapPut(UpdateConsumoAlimentar, "{id}");
 
     }
 
@@ -26,11 +28,11 @@ public class ConsumosAlimentares : EndpointGroupBase
         return await sender.Send(command);
     }
 
-    //public async Task<bool> UpdateConsumoAlimentar(ISender sender, int id, UpdateEncaminhamentoConsumoAlimentarCommand command)
-    //{
-    //    if (id != command.Id) return false;
-    //    var result = await sender.Send(command);
-    //    return result;
-    //}
+    public async Task<bool> UpdateConsumoAlimentar(ISender sender, int id, UpdateConsumoAlimentarCommand command)
+    {
+        if (id != command.Id) return false;
+        var result = await sender.Send(command);
+        return result;
+    }
 
 }
