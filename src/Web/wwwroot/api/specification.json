@@ -928,6 +928,80 @@
         }
       }
     },
+    "/api/ConsumosAlimentares/{id}": {
+      "get": {
+        "tags": [
+          "ConsumosAlimentares"
+        ],
+        "operationId": "GetConsumoAlimentarById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConsumoAlimentarDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ConsumosAlimentares"
+        ],
+        "operationId": "UpdateConsumoAlimentar",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateConsumoAlimentarCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/ConsumosAlimentares": {
       "get": {
         "tags": [
@@ -975,50 +1049,6 @@
                 "schema": {
                   "type": "integer",
                   "format": "int32"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/ConsumosAlimentares/{id}": {
-      "put": {
-        "tags": [
-          "ConsumosAlimentares"
-        ],
-        "operationId": "UpdateConsumoAlimentar",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "x-position": 1
-          }
-        ],
-        "requestBody": {
-          "x-name": "command",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateConsumoAlimentarCommand"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 2
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "boolean"
                 }
               }
             }
@@ -6481,27 +6511,6 @@
       }
     },
     "/api/QualidadeDeVidas": {
-      "get": {
-        "tags": [
-          "QualidadeDeVidas"
-        ],
-        "operationId": "GetQualidadeDeVidasAll",
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/QualidadeDeVidaDto"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
       "post": {
         "tags": [
           "QualidadeDeVidas"
@@ -6527,6 +6536,27 @@
                 "schema": {
                   "type": "integer",
                   "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "QualidadeDeVidas"
+        ],
+        "operationId": "GetQualidadeDeVidasAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/QualidadeDeVidaDto"
+                  }
                 }
               }
             }
@@ -6571,6 +6601,36 @@
               "application/json": {
                 "schema": {
                   "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "QualidadeDeVidas"
+        ],
+        "operationId": "GetQualidadeDeVidaById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QualidadeDeVidaDto"
                 }
               }
             }
@@ -7253,40 +7313,37 @@
         }
       }
     },
-    "/api/SaudeBucais": {
-      "post": {
+    "/api/SaudeBucais/{id}": {
+      "get": {
         "tags": [
           "SaudeBucais"
         ],
-        "operationId": "CreateSaudeBucal",
-        "requestBody": {
-          "x-name": "command",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateSaudeBucalCommand"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 1
-        },
+        "operationId": "GetSaudeBucalById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "integer",
-                  "format": "int32"
+                  "$ref": "#/components/schemas/SaudeBucalDto"
                 }
               }
             }
           }
         }
-      }
-    },
-    "/api/SaudeBucais/{id}": {
+      },
       "put": {
         "tags": [
           "SaudeBucais"
@@ -7323,6 +7380,39 @@
               "application/json": {
                 "schema": {
                   "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/SaudeBucais": {
+      "post": {
+        "tags": [
+          "SaudeBucais"
+        ],
+        "operationId": "CreateSaudeBucal",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSaudeBucalCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
                 }
               }
             }
@@ -9318,40 +9408,37 @@
         }
       }
     },
-    "/api/Vocacionais": {
-      "post": {
+    "/api/Vocacionais/{id}": {
+      "get": {
         "tags": [
           "Vocacionais"
         ],
-        "operationId": "CreateVocacional",
-        "requestBody": {
-          "x-name": "command",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateVocacionalCommand"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 1
-        },
+        "operationId": "GetVocacionalById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "integer",
-                  "format": "int32"
+                  "$ref": "#/components/schemas/VocacionalDto2"
                 }
               }
             }
           }
         }
-      }
-    },
-    "/api/Vocacionais/{id}": {
+      },
       "put": {
         "tags": [
           "Vocacionais"
@@ -9388,6 +9475,39 @@
               "application/json": {
                 "schema": {
                   "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Vocacionais": {
+      "post": {
+        "tags": [
+          "Vocacionais"
+        ],
+        "operationId": "CreateVocacional",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateVocacionalCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
                 }
               }
             }
@@ -16003,6 +16123,26 @@
           }
         }
       },
+      "CreateQualidadeDeVidaCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "profissionalId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "alunoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "respostas": {
+            "type": "string"
+          },
+          "statusQualidadeDeVida": {
+            "type": "string"
+          }
+        }
+      },
       "QualidadeDeVidaDto": {
         "type": "object",
         "additionalProperties": false,
@@ -16021,26 +16161,6 @@
           "statusQualidadeDeVida": {
             "type": "string",
             "nullable": true
-          }
-        }
-      },
-      "CreateQualidadeDeVidaCommand": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "profissionalId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "alunoId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "respostas": {
-            "type": "string"
-          },
-          "statusQualidadeDeVida": {
-            "type": "string"
           }
         }
       },
@@ -16295,6 +16415,25 @@
           "valorPesoResposta": {
             "type": "number",
             "format": "decimal"
+          }
+        }
+      },
+      "SaudeBucalDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "profissional": {
+            "$ref": "#/components/schemas/ProfissionalDto"
+          },
+          "questionario": {
+            "$ref": "#/components/schemas/QuestionarioDto"
+          },
+          "resposta": {
+            "type": "string"
           }
         }
       },
@@ -17606,6 +17745,34 @@
           "municipioId": {
             "type": "integer",
             "format": "int32"
+          }
+        }
+      },
+      "VocacionalDto2": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "profissional": {
+            "$ref": "#/components/schemas/ProfissionalDto"
+          },
+          "encaminhamento": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Encaminhamento"
+              }
+            ]
+          },
+          "respostas": {
+            "type": "string"
+          },
+          "statusVocacional": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
