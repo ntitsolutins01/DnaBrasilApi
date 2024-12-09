@@ -4,6 +4,7 @@ using DnaBrasilApi.Application.Alunos.Commands.DeleteAluno;
 using DnaBrasilApi.Application.Alunos.Commands.UpdateAluno;
 using DnaBrasilApi.Application.Alunos.Commands.UpdateAlunoAmbientes;
 using DnaBrasilApi.Application.Alunos.Commands.UpdateAlunoFoto;
+using DnaBrasilApi.Application.Alunos.Commands.UpdateQrCode;
 using DnaBrasilApi.Application.Alunos.Commands.UpdateVoucher;
 using DnaBrasilApi.Application.Alunos.Queries;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunoByEmail;
@@ -31,6 +32,7 @@ public class Alunos : EndpointGroupBase
             .MapPut(UpdateAluno, "{id}")
             .MapPut(UpdateAlunoFoto, "/UploadFoto/{id}")
             .MapPut(UpdateAlunoModalidades, "/Modalidades")
+            .MapPut(UpdateQrCode, "/QrCode/{id}")
             .MapDelete(DeleteAluno, "{id}")
             .MapPost(GetAlunosByFilter, "Filter");
     }
@@ -61,6 +63,13 @@ public class Alunos : EndpointGroupBase
     }
 
     public async Task<bool> UpdateAluno(ISender sender, int id, UpdateAlunoCommand command)
+    {
+        if (id != command.Id) return false;
+        var result = await sender.Send(command);
+        return result;
+    }
+
+    public async Task<bool> UpdateQrCode(ISender sender, int id, UpdateQrCodeCommand command)
     {
         if (id != command.Id) return false;
         var result = await sender.Send(command);

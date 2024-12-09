@@ -5,20 +5,19 @@ using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoSaudeBucal;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoTalentoEsportivo;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoTalentoEsportivoV1;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoVocacional;
-using DnaBrasilApi.Application.Laudos.Commands.UpdateQualidadeVida;
 using DnaBrasilApi.Application.Laudos.Queries;
 using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoByQualidadeDeVidaId;
 using DnaBrasilApi.Application.Laudos.Queries.GetLaudosAll;
 using DnaBrasilApi.Application.Laudos.Queries.GetLaudoByAluno;
 using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoBySaudeId;
 using DnaBrasilApi.Application.Common.Models;
+using DnaBrasilApi.Application.Laudos.Commands.UpdateLaudo;
 using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoByVocacional;
 using DnaBrasilApi.Application.Laudos.Queries.GetDesempenhoByAluno;
 using DnaBrasilApi.Application.Laudos.Queries.GetLaudoById;
 using DnaBrasilApi.Application.Laudos.Queries.GetLaudosByFilter;
-using DnaBrasilApi.Application.Usuarios.Queries.GetUsuarioByEmail;
-using DnaBrasilApi.Application.Usuarios.Queries.GetUsuarioById;
 using Microsoft.AspNetCore.Mvc;
+using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoQualidadeVida;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -30,6 +29,7 @@ public class Laudos : EndpointGroupBase
             //.RequireAuthorization() 
             .MapGet(GetLaudoById, "{id}")
             .MapPost(CreateLaudo)
+            .MapPut(UpdateLaudo, "{id}")
             .MapPut(UpdateEncaminhamentoTalentoEsportivo, "Encaminhamento/TalentoEsportivo/{alunoId}")
             .MapPut(UpdateEncaminhamentoTalentoEsportivoV1, "v1/Encaminhamento/TalentoEsportivo/{alunoId}")
             .MapPut(UpdateEncaminhamentoSaudeBucal, "Encaminhamento/SaudeBucal/{alunoId}")
@@ -47,6 +47,12 @@ public class Laudos : EndpointGroupBase
     public async Task<int> CreateLaudo(ISender sender, CreateLaudoCommand command)
     {
         return await sender.Send(command);
+    }
+    public async Task<bool> UpdateLaudo(ISender sender, int id, UpdateLaudoCommand command)
+    {
+        if (id != command.Id) return false;
+        var result = await sender.Send(command);
+        return result;
     }
     public async Task<bool> UpdateEncaminhamentoTalentoEsportivo(ISender sender, int alunoId)
     {
@@ -115,10 +121,10 @@ public class Laudos : EndpointGroupBase
     }
     public async Task<LaudosFilterDto> GetLaudosByFilter(ISender sender, [FromBody] LaudosFilterDto search)
     {
-        var usuario = await sender.Send(new GetUsuarioByEmailQuery() { Email = search.UsuarioEmail! });
+        //var usuario = await sender.Send(new GetUsuarioByEmailQuery() { Email = search.UsuarioEmail! });
 
-        search.MunicipioId = usuario.MunicipioId;
-        search.Estado = usuario.Uf;
+        //search.MunicipioId = usuario.MunicipioId;
+        //search.Estado = usuario.Uf;
 
         var result = await sender.Send(new GetLaudosByFilterQuery() { SearchFilter = search });
 

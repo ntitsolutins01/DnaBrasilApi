@@ -22,21 +22,6 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("AlunoContrato", b =>
-                {
-                    b.Property<int>("AlunosId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ContratosId")
-                        .HasColumnType("int");
-
-                    b.HasKey("AlunosId", "ContratosId");
-
-                    b.HasIndex("ContratosId");
-
-                    b.ToTable("AlunoContrato");
-                });
-
             modelBuilder.Entity("AlunosModalidades", b =>
                 {
                     b.Property<int>("AlunoId")
@@ -50,36 +35,6 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.HasIndex("ModalidadeId");
 
                     b.ToTable("AlunosModalidades");
-                });
-
-            modelBuilder.Entity("ContratoLocalidade", b =>
-                {
-                    b.Property<int>("ContratosId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("LocalidadesId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ContratosId", "LocalidadesId");
-
-                    b.HasIndex("LocalidadesId");
-
-                    b.ToTable("ContratoLocalidade");
-                });
-
-            modelBuilder.Entity("ContratoProfissional", b =>
-                {
-                    b.Property<int>("ContratosId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProfissionaisId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ContratosId", "ProfissionaisId");
-
-                    b.HasIndex("ProfissionaisId");
-
-                    b.ToTable("ContratoProfissional");
                 });
 
             modelBuilder.Entity("DnaBrasilApi.Domain.Entities.Aluno", b =>
@@ -113,6 +68,9 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.Property<string>("Cep")
                         .HasMaxLength(9)
                         .HasColumnType("nvarchar(9)");
+
+                    b.Property<bool>("Convidado")
+                        .HasColumnType("bit");
 
                     b.Property<bool?>("CopiaDocAlunoResponsavel")
                         .HasColumnType("bit");
@@ -349,55 +307,6 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.HasIndex("ProfissionalId");
 
                     b.ToTable("ConsumoAlimentares");
-                });
-
-            modelBuilder.Entity("DnaBrasilApi.Domain.Entities.Contrato", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Anexo")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<DateTimeOffset>("Created")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Descricao")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<DateTime>("DtFim")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DtIni")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTimeOffset>("LastModified")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasMaxLength(80)
-                        .HasColumnType("nvarchar(80)");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Contratos");
                 });
 
             modelBuilder.Entity("DnaBrasilApi.Domain.Entities.ControleAcessoAula", b =>
@@ -645,88 +554,6 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Deficiencias");
-                });
-
-            modelBuilder.Entity("DnaBrasilApi.Domain.Entities.Dependencia", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("AlunoId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Ano")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<bool?>("AutorizacaoSaida")
-                        .HasColumnType("bit");
-
-                    b.Property<bool?>("AutorizacaoUsoImagemAudio")
-                        .HasColumnType("bit");
-
-                    b.Property<bool?>("AutorizacaoUsoIndicadores")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset>("Created")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Doencas")
-                        .HasMaxLength(400)
-                        .HasColumnType("nvarchar(400)");
-
-                    b.Property<DateTimeOffset>("LastModified")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Nacionalidade")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Naturalidade")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("NomeEscola")
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
-
-                    b.Property<string>("Serie")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<bool?>("TermoCompromisso")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("TipoEscola")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("TipoEscolaridade")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Turma")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<string>("Turno")
-                        .HasMaxLength(1)
-                        .HasColumnType("nvarchar(1)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AlunoId");
-
-                    b.ToTable("Dependencias");
                 });
 
             modelBuilder.Entity("DnaBrasilApi.Domain.Entities.Disciplina", b =>
@@ -1986,7 +1813,6 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Referencia")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -2686,6 +2512,9 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("LocalidadeId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("MunicipioId")
                         .HasColumnType("int");
 
@@ -2706,6 +2535,8 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                         .HasColumnType("nvarchar(2)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("LocalidadeId");
 
                     b.HasIndex("MunicipioId");
 
@@ -3030,21 +2861,6 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.ToTable("ProfissionaisModalidades");
                 });
 
-            modelBuilder.Entity("AlunoContrato", b =>
-                {
-                    b.HasOne("DnaBrasilApi.Domain.Entities.Aluno", null)
-                        .WithMany()
-                        .HasForeignKey("AlunosId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DnaBrasilApi.Domain.Entities.Contrato", null)
-                        .WithMany()
-                        .HasForeignKey("ContratosId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("AlunosModalidades", b =>
                 {
                     b.HasOne("DnaBrasilApi.Domain.Entities.Aluno", null)
@@ -3056,36 +2872,6 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.HasOne("DnaBrasilApi.Domain.Entities.Modalidade", null)
                         .WithMany()
                         .HasForeignKey("ModalidadeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("ContratoLocalidade", b =>
-                {
-                    b.HasOne("DnaBrasilApi.Domain.Entities.Contrato", null)
-                        .WithMany()
-                        .HasForeignKey("ContratosId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DnaBrasilApi.Domain.Entities.Localidade", null)
-                        .WithMany()
-                        .HasForeignKey("LocalidadesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("ContratoProfissional", b =>
-                {
-                    b.HasOne("DnaBrasilApi.Domain.Entities.Contrato", null)
-                        .WithMany()
-                        .HasForeignKey("ContratosId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DnaBrasilApi.Domain.Entities.Profissional", null)
-                        .WithMany()
-                        .HasForeignKey("ProfissionaisId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -3242,15 +3028,6 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.Navigation("TipoCurso");
 
                     b.Navigation("Usuario");
-                });
-
-            modelBuilder.Entity("DnaBrasilApi.Domain.Entities.Dependencia", b =>
-                {
-                    b.HasOne("DnaBrasilApi.Domain.Entities.Aluno", "Aluno")
-                        .WithMany()
-                        .HasForeignKey("AlunoId");
-
-                    b.Navigation("Aluno");
                 });
 
             modelBuilder.Entity("DnaBrasilApi.Domain.Entities.Encaminhamento", b =>
@@ -3660,6 +3437,10 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("DnaBrasilApi.Domain.Entities.Usuario", b =>
                 {
+                    b.HasOne("DnaBrasilApi.Domain.Entities.Localidade", "Localidade")
+                        .WithMany()
+                        .HasForeignKey("LocalidadeId");
+
                     b.HasOne("DnaBrasilApi.Domain.Entities.Municipio", "Municipio")
                         .WithMany()
                         .HasForeignKey("MunicipioId");
@@ -3669,6 +3450,8 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                         .HasForeignKey("PerfilId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Localidade");
 
                     b.Navigation("Municipio");
 

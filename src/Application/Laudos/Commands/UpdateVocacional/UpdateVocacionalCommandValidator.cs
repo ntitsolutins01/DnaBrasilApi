@@ -4,8 +4,5 @@ public class UpdateVocacionalCommandValidator : AbstractValidator<UpdateVocacion
 {
     public UpdateVocacionalCommandValidator()
     {
-        RuleFor(v => v.Resposta)
-            .MaximumLength(100)
-            .NotEmpty();
     }
 }

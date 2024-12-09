@@ -1,20 +1,26 @@
 ﻿using DnaBrasilApi.Application.Laudos.Commands.CreateSaude;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateSaude;
+using DnaBrasilApi.Application.Laudos.Queries;
+using DnaBrasilApi.Application.Laudos.Queries.GetSaudeById;
 
 
 namespace DnaBrasilApi.Web.Endpoints;
 
 public class Saudes : EndpointGroupBase
 {
+    #region MapEndpoints
     public override void Map(WebApplication app)
     {
         app.MapGroup(this)
             //.RequireAuthorization()
             .MapPost(CreateSaude)
-            .MapPut(UpdateSaude, "{id}");
+            .MapPut(UpdateSaude, "{id}")
+            .MapGet(GetSaudeById, "{id}");
     }
+    #endregion
 
-    
+
+    #region Main Methods
     public async Task<int> CreateSaude(ISender sender, CreateSaudeCommand command)
     {
         return await sender.Send(command);
@@ -26,5 +32,15 @@ public class Saudes : EndpointGroupBase
         var result = await sender.Send(command);
         return result;
     }
+
+    #endregion
+
+    #region Methods
+
+    public async Task<SaudeDto> GetSaudeById(ISender sender, int id)
+    {
+        return await sender.Send(new GetSaudeByIdQuery() { Id = id });
+    }
+    #endregion
 
 }
