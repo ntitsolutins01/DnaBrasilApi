@@ -28,7 +28,6 @@ public class Aluno : BaseAuditableEntity
     public Deficiencia? Deficiencia { get; set; }
     public List<Modalidade>? Modalidades { get; set; }
     public Parceiro? Parceiro { get; set; }
-    public List<Contrato>? Contratos { get; set; }
     public Matricula? Matricula { get; set; }
     public Voucher? Voucher { get; set; }
     //public Dependencia? Dependencia { get; set; }
