@@ -27,7 +27,7 @@ public class GetNomeAlunosAllQueryHandler : IRequestHandler<GetNomeAlunosAllQuer
         {
             result = await _context.Alunos
                 .AsNoTracking()
-                .Select(s => new SelectListDto { Id = s.Id, Nome = s.Id + "-" + s.Nome })
+                .Select(s => new SelectListDto { Id = s.Id, Nome = s.Id + " - " + s.Nome.ToUpper() })
                 .OrderBy(t => t.Id)
                 .ToListAsync(cancellationToken);
         }
@@ -35,7 +35,7 @@ public class GetNomeAlunosAllQueryHandler : IRequestHandler<GetNomeAlunosAllQuer
         {
             result = await _context.Alunos
                 .Where(x => x.Localidade!.Id == idLocalidade)
-                .Select(s => new SelectListDto { Id = s.Id, Nome = s.Id + "-" + s.Nome })
+                .Select(s => new SelectListDto { Id = s.Id, Nome = s.Id + " - " + s.Nome.ToUpper() })
                 .AsNoTracking()
                 .OrderBy(t => t.Nome)
                 .ToListAsync(cancellationToken);
