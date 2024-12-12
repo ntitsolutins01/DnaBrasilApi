@@ -14088,6 +14088,10 @@
           "finalizado": {
             "type": "boolean"
           },
+          "deficienciaId": {
+            "type": "string",
+            "nullable": true
+          },
           "laudos": {
             "nullable": true,
             "oneOf": [
