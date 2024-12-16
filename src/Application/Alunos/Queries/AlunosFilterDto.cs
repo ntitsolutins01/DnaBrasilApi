@@ -5,6 +5,7 @@ public class AlunosFilterDto
 {
 
     #region SearchFilter
+    public string? Matricula { get; set; }
     public string? Sexo { get; set; }
     public string? FomentoId { get; set; }
     public string? Estado { get; set; }

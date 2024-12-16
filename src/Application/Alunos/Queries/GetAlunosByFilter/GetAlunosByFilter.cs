@@ -78,6 +78,13 @@ public class GetAlunosByFilterQueryHandler : IRequestHandler<GetAlunosByFilterQu
             Alunos = Alunos.Where(u => u.Etnia!.Equals(search.Etnia));
         }
 
+        if (!string.IsNullOrWhiteSpace(search.Matricula))
+        {
+            var matricula = Convert.ToInt32(search.Matricula);
+
+            Alunos = Alunos.Where(u => u.Id == matricula);
+        }
+
         return Alunos;
     }
 }

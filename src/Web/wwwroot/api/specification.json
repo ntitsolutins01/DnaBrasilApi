@@ -11160,6 +11160,10 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
+          "matricula": {
+            "type": "string",
+            "nullable": true
+          },
           "sexo": {
             "type": "string",
             "nullable": true
