@@ -4,6 +4,7 @@ using DnaBrasilApi.Application.Modalidades.Commands.UpdateModalidade;
 using DnaBrasilApi.Application.Modalidades.Queries;
 using DnaBrasilApi.Application.Modalidades.Queries.GetModalidadeById;
 using DnaBrasilApi.Application.Modalidades.Queries.GetAmbientesAll;
+using DnaBrasilApi.Application.Modalidades.Queries.GetModalidadesByLinhaAcaoId;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -17,7 +18,8 @@ public class Modalidades : EndpointGroupBase
             .MapPost(CreateModalidade)
             .MapPut(UpdateModalidade, "{id}")
             .MapDelete(DeleteModalidade, "{id}")
-            .MapGet(GetModalidadeById, "Modalidade/{id}");
+            .MapGet(GetModalidadeById, "Modalidade/{id}")
+            .MapGet(GetModalidadesByLinhaAcaoId, "LinhaAcao/{id}");
     }
 
     public async Task<List<ModalidadeDto>> GetModalidadesAll(ISender sender)
@@ -28,6 +30,10 @@ public class Modalidades : EndpointGroupBase
     public async Task<ModalidadeDto> GetModalidadeById(ISender sender, int id)
     {
         return await sender.Send(new GetModalidadeByIdQuery() { Id = id });
+    }
+    public async Task<List<ModalidadeDto>> GetModalidadesByLinhaAcaoId(ISender sender, int id)
+    {
+        return await sender.Send(new GetModalidadesByLinhaAcaoIdQuery() { Id = id });
     }
     public async Task<int> CreateModalidade(ISender sender, CreateModalidadeCommand command)
     {

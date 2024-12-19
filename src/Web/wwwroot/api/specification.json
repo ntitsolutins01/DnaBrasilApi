@@ -5038,6 +5038,41 @@
         }
       }
     },
+    "/api/Modalidades/LinhaAcao/{id}": {
+      "get": {
+        "tags": [
+          "Modalidades"
+        ],
+        "operationId": "GetModalidadesByLinhaAcaoId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ModalidadeDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/ModulosEad": {
       "get": {
         "tags": [
@@ -11528,6 +11563,18 @@
           "status": {
             "type": "boolean"
           },
+          "byteImage": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "alunos": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/AlunoDto"
+            }
+          },
           "linhaAcao": {
             "nullable": true,
             "oneOf": [
@@ -11536,10 +11583,12 @@
               }
             ]
           },
-          "byteImage": {
-            "type": "string",
-            "format": "byte",
-            "nullable": true
+          "profissionais": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ProfissionalDto"
+            }
           }
         }
       },
@@ -11557,6 +11606,70 @@
           },
           "status": {
             "type": "boolean"
+          },
+          "fomentos": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/FomentoDto"
+            }
+          }
+        }
+      },
+      "FomentoDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idIdMunicipio": {
+            "type": "string",
+            "nullable": true
+          },
+          "codigo": {
+            "type": "string",
+            "nullable": true
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true
+          },
+          "municipioEstado": {
+            "type": "string",
+            "nullable": true
+          },
+          "municipioId": {
+            "type": "string",
+            "nullable": true
+          },
+          "localidade": {
+            "type": "string",
+            "nullable": true
+          },
+          "localidadeId": {
+            "type": "string",
+            "nullable": true
+          },
+          "dtIni": {
+            "type": "string",
+            "nullable": true
+          },
+          "dtFim": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "boolean"
+          },
+          "sigla": {
+            "type": "string",
+            "nullable": true
+          },
+          "linhaAcoes": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -13413,63 +13526,6 @@
           },
           "status": {
             "type": "boolean"
-          }
-        }
-      },
-      "FomentoDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "idIdMunicipio": {
-            "type": "string",
-            "nullable": true
-          },
-          "codigo": {
-            "type": "string",
-            "nullable": true
-          },
-          "nome": {
-            "type": "string",
-            "nullable": true
-          },
-          "municipioEstado": {
-            "type": "string",
-            "nullable": true
-          },
-          "municipioId": {
-            "type": "string",
-            "nullable": true
-          },
-          "localidade": {
-            "type": "string",
-            "nullable": true
-          },
-          "localidadeId": {
-            "type": "string",
-            "nullable": true
-          },
-          "dtIni": {
-            "type": "string",
-            "nullable": true
-          },
-          "dtFim": {
-            "type": "string",
-            "nullable": true
-          },
-          "status": {
-            "type": "boolean"
-          },
-          "sigla": {
-            "type": "string",
-            "nullable": true
-          },
-          "linhaAcoes": {
-            "type": "string",
-            "nullable": true
           }
         }
       },
