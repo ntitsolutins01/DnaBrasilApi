@@ -12167,6 +12167,14 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
+          "pageNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
           "fomentoId": {
             "type": "string",
             "nullable": true
@@ -12192,11 +12200,16 @@
             "nullable": true
           },
           "controlesPresencas": {
-            "type": "array",
             "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/ControlePresencaDto"
-            }
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/PaginatedListOfControlePresencaDto"
+              }
+            ]
+          },
+          "usuarioEmail": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
