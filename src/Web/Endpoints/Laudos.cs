@@ -18,6 +18,7 @@ using DnaBrasilApi.Application.Laudos.Queries.GetLaudoById;
 using DnaBrasilApi.Application.Laudos.Queries.GetLaudosByFilter;
 using Microsoft.AspNetCore.Mvc;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoQualidadeVida;
+using DnaBrasilApi.Application.Usuarios.Queries.GetUsuarioByEmail;
 
 namespace DnaBrasilApi.Web.Endpoints;
 

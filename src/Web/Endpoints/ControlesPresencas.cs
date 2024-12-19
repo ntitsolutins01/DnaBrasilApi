@@ -9,6 +9,7 @@ using DnaBrasilApi.Application.ControlesPresencas.Queries.GetControlesPresencasB
 using Microsoft.AspNetCore.Mvc;
 using DnaBrasilApi.Application.ControlesPresencas.Queries.GetControlesPresencasByEventoId;
 using DnaBrasilApi.Application.Common.Models;
+using DnaBrasilApi.Application.Laudos.Queries.GetLaudosByFilter;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -32,7 +33,9 @@ public class ControlesPresencas : EndpointGroupBase
     {
         var result = await sender.Send(new GetControlesPresencasByFilterQuery() { SearchFilter = search });
 
-        return new ControlesPresencasFilterDto { ControlesPresencas = result };
+        search.ControlesPresencas = result;
+
+        return search;
     }
     public async Task<PaginatedList<ControlePresencaDto>> GetControlesPresencasAll(ISender sender, [AsParameters] GetControlesPresencasAllQuery query)
     {
