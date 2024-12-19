@@ -113,17 +113,18 @@ public class UpdateLaudoCommandHandler : IRequestHandler<UpdateLaudoCommand, boo
                     ? "F"
                     : "A";
                 break;
+            default:
+                request.StatusLaudo = saude != null
+                                      &&
+                                      consumoAlimentar != null
+                                      &&
+                                      saudeBucal != null
+                                      &&
+                                      talentoEsportivo != null
+                    ? "F"
+                    : "A";
+                break;
         }
-
-        request.StatusLaudo = saude != null
-                              &&
-                              consumoAlimentar != null
-                              &&
-                              saudeBucal != null
-                              &&
-                              talentoEsportivo != null
-            ? "F"
-            : "A";
 
         entity.Saude = saude;
         entity.Vocacional = vocacional;

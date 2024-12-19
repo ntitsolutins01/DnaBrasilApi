@@ -2,7 +2,9 @@
 using DnaBrasilApi.Application.Laudos.Commands.UpdateConsumoAlimentar;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoConsumoAlimentar;
 using DnaBrasilApi.Application.Laudos.Queries;
+using DnaBrasilApi.Application.Laudos.Queries.GetConsumoAlimentarById;
 using DnaBrasilApi.Application.Laudos.Queries.GetConsumosAlimentaresAll;
+using DnaBrasilApi.Application.Laudos.Queries.GetQualidadeVidaById;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -12,12 +14,17 @@ public class ConsumosAlimentares : EndpointGroupBase
     {
         app.MapGroup(this)
             //.RequireAuthorization()
+            .MapGet(GetConsumoAlimentarById, "{id}")
             .MapGet(GetConsumosAlimentaresAll)
             .MapPost(CreateConsumoAlimentar)
             .MapPut(UpdateConsumoAlimentar, "{id}");
 
     }
 
+    public async Task<ConsumoAlimentarDto> GetConsumoAlimentarById(ISender sender, int id)
+    {
+        return await sender.Send(new GetConsumoAlimentarByIdQuery() { Id = id });
+    }
     public async Task<List<ConsumoAlimentarDto>> GetConsumosAlimentaresAll(ISender sender)
     {
         return await sender.Send(new GetConsumosAlimentaresAllQuery());

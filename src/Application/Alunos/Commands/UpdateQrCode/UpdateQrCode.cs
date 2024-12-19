@@ -24,7 +24,7 @@ public class UpdateQrCodeCommandHandler : IRequestHandler<UpdateQrCodeCommand, b
 
         Guard.Against.NotFound(request.Id, entity);
 
-        entity.ByteImage = request.QrCode;
+        entity.QrCode = request.QrCode;
 
         var result = await _context.SaveChangesAsync(cancellationToken);
 

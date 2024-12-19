@@ -31,11 +31,6 @@ public class TalentosEsportivos : EndpointGroupBase
 
         var updateResult = await sender.Send(new UpdateEncaminhamentoTalentoEsportivoCommand(command.AlunoId));
 
-        if (updateResult)
-        {
-            throw new ValidationException();
-        }
-
         return result;
     }
 
@@ -45,10 +40,6 @@ public class TalentosEsportivos : EndpointGroupBase
         var result = await sender.Send(command);
         var updateResult = await sender.Send(new UpdateEncaminhamentoTalentoEsportivoCommand(command.AlunoId));
 
-        if (updateResult)
-        {
-            throw new ValidationException();
-        }
         return result;
     }
     #endregion
