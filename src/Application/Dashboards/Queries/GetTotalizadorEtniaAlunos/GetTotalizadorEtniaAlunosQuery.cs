@@ -1,6 +1,5 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorEtniaAlunos;
 //[Authorize]
@@ -25,7 +24,7 @@ public class GetTotalizadorEtniaAlunosQueryHandler : IRequestHandler<GetTotaliza
     {
         IQueryable<Aluno> alunos;
 
-        alunos = _context.Alunos
+        alunos = _context.Alunos.Where(x => x.Convidado == false)
             .AsNoTracking();
 
         var result = FilterAlunosPeriodo(alunos, request.SearchFilter!, cancellationToken);

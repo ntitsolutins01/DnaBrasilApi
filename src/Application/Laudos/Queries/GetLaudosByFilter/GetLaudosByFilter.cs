@@ -85,6 +85,11 @@ public class GetLaudosByFilterQueryHandler : IRequestHandler<GetLaudosByFilterQu
             };
         }
 
+        if (!string.IsNullOrWhiteSpace(search.DeficienciaId))
+        {
+            laudos = laudos.Where(u => u.Aluno!.Deficiencia!.Id == Convert.ToInt32(search.DeficienciaId));
+        }
+
         if (search.PossuiFoto)
         {
             laudos = laudos.Where(u => u.Aluno.ByteImage != null);
@@ -94,7 +99,6 @@ public class GetLaudosByFilterQueryHandler : IRequestHandler<GetLaudosByFilterQu
         {
             laudos = laudos.Where(u => u.StatusLaudo == "F");
         }
-
 
         return laudos;
     }

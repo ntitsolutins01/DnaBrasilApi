@@ -9762,10 +9762,6 @@
           "municipioId": {
             "type": "string",
             "nullable": true
-          },
-          "idLocalidadeId": {
-            "type": "string",
-            "nullable": true
           }
         }
       },
@@ -10413,13 +10409,6 @@
                   "$ref": "#/components/schemas/QualidadeDeVida"
                 }
               },
-              "laudos": {
-                "type": "array",
-                "nullable": true,
-                "items": {
-                  "$ref": "#/components/schemas/Laudo"
-                }
-              },
               "autorizacaoSaida": {
                 "type": "boolean",
                 "nullable": true
@@ -11036,380 +11025,6 @@
                 "type": "string"
               },
               "statusQualidadeDeVida": {
-                "type": "string",
-                "nullable": true
-              }
-            }
-          }
-        ]
-      },
-      "Laudo": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BaseAuditableEntity"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "talentoEsportivo": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/TalentoEsportivo"
-                  }
-                ]
-              },
-              "vocacional": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/Vocacional"
-                  }
-                ]
-              },
-              "qualidadeDeVida": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/QualidadeDeVida"
-                  }
-                ]
-              },
-              "saude": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/Saude"
-                  }
-                ]
-              },
-              "consumoAlimentar": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/ConsumoAlimentar"
-                  }
-                ]
-              },
-              "saudeBucal": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/SaudeBucal"
-                  }
-                ]
-              },
-              "aluno": {
-                "$ref": "#/components/schemas/Aluno"
-              },
-              "statusLaudo": {
-                "type": "string",
-                "nullable": true
-              }
-            }
-          }
-        ]
-      },
-      "TalentoEsportivo": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BaseAuditableEntity"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "profissional": {
-                "$ref": "#/components/schemas/Profissional"
-              },
-              "encaminhamento": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/Encaminhamento"
-                  }
-                ]
-              },
-              "flexibilidade": {
-                "type": "number",
-                "format": "decimal",
-                "nullable": true
-              },
-              "preensaoManual": {
-                "type": "number",
-                "format": "decimal",
-                "nullable": true
-              },
-              "velocidade": {
-                "type": "number",
-                "format": "decimal",
-                "nullable": true
-              },
-              "impulsaoHorizontal": {
-                "type": "number",
-                "format": "decimal",
-                "nullable": true
-              },
-              "vo2Max": {
-                "type": "number",
-                "format": "decimal",
-                "nullable": true
-              },
-              "abdominal": {
-                "type": "number",
-                "format": "decimal",
-                "nullable": true
-              },
-              "imc": {
-                "type": "number",
-                "format": "decimal",
-                "nullable": true
-              },
-              "shuttleRun": {
-                "type": "number",
-                "format": "decimal",
-                "nullable": true
-              },
-              "encaminhamentoTexo": {
-                "type": "string",
-                "nullable": true
-              },
-              "altura": {
-                "type": "number",
-                "format": "decimal",
-                "nullable": true
-              },
-              "peso": {
-                "type": "number",
-                "format": "decimal",
-                "nullable": true
-              },
-              "envergadura": {
-                "type": "number",
-                "format": "decimal",
-                "nullable": true
-              },
-              "statusTalentosEsportivos": {
-                "type": "string",
-                "nullable": true
-              },
-              "aluno": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/Aluno"
-                  }
-                ]
-              }
-            }
-          }
-        ]
-      },
-      "Encaminhamento": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BaseAuditableEntity"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "tipoLaudo": {
-                "$ref": "#/components/schemas/TipoLaudo"
-              },
-              "nome": {
-                "type": "string"
-              },
-              "parametro": {
-                "type": "string"
-              },
-              "descricao": {
-                "type": "string",
-                "nullable": true
-              },
-              "status": {
-                "type": "boolean"
-              },
-              "byteImage": {
-                "type": "string",
-                "format": "byte",
-                "nullable": true
-              }
-            }
-          }
-        ]
-      },
-      "TipoLaudo": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BaseAuditableEntity"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "nome": {
-                "type": "string"
-              },
-              "descricao": {
-                "type": "string",
-                "nullable": true
-              },
-              "status": {
-                "type": "boolean"
-              },
-              "idadeMinima": {
-                "type": "integer",
-                "format": "int32"
-              }
-            }
-          }
-        ]
-      },
-      "Vocacional": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BaseAuditableEntity"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "profissional": {
-                "$ref": "#/components/schemas/Profissional"
-              },
-              "aluno": {
-                "$ref": "#/components/schemas/Aluno"
-              },
-              "encaminhamento": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/Encaminhamento"
-                  }
-                ]
-              },
-              "respostas": {
-                "type": "string"
-              },
-              "statusVocacional": {
-                "type": "string",
-                "nullable": true
-              }
-            }
-          }
-        ]
-      },
-      "Saude": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BaseAuditableEntity"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "profissional": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/Profissional"
-                  }
-                ]
-              },
-              "altura": {
-                "type": "number",
-                "format": "decimal",
-                "nullable": true
-              },
-              "massa": {
-                "type": "number",
-                "format": "decimal",
-                "nullable": true
-              },
-              "envergadura": {
-                "type": "number",
-                "format": "decimal",
-                "nullable": true
-              },
-              "statusSaude": {
-                "type": "string",
-                "nullable": true
-              },
-              "aluno": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/Aluno"
-                  }
-                ]
-              }
-            }
-          }
-        ]
-      },
-      "ConsumoAlimentar": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BaseAuditableEntity"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "profissional": {
-                "$ref": "#/components/schemas/Profissional"
-              },
-              "aluno": {
-                "$ref": "#/components/schemas/Aluno"
-              },
-              "encaminhamento": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/Encaminhamento"
-                  }
-                ]
-              },
-              "respostas": {
-                "type": "string"
-              },
-              "statusConsumoAlimentar": {
-                "type": "string",
-                "nullable": true
-              }
-            }
-          }
-        ]
-      },
-      "SaudeBucal": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BaseAuditableEntity"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "profissional": {
-                "$ref": "#/components/schemas/Profissional"
-              },
-              "aluno": {
-                "$ref": "#/components/schemas/Aluno"
-              },
-              "encaminhamento": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/Encaminhamento"
-                  }
-                ]
-              },
-              "respostas": {
-                "type": "string"
-              },
-              "statusSaudeBucal": {
                 "type": "string",
                 "nullable": true
               }
@@ -14063,6 +13678,11 @@
             "type": "string",
             "nullable": true
           },
+          "modalidadeByteImage": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
           "imcSaude": {
             "type": "string",
             "nullable": true
@@ -14472,6 +14092,10 @@
           },
           "finalizado": {
             "type": "boolean"
+          },
+          "deficienciaId": {
+            "type": "string",
+            "nullable": true
           },
           "laudos": {
             "nullable": true,
@@ -16774,39 +16398,52 @@
             "type": "integer",
             "format": "int32"
           },
+          "altura": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
+          "massaCorporal": {
+            "type": "number",
+            "format": "decimal",
+            "nullable": true
+          },
           "flexibilidade": {
-            "type": "integer",
-            "format": "int32",
+            "type": "number",
+            "format": "decimal",
             "nullable": true
           },
           "preensaoManual": {
-            "type": "integer",
-            "format": "int32",
+            "type": "number",
+            "format": "decimal",
             "nullable": true
           },
           "velocidade": {
-            "type": "integer",
-            "format": "int32",
+            "type": "number",
+            "format": "decimal",
             "nullable": true
           },
           "impulsaoHorizontal": {
-            "type": "integer",
-            "format": "int32",
+            "type": "number",
+            "format": "decimal",
             "nullable": true
           },
           "aptidaoFisica": {
-            "type": "integer",
-            "format": "int32",
+            "type": "number",
+            "format": "decimal",
             "nullable": true
           },
           "agilidade": {
-            "type": "integer",
-            "format": "int32",
+            "type": "number",
+            "format": "decimal",
             "nullable": true
           },
           "abdominal": {
-            "type": "integer",
-            "format": "int32",
+            "type": "boolean",
+            "nullable": true
+          },
+          "statusTalentosEsportivos": {
+            "type": "string",
             "nullable": true
           }
         }
