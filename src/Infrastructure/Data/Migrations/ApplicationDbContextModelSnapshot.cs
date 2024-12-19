@@ -69,6 +69,9 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                         .HasMaxLength(9)
                         .HasColumnType("nvarchar(9)");
 
+                    b.Property<bool>("Convidado")
+                        .HasColumnType("bit");
+
                     b.Property<bool?>("CopiaDocAlunoResponsavel")
                         .HasColumnType("bit");
 
@@ -1810,7 +1813,6 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Referencia")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

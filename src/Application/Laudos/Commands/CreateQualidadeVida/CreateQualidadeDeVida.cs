@@ -38,7 +38,7 @@ public class CreateQualidadeDeVidaCommandHandler : IRequestHandler<CreateQualida
             Aluno = aluno,
             Respostas = request.Respostas,
             StatusQualidadeDeVida = request.StatusQualidadeDeVida,
-            Encaminhamentos = GetEncaminhamento(request.Respostas, aluno)
+            Encaminhamentos = GetEncaminhamento(request.Respostas)
         };
 
         _context.QualidadeDeVidas.Add(entity);
@@ -48,7 +48,7 @@ public class CreateQualidadeDeVidaCommandHandler : IRequestHandler<CreateQualida
         return entity.Id;
     }
 
-    private string GetEncaminhamento(string strRespostas, Aluno aluno)
+    private string GetEncaminhamento(string strRespostas)
     {
         var encaminhamento = new List<int>();
 

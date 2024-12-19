@@ -1,4 +1,5 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Domain.GuardClauses;
 
 namespace DnaBrasilApi.Application.Localidades.Commands.DeleteLocalidade;
 public record DeleteLocalidadeCommand(int Id) : IRequest<bool>;
@@ -18,6 +19,10 @@ public class DeleteLocalidadeCommandHandler : IRequestHandler<DeleteLocalidadeCo
             .FindAsync(new object[] { request.Id }, cancellationToken);
 
         Guard.Against.NotFound(request.Id, entity);
+
+        var possuiProfissionais = _context.Profissionais.Any(x => x.Localidade != null && x.Localidade.Id == request.Id);
+
+        Guard.Against.PossuiProfissionais(possuiProfissionais);
 
         _context.Localidades.Remove(entity);
 
