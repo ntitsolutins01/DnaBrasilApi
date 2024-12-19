@@ -22,7 +22,7 @@ public class DeletePerfilCommandHandler : IRequestHandler<DeletePerfilCommand, b
         _context.Perfis.Remove(entity);
 
         var result = await _context.SaveChangesAsync(cancellationToken);
-        return result == 0;
+        return result == 1;
     }
 
 }

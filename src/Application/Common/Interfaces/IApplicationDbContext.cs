@@ -21,13 +21,11 @@ public interface IApplicationDbContext
     DbSet<ConsumoAlimentar> ConsumoAlimentares { get; }
     DbSet<Vocacional> Vocacionais { get; }
     DbSet<Aluno> Alunos { get; }
-    DbSet<Dependencia> Dependencias { get; }
     DbSet<Matricula> Matriculas { get; }
     DbSet<Voucher> Vouchers { get; }
     DbSet<Parceiro> Parceiros { get; }
     DbSet<PlanoAula> PlanosAulas { get; }
     DbSet<Questionario> Questionarios { get; }
-    DbSet<Contrato> Contratos { get; }
     DbSet<Laudo> Laudos { get; }
     DbSet<Perfil> Perfis { get; }
     DbSet<Usuario> Usuarios { get; }
@@ -55,6 +53,7 @@ public interface IApplicationDbContext
     DbSet<ControleMaterial> ControlesMateriais { get; }
     DbSet<QuestaoEad> QuestoesEad { get; }
     DbSet<RespostaEad> RespostasEad { get; }
+    DbSet<TextoQuestao> TextosQuestoes { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

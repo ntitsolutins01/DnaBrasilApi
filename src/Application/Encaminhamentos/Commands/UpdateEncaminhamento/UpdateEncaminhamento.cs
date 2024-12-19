@@ -9,6 +9,7 @@ public record UpdateEncaminhamentoCommand : IRequest<bool>
     public required string Parametro { get; init; }
     public string? Descricao { get; init; }
     public bool Status { get; init; }
+    public byte[]? ByteImage { get; init; }
 }
 
 public class UpdateEncaminhamentoCommandHandler : IRequestHandler<UpdateEncaminhamentoCommand, bool>
@@ -31,6 +32,7 @@ public class UpdateEncaminhamentoCommandHandler : IRequestHandler<UpdateEncaminh
         entity.Parametro = request.Parametro;
         entity.Descricao = request.Descricao;
         entity.Status = request.Status;
+        entity.ByteImage = request.ByteImage;
 
         var result = await _context.SaveChangesAsync(cancellationToken);
 

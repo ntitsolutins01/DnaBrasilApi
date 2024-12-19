@@ -1,4 +1,4 @@
-﻿using DnaBrasilApi.Domain.Entities;
+using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Laudos.Queries;
 public class LaudoDto
@@ -15,6 +15,7 @@ public class LaudoDto
     public int? SaudeBucalId { get; init; }
     public int? LocalidadeId { get; init; }
     public int? AlunoId { get; init; }
+    public int? ProfissionalId { get; init; }
     public int? EncaminhamentoVocacionalId { get; init; }
     public int? EncaminhamentoConsumoAlimentarId { get; init; }
     public int? EncaminhamentoSaudeBucalId { get; init; }
@@ -28,6 +29,7 @@ public class LaudoDto
     public required string NomeLocalidade { get; init; }
     public string? MunicipioEstado { get; init; }
     public string? Sexo { get; init; }
+    public string? Etnia { get; init; }
     public string? StatusLaudo { get; init; }
     public DateTime? DtNascimento { get; init; }
     public int? Idade { get; init; }
@@ -38,6 +40,7 @@ public class LaudoDto
     public byte[]? ByteImage { get; init; }
     public string? NomeFoto { get; init; }
     public string? Modalidade { get; init; }
+    public byte[]? ModalidadeByteImage { get; init; }
     #endregion
 
     #region Saude
@@ -46,20 +49,30 @@ public class LaudoDto
 
     #endregion
 
+    #region Edição de Laudo
+    public string? Uf { get; init; }
+    #endregion
+
+    #region Exportacao
+    public string? Telefone { get; set; }
+    public string? Celular { get; set; }
+
+    #endregion
     private class Mapping : Profile
     {
         public Mapping()
         {
             CreateMap<Laudo, LaudoDto>()
                 .ForMember(dest => dest.TalentoEsportivoId, opt => opt.MapFrom(src => src.TalentoEsportivo!.Id))
-                .ForMember(dest => dest.VocacionalId, opt => opt.MapFrom(src => src.Vocacional!.Encaminhamento!.Id))
+                .ForMember(dest => dest.VocacionalId, opt => opt.MapFrom(src => src.Vocacional!.Id))
                 .ForMember(dest => dest.QualidadeDeVidaId, opt => opt.MapFrom(src => src.QualidadeDeVida!.Id))
                 .ForMember(dest => dest.SaudeId, opt => opt.MapFrom(src => src.Saude!.Id))
-                .ForMember(dest => dest.ConsumoAlimentarId,
-                    opt => opt.MapFrom(src => src.ConsumoAlimentar!.Encaminhamento!.Id))
-                .ForMember(dest => dest.SaudeBucalId, opt => opt.MapFrom(src => src.SaudeBucal!.Encaminhamento!.Id))
+                .ForMember(dest => dest.ConsumoAlimentarId, opt => opt.MapFrom(src => src.ConsumoAlimentar!.Id))
+                .ForMember(dest => dest.SaudeBucalId, opt => opt.MapFrom(src => src.SaudeBucal!.Id))
                 .ForMember(dest => dest.AlunoId, opt => opt.MapFrom(src => src.Aluno!.Id))
                 .ForMember(dest => dest.NomeAluno, opt => opt.MapFrom(src => src.Aluno.Nome))
+                .ForMember(dest => dest.Sexo, opt => opt.MapFrom(src => GetSexo(src.Aluno.Sexo)))
+                .ForMember(dest => dest.Etnia, opt => opt.MapFrom(src => src.Aluno.Etnia))
                 .ForMember(dest => dest.Idade, opt => opt.MapFrom(src => GetIdade(src.Aluno!.DtNascimento, null)))
                 .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Aluno.Email))
                 .ForMember(dest => dest.QrCode, opt => opt.MapFrom(src => src.Aluno.QrCode))
@@ -82,12 +95,12 @@ public class LaudoDto
                     opt => opt.MapFrom(src => GetImc(src.Saude!.Massa, src.Saude!.Altura)))
                 .ForMember(dest => dest.MunicipioEstado,
                     opt => opt.MapFrom(src =>
-                        src.Aluno.Municipio.Nome!.ToString() + " / " + src.Aluno.Municipio.Estado!.Sigla!.ToString()));
-            //.ForMember(dest => dest.DependenciaId, opt => opt.MapFrom(src => src.Dependencia!.Id))
-            //.ForMember(dest => dest.Serie, opt => opt.MapFrom(src => src.Dependencia!.Serie))
-            //.ForMember(dest => dest.Turma, opt => opt.MapFrom(src => src.Dependencia!.Turma));
-            //.ForMember(dest => dest.LocalidadeId, opt => opt.MapFrom(src => src.Aluno.Localidade.Id))
-            //.ForMember(dest => dest.NomeLocalidade, opt => opt.MapFrom(src => src.Aluno.Localidade.Nome))
+                        src.Aluno.Municipio.Nome!.ToString() + " / " + src.Aluno.Municipio.Estado!.Sigla!.ToString()))
+                .ForMember(dest => dest.Uf, opt => opt.MapFrom(src => src.Aluno.Localidade.Municipio!.Estado!.Sigla))
+                .ForMember(dest => dest.Telefone, opt => opt.MapFrom(src => src.Aluno.Telefone))
+                .ForMember(dest => dest.Celular, opt => opt.MapFrom(src => src.Aluno.Celular))
+                .ForMember(dest => dest.ProfissionalId, opt => opt.MapFrom(src => src.Aluno.Profissional!.Id))
+                .ForMember(dest => dest.ModalidadeByteImage, opt => opt.MapFrom(src => src.TalentoEsportivo!.Encaminhamento!.ByteImage));
 
             //.ForMember(dest => dest.Sexo, opt => opt.MapFrom(src => src.Aluno!.Sexo))
             //.ForMember(dest => dest.DtNascimento, opt => opt.MapFrom(src => src.Aluno!.DtNascimento));
@@ -132,6 +145,15 @@ public class LaudoDto
             {
                 return 0;
             }
+        }
+        public static string GetSexo(string sigla)
+        {
+            return sigla switch
+            {
+                "F" => "Feminino",
+                "M" => "Masculino",
+                _ => "Não Definido"
+            };
         }
     }
 }

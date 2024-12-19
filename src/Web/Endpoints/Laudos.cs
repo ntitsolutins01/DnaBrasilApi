@@ -5,17 +5,20 @@ using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoSaudeBucal;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoTalentoEsportivo;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoTalentoEsportivoV1;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoVocacional;
-using DnaBrasilApi.Application.Laudos.Commands.UpdateQualidadeVida;
 using DnaBrasilApi.Application.Laudos.Queries;
 using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoByQualidadeDeVidaId;
 using DnaBrasilApi.Application.Laudos.Queries.GetLaudosAll;
 using DnaBrasilApi.Application.Laudos.Queries.GetLaudoByAluno;
 using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoBySaudeId;
-using DnaBrasilApi.Application.Laudos.Queries.GetTalentoEsportivoByAluno;
 using DnaBrasilApi.Application.Common.Models;
+using DnaBrasilApi.Application.Laudos.Commands.UpdateLaudo;
 using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoByVocacional;
+using DnaBrasilApi.Application.Laudos.Queries.GetDesempenhoByAluno;
+using DnaBrasilApi.Application.Laudos.Queries.GetLaudoById;
 using DnaBrasilApi.Application.Laudos.Queries.GetLaudosByFilter;
 using Microsoft.AspNetCore.Mvc;
+using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoQualidadeVida;
+using DnaBrasilApi.Application.Usuarios.Queries.GetUsuarioByEmail;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -24,8 +27,10 @@ public class Laudos : EndpointGroupBase
     public override void Map(WebApplication app)
     {
         app.MapGroup(this)
-            //.RequireAuthorization()
+            //.RequireAuthorization() 
+            .MapGet(GetLaudoById, "{id}")
             .MapPost(CreateLaudo)
+            .MapPut(UpdateLaudo, "{id}")
             .MapPut(UpdateEncaminhamentoTalentoEsportivo, "Encaminhamento/TalentoEsportivo/{alunoId}")
             .MapPut(UpdateEncaminhamentoTalentoEsportivoV1, "v1/Encaminhamento/TalentoEsportivo/{alunoId}")
             .MapPut(UpdateEncaminhamentoSaudeBucal, "Encaminhamento/SaudeBucal/{alunoId}")
@@ -34,15 +39,21 @@ public class Laudos : EndpointGroupBase
             .MapPut(UpdateEncaminhamentoConsumoAlimentar, "Encaminhamento/ConsumoAlimentar/{alunoId}")
             .MapGet(GetLaudosAll)
             .MapGet(GetLaudoByAluno, "Aluno/{id}")
-            .MapGet(GetTalentoEsportivoByAlunoQuery, "TalentoEsportivo/Aluno/{id}")
             .MapGet(GetEncaminhamentoBySaudeId, "Encaminhamento/Saude/{id}")
             .MapGet(GetEncaminhamentoByQualidadeDeVidaId, "Encaminhamento/QualidadeDeVida/{id}")
             .MapGet(GetEncaminhamentoByVocacional, "Encaminhamentos/Vocacional")
+            .MapGet(GetDesempenhoByAluno, "Desempenho/{id}")
             .MapPost(GetLaudosByFilter, "Filter");
     }
     public async Task<int> CreateLaudo(ISender sender, CreateLaudoCommand command)
     {
         return await sender.Send(command);
+    }
+    public async Task<bool> UpdateLaudo(ISender sender, int id, UpdateLaudoCommand command)
+    {
+        if (id != command.Id) return false;
+        var result = await sender.Send(command);
+        return result;
     }
     public async Task<bool> UpdateEncaminhamentoTalentoEsportivo(ISender sender, int alunoId)
     {
@@ -87,13 +98,14 @@ public class Laudos : EndpointGroupBase
         var laudo = await sender.Send(new GetLaudoByAlunoQuery(id));
         return laudo;
     }
+    public async Task<LaudoDto> GetLaudoById(ISender sender, int id)
+    {
+        var laudo = await sender.Send(new GetLaudoByIdQuery(id));
+        return laudo;
+    }
     public async Task<EncaminhamentoDto> GetEncaminhamentoBySaudeId(ISender sender, int id)
     {
         return await sender.Send(new GetEncaminhamentoBySaudeIdQuery(id));
-    }
-    public async Task<TalentoEsportivoDto> GetTalentoEsportivoByAlunoQuery(ISender sender, int id)
-    {
-        return await sender.Send(new GetTalentoEsportivoByAlunoQuery(id));
     }
     public async Task<List<EncaminhamentoDto>> GetEncaminhamentoByQualidadeDeVidaId(ISender sender, int id)
     {
@@ -103,8 +115,18 @@ public class Laudos : EndpointGroupBase
     {
         return await sender.Send(new GetEncaminhamentoByVocacionalQuery());
     }
+    public async Task<DesempenhoDto> GetDesempenhoByAluno(ISender sender, int id)
+    {
+        return await sender.Send(new GetDesempenhoByAlunoQuery(id));
+
+    }
     public async Task<LaudosFilterDto> GetLaudosByFilter(ISender sender, [FromBody] LaudosFilterDto search)
     {
+        //var usuario = await sender.Send(new GetUsuarioByEmailQuery() { Email = search.UsuarioEmail! });
+
+        //search.MunicipioId = usuario.MunicipioId;
+        //search.Estado = usuario.Uf;
+
         var result = await sender.Send(new GetLaudosByFilterQuery() { SearchFilter = search });
 
         search.Laudos = result;

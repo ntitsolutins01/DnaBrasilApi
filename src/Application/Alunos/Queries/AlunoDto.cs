@@ -1,4 +1,5 @@
-﻿using DnaBrasilApi.Domain.Entities;
+﻿using DnaBrasilApi.Application.Laudos.Queries;
+using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Alunos.Queries;
 public class AlunoDto
@@ -38,12 +39,12 @@ public class AlunoDto
     public string? DeficienciaId { get; set; }
     public string? ProfissionalId { get; set; }
     public string? MunicipioId { get; set; }
-    public string? IdLocalidadeId { get; set; }
     private class Mapping : Profile
     {
         public Mapping()
         {
             CreateMap<Aluno, AlunoDto>()
+                .ForMember(dest => dest.Nome, opt => opt.MapFrom(src => src.Nome.ToUpper()))
                 .ForMember(dest => dest.DeficienciaId, opt => opt.MapFrom(src => src.Deficiencia!.Id.ToString()))
                 .ForMember(dest => dest.ModalidadeLinhaAcao, opt => opt.MapFrom(src => src.LinhaAcao!.Nome))
                 .ForMember(dest => dest.ProfissionalId, opt => opt.MapFrom(src => src.Profissional!.Id.ToString()))

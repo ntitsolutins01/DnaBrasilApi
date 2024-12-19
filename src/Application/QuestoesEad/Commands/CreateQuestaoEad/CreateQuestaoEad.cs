@@ -5,8 +5,9 @@ namespace DnaBrasilApi.Application.QuestoesEad.Commands.CreateQuestaoEad;
 public record CreateQuestaoEadCommand : IRequest<int>
 {
     public required string Pergunta { get; init; }
-    public required string Referencia { get; init; }
+    public string? Referencia { get; init; }
     public required int Questao { get; init; }
+    public required int AulaId { get; init; }
 }
 
 public class CreateQuestaoEadCommandHandler : IRequestHandler<CreateQuestaoEadCommand, int>
@@ -20,11 +21,17 @@ public class CreateQuestaoEadCommandHandler : IRequestHandler<CreateQuestaoEadCo
 
     public async Task<int> Handle(CreateQuestaoEadCommand request, CancellationToken cancellationToken)
     {
+        var aula = await _context.Aulas
+            .FindAsync([request.AulaId], cancellationToken);
+
+        Guard.Against.NotFound(request.AulaId, aula);
+
         var entity = new QuestaoEad
         {
             Enunciado = request.Pergunta,
             Referencia = request.Referencia,
-            Questao = request.Questao
+            Questao = request.Questao,
+            Aula = aula
         };
 
         _context.QuestoesEad.Add(entity);
