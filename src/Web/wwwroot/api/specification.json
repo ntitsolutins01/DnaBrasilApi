@@ -13678,6 +13678,11 @@
             "type": "string",
             "nullable": true
           },
+          "modalidadeByteImage": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
           "imcSaude": {
             "type": "string",
             "nullable": true

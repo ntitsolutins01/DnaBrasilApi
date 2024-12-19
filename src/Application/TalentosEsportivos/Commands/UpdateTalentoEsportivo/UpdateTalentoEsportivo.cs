@@ -44,7 +44,6 @@ public class UpdateTalentoEsportivoCommandHandler : IRequestHandler<UpdateTalent
         entity.Flexibilidade = request.Flexibilidade;
         entity.Altura = request.Altura;
         entity.Peso = request.MassaCorporal;
-        entity.Flexibilidade = request.Flexibilidade;
         entity.PreensaoManual = request.PreensaoManual;
         entity.Velocidade = request.Velocidade;
         entity.ImpulsaoHorizontal = request.ImpulsaoHorizontal;

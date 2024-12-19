@@ -30,21 +30,21 @@ public class CreateTalentoEsportivoCommandHandler : IRequestHandler<CreateTalent
 
     public async Task<int> Handle(CreateTalentoEsportivoCommand request, CancellationToken cancellationToken)
     {
-        var aluno = await _context.Alunos.FindAsync(new object[] { request.AlunoId }, cancellationToken);
+        var aluno = await _context.Alunos.FindAsync([request.AlunoId], cancellationToken);
 
         Guard.Against.NotFound(request.AlunoId, aluno);
 
-        var profissional = await _context.Profissionais.FindAsync(new object[] { request.ProfissionalId }, cancellationToken);
+        var profissional = await _context.Profissionais.FindAsync([request.ProfissionalId], cancellationToken);
 
         Guard.Against.NotFound(request.ProfissionalId, profissional);
 
         var entity = new TalentoEsportivo
         {
-            Profissional = profissional,
             Aluno = aluno,
+            Profissional = profissional,
+            Flexibilidade = request.Flexibilidade,
             Altura = request.Altura,
             Peso = request.MassaCorporal,
-            Flexibilidade = request.Flexibilidade,
             PreensaoManual = request.PreensaoManual,
             Velocidade = request.Velocidade,
             ImpulsaoHorizontal = request.ImpulsaoHorizontal,

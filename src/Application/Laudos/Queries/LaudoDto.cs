@@ -40,6 +40,7 @@ public class LaudoDto
     public byte[]? ByteImage { get; init; }
     public string? NomeFoto { get; init; }
     public string? Modalidade { get; init; }
+    public byte[]? ModalidadeByteImage { get; init; }
     #endregion
 
     #region Saude
@@ -96,10 +97,10 @@ public class LaudoDto
                     opt => opt.MapFrom(src =>
                         src.Aluno.Municipio.Nome!.ToString() + " / " + src.Aluno.Municipio.Estado!.Sigla!.ToString()))
                 .ForMember(dest => dest.Uf, opt => opt.MapFrom(src => src.Aluno.Localidade.Municipio!.Estado!.Sigla))
-            .ForMember(dest => dest.Telefone, opt => opt.MapFrom(src => src.Aluno.Telefone))
-            .ForMember(dest => dest.Celular, opt => opt.MapFrom(src => src.Aluno.Celular))
-            .ForMember(dest => dest.ProfissionalId, opt => opt.MapFrom(src => src.Aluno.Profissional!.Id));
-            //.ForMember(dest => dest.NomeLocalidade, opt => opt.MapFrom(src => src.Aluno.Localidade.Nome))
+                .ForMember(dest => dest.Telefone, opt => opt.MapFrom(src => src.Aluno.Telefone))
+                .ForMember(dest => dest.Celular, opt => opt.MapFrom(src => src.Aluno.Celular))
+                .ForMember(dest => dest.ProfissionalId, opt => opt.MapFrom(src => src.Aluno.Profissional!.Id))
+                .ForMember(dest => dest.ModalidadeByteImage, opt => opt.MapFrom(src => src.TalentoEsportivo!.Encaminhamento!.ByteImage));
 
             //.ForMember(dest => dest.Sexo, opt => opt.MapFrom(src => src.Aluno!.Sexo))
             //.ForMember(dest => dest.DtNascimento, opt => opt.MapFrom(src => src.Aluno!.DtNascimento));
