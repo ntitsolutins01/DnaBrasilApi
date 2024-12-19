@@ -1,14 +1,16 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Application.Common.Mappings;
+using DnaBrasilApi.Application.Common.Models;
 using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.ControlesPresencas.Queries.GetControlesPresencasByFilter;
 
-public record GetControlesPresencasByFilterQuery : IRequest<List<ControlePresencaDto>>
+public record GetControlesPresencasByFilterQuery : IRequest<PaginatedList<ControlePresencaDto>>
 {
-    public ControlesPresencasFilterDto? SearchFilter { get; init; }
+    public required ControlesPresencasFilterDto SearchFilter { get; init; }
 }
 
-public class GetControlesPresencasByFilterQueryHandler : IRequestHandler<GetControlesPresencasByFilterQuery, List<ControlePresencaDto>>
+public class GetControlesPresencasByFilterQueryHandler : IRequestHandler<GetControlesPresencasByFilterQuery, PaginatedList<ControlePresencaDto>>
 {
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
@@ -19,7 +21,7 @@ public class GetControlesPresencasByFilterQueryHandler : IRequestHandler<GetCont
         _mapper = mapper;
     }
 
-    public async Task<List<ControlePresencaDto>> Handle(GetControlesPresencasByFilterQuery request, CancellationToken cancellationToken)
+    public async Task<PaginatedList<ControlePresencaDto>> Handle(GetControlesPresencasByFilterQuery request, CancellationToken cancellationToken)
     {
         var ControlePresencas = _context.ControlesPresencas
             .Include(i=>i.Evento)
@@ -28,8 +30,8 @@ public class GetControlesPresencasByFilterQueryHandler : IRequestHandler<GetCont
 
         var result = FilterControlePresencas(ControlePresencas, request.SearchFilter!, cancellationToken)
             .ProjectTo<ControlePresencaDto>(_mapper.ConfigurationProvider)
-            .OrderBy(t => t.Id)
-            .ToListAsync(cancellationToken); ;
+            .OrderByDescending(t => t.Id)
+            .PaginatedListAsync(request.SearchFilter.PageNumber, request.SearchFilter.PageSize);
 
         return await (result ?? throw new ArgumentNullException(nameof(result)));
     }
