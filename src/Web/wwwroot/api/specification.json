@@ -13502,7 +13502,7 @@
             "format": "int32"
           },
           "localidade": {
-            "$ref": "#/components/schemas/Localidade"
+            "$ref": "#/components/schemas/LocalidadeDto"
           },
           "nome": {
             "type": "string"
@@ -13513,6 +13513,43 @@
           },
           "status": {
             "type": "boolean"
+          }
+        }
+      },
+      "LocalidadeDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true
+          },
+          "descricao": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "boolean"
+          },
+          "municipioId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "estadoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeMunicipio": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeEstado": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -14373,43 +14410,6 @@
           },
           "status": {
             "type": "boolean"
-          }
-        }
-      },
-      "LocalidadeDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nome": {
-            "type": "string",
-            "nullable": true
-          },
-          "descricao": {
-            "type": "string",
-            "nullable": true
-          },
-          "status": {
-            "type": "boolean"
-          },
-          "municipioId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "estadoId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nomeMunicipio": {
-            "type": "string",
-            "nullable": true
-          },
-          "nomeEstado": {
-            "type": "string",
-            "nullable": true
           }
         }
       },
