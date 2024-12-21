@@ -5,15 +5,9 @@ namespace DnaBrasilApi.Application.Atividades.Commands.UpdateAtividade;
 public record UpdateAtividadeCommand : IRequest <bool>
 {
     public required int Id { get; init; }
-    public required int EstruturaId { get; set; }
-    public required int LinhaAcaoId { get; set; }
-    public required int AtividadeId { get; set; }
-    public required int ModalidadeId { get; set; }
     public string? Turma { get; set; }
-    public DateTime? HrIni { get; set; }
-    public DateTime? HrFim { get; set; }
-    public required int ProfissionalId { get; set; }
-    public required int LocalidadeId { get; set; }
+    public TimeSpan? HrInicial { get; set; }
+    public TimeSpan? HrFinal { get; set; }
 }
 
 public class UpdateAtividadeCommandHandler : IRequestHandler<UpdateAtividadeCommand, bool>
@@ -33,8 +27,8 @@ public class UpdateAtividadeCommandHandler : IRequestHandler<UpdateAtividadeComm
         Guard.Against.NotFound(request.Id, entity);
         
         entity.Turma = request.Turma;
-        entity.HrIni = request.HrIni;
-        entity.HrFim = request.HrFim;
+        entity.HrInicial = request.HrInicial;
+        entity.HrFinal = request.HrFinal;
 
         var result = await _context.SaveChangesAsync(cancellationToken);
 

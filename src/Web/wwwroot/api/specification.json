@@ -11596,14 +11596,14 @@
             "type": "string",
             "nullable": true
           },
-          "hrIni": {
+          "hrInicial": {
             "type": "string",
-            "format": "date-time",
+            "format": "duration",
             "nullable": true
           },
-          "hrFim": {
+          "hrFinal": {
             "type": "string",
-            "format": "date-time",
+            "format": "duration",
             "nullable": true
           },
           "profissionalId": {
@@ -11624,43 +11624,19 @@
             "type": "integer",
             "format": "int32"
           },
-          "estruturaId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "linhaAcaoId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "atividadeId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "modalidadeId": {
-            "type": "integer",
-            "format": "int32"
-          },
           "turma": {
             "type": "string",
             "nullable": true
           },
-          "hrIni": {
+          "hrInicial": {
             "type": "string",
-            "format": "date-time",
+            "format": "duration",
             "nullable": true
           },
-          "hrFim": {
+          "hrFinal": {
             "type": "string",
-            "format": "date-time",
+            "format": "duration",
             "nullable": true
-          },
-          "profissionalId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "localidadeId": {
-            "type": "integer",
-            "format": "int32"
           }
         }
       },

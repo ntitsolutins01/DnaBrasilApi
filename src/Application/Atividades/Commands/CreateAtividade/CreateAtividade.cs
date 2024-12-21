@@ -9,8 +9,8 @@ public record CreateAtividadeCommand : IRequest<int>
     public required int CategoriaId { get; set; }
     public required int ModalidadeId { get; set; }
     public string? Turma { get; set; }
-    public DateTime? HrIni { get; set; }
-    public DateTime? HrFim { get; set; }
+    public TimeSpan? HrInicial { get; set; }
+    public TimeSpan? HrFinal { get; set; }
     public required int ProfissionalId { get; set; }
     public required int LocalidadeId { get; set; }
 }
@@ -63,8 +63,8 @@ public class CreateAtividadeCommandHandler : IRequestHandler<CreateAtividadeComm
             Categoria = categoria,
             Modalidade = modalidade,
             Turma = request.Turma,
-            HrIni = request.HrIni,
-            HrFim = request.HrFim,
+            HrInicial = request.HrInicial,
+            HrFinal = request.HrFinal,
             Profissional = profissional,
             Localidade = localidade
         };
