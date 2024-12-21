@@ -4,7 +4,10 @@ using DnaBrasilApi.Domain.Entities;
 namespace DnaBrasilApi.Application.Categorias.Commands.CreateCategoria;
 public record CreateCategoriaCommand : IRequest<int>
 {
+    public required string Codigo { get; init; }
     public required string Nome { get; init; }
+    public required int IdadeInicial { get; init; }
+    public required int IdadeFinal { get; init; }
     public string? Descricao { get; init; }
 }
 
@@ -21,7 +24,10 @@ public class CreateCategoriaCommandHandler : IRequestHandler<CreateCategoriaComm
     {
         var entity = new Categoria
         {
+            Codigo = request.Codigo,
             Nome = request.Nome,
+            IdadeInicial = request.IdadeInicial,
+            IdadeFinal = request.IdadeFinal,
             Descricao = request.Descricao
         };
 

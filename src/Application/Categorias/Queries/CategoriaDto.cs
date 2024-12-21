@@ -6,7 +6,10 @@ namespace DnaBrasilApi.Application.Categorias.Queries;
 public class CategoriaDto
 {
     public required int Id { get; init; }
+    public required string Codigo { get; init; }
     public required string Nome { get; init; }
+    public required int IdadeInicial { get; init; }
+    public required int IdadeFinal { get; init; }
     public string? Descricao { get; init; }
     public bool Status { get; init; }
 
