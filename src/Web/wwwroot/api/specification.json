@@ -1376,6 +1376,201 @@
         }
       }
     },
+    "/api/ControlesMensaisEstoque": {
+      "get": {
+        "tags": [
+          "ControlesMensaisEstoque"
+        ],
+        "operationId": "GetControlesMensaisEstoqueAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ControleMensalEstoqueDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "ControlesMensaisEstoque"
+        ],
+        "operationId": "CreateControleMensalEstoque",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateControleMensalEstoqueCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ControlesMensaisEstoque/{id}": {
+      "put": {
+        "tags": [
+          "ControlesMensaisEstoque"
+        ],
+        "operationId": "UpdateControleMensalEstoque",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateControleMensalEstoqueCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ControlesMensaisEstoque"
+        ],
+        "operationId": "DeleteControleMensalEstoque",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ControlesMensaisEstoque/ControleMensalEstoque/{id}": {
+      "get": {
+        "tags": [
+          "ControlesMensaisEstoque"
+        ],
+        "operationId": "GetControleMensalEstoqueById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ControleMensalEstoqueDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ControlesMensaisEstoque/Material/{id}": {
+      "get": {
+        "tags": [
+          "ControlesMensaisEstoque"
+        ],
+        "operationId": "GetControlesMensaisEstoqueAllByMaterialId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ControleMensalEstoqueDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/ControlesPresencas": {
       "get": {
         "tags": [
@@ -12583,6 +12778,146 @@
           },
           "status": {
             "type": "boolean"
+          }
+        }
+      },
+      "ControleMensalEstoqueDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "materialId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "qtdPrevista": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "dataMesSaida": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "totalSaidas": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "totalEstoque": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "qtdMateriaisDanificadosExtraviados": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "justificativaDanificadosExtraviados": {
+            "type": "string",
+            "nullable": true
+          },
+          "dataDanificadosExtraviados": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        }
+      },
+      "CreateControleMensalEstoqueCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "materialId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "qtdPrevista": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "dataMesSaida": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "totalSaidas": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "totalEstoque": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "qtdMateriaisDanificadosExtraviados": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "justificativaDanificadosExtraviados": {
+            "type": "string",
+            "nullable": true
+          },
+          "dataDanificadosExtraviados": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        }
+      },
+      "UpdateControleMensalEstoqueCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "materialId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "qtdPrevista": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "dataMesSaida": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "totalSaidas": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "totalEstoque": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "qtdMateriaisDanificadosExtraviados": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "justificativaDanificadosExtraviados": {
+            "type": "string",
+            "nullable": true
+          },
+          "dataDanificadosExtraviados": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
           }
         }
       },
