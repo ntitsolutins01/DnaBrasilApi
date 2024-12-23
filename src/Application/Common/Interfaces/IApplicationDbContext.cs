@@ -54,6 +54,9 @@ public interface IApplicationDbContext
     DbSet<QuestaoEad> QuestoesEad { get; }
     DbSet<RespostaEad> RespostasEad { get; }
     DbSet<TextoQuestao> TextosQuestoes { get; }
+    DbSet<GrupoMaterial> GruposMateriais { get; }
+    DbSet<TipoMaterial> TiposMateriais { get; }
+    DbSet<Material> Materiais { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

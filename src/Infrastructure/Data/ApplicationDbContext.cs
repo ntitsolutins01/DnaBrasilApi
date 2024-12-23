@@ -61,6 +61,9 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<QuestaoEad> QuestoesEad => Set<QuestaoEad>();
     public DbSet<RespostaEad> RespostasEad => Set<RespostaEad>();
     public DbSet<TextoQuestao> TextosQuestoes => Set<TextoQuestao>();
+    public DbSet<GrupoMaterial> GruposMateriais => Set<GrupoMaterial>();
+    public DbSet<TipoMaterial> TiposMateriais => Set<TipoMaterial>();
+    public DbSet<Material> Materiais => Set<Material>();
 
 
     protected override void OnModelCreating(ModelBuilder builder)
