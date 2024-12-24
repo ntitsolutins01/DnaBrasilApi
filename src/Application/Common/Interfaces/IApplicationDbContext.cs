@@ -58,6 +58,7 @@ public interface IApplicationDbContext
     DbSet<TipoMaterial> TiposMateriais { get; }
     DbSet<Material> Materiais { get; }
     DbSet<ControleMensalEstoque> ControlesMensaisEstoque { get; }
+    DbSet<ControleMaterialEstoqueSaida> ControlesMateriaisEstoquesSaidas { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

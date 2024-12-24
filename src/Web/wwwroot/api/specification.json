@@ -1376,6 +1376,201 @@
         }
       }
     },
+    "/api/ControlesMateriaisEstoquesSaidas": {
+      "get": {
+        "tags": [
+          "ControlesMateriaisEstoquesSaidas"
+        ],
+        "operationId": "GetControlesMateriaisEstoquesSaidasAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ControleMaterialEstoqueSaidaDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "ControlesMateriaisEstoquesSaidas"
+        ],
+        "operationId": "CreateControleMaterialEstoqueSaida",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateControleMaterialEstoqueSaidaCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ControlesMateriaisEstoquesSaidas/{id}": {
+      "put": {
+        "tags": [
+          "ControlesMateriaisEstoquesSaidas"
+        ],
+        "operationId": "UpdateControleMaterialEstoqueSaida",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateControleMaterialEstoqueSaidaCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ControlesMateriaisEstoquesSaidas"
+        ],
+        "operationId": "DeleteControleMaterialEstoqueSaida",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ControlesMateriaisEstoquesSaidas/ControleMaterialEstoqueSaida/{id}": {
+      "get": {
+        "tags": [
+          "ControlesMateriaisEstoquesSaidas"
+        ],
+        "operationId": "GetControleMaterialEstoqueSaidaById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ControleMaterialEstoqueSaidaDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ControlesMateriaisEstoquesSaidas/Material/{id}": {
+      "get": {
+        "tags": [
+          "ControlesMateriaisEstoquesSaidas"
+        ],
+        "operationId": "GetControlesMateriaisEstoquesSaidasAllByMaterialId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ControleMaterialEstoqueSaidaDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/ControlesMensaisEstoque": {
       "get": {
         "tags": [
@@ -12778,6 +12973,68 @@
           },
           "status": {
             "type": "boolean"
+          }
+        }
+      },
+      "ControleMaterialEstoqueSaidaDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "materialId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "quantidade": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "solicitante": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "CreateControleMaterialEstoqueSaidaCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "materialId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "quantidade": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "solicitante": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "UpdateControleMaterialEstoqueSaidaCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "materialId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "quantidade": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "solicitante": {
+            "type": "string",
+            "nullable": true
           }
         }
       },

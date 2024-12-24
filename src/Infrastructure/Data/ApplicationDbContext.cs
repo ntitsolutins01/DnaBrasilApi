@@ -65,6 +65,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<TipoMaterial> TiposMateriais => Set<TipoMaterial>();
     public DbSet<Material> Materiais => Set<Material>();
     public DbSet<ControleMensalEstoque> ControlesMensaisEstoque => Set<ControleMensalEstoque>();
+    public DbSet<ControleMaterialEstoqueSaida> ControlesMateriaisEstoquesSaidas => Set<ControleMaterialEstoqueSaida>();
 
 
     protected override void OnModelCreating(ModelBuilder builder)
