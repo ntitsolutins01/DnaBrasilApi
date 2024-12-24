@@ -90,5 +90,4 @@ public class Disciplinas : EndpointGroupBase
         return await sender.Send(new GetDisciplinaByIdQuery() { Id = id });
     }
     #endregion
-
 }

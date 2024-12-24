@@ -66,8 +66,7 @@ public class Aulas : EndpointGroupBase
     {
         return await sender.Send(new DeleteAulaCommand(id));
     }
-
-    #endregion
+    #endregion 
 
     #region Get Methods
 
@@ -103,5 +102,4 @@ public class Aulas : EndpointGroupBase
         return await sender.Send(new GetAulasAllByModuloEadIdQuery() { ModuloEadId = id });
     }
     #endregion
-
 }

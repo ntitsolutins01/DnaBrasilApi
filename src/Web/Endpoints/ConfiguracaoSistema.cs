@@ -112,8 +112,6 @@ public class ConfiguracaoSistema : EndpointGroupBase
     {
         return await sender.Send(new DeleteModuloCommand(id));
     }
-
-
     #endregion
 
     #region Get Methods
@@ -162,15 +160,4 @@ public class ConfiguracaoSistema : EndpointGroupBase
 
     
     #endregion
-
-
-
-
-
-
-
-
-
-
-
 }
