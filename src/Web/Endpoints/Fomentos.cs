@@ -45,7 +45,7 @@ public class Fomentos : EndpointGroupBase
     public async Task<bool> UpdateFomento(ISender sender, int id, UpdateFomentoCommand command)
     {
         if (id != command.Id) return false;
-        var result = await sender.Send(command);
+        var result = await sender.Send(command); 
         return result;
     }
 
