@@ -18095,6 +18095,9 @@
           "grupoMaterialId": {
             "type": "integer",
             "format": "int32"
+          },
+          "nome": {
+            "type": "string"
           }
         }
       },
