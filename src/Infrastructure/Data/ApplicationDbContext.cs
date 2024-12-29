@@ -61,6 +61,9 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<QuestaoEad> QuestoesEad => Set<QuestaoEad>();
     public DbSet<RespostaEad> RespostasEad => Set<RespostaEad>();
     public DbSet<TextoQuestao> TextosQuestoes => Set<TextoQuestao>();
+    public DbSet<Estrutura> Estruturas => Set<Estrutura>();
+    public DbSet<Categoria> Categorias => Set<Categoria>();
+    public DbSet<Atividade> Atividades => Set<Atividade>();
     public DbSet<GrupoMaterial> GruposMateriais => Set<GrupoMaterial>();
     public DbSet<TipoMaterial> TiposMateriais => Set<TipoMaterial>();
     public DbSet<Material> Materiais => Set<Material>();
