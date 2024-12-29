@@ -9,6 +9,7 @@ namespace DnaBrasilApi.Web.Endpoints;
 
 public class Modalidades : EndpointGroupBase
 {
+    #region MapEndpoints
     public override void Map(WebApplication app)
     {
         app.MapGroup(this)
@@ -19,30 +20,33 @@ public class Modalidades : EndpointGroupBase
             .MapDelete(DeleteModalidade, "{id}")
             .MapGet(GetModalidadeById, "Modalidade/{id}");
     }
+    #endregion
 
-    public async Task<List<ModalidadeDto>> GetModalidadesAll(ISender sender)
-    {
-        return await sender.Send(new GetModalidadesQuery());
-    }
-
-    public async Task<ModalidadeDto> GetModalidadeById(ISender sender, int id)
-    {
-        return await sender.Send(new GetModalidadeByIdQuery() { Id = id });
-    }
+    #region Main Methods
     public async Task<int> CreateModalidade(ISender sender, CreateModalidadeCommand command)
     {
         return await sender.Send(command);
     }
-
     public async Task<bool> UpdateModalidade(ISender sender, int id, UpdateModalidadeCommand command)
     {
         if (id != command.Id) return false;
         var result = await sender.Send(command);
         return result;
     }
-
     public async Task<bool> DeleteModalidade(ISender sender, int id)
     {
         return await sender.Send(new DeleteModalidadeCommand(id));
     }
+    #endregion
+
+    #region Get Methods
+    public async Task<List<ModalidadeDto>> GetModalidadesAll(ISender sender)
+    {
+        return await sender.Send(new GetModalidadesQuery());
+    }
+    public async Task<ModalidadeDto> GetModalidadeById(ISender sender, int id)
+    {
+        return await sender.Send(new GetModalidadeByIdQuery() { Id = id });
+    }
+    #endregion
 }

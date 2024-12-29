@@ -7,6 +7,9 @@ using DnaBrasilApi.Application.ControlesAcessosAulas.Queries.GetControlesAcessos
 
 namespace DnaBrasilApi.Web.Endpoints;
 
+/// <summary>
+/// Api de Controle de Acessos Aulas
+/// </summary>
 public class ControlesAcessosAulas : EndpointGroupBase
 {
     #region MapEndpoints
@@ -90,5 +93,4 @@ public class ControlesAcessosAulas : EndpointGroupBase
         return await sender.Send(new GetControleAcessoAulaByIdQuery() { Id = id });
     }
     #endregion
-
 }

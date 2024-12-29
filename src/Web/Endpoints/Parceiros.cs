@@ -7,9 +7,12 @@ using DnaBrasilApi.Application.Parceiros.Queries.GetParceiroByAspNetUserId;
 using DnaBrasilApi.Application.Parceiros.Queries.GetParceiroById;
 
 namespace DnaBrasilApi.Web.Endpoints;
-
+/// <summary>
+/// Api de Parceiros
+/// </summary>
 public class Parceiros : EndpointGroupBase
 {
+    #region MapEndpoints
     public override void Map(WebApplication app)
     {
         app.MapGroup(this)
@@ -21,6 +24,17 @@ public class Parceiros : EndpointGroupBase
             .MapGet(GetParceiroById, "Parceiro/{id}")
             .MapGet(GetParceiroByAspNetUserId, "Parceiro/AspNetUser/{id}");
     }
+    #endregion
+
+    #region Main Methods
+
+
+    #endregion
+
+    #region Get Methods
+
+
+    #endregion
 
     public async Task<List<ParceiroDto>> GetParceirosAll(ISender sender)
     {

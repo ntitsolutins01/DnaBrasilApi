@@ -6,6 +6,9 @@ using DnaBrasilApi.Application.Laudos.Queries.GetConsumosAlimentaresAll;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
+/// <summary>
+/// Api de Consumos Alimentares
+/// </summary>
 public class ConsumosAlimentares : EndpointGroupBase
 {
     #region MapEndpoints

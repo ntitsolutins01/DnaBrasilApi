@@ -8,6 +8,9 @@ using DnaBrasilApi.Application.Aulas.Queries.GetAulasAllByModuloEadId;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
+/// <summary>
+/// Api de Aulas
+/// </summary>
 public class Aulas : EndpointGroupBase
 {
     #region MapEndpoints
