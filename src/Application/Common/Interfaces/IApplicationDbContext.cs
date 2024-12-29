@@ -57,6 +57,11 @@ public interface IApplicationDbContext
     DbSet<Estrutura> Estruturas { get; }
     DbSet<Categoria> Categorias { get; }
     DbSet<Atividade> Atividades { get; }
+    DbSet<GrupoMaterial> GruposMateriais { get; }
+    DbSet<TipoMaterial> TiposMateriais { get; }
+    DbSet<Material> Materiais { get; }
+    DbSet<ControleMensalEstoque> ControlesMensaisEstoque { get; }
+    DbSet<ControleMaterialEstoqueSaida> ControlesMateriaisEstoquesSaidas { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

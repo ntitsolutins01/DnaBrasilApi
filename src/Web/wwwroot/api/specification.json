@@ -1696,6 +1696,396 @@
         }
       }
     },
+    "/api/ControlesMateriaisEstoquesSaidas": {
+      "get": {
+        "tags": [
+          "ControlesMateriaisEstoquesSaidas"
+        ],
+        "operationId": "GetControlesMateriaisEstoquesSaidasAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ControleMaterialEstoqueSaidaDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "ControlesMateriaisEstoquesSaidas"
+        ],
+        "operationId": "CreateControleMaterialEstoqueSaida",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateControleMaterialEstoqueSaidaCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ControlesMateriaisEstoquesSaidas/{id}": {
+      "put": {
+        "tags": [
+          "ControlesMateriaisEstoquesSaidas"
+        ],
+        "operationId": "UpdateControleMaterialEstoqueSaida",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateControleMaterialEstoqueSaidaCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ControlesMateriaisEstoquesSaidas"
+        ],
+        "operationId": "DeleteControleMaterialEstoqueSaida",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ControlesMateriaisEstoquesSaidas/ControleMaterialEstoqueSaida/{id}": {
+      "get": {
+        "tags": [
+          "ControlesMateriaisEstoquesSaidas"
+        ],
+        "operationId": "GetControleMaterialEstoqueSaidaById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ControleMaterialEstoqueSaidaDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ControlesMateriaisEstoquesSaidas/Material/{id}": {
+      "get": {
+        "tags": [
+          "ControlesMateriaisEstoquesSaidas"
+        ],
+        "operationId": "GetControlesMateriaisEstoquesSaidasAllByMaterialId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ControleMaterialEstoqueSaidaDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ControlesMensaisEstoque": {
+      "get": {
+        "tags": [
+          "ControlesMensaisEstoque"
+        ],
+        "operationId": "GetControlesMensaisEstoqueAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ControleMensalEstoqueDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "ControlesMensaisEstoque"
+        ],
+        "operationId": "CreateControleMensalEstoque",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateControleMensalEstoqueCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ControlesMensaisEstoque/{id}": {
+      "put": {
+        "tags": [
+          "ControlesMensaisEstoque"
+        ],
+        "operationId": "UpdateControleMensalEstoque",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateControleMensalEstoqueCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ControlesMensaisEstoque"
+        ],
+        "operationId": "DeleteControleMensalEstoque",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ControlesMensaisEstoque/ControleMensalEstoque/{id}": {
+      "get": {
+        "tags": [
+          "ControlesMensaisEstoque"
+        ],
+        "operationId": "GetControleMensalEstoqueById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ControleMensalEstoqueDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ControlesMensaisEstoque/Material/{id}": {
+      "get": {
+        "tags": [
+          "ControlesMensaisEstoque"
+        ],
+        "operationId": "GetControlesMensaisEstoqueAllByMaterialId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ControleMensalEstoqueDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/ControlesPresencas": {
       "get": {
         "tags": [
@@ -4125,6 +4515,166 @@
         }
       }
     },
+    "/api/GruposMateriais": {
+      "get": {
+        "tags": [
+          "GruposMateriais"
+        ],
+        "operationId": "GetGruposMateriaisAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GrupoMaterialDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "GruposMateriais"
+        ],
+        "operationId": "CreateGrupoMaterial",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateGrupoMaterialCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/GruposMateriais/{id}": {
+      "put": {
+        "tags": [
+          "GruposMateriais"
+        ],
+        "operationId": "UpdateGrupoMaterial",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateGrupoMaterialCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "GruposMateriais"
+        ],
+        "operationId": "DeleteGrupoMaterial",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/GruposMateriais/GrupoMaterial/{id}": {
+      "get": {
+        "tags": [
+          "GruposMateriais"
+        ],
+        "operationId": "GetGrupoMaterialById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GrupoMaterialDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Laudos/{id}": {
       "get": {
         "tags": [
@@ -5092,6 +5642,201 @@
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/LocalidadeDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Materiais": {
+      "get": {
+        "tags": [
+          "Materiais"
+        ],
+        "operationId": "GetMateriaisAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MaterialDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Materiais"
+        ],
+        "operationId": "CreateMaterial",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateMaterialCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Materiais/{id}": {
+      "put": {
+        "tags": [
+          "Materiais"
+        ],
+        "operationId": "UpdateMaterial",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateMaterialCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Materiais"
+        ],
+        "operationId": "DeleteMaterial",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Materiais/Material/{id}": {
+      "get": {
+        "tags": [
+          "Materiais"
+        ],
+        "operationId": "GetMaterialById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MaterialDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Materiais/TipoMaterial/{id}": {
+      "get": {
+        "tags": [
+          "Materiais"
+        ],
+        "operationId": "GetMateriaisAllByTipoMaterialId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MaterialDto"
                   }
                 }
               }
@@ -8946,6 +9691,201 @@
         }
       }
     },
+    "/api/TiposMateriais": {
+      "get": {
+        "tags": [
+          "TiposMateriais"
+        ],
+        "operationId": "GetTiposMateriaisAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TipoMaterialDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "TiposMateriais"
+        ],
+        "operationId": "CreateTipoMaterial",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTipoMaterialCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/TiposMateriais/{id}": {
+      "put": {
+        "tags": [
+          "TiposMateriais"
+        ],
+        "operationId": "UpdateTipoMaterial",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTipoMaterialCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "TiposMateriais"
+        ],
+        "operationId": "DeleteTipoMaterial",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/TiposMateriais/TipoMaterial/{id}": {
+      "get": {
+        "tags": [
+          "TiposMateriais"
+        ],
+        "operationId": "GetTipoMaterialById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoMaterialDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/TiposMateriais/GrupoMaterial/{id}": {
+      "get": {
+        "tags": [
+          "TiposMateriais"
+        ],
+        "operationId": "GetTiposMateriaisAllByGrupoMaterialId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TipoMaterialDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/TodoItems": {
       "get": {
         "tags": [
@@ -12743,6 +13683,208 @@
           }
         }
       },
+      "ControleMaterialEstoqueSaidaDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "materialId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "quantidade": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "solicitante": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "CreateControleMaterialEstoqueSaidaCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "materialId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "quantidade": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "solicitante": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "UpdateControleMaterialEstoqueSaidaCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "materialId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "quantidade": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "solicitante": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "ControleMensalEstoqueDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "materialId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "qtdPrevista": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "dataMesSaida": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "totalSaidas": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "totalEstoque": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "qtdMateriaisDanificadosExtraviados": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "justificativaDanificadosExtraviados": {
+            "type": "string",
+            "nullable": true
+          },
+          "dataDanificadosExtraviados": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        }
+      },
+      "CreateControleMensalEstoqueCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "materialId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "qtdPrevista": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "dataMesSaida": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "totalSaidas": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "totalEstoque": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "qtdMateriaisDanificadosExtraviados": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "justificativaDanificadosExtraviados": {
+            "type": "string",
+            "nullable": true
+          },
+          "dataDanificadosExtraviados": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        }
+      },
+      "UpdateControleMensalEstoqueCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "materialId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "qtdPrevista": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "dataMesSaida": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "totalSaidas": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "totalEstoque": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "qtdMateriaisDanificadosExtraviados": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "justificativaDanificadosExtraviados": {
+            "type": "string",
+            "nullable": true
+          },
+          "dataDanificadosExtraviados": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        }
+      },
       "PaginatedListOfControlePresencaDto": {
         "type": "object",
         "additionalProperties": false,
@@ -14362,6 +15504,41 @@
           }
         }
       },
+      "GrupoMaterialDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string"
+          }
+        }
+      },
+      "CreateGrupoMaterialCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "nome": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdateGrupoMaterialCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string"
+          }
+        }
+      },
       "LaudoDto": {
         "type": "object",
         "additionalProperties": false,
@@ -15003,6 +16180,80 @@
           "municipioId": {
             "type": "integer",
             "format": "int32"
+          }
+        }
+      },
+      "MaterialDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tipoMaterialId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "unidadeMedida": {
+            "type": "string"
+          },
+          "descricao": {
+            "type": "string",
+            "nullable": true
+          },
+          "qtdAdquirida": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        }
+      },
+      "CreateMaterialCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "tipoMaterialId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "unidadeMedida": {
+            "type": "string"
+          },
+          "descricao": {
+            "type": "string",
+            "nullable": true
+          },
+          "qtdAdquirida": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        }
+      },
+      "UpdateMaterialCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tipoMaterialId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "unidadeMedida": {
+            "type": "string"
+          },
+          "descricao": {
+            "type": "string",
+            "nullable": true
+          },
+          "qtdAdquirida": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
           }
         }
       },
@@ -17601,6 +18852,53 @@
           "idadeMinima": {
             "type": "integer",
             "format": "int32"
+          }
+        }
+      },
+      "TipoMaterialDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "grupoMaterialId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string"
+          }
+        }
+      },
+      "CreateTipoMaterialCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "grupoMaterialId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdateTipoMaterialCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "grupoMaterialId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string"
           }
         }
       },

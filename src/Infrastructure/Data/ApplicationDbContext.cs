@@ -64,6 +64,11 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<Estrutura> Estruturas => Set<Estrutura>();
     public DbSet<Categoria> Categorias => Set<Categoria>();
     public DbSet<Atividade> Atividades => Set<Atividade>();
+    public DbSet<GrupoMaterial> GruposMateriais => Set<GrupoMaterial>();
+    public DbSet<TipoMaterial> TiposMateriais => Set<TipoMaterial>();
+    public DbSet<Material> Materiais => Set<Material>();
+    public DbSet<ControleMensalEstoque> ControlesMensaisEstoque => Set<ControleMensalEstoque>();
+    public DbSet<ControleMaterialEstoqueSaida> ControlesMateriaisEstoquesSaidas => Set<ControleMaterialEstoqueSaida>();
 
 
     protected override void OnModelCreating(ModelBuilder builder)
