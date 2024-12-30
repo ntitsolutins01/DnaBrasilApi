@@ -69,7 +69,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<Material> Materiais => Set<Material>();
     public DbSet<ControleMensalEstoque> ControlesMensaisEstoque => Set<ControleMensalEstoque>();
     public DbSet<ControleMaterialEstoqueSaida> ControlesMateriaisEstoquesSaidas => Set<ControleMaterialEstoqueSaida>();
-    public DbSet<ProfissionalModalidade> ProfissionalModalidades => Set<ProfissionalModalidade>();
+    //public DbSet<ProfissionalModalidade> ProfissionalModalidades => Set<ProfissionalModalidade>();
 
 
     protected override void OnModelCreating(ModelBuilder builder)
