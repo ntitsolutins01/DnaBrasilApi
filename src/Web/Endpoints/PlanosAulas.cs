@@ -60,7 +60,7 @@ public class PlanosAulas : EndpointGroupBase
     /// Endpoint para exclusão de Plano de Aula
     /// </summary>
     /// <param name="sender">Sender</param>
-    /// <param name="id">Id de exclusao de Plano Aula</param>
+    /// <param name="id">Id de exclusão de Plano Aula</param>
     /// <returns>Retorna true ou false</returns>
     public async Task<bool> DeletePlanoAula(ISender sender, int id)
     {
