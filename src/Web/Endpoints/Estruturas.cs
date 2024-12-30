@@ -4,6 +4,7 @@ using DnaBrasilApi.Application.Estruturas.Commands.DeleteEstrutura;
 using DnaBrasilApi.Application.Estruturas.Commands.UpdateEstrutura;
 using DnaBrasilApi.Application.Estruturas.Queries;
 using DnaBrasilApi.Application.Estruturas.Queries.GetEstruturasAll;
+using DnaBrasilApi.Application.Estruturas.Queries.GetEstruturasByLocalidade;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -23,7 +24,8 @@ public class Estruturas : EndpointGroupBase
             .MapPut(UpdateEstrutura, "{id}")
             .MapDelete(DeleteEstrutura, "{id}")
             .MapGet(GetEstruturasAll)
-            .MapGet(GetEstruturaById, "Estrutura/{id}");
+            .MapGet(GetEstruturaById, "Estrutura/{id}")
+            .MapGet(GetEstruturasByLocalidade, "Localidade/{id}");
     }
     #endregion
 
@@ -88,6 +90,17 @@ public class Estruturas : EndpointGroupBase
     public async Task<EstruturaDto> GetEstruturaById(ISender sender, int id)
     {
         return await sender.Send(new GetEstruturaByIdQuery() { Id = id });
+    }
+
+    /// <summary>
+    /// Endpoint que busca todas as estruturas por localidade
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="id">Id da localidade</param>
+    /// <returns>Retorna a lista de Estruturas</returns>
+    public async Task<List<EstruturaDto>> GetEstruturasByLocalidade(ISender sender, int id)
+    {
+        return await sender.Send(new GetEstruturasByLocalidadeQuery { LocalidadeId = id });
     }
     #endregion
 

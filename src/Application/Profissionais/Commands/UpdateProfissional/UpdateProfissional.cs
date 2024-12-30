@@ -1,3 +1,4 @@
+using System.Globalization;
 using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
 
@@ -62,7 +63,7 @@ public class UpdateProfissionalCommandHandler : IRequestHandler<UpdateProfission
         Guard.Against.NotFound(request.Id, entity);
 
         entity.Nome = request.Nome!;
-        entity.DtNascimento = request.DtNascimento == "" ? null : Convert.ToDateTime(request.DtNascimento);
+        entity.DtNascimento = DateTime.ParseExact(request.DtNascimento!, "dd/MM/yyyy", CultureInfo.CreateSpecificCulture("pt-BR"));
         entity.Email = request.Email!;
         entity.Sexo = request.Sexo;
         entity.Telefone = request.Telefone;
