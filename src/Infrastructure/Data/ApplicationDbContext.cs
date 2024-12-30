@@ -69,6 +69,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<Material> Materiais => Set<Material>();
     public DbSet<ControleMensalEstoque> ControlesMensaisEstoque => Set<ControleMensalEstoque>();
     public DbSet<ControleMaterialEstoqueSaida> ControlesMateriaisEstoquesSaidas => Set<ControleMaterialEstoqueSaida>();
+    public DbSet<ProfissionalModalidade> ProfissionalModalidades => Set<ProfissionalModalidade>();
 
 
     protected override void OnModelCreating(ModelBuilder builder)
@@ -77,7 +78,15 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
 
         base.OnModelCreating(builder);
 
+        #region HasNoKey
+
+        builder.Entity<ProfissionalModalidade>()
+            .HasNoKey();
+
+        #endregion
+
         #region Basic many-to-many
+
         builder.Entity<Fomentu>()
         .HasMany(e => e.LinhasAcoes)
         .WithMany(e => e.Fomentos)
@@ -96,14 +105,14 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
             l => l.HasOne(typeof(Aluno)).WithMany().HasForeignKey("AlunoId").HasPrincipalKey(nameof(Aluno.Id)),
             j => j.HasKey("AlunoId", "ModalidadeId"));
 
-        builder.Entity<Profissional>()
-                    .HasMany(e => e.Modalidades)
-                    .WithMany(e => e.Profissionais)
-                    .UsingEntity(
-                        "ProfissionaisModalidades",
-                        r => r.HasOne(typeof(Modalidade)).WithMany().HasForeignKey("ModalidadeId").HasPrincipalKey(nameof(Modalidade.Id)),
-                        l => l.HasOne(typeof(Profissional)).WithMany().HasForeignKey("ProfissionalId").HasPrincipalKey(nameof(Profissional.Id)),
-                        j => j.HasKey("ProfissionalId", "ModalidadeId"));
+        //builder.Entity<Profissional>()
+        //            .HasMany(e => e.Modalidades)
+        //            .WithMany(e => e.Profissionais)
+        //            .UsingEntity(
+        //                "ProfissionaisModalidades",
+        //                r => r.HasOne(typeof(Modalidade)).WithMany().HasForeignKey("ModalidadeId").HasPrincipalKey(nameof(Modalidade.Id)),
+        //                l => l.HasOne(typeof(Profissional)).WithMany().HasForeignKey("ProfissionalId").HasPrincipalKey(nameof(Profissional.Id)),
+        //                j => j.HasKey("ProfissionalId", "ModalidadeId"));
 
         
 

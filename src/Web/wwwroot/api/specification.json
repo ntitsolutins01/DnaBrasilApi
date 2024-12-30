@@ -11714,17 +11714,17 @@
                   }
                 ]
               },
+              "byteImage": {
+                "type": "string",
+                "format": "byte",
+                "nullable": true
+              },
               "profissionais": {
                 "type": "array",
                 "nullable": true,
                 "items": {
                   "$ref": "#/components/schemas/Profissional"
                 }
-              },
-              "byteImage": {
-                "type": "string",
-                "format": "byte",
-                "nullable": true
               }
             }
           }
@@ -12447,13 +12447,6 @@
                   }
                 ]
               },
-              "modalidades": {
-                "type": "array",
-                "nullable": true,
-                "items": {
-                  "$ref": "#/components/schemas/Modalidade"
-                }
-              },
               "perfil": {
                 "nullable": true,
                 "oneOf": [
@@ -12461,6 +12454,13 @@
                     "$ref": "#/components/schemas/Perfil"
                   }
                 ]
+              },
+              "modalidades": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "$ref": "#/components/schemas/Modalidade"
+                }
               }
             }
           }

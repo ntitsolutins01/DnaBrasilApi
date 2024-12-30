@@ -1,6 +1,7 @@
 using DnaBrasilApi.Application.Alunos.Queries;
 using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Application.Modalidades.Queries;
+using DnaBrasilApi.Domain.Entities;
 using DnaBrasilApi.Domain.GuardClauses;
 using Microsoft.EntityFrameworkCore;
 
@@ -27,32 +28,39 @@ public class DeleteProfissionalModalidadeCommandHandler : IRequestHandler<Delete
     {
         int result;
 
-        var entity = await _context.Profissionais
-            .Include(i => i.Modalidades)
-            .Where(x => x.Id == request.ProfissionalId)
-            //.ProjectTo<ModalidadeDto>(_mapper.ConfigurationProvider)
-            .AsNoTracking()
-            .FirstAsync(cancellationToken);
+        //var entity = await _context.Profissionais
+        //    //.Include(i => i.Modalidades)
+        //    .Where(x => x.Id == request.ProfissionalId)
+        //    //.ProjectTo<ModalidadeDto>(_mapper.ConfigurationProvider)
+        //    .AsNoTracking()
+        //    .FirstAsync(cancellationToken);
 
-        Guard.Against.NotFound(request.ProfissionalId, entity);
+        //Guard.Against.NotFound(request.ProfissionalId, entity);
 
-        var modalidade = await _context.Modalidades
-            .Include(i=>i.Profissionais)
-            .Where(x=>x.Id == request.ModalidadeId)
-            //.ProjectTo<ModalidadeDto>(_mapper.ConfigurationProvider)
-            .AsNoTracking()
-            .FirstAsync(cancellationToken);
+        //var modalidade = await _context.Modalidades
+        //    //.Include(i=>i.Profissionais)
+        //    .Where(x=>x.Id == request.ModalidadeId)
+        //    //.ProjectTo<ModalidadeDto>(_mapper.ConfigurationProvider)
+        //    .AsNoTracking()
+        //    .FirstAsync(cancellationToken);
 
-        Guard.Against.NotFound(request.ModalidadeId, modalidade);
+        //Guard.Against.NotFound(request.ModalidadeId, modalidade);
 
-        entity.Modalidades?.Remove(modalidade);
+        //entity.Modalidades?.Remove(modalidade);
 
         //modalidade.Profissionais?.Remove(entity);
 
-        //_context.Profissionais.FindAsync([request.ProfissionalId], cancellationToken).Result.Remove(entity);
+        var entity = await _context.ProfissionalModalidades
+            .Where(x => x.ProfissionalId == request.ProfissionalId)
+            .AsNoTracking()
+            .ToListAsync(cancellationToken);
+
+        foreach (ProfissionalModalidade obj in entity)
+        {
+            _context.ProfissionalModalidades.Remove(obj);
+        }
 
         result = await _context.SaveChangesAsync(cancellationToken);
-
 
         return result == 1;
     }
