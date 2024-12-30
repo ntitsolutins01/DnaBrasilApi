@@ -140,11 +140,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
             .WithOne(e => e.Modulo)
             .IsRequired();
 
-        builder.Entity<Aluno>()
-            .HasMany(c => c.QualidadeDeVidas)
-            .WithOne(e => e.Aluno)
-            .IsRequired();
-
         #endregion
 
 
