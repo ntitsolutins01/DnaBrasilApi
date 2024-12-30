@@ -95,7 +95,7 @@ public class CreateProfissionalCommandHandler : IRequestHandler<CreateProfission
             Bairro = request.Bairro,
             Municipio = municipio,
             AspNetUserId = request.AspNetUserId,
-            Modalidades = list,
+            //Modalidades = list,
             Habilitado = request.Habilitado,
             Localidade = localidade,
             Perfil = perfil

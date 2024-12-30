@@ -7481,6 +7481,38 @@
         }
       }
     },
+    "/api/Profissionais/Modalidade/{id}": {
+      "delete": {
+        "tags": [
+          "Profissionais"
+        ],
+        "operationId": "DeleteProfissionalModalide",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Profissionais/Profissional/{id}": {
       "get": {
         "tags": [
@@ -11682,13 +11714,6 @@
                   }
                 ]
               },
-              "profissionais": {
-                "type": "array",
-                "nullable": true,
-                "items": {
-                  "$ref": "#/components/schemas/Profissional"
-                }
-              },
               "byteImage": {
                 "type": "string",
                 "format": "byte",
@@ -12414,13 +12439,6 @@
                     "$ref": "#/components/schemas/Localidade"
                   }
                 ]
-              },
-              "modalidades": {
-                "type": "array",
-                "nullable": true,
-                "items": {
-                  "$ref": "#/components/schemas/Modalidade"
-                }
               },
               "perfil": {
                 "nullable": true,
