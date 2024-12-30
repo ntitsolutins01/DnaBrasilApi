@@ -11718,6 +11718,13 @@
                 "type": "string",
                 "format": "byte",
                 "nullable": true
+              },
+              "profissionalModalidades": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "$ref": "#/components/schemas/ProfissionalModalidade"
+                }
               }
             }
           }
@@ -12447,6 +12454,13 @@
                     "$ref": "#/components/schemas/Perfil"
                   }
                 ]
+              },
+              "profissionalModalidades": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "$ref": "#/components/schemas/ProfissionalModalidade"
+                }
               }
             }
           }
@@ -12470,6 +12484,33 @@
               },
               "aspNetRoleId": {
                 "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "ProfissionalModalidade": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "profissionalId": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "modalidadeId": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "profissional": {
+                "$ref": "#/components/schemas/Profissional"
+              },
+              "modalidade": {
+                "$ref": "#/components/schemas/Modalidade"
               }
             }
           }
