@@ -78,13 +78,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
 
         base.OnModelCreating(builder);
 
-        #region HasNoKey
-
-        builder.Entity<ProfissionalModalidade>()
-            .HasNoKey();
-
-        #endregion
-
         #region Basic many-to-many
 
         builder.Entity<Fomentu>()

@@ -4,6 +4,7 @@ using DnaBrasilApi.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DnaBrasilApi.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241230113404_DnaUpdateProfissionalMoalidades")]
+    partial class DnaUpdateProfissionalMoalidades
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -3238,6 +3241,21 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("ModalidadeProfissional", b =>
+                {
+                    b.Property<int>("ModalidadesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProfissionaisId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ModalidadesId", "ProfissionaisId");
+
+                    b.HasIndex("ProfissionaisId");
+
+                    b.ToTable("ModalidadeProfissional");
+                });
+
             modelBuilder.Entity("AlunosModalidades", b =>
                 {
                     b.HasOne("DnaBrasilApi.Domain.Entities.Aluno", null)
@@ -4064,6 +4082,21 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.HasOne("DnaBrasilApi.Infrastructure.Identity.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ModalidadeProfissional", b =>
+                {
+                    b.HasOne("DnaBrasilApi.Domain.Entities.Modalidade", null)
+                        .WithMany()
+                        .HasForeignKey("ModalidadesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DnaBrasilApi.Domain.Entities.Profissional", null)
+                        .WithMany()
+                        .HasForeignKey("ProfissionaisId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

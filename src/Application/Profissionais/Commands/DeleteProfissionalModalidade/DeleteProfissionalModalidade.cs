@@ -50,15 +50,16 @@ public class DeleteProfissionalModalidadeCommandHandler : IRequestHandler<Delete
 
         //modalidade.Profissionais?.Remove(entity);
 
-        var entity = await _context.ProfissionalModalidades
-            .Where(x => x.ProfissionalId == request.ProfissionalId)
-            .AsNoTracking()
-            .ToListAsync(cancellationToken);
+        //var entity = await _context.Profissionais
+        //    .Include(i=>i.Modalidades)
+        //    .Where(x => x.Id == request.ProfissionalId)
+        //    .Select(s=>s.Modalidades)
+        //    .ToListAsync(cancellationToken);
 
-        foreach (ProfissionalModalidade obj in entity)
-        {
-            _context.ProfissionalModalidades.Remove(obj);
-        }
+        //foreach (var obj in entity)
+        //{
+        //    entity.Remove(obj);
+        //}
 
         result = await _context.SaveChangesAsync(cancellationToken);
 

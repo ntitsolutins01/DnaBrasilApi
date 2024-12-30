@@ -1,5 +1,5 @@
 ﻿namespace DnaBrasilApi.Domain.Entities;
-public class ProfissionalModalidade 
+public class ProfissionalModalidade : BaseAuditableEntity
 {
     public int ProfissionalId { get; set; }
     public int ModalidadeId { get; set; }
