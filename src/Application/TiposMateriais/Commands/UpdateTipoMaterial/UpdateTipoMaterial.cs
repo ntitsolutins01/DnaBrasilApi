@@ -6,7 +6,7 @@ public record UpdateTipoMaterialCommand : IRequest <bool>
 {
     public required int Id { get; init; }
     public required int GrupoMaterialId { get; init; }
-    public required String Nome { get; init; }
+    public required string Nome { get; init; }
 }
 
 public class UpdateTipoMaterialCommandHandler : IRequestHandler<UpdateTipoMaterialCommand, bool>

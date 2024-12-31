@@ -7,7 +7,7 @@ public class ControleMaterialEstoqueSaidaDto
     public required int Id { get; init; }
     public required int MaterialId { get; init; }
     public required int Quantidade { get; init; }
-    public String? Solicitante { get; init; }
+    public string? Solicitante { get; init; }
 
     private class Mapping : Profile
     {

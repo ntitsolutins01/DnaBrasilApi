@@ -3,5 +3,5 @@
 public class TipoMaterial : BaseAuditableEntity
 {   
     public required GrupoMaterial GrupoMaterial { get; set; }
-    public required String Nome { get; set; }
+    public required string Nome { get; set; }
 }

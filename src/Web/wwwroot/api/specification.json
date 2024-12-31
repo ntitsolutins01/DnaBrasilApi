@@ -18096,6 +18096,9 @@
             "type": "integer",
             "format": "int32"
           },
+          "tituloGrupoMaterial": {
+            "type": "string"
+          },
           "nome": {
             "type": "string"
           }
