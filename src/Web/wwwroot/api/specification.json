@@ -15424,6 +15424,9 @@
             "type": "integer",
             "format": "int32"
           },
+          "tituloTipoMaterial": {
+            "type": "string"
+          },
           "unidadeMedida": {
             "type": "string"
           },

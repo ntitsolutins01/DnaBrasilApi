@@ -5,8 +5,8 @@ namespace DnaBrasilApi.Application.Materiais.Commands.CreateMaterial;
 public record CreateMaterialCommand : IRequest<int>
 {
     public required int TipoMaterialId { get; set; }
-    public required String UnidadeMedida { get; set; }
-    public String? Descricao { get; set; }
+    public required string UnidadeMedida { get; set; }
+    public string? Descricao { get; set; }
     public int? QtdAdquirida { get; set; }
 }
 
