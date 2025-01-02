@@ -61,25 +61,6 @@ public class CreateProfissionalCommandHandler : IRequestHandler<CreateProfission
             Guard.Against.NotFound((int)request.LocalidadeId, localidade);
         }
 
-        var list = new List<Modalidade>();
-
-        if (!string.IsNullOrWhiteSpace(request.ModalidadesIds))
-        {
-            List<int> listIds = request.ModalidadesIds.Split(',').Select(s => Convert.ToInt32(s)).ToList();
-
-            foreach (int id in listIds)
-            {
-                var Modalidade = await _context.Modalidades
-                    .FindAsync([id], cancellationToken);
-
-                list.Add(Modalidade!);
-            }
-        }
-        else
-        {
-            list = null;
-        }
-
         var entity = new Profissional
         {
             Nome = request.Nome!,
@@ -95,13 +76,40 @@ public class CreateProfissionalCommandHandler : IRequestHandler<CreateProfission
             Bairro = request.Bairro,
             Municipio = municipio,
             AspNetUserId = request.AspNetUserId,
-            //Modalidades = list,
+            //ProfissionalModalidades = list,
             Habilitado = request.Habilitado,
             Localidade = localidade,
             Perfil = perfil
         };
 
         _context.Profissionais.Add(entity);
+
+        await _context.SaveChangesAsync(cancellationToken);
+
+        var list = new List<ProfissionalModalidade>();
+
+        if (!string.IsNullOrWhiteSpace(request.ModalidadesIds))
+        {
+            List<int> listIds = request.ModalidadesIds.Split(',').Select(s => Convert.ToInt32(s)).ToList();
+
+            foreach (int id in listIds)
+            {
+                var modalidade = await _context.Modalidades
+                    .FindAsync([id], cancellationToken);
+
+                list.Add(new ProfissionalModalidade()
+                {
+                    Modalidade = modalidade!,
+                    Profissional = entity
+                });
+            }
+        }
+        else
+        {
+            list = null;
+        }
+
+        entity.ProfissionalModalidades = list;
 
         await _context.SaveChangesAsync(cancellationToken);
 

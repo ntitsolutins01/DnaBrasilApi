@@ -56,7 +56,7 @@ public class Profissionais : EndpointGroupBase
     }
     public async Task<bool> DeleteProfissionalModalide(ISender sender, int id)
     {
-        return await sender.Send(new DeleteProfissionalModalidadeCommand(){ ProfissionalId = 60, ModalidadeId = 4});
+        return await sender.Send(new DeleteProfissionalModalidadeCommand(){ ProfissionalId = id});
     }
     public async Task<ProfissionalDto> GetProfissionalByEmail(ISender sender, string email)
     {

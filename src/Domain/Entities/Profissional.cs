@@ -18,5 +18,5 @@ public class Profissional : BaseAuditableEntity
     public Municipio? Municipio { get; set; }
     public Localidade? Localidade { get; set; }
     public Perfil? Perfil { get; set; }
-    //public List<Modalidade>? Modalidades { get; set; } = [];
+    public IList<ProfissionalModalidade>? ProfissionalModalidades { get; set; }
 }
