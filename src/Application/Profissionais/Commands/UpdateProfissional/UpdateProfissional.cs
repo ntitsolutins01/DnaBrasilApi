@@ -23,7 +23,7 @@ public record UpdateProfissionalCommand : IRequest<bool>
     public int? MunicipioId { get; init; }
     public int? LocalidadeId { get; init; }
     public bool Habilitado { get; init; }
-    public string? AmbientesIds { get; init; }
+    public string? ModalidadesIds { get; init; }
 }
 
 public class UpdateProfissionalCommandHandler : IRequestHandler<UpdateProfissionalCommand, bool>
@@ -61,6 +61,29 @@ public class UpdateProfissionalCommandHandler : IRequestHandler<UpdateProfission
             .FindAsync(new object[] { request.Id }, cancellationToken);
 
         Guard.Against.NotFound(request.Id, entity);
+
+        var list = new List<ProfissionalModalidade>();
+
+        if (!string.IsNullOrWhiteSpace(request.ModalidadesIds))
+        {
+            List<int> listIds = request.ModalidadesIds.Split(',').Select(s => Convert.ToInt32(s)).ToList();
+
+            foreach (int id in listIds)
+            {
+                var modalidade = await _context.Modalidades
+                    .FindAsync([id], cancellationToken);
+
+                list.Add(new ProfissionalModalidade()
+                {
+                    Modalidade = modalidade!,
+                    Profissional = entity
+                });
+            }
+        }
+        else
+        {
+            list = null;
+        }
 
         entity.Nome = request.Nome!;
         entity.DtNascimento = DateTime.ParseExact(request.DtNascimento!, "dd/MM/yyyy", CultureInfo.CreateSpecificCulture("pt-BR"));

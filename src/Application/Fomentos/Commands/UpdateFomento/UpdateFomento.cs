@@ -68,7 +68,7 @@ public class UpdateFomentoCommandHandler : IRequestHandler<UpdateFomentoCommand,
         entity.Status = request.Status;
         entity.DtIni = DateTime.ParseExact(request.DtIni, "dd/MM/yyyy", CultureInfo.CreateSpecificCulture("pt-BR"));
         entity.DtFim = DateTime.ParseExact(request.DtFim, "dd/MM/yyyy", CultureInfo.CreateSpecificCulture("pt-BR"));
-        entity.LinhasAcoes = listLinhasAcoes;
+        //entity.LinhasAcoes = listLinhasAcoes;
 
         var result = await _context.SaveChangesAsync(cancellationToken);
 
