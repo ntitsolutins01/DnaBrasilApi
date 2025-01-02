@@ -5,7 +5,6 @@ namespace DnaBrasilApi.Application.TiposMateriais.Commands.UpdateTipoMaterial;
 public record UpdateTipoMaterialCommand : IRequest <bool>
 {
     public required int Id { get; init; }
-    public required int GrupoMaterialId { get; init; }
     public required string Nome { get; init; }
 }
 
@@ -25,13 +24,7 @@ public class UpdateTipoMaterialCommandHandler : IRequestHandler<UpdateTipoMateri
 
         Guard.Against.NotFound(request.Id, entity);
 
-        var grupoMaterial = await _context.GruposMateriais
-            .FindAsync([request.GrupoMaterialId], cancellationToken);
-
-        Guard.Against.NotFound(request.GrupoMaterialId, grupoMaterial);
-
         entity.Nome = request.Nome;
-        entity.GrupoMaterial = grupoMaterial;
 
         var result = await _context.SaveChangesAsync(cancellationToken);
 

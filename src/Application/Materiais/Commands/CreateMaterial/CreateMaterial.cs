@@ -6,7 +6,7 @@ public record CreateMaterialCommand : IRequest<int>
 {
     public required int TipoMaterialId { get; set; }
     public required string UnidadeMedida { get; set; }
-    public string? Descricao { get; set; }
+    public required string Descricao { get; set; }
     public int? QtdAdquirida { get; set; }
 }
 

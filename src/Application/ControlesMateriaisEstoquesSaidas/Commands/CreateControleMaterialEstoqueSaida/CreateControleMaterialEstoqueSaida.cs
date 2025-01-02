@@ -6,7 +6,7 @@ public record CreateControleMaterialEstoqueSaidaCommand : IRequest<int>
 {
     public required int MaterialId { get; set; }
     public required int Quantidade { get; set; }
-    public String? Solicitante { get; set; }
+    public string? Solicitante { get; set; }
 }
 
 public class CreateControleMaterialEstoqueSaidaCommandHandler : IRequestHandler<CreateControleMaterialEstoqueSaidaCommand, int>

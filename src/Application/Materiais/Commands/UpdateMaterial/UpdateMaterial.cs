@@ -5,10 +5,10 @@ namespace DnaBrasilApi.Application.Materiais.Commands.UpdateMaterial;
 public record UpdateMaterialCommand : IRequest <bool>
 {
     public required int Id { get; init; }
-    public required int TipoMaterialId { get; set; }
-    public required string UnidadeMedida { get; set; }
-    public string? Descricao { get; set; }
-    public int? QtdAdquirida { get; set; }
+    public required int TipoMaterialId { get; init; }
+    public required string UnidadeMedida { get; init; }
+    public required string Descricao { get; init; }
+    public int? QtdAdquirida { get; init; }
 }
 
 public class UpdateMaterialCommandHandler : IRequestHandler<UpdateMaterialCommand, bool>

@@ -12988,6 +12988,9 @@
             "type": "integer",
             "format": "int32"
           },
+          "tituloMaterial": {
+            "type": "string"
+          },
           "quantidade": {
             "type": "integer",
             "format": "int32"
@@ -15431,8 +15434,7 @@
             "type": "string"
           },
           "descricao": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "qtdAdquirida": {
             "type": "integer",
@@ -15453,8 +15455,7 @@
             "type": "string"
           },
           "descricao": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "qtdAdquirida": {
             "type": "integer",
@@ -15479,8 +15480,7 @@
             "type": "string"
           },
           "descricao": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "qtdAdquirida": {
             "type": "integer",
@@ -18125,10 +18125,6 @@
         "additionalProperties": false,
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "grupoMaterialId": {
             "type": "integer",
             "format": "int32"
           },
