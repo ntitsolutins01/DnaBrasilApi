@@ -19540,6 +19540,10 @@
           "municipioId": {
             "type": "integer",
             "format": "int32"
+          },
+          "localidadeId": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },
@@ -19577,6 +19581,10 @@
             "format": "int32"
           },
           "municipioId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "localidadeId": {
             "type": "integer",
             "format": "int32"
           }
