@@ -19,7 +19,7 @@ public class FotosEvento : EndpointGroupBase
     {
         app.MapGroup(this)
             //.RequireAuthorization()
-            .MapGet(GetFotosAllByEventoId, "Evento/{eventoId}")
+            .MapGet(GetFotosAllByEventoId, "{eventoId}")
             .MapPost(CreateFotoEvento)
             .MapDelete(DeleteFotoEvento, "{id}")
             .MapGet(GetFotoEventoById, "Foto/{id}");
