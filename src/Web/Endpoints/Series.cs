@@ -25,7 +25,7 @@ public class Series : EndpointGroupBase
             .MapPost(CreateSerie)
             .MapPut(UpdateSerie, "{id}")
             .MapDelete(DeleteSerie, "{id}")
-            .MapGet(GetSerieById, "Serie/{id}");
+            .MapGet(GetSerieById, "{id}");
     }
     #endregion
 
