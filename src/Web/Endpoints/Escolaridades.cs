@@ -22,7 +22,7 @@ public class Escolaridades : EndpointGroupBase
             .MapPost(CreateEscolaridade)
             .MapPut(UpdateEscolaridade, "{id}")
             .MapDelete(DeleteEscolaridade, "{id}")
-            .MapGet(GetEscolaridadeById, "Escolaridade/{id}");
+            .MapGet(GetEscolaridadeById, "{id}");
     }
 
 
