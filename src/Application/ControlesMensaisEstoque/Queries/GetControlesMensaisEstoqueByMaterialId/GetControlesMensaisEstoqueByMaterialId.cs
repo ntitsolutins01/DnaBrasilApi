@@ -1,24 +1,24 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasilApi.Application.ControlesMensaisEstoque.Queries.GetControlesMensaisEstoqueAllByMaterialId;
+namespace DnaBrasilApi.Application.ControlesMensaisEstoque.Queries.GetControlesMensaisEstoqueByMaterialId;
 
-public record GetControlesMensaisEstoqueAllByMaterialIdQuery : IRequest<List<ControleMensalEstoqueDto>>
+public record GetControlesMensaisEstoqueByMaterialIdQuery : IRequest<List<ControleMensalEstoqueDto>>
 {
     public required int MaterialId { get; init; }
 }
 
-public class GetControlesMensaisEstoqueAllByMaterialIdQueryHandler : IRequestHandler<GetControlesMensaisEstoqueAllByMaterialIdQuery, List<ControleMensalEstoqueDto>>
+public class GetControlesMensaisEstoqueByMaterialIdQueryHandler : IRequestHandler<GetControlesMensaisEstoqueByMaterialIdQuery, List<ControleMensalEstoqueDto>>
 {
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
 
-    public GetControlesMensaisEstoqueAllByMaterialIdQueryHandler(IApplicationDbContext context, IMapper mapper)
+    public GetControlesMensaisEstoqueByMaterialIdQueryHandler(IApplicationDbContext context, IMapper mapper)
     {
         _context = context;
         _mapper = mapper;
     }
 
-    public async Task<List<ControleMensalEstoqueDto>> Handle(GetControlesMensaisEstoqueAllByMaterialIdQuery request, CancellationToken cancellationToken)
+    public async Task<List<ControleMensalEstoqueDto>> Handle(GetControlesMensaisEstoqueByMaterialIdQuery request, CancellationToken cancellationToken)
     {
         var result = await _context.ControlesMensaisEstoque
             .Include(i=>i.Material)

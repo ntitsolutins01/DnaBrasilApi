@@ -4,7 +4,7 @@ using DnaBrasilApi.Application.ControlesMensaisEstoque.Commands.DeleteControleMe
 using DnaBrasilApi.Application.ControlesMensaisEstoque.Commands.UpdateControleMensalEstoque;
 using DnaBrasilApi.Application.ControlesMensaisEstoque.Queries;
 using DnaBrasilApi.Application.ControlesMensaisEstoque.Queries.GetControlesMensaisEstoqueAll;
-using DnaBrasilApi.Application.ControlesMensaisEstoque.Queries.GetControlesMensaisEstoqueAllByMaterialId;
+using DnaBrasilApi.Application.ControlesMensaisEstoque.Queries.GetControlesMensaisEstoqueByMaterialId;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -25,7 +25,7 @@ public class ControlesMensaisEstoque : EndpointGroupBase
             .MapPut(UpdateControleMensalEstoque, "{id}")
             .MapDelete(DeleteControleMensalEstoque, "{id}")
             .MapGet(GetControleMensalEstoqueById, "ControleMensalEstoque/{id}")
-            .MapGet(GetControlesMensaisEstoqueAllByMaterialId, "Material/{id}");
+            .MapGet(GetControlesMensaisEstoqueByMaterialId, "Material/{id}");
     }
     #endregion
 
@@ -98,9 +98,9 @@ public class ControlesMensaisEstoque : EndpointGroupBase
     /// <param name="sender">Sender</param>
     /// <param name="id">Id do módulo Ead</param>
     /// <returns>Retorna uma lista de ControlesMensaisEstoque</returns>
-    public async Task<List<ControleMensalEstoqueDto>> GetControlesMensaisEstoqueAllByMaterialId(ISender sender, int id)
+    public async Task<List<ControleMensalEstoqueDto>> GetControlesMensaisEstoqueByMaterialId(ISender sender, int id)
     {
-        return await sender.Send(new GetControlesMensaisEstoqueAllByMaterialIdQuery() { MaterialId = id });
+        return await sender.Send(new GetControlesMensaisEstoqueByMaterialIdQuery() { MaterialId = id });
     }
     #endregion
 

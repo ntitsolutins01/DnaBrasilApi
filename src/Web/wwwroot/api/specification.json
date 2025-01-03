@@ -1861,7 +1861,7 @@
         "tags": [
           "ControlesMateriaisEstoquesSaidas"
         ],
-        "operationId": "GetControlesMateriaisEstoquesSaidasAllByMaterialId",
+        "operationId": "GetControlesMateriaisEstoquesSaidasByMaterialId",
         "parameters": [
           {
             "name": "id",
@@ -2056,7 +2056,7 @@
         "tags": [
           "ControlesMensaisEstoque"
         ],
-        "operationId": "GetControlesMensaisEstoqueAllByMaterialId",
+        "operationId": "GetControlesMensaisEstoqueByMaterialId",
         "parameters": [
           {
             "name": "id",
@@ -5850,7 +5850,7 @@
         "tags": [
           "Materiais"
         ],
-        "operationId": "GetMateriaisAllByTipoMaterialId",
+        "operationId": "GetMateriaisByTipoMaterialId",
         "parameters": [
           {
             "name": "id",
@@ -9923,7 +9923,7 @@
         "tags": [
           "TiposMateriais"
         ],
-        "operationId": "GetTiposMateriaisAllByGrupoMaterialId",
+        "operationId": "GetTiposMateriaisByGrupoMaterialId",
         "parameters": [
           {
             "name": "id",

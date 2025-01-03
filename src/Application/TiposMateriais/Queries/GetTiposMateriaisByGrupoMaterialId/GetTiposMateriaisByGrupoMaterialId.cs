@@ -1,24 +1,24 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasilApi.Application.TiposMateriais.Queries.GetTiposMateriaisAllByGrupoMaterialId;
+namespace DnaBrasilApi.Application.TiposMateriais.Queries.GetTiposMateriaisByGrupoMaterialId;
 
-public record GetTiposMateriaisAllByGrupoMaterialIdQuery : IRequest<List<TipoMaterialDto>>
+public record GetTiposMateriaisByGrupoMaterialIdQuery : IRequest<List<TipoMaterialDto>>
 {
     public required int GrupoMaterialId { get; init; }
 }
 
-public class GetTiposMateriaisAllByGrupoMaterialIdQueryHandler : IRequestHandler<GetTiposMateriaisAllByGrupoMaterialIdQuery, List<TipoMaterialDto>>
+public class GetTiposMateriaisByGrupoMaterialIdQueryHandler : IRequestHandler<GetTiposMateriaisByGrupoMaterialIdQuery, List<TipoMaterialDto>>
 {
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
 
-    public GetTiposMateriaisAllByGrupoMaterialIdQueryHandler(IApplicationDbContext context, IMapper mapper)
+    public GetTiposMateriaisByGrupoMaterialIdQueryHandler(IApplicationDbContext context, IMapper mapper)
     {
         _context = context;
         _mapper = mapper;
     }
 
-    public async Task<List<TipoMaterialDto>> Handle(GetTiposMateriaisAllByGrupoMaterialIdQuery request, CancellationToken cancellationToken)
+    public async Task<List<TipoMaterialDto>> Handle(GetTiposMateriaisByGrupoMaterialIdQuery request, CancellationToken cancellationToken)
     {
         var result = await _context.TiposMateriais
             .Include(i => i.GrupoMaterial)
