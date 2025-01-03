@@ -18,7 +18,7 @@ public class LinhasAcoes : EndpointGroupBase
             .MapPost(CreateLinhaAcao)
             .MapPut(UpdateLinhaAcao, "{id}")
             .MapDelete(DeleteLinhaAcao, "{id}")
-            .MapGet(GetLinhaAcaoById, "LinhaAcao/{id}");
+            .MapGet(GetLinhaAcaoById, "{id}");
     }
     #endregion
 
