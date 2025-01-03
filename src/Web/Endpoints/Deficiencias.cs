@@ -23,7 +23,7 @@ public class Deficiencias : EndpointGroupBase
         app.MapGroup(this)
             //.RequireAuthorization()
             .MapGet(GetDeficienciasAll)
-            .MapGet(GetDeficienciaById, "Deficiencia/{id}")
+            .MapGet(GetDeficienciaById, "{id}")
             .MapPost(CreateDeficiencia)
             .MapPut(UpdateDeficiencia, "{id}")
             .MapDelete(DeleteDeficiencia, "{id}");
