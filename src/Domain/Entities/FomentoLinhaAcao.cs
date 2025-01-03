@@ -1,8 +1,9 @@
 ﻿namespace DnaBrasilApi.Domain.Entities;
-public class FomentoLocalidade : BaseAuditableEntity
+public class FomentoLocalidade 
 {
     public int FomentoId { get; set; }
     public int LocalidadeId { get; set; }
-    public required Fomentu Fomento { get; set; }
-    public required Localidade Localidade { get; set; }
+    public Fomentu? Fomento { get; set; }
+    public Localidade? Localidade { get; set; }
+    public bool Status { get; set; } = true;
 }
