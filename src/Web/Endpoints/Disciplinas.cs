@@ -23,7 +23,7 @@ public class Disciplinas : EndpointGroupBase
             .MapPost(CreateDisciplina)
             .MapPut(UpdateDisciplina, "{id}")
             .MapDelete(DeleteDisciplina, "{id}")
-            .MapGet(GetDisciplinaById, "Disciplina/{id}");
+            .MapGet(GetDisciplinaById, "{id}");
     }
     #endregion
 
