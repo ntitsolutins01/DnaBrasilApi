@@ -26,7 +26,7 @@ public class ControlesMateriais : EndpointGroupBase
             .MapPost(CreateControleMaterial)
             .MapPut(UpdateControleMaterial, "{id}")
             .MapDelete(DeleteControleMaterial, "{id}")
-            .MapGet(GetControleMaterialById, "ControleMaterial/{id}");
+            .MapGet(GetControleMaterialById, "{id}");
     }
     #endregion
 
