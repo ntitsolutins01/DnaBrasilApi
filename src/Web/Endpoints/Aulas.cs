@@ -27,7 +27,7 @@ public class Aulas : EndpointGroupBase
             .MapPost(CreateAula)
             .MapPut(UpdateAula, "{id}")
             .MapDelete(DeleteAula, "{id}")
-            .MapGet(GetAulaById, "Aula/{id}")
+            .MapGet(GetAulaById, "{id}")
             .MapGet(GetAulasAllByModuloEadId, "ModuloEad/{id}");
     }
     #endregion
