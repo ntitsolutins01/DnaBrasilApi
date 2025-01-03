@@ -25,7 +25,7 @@ public class RespostasEad : EndpointGroupBase
             .MapPost(CreateRespostaEad)
             .MapPut(UpdateRespostaEad, "{id}")
             .MapDelete(DeleteRespostaEad, "{id}")
-            .MapGet(GetRespostaEadById, "RespostaEad/{id}");
+            .MapGet(GetRespostaEadById, "{id}");
     }
     #endregion
 
