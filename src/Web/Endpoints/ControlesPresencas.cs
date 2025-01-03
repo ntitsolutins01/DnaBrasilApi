@@ -28,9 +28,9 @@ public class ControlesPresencas : EndpointGroupBase
             .MapPost(CreateControlePresenca)
             .MapPut(UpdateControlePresenca, "{id}")
             .MapDelete(DeleteControlePresenca, "{id}")
-            .MapGet(GetControlePresencaById, "ControlePresenca/{id}")
-            .MapGet(GetControlesPresencasByAlunoId, "ControlePresenca/Aluno/{alunoId}")
-            .MapGet(GetControlesPresencasByEventoId, "ControlePresenca/Evento/{eventoId}")
+            .MapGet(GetControlePresencaById, "{id}")
+            .MapGet(GetControlesPresencasByAlunoId, "Aluno/{alunoId}")
+            .MapGet(GetControlesPresencasByEventoId, "Evento/{eventoId}")
             .MapPost(GetControlesPresencasByFilter, "Filter");
     }
 
