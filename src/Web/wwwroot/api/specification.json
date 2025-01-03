@@ -12089,10 +12089,20 @@
                 "format": "int32"
               },
               "fomento": {
-                "$ref": "#/components/schemas/Fomentu"
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Fomentu"
+                  }
+                ]
               },
               "localidade": {
-                "$ref": "#/components/schemas/Localidade"
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Localidade"
+                  }
+                ]
               }
             }
           }
@@ -13237,6 +13247,10 @@
             "nullable": true
           },
           "perfil": {
+            "type": "string",
+            "nullable": true
+          },
+          "localidade": {
             "type": "string",
             "nullable": true
           }
@@ -15556,7 +15570,7 @@
             "type": "string",
             "nullable": true
           },
-          "localidade": {
+          "localidades": {
             "type": "string",
             "nullable": true
           },
@@ -15580,6 +15594,10 @@
             "nullable": true
           },
           "linhaAcoes": {
+            "type": "string",
+            "nullable": true
+          },
+          "localidadesId": {
             "type": "string",
             "nullable": true
           }
@@ -15610,6 +15628,9 @@
             "type": "string"
           },
           "linhaAcoes": {
+            "type": "string"
+          },
+          "localidades": {
             "type": "string"
           }
         }

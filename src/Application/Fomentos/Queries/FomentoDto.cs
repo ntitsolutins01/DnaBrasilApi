@@ -9,13 +9,14 @@ public class FomentoDto
     public string? Nome { get; set; }
     public string? MunicipioEstado { get; set; }
     public string? MunicipioId { get; set; }
-    public string? Localidade { get; set; }
+    public string? Localidades { get; set; }
     public string? LocalidadeId { get; set; }
     public string? DtIni { get; set; }
     public string? DtFim { get; set; }
     public bool Status { get; set; }
     public string? Sigla { get; set; }
     public string? LinhaAcoes { get; set; }
+    public string? LocalidadesId { get; set; }
 
     private class Mapping : Profile
     {
@@ -24,13 +25,21 @@ public class FomentoDto
             CreateMap<Fomentu, FomentoDto>()
                 .ForMember(dest => dest.DtIni, opt => opt.MapFrom(src => src.DtIni.ToString("dd/MM/yyyy")))
                 .ForMember(dest => dest.DtFim, opt => opt.MapFrom(src => src.DtFim.ToString("dd/MM/yyyy")))
-                .ForMember(dest => dest.Localidade, opt => opt.MapFrom(src => src.Localidade.Nome!.ToString()))
-                //.ForMember(dest => dest.LinhaAcoes,
-                //    opt => opt.MapFrom(src =>
-                //        src.LinhasAcoes == null
-                //            ? ""
-                //            : string.Join(",", src.LinhasAcoes!.Select(s => s.Id.ToString()).ToArray())))
-                .ForMember(dest => dest.LocalidadeId, opt => opt.MapFrom(src => src.Localidade.Id!.ToString()))
+                .ForMember(dest => dest.Localidades, 
+                    opt => opt.MapFrom(src =>
+                        src.FomentoLocalidades == null
+                            ? ""
+                            : string.Join(",", src.FomentoLocalidades!.Select(s => s.Localidade!.Nome!.ToString()).ToArray())))
+                .ForMember(dest => dest.LinhaAcoes,
+                    opt => opt.MapFrom(src =>
+                        src.FomentoLinhasAcoes == null
+                            ? ""
+                            : string.Join(",", src.FomentoLinhasAcoes!.Select(s => s.LinhaAcaoId.ToString()).ToArray())))
+                .ForMember(dest => dest.LocalidadesId,
+                    opt => opt.MapFrom(src =>
+                        src.FomentoLocalidades == null
+                            ? ""
+                            : string.Join(",", src.FomentoLocalidades!.Select(s => s.FomentoId.ToString()).ToArray())))
                 .ForMember(dest => dest.MunicipioId, opt => opt.MapFrom(src => src.Municipio!.Id.ToString()))
                 .ForMember(dest => dest.Sigla, opt => opt.MapFrom(src => src.Municipio!.Estado!.Sigla!.ToString()))
                 .ForMember(dest => dest.IdIdMunicipio, opt => opt.MapFrom(src => $"{src.Id}-{src.Municipio!.Id}"))
