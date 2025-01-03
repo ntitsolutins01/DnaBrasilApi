@@ -4,6 +4,7 @@ using DnaBrasilApi.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DnaBrasilApi.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250102235906_DnaDeleteFomentoLocalidades")]
+    partial class DnaDeleteFomentoLocalidades
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1043,11 +1046,11 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("DnaBrasilApi.Domain.Entities.FomentoLocalidade", b =>
                 {
-                    b.Property<int>("FomentoId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("LocalidadeId")
-                        .HasColumnType("int");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTimeOffset>("Created")
                         .HasColumnType("datetimeoffset");
@@ -1055,7 +1058,7 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Id")
+                    b.Property<int>("FomentoId")
                         .HasColumnType("int");
 
                     b.Property<DateTimeOffset>("LastModified")
@@ -1064,11 +1067,16 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("FomentoId", "LocalidadeId");
+                    b.Property<int>("LocalidadeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FomentoId");
 
                     b.HasIndex("LocalidadeId");
 
-                    b.ToTable("FomentoLocalidades");
+                    b.ToTable("FomentoLocalidade");
                 });
 
             modelBuilder.Entity("DnaBrasilApi.Domain.Entities.Fomentu", b =>

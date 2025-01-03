@@ -72,6 +72,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<ControleMaterialEstoqueSaida> ControlesMateriaisEstoquesSaidas => Set<ControleMaterialEstoqueSaida>();
     public DbSet<ProfissionalModalidade> ProfissionalModalidades => Set<ProfissionalModalidade>();
     public DbSet<FomentoLocalidade> FomentoLocalidades => Set<FomentoLocalidade>();
+    public DbSet<FomentoLinhaAcao> FomentoLinhasAcoes => Set<FomentoLinhaAcao>();
 
 
     protected override void OnModelCreating(ModelBuilder builder)
@@ -105,16 +106,18 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
             .HasOne<Localidade>(sc => sc.Localidade)
             .WithMany(s => s.FomentoLocalidades)
             .HasForeignKey(sc => sc.LocalidadeId);
-        
 
-        //builder.Entity<Fomentu>()
-        //.HasMany(e => e.LinhasAcoes)
-        //.WithMany(e => e.Fomentos)
-        //.UsingEntity(
-        //    "FomentosLinhasAcoes",
-        //    r => r.HasOne(typeof(LinhaAcao)).WithMany().HasForeignKey("LinhaAcaoId").HasPrincipalKey(nameof(LinhaAcao.Id)),
-        //    l => l.HasOne(typeof(Fomentu)).WithMany().HasForeignKey("FomentoId").HasPrincipalKey(nameof(Fomentu.Id)),
-        //    j => j.HasKey("FomentoId", "LinhaAcaoId"));
+        builder.Entity<FomentoLinhaAcao>().HasKey(sc => new { sc.FomentoId, sc.LinhaAcaoId });
+
+        builder.Entity<FomentoLinhaAcao>()
+            .HasOne<Fomentu>(sc => sc.Fomento)
+            .WithMany(s => s.FomentoLinhasAcoes)
+            .HasForeignKey(sc => sc.FomentoId);
+
+        builder.Entity<FomentoLinhaAcao>()
+            .HasOne<LinhaAcao>(sc => sc.LinhaAcao)
+            .WithMany(s => s.FomentoLinhasAcoes)
+            .HasForeignKey(sc => sc.LinhaAcaoId);
 
         builder.Entity<Aluno>()
         .HasMany(e => e.Modalidades)
