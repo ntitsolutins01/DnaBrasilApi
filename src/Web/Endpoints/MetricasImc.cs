@@ -21,7 +21,7 @@ public class MetricasImc : EndpointGroupBase
             .MapPost(CreateMetricaImc)
             .MapPut(UpdateMetricaImc, "{id}")
             .MapDelete(DeleteMetricaImc, "{id}")
-            .MapGet(GetMetricaImcById, "MetricaImc/{id}");
+            .MapGet(GetMetricaImcById, "{id}");
     }
     #endregion
 
