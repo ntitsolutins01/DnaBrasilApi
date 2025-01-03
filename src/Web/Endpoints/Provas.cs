@@ -23,7 +23,7 @@ public class Provas : EndpointGroupBase
             .MapPost(CreateProva)
             .MapPut(UpdateProva, "{id}")
             .MapDelete(DeleteProva, "{id}")
-            .MapGet(GetProvaById, "Prova/{id}");
+            .MapGet(GetProvaById, "{id}");
     }
     #endregion
 
