@@ -25,7 +25,7 @@ public class TiposCursos : EndpointGroupBase
             .MapPost(CreateTipoCurso)
             .MapPut(UpdateTipoCurso, "{id}")
             .MapDelete(DeleteTipoCurso, "{id}")
-            .MapGet(GetTipoCursoById, "TipoCurso/{id}");
+            .MapGet(GetTipoCursoById, "{id}");
     }
     #endregion
 
