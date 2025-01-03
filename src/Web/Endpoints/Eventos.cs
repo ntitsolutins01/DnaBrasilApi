@@ -22,7 +22,7 @@ public class Eventos : EndpointGroupBase
             .MapPost(CreateEvento)
             .MapPut(UpdateEvento, "{id}")
             .MapDelete(DeleteEvento, "{id}")
-            .MapGet(GetEventoById, "Evento/{id}");
+            .MapGet(GetEventoById, "{id}");
     }
     #endregion
 
