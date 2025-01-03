@@ -15,8 +15,8 @@ public class FomentoDto
     public string? DtFim { get; set; }
     public bool Status { get; set; }
     public string? Sigla { get; set; }
-    public string? LinhaAcoes { get; set; }
-    public string? LocalidadesId { get; set; }
+    public string? LinhasAcoesIds { get; set; }
+    public string? LocalidadesIds { get; set; }
 
     private class Mapping : Profile
     {
@@ -30,16 +30,16 @@ public class FomentoDto
                         src.FomentoLocalidades == null
                             ? ""
                             : string.Join(",", src.FomentoLocalidades!.Select(s => s.Localidade!.Nome!.ToString()).ToArray())))
-                .ForMember(dest => dest.LinhaAcoes,
+                .ForMember(dest => dest.LinhasAcoesIds,
                     opt => opt.MapFrom(src =>
                         src.FomentoLinhasAcoes == null
                             ? ""
                             : string.Join(",", src.FomentoLinhasAcoes!.Select(s => s.LinhaAcaoId.ToString()).ToArray())))
-                .ForMember(dest => dest.LocalidadesId,
+                .ForMember(dest => dest.LocalidadesIds,
                     opt => opt.MapFrom(src =>
                         src.FomentoLocalidades == null
                             ? ""
-                            : string.Join(",", src.FomentoLocalidades!.Select(s => s.FomentoId.ToString()).ToArray())))
+                            : string.Join(",", src.FomentoLocalidades!.Select(s => s.LocalidadeId.ToString()).ToArray())))
                 .ForMember(dest => dest.MunicipioId, opt => opt.MapFrom(src => src.Municipio!.Id.ToString()))
                 .ForMember(dest => dest.Sigla, opt => opt.MapFrom(src => src.Municipio!.Estado!.Sigla!.ToString()))
                 .ForMember(dest => dest.IdIdMunicipio, opt => opt.MapFrom(src => $"{src.Id}-{src.Municipio!.Id}"))

@@ -12072,41 +12072,37 @@
         ]
       },
       "FomentoLocalidade": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BaseAuditableEntity"
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "fomentoId": {
+            "type": "integer",
+            "format": "int32"
           },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "fomentoId": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "localidadeId": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "fomento": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/Fomentu"
-                  }
-                ]
-              },
-              "localidade": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/Localidade"
-                  }
-                ]
+          "localidadeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fomento": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Fomentu"
               }
-            }
+            ]
+          },
+          "localidade": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Localidade"
+              }
+            ]
+          },
+          "status": {
+            "type": "boolean"
           }
-        ]
+        }
       },
       "Fomentu": {
         "allOf": [
@@ -12164,31 +12160,37 @@
         ]
       },
       "FomentoLinhaAcao": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BaseAuditableEntity"
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "fomentoId": {
+            "type": "integer",
+            "format": "int32"
           },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "fomentoId": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "linhaAcaoId": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "fomento": {
+          "linhaAcaoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fomento": {
+            "nullable": true,
+            "oneOf": [
+              {
                 "$ref": "#/components/schemas/Fomentu"
-              },
-              "linhaAcao": {
+              }
+            ]
+          },
+          "linhaAcao": {
+            "nullable": true,
+            "oneOf": [
+              {
                 "$ref": "#/components/schemas/LinhaAcao"
               }
-            }
+            ]
+          },
+          "status": {
+            "type": "boolean"
           }
-        ]
+        }
       },
       "LinhaAcao": {
         "allOf": [
@@ -15593,11 +15595,11 @@
             "type": "string",
             "nullable": true
           },
-          "linhaAcoes": {
+          "linhasAcoesIds": {
             "type": "string",
             "nullable": true
           },
-          "localidadesId": {
+          "localidadesIds": {
             "type": "string",
             "nullable": true
           }
@@ -15627,11 +15629,13 @@
           "dtFim": {
             "type": "string"
           },
-          "linhaAcoes": {
-            "type": "string"
+          "linhasAcoesIds": {
+            "type": "string",
+            "nullable": true
           },
-          "localidades": {
-            "type": "string"
+          "localidadesIds": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -15666,8 +15670,13 @@
           "dtFim": {
             "type": "string"
           },
-          "linhaAcoes": {
-            "type": "string"
+          "linhasAcoesIds": {
+            "type": "string",
+            "nullable": true
+          },
+          "localidadesIds": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
