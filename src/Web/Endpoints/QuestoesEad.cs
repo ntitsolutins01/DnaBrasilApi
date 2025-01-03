@@ -23,7 +23,7 @@ public class QuestoesEad : EndpointGroupBase
             .MapPost(CreateQuestaoEad)
             .MapPut(UpdateQuestaoEad, "{id}")
             .MapDelete(DeleteQuestaoEad, "{id}")
-            .MapGet(GetQuestaoEadById, "QuestaoEad/{id}");
+            .MapGet(GetQuestaoEadById, "{id}");
     }
     #endregion
 
