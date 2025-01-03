@@ -46,6 +46,7 @@ public class Profissionais : EndpointGroupBase
     public async Task<bool> UpdateProfissional(ISender sender, int id, UpdateProfissionalCommand command)
     {
         if (id != command.Id) return false;
+        await sender.Send(new DeleteProfissionalModalidadeCommand() { ProfissionalId = id });
         var result = await sender.Send(command);
         return result;
     }

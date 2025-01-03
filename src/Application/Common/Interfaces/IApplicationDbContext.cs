@@ -63,6 +63,8 @@ public interface IApplicationDbContext
     DbSet<ControleMensalEstoque> ControlesMensaisEstoque { get; }
     DbSet<ControleMaterialEstoqueSaida> ControlesMateriaisEstoquesSaidas { get; }
     DbSet<ProfissionalModalidade> ProfissionalModalidades { get; }
+    DbSet<FomentoLocalidade> FomentoLocalidades { get; }
+    DbSet<FomentoLinhaAcao> FomentoLinhasAcoes { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

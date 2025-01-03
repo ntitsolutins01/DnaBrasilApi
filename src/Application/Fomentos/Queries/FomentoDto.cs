@@ -25,11 +25,11 @@ public class FomentoDto
                 .ForMember(dest => dest.DtIni, opt => opt.MapFrom(src => src.DtIni.ToString("dd/MM/yyyy")))
                 .ForMember(dest => dest.DtFim, opt => opt.MapFrom(src => src.DtFim.ToString("dd/MM/yyyy")))
                 .ForMember(dest => dest.Localidade, opt => opt.MapFrom(src => src.Localidade.Nome!.ToString()))
-                .ForMember(dest => dest.LinhaAcoes,
-                    opt => opt.MapFrom(src =>
-                        src.LinhasAcoes == null
-                            ? ""
-                            : string.Join(",", src.LinhasAcoes!.Select(s => s.Id.ToString()).ToArray())))
+                //.ForMember(dest => dest.LinhaAcoes,
+                //    opt => opt.MapFrom(src =>
+                //        src.LinhasAcoes == null
+                //            ? ""
+                //            : string.Join(",", src.LinhasAcoes!.Select(s => s.Id.ToString()).ToArray())))
                 .ForMember(dest => dest.LocalidadeId, opt => opt.MapFrom(src => src.Localidade.Id!.ToString()))
                 .ForMember(dest => dest.MunicipioId, opt => opt.MapFrom(src => src.Municipio!.Id.ToString()))
                 .ForMember(dest => dest.Sigla, opt => opt.MapFrom(src => src.Municipio!.Estado!.Sigla!.ToString()))

@@ -12059,6 +12059,40 @@
                     "$ref": "#/components/schemas/Municipio"
                   }
                 ]
+              },
+              "fomentoLocalidades": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "$ref": "#/components/schemas/FomentoLocalidade"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "FomentoLocalidade": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "fomentoId": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "localidadeId": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "fomento": {
+                "$ref": "#/components/schemas/Fomentu"
+              },
+              "localidade": {
+                "$ref": "#/components/schemas/Localidade"
               }
             }
           }
@@ -12101,12 +12135,46 @@
                 "type": "string",
                 "format": "date-time"
               },
-              "linhasAcoes": {
+              "fomentoLinhasAcoes": {
                 "type": "array",
                 "nullable": true,
                 "items": {
-                  "$ref": "#/components/schemas/LinhaAcao"
+                  "$ref": "#/components/schemas/FomentoLinhaAcao"
                 }
+              },
+              "fomentoLocalidades": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "$ref": "#/components/schemas/FomentoLocalidade"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "FomentoLinhaAcao": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "fomentoId": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "linhaAcaoId": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "fomento": {
+                "$ref": "#/components/schemas/Fomentu"
+              },
+              "linhaAcao": {
+                "$ref": "#/components/schemas/LinhaAcao"
               }
             }
           }
@@ -12127,11 +12195,11 @@
               "status": {
                 "type": "boolean"
               },
-              "fomentos": {
+              "fomentoLinhasAcoes": {
                 "type": "array",
                 "nullable": true,
                 "items": {
-                  "$ref": "#/components/schemas/Fomentu"
+                  "$ref": "#/components/schemas/FomentoLinhaAcao"
                 }
               }
             }
@@ -17633,7 +17701,7 @@
           "habilitado": {
             "type": "boolean"
           },
-          "ambientesIds": {
+          "modalidadesIds": {
             "type": "string",
             "nullable": true
           }

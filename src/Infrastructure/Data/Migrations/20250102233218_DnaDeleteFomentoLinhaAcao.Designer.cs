@@ -4,6 +4,7 @@ using DnaBrasilApi.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DnaBrasilApi.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250102233218_DnaDeleteFomentoLinhaAcao")]
+    partial class DnaDeleteFomentoLinhaAcao
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1009,36 +1012,6 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.HasIndex("LocalidadeId");
 
                     b.ToTable("Eventos");
-                });
-
-            modelBuilder.Entity("DnaBrasilApi.Domain.Entities.FomentoLinhaAcao", b =>
-                {
-                    b.Property<int>("FomentoId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("LinhaAcaoId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTimeOffset>("Created")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
-                    b.Property<DateTimeOffset>("LastModified")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("FomentoId", "LinhaAcaoId");
-
-                    b.HasIndex("LinhaAcaoId");
-
-                    b.ToTable("FomentoLinhasAcoes");
                 });
 
             modelBuilder.Entity("DnaBrasilApi.Domain.Entities.FomentoLocalidade", b =>
@@ -3553,25 +3526,6 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.Navigation("Localidade");
                 });
 
-            modelBuilder.Entity("DnaBrasilApi.Domain.Entities.FomentoLinhaAcao", b =>
-                {
-                    b.HasOne("DnaBrasilApi.Domain.Entities.Fomentu", "Fomento")
-                        .WithMany("FomentoLinhasAcoes")
-                        .HasForeignKey("FomentoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DnaBrasilApi.Domain.Entities.LinhaAcao", "LinhaAcao")
-                        .WithMany("FomentoLinhasAcoes")
-                        .HasForeignKey("LinhaAcaoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Fomento");
-
-                    b.Navigation("LinhaAcao");
-                });
-
             modelBuilder.Entity("DnaBrasilApi.Domain.Entities.FomentoLocalidade", b =>
                 {
                     b.HasOne("DnaBrasilApi.Domain.Entities.Fomentu", "Fomento")
@@ -4159,14 +4113,7 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("DnaBrasilApi.Domain.Entities.Fomentu", b =>
                 {
-                    b.Navigation("FomentoLinhasAcoes");
-
                     b.Navigation("FomentoLocalidades");
-                });
-
-            modelBuilder.Entity("DnaBrasilApi.Domain.Entities.LinhaAcao", b =>
-                {
-                    b.Navigation("FomentoLinhasAcoes");
                 });
 
             modelBuilder.Entity("DnaBrasilApi.Domain.Entities.Localidade", b =>
