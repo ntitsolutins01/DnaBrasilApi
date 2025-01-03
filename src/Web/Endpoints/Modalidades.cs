@@ -26,7 +26,7 @@ public class Modalidades : EndpointGroupBase
             .MapPost(CreateModalidade)
             .MapPut(UpdateModalidade, "{id}")
             .MapDelete(DeleteModalidade, "{id}")
-            .MapGet(GetModalidadeById, "Modalidade/{id}");
+            .MapGet(GetModalidadeById, "{id}");
     }
     #endregion
 
