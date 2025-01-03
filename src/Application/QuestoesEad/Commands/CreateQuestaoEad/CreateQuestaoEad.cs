@@ -5,7 +5,7 @@ namespace DnaBrasilApi.Application.QuestoesEad.Commands.CreateQuestaoEad;
 public record CreateQuestaoEadCommand : IRequest<int>
 {
     public required string Pergunta { get; init; }
-    public required string Referencia { get; init; }
+    public string? Referencia { get; init; }
     public required int Questao { get; init; }
     public required int AulaId { get; init; }
 }

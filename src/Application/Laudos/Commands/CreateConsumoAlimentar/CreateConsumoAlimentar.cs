@@ -7,8 +7,8 @@ namespace DnaBrasilApi.Application.Laudos.Commands.CreateConsumoAlimentar;
 
 public record CreateConsumoAlimentarCommand : IRequest<int>
 {
-    public int ProfissionalId { get; init; }
-    public int AlunoId { get; init; }
+    public required int ProfissionalId { get; init; }
+    public required int AlunoId { get; init; }
     public required string Respostas { get; init; }
     public required string StatusConsumoAlimentar { get; init; }
 }

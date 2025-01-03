@@ -31,6 +31,7 @@ public class GetTalentoEsportivoByAlunoQueryHandler : IRequestHandler<GetTalento
 
         var result = await _context.TalentosEsportivos
             .Where(x => x.Aluno!.Id == request.AlunoId)
+            .Include(i=>i.Profissional)
             .AsNoTracking()
             .ProjectTo<TalentoEsportivoDto>(_mapper.ConfigurationProvider)
             .FirstOrDefaultAsync(cancellationToken);

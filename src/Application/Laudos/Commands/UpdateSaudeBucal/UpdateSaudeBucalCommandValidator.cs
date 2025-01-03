@@ -4,8 +4,5 @@ public class UpdateSaudeBucalCommandValidator : AbstractValidator<UpdateSaudeBuc
 {
     public UpdateSaudeBucalCommandValidator()
     {
-        RuleFor(v => v.Resposta)
-            .MaximumLength(100)
-            .NotEmpty();
     }
 }

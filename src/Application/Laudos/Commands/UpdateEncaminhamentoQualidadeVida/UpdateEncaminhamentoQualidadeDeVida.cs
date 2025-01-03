@@ -2,7 +2,7 @@
 using DnaBrasilApi.Domain.Entities;
 using DnaBrasilApi.Domain.Enums;
 
-namespace DnaBrasilApi.Application.Laudos.Commands.UpdateQualidadeVida;
+namespace DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoQualidadeVida;
 
 public record UpdateEncaminhamentoQualidadeDeVidaCommand : IRequest<bool>
 {

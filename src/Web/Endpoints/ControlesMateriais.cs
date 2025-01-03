@@ -7,6 +7,9 @@ using DnaBrasilApi.Application.ControlesMateriais.Queries.GetControlesMateriaisA
 
 namespace DnaBrasilApi.Web.Endpoints;
 
+/// <summary>
+/// Api de Controle de Materiais
+/// </summary>
 public class ControlesMateriais : EndpointGroupBase
 {
     #region MapEndpoints
@@ -30,11 +33,11 @@ public class ControlesMateriais : EndpointGroupBase
     #region Main Methods
 
     /// <summary>
-    /// Endpoint para inclusão de ControleMaterial
+    /// Endpoint para inclusão de Controle de Material
     /// </summary>
     /// <param name="sender">Sender</param>
-    /// <param name="command">Objeto de inclusão da ControleMaterial</param>
-    /// <returns>Retorna Id da nova ControleMaterial</returns>
+    /// <param name="command">Objeto de inclusão da Controle de Material</param>
+    /// <returns>Retorna Id do novo Controle de Material</returns>
     public async Task<int> CreateControleMaterial(ISender sender, CreateControleMaterialCommand command)
     {
         return await sender.Send(command);
@@ -90,5 +93,4 @@ public class ControlesMateriais : EndpointGroupBase
         return await sender.Send(new GetControleMaterialByIdQuery() { Id = id });
     }
     #endregion
-
 }
