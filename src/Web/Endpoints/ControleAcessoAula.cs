@@ -26,7 +26,7 @@ public class ControlesAcessosAulas : EndpointGroupBase
             .MapPost(CreateControleAcessoAula)
             .MapPut(UpdateControleAcessoAula, "{id}")
             .MapDelete(DeleteControleAcessoAula, "{id}")
-            .MapGet(GetControleAcessoAulaById, "ControleAcessoAula/{id}");
+            .MapGet(GetControleAcessoAulaById, "{id}");
     }
     #endregion
 
