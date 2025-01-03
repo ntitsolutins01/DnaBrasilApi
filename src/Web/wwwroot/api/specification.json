@@ -13896,14 +13896,6 @@
             "type": "integer",
             "format": "int32"
           },
-          "materialId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "quantidade": {
-            "type": "integer",
-            "format": "int32"
-          },
           "solicitante": {
             "type": "string",
             "nullable": true
