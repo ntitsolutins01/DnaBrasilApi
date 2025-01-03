@@ -14,7 +14,8 @@ public record UpdateFomentoCommand : IRequest <bool>
     public bool Status { get; init; }
     public required string DtIni { get; init; }
     public required string DtFim { get; init; }
-    public required string LinhaAcoes { get; init; }
+    public string? LinhasAcoesIds { get; init; }
+    public string? LocalidadesIds { get; init; }
 }
 
 public class UpdateFomentoCommandHandler : IRequestHandler<UpdateFomentoCommand, bool>
@@ -43,24 +44,6 @@ public class UpdateFomentoCommandHandler : IRequestHandler<UpdateFomentoCommand,
 
         Guard.Against.NotFound(request.LocalidadeId, localidade);
 
-        var listLinhasAcoes = new List<LinhaAcao>();
-
-        if (!string.IsNullOrEmpty(request.LinhaAcoes))
-        {
-            int[] ia = request.LinhaAcoes.Split(',').Select(n => Convert.ToInt32(n)).ToArray();
-
-            foreach (var item in ia)
-            {
-                var linhaAcao = await _context.LinhasAcoes
-                    .FindAsync([item], cancellationToken);
-
-                if (linhaAcao != null)
-                {
-                    listLinhasAcoes.Add(linhaAcao);
-                }
-            }
-        }
-
         entity.Nome = request.Nome;
         entity.Codigo = request.Codigo;
         entity.Localidade = localidade;
@@ -68,10 +51,31 @@ public class UpdateFomentoCommandHandler : IRequestHandler<UpdateFomentoCommand,
         entity.Status = request.Status;
         entity.DtIni = DateTime.ParseExact(request.DtIni, "dd/MM/yyyy", CultureInfo.CreateSpecificCulture("pt-BR"));
         entity.DtFim = DateTime.ParseExact(request.DtFim, "dd/MM/yyyy", CultureInfo.CreateSpecificCulture("pt-BR"));
-        //entity.LinhasAcoes = listLinhasAcoes;
+
+        var listFomentoLocalidades = new List<FomentoLocalidade>();
+
+        if (!string.IsNullOrEmpty(request.LocalidadesIds))
+        {
+            int[] arrLocsIds = request.LocalidadesIds.Split(',').Select(n => Convert.ToInt32(n)).ToArray();
+
+            listFomentoLocalidades.AddRange(arrLocsIds.Select(item => new FomentoLocalidade { LocalidadeId = item, FomentoId = entity.Id }));
+        }
+
+        entity.FomentoLocalidades = listFomentoLocalidades;
+
+        var listFomentoLinhasAcoes = new List<FomentoLinhaAcao>();
+
+        if (!string.IsNullOrEmpty(request.LinhasAcoesIds))
+        {
+            int[] arrLinAcIds = request.LinhasAcoesIds.Split(',').Select(n => Convert.ToInt32(n)).ToArray();
+
+            listFomentoLinhasAcoes.AddRange(arrLinAcIds.Select(item => new FomentoLinhaAcao { LinhaAcaoId = item, FomentoId = entity.Id }));
+        }
+
+        entity.FomentoLinhasAcoes = listFomentoLinhasAcoes;
 
         var result = await _context.SaveChangesAsync(cancellationToken);
 
-        return result == 1;//true
+        return result >= 1;//true
     }
 }

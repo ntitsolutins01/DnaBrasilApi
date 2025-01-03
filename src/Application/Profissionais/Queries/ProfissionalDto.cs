@@ -30,6 +30,7 @@ public class ProfissionalDto
     public int? MunicipioId { get; set; }
     public int? LocalidadeId { get; set; }
     public string? Perfil { get; set; }
+    public string? Localidade { get; set; }
     private class Mapping : Profile
     {
         public Mapping()
@@ -38,6 +39,7 @@ public class ProfissionalDto
                 .ForMember(dest => dest.MunicipioId, opt => opt.MapFrom(src => src.Municipio!.Id))
                 .ForMember(dest => dest.Perfil, opt => opt.MapFrom(src => src.Perfil!.Nome))
                 .ForMember(dest => dest.LocalidadeId, opt =>opt.MapFrom(src => src.Localidade!.Id))
+                .ForMember(dest => dest.Localidade, opt =>opt.MapFrom(src => src.Localidade!.Nome))
                 .ForMember(dest => dest.EstadoId, opt => opt.MapFrom(src => src.Municipio!.Estado!.Id))
                 .ForMember(dest => dest.Uf, opt => opt.MapFrom(src => src.Municipio!.Estado!.Sigla))
                 .ForMember(dest => dest.DtNascimento,
