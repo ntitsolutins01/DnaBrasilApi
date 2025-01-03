@@ -114,7 +114,7 @@ public class UpdateAlunoCommandHandler : IRequestHandler<UpdateAlunoCommand, boo
         entity.Email = request.Email!;
         entity.Sexo = request.Sexo!;
         entity.Etnia = request.Etnia!;
-        entity.DtNascimento = DateTime.ParseExact(request.DtNascimento!, "dd/MM/yyyy", CultureInfo.CreateSpecificCulture("pt-BR")); ;
+        entity.DtNascimento = DateTime.ParseExact(request.DtNascimento!, "dd/MM/yyyy", CultureInfo.CreateSpecificCulture("pt-BR")); 
         entity.NomeMae = request.NomeMae;
         entity.NomePai = request.NomePai;
         entity.Cpf = request.Cpf;

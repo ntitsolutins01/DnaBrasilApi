@@ -62,7 +62,7 @@ public class CreateFomentoCommandHandler : IRequestHandler<CreateFomentoCommand,
             Localidade = localidade!,
             DtIni = DateTime.ParseExact(request.DtIni, "dd/MM/yyyy", CultureInfo.CreateSpecificCulture("pt-BR")),
             DtFim = DateTime.ParseExact(request.DtFim, "dd/MM/yyyy", CultureInfo.CreateSpecificCulture("pt-BR")),
-            LinhasAcoes = listLinhasAcoes
+            //LinhasAcoes = listLinhasAcoes
         };
 
         _context.Fomentos.Add(entity);

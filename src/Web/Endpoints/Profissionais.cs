@@ -7,6 +7,7 @@ using DnaBrasilApi.Application.Profissionais.Queries.GetProfissionaisAll;
 using DnaBrasilApi.Application.Profissionais.Queries.GetProfissionalByCpfCnpj;
 using DnaBrasilApi.Application.Profissionais.Queries.GetProfissionalByEmail;
 using DnaBrasilApi.Application.Profissionais.Queries.GetProfissionalByLocalidade;
+using DnaBrasilApi.Application.Profissionais.Commands.DeleteProfissionalModalidade;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -20,6 +21,7 @@ public class Profissionais : EndpointGroupBase
             .MapPost(CreateProfissional)
             .MapPut(UpdateProfissional, "{id}")
             .MapDelete(DeleteProfissional, "{id}")
+            .MapDelete(DeleteProfissionalModalide, "Modalidade/{id}")
             .MapGet(GetProfissionalById, "Profissional/{id}")
             .MapGet(GetProfissionalByEmail, "Email/{email}")
             .MapGet(GetProfissionalByCpfCnpj, "Cpf/{cpf}")
@@ -44,6 +46,7 @@ public class Profissionais : EndpointGroupBase
     public async Task<bool> UpdateProfissional(ISender sender, int id, UpdateProfissionalCommand command)
     {
         if (id != command.Id) return false;
+        await sender.Send(new DeleteProfissionalModalidadeCommand() { ProfissionalId = id });
         var result = await sender.Send(command);
         return result;
     }
@@ -51,6 +54,10 @@ public class Profissionais : EndpointGroupBase
     public async Task<bool> DeleteProfissional(ISender sender, int id)
     {
         return await sender.Send(new DeleteProfissionalCommand(id));
+    }
+    public async Task<bool> DeleteProfissionalModalide(ISender sender, int id)
+    {
+        return await sender.Send(new DeleteProfissionalModalidadeCommand(){ ProfissionalId = id});
     }
     public async Task<ProfissionalDto> GetProfissionalByEmail(ISender sender, string email)
     {
