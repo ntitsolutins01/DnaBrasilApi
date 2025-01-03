@@ -22,7 +22,7 @@ public class Localidades : EndpointGroupBase
             .MapPost(CreateLocalidade)
             .MapPut(UpdateLocalidade, "{id}")
             .MapDelete(DeleteLocalidade, "{id}")
-            .MapGet(GetLocalidadeById, "Localidade/{id}")
+            .MapGet(GetLocalidadeById, "{id}")
             .MapGet(GetLocalidadesByMunicipio, "Municipio/{id}")
             .MapGet(GetLocalidadesByFomento, "Fomento/{id}");
     }
