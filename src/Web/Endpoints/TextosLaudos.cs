@@ -25,7 +25,7 @@ public class TextosLaudos : EndpointGroupBase
             .MapPost(CreateTextoLaudo)
             .MapPut(UpdateTextoLaudo, "{id}")
             .MapDelete(DeleteTextoLaudo, "{id}")
-            .MapGet(GetTextoLaudoById, "TextoLaudo/{id}");
+            .MapGet(GetTextoLaudoById, "{id}");
     }
     #endregion
 
