@@ -26,8 +26,8 @@ public class Parceiros : EndpointGroupBase
             .MapPost(CreateParceiro)
             .MapPut(UpdateParceiro, "{id}")
             .MapDelete(DeleteParceiro, "{id}")
-            .MapGet(GetParceiroById, "Parceiro/{id}")
-            .MapGet(GetParceiroByAspNetUserId, "Parceiro/AspNetUser/{id}");
+            .MapGet(GetParceiroById, "{id}")
+            .MapGet(GetParceiroByAspNetUserId, "AspNetUser/{id}");
     }
     #endregion
 
