@@ -25,7 +25,7 @@ public class TextosQuestoes : EndpointGroupBase
             .MapPost(CreateTextoQuestao)
             .MapPut(UpdateTextoQuestao, "{id}")
             .MapDelete(DeleteTextoQuestao, "{id}")
-            .MapGet(GetTextoQuestaoById, "TextoQuestao/{id}");
+            .MapGet(GetTextoQuestaoById, "{id}");
     }
     #endregion
 
