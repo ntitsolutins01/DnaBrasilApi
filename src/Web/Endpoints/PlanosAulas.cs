@@ -26,7 +26,7 @@ public class PlanosAulas : EndpointGroupBase
             .MapPost(CreatePlanoAula)
             .MapPut(UpdatePlanoAula, "{id}")
             .MapDelete(DeletePlanoAula, "{id}")
-            .MapGet(GetPlanoAulaById, "PlanoAula/{id}");
+            .MapGet(GetPlanoAulaById, "{id}");
     }
     #endregion
 
