@@ -25,7 +25,7 @@ public class Respostas : EndpointGroupBase
             .MapPost(CreateResposta)
             .MapPut(UpdateResposta, "{id}")
             .MapDelete(DeleteResposta, "{id}")
-            .MapGet(GetRespostaById, "Resposta/{id}");
+            .MapGet(GetRespostaById, "{id}");
     }
     #endregion
 
