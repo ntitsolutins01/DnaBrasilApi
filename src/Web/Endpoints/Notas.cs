@@ -23,7 +23,7 @@ public class Notas : EndpointGroupBase
             .MapPost(CreateNota)
             .MapPut(UpdateNota, "{id}")
             .MapDelete(DeleteNota, "{id}")
-            .MapGet(GetNotaById, "Nota/{id}");
+            .MapGet(GetNotaById, "{id}");
     }
     #endregion
 
