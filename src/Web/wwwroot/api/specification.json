@@ -16405,10 +16405,6 @@
             "type": "integer",
             "format": "int32"
           },
-          "tipoMaterialId": {
-            "type": "integer",
-            "format": "int32"
-          },
           "unidadeMedida": {
             "type": "string"
           },

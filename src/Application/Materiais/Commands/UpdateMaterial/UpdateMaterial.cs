@@ -5,7 +5,6 @@ namespace DnaBrasilApi.Application.Materiais.Commands.UpdateMaterial;
 public record UpdateMaterialCommand : IRequest <bool>
 {
     public required int Id { get; init; }
-    public required int TipoMaterialId { get; init; }
     public required string UnidadeMedida { get; init; }
     public required string Descricao { get; init; }
     public int? QtdAdquirida { get; init; }
@@ -27,12 +26,6 @@ public class UpdateMaterialCommandHandler : IRequestHandler<UpdateMaterialComman
 
         Guard.Against.NotFound(request.Id, entity);
 
-        var tipoMaterial = await _context.TiposMateriais
-            .FindAsync([request.TipoMaterialId], cancellationToken);
-
-        Guard.Against.NotFound(request.TipoMaterialId, tipoMaterial);
-
-        entity.TipoMaterial = tipoMaterial;
         entity.UnidadeMedida = request.UnidadeMedida;
         entity.Descricao = request.Descricao;
         entity.QtdAdquirida = request.QtdAdquirida;
