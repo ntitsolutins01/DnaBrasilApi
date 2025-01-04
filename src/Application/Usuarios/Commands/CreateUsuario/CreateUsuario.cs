@@ -13,6 +13,7 @@ public record CreateUsuarioCommand : IRequest<int>
     public required string AspNetRoleId { get; init; }
     public required int PerfilId { get; init; }
     public required int MunicipioId { get; init; }
+    public required int LocalidadeId { get; init; }
 }
 
 public class CreateUsuarioCommandHandler : IRequestHandler<CreateUsuarioCommand, int>
@@ -27,9 +28,15 @@ public class CreateUsuarioCommandHandler : IRequestHandler<CreateUsuarioCommand,
     public async Task<int> Handle(CreateUsuarioCommand request, CancellationToken cancellationToken)
     {
         var municipio = await _context.Municipios
-            .FindAsync(new object[] { request.MunicipioId }, cancellationToken);
+            .FindAsync([request.MunicipioId], cancellationToken);
+
         var perfil = await _context.Perfis
-            .FindAsync(new object[] { request.PerfilId }, cancellationToken);
+            .FindAsync([request.PerfilId], cancellationToken);
+
+        var localidade = await _context.Localidades
+            .FindAsync([request.LocalidadeId], cancellationToken);
+
+        Guard.Against.NotFound((int)request.LocalidadeId, localidade);
 
         var entity = new Usuario
         {
@@ -40,7 +47,8 @@ public class CreateUsuarioCommandHandler : IRequestHandler<CreateUsuarioCommand,
             Email = request.Email,
             AspNetRoleId = request.AspNetRoleId,
             Perfil = perfil!,
-            Municipio = municipio
+            Municipio = municipio,
+            Localidade = localidade
         };
 
         _context.Usuarios.Add(entity);

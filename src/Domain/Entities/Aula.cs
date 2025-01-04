@@ -8,4 +8,7 @@ public class Aula : BaseAuditableEntity
     public required string Titulo { get; set; }    
     public string?  Descricao { get; set; }  
     public bool Status { get; set; } = true;
- }
+    public string? Material { get; set; }
+    public string? NomeMaterial { get; set; }
+    public string? Video { get; set; }
+}

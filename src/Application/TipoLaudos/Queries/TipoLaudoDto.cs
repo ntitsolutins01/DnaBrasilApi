@@ -8,6 +8,7 @@ public class TipoLaudoDto
     public required string Nome { get; init; }
     public string? Descricao { get; init; }
     public bool Status { get; init; }
+    public required int IdadeMinima { get; init; }
 
     private class Mapping : Profile
     {

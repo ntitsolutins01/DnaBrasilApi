@@ -8,6 +8,7 @@ public record UpdateTipoLaudoCommand : IRequest <bool>
     public required string Nome { get; init; }
     public string? Descricao { get; init; }
     public bool Status { get; init; }
+    public required int IdadeMinima { get; init; }
 }
 
 public class UpdateTipoLaudoCommandHandler : IRequestHandler<UpdateTipoLaudoCommand, bool>
@@ -29,6 +30,7 @@ public class UpdateTipoLaudoCommandHandler : IRequestHandler<UpdateTipoLaudoComm
         entity.Nome = request.Nome;
         entity.Descricao = request.Descricao;
         entity.Status = request.Status;
+        entity.IdadeMinima = request.IdadeMinima;
 
         await _context.SaveChangesAsync(cancellationToken);
         var result = await _context.SaveChangesAsync(cancellationToken);

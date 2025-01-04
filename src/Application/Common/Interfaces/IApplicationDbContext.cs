@@ -21,13 +21,11 @@ public interface IApplicationDbContext
     DbSet<ConsumoAlimentar> ConsumoAlimentares { get; }
     DbSet<Vocacional> Vocacionais { get; }
     DbSet<Aluno> Alunos { get; }
-    DbSet<Dependencia> Dependencias { get; }
     DbSet<Matricula> Matriculas { get; }
     DbSet<Voucher> Vouchers { get; }
     DbSet<Parceiro> Parceiros { get; }
     DbSet<PlanoAula> PlanosAulas { get; }
     DbSet<Questionario> Questionarios { get; }
-    DbSet<Contrato> Contratos { get; }
     DbSet<Laudo> Laudos { get; }
     DbSet<Perfil> Perfis { get; }
     DbSet<Usuario> Usuarios { get; }
@@ -56,6 +54,17 @@ public interface IApplicationDbContext
     DbSet<QuestaoEad> QuestoesEad { get; }
     DbSet<RespostaEad> RespostasEad { get; }
     DbSet<TextoQuestao> TextosQuestoes { get; }
+    DbSet<Estrutura> Estruturas { get; }
+    DbSet<Categoria> Categorias { get; }
+    DbSet<Atividade> Atividades { get; }
+    DbSet<GrupoMaterial> GruposMateriais { get; }
+    DbSet<TipoMaterial> TiposMateriais { get; }
+    DbSet<Material> Materiais { get; }
+    DbSet<ControleMensalEstoque> ControlesMensaisEstoque { get; }
+    DbSet<ControleMaterialEstoqueSaida> ControlesMateriaisEstoquesSaidas { get; }
+    DbSet<ProfissionalModalidade> ProfissionalModalidades { get; }
+    DbSet<FomentoLocalidade> FomentoLocalidades { get; }
+    DbSet<FomentoLinhaAcao> FomentoLinhasAcoes { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

@@ -7,9 +7,12 @@ public record UpdateAulaCommand : IRequest <bool>
     public required int Id { get; init; }
     public required int ProfessorId { get; init; }
     public required int CargaHoraria { get; set; }
-    public required string Titulo { get; set; }
-    public string? Descricao { get; set; }
+    public required string Titulo { get; init; }
+    public string? Descricao { get; init; }
     public bool Status { get; init; }
+    public string? Material { get; init; }
+    public string? NomeMaterial { get; init; }
+    public string? Video { get; init; }
 }
 
 public class UpdateAulaCommandHandler : IRequestHandler<UpdateAulaCommand, bool>
@@ -38,6 +41,9 @@ public class UpdateAulaCommandHandler : IRequestHandler<UpdateAulaCommand, bool>
         entity.Descricao = request.Descricao;
         entity.Status = request.Status;
         entity.Professor = professor;
+        entity.Material = request.Material;
+        entity.NomeMaterial = request.NomeMaterial;
+        entity.Video = request.Video;
 
         var result = await _context.SaveChangesAsync(cancellationToken);
 

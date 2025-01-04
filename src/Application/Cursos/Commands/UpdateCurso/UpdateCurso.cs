@@ -8,6 +8,8 @@ public record UpdateCursoCommand : IRequest <bool>
     public required string Titulo { get; init; }
     public required int CargaHoraria { get; init; }
     public string? Descricao { get; init; }
+    public string? Imagem { get; init; }
+    public string? NomeImagem { get; init; }
     public bool Status { get; init; }
     public required int CoordenadorId { get; init; }
 }
@@ -36,6 +38,9 @@ public class UpdateCursoCommandHandler : IRequestHandler<UpdateCursoCommand, boo
         entity.Titulo = request.Titulo;
         entity.CargaHoraria = request.CargaHoraria;
         entity.Descricao = request.Descricao;
+        entity.Imagem = request.Imagem;
+        entity.NomeImagem = request.NomeImagem;
+        entity.Imagem = request.Imagem;
         entity.Status = request.Status;
         entity.Usuario = coordenador;
 

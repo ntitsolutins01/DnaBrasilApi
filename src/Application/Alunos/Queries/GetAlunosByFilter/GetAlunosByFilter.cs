@@ -1,4 +1,4 @@
-﻿using DnaBrasilApi.Application.Common.Interfaces;
+ using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Application.Dashboards.Queries;
 using DnaBrasilApi.Domain.Entities;
 
@@ -83,6 +83,11 @@ public class GetAlunosByFilterQueryHandler : IRequestHandler<GetAlunosByFilterQu
             var matricula = Convert.ToInt32(search.Matricula);
 
             Alunos = Alunos.Where(u => u.Id == matricula);
+        }
+
+        if (!string.IsNullOrWhiteSpace(search.Sexo))
+        {
+            Alunos = Alunos.Where(u => u.Sexo!.Equals(search.Sexo));
         }
 
         return Alunos;

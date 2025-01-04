@@ -1,10 +1,13 @@
 ﻿using DnaBrasilApi.Application.Alunos.Queries;
+using DnaBrasilApi.Application.Common.Models;
 
 namespace DnaBrasilApi.Application.ControlesPresencas.Queries;
 public class ControlesPresencasFilterDto
 {
 
     #region SearchFilter
+    public required int PageNumber { get; set; } = 1;
+    public required int PageSize { get; set; } = 10;
     public string? FomentoId { get; set; }
     public string? Estado { get; set; }
     public string? MunicipioId { get; set; }
@@ -13,5 +16,6 @@ public class ControlesPresencasFilterDto
     public string? Etnia { get; set; }
     #endregion
 
-    public List<ControlePresencaDto>? ControlesPresencas { get; set; }
+    public PaginatedList<ControlePresencaDto>? ControlesPresencas { get; set; }
+    public string? UsuarioEmail { get; set; }
 }

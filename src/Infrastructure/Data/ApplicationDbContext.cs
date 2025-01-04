@@ -1,4 +1,5 @@
 using System.Reflection;
+using System.Reflection.Emit;
 using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
 using DnaBrasilApi.Infrastructure.Identity;
@@ -28,13 +29,11 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<ConsumoAlimentar> ConsumoAlimentares => Set<ConsumoAlimentar>();
     public DbSet<Vocacional> Vocacionais => Set<Vocacional>();
     public DbSet<Aluno> Alunos => Set<Aluno>();
-    public DbSet<Dependencia> Dependencias => Set<Dependencia>();
     public DbSet<Matricula> Matriculas => Set<Matricula>();
     public DbSet<Voucher> Vouchers => Set<Voucher>();
     public DbSet<Parceiro> Parceiros => Set<Parceiro>();
     public DbSet<PlanoAula> PlanosAulas => Set<PlanoAula>();
     public DbSet<Questionario> Questionarios => Set<Questionario>();
-    public DbSet<Contrato> Contratos => Set<Contrato>();
     public DbSet<Laudo> Laudos => Set<Laudo>();
     public DbSet<Usuario> Usuarios => Set<Usuario>();
     public DbSet<Perfil> Perfis => Set<Perfil>();
@@ -63,6 +62,17 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<QuestaoEad> QuestoesEad => Set<QuestaoEad>();
     public DbSet<RespostaEad> RespostasEad => Set<RespostaEad>();
     public DbSet<TextoQuestao> TextosQuestoes => Set<TextoQuestao>();
+    public DbSet<Estrutura> Estruturas => Set<Estrutura>();
+    public DbSet<Categoria> Categorias => Set<Categoria>();
+    public DbSet<Atividade> Atividades => Set<Atividade>();
+    public DbSet<GrupoMaterial> GruposMateriais => Set<GrupoMaterial>();
+    public DbSet<TipoMaterial> TiposMateriais => Set<TipoMaterial>();
+    public DbSet<Material> Materiais => Set<Material>();
+    public DbSet<ControleMensalEstoque> ControlesMensaisEstoque => Set<ControleMensalEstoque>();
+    public DbSet<ControleMaterialEstoqueSaida> ControlesMateriaisEstoquesSaidas => Set<ControleMaterialEstoqueSaida>();
+    public DbSet<ProfissionalModalidade> ProfissionalModalidades => Set<ProfissionalModalidade>();
+    public DbSet<FomentoLocalidade> FomentoLocalidades => Set<FomentoLocalidade>();
+    public DbSet<FomentoLinhaAcao> FomentoLinhasAcoes => Set<FomentoLinhaAcao>();
 
 
     protected override void OnModelCreating(ModelBuilder builder)
@@ -72,14 +82,42 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
         base.OnModelCreating(builder);
 
         #region Basic many-to-many
-        //builder.Entity<Aluno>()
-        //.HasMany(e => e.Deficiencias)
-        //.WithMany(e => e.Alunos)
-        //.UsingEntity(
-        //    "AlunosDeficiencias",
-        //    r => r.HasOne(typeof(Deficiencia)).WithMany().HasForeignKey("DeficienciaId").HasPrincipalKey(nameof(Deficiencia.Id)),
-        //    l => l.HasOne(typeof(Aluno)).WithMany().HasForeignKey("AlunoId").HasPrincipalKey(nameof(Aluno.Id)),
-        //    j => j.HasKey("AlunoId", "DeficienciaId"));
+
+        builder.Entity<ProfissionalModalidade>().HasKey(sc => new { sc.ProfissionalId, sc.ModalidadeId });
+
+        builder.Entity<ProfissionalModalidade>()
+            .HasOne<Profissional>(sc => sc.Profissional)
+            .WithMany(s => s.ProfissionalModalidades)
+            .HasForeignKey(sc => sc.ProfissionalId);
+
+        builder.Entity<ProfissionalModalidade>()
+            .HasOne<Modalidade>(sc => sc.Modalidade)
+            .WithMany(s => s.ProfissionalModalidades)
+            .HasForeignKey(sc => sc.ModalidadeId);
+
+        builder.Entity<FomentoLocalidade>().HasKey(sc => new { sc.FomentoId, sc.LocalidadeId });
+
+        builder.Entity<FomentoLocalidade>()
+            .HasOne<Fomentu>(sc => sc.Fomento)
+            .WithMany(s => s.FomentoLocalidades)
+            .HasForeignKey(sc => sc.FomentoId);
+
+        builder.Entity<FomentoLocalidade>()
+            .HasOne<Localidade>(sc => sc.Localidade)
+            .WithMany(s => s.FomentoLocalidades)
+            .HasForeignKey(sc => sc.LocalidadeId);
+
+        builder.Entity<FomentoLinhaAcao>().HasKey(sc => new { sc.FomentoId, sc.LinhaAcaoId });
+
+        builder.Entity<FomentoLinhaAcao>()
+            .HasOne<Fomentu>(sc => sc.Fomento)
+            .WithMany(s => s.FomentoLinhasAcoes)
+            .HasForeignKey(sc => sc.FomentoId);
+
+        builder.Entity<FomentoLinhaAcao>()
+            .HasOne<LinhaAcao>(sc => sc.LinhaAcao)
+            .WithMany(s => s.FomentoLinhasAcoes)
+            .HasForeignKey(sc => sc.LinhaAcaoId);
 
         builder.Entity<Aluno>()
         .HasMany(e => e.Modalidades)
@@ -89,17 +127,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
             r => r.HasOne(typeof(Modalidade)).WithMany().HasForeignKey("ModalidadeId").HasPrincipalKey(nameof(Modalidade.Id)),
             l => l.HasOne(typeof(Aluno)).WithMany().HasForeignKey("AlunoId").HasPrincipalKey(nameof(Aluno.Id)),
             j => j.HasKey("AlunoId", "ModalidadeId"));
-
-        builder.Entity<Profissional>()
-                    .HasMany(e => e.Modalidades)
-                    .WithMany(e => e.Profissionais)
-                    .UsingEntity(
-                        "ProfissionaisModalidades",
-                        r => r.HasOne(typeof(Modalidade)).WithMany().HasForeignKey("ModalidadeId").HasPrincipalKey(nameof(Modalidade.Id)),
-                        l => l.HasOne(typeof(Profissional)).WithMany().HasForeignKey("ProfissionalId").HasPrincipalKey(nameof(Profissional.Id)),
-                        j => j.HasKey("ProfissionalId", "ModalidadeId"));
-
-        
 
         #endregion
 
@@ -132,11 +159,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
         builder.Entity<Modulo>()
             .HasMany(c => c.Funcionalidades)
             .WithOne(e => e.Modulo)
-            .IsRequired();
-
-        builder.Entity<Aluno>()
-            .HasMany(c => c.QualidadeDeVidas)
-            .WithOne(e => e.Aluno)
             .IsRequired();
 
         #endregion

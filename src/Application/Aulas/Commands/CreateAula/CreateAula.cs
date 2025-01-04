@@ -4,12 +4,15 @@ using DnaBrasilApi.Domain.Entities;
 namespace DnaBrasilApi.Application.Aulas.Commands.CreateAula;
 public record CreateAulaCommand : IRequest<int>
 {
-    public required int CargaHoraria { get; set; }
-    public required int ProfessorId { get; set; }
-    public required int ModuloEadId { get; set; }
-    public required string Titulo { get; set; }
-    public string? Descricao { get; set; }
+    public required int CargaHoraria { get; init; }
+    public required int ProfessorId { get; init; }
+    public required int ModuloEadId { get; init; }
+    public required string Titulo { get; init; }
+    public string? Descricao { get; init; }
     public bool Status { get; init; } = true;
+    public string? Material { get; init; }
+    public string? NomeMaterial { get; init; }
+    public string? Video { get; init; }
 }
 
 public class CreateAulaCommandHandler : IRequestHandler<CreateAulaCommand, int>
@@ -40,7 +43,10 @@ public class CreateAulaCommandHandler : IRequestHandler<CreateAulaCommand, int>
             ModuloEad = moduloEad,
             Titulo = request.Titulo,
             Descricao = request.Descricao,
-            Status = request.Status
+            Status = request.Status,
+            Video = request.Video,
+            Material = request.Material,
+            NomeMaterial = request.NomeMaterial
         };
 
         _context.Aulas.Add(entity);
