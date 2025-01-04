@@ -20,7 +20,7 @@ public class Fomentos : EndpointGroupBase
             .MapPut(UpdateFomento, "{id}")
             .MapDelete(DeleteFomento, "{id}")
             .MapGet(GetFomentoByLocalidadeId, "/Localidade/{id}")
-            .MapGet(GetFomentoById, "/Fomento/{id}");
+            .MapGet(GetFomentoById, "{id}");
     }
     #endregion
 
