@@ -28,7 +28,7 @@ public class Profissionais : EndpointGroupBase
             .MapPost(CreateProfissional)
             .MapPut(UpdateProfissional, "{id}")
             .MapDelete(DeleteProfissional, "{id}")
-            .MapGet(GetProfissionalById, "Profissional/{id}")
+            .MapGet(GetProfissionalById, "{id}")
             .MapGet(GetProfissionalByEmail, "Email/{email}")
             .MapGet(GetProfissionalByCpfCnpj, "Cpf/{cpf}")
             .MapGet(GetProfissionaisByLocalidade, "Localidade/{id}");
