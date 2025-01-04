@@ -7,7 +7,6 @@ public record UpdateMaterialCommand : IRequest <bool>
     public required int Id { get; init; }
     public required string UnidadeMedida { get; init; }
     public required string Descricao { get; init; }
-    public int? QtdAdquirida { get; init; }
 }
 
 public class UpdateMaterialCommandHandler : IRequestHandler<UpdateMaterialCommand, bool>
@@ -28,7 +27,6 @@ public class UpdateMaterialCommandHandler : IRequestHandler<UpdateMaterialComman
 
         entity.UnidadeMedida = request.UnidadeMedida;
         entity.Descricao = request.Descricao;
-        entity.QtdAdquirida = request.QtdAdquirida;
 
         var result = await _context.SaveChangesAsync(cancellationToken);
 
