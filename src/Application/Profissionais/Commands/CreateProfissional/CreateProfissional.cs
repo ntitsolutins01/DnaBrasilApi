@@ -88,30 +88,17 @@ public class CreateProfissionalCommandHandler : IRequestHandler<CreateProfission
 
         await _context.SaveChangesAsync(cancellationToken);
 
-        var list = new List<ProfissionalModalidade>();
+        var listProfissionalModalidades = new List<ProfissionalModalidade>();
 
-        if (!string.IsNullOrWhiteSpace(request.ModalidadesIds))
+        if (!string.IsNullOrEmpty(request.ModalidadesIds))
         {
-            List<int> listIds = request.ModalidadesIds.Split(',').Select(s => Convert.ToInt32(s)).ToList();
+            int[] arrModIds = request.ModalidadesIds.Split(',').Select(n => Convert.ToInt32(n)).ToArray();
 
-            foreach (int id in listIds)
-            {
-                var modalidade = await _context.Modalidades
-                    .FindAsync([id], cancellationToken);
-
-                list.Add(new ProfissionalModalidade()
-                {
-                    Modalidade = modalidade!,
-                    Profissional = entity
-                });
-            }
-        }
-        else
-        {
-            list = null;
+            listProfissionalModalidades.AddRange(arrModIds.Select(item => new ProfissionalModalidade() { ModalidadeId = item, ProfissionalId = entity.Id }));
         }
 
-        entity.ProfissionalModalidades = list;
+        entity.ProfissionalModalidades = listProfissionalModalidades;
+
 
         await _context.SaveChangesAsync(cancellationToken);
 

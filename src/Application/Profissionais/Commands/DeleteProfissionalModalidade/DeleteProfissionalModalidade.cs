@@ -21,15 +21,12 @@ public class DeleteProfissionalModalidadeCommandHandler : IRequestHandler<Delete
 
     public async Task<bool> Handle(DeleteProfissionalModalidadeCommand request, CancellationToken cancellationToken)
     {
-        var entity = await _context.ProfissionalModalidades
+        var list = await _context.ProfissionalModalidades
             .Where(x => x.ProfissionalId == request.ProfissionalId)
             .AsNoTracking()
             .ToListAsync(cancellationToken);
 
-        foreach (ProfissionalModalidade obj in entity)
-        {
-            _context.ProfissionalModalidades.Remove(obj);
-        }
+        _context.ProfissionalModalidades.RemoveRange(list);
 
         var result = await _context.SaveChangesAsync(cancellationToken);
 
