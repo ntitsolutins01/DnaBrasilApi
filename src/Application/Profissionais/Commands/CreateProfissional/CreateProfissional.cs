@@ -22,7 +22,8 @@ public record CreateProfissionalCommand : IRequest<int>
     public int? LocalidadeId { get; init; }
     public bool Habilitado { get; init; }
     public string? ModalidadesIds { get; init; }
-    public required int PerfilId { get; set; }
+    public required int PerfilId { get; init; }
+    public string? Cargo { get; init; }
 }
 
 public class CreateProfissionalCommandHandler : IRequestHandler<CreateProfissionalCommand, int>
@@ -79,7 +80,8 @@ public class CreateProfissionalCommandHandler : IRequestHandler<CreateProfission
             //ProfissionalModalidades = list,
             Habilitado = request.Habilitado,
             Localidade = localidade,
-            Perfil = perfil
+            Perfil = perfil,
+            Cargo = request.Cargo
         };
 
         _context.Profissionais.Add(entity);

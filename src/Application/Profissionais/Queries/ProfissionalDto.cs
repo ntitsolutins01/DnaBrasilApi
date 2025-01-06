@@ -31,6 +31,7 @@ public class ProfissionalDto
     public int? LocalidadeId { get; set; }
     public string? Perfil { get; set; }
     public string? Localidade { get; set; }
+    public string? Cargo { get; set; }
     private class Mapping : Profile
     {
         public Mapping()

@@ -24,6 +24,7 @@ public record UpdateProfissionalCommand : IRequest<bool>
     public int? LocalidadeId { get; init; }
     public bool Habilitado { get; init; }
     public string? ModalidadesIds { get; init; }
+    public string? Cargo { get; init; }
 }
 
 public class UpdateProfissionalCommandHandler : IRequestHandler<UpdateProfissionalCommand, bool>
@@ -99,6 +100,7 @@ public class UpdateProfissionalCommandHandler : IRequestHandler<UpdateProfission
         entity.Status = request.Status;
         entity.Habilitado = request.Habilitado;
         entity.Localidade = localidade;
+        entity.Cargo = request.Cargo;
 
         var result = await _context.SaveChangesAsync(cancellationToken);
 

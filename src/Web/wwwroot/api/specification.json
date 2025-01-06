@@ -12541,6 +12541,10 @@
                 "items": {
                   "$ref": "#/components/schemas/ProfissionalModalidade"
                 }
+              },
+              "cargo": {
+                "type": "string",
+                "nullable": true
               }
             }
           }
@@ -13257,6 +13261,10 @@
             "nullable": true
           },
           "localidade": {
+            "type": "string",
+            "nullable": true
+          },
+          "cargo": {
             "type": "string",
             "nullable": true
           }
@@ -17659,6 +17667,10 @@
           "perfilId": {
             "type": "integer",
             "format": "int32"
+          },
+          "cargo": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -17736,6 +17748,10 @@
             "type": "boolean"
           },
           "modalidadesIds": {
+            "type": "string",
+            "nullable": true
+          },
+          "cargo": {
             "type": "string",
             "nullable": true
           }
