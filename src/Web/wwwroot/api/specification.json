@@ -12574,31 +12574,24 @@
         ]
       },
       "ProfissionalModalidade": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BaseAuditableEntity"
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "profissionalId": {
+            "type": "integer",
+            "format": "int32"
           },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "profissionalId": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "modalidadeId": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "profissional": {
-                "$ref": "#/components/schemas/Profissional"
-              },
-              "modalidade": {
-                "$ref": "#/components/schemas/Modalidade"
-              }
-            }
+          "modalidadeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "profissional": {
+            "$ref": "#/components/schemas/Profissional"
+          },
+          "modalidade": {
+            "$ref": "#/components/schemas/Modalidade"
           }
-        ]
+        }
       },
       "QualidadeDeVida": {
         "allOf": [
