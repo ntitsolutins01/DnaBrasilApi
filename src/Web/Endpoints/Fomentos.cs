@@ -1,10 +1,13 @@
 ﻿using DnaBrasilApi.Application.Fomentos.Commands.CreateFomento;
 using DnaBrasilApi.Application.Fomentos.Commands.DeleteFomento;
+using DnaBrasilApi.Application.Fomentos.Commands.DeleteFomentoLinhasAcoes;
+using DnaBrasilApi.Application.Fomentos.Commands.DeleteFomentoLocalidades;
 using DnaBrasilApi.Application.Fomentos.Commands.UpdateFomento;
 using DnaBrasilApi.Application.Fomentos.Queries;
 using DnaBrasilApi.Application.Fomentos.Queries.GetFomentoById;
 using DnaBrasilApi.Application.Fomentos.Queries.GetFomentoByLocalidadeId;
 using DnaBrasilApi.Application.Fomentos.Queries.GetFomentosAll;
+using DnaBrasilApi.Application.Profissionais.Commands.DeleteProfissionalModalidade;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -45,6 +48,8 @@ public class Fomentos : EndpointGroupBase
     public async Task<bool> UpdateFomento(ISender sender, int id, UpdateFomentoCommand command)
     {
         if (id != command.Id) return false;
+        await sender.Send(new DeleteFomentoLinhasAcoesCommand() { FomentoId = id });
+        await sender.Send(new DeleteFomentoLocalidadesCommand() { FomentoId = id });
         var result = await sender.Send(command);
         return result;
     }

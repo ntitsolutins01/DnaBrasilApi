@@ -1,8 +1,11 @@
-﻿using DnaBrasilApi.Application.TalentosEsportivos.Commands.CreateTalentoEsportivo;
+﻿using DnaBrasilApi.Application.Common.Exceptions;
+using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoTalentoEsportivo;
+using DnaBrasilApi.Application.TalentosEsportivos.Commands.CreateTalentoEsportivo;
 using DnaBrasilApi.Application.TalentosEsportivos.Commands.UpdateTalentoEsportivo;
 using DnaBrasilApi.Application.TalentosEsportivos.Queries;
 using DnaBrasilApi.Application.TalentosEsportivos.Queries.GetTalentoEsportivoByAluno;
 using DnaBrasilApi.Application.TalentosEsportivos.Queries.GetTalentoEsportivoById;
+using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -24,13 +27,19 @@ public class TalentosEsportivos : EndpointGroupBase
     #region Main Methods
     public async Task<int> CreateTalentoEsportivo(ISender sender, CreateTalentoEsportivoCommand command)
     {
-        return await sender.Send(command);
+        var result = await sender.Send(command);
+
+        var updateResult = await sender.Send(new UpdateEncaminhamentoTalentoEsportivoCommand(command.AlunoId));
+
+        return result;
     }
 
     public async Task<bool> UpdateTalentoEsportivo(ISender sender, int id, UpdateTalentoEsportivoCommand command)
     {
         if (id != command.Id) return false;
         var result = await sender.Send(command);
+        var updateResult = await sender.Send(new UpdateEncaminhamentoTalentoEsportivoCommand(command.AlunoId));
+
         return result;
     }
     #endregion

@@ -5,7 +5,7 @@ namespace DnaBrasilApi.Application.Laudos.Commands.UpdateLaudo;
 
 public record UpdateLaudoCommand : IRequest<bool>
 {
-    public int Id { get; init; }
+    public required  int Id { get; init; }
     public required int AlunoId { get; init; }
     public int? SaudeId { get; init; }
     public int? VocacionalId { get; init; }
@@ -113,19 +113,19 @@ public class UpdateLaudoCommandHandler : IRequestHandler<UpdateLaudoCommand, boo
                     ? "F"
                     : "A";
                 break;
+            default:
+                request.StatusLaudo = saude != null
+                                      &&
+                                      consumoAlimentar != null
+                                      &&
+                                      saudeBucal != null
+                                      &&
+                                      talentoEsportivo != null
+                    ? "F"
+                    : "A";
+                break;
         }
 
-        request.StatusLaudo = saude != null
-                              &&
-                              consumoAlimentar != null
-                              &&
-                              saudeBucal != null
-                              &&
-                              talentoEsportivo != null
-            ? "F"
-            : "A";
-
-        entity.Aluno = aluno;
         entity.Saude = saude;
         entity.Vocacional = vocacional;
         entity.ConsumoAlimentar = consumoAlimentar;
