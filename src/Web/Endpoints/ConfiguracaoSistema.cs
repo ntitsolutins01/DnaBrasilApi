@@ -12,6 +12,9 @@ using DnaBrasilApi.Application.Modulos.Queries.GetModulosAll;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
+/// <summary>
+/// Api de Configuração de Sistema
+/// </summary>
 public class ConfiguracaoSistema : EndpointGroupBase
 {
     #region MapEndpoints
@@ -112,8 +115,6 @@ public class ConfiguracaoSistema : EndpointGroupBase
     {
         return await sender.Send(new DeleteModuloCommand(id));
     }
-
-
     #endregion
 
     #region Get Methods
@@ -162,15 +163,4 @@ public class ConfiguracaoSistema : EndpointGroupBase
 
     
     #endregion
-
-
-
-
-
-
-
-
-
-
-
 }

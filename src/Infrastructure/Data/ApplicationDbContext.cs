@@ -73,6 +73,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<ProfissionalModalidade> ProfissionalModalidades => Set<ProfissionalModalidade>();
     public DbSet<FomentoLocalidade> FomentoLocalidades => Set<FomentoLocalidade>();
     public DbSet<FomentoLinhaAcao> FomentoLinhasAcoes => Set<FomentoLinhaAcao>();
+    public DbSet<Certificado> Certificados => Set<Certificado>();
 
 
     protected override void OnModelCreating(ModelBuilder builder)
