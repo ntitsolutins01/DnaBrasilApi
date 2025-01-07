@@ -65,6 +65,7 @@ public interface IApplicationDbContext
     DbSet<ProfissionalModalidade> ProfissionalModalidades { get; }
     DbSet<FomentoLocalidade> FomentoLocalidades { get; }
     DbSet<FomentoLinhaAcao> FomentoLinhasAcoes { get; }
+    DbSet<Certificado> Certificados { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

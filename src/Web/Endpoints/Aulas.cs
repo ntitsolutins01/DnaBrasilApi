@@ -8,6 +8,9 @@ using DnaBrasilApi.Application.Aulas.Queries.GetAulasAllByModuloEadId;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
+/// <summary>
+/// Api de Aulas
+/// </summary>
 public class Aulas : EndpointGroupBase
 {
     #region MapEndpoints
@@ -24,7 +27,7 @@ public class Aulas : EndpointGroupBase
             .MapPost(CreateAula)
             .MapPut(UpdateAula, "{id}")
             .MapDelete(DeleteAula, "{id}")
-            .MapGet(GetAulaById, "Aula/{id}")
+            .MapGet(GetAulaById, "{id}")
             .MapGet(GetAulasAllByModuloEadId, "ModuloEad/{id}");
     }
     #endregion
@@ -66,8 +69,7 @@ public class Aulas : EndpointGroupBase
     {
         return await sender.Send(new DeleteAulaCommand(id));
     }
-
-    #endregion
+    #endregion 
 
     #region Get Methods
 
@@ -103,5 +105,4 @@ public class Aulas : EndpointGroupBase
         return await sender.Send(new GetAulasAllByModuloEadIdQuery() { ModuloEadId = id });
     }
     #endregion
-
 }

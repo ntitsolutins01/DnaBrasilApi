@@ -23,8 +23,6 @@ public class ProfissionalDto
     public string? Bairro { get; set; }
     public bool Status { get; set; } = true;
     public bool Habilitado { get; set; }
-    public List<ModalidadeDto>? Modalidades { get; set; }
-    //public List<Contrato>? Contratos { get; set; }
     public int EstadoId { get; set; }
     public string? Uf { get; set; }
     public int? MunicipioId { get; set; }
@@ -32,6 +30,7 @@ public class ProfissionalDto
     public string? Perfil { get; set; }
     public string? Localidade { get; set; }
     public string? Cargo { get; set; }
+    public string? ModalidadesIds { get; set; }
     private class Mapping : Profile
     {
         public Mapping()
@@ -44,7 +43,12 @@ public class ProfissionalDto
                 .ForMember(dest => dest.EstadoId, opt => opt.MapFrom(src => src.Municipio!.Estado!.Id))
                 .ForMember(dest => dest.Uf, opt => opt.MapFrom(src => src.Municipio!.Estado!.Sigla))
                 .ForMember(dest => dest.DtNascimento,
-                    opt => opt.MapFrom(src => src.DtNascimento!.Value.ToString("dd/MM/yyyy")));
+                    opt => opt.MapFrom(src => src.DtNascimento!.Value.ToString("dd/MM/yyyy")))
+                .ForMember(dest => dest.ModalidadesIds,
+                    opt => opt.MapFrom(src =>
+                        src.ProfissionalModalidades == null
+                            ? ""
+                            : string.Join(",", src.ProfissionalModalidades!.Select(s => s.ModalidadeId.ToString()).ToArray())));
         }
     }
 }

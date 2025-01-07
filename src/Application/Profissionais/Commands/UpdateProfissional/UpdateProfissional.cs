@@ -63,29 +63,6 @@ public class UpdateProfissionalCommandHandler : IRequestHandler<UpdateProfission
 
         Guard.Against.NotFound(request.Id, entity);
 
-        var list = new List<ProfissionalModalidade>();
-
-        if (!string.IsNullOrWhiteSpace(request.ModalidadesIds))
-        {
-            List<int> listIds = request.ModalidadesIds.Split(',').Select(s => Convert.ToInt32(s)).ToList();
-
-            foreach (int id in listIds)
-            {
-                var modalidade = await _context.Modalidades
-                    .FindAsync([id], cancellationToken);
-
-                list.Add(new ProfissionalModalidade()
-                {
-                    Modalidade = modalidade!,
-                    Profissional = entity
-                });
-            }
-        }
-        else
-        {
-            list = null;
-        }
-
         entity.Nome = request.Nome!;
         entity.DtNascimento = DateTime.ParseExact(request.DtNascimento!, "dd/MM/yyyy", CultureInfo.CreateSpecificCulture("pt-BR"));
         entity.Email = request.Email!;
@@ -102,8 +79,19 @@ public class UpdateProfissionalCommandHandler : IRequestHandler<UpdateProfission
         entity.Localidade = localidade;
         entity.Cargo = request.Cargo;
 
+        var listProfissionalModalidades = new List<ProfissionalModalidade>();
+
+        if (!string.IsNullOrEmpty(request.ModalidadesIds))
+        {
+            int[] arrLocsIds = request.ModalidadesIds.Split(',').Select(n => Convert.ToInt32(n)).ToArray();
+
+            listProfissionalModalidades.AddRange(arrLocsIds.Select(item => new ProfissionalModalidade { ModalidadeId = item, ProfissionalId = entity.Id }));
+        }
+
+        entity.ProfissionalModalidades = listProfissionalModalidades;
+
         var result = await _context.SaveChangesAsync(cancellationToken);
 
-        return result == 1;//true
+        return result >= 1;//true
     }
 }
