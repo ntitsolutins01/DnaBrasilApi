@@ -17,7 +17,7 @@ public class ControleMaterialEstoqueSaidaDto
         {
             CreateMap<ControleMaterialEstoqueSaida, ControleMaterialEstoqueSaidaDto>()
                 .ForMember(dest => dest.TituloMaterial, opt => opt.MapFrom(src => src.Material.Descricao))
-                .ForMember(dest => dest.Created, opt => opt.MapFrom(src => src.Material.Created));
+                .ForMember(dest => dest.Created, opt => opt.MapFrom(src => src.Created));
         }
     }
 }
