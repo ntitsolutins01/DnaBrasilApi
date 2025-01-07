@@ -1660,9 +1660,7 @@
             }
           }
         }
-      }
-    },
-    "/api/ControlesAcessosAulas/ControleAcessoAula/{id}": {
+      },
       "get": {
         "tags": [
           "ControlesAcessosAulas"
@@ -1820,9 +1818,7 @@
             }
           }
         }
-      }
-    },
-    "/api/ControlesMateriais/ControleMaterial/{id}": {
+      },
       "get": {
         "tags": [
           "ControlesMateriais"
@@ -2389,9 +2385,7 @@
             }
           }
         }
-      }
-    },
-    "/api/ControlesPresencas/ControlePresenca/{id}": {
+      },
       "get": {
         "tags": [
           "ControlesPresencas"
@@ -2423,7 +2417,7 @@
         }
       }
     },
-    "/api/ControlesPresencas/ControlePresenca/Aluno/{alunoId}": {
+    "/api/ControlesPresencas/Aluno/{alunoId}": {
       "get": {
         "tags": [
           "ControlesPresencas"
@@ -2458,7 +2452,7 @@
         }
       }
     },
-    "/api/ControlesPresencas/ControlePresenca/Evento/{eventoId}": {
+    "/api/ControlesPresencas/Evento/{eventoId}": {
       "get": {
         "tags": [
           "ControlesPresencas"
@@ -3317,7 +3311,7 @@
         }
       }
     },
-    "/api/Deficiencias/Deficiencia/{id}": {
+    "/api/Deficiencias/{id}": {
       "get": {
         "tags": [
           "Deficiencias"
@@ -3347,9 +3341,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Deficiencias/{id}": {
+      },
       "put": {
         "tags": [
           "Deficiencias"
@@ -3549,9 +3541,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Disciplinas/Disciplina/{id}": {
+      },
       "get": {
         "tags": [
           "Disciplinas"
@@ -3831,7 +3821,7 @@
         }
       }
     },
-    "/api/Encaminhamentos/Encaminhamento/TipoLaudo/{id}": {
+    "/api/Encaminhamentos/TipoLaudo/{id}": {
       "get": {
         "tags": [
           "Encaminhamentos"
@@ -3992,9 +3982,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Escolaridades/Escolaridade/{id}": {
+      },
       "get": {
         "tags": [
           "Escolaridades"
@@ -4347,9 +4335,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Eventos/Evento/{id}": {
+      },
       "get": {
         "tags": [
           "Eventos"
@@ -4507,6 +4493,36 @@
             }
           }
         }
+      },
+      "get": {
+        "tags": [
+          "Fomentos"
+        ],
+        "operationId": "GetFomentoById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FomentoDto"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/api/Fomentos/Localidade/{id}": {
@@ -4541,39 +4557,7 @@
         }
       }
     },
-    "/api/Fomentos/Fomento/{id}": {
-      "get": {
-        "tags": [
-          "Fomentos"
-        ],
-        "operationId": "GetFomentoById",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "x-position": 1
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/FomentoDto"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/FotosEvento/Evento/{eventoId}": {
+    "/api/FotosEvento/{eventoId}": {
       "get": {
         "tags": [
           "FotosEvento"
@@ -5579,9 +5563,7 @@
             }
           }
         }
-      }
-    },
-    "/api/LinhasAcoes/LinhaAcao/{id}": {
+      },
       "get": {
         "tags": [
           "LinhasAcoes"
@@ -5739,9 +5721,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Localidades/Localidade/{id}": {
+      },
       "get": {
         "tags": [
           "Localidades"
@@ -6262,9 +6242,7 @@
             }
           }
         }
-      }
-    },
-    "/api/MetricasImc/MetricaImc/{id}": {
+      },
       "get": {
         "tags": [
           "MetricasImc"
@@ -6422,9 +6400,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Modalidades/Modalidade/{id}": {
+      },
       "get": {
         "tags": [
           "Modalidades"
@@ -6582,9 +6558,7 @@
             }
           }
         }
-      }
-    },
-    "/api/ModulosEad/ModuloEad/{id}": {
+      },
       "get": {
         "tags": [
           "ModulosEad"
@@ -6777,9 +6751,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Notas/Nota/{id}": {
+      },
       "get": {
         "tags": [
           "Notas"
@@ -6937,9 +6909,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Parceiros/Parceiro/{id}": {
+      },
       "get": {
         "tags": [
           "Parceiros"
@@ -6971,7 +6941,7 @@
         }
       }
     },
-    "/api/Parceiros/Parceiro/AspNetUser": {
+    "/api/Parceiros/AspNetUser": {
       "get": {
         "tags": [
           "Parceiros"
@@ -7477,9 +7447,7 @@
             }
           }
         }
-      }
-    },
-    "/api/PlanosAulas/PlanoAula/{id}": {
+      },
       "get": {
         "tags": [
           "PlanosAulas"
@@ -7637,6 +7605,36 @@
             }
           }
         }
+      },
+      "get": {
+        "tags": [
+          "Profissionais"
+        ],
+        "operationId": "GetProfissionalById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfissionalDto"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/api/Profissionais/Modalidade/{id}": {
@@ -7664,38 +7662,6 @@
               "application/json": {
                 "schema": {
                   "type": "boolean"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/Profissionais/Profissional/{id}": {
-      "get": {
-        "tags": [
-          "Profissionais"
-        ],
-        "operationId": "GetProfissionalById",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "x-position": 1
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProfissionalDto"
                 }
               }
             }
@@ -7926,9 +7892,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Provas/Prova/{id}": {
+      },
       "get": {
         "tags": [
           "Provas"
@@ -8409,9 +8373,7 @@
             }
           }
         }
-      }
-    },
-    "/api/QuestoesEad/QuestaoEad/{id}": {
+      },
       "get": {
         "tags": [
           "QuestoesEad"
@@ -8569,9 +8531,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Respostas/Resposta/{id}": {
+      },
       "get": {
         "tags": [
           "Respostas"
@@ -8729,9 +8689,7 @@
             }
           }
         }
-      }
-    },
-    "/api/RespostasEad/RespostaEad/{id}": {
+      },
       "get": {
         "tags": [
           "RespostasEad"
@@ -9103,9 +9061,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Series/Serie/{id}": {
+      },
       "get": {
         "tags": [
           "Series"
@@ -9402,9 +9358,7 @@
             }
           }
         }
-      }
-    },
-    "/api/TextosLaudos/TextoLaudo/{id}": {
+      },
       "get": {
         "tags": [
           "TextosLaudos"
@@ -9562,9 +9516,7 @@
             }
           }
         }
-      }
-    },
-    "/api/TextosQuestoes/TextoQuestao/{id}": {
+      },
       "get": {
         "tags": [
           "TextosQuestoes"
@@ -9722,9 +9674,7 @@
             }
           }
         }
-      }
-    },
-    "/api/TiposCursos/TipoCurso/{id}": {
+      },
       "get": {
         "tags": [
           "TiposCursos"
@@ -9882,9 +9832,7 @@
             }
           }
         }
-      }
-    },
-    "/api/TiposLaudos/TipoLaudo/{id}": {
+      },
       "get": {
         "tags": [
           "TiposLaudos"
