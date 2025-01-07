@@ -697,9 +697,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Aulas/Aula/{id}": {
+      },
       "get": {
         "tags": [
           "Aulas"
@@ -1662,9 +1660,7 @@
             }
           }
         }
-      }
-    },
-    "/api/ControlesAcessosAulas/ControleAcessoAula/{id}": {
+      },
       "get": {
         "tags": [
           "ControlesAcessosAulas"
@@ -1822,9 +1818,7 @@
             }
           }
         }
-      }
-    },
-    "/api/ControlesMateriais/ControleMaterial/{id}": {
+      },
       "get": {
         "tags": [
           "ControlesMateriais"
@@ -2391,9 +2385,7 @@
             }
           }
         }
-      }
-    },
-    "/api/ControlesPresencas/ControlePresenca/{id}": {
+      },
       "get": {
         "tags": [
           "ControlesPresencas"
@@ -2425,7 +2417,7 @@
         }
       }
     },
-    "/api/ControlesPresencas/ControlePresenca/Aluno/{alunoId}": {
+    "/api/ControlesPresencas/Aluno/{alunoId}": {
       "get": {
         "tags": [
           "ControlesPresencas"
@@ -2460,7 +2452,7 @@
         }
       }
     },
-    "/api/ControlesPresencas/ControlePresenca/Evento/{eventoId}": {
+    "/api/ControlesPresencas/Evento/{eventoId}": {
       "get": {
         "tags": [
           "ControlesPresencas"
@@ -3319,7 +3311,7 @@
         }
       }
     },
-    "/api/Deficiencias/Deficiencia/{id}": {
+    "/api/Deficiencias/{id}": {
       "get": {
         "tags": [
           "Deficiencias"
@@ -3349,9 +3341,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Deficiencias/{id}": {
+      },
       "put": {
         "tags": [
           "Deficiencias"
@@ -3551,9 +3541,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Disciplinas/Disciplina/{id}": {
+      },
       "get": {
         "tags": [
           "Disciplinas"
@@ -3833,7 +3821,7 @@
         }
       }
     },
-    "/api/Encaminhamentos/Encaminhamento/TipoLaudo/{id}": {
+    "/api/Encaminhamentos/TipoLaudo/{id}": {
       "get": {
         "tags": [
           "Encaminhamentos"
@@ -3994,9 +3982,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Escolaridades/Escolaridade/{id}": {
+      },
       "get": {
         "tags": [
           "Escolaridades"
@@ -4349,9 +4335,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Eventos/Evento/{id}": {
+      },
       "get": {
         "tags": [
           "Eventos"
@@ -4509,6 +4493,36 @@
             }
           }
         }
+      },
+      "get": {
+        "tags": [
+          "Fomentos"
+        ],
+        "operationId": "GetFomentoById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FomentoDto"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/api/Fomentos/Localidade/{id}": {
@@ -4543,39 +4557,7 @@
         }
       }
     },
-    "/api/Fomentos/Fomento/{id}": {
-      "get": {
-        "tags": [
-          "Fomentos"
-        ],
-        "operationId": "GetFomentoById",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "x-position": 1
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/FomentoDto"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/FotosEvento/Evento/{eventoId}": {
+    "/api/FotosEvento/{eventoId}": {
       "get": {
         "tags": [
           "FotosEvento"
@@ -5581,9 +5563,7 @@
             }
           }
         }
-      }
-    },
-    "/api/LinhasAcoes/LinhaAcao/{id}": {
+      },
       "get": {
         "tags": [
           "LinhasAcoes"
@@ -5741,9 +5721,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Localidades/Localidade/{id}": {
+      },
       "get": {
         "tags": [
           "Localidades"
@@ -6264,9 +6242,7 @@
             }
           }
         }
-      }
-    },
-    "/api/MetricasImc/MetricaImc/{id}": {
+      },
       "get": {
         "tags": [
           "MetricasImc"
@@ -6424,9 +6400,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Modalidades/Modalidade/{id}": {
+      },
       "get": {
         "tags": [
           "Modalidades"
@@ -6584,9 +6558,7 @@
             }
           }
         }
-      }
-    },
-    "/api/ModulosEad/ModuloEad/{id}": {
+      },
       "get": {
         "tags": [
           "ModulosEad"
@@ -6779,9 +6751,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Notas/Nota/{id}": {
+      },
       "get": {
         "tags": [
           "Notas"
@@ -6939,9 +6909,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Parceiros/Parceiro/{id}": {
+      },
       "get": {
         "tags": [
           "Parceiros"
@@ -6973,7 +6941,7 @@
         }
       }
     },
-    "/api/Parceiros/Parceiro/AspNetUser": {
+    "/api/Parceiros/AspNetUser": {
       "get": {
         "tags": [
           "Parceiros"
@@ -7479,9 +7447,7 @@
             }
           }
         }
-      }
-    },
-    "/api/PlanosAulas/PlanoAula/{id}": {
+      },
       "get": {
         "tags": [
           "PlanosAulas"
@@ -7639,6 +7605,36 @@
             }
           }
         }
+      },
+      "get": {
+        "tags": [
+          "Profissionais"
+        ],
+        "operationId": "GetProfissionalById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfissionalDto"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/api/Profissionais/Modalidade/{id}": {
@@ -7666,38 +7662,6 @@
               "application/json": {
                 "schema": {
                   "type": "boolean"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/Profissionais/Profissional/{id}": {
-      "get": {
-        "tags": [
-          "Profissionais"
-        ],
-        "operationId": "GetProfissionalById",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "x-position": 1
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProfissionalDto"
                 }
               }
             }
@@ -7928,9 +7892,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Provas/Prova/{id}": {
+      },
       "get": {
         "tags": [
           "Provas"
@@ -8411,9 +8373,7 @@
             }
           }
         }
-      }
-    },
-    "/api/QuestoesEad/QuestaoEad/{id}": {
+      },
       "get": {
         "tags": [
           "QuestoesEad"
@@ -8571,9 +8531,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Respostas/Resposta/{id}": {
+      },
       "get": {
         "tags": [
           "Respostas"
@@ -8731,9 +8689,7 @@
             }
           }
         }
-      }
-    },
-    "/api/RespostasEad/RespostaEad/{id}": {
+      },
       "get": {
         "tags": [
           "RespostasEad"
@@ -9105,9 +9061,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Series/Serie/{id}": {
+      },
       "get": {
         "tags": [
           "Series"
@@ -9404,9 +9358,7 @@
             }
           }
         }
-      }
-    },
-    "/api/TextosLaudos/TextoLaudo/{id}": {
+      },
       "get": {
         "tags": [
           "TextosLaudos"
@@ -9564,9 +9516,7 @@
             }
           }
         }
-      }
-    },
-    "/api/TextosQuestoes/TextoQuestao/{id}": {
+      },
       "get": {
         "tags": [
           "TextosQuestoes"
@@ -9724,9 +9674,7 @@
             }
           }
         }
-      }
-    },
-    "/api/TiposCursos/TipoCurso/{id}": {
+      },
       "get": {
         "tags": [
           "TiposCursos"
@@ -9884,9 +9832,7 @@
             }
           }
         }
-      }
-    },
-    "/api/TiposLaudos/TipoLaudo/{id}": {
+      },
       "get": {
         "tags": [
           "TiposLaudos"
@@ -12701,6 +12647,10 @@
                 "items": {
                   "$ref": "#/components/schemas/ProfissionalModalidade"
                 }
+              },
+              "cargo": {
+                "type": "string",
+                "nullable": true
               }
             }
           }
@@ -12730,31 +12680,34 @@
         ]
       },
       "ProfissionalModalidade": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BaseAuditableEntity"
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "profissionalId": {
+            "type": "integer",
+            "format": "int32"
           },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "profissionalId": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "modalidadeId": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "profissional": {
+          "modalidadeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "profissional": {
+            "nullable": true,
+            "oneOf": [
+              {
                 "$ref": "#/components/schemas/Profissional"
-              },
-              "modalidade": {
+              }
+            ]
+          },
+          "modalidade": {
+            "nullable": true,
+            "oneOf": [
+              {
                 "$ref": "#/components/schemas/Modalidade"
               }
-            }
+            ]
           }
-        ]
+        }
       },
       "QualidadeDeVida": {
         "allOf": [
@@ -13479,13 +13432,6 @@
           "habilitado": {
             "type": "boolean"
           },
-          "modalidades": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/ModalidadeDto"
-            }
-          },
           "estadoId": {
             "type": "integer",
             "format": "int32"
@@ -13511,133 +13457,14 @@
           "localidade": {
             "type": "string",
             "nullable": true
-          }
-        }
-      },
-      "ModalidadeDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
           },
-          "nome": {
+          "cargo": {
             "type": "string",
             "nullable": true
           },
-          "vo2MaxIni": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "vo2MaxFim": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "vinteMetrosIni": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "vinteMetrosFim": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "shutlleRunIni": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "shutlleRunFim": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "flexibilidadeIni": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "flexibilidadeFim": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "preensaoManualIni": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "preensaoManualFim": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "abdominalPranchaIni": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "abdominalPranchaFim": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "impulsaoIni": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "impulsaoFim": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "envergaduraIni": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "envergaduraFim": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "pesoIni": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "pesoFim": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "alturaIni": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "alturaFim": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "status": {
-            "type": "boolean"
-          },
-          "linhaAcao": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/LinhaAcaoDto"
-              }
-            ]
-          },
-          "byteImage": {
-            "type": "string",
-            "format": "byte",
-            "nullable": true
-          }
-        }
-      },
-      "LinhaAcaoDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nome": {
+          "modalidadesIds": {
             "type": "string",
             "nullable": true
-          },
-          "status": {
-            "type": "boolean"
           }
         }
       },
@@ -16557,6 +16384,23 @@
           }
         }
       },
+      "LinhaAcaoDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "boolean"
+          }
+        }
+      },
       "CreateLinhaAcaoCommand": {
         "type": "object",
         "additionalProperties": false,
@@ -16979,6 +16823,116 @@
           },
           "status": {
             "type": "boolean"
+          }
+        }
+      },
+      "ModalidadeDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true
+          },
+          "vo2MaxIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "vo2MaxFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "vinteMetrosIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "vinteMetrosFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "shutlleRunIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "shutlleRunFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "flexibilidadeIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "flexibilidadeFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "preensaoManualIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "preensaoManualFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "abdominalPranchaIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "abdominalPranchaFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "impulsaoIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "impulsaoFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "envergaduraIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "envergaduraFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pesoIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pesoFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "alturaIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "alturaFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "status": {
+            "type": "boolean"
+          },
+          "linhaAcao": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/LinhaAcaoDto"
+              }
+            ]
+          },
+          "byteImage": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
           }
         }
       },
@@ -17911,6 +17865,10 @@
           "perfilId": {
             "type": "integer",
             "format": "int32"
+          },
+          "cargo": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -17988,6 +17946,10 @@
             "type": "boolean"
           },
           "modalidadesIds": {
+            "type": "string",
+            "nullable": true
+          },
+          "cargo": {
             "type": "string",
             "nullable": true
           }
