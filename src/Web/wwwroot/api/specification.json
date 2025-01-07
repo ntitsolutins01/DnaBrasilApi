@@ -12425,6 +12425,13 @@
                     "$ref": "#/components/schemas/TipoParceria"
                   }
                 ]
+              },
+              "razaoSocial": {
+                "type": "string"
+              },
+              "nomeContato": {
+                "type": "string",
+                "nullable": true
               }
             }
           }
@@ -17453,6 +17460,12 @@
                 "$ref": "#/components/schemas/TipoParceriaDto"
               }
             ]
+          },
+          "razaoSocial": {
+            "type": "string"
+          },
+          "nomeContato": {
+            "type": "string"
           }
         }
       },
@@ -17545,6 +17558,13 @@
             "items": {
               "$ref": "#/components/schemas/Aluno"
             }
+          },
+          "razaoSocial": {
+            "type": "string"
+          },
+          "nomeContato": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -17612,6 +17632,13 @@
             "items": {
               "$ref": "#/components/schemas/Aluno"
             }
+          },
+          "razaoSocial": {
+            "type": "string"
+          },
+          "nomeContato": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
