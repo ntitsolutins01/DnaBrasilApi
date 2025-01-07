@@ -10829,7 +10829,7 @@
         }
       }
     },
-    "/api/Usuarios/Usuario/{id}": {
+    "/api/Usuarios/{id}": {
       "get": {
         "tags": [
           "Usuarios"
@@ -10859,9 +10859,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Usuarios/{id}": {
+      },
       "put": {
         "tags": [
           "Usuarios"
@@ -16535,6 +16533,11 @@
           },
           "descricao": {
             "type": "string"
+          },
+          "qtdAdquirida": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
           }
         }
       },
