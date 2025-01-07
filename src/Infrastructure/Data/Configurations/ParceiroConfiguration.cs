@@ -33,5 +33,9 @@ internal class ParceiroConfiguration : IEntityTypeConfiguration<Parceiro>
             .HasMaxLength(200);
         builder.Property(t => t.Bairro)
             .HasMaxLength(50);
+        builder.Property(t => t.RazaoSocial)
+            .HasMaxLength(150);
+        builder.Property(t => t.NomeContato)
+            .HasMaxLength(150);
     }
 }

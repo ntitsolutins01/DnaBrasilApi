@@ -6,7 +6,7 @@
     "version": "1.0.0"
   },
   "paths": {
-    "/api/Alunos/Aluno/{id}": {
+    "/api/Alunos/{id}": {
       "get": {
         "tags": [
           "Alunos"
@@ -36,9 +36,81 @@
             }
           }
         }
+      },
+      "put": {
+        "tags": [
+          "Alunos"
+        ],
+        "operationId": "UpdateAluno",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAlunoCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Alunos"
+        ],
+        "operationId": "DeleteAluno",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
       }
     },
-    "/api/Alunos/Aluno/Email/{email}": {
+    "/api/Alunos/Email/{email}": {
       "get": {
         "tags": [
           "Alunos"
@@ -185,80 +257,6 @@
                 "schema": {
                   "type": "integer",
                   "format": "int32"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/Alunos/{id}": {
-      "put": {
-        "tags": [
-          "Alunos"
-        ],
-        "operationId": "UpdateAluno",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "x-position": 1
-          }
-        ],
-        "requestBody": {
-          "x-name": "command",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateAlunoCommand"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 2
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "boolean"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Alunos"
-        ],
-        "operationId": "DeleteAluno",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "x-position": 1
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "boolean"
                 }
               }
             }
@@ -3787,9 +3785,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Encaminhamentos/Encaminhamento/{id}": {
+      },
       "get": {
         "tags": [
           "Encaminhamentos"
@@ -12429,6 +12425,13 @@
                     "$ref": "#/components/schemas/TipoParceria"
                   }
                 ]
+              },
+              "razaoSocial": {
+                "type": "string"
+              },
+              "nomeContato": {
+                "type": "string",
+                "nullable": true
               }
             }
           }
@@ -17457,6 +17460,12 @@
                 "$ref": "#/components/schemas/TipoParceriaDto"
               }
             ]
+          },
+          "razaoSocial": {
+            "type": "string"
+          },
+          "nomeContato": {
+            "type": "string"
           }
         }
       },
@@ -17549,6 +17558,13 @@
             "items": {
               "$ref": "#/components/schemas/Aluno"
             }
+          },
+          "razaoSocial": {
+            "type": "string"
+          },
+          "nomeContato": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -17616,6 +17632,13 @@
             "items": {
               "$ref": "#/components/schemas/Aluno"
             }
+          },
+          "razaoSocial": {
+            "type": "string"
+          },
+          "nomeContato": {
+            "type": "string",
+            "nullable": true
           }
         }
       },

@@ -21,6 +21,8 @@ public record UpdateParceiroCommand : IRequest<bool>
     public bool Status { get; init; }
     public bool? Habilitado { get; init; }
     public List<Aluno>? Alunos { get; init; }
+    public required string RazaoSocial { get; init; }
+    public string? NomeContato { get; init; }
 }
 
 public class UpdateParceiroCommandHandler : IRequestHandler<UpdateParceiroCommand,bool>
@@ -71,6 +73,8 @@ public class UpdateParceiroCommandHandler : IRequestHandler<UpdateParceiroComman
             entity.Email = request.Email;
             entity.Bairro = request.Bairro;
             entity.Numero = request.Numero;
+            entity.RazaoSocial = request.RazaoSocial;
+            entity.NomeContato = request.NomeContato;
         }
 
         var result = await _context.SaveChangesAsync(cancellationToken);
