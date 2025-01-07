@@ -697,9 +697,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Aulas/Aula/{id}": {
+      },
       "get": {
         "tags": [
           "Aulas"
