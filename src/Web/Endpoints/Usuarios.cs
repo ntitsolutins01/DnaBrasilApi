@@ -24,7 +24,7 @@ public class Usuarios : EndpointGroupBase
         app.MapGroup(this)
             //.RequireAuthorization()
             .MapGet(GetUsuariosAll)
-            .MapGet(GetUsuarioById, "Usuario/{id}")
+            .MapGet(GetUsuarioById, "{id}")
             .MapPost(CreateUsuario)
             .MapPut(UpdateUsuario, "{id}")
             .MapDelete(DeleteUsuario, "{id}")
