@@ -35,5 +35,7 @@ public class ProfissionalConfigurations : IEntityTypeConfiguration<Profissional>
             .HasMaxLength(9);
         builder.Property(t => t.Status)
             .IsRequired();
+        builder.Property(t => t.Cargo)
+            .HasMaxLength(50);
     }
 }

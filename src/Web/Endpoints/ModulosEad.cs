@@ -25,7 +25,7 @@ public class ModulosEad : EndpointGroupBase
             .MapPost(CreateModuloEad)
             .MapPut(UpdateModuloEad, "{id}")
             .MapDelete(DeleteModuloEad, "{id}")
-            .MapGet(GetModuloEadById, "ModuloEad/{id}")
+            .MapGet(GetModuloEadById, "{id}")
             .MapGet(GetModulosEadAllByCursoId, pattern:"Curso/{cursoId}");
     }
     #endregion
