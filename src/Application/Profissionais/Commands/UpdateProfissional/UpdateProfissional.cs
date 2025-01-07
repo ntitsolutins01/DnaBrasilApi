@@ -1,3 +1,4 @@
+using System.Globalization;
 using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
 
@@ -22,7 +23,8 @@ public record UpdateProfissionalCommand : IRequest<bool>
     public int? MunicipioId { get; init; }
     public int? LocalidadeId { get; init; }
     public bool Habilitado { get; init; }
-    public string? AmbientesIds { get; init; }
+    public string? ModalidadesIds { get; init; }
+    public string? Cargo { get; init; }
 }
 
 public class UpdateProfissionalCommandHandler : IRequestHandler<UpdateProfissionalCommand, bool>
@@ -62,7 +64,7 @@ public class UpdateProfissionalCommandHandler : IRequestHandler<UpdateProfission
         Guard.Against.NotFound(request.Id, entity);
 
         entity.Nome = request.Nome!;
-        entity.DtNascimento = request.DtNascimento == "" ? null : Convert.ToDateTime(request.DtNascimento);
+        entity.DtNascimento = DateTime.ParseExact(request.DtNascimento!, "dd/MM/yyyy", CultureInfo.CreateSpecificCulture("pt-BR"));
         entity.Email = request.Email!;
         entity.Sexo = request.Sexo;
         entity.Telefone = request.Telefone;
@@ -75,9 +77,21 @@ public class UpdateProfissionalCommandHandler : IRequestHandler<UpdateProfission
         entity.Status = request.Status;
         entity.Habilitado = request.Habilitado;
         entity.Localidade = localidade;
+        entity.Cargo = request.Cargo;
+
+        var listProfissionalModalidades = new List<ProfissionalModalidade>();
+
+        if (!string.IsNullOrEmpty(request.ModalidadesIds))
+        {
+            int[] arrLocsIds = request.ModalidadesIds.Split(',').Select(n => Convert.ToInt32(n)).ToArray();
+
+            listProfissionalModalidades.AddRange(arrLocsIds.Select(item => new ProfissionalModalidade { ModalidadeId = item, ProfissionalId = entity.Id }));
+        }
+
+        entity.ProfissionalModalidades = listProfissionalModalidades;
 
         var result = await _context.SaveChangesAsync(cancellationToken);
 
-        return result == 1;//true
+        return result >= 1;//true
     }
 }
