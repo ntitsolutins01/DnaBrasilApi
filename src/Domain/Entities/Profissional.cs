@@ -20,4 +20,5 @@ public class Profissional : BaseAuditableEntity
     public Perfil? Perfil { get; set; }
     public IList<ProfissionalModalidade>? ProfissionalModalidades { get; set; }
     public string? Cargo { get; set; }
+    public IList<Aluno>? Alunos { get; set; }
 }

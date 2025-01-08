@@ -10829,7 +10829,7 @@
         }
       }
     },
-    "/api/Usuarios/Usuario/{id}": {
+    "/api/Usuarios/{id}": {
       "get": {
         "tags": [
           "Usuarios"
@@ -10859,9 +10859,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Usuarios/{id}": {
+      },
       "put": {
         "tags": [
           "Usuarios"
@@ -12654,6 +12652,13 @@
               "cargo": {
                 "type": "string",
                 "nullable": true
+              },
+              "alunos": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "$ref": "#/components/schemas/Aluno"
+                }
               }
             }
           }
@@ -13387,6 +13392,10 @@
             "type": "string",
             "nullable": true
           },
+          "aspNetRoleId": {
+            "type": "string",
+            "nullable": true
+          },
           "nome": {
             "type": "string"
           },
@@ -13467,6 +13476,10 @@
           },
           "modalidadesIds": {
             "type": "string",
+            "nullable": true
+          },
+          "possuiAlunosVinculados": {
+            "type": "boolean",
             "nullable": true
           }
         }
