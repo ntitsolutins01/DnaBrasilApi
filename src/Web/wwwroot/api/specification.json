@@ -6014,6 +6014,38 @@
         }
       }
     },
+    "/api/Materiais/Filter": {
+      "post": {
+        "tags": [
+          "Materiais"
+        ],
+        "operationId": "GetMateriaisByFilter",
+        "requestBody": {
+          "x-name": "search",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MateriaisFilterDto"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MateriaisFilterDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Matriculas": {
       "get": {
         "tags": [
@@ -16532,6 +16564,59 @@
           "id": {
             "type": "integer",
             "format": "int32"
+          },
+          "unidadeMedida": {
+            "type": "string"
+          },
+          "descricao": {
+            "type": "string"
+          },
+          "qtdAdquirida": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        }
+      },
+      "MateriaisFilterDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeMaterial": {
+            "type": "string",
+            "nullable": true
+          },
+          "grupoMaterialId": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipoMaterialId": {
+            "type": "string",
+            "nullable": true
+          },
+          "materiais": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/MaterialIndexDto"
+            }
+          }
+        }
+      },
+      "MaterialIndexDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tituloTipoMaterial": {
+            "type": "string"
           },
           "unidadeMedida": {
             "type": "string"
