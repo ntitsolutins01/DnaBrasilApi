@@ -29,7 +29,7 @@ public class GetMateriaisByFilterQueryHandler : IRequestHandler<GetMateriaisByFi
         var result = FilterMateriais(Materiais, request.SearchFilter!, cancellationToken)
             .ProjectTo<MaterialIndexDto>(_mapper.ConfigurationProvider)
             .OrderBy(t => t.Id)
-            .ToListAsync(cancellationToken); ;
+            .ToListAsync(cancellationToken);
 
         return await (result ?? throw new ArgumentNullException(nameof(result)));
     }
@@ -38,17 +38,17 @@ public class GetMateriaisByFilterQueryHandler : IRequestHandler<GetMateriaisByFi
     {
         if (!string.IsNullOrWhiteSpace(search.Id))
         {
-            Materiais = Materiais.Where(u => u.Id.Equals(search.Id));
+            Materiais = Materiais.Where(u => u.Id.ToString().Equals(search.Id));
         }
 
         if (!string.IsNullOrWhiteSpace(search.NomeMaterial))
         {
-            Materiais = Materiais.Where(u => u.Descricao!.Contains(search.NomeMaterial));
+            Materiais = Materiais.Where(u => u.Descricao!.ToString().Contains(search.NomeMaterial));
         }
 
         if (!string.IsNullOrWhiteSpace(search.TipoMaterialId))
         {
-            Materiais = Materiais.Where(u => u.TipoMaterial.Id.Equals(search.TipoMaterialId));
+            Materiais = Materiais.Where(u => u.TipoMaterial.Id.ToString().Equals(search.TipoMaterialId));
         }
 
         return Materiais;
