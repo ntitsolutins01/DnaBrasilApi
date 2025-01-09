@@ -1,10 +1,10 @@
-name: Build and deploy .NET Core application to Web App DnaBrasilApiDev
+name: Build and deploy .NET Core application to Web App AppServiceDnaBrasilApiPrd
 on:
   push:
     branches:
     - develop
 env:
-  AZURE_WEBAPP_NAME: DnaBrasilApiDev
+  AZURE_WEBAPP_NAME: AppServiceDnaBrasilApiPrd
   AZURE_WEBAPP_PACKAGE_PATH: src\Web\published
   CONFIGURATION: Release
   DOTNET_CORE_VERSION: 8.0.x
@@ -44,5 +44,5 @@ jobs:
       uses: azure/webapps-deploy@v2
       with:
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
-        publish-profile: ${{ secrets.DnaBrasilApiDev_EFB8 }}
+        publish-profile: ${{ secrets.AppServiceDnaBrasilApiPrd_B92F }}
         package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
