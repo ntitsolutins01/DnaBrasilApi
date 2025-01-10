@@ -19865,6 +19865,10 @@
           "localidadeId": {
             "type": "string",
             "nullable": true
+          },
+          "localidade": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
