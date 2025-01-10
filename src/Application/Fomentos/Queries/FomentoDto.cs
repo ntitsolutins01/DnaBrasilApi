@@ -25,11 +25,11 @@ public class FomentoDto
             CreateMap<Fomentu, FomentoDto>()
                 .ForMember(dest => dest.DtIni, opt => opt.MapFrom(src => src.DtIni.ToString("dd/MM/yyyy")))
                 .ForMember(dest => dest.DtFim, opt => opt.MapFrom(src => src.DtFim.ToString("dd/MM/yyyy")))
-                .ForMember(dest => dest.Localidades, 
-                    opt => opt.MapFrom(src =>
-                        src.FomentoLocalidades == null
-                            ? ""
-                            : string.Join(",", src.FomentoLocalidades!.Select(s => s.Localidade!.Nome!.ToString()).ToArray())))
+                //.ForMember(dest => dest.Localidades, 
+                //    opt => opt.MapFrom(src =>
+                //        src.FomentoLocalidades == null
+                //            ? ""
+                //            : string.Join(",", src.FomentoLocalidades!.Select(s => s.Localidade!.Nome!.ToString()).ToArray())))
                 .ForMember(dest => dest.LinhasAcoesIds,
                     opt => opt.MapFrom(src =>
                         src.FomentoLinhasAcoes == null

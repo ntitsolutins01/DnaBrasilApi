@@ -13481,6 +13481,11 @@
           "possuiAlunosVinculados": {
             "type": "boolean",
             "nullable": true
+          },
+          "quantidadeAlunosVinculados": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
           }
         }
       },
@@ -19858,6 +19863,10 @@
             "nullable": true
           },
           "localidadeId": {
+            "type": "string",
+            "nullable": true
+          },
+          "localidade": {
             "type": "string",
             "nullable": true
           }
