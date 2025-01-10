@@ -17,6 +17,7 @@ public class UsuarioDto
     public string? MunicipioId { get; init; }
     public string? Uf { get; init; }
     public string? LocalidadeId { get; init; }
+    public string? Localidade { get; init; }
     private class Mapping : Profile
     {
         public Mapping()
@@ -24,6 +25,7 @@ public class UsuarioDto
             CreateMap<Usuario, UsuarioDto>()
                 .ForMember(dest => dest.Uf, opt => opt.MapFrom(src => src.Municipio!.Estado!.Sigla!.ToString()))
                 .ForMember(dest => dest.LocalidadeId, opt => opt.MapFrom(src => src.Localidade!.Id.ToString()))
+                .ForMember(dest => dest.Localidade, opt => opt.MapFrom(src => src.Localidade!.Nome!.ToString()))
                 .ForMember(dest => dest.MunicipioId, opt => opt.MapFrom(src => src.Municipio!.Id.ToString()))
                 .ForMember(dest => dest.MunicipioEstado, opt => opt.MapFrom(src => src.Municipio!.Nome!.ToString() + " / " + src.Municipio!.Estado!.Sigla!.ToString()));
         }
