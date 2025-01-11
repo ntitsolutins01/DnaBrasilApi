@@ -13189,6 +13189,14 @@
             "format": "byte",
             "nullable": true
           },
+          "nomeFotoFrente": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeFotoVerso": {
+            "type": "string",
+            "nullable": true
+          },
           "htmlFrente": {
             "type": "string"
           },
@@ -13215,6 +13223,14 @@
           "imgVerso": {
             "type": "string",
             "format": "byte",
+            "nullable": true
+          },
+          "nomeFotoFrente": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeFotoVerso": {
+            "type": "string",
             "nullable": true
           },
           "htmlFrente": {
@@ -13247,6 +13263,14 @@
           "imgVerso": {
             "type": "string",
             "format": "byte",
+            "nullable": true
+          },
+          "nomeFotoFrente": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeFotoVerso": {
+            "type": "string",
             "nullable": true
           },
           "htmlFrente": {
