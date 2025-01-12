@@ -6,8 +6,10 @@ public record UpdateCertificadoCommand : IRequest <bool>
 {
     public required int Id { get; init; }
     public required int CursoId { get; init; }
-    public required Byte[] ImgFrente { get; init; }
-    public Byte[]? ImgVerso { get; init; }
+    public required byte[] ImgFrente { get; init; }
+    public byte[]? ImgVerso { get; init; }
+    public string? NomeFotoFrente { get; set; }
+    public string? NomeFotoVerso { get; set; }
     public required string HtmlFrente { get; init; }
     public required string HtmlVerso { get; init; }
     public bool Status { get; init; } = true;
@@ -37,6 +39,8 @@ public class UpdateCertificadoCommandHandler : IRequestHandler<UpdateCertificado
         entity.Curso = curso;
         entity.ImagemFrente = request.ImgFrente;
         entity.ImagemVerso = request.ImgVerso;
+        entity.NomeFotoFrente = request.NomeFotoFrente;
+        entity.NomeFotoVerso = request.NomeFotoVerso;
         entity.HtmlFrente = request.HtmlFrente;
         entity.HtmlVerso = request.HtmlVerso;
         entity.Status = request.Status;
