@@ -5,7 +5,7 @@ namespace DnaBrasilApi.Application.TiposMateriais.Commands.CreateTipoMaterial;
 public record CreateTipoMaterialCommand : IRequest<int>
 {
     public required int GrupoMaterialId { get; init; }
-    public required String Nome { get; init; }
+    public required string Nome { get; init; }
 }
 
 public class CreateTipoMaterialCommandHandler : IRequestHandler<CreateTipoMaterialCommand, int>

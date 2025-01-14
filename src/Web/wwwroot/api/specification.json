@@ -1988,7 +1988,7 @@
         "tags": [
           "ControlesMateriaisEstoquesSaidas"
         ],
-        "operationId": "GetControlesMateriaisEstoquesSaidasAllByMaterialId",
+        "operationId": "GetControlesMateriaisEstoquesSaidasByMaterialId",
         "parameters": [
           {
             "name": "id",
@@ -2183,7 +2183,7 @@
         "tags": [
           "ControlesMensaisEstoque"
         ],
-        "operationId": "GetControlesMensaisEstoqueAllByMaterialId",
+        "operationId": "GetControlesMensaisEstoqueByMaterialId",
         "parameters": [
           {
             "name": "id",
@@ -5959,7 +5959,7 @@
         "tags": [
           "Materiais"
         ],
-        "operationId": "GetMateriaisAllByTipoMaterialId",
+        "operationId": "GetMateriaisByTipoMaterialId",
         "parameters": [
           {
             "name": "id",
@@ -5982,6 +5982,38 @@
                   "items": {
                     "$ref": "#/components/schemas/MaterialDto"
                   }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Materiais/Filter": {
+      "post": {
+        "tags": [
+          "Materiais"
+        ],
+        "operationId": "GetMateriaisByFilter",
+        "requestBody": {
+          "x-name": "search",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MateriaisFilterDto"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MateriaisFilterDto"
                 }
               }
             }
@@ -10000,7 +10032,7 @@
         "tags": [
           "TiposMateriais"
         ],
-        "operationId": "GetTiposMateriaisAllByGrupoMaterialId",
+        "operationId": "GetTiposMateriaisByGrupoMaterialId",
         "parameters": [
           {
             "name": "id",
@@ -13233,12 +13265,20 @@
             "type": "integer",
             "format": "int32"
           },
+          "tituloMaterial": {
+            "type": "string"
+          },
           "quantidade": {
             "type": "integer",
             "format": "int32"
           },
           "solicitante": {
             "type": "string",
+            "nullable": true
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time",
             "nullable": true
           }
         }
@@ -13266,14 +13306,6 @@
         "additionalProperties": false,
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "materialId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "quantidade": {
             "type": "integer",
             "format": "int32"
           },
@@ -16476,12 +16508,14 @@
             "type": "integer",
             "format": "int32"
           },
+          "tituloTipoMaterial": {
+            "type": "string"
+          },
           "unidadeMedida": {
             "type": "string"
           },
           "descricao": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "qtdAdquirida": {
             "type": "integer",
@@ -16502,8 +16536,7 @@
             "type": "string"
           },
           "descricao": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "qtdAdquirida": {
             "type": "integer",
@@ -16520,16 +16553,64 @@
             "type": "integer",
             "format": "int32"
           },
+          "unidadeMedida": {
+            "type": "string"
+          },
+          "descricao": {
+            "type": "string"
+          },
+          "qtdAdquirida": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        }
+      },
+      "MateriaisFilterDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeMaterial": {
+            "type": "string",
+            "nullable": true
+          },
+          "grupoMaterialId": {
+            "type": "string",
+            "nullable": true
+          },
           "tipoMaterialId": {
+            "type": "string",
+            "nullable": true
+          },
+          "materiais": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/MaterialIndexDto"
+            }
+          }
+        }
+      },
+      "MaterialIndexDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
             "type": "integer",
             "format": "int32"
+          },
+          "tituloTipoMaterial": {
+            "type": "string"
           },
           "unidadeMedida": {
             "type": "string"
           },
           "descricao": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "qtdAdquirida": {
             "type": "integer",
@@ -19286,6 +19367,9 @@
             "type": "integer",
             "format": "int32"
           },
+          "tituloGrupoMaterial": {
+            "type": "string"
+          },
           "nome": {
             "type": "string"
           }
@@ -19309,10 +19393,6 @@
         "additionalProperties": false,
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "grupoMaterialId": {
             "type": "integer",
             "format": "int32"
           },
