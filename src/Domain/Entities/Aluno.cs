@@ -39,4 +39,5 @@ public class Aluno : BaseAuditableEntity
     public bool? UtilizacaoImagem { get; set; } = false;
     public bool? CopiaDocAlunoResponsavel { get; set; } = false;
     public bool Convidado { get; set; } = false;
+    public IList<AlunoModalidade>? AlunoModalidades { get; set; }
 }
