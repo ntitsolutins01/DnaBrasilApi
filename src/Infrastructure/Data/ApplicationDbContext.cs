@@ -120,15 +120,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
             .WithMany(s => s.FomentoLinhasAcoes)
             .HasForeignKey(sc => sc.LinhaAcaoId);
 
-        builder.Entity<Aluno>()
-        .HasMany(e => e.Modalidades)
-        .WithMany(e => e.Alunos)
-        .UsingEntity(
-            "AlunosModalidades",
-            r => r.HasOne(typeof(Modalidade)).WithMany().HasForeignKey("ModalidadeId").HasPrincipalKey(nameof(Modalidade.Id)),
-            l => l.HasOne(typeof(Aluno)).WithMany().HasForeignKey("AlunoId").HasPrincipalKey(nameof(Aluno.Id)),
-            j => j.HasKey("AlunoId", "ModalidadeId"));
-
         #endregion
 
         #region Required one-to-one with primary key to primary key relationship

@@ -4,7 +4,9 @@ using DnaBrasilApi.Application.Materiais.Commands.DeleteMaterial;
 using DnaBrasilApi.Application.Materiais.Commands.UpdateMaterial;
 using DnaBrasilApi.Application.Materiais.Queries;
 using DnaBrasilApi.Application.Materiais.Queries.GetMateriaisAll;
-using DnaBrasilApi.Application.Materiais.Queries.GetMateriaisAllByTipoMaterialId;
+using DnaBrasilApi.Application.Materiais.Queries.GetMateriaisByTipoMaterialId;
+using DnaBrasilApi.Application.Materiais.Queries.GetMateriaisByFilter;
+using Microsoft.AspNetCore.Mvc;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -25,7 +27,8 @@ public class Materiais : EndpointGroupBase
             .MapPut(UpdateMaterial, "{id}")
             .MapDelete(DeleteMaterial, "{id}")
             .MapGet(GetMaterialById, "Material/{id}")
-            .MapGet(GetMateriaisAllByTipoMaterialId, "TipoMaterial/{id}");
+            .MapGet(GetMateriaisByTipoMaterialId, "TipoMaterial/{id}")
+            .MapPost(GetMateriaisByFilter, "Filter"); ;
     }
     #endregion
 
@@ -82,6 +85,19 @@ public class Materiais : EndpointGroupBase
     }
 
     /// <summary>
+    /// Endpoint que busca Materiais por Filtro 
+    /// </summary>
+    /// <param name="sender">sender</param>
+    /// <param name="search">filtro para pesquisas de Materiais</param>
+    /// <returns>retorna a lista de Materiais</returns>
+    public async Task<MateriaisFilterDto> GetMateriaisByFilter(ISender sender, [FromBody] MateriaisFilterDto search)
+    {
+        var result = await sender.Send(new GetMateriaisByFilterQuery() { SearchFilter = search });
+
+        return new MateriaisFilterDto { Materiais = result };
+    }
+
+    /// <summary>
     /// Endpoint que busca uma única Material
     /// </summary>
     /// <param name="sender">Sender</param>
@@ -98,9 +114,9 @@ public class Materiais : EndpointGroupBase
     /// <param name="sender">Sender</param>
     /// <param name="id">Id do módulo Ead</param>
     /// <returns>Retorna uma lista de Materiais</returns>
-    public async Task<List<MaterialDto>> GetMateriaisAllByTipoMaterialId(ISender sender, int id)
+    public async Task<List<MaterialDto>> GetMateriaisByTipoMaterialId(ISender sender, int id)
     {
-        return await sender.Send(new GetMateriaisAllByTipoMaterialIdQuery() { TipoMaterialId = id });
+        return await sender.Send(new GetMateriaisByTipoMaterialIdQuery() { TipoMaterialId = id });
     }
     #endregion
 

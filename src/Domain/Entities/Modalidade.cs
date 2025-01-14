@@ -23,7 +23,6 @@ public class Modalidade : BaseAuditableEntity
     public int AlturaIni { get; set; }
     public int AlturaFim { get; set; }
     public bool Status { get; set; }
-    public List<Aluno>? Alunos { get; set; }
     public LinhaAcao? LinhaAcao { get; set; }
     public byte[]? ByteImage { get; set; }
     public IList<ProfissionalModalidade>? ProfissionalModalidades { get; set; }

@@ -1,7 +1,6 @@
 ﻿using DnaBrasilApi.Application.Alunos.Commands.CreateAluno;
 using DnaBrasilApi.Application.Alunos.Commands.DeleteAluno;
 using DnaBrasilApi.Application.Alunos.Commands.UpdateAluno;
-using DnaBrasilApi.Application.Alunos.Commands.UpdateAlunoAmbientes;
 using DnaBrasilApi.Application.Alunos.Commands.UpdateAlunoFoto;
 using DnaBrasilApi.Application.Alunos.Commands.UpdateQrCode;
 using DnaBrasilApi.Application.Alunos.Queries;
@@ -34,7 +33,7 @@ public class Alunos : EndpointGroupBase
             .MapPost(CreateAluno)
             .MapPut(UpdateAluno, "{id}")
             .MapPut(UpdateAlunoFoto, "/UploadFoto/{id}")
-            .MapPut(UpdateAlunoModalidades, "/Modalidades")
+            //.MapPut(UpdateAlunoModalidades, "/Modalidades")
             .MapPut(UpdateQrCode, "/QrCode/{id}")
             .MapDelete(DeleteAluno, "{id}")
             .MapPost(GetAlunosByFilter, "Filter");
@@ -96,19 +95,19 @@ public class Alunos : EndpointGroupBase
         return result;
     }
 
-    /// <summary>
-    /// Endpoint para alteração de Aluno Modalidade
-    /// </summary>
-    /// <param name="sender">Sender</param>
-    /// <param name="id">Id de alteração de Aluno Modalidade</param>
-    /// <param name="command">Objeto de alteração de Aluno Modalidade</param>
-    /// <returns>Retorna true ou false</returns>
-    public async Task<IResult> UpdateAlunoModalidades(ISender sender, UpdateAlunoModalidadesCommand command)
-    {
-        await sender.Send(command);
+    ///// <summary>
+    ///// Endpoint para alteração de Aluno Modalidade
+    ///// </summary>
+    ///// <param name="sender">Sender</param>
+    ///// <param name="id">Id de alteração de Aluno Modalidade</param>
+    ///// <param name="command">Objeto de alteração de Aluno Modalidade</param>
+    ///// <returns>Retorna true ou false</returns>
+    //public async Task<IResult> UpdateAlunoModalidades(ISender sender, UpdateAlunoModalidadesCommand command)
+    //{
+    //    await sender.Send(command);
 
-        return Results.NoContent();
-    }
+    //    return Results.NoContent();
+    //}
 
     /// <summary>
     /// Endpoint para exclusão de Aluno

@@ -2,5 +2,5 @@
 
 public class GrupoMaterial : BaseAuditableEntity
 {
-    public required String Nome { get; set; }
+    public required string Nome { get; set; }
 }
