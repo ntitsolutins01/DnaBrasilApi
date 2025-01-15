@@ -4,6 +4,7 @@ using DnaBrasilApi.Application.Modalidades.Commands.UpdateModalidade;
 using DnaBrasilApi.Application.Modalidades.Queries;
 using DnaBrasilApi.Application.Modalidades.Queries.GetModalidadeById;
 using DnaBrasilApi.Application.Modalidades.Queries.GetAmbientesAll;
+using DnaBrasilApi.Application.Modalidades.Queries.GetModalidadesByLinhaAcaoId;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -26,7 +27,8 @@ public class Modalidades : EndpointGroupBase
             .MapPost(CreateModalidade)
             .MapPut(UpdateModalidade, "{id}")
             .MapDelete(DeleteModalidade, "{id}")
-            .MapGet(GetModalidadeById, "{id}");
+            .MapGet(GetModalidadeById, "{id}")
+            .MapGet(GetModalidadesByLinhaAcaoId, "/LinhaAcao/{id}");
     }
     #endregion
 
@@ -89,6 +91,17 @@ public class Modalidades : EndpointGroupBase
     public async Task<ModalidadeDto> GetModalidadeById(ISender sender, int id)
     {
         return await sender.Send(new GetModalidadeByIdQuery() { Id = id });
+    }
+
+    /// <summary>
+    /// Endpoint que busca todas as modalidades por linha de ação
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="id">Id da linha de ação a ser buscada</param>
+    /// <returns>Retorna a lista de Modalidades</returns>
+    public async Task<List<ModalidadeDto>> GetModalidadesByLinhaAcaoId(ISender sender, int id)
+    {
+        return await sender.Send(new GetModalidadesByLinhaAcaoIdQuery(){ LinhaAcaoId = id });
     }
     #endregion
 }
