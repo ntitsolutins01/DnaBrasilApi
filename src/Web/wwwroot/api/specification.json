@@ -10939,6 +10939,37 @@
         }
       }
     },
+    "/api/Usuarios/AspNetUser/{aspNetUserId}": {
+      "get": {
+        "tags": [
+          "Usuarios"
+        ],
+        "operationId": "GetUsuarioByAspNetUserId",
+        "parameters": [
+          {
+            "name": "aspNetUserId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsuarioDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Vocacionais/{id}": {
       "get": {
         "tags": [
