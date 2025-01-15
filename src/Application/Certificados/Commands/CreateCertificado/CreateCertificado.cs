@@ -1,14 +1,17 @@
-﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Certificados.Commands.CreateCertificado;
 public record CreateCertificadoCommand : IRequest<int>
 {
-    public required int CursoId { get; set; }
-    public required Byte[] ImgFrente { get; set; }
-    public Byte[]? ImgVerso { get; set; }
-    public required string HtmlFrente { get; set; }
-    public required string HtmlVerso { get; set; }
+    public required int CursoId { get; init; }
+    public required byte[] ImgFrente { get; init; }
+    public byte[]? ImgVerso { get; init; }
+    public string? NomeFotoFrente { get; set; }
+    public string? NomeFotoVerso { get; set; }
+    public required string HtmlFrente { get; init; }
+    public required string HtmlVerso { get; init; }
+
     public bool Status { get; init; } = true;
 }
 
@@ -33,6 +36,8 @@ public class CreateCertificadoCommandHandler : IRequestHandler<CreateCertificado
             Curso = curso,
             ImagemFrente = request.ImgFrente,
             ImagemVerso = request.ImgVerso,
+            NomeFotoFrente = request.NomeFotoFrente,
+            NomeFotoVerso = request.NomeFotoVerso,
             HtmlFrente = request.HtmlFrente,
             HtmlVerso = request.HtmlVerso,
             Status = request.Status

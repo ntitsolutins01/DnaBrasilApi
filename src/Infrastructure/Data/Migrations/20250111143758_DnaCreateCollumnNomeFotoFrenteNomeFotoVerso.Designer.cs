@@ -4,6 +4,7 @@ using DnaBrasilApi.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DnaBrasilApi.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250111143758_DnaCreateCollumnNomeFotoFrenteNomeFotoVerso")]
+    partial class DnaCreateCollumnNomeFotoFrenteNomeFotoVerso
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,6 +24,21 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("AlunosModalidades", b =>
+                {
+                    b.Property<int>("AlunoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ModalidadeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("AlunoId", "ModalidadeId");
+
+                    b.HasIndex("ModalidadeId");
+
+                    b.ToTable("AlunosModalidades");
+                });
 
             modelBuilder.Entity("DnaBrasilApi.Domain.Entities.Aluno", b =>
                 {
@@ -181,21 +199,6 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.HasIndex("ProfissionalId");
 
                     b.ToTable("Alunos");
-                });
-
-            modelBuilder.Entity("DnaBrasilApi.Domain.Entities.AlunoModalidade", b =>
-                {
-                    b.Property<int>("AlunoId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ModalidadeId")
-                        .HasColumnType("int");
-
-                    b.HasKey("AlunoId", "ModalidadeId");
-
-                    b.HasIndex("ModalidadeId");
-
-                    b.ToTable("AlunoModalidades");
                 });
 
             modelBuilder.Entity("DnaBrasilApi.Domain.Entities.Atividade", b =>
@@ -3306,6 +3309,21 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("AlunosModalidades", b =>
+                {
+                    b.HasOne("DnaBrasilApi.Domain.Entities.Aluno", null)
+                        .WithMany()
+                        .HasForeignKey("AlunoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DnaBrasilApi.Domain.Entities.Modalidade", null)
+                        .WithMany()
+                        .HasForeignKey("ModalidadeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("DnaBrasilApi.Domain.Entities.Aluno", b =>
                 {
                     b.HasOne("DnaBrasilApi.Domain.Entities.Deficiencia", "Deficiencia")
@@ -3356,25 +3374,6 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.Navigation("Parceiro");
 
                     b.Navigation("Profissional");
-                });
-
-            modelBuilder.Entity("DnaBrasilApi.Domain.Entities.AlunoModalidade", b =>
-                {
-                    b.HasOne("DnaBrasilApi.Domain.Entities.Aluno", "Aluno")
-                        .WithMany("AlunoModalidades")
-                        .HasForeignKey("AlunoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DnaBrasilApi.Domain.Entities.Modalidade", "Modalidade")
-                        .WithMany("AlunoModalidades")
-                        .HasForeignKey("ModalidadeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Aluno");
-
-                    b.Navigation("Modalidade");
                 });
 
             modelBuilder.Entity("DnaBrasilApi.Domain.Entities.Atividade", b =>
@@ -4176,8 +4175,6 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("DnaBrasilApi.Domain.Entities.Aluno", b =>
                 {
-                    b.Navigation("AlunoModalidades");
-
                     b.Navigation("Matricula");
 
                     b.Navigation("QualidadeDeVidas");
@@ -4221,8 +4218,6 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("DnaBrasilApi.Domain.Entities.Modalidade", b =>
                 {
-                    b.Navigation("AlunoModalidades");
-
                     b.Navigation("ProfissionalModalidades");
                 });
 
