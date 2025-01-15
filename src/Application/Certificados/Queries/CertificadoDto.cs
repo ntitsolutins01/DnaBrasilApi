@@ -7,6 +7,7 @@ public class CertificadoDto
 {
     public required int Id { get; init; }
     public required int CursoId { get; init; }
+    public string? TituloCurso { get; init; }
     public required byte[] ImagemFrente { get; init; }
     public byte[]? ImagemVerso { get; init; }
     public string? NomeFotoFrente { get; set; }
@@ -19,7 +20,8 @@ public class CertificadoDto
     {
         public Mapping()
         {
-            CreateMap<Certificado, CertificadoDto>();
+            CreateMap<Certificado, CertificadoDto>()
+                .ForMember(dest => dest.TituloCurso, opt => opt.MapFrom(src => src.Curso.Titulo));
         }
     }
 }
