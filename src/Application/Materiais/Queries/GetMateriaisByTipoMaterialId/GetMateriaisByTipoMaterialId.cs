@@ -1,24 +1,24 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasilApi.Application.Materiais.Queries.GetMateriaisAllByTipoMaterialId;
+namespace DnaBrasilApi.Application.Materiais.Queries.GetMateriaisByTipoMaterialId;
 
-public record GetMateriaisAllByTipoMaterialIdQuery : IRequest<List<MaterialDto>>
+public record GetMateriaisByTipoMaterialIdQuery : IRequest<List<MaterialDto>>
 {
     public required int TipoMaterialId { get; init; }
 }
 
-public class GetMateriaisAllByTipoMaterialIdQueryHandler : IRequestHandler<GetMateriaisAllByTipoMaterialIdQuery, List<MaterialDto>>
+public class GetMateriaisByTipoMaterialIdQueryHandler : IRequestHandler<GetMateriaisByTipoMaterialIdQuery, List<MaterialDto>>
 {
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
 
-    public GetMateriaisAllByTipoMaterialIdQueryHandler(IApplicationDbContext context, IMapper mapper)
+    public GetMateriaisByTipoMaterialIdQueryHandler(IApplicationDbContext context, IMapper mapper)
     {
         _context = context;
         _mapper = mapper;
     }
 
-    public async Task<List<MaterialDto>> Handle(GetMateriaisAllByTipoMaterialIdQuery request, CancellationToken cancellationToken)
+    public async Task<List<MaterialDto>> Handle(GetMateriaisByTipoMaterialIdQuery request, CancellationToken cancellationToken)
     {
         var result = await _context.Materiais
             .Include(i => i.TipoMaterial)
