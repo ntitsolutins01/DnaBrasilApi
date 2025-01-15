@@ -74,6 +74,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<FomentoLocalidade> FomentoLocalidades => Set<FomentoLocalidade>();
     public DbSet<FomentoLinhaAcao> FomentoLinhasAcoes => Set<FomentoLinhaAcao>();
     public DbSet<Certificado> Certificados => Set<Certificado>();
+    public DbSet<AlunoModalidade> AlunoModalidades => Set<AlunoModalidade>();
 
 
     protected override void OnModelCreating(ModelBuilder builder)
@@ -119,6 +120,18 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
             .HasOne<LinhaAcao>(sc => sc.LinhaAcao)
             .WithMany(s => s.FomentoLinhasAcoes)
             .HasForeignKey(sc => sc.LinhaAcaoId);
+
+        builder.Entity<AlunoModalidade>().HasKey(sc => new { sc.AlunoId, sc.ModalidadeId });
+
+        builder.Entity<AlunoModalidade>()
+            .HasOne<Aluno>(sc => sc.Aluno)
+            .WithMany(s => s.AlunoModalidades)
+            .HasForeignKey(sc => sc.AlunoId);
+
+        builder.Entity<AlunoModalidade>()
+            .HasOne<Modalidade>(sc => sc.Modalidade)
+            .WithMany(s => s.AlunoModalidades)
+            .HasForeignKey(sc => sc.ModalidadeId);
 
         #endregion
 

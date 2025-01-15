@@ -6021,104 +6021,6 @@
         }
       }
     },
-    "/api/Matriculas": {
-      "get": {
-        "tags": [
-          "Matriculas"
-        ],
-        "operationId": "GetMatriculasAll",
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/MatriculaDto"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Matriculas"
-        ],
-        "operationId": "CreateMatricula",
-        "requestBody": {
-          "x-name": "command",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateMatriculaCommand"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 1
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/Matriculas/{id}": {
-      "put": {
-        "tags": [
-          "Matriculas"
-        ],
-        "operationId": "UpdateMatricula",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "x-position": 1
-          }
-        ],
-        "requestBody": {
-          "x-name": "command",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateMatriculaCommand"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 2
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "boolean"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/MetricasImc": {
       "get": {
         "tags": [
@@ -11109,83 +11011,6 @@
         }
       }
     },
-    "/api/Vouchers": {
-      "post": {
-        "tags": [
-          "Vouchers"
-        ],
-        "operationId": "CreateVoucher",
-        "requestBody": {
-          "x-name": "command",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateVoucherCommand"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 1
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/Vouchers/{id}": {
-      "put": {
-        "tags": [
-          "Vouchers"
-        ],
-        "operationId": "UpdateVoucher",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "x-position": 1
-          }
-        ],
-        "requestBody": {
-          "x-name": "command",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateVoucherCommand"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 2
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "boolean"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/WeatherForecasts": {
       "get": {
         "tags": [
@@ -11354,6 +11179,10 @@
             "nullable": true
           },
           "municipioId": {
+            "type": "string",
+            "nullable": true
+          },
+          "modalidadesIds": {
             "type": "string",
             "nullable": true
           }
@@ -11542,6 +11371,10 @@
           "convidado": {
             "type": "boolean",
             "nullable": true
+          },
+          "modalidadesIds": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -11667,9 +11500,8 @@
             "format": "int32",
             "nullable": true
           },
-          "modalidadeId": {
-            "type": "integer",
-            "format": "int32",
+          "modalidadesIds": {
+            "type": "string",
             "nullable": true
           }
         }
@@ -14876,6 +14708,13 @@
               },
               "convidado": {
                 "type": "boolean"
+              },
+              "alunoModalidades": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "$ref": "#/components/schemas/AlunoModalidade"
+                }
               }
             }
           }
@@ -15372,10 +15211,47 @@
                 "items": {
                   "$ref": "#/components/schemas/ProfissionalModalidade"
                 }
+              },
+              "alunoModalidades": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "$ref": "#/components/schemas/AlunoModalidade"
+                }
               }
             }
           }
         ]
+      },
+      "AlunoModalidade": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "alunoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "modalidadeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "aluno": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Aluno"
+              }
+            ]
+          },
+          "modalidade": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Modalidade"
+              }
+            ]
+          }
+        }
       },
       "QualidadeDeVida": {
         "allOf": [
@@ -16616,180 +16492,6 @@
             "type": "integer",
             "format": "int32",
             "nullable": true
-          }
-        }
-      },
-      "MatriculaDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "dtVencimentoParq": {
-            "type": "string",
-            "nullable": true
-          },
-          "dtVencimentoAtestadoMedico": {
-            "type": "string",
-            "nullable": true
-          },
-          "nomeResponsavel1": {
-            "type": "string",
-            "nullable": true
-          },
-          "parentescoResponsavel1": {
-            "type": "string",
-            "nullable": true
-          },
-          "cpfResponsavel1": {
-            "type": "string",
-            "nullable": true
-          },
-          "nomeResponsavel2": {
-            "type": "string",
-            "nullable": true
-          },
-          "parentescoResponsavel2": {
-            "type": "string",
-            "nullable": true
-          },
-          "cpfResponsavel2": {
-            "type": "string",
-            "nullable": true
-          },
-          "nomeResponsavel3": {
-            "type": "string",
-            "nullable": true
-          },
-          "parentescoResponsavel3": {
-            "type": "string",
-            "nullable": true
-          },
-          "cpfResponsavel3": {
-            "type": "string",
-            "nullable": true
-          },
-          "aluno": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/AlunoDto"
-              }
-            ]
-          }
-        }
-      },
-      "CreateMatriculaCommand": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "dtVencimentoParq": {
-            "type": "string",
-            "nullable": true
-          },
-          "dtVencimentoAtestadoMedico": {
-            "type": "string",
-            "nullable": true
-          },
-          "nomeResponsavel1": {
-            "type": "string",
-            "nullable": true
-          },
-          "parentescoResponsavel1": {
-            "type": "string",
-            "nullable": true
-          },
-          "cpfResponsavel1": {
-            "type": "string",
-            "nullable": true
-          },
-          "nomeResponsavel2": {
-            "type": "string",
-            "nullable": true
-          },
-          "parentescoResponsavel2": {
-            "type": "string",
-            "nullable": true
-          },
-          "cpfResponsavel2": {
-            "type": "string",
-            "nullable": true
-          },
-          "nomeResponsavel3": {
-            "type": "string",
-            "nullable": true
-          },
-          "parentescoResponsavel3": {
-            "type": "string",
-            "nullable": true
-          },
-          "cpfResponsavel3": {
-            "type": "string",
-            "nullable": true
-          },
-          "alunoId": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "UpdateMatriculaCommand": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "dtVencimentoParq": {
-            "type": "string",
-            "nullable": true
-          },
-          "dtVencimentoAtestadoMedico": {
-            "type": "string",
-            "nullable": true
-          },
-          "nomeResponsavel1": {
-            "type": "string",
-            "nullable": true
-          },
-          "parentescoResponsavel1": {
-            "type": "string",
-            "nullable": true
-          },
-          "cpfResponsavel1": {
-            "type": "string",
-            "nullable": true
-          },
-          "nomeResponsavel2": {
-            "type": "string",
-            "nullable": true
-          },
-          "parentescoResponsavel2": {
-            "type": "string",
-            "nullable": true
-          },
-          "cpfResponsavel2": {
-            "type": "string",
-            "nullable": true
-          },
-          "nomeResponsavel3": {
-            "type": "string",
-            "nullable": true
-          },
-          "parentescoResponsavel3": {
-            "type": "string",
-            "nullable": true
-          },
-          "cpfResponsavel3": {
-            "type": "string",
-            "nullable": true
-          },
-          "alunoId": {
-            "type": "integer",
-            "format": "int32"
           }
         }
       },
@@ -20068,69 +19770,6 @@
           },
           "statusVocacional": {
             "type": "string"
-          }
-        }
-      },
-      "CreateVoucherCommand": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "local": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/Localidade"
-              }
-            ]
-          },
-          "descricao": {
-            "type": "string",
-            "nullable": true
-          },
-          "turma": {
-            "type": "string",
-            "nullable": true
-          },
-          "serie": {
-            "type": "string",
-            "nullable": true
-          },
-          "aluno": {
-            "$ref": "#/components/schemas/Aluno"
-          }
-        }
-      },
-      "UpdateVoucherCommand": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "local": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/Localidade"
-              }
-            ]
-          },
-          "descricao": {
-            "type": "string",
-            "nullable": true
-          },
-          "turma": {
-            "type": "string",
-            "nullable": true
-          },
-          "serie": {
-            "type": "string",
-            "nullable": true
           }
         }
       },
