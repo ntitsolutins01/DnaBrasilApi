@@ -6337,6 +6337,41 @@
         }
       }
     },
+    "/api/Modalidades/LinhaAcao/{id}": {
+      "get": {
+        "tags": [
+          "Modalidades"
+        ],
+        "operationId": "GetModalidadesByLinhaAcaoId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ModalidadeDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/ModulosEad": {
       "get": {
         "tags": [
@@ -16693,17 +16728,18 @@
           "status": {
             "type": "boolean"
           },
-          "linhaAcao": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/LinhaAcaoDto"
-              }
-            ]
-          },
           "byteImage": {
             "type": "string",
             "format": "byte",
+            "nullable": true
+          },
+          "linhaAcaoId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "linhaAcao": {
+            "type": "string",
             "nullable": true
           }
         }
