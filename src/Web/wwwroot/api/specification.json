@@ -11181,6 +11181,10 @@
           "municipioId": {
             "type": "string",
             "nullable": true
+          },
+          "modalidadesIds": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
