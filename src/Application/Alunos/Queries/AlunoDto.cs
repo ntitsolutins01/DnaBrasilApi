@@ -39,6 +39,7 @@ public class AlunoDto
     public string? DeficienciaId { get; set; }
     public string? ProfissionalId { get; set; }
     public string? MunicipioId { get; set; }
+    public string? ModalidadesIds { get; set; }
     private class Mapping : Profile
     {
         public Mapping()
@@ -61,7 +62,13 @@ public class AlunoDto
                         src.Municipio!.Nome!.ToString() + " / " + src.Municipio!.Estado!.Sigla!.ToString()))
                 .ForMember(dest => dest.LinhaAcaoId, opt => opt.MapFrom(src => src.LinhaAcao!.Id.ToString()))
                 .ForMember(dest => dest.FomentoId, opt => opt.MapFrom(src => src.Fomento!.Id.ToString()))
-                .ForMember(dest => dest.Estado, opt => opt.MapFrom(src => src.Municipio.Estado!.Sigla));
+                .ForMember(dest => dest.Estado, opt => opt.MapFrom(src => src.Municipio.Estado!.Sigla))
+                .ForMember(dest => dest.ModalidadesIds,
+                    opt => opt.MapFrom(src =>
+                        src.AlunoModalidades == null
+                            ? ""
+                            : string.Join(",",
+                                src.AlunoModalidades!.Select(s => s.ModalidadeId.ToString()).ToArray())));
         }
     }
 

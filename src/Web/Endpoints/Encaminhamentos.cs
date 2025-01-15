@@ -24,7 +24,7 @@ public class Encaminhamentos : EndpointGroupBase
             .MapPost(CreateEncaminhamento)
             .MapPut(UpdateEncaminhamento, "{id}")
             .MapDelete(DeleteEncaminhamento, "{id}")
-            .MapGet(GetEncaminhamentoById, "Encaminhamento/{id}")
+            .MapGet(GetEncaminhamentoById, "{id}")
             .MapGet(GetEncaminhamentosByTipoLaudoId,"TipoLaudo/{id}");
     }
     #endregion

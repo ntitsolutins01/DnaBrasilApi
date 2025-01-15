@@ -26,7 +26,6 @@ public class Aluno : BaseAuditableEntity
     public bool Habilitado { get; set; }
     public int? IdCliente { get; set; }
     public Deficiencia? Deficiencia { get; set; }
-    public List<Modalidade>? Modalidades { get; set; }
     public Parceiro? Parceiro { get; set; }
     public Matricula? Matricula { get; set; }
     public Voucher? Voucher { get; set; }
@@ -40,4 +39,5 @@ public class Aluno : BaseAuditableEntity
     public bool? UtilizacaoImagem { get; set; } = false;
     public bool? CopiaDocAlunoResponsavel { get; set; } = false;
     public bool Convidado { get; set; } = false;
+    public IList<AlunoModalidade>? AlunoModalidades { get; set; }
 }
