@@ -29,13 +29,16 @@ public class ModalidadeDto
     public int AlturaIni { get; set; }
     public int AlturaFim { get; set; }
     public bool Status { get; set; } = true;
-    public LinhaAcaoDto? LinhaAcao { get; set; }
     public byte[]? ByteImage { get; set; }
+    public int? LinhaAcaoId { get; set; }
+    public string? LinhaAcao { get; set; }
     private class Mapping : Profile
     {
         public Mapping()
         {
-            CreateMap<Modalidade, ModalidadeDto>();
+            CreateMap<Modalidade, ModalidadeDto>()
+                .ForMember(dest => dest.LinhaAcaoId, opt => opt.MapFrom(src => src.LinhaAcao!.Id))
+                .ForMember(dest => dest.LinhaAcao, opt => opt.MapFrom(src => src.LinhaAcao!.Nome));
         }
     }
 }
