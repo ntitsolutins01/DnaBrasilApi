@@ -12024,6 +12024,10 @@
             "type": "integer",
             "format": "int32"
           },
+          "tituloCurso": {
+            "type": "string",
+            "nullable": true
+          },
           "imagemFrente": {
             "type": "string",
             "format": "byte"
