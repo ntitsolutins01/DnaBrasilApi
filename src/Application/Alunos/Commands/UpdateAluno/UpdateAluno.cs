@@ -34,7 +34,7 @@ public record UpdateAlunoCommand : IRequest<bool>
     public int? ParceiroId { get; init; }
     public string? Etnia { get; set; }
     public int? ProfissionalId { get; set; }
-    public int? ModalidadeId { get; set; }
+    public string? ModalidadesIds { get; init; }
 }
 
 public class UpdateAlunoCommandHandler : IRequestHandler<UpdateAlunoCommand, bool>
@@ -53,8 +53,6 @@ public class UpdateAlunoCommandHandler : IRequestHandler<UpdateAlunoCommand, boo
 
         Guard.Against.NotFound(request.Id, entity);
 
-        int result;
-        
         Deficiencia? deficiencia = null;
 
         if (request.DeficienciaId.HasValue && request.DeficienciaId.Value > 0)
@@ -99,16 +97,6 @@ public class UpdateAlunoCommandHandler : IRequestHandler<UpdateAlunoCommand, boo
             Guard.Against.NotFound((int)request.LinhaAcaoId, profissional);
         }
 
-        Modalidade? modalidade = null;
-
-        if (request.ModalidadeId != null)
-        {
-            modalidade = await _context.Modalidades.FindAsync(new object[] { request.ModalidadeId }, cancellationToken);
-
-            Guard.Against.NotFound((int)request.ModalidadeId, profissional);
-        }
-
-
         entity.AspNetUserId = request.AspNetUserId;
         entity.Nome = request.Nome!;
         entity.Email = request.Email!;
@@ -135,9 +123,19 @@ public class UpdateAlunoCommandHandler : IRequestHandler<UpdateAlunoCommand, boo
             entity.ByteImage = request.ByteImage;
         }
 
+        var listAlunoModalidades = new List<AlunoModalidade>();
 
-        result = await _context.SaveChangesAsync(cancellationToken);
+        if (!string.IsNullOrEmpty(request.ModalidadesIds))
+        {
+            int[] arrLocsIds = request.ModalidadesIds.Split(',').Select(n => Convert.ToInt32(n)).ToArray();
 
-        return result == 1;//true
+            listAlunoModalidades.AddRange(arrLocsIds.Select(item => new AlunoModalidade { ModalidadeId = item, AlunoId = entity.Id }));
+        }
+
+        entity.AlunoModalidades = listAlunoModalidades;
+
+        var result = await _context.SaveChangesAsync(cancellationToken);
+
+        return result >= 1;//true
     }
 }

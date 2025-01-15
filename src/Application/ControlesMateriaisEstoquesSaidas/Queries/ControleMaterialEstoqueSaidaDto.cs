@@ -6,14 +6,18 @@ public class ControleMaterialEstoqueSaidaDto
 {
     public required int Id { get; init; }
     public required int MaterialId { get; init; }
+    public required string TituloMaterial { get; init; }
     public required int Quantidade { get; init; }
-    public String? Solicitante { get; init; }
+    public string? Solicitante { get; init; }
+    public DateTimeOffset? Created { get; init; }
 
     private class Mapping : Profile
     {
         public Mapping()
         {
-            CreateMap<ControleMaterialEstoqueSaida, ControleMaterialEstoqueSaidaDto>();
+            CreateMap<ControleMaterialEstoqueSaida, ControleMaterialEstoqueSaidaDto>()
+                .ForMember(dest => dest.TituloMaterial, opt => opt.MapFrom(src => src.Material.Descricao))
+                .ForMember(dest => dest.Created, opt => opt.MapFrom(src => src.Created));
         }
     }
 }

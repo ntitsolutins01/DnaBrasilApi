@@ -74,6 +74,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<FomentoLocalidade> FomentoLocalidades => Set<FomentoLocalidade>();
     public DbSet<FomentoLinhaAcao> FomentoLinhasAcoes => Set<FomentoLinhaAcao>();
     public DbSet<Certificado> Certificados => Set<Certificado>();
+    public DbSet<AlunoModalidade> AlunoModalidades => Set<AlunoModalidade>();
 
 
     protected override void OnModelCreating(ModelBuilder builder)
@@ -120,14 +121,17 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
             .WithMany(s => s.FomentoLinhasAcoes)
             .HasForeignKey(sc => sc.LinhaAcaoId);
 
-        builder.Entity<Aluno>()
-        .HasMany(e => e.Modalidades)
-        .WithMany(e => e.Alunos)
-        .UsingEntity(
-            "AlunosModalidades",
-            r => r.HasOne(typeof(Modalidade)).WithMany().HasForeignKey("ModalidadeId").HasPrincipalKey(nameof(Modalidade.Id)),
-            l => l.HasOne(typeof(Aluno)).WithMany().HasForeignKey("AlunoId").HasPrincipalKey(nameof(Aluno.Id)),
-            j => j.HasKey("AlunoId", "ModalidadeId"));
+        builder.Entity<AlunoModalidade>().HasKey(sc => new { sc.AlunoId, sc.ModalidadeId });
+
+        builder.Entity<AlunoModalidade>()
+            .HasOne<Aluno>(sc => sc.Aluno)
+            .WithMany(s => s.AlunoModalidades)
+            .HasForeignKey(sc => sc.AlunoId);
+
+        builder.Entity<AlunoModalidade>()
+            .HasOne<Modalidade>(sc => sc.Modalidade)
+            .WithMany(s => s.AlunoModalidades)
+            .HasForeignKey(sc => sc.ModalidadeId);
 
         #endregion
 

@@ -39,6 +39,7 @@ public record CreateAlunoCommand : IRequest<int>
     public bool? UtilizacaoImagem { get; init; }
     public bool? CopiaDocAlunoResponsavel { get; init; }
     public bool? Convidado { get; init; } = false;
+    public string? ModalidadesIds { get; init; }
 }
 
 public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int>
@@ -132,6 +133,19 @@ public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int
         };
 
         _context.Alunos.Add(entity);
+
+        await _context.SaveChangesAsync(cancellationToken);
+
+        var listAlunoModalidades = new List<AlunoModalidade>();
+
+        if (!string.IsNullOrEmpty(request.ModalidadesIds))
+        {
+            int[] arrModIds = request.ModalidadesIds.Split(',').Select(n => Convert.ToInt32(n)).ToArray();
+
+            listAlunoModalidades.AddRange(arrModIds.Select(item => new AlunoModalidade() { ModalidadeId = item, AlunoId = entity.Id }));
+        }
+
+        entity.AlunoModalidades = listAlunoModalidades;
 
         await _context.SaveChangesAsync(cancellationToken);
 

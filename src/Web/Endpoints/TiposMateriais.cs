@@ -4,7 +4,7 @@ using DnaBrasilApi.Application.TiposMateriais.Commands.DeleteTipoMaterial;
 using DnaBrasilApi.Application.TiposMateriais.Commands.UpdateTipoMaterial;
 using DnaBrasilApi.Application.TiposMateriais.Queries;
 using DnaBrasilApi.Application.TiposMateriais.Queries.GetTiposMateriaisAll;
-using DnaBrasilApi.Application.TiposMateriais.Queries.GetTiposMateriaisAllByGrupoMaterialId;
+using DnaBrasilApi.Application.TiposMateriais.Queries.GetTiposMateriaisByGrupoMaterialId;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -25,7 +25,7 @@ public class TiposMateriais : EndpointGroupBase
             .MapPut(UpdateTipoMaterial, "{id}")
             .MapDelete(DeleteTipoMaterial, "{id}")
             .MapGet(GetTipoMaterialById, "TipoMaterial/{id}")
-            .MapGet(GetTiposMateriaisAllByGrupoMaterialId, "GrupoMaterial/{id}");
+            .MapGet(GetTiposMateriaisByGrupoMaterialId, "GrupoMaterial/{id}");
     }
     #endregion
 
@@ -98,9 +98,9 @@ public class TiposMateriais : EndpointGroupBase
     /// <param name="sender">Sender</param>
     /// <param name="id">Id do módulo Ead</param>
     /// <returns>Retorna uma lista de TiposMateriais</returns>
-    public async Task<List<TipoMaterialDto>> GetTiposMateriaisAllByGrupoMaterialId(ISender sender, int id)
+    public async Task<List<TipoMaterialDto>> GetTiposMateriaisByGrupoMaterialId(ISender sender, int id)
     {
-        return await sender.Send(new GetTiposMateriaisAllByGrupoMaterialIdQuery() { GrupoMaterialId = id });
+        return await sender.Send(new GetTiposMateriaisByGrupoMaterialIdQuery() { GrupoMaterialId = id });
     }
     #endregion
 
