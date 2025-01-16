@@ -11676,18 +11676,13 @@
             "format": "int32"
           },
           "turma": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "hrInicial": {
-            "type": "string",
-            "format": "duration",
-            "nullable": true
+            "type": "string"
           },
           "hrFinal": {
-            "type": "string",
-            "format": "duration",
-            "nullable": true
+            "type": "string"
           },
           "profissionalId": {
             "type": "integer",
@@ -11696,6 +11691,13 @@
           "localidadeId": {
             "type": "integer",
             "format": "int32"
+          },
+          "quantidadeAluno": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "diasSemana": {
+            "type": "string"
           }
         }
       },
@@ -11708,18 +11710,20 @@
             "format": "int32"
           },
           "turma": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "hrInicial": {
-            "type": "string",
-            "format": "duration",
-            "nullable": true
+            "type": "string"
           },
           "hrFinal": {
-            "type": "string",
-            "format": "duration",
-            "nullable": true
+            "type": "string"
+          },
+          "quantidadeAluno": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "diasSemana": {
+            "type": "string"
           }
         }
       },

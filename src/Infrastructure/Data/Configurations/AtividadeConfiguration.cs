@@ -9,9 +9,9 @@ public class Configuration : IEntityTypeConfiguration<Atividade>
     public void Configure(EntityTypeBuilder<Atividade> builder)
     {
         builder.Property(t => t.Turma)
-            .HasMaxLength(10);
-        builder.Property(t => t.DiaSemana)
-            .HasMaxLength(50);
+            .HasMaxLength(3);
+        builder.Property(t => t.DiasSemana)
+            .HasMaxLength(100);
 
     }
 }
