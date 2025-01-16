@@ -12028,20 +12028,22 @@
             "type": "integer",
             "format": "int32"
           },
-          "imagemFrente": {
+          "tituloCurso": {
             "type": "string",
-            "format": "byte"
+            "nullable": true
+          },
+          "imagemFrente": {
+            "type": "string"
           },
           "imagemVerso": {
             "type": "string",
-            "format": "byte",
             "nullable": true
           },
-          "nomeFotoFrente": {
+          "nomeImagemFrente": {
             "type": "string",
             "nullable": true
           },
-          "nomeFotoVerso": {
+          "nomeImagemVerso": {
             "type": "string",
             "nullable": true
           },
@@ -12064,20 +12066,18 @@
             "type": "integer",
             "format": "int32"
           },
-          "imgFrente": {
-            "type": "string",
-            "format": "byte"
+          "imagemFrente": {
+            "type": "string"
           },
-          "imgVerso": {
-            "type": "string",
-            "format": "byte",
-            "nullable": true
-          },
-          "nomeFotoFrente": {
+          "imagemVerso": {
             "type": "string",
             "nullable": true
           },
-          "nomeFotoVerso": {
+          "nomeImagemFrente": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeImagemVerso": {
             "type": "string",
             "nullable": true
           },
@@ -12104,20 +12104,18 @@
             "type": "integer",
             "format": "int32"
           },
-          "imgFrente": {
-            "type": "string",
-            "format": "byte"
+          "imagemFrente": {
+            "type": "string"
           },
-          "imgVerso": {
-            "type": "string",
-            "format": "byte",
-            "nullable": true
-          },
-          "nomeFotoFrente": {
+          "imagemVerso": {
             "type": "string",
             "nullable": true
           },
-          "nomeFotoVerso": {
+          "nomeImagemFrente": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeImagemVerso": {
             "type": "string",
             "nullable": true
           },
