@@ -29,11 +29,11 @@ public class Profissionais : EndpointGroupBase
             .MapPost(CreateProfissional)
             .MapPut(UpdateProfissional, "{id}")
             .MapDelete(DeleteProfissional, "{id}")
-            .MapDelete(DeleteProfissionalModalide, "Modalidade/{id}")
+            .MapDelete(DeleteProfissionalModalide, "/Modalidade/{id}")
             .MapGet(GetProfissionalById, "{id}")
-            .MapGet(GetProfissionalByEmail, "Email/{email}")
-            .MapGet(GetProfissionalByCpfCnpj, "Cpf/{cpf}")
-            .MapGet(GetProfissionaisByLocalidade, "Localidade/{id}");
+            .MapGet(GetProfissionalByEmail, "/Email/{email}")
+            .MapGet(GetProfissionalByCpfCnpj, "/Cpf/{cpf}")
+            .MapGet(GetProfissionaisByLocalidade, "/Localidade/{id}");
     }
     #endregion
 
