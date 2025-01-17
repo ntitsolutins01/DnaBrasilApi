@@ -863,9 +863,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Categorias/Categoria/{id}": {
+      },
       "get": {
         "tags": [
           "Categorias"
