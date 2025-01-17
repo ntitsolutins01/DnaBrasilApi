@@ -4111,9 +4111,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Estruturas/Estrutura/{id}": {
+      },
       "get": {
         "tags": [
           "Estruturas"
