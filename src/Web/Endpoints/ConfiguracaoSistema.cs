@@ -33,7 +33,7 @@ public class ConfiguracaoSistema : EndpointGroupBase
             .MapPut(UpdateModulo, "{id}")
             .MapDelete(DeleteModulo, "{id}")
             .MapGet(GetFuncionalidadesAll, "Funcionalidades")
-            .MapGet(GetFuncionalidadeById, "Funcionalidade/{id}")
+            .MapGet(GetFuncionalidadeById, "{id}")
             .MapPost(CreateFuncionalidade, "Funcionalidade")
             .MapPut(UpdateFuncionalidade, "Funcionalidade/{id}")
             .MapDelete(DeleteFuncionalidade, "Funcionalidade/{id}");

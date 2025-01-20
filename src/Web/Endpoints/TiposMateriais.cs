@@ -24,7 +24,7 @@ public class TiposMateriais : EndpointGroupBase
             .MapPost(CreateTipoMaterial)
             .MapPut(UpdateTipoMaterial, "{id}")
             .MapDelete(DeleteTipoMaterial, "{id}")
-            .MapGet(GetTipoMaterialById, "TipoMaterial/{id}")
+            .MapGet(GetTipoMaterialById, "{id}")
             .MapGet(GetTiposMateriaisByGrupoMaterialId, "GrupoMaterial/{id}");
     }
     #endregion

@@ -27,7 +27,7 @@ public class Questionarios : EndpointGroupBase
             .MapPut(UpdateQuestionario, "{id}")
             .MapDelete(DeleteQuestionario, "{id}")
             .MapGet(GetQuestionarioByTipoLaudo, "TipoLaudo/{id}")
-            .MapGet(GetQuestionarioById, "Questionario/{id}");
+            .MapGet(GetQuestionarioById, "{id}");
     }
     #endregion
 

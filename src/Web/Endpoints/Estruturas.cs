@@ -24,7 +24,7 @@ public class Estruturas : EndpointGroupBase
             .MapPut(UpdateEstrutura, "{id}")
             .MapDelete(DeleteEstrutura, "{id}")
             .MapGet(GetEstruturasAll)
-            .MapGet(GetEstruturaById, "Estrutura/{id}")
+            .MapGet(GetEstruturaById, "{id}")
             .MapGet(GetEstruturasByLocalidade, "Localidade/{id}");
     }
     #endregion

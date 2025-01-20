@@ -19,7 +19,7 @@ public class GruposMateriais : EndpointGroupBase
             .MapPost(CreateGrupoMaterial)
             .MapPut(UpdateGrupoMaterial, "{id}")
             .MapDelete(DeleteGrupoMaterial, "{id}")
-            .MapGet(GetGrupoMaterialById, "GrupoMaterial/{id}");
+            .MapGet(GetGrupoMaterialById, "{id}");
     }
 
     #endregion

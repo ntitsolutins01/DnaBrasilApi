@@ -13,7 +13,7 @@ public class ControlesMateriaisEstoquesSaidas : EndpointGroupBase
     #region MapEndpoints
 
     /// <summary>
-    /// Mapeamento dos Endpoints
+    /// Mapeamento dos EndpointsT
     /// </summary>
     /// <param name="app">Objeto usado para configurar as rotas e os http pipelines</param>
     public override void Map(WebApplication app)
@@ -24,7 +24,7 @@ public class ControlesMateriaisEstoquesSaidas : EndpointGroupBase
             .MapPost(CreateControleMaterialEstoqueSaida)
             .MapPut(UpdateControleMaterialEstoqueSaida, "{id}")
             .MapDelete(DeleteControleMaterialEstoqueSaida, "{id}")
-            .MapGet(GetControleMaterialEstoqueSaidaById, "ControleMaterialEstoqueSaida/{id}")
+            .MapGet(GetControleMaterialEstoqueSaidaById, "{id}")
             .MapGet(GetControlesMateriaisEstoquesSaidasByMaterialId, "Material/{id}");
     }
     #endregion
