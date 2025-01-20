@@ -23,7 +23,7 @@ public class Certificados : EndpointGroupBase
             .MapPost(CreateCertificado)
             .MapPut(UpdateCertificado, "{id}")
             .MapDelete(DeleteCertificado, "{id}")
-            .MapGet(GetCertificadoById, "Certificado/{id}");
+            .MapGet(GetCertificadoById, "{id}");
     }
     #endregion
 
