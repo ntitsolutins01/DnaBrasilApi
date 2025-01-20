@@ -1023,9 +1023,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Certificados/Certificado/{id}": {
+      },
       "get": {
         "tags": [
           "Certificados"
