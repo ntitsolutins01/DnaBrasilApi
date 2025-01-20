@@ -510,9 +510,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Atividades/Atividade/{id}": {
+      },
       "get": {
         "tags": [
           "Atividades"
@@ -863,9 +861,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Categorias/Categoria/{id}": {
+      },
       "get": {
         "tags": [
           "Categorias"
