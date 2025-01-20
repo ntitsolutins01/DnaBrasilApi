@@ -23,7 +23,7 @@ public class Atividades : EndpointGroupBase
             .MapPut(UpdateAtividade, "{id}")
             .MapDelete(DeleteAtividade, "{id}")
             .MapGet(GetAtividadesAll)
-            .MapGet(GetAtividadeById, "Atividade/{id}");
+            .MapGet(GetAtividadeById, "{id}");
     }
     #endregion
 
