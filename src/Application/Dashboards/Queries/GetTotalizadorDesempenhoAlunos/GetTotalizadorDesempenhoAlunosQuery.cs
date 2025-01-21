@@ -33,7 +33,7 @@ public class GetTotalizadorDesempenhoAlunosQueryHandler : IRequestHandler<GetTot
         return result;
     }
 
-    private async Task<TotalizadorDesempenhoDto> FilterDesempenhoAlunos(IQueryable<Aluno> alunos, DashboardDto search,
+    public async Task<TotalizadorDesempenhoDto> FilterDesempenhoAlunos(IQueryable<Aluno> alunos, DashboardDto search,
         CancellationToken cancellationToken)
     {
         if (!string.IsNullOrWhiteSpace(search.FomentoId))

@@ -23,7 +23,7 @@ public class Disciplinas : EndpointGroupBase
             .MapPost(CreateDisciplina)
             .MapPut(UpdateDisciplina, "{id}")
             .MapDelete(DeleteDisciplina, "{id}")
-            .MapGet(GetDisciplinaById, "Disciplina/{id}");
+            .MapGet(GetDisciplinaById, "{id}");
     }
     #endregion
 
@@ -90,5 +90,4 @@ public class Disciplinas : EndpointGroupBase
         return await sender.Send(new GetDisciplinaByIdQuery() { Id = id });
     }
     #endregion
-
 }

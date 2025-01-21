@@ -6,7 +6,7 @@
     "version": "1.0.0"
   },
   "paths": {
-    "/api/Alunos/Aluno/{id}": {
+    "/api/Alunos/{id}": {
       "get": {
         "tags": [
           "Alunos"
@@ -36,9 +36,81 @@
             }
           }
         }
+      },
+      "put": {
+        "tags": [
+          "Alunos"
+        ],
+        "operationId": "UpdateAluno",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAlunoCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Alunos"
+        ],
+        "operationId": "DeleteAluno",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
       }
     },
-    "/api/Alunos/Aluno/Email/{email}": {
+    "/api/Alunos/Email/{email}": {
       "get": {
         "tags": [
           "Alunos"
@@ -192,80 +264,6 @@
         }
       }
     },
-    "/api/Alunos/{id}": {
-      "put": {
-        "tags": [
-          "Alunos"
-        ],
-        "operationId": "UpdateAluno",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "x-position": 1
-          }
-        ],
-        "requestBody": {
-          "x-name": "command",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateAlunoCommand"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 2
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "boolean"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Alunos"
-        ],
-        "operationId": "DeleteAluno",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "x-position": 1
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "boolean"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/Alunos/UploadFoto/{id}": {
       "put": {
         "tags": [
@@ -306,31 +304,6 @@
                 }
               }
             }
-          }
-        }
-      }
-    },
-    "/api/Alunos/Modalidades": {
-      "put": {
-        "tags": [
-          "Alunos"
-        ],
-        "operationId": "UpdateAlunoModalidades",
-        "requestBody": {
-          "x-name": "command",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateAlunoModalidadesCommand"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 1
-        },
-        "responses": {
-          "200": {
-            "description": ""
           }
         }
       }
@@ -404,6 +377,164 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AlunosFilterDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Atividades": {
+      "post": {
+        "tags": [
+          "Atividades"
+        ],
+        "operationId": "CreateAtividade",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAtividadeCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Atividades"
+        ],
+        "operationId": "GetAtividadesAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AtividadeDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Atividades/{id}": {
+      "put": {
+        "tags": [
+          "Atividades"
+        ],
+        "operationId": "UpdateAtividade",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAtividadeCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Atividades"
+        ],
+        "operationId": "DeleteAtividade",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Atividades"
+        ],
+        "operationId": "GetAtividadeById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AtividadeDto"
                 }
               }
             }
@@ -537,9 +668,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Aulas/Aula/{id}": {
+      },
       "get": {
         "tags": [
           "Aulas"
@@ -599,6 +728,322 @@
                   "items": {
                     "$ref": "#/components/schemas/AulaDto"
                   }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Categorias": {
+      "post": {
+        "tags": [
+          "Categorias"
+        ],
+        "operationId": "CreateCategoria",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCategoriaCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Categorias"
+        ],
+        "operationId": "GetCategoriasAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CategoriaDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Categorias/{id}": {
+      "put": {
+        "tags": [
+          "Categorias"
+        ],
+        "operationId": "UpdateCategoria",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCategoriaCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Categorias"
+        ],
+        "operationId": "DeleteCategoria",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Categorias"
+        ],
+        "operationId": "GetCategoriaById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoriaDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Certificados": {
+      "get": {
+        "tags": [
+          "Certificados"
+        ],
+        "operationId": "GetCertificadosAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CertificadoDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Certificados"
+        ],
+        "operationId": "CreateCertificado",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCertificadoCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Certificados/{id}": {
+      "put": {
+        "tags": [
+          "Certificados"
+        ],
+        "operationId": "UpdateCertificado",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCertificadoCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Certificados"
+        ],
+        "operationId": "DeleteCertificado",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Certificados"
+        ],
+        "operationId": "GetCertificadoById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CertificadoDto"
                 }
               }
             }
@@ -766,32 +1211,7 @@
             }
           }
         }
-      }
-    },
-    "/api/ConfiguracaoSistema/Funcionalidades": {
-      "get": {
-        "tags": [
-          "ConfiguracaoSistema"
-        ],
-        "operationId": "GetFuncionalidadesAll",
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/FuncionalidadeDto"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/ConfiguracaoSistema/Funcionalidade/{id}": {
+      },
       "get": {
         "tags": [
           "ConfiguracaoSistema"
@@ -821,7 +1241,65 @@
             }
           }
         }
-      },
+      }
+    },
+    "/api/ConfiguracaoSistema/Funcionalidades": {
+      "get": {
+        "tags": [
+          "ConfiguracaoSistema"
+        ],
+        "operationId": "GetFuncionalidadesAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FuncionalidadeDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ConfiguracaoSistema/Funcionalidade": {
+      "post": {
+        "tags": [
+          "ConfiguracaoSistema"
+        ],
+        "operationId": "CreateFuncionalidade",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateFuncionalidadeCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ConfiguracaoSistema/Funcionalidade/{id}": {
       "put": {
         "tags": [
           "ConfiguracaoSistema"
@@ -888,39 +1366,6 @@
               "application/json": {
                 "schema": {
                   "type": "boolean"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/ConfiguracaoSistema/Funcionalidade": {
-      "post": {
-        "tags": [
-          "ConfiguracaoSistema"
-        ],
-        "operationId": "CreateFuncionalidade",
-        "requestBody": {
-          "x-name": "command",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateFuncionalidadeCommand"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 1
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "integer",
-                  "format": "int32"
                 }
               }
             }
@@ -1182,9 +1627,7 @@
             }
           }
         }
-      }
-    },
-    "/api/ControlesAcessosAulas/ControleAcessoAula/{id}": {
+      },
       "get": {
         "tags": [
           "ControlesAcessosAulas"
@@ -1342,9 +1785,7 @@
             }
           }
         }
-      }
-    },
-    "/api/ControlesMateriais/ControleMaterial/{id}": {
+      },
       "get": {
         "tags": [
           "ControlesMateriais"
@@ -1369,6 +1810,392 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ControleMaterialDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ControlesMateriaisEstoquesSaidas": {
+      "get": {
+        "tags": [
+          "ControlesMateriaisEstoquesSaidas"
+        ],
+        "operationId": "GetControlesMateriaisEstoquesSaidasAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ControleMaterialEstoqueSaidaDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "ControlesMateriaisEstoquesSaidas"
+        ],
+        "operationId": "CreateControleMaterialEstoqueSaida",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateControleMaterialEstoqueSaidaCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ControlesMateriaisEstoquesSaidas/{id}": {
+      "put": {
+        "tags": [
+          "ControlesMateriaisEstoquesSaidas"
+        ],
+        "operationId": "UpdateControleMaterialEstoqueSaida",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateControleMaterialEstoqueSaidaCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ControlesMateriaisEstoquesSaidas"
+        ],
+        "operationId": "DeleteControleMaterialEstoqueSaida",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ControlesMateriaisEstoquesSaidas"
+        ],
+        "operationId": "GetControleMaterialEstoqueSaidaById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ControleMaterialEstoqueSaidaDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ControlesMateriaisEstoquesSaidas/Material/{id}": {
+      "get": {
+        "tags": [
+          "ControlesMateriaisEstoquesSaidas"
+        ],
+        "operationId": "GetControlesMateriaisEstoquesSaidasByMaterialId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ControleMaterialEstoqueSaidaDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ControlesMensaisEstoque": {
+      "get": {
+        "tags": [
+          "ControlesMensaisEstoque"
+        ],
+        "operationId": "GetControlesMensaisEstoqueAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ControleMensalEstoqueDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "ControlesMensaisEstoque"
+        ],
+        "operationId": "CreateControleMensalEstoque",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateControleMensalEstoqueCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ControlesMensaisEstoque/{id}": {
+      "put": {
+        "tags": [
+          "ControlesMensaisEstoque"
+        ],
+        "operationId": "UpdateControleMensalEstoque",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateControleMensalEstoqueCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ControlesMensaisEstoque"
+        ],
+        "operationId": "DeleteControleMensalEstoque",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ControlesMensaisEstoque"
+        ],
+        "operationId": "GetControleMensalEstoqueById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ControleMensalEstoqueDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ControlesMensaisEstoque/Material/{id}": {
+      "get": {
+        "tags": [
+          "ControlesMensaisEstoque"
+        ],
+        "operationId": "GetControlesMensaisEstoqueByMaterialId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ControleMensalEstoqueDto"
+                  }
                 }
               }
             }
@@ -1521,9 +2348,7 @@
             }
           }
         }
-      }
-    },
-    "/api/ControlesPresencas/ControlePresenca/{id}": {
+      },
       "get": {
         "tags": [
           "ControlesPresencas"
@@ -1555,7 +2380,7 @@
         }
       }
     },
-    "/api/ControlesPresencas/ControlePresenca/Aluno/{alunoId}": {
+    "/api/ControlesPresencas/Aluno/{alunoId}": {
       "get": {
         "tags": [
           "ControlesPresencas"
@@ -1590,7 +2415,7 @@
         }
       }
     },
-    "/api/ControlesPresencas/ControlePresenca/Evento/{eventoId}": {
+    "/api/ControlesPresencas/Evento/{eventoId}": {
       "get": {
         "tags": [
           "ControlesPresencas"
@@ -2449,7 +3274,7 @@
         }
       }
     },
-    "/api/Deficiencias/Deficiencia/{id}": {
+    "/api/Deficiencias/{id}": {
       "get": {
         "tags": [
           "Deficiencias"
@@ -2479,9 +3304,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Deficiencias/{id}": {
+      },
       "put": {
         "tags": [
           "Deficiencias"
@@ -2681,9 +3504,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Disciplinas/Disciplina/{id}": {
+      },
       "get": {
         "tags": [
           "Disciplinas"
@@ -2929,9 +3750,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Encaminhamentos/Encaminhamento/{id}": {
+      },
       "get": {
         "tags": [
           "Encaminhamentos"
@@ -2963,7 +3782,7 @@
         }
       }
     },
-    "/api/Encaminhamentos/Encaminhamento/TipoLaudo/{id}": {
+    "/api/Encaminhamentos/TipoLaudo/{id}": {
       "get": {
         "tags": [
           "Encaminhamentos"
@@ -3124,9 +3943,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Escolaridades/Escolaridade/{id}": {
+      },
       "get": {
         "tags": [
           "Escolaridades"
@@ -3151,6 +3968,199 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/EscolaridadeDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Estruturas": {
+      "post": {
+        "tags": [
+          "Estruturas"
+        ],
+        "operationId": "CreateEstrutura",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateEstruturaCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Estruturas"
+        ],
+        "operationId": "GetEstruturasAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EstruturaDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Estruturas/{id}": {
+      "put": {
+        "tags": [
+          "Estruturas"
+        ],
+        "operationId": "UpdateEstrutura",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEstruturaCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Estruturas"
+        ],
+        "operationId": "DeleteEstrutura",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Estruturas"
+        ],
+        "operationId": "GetEstruturaById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EstruturaDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Estruturas/Localidade/{id}": {
+      "get": {
+        "tags": [
+          "Estruturas"
+        ],
+        "operationId": "GetEstruturasByLocalidade",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EstruturaDto"
+                  }
                 }
               }
             }
@@ -3284,9 +4294,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Eventos/Evento/{id}": {
+      },
       "get": {
         "tags": [
           "Eventos"
@@ -3444,6 +4452,36 @@
             }
           }
         }
+      },
+      "get": {
+        "tags": [
+          "Fomentos"
+        ],
+        "operationId": "GetFomentoById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FomentoDto"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/api/Fomentos/Localidade/{id}": {
@@ -3478,39 +4516,7 @@
         }
       }
     },
-    "/api/Fomentos/Fomento/{id}": {
-      "get": {
-        "tags": [
-          "Fomentos"
-        ],
-        "operationId": "GetFomentoById",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "x-position": 1
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/FomentoDto"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/FotosEvento/Evento/{eventoId}": {
+    "/api/FotosEvento/{eventoId}": {
       "get": {
         "tags": [
           "FotosEvento"
@@ -3638,6 +4644,164 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/FotoEventoDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/GruposMateriais": {
+      "get": {
+        "tags": [
+          "GruposMateriais"
+        ],
+        "operationId": "GetGruposMateriaisAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GrupoMaterialDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "GruposMateriais"
+        ],
+        "operationId": "CreateGrupoMaterial",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateGrupoMaterialCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/GruposMateriais/{id}": {
+      "put": {
+        "tags": [
+          "GruposMateriais"
+        ],
+        "operationId": "UpdateGrupoMaterial",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateGrupoMaterialCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "GruposMateriais"
+        ],
+        "operationId": "DeleteGrupoMaterial",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "GruposMateriais"
+        ],
+        "operationId": "GetGrupoMaterialById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GrupoMaterialDto"
                 }
               }
             }
@@ -4356,9 +5520,7 @@
             }
           }
         }
-      }
-    },
-    "/api/LinhasAcoes/LinhaAcao/{id}": {
+      },
       "get": {
         "tags": [
           "LinhasAcoes"
@@ -4516,9 +5678,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Localidades/Localidade/{id}": {
+      },
       "get": {
         "tags": [
           "Localidades"
@@ -4620,12 +5780,12 @@
         }
       }
     },
-    "/api/Matriculas": {
+    "/api/Materiais": {
       "get": {
         "tags": [
-          "Matriculas"
+          "Materiais"
         ],
-        "operationId": "GetMatriculasAll",
+        "operationId": "GetMateriaisAll",
         "responses": {
           "200": {
             "description": "",
@@ -4634,7 +5794,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/MatriculaDto"
+                    "$ref": "#/components/schemas/MaterialDto"
                   }
                 }
               }
@@ -4644,15 +5804,15 @@
       },
       "post": {
         "tags": [
-          "Matriculas"
+          "Materiais"
         ],
-        "operationId": "CreateMatricula",
+        "operationId": "CreateMaterial",
         "requestBody": {
           "x-name": "command",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateMatriculaCommand"
+                "$ref": "#/components/schemas/CreateMaterialCommand"
               }
             }
           },
@@ -4674,12 +5834,12 @@
         }
       }
     },
-    "/api/Matriculas/{id}": {
+    "/api/Materiais/{id}": {
       "put": {
         "tags": [
-          "Matriculas"
+          "Materiais"
         ],
-        "operationId": "UpdateMatricula",
+        "operationId": "UpdateMaterial",
         "parameters": [
           {
             "name": "id",
@@ -4697,7 +5857,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateMatriculaCommand"
+                "$ref": "#/components/schemas/UpdateMaterialCommand"
               }
             }
           },
@@ -4711,6 +5871,133 @@
               "application/json": {
                 "schema": {
                   "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Materiais"
+        ],
+        "operationId": "DeleteMaterial",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Materiais"
+        ],
+        "operationId": "GetMaterialById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MaterialDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Materiais/TipoMaterial/{id}": {
+      "get": {
+        "tags": [
+          "Materiais"
+        ],
+        "operationId": "GetMateriaisByTipoMaterialId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MaterialDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Materiais/Filter": {
+      "post": {
+        "tags": [
+          "Materiais"
+        ],
+        "operationId": "GetMateriaisByFilter",
+        "requestBody": {
+          "x-name": "search",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MateriaisFilterDto"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MateriaisFilterDto"
                 }
               }
             }
@@ -4844,9 +6131,7 @@
             }
           }
         }
-      }
-    },
-    "/api/MetricasImc/MetricaImc/{id}": {
+      },
       "get": {
         "tags": [
           "MetricasImc"
@@ -5004,9 +6289,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Modalidades/Modalidade/{id}": {
+      },
       "get": {
         "tags": [
           "Modalidades"
@@ -5031,6 +6314,41 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ModalidadeDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Modalidades/LinhaAcao/{id}": {
+      "get": {
+        "tags": [
+          "Modalidades"
+        ],
+        "operationId": "GetModalidadesByLinhaAcaoId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ModalidadeDto"
+                  }
                 }
               }
             }
@@ -5164,9 +6482,7 @@
             }
           }
         }
-      }
-    },
-    "/api/ModulosEad/ModuloEad/{id}": {
+      },
       "get": {
         "tags": [
           "ModulosEad"
@@ -5359,9 +6675,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Notas/Nota/{id}": {
+      },
       "get": {
         "tags": [
           "Notas"
@@ -5519,9 +6833,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Parceiros/Parceiro/{id}": {
+      },
       "get": {
         "tags": [
           "Parceiros"
@@ -5553,7 +6865,7 @@
         }
       }
     },
-    "/api/Parceiros/Parceiro/AspNetUser": {
+    "/api/Parceiros/AspNetUser": {
       "get": {
         "tags": [
           "Parceiros"
@@ -5710,9 +7022,7 @@
             }
           }
         }
-      }
-    },
-    "/api/TipoParcerias/TipoParceria/{id}": {
+      },
       "get": {
         "tags": [
           "TipoParcerias"
@@ -6059,9 +7369,7 @@
             }
           }
         }
-      }
-    },
-    "/api/PlanosAulas/PlanoAula/{id}": {
+      },
       "get": {
         "tags": [
           "PlanosAulas"
@@ -6219,9 +7527,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Profissionais/Profissional/{id}": {
+      },
       "get": {
         "tags": [
           "Profissionais"
@@ -6246,6 +7552,38 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ProfissionalDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Profissionais/Modalidade/{id}": {
+      "delete": {
+        "tags": [
+          "Profissionais"
+        ],
+        "operationId": "DeleteProfissionalModalide",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
                 }
               }
             }
@@ -6476,9 +7814,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Provas/Prova/{id}": {
+      },
       "get": {
         "tags": [
           "Provas"
@@ -6764,6 +8100,36 @@
             }
           }
         }
+      },
+      "get": {
+        "tags": [
+          "Questionarios"
+        ],
+        "operationId": "GetQuestionarioById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuestionarioDto"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/api/Questionarios/TipoLaudo/{id}": {
@@ -6794,38 +8160,6 @@
                   "items": {
                     "$ref": "#/components/schemas/QuestionarioDto"
                   }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/Questionarios/Questionario/{id}": {
-      "get": {
-        "tags": [
-          "Questionarios"
-        ],
-        "operationId": "GetQuestionarioById",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "x-position": 1
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/QuestionarioDto"
                 }
               }
             }
@@ -6959,9 +8293,7 @@
             }
           }
         }
-      }
-    },
-    "/api/QuestoesEad/QuestaoEad/{id}": {
+      },
       "get": {
         "tags": [
           "QuestoesEad"
@@ -7119,9 +8451,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Respostas/Resposta/{id}": {
+      },
       "get": {
         "tags": [
           "Respostas"
@@ -7279,9 +8609,7 @@
             }
           }
         }
-      }
-    },
-    "/api/RespostasEad/RespostaEad/{id}": {
+      },
       "get": {
         "tags": [
           "RespostasEad"
@@ -7653,9 +8981,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Series/Serie/{id}": {
+      },
       "get": {
         "tags": [
           "Series"
@@ -7952,9 +9278,7 @@
             }
           }
         }
-      }
-    },
-    "/api/TextosLaudos/TextoLaudo/{id}": {
+      },
       "get": {
         "tags": [
           "TextosLaudos"
@@ -8112,9 +9436,7 @@
             }
           }
         }
-      }
-    },
-    "/api/TextosQuestoes/TextoQuestao/{id}": {
+      },
       "get": {
         "tags": [
           "TextosQuestoes"
@@ -8272,9 +9594,7 @@
             }
           }
         }
-      }
-    },
-    "/api/TiposCursos/TipoCurso/{id}": {
+      },
       "get": {
         "tags": [
           "TiposCursos"
@@ -8432,9 +9752,7 @@
             }
           }
         }
-      }
-    },
-    "/api/TiposLaudos/TipoLaudo/{id}": {
+      },
       "get": {
         "tags": [
           "TiposLaudos"
@@ -8459,6 +9777,199 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/TipoLaudoDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/TiposMateriais": {
+      "get": {
+        "tags": [
+          "TiposMateriais"
+        ],
+        "operationId": "GetTiposMateriaisAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TipoMaterialDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "TiposMateriais"
+        ],
+        "operationId": "CreateTipoMaterial",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTipoMaterialCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/TiposMateriais/{id}": {
+      "put": {
+        "tags": [
+          "TiposMateriais"
+        ],
+        "operationId": "UpdateTipoMaterial",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTipoMaterialCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "TiposMateriais"
+        ],
+        "operationId": "DeleteTipoMaterial",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "TiposMateriais"
+        ],
+        "operationId": "GetTipoMaterialById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoMaterialDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/TiposMateriais/GrupoMaterial/{id}": {
+      "get": {
+        "tags": [
+          "TiposMateriais"
+        ],
+        "operationId": "GetTiposMateriaisByGrupoMaterialId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TipoMaterialDto"
+                  }
                 }
               }
             }
@@ -9240,7 +10751,7 @@
         }
       }
     },
-    "/api/Usuarios/Usuario/{id}": {
+    "/api/Usuarios/{id}": {
       "get": {
         "tags": [
           "Usuarios"
@@ -9270,9 +10781,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Usuarios/{id}": {
+      },
       "put": {
         "tags": [
           "Usuarios"
@@ -9408,6 +10917,37 @@
         }
       }
     },
+    "/api/Usuarios/AspNetUser/{aspNetUserId}": {
+      "get": {
+        "tags": [
+          "Usuarios"
+        ],
+        "operationId": "GetUsuarioByAspNetUserId",
+        "parameters": [
+          {
+            "name": "aspNetUserId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsuarioDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Vocacionais/{id}": {
       "get": {
         "tags": [
@@ -9508,83 +11048,6 @@
                 "schema": {
                   "type": "integer",
                   "format": "int32"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/Vouchers": {
-      "post": {
-        "tags": [
-          "Vouchers"
-        ],
-        "operationId": "CreateVoucher",
-        "requestBody": {
-          "x-name": "command",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateVoucherCommand"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 1
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/Vouchers/{id}": {
-      "put": {
-        "tags": [
-          "Vouchers"
-        ],
-        "operationId": "UpdateVoucher",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "x-position": 1
-          }
-        ],
-        "requestBody": {
-          "x-name": "command",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateVoucherCommand"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 2
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "boolean"
                 }
               }
             }
@@ -9760,6 +11223,10 @@
             "nullable": true
           },
           "municipioId": {
+            "type": "string",
+            "nullable": true
+          },
+          "modalidadesIds": {
             "type": "string",
             "nullable": true
           }
@@ -9948,6 +11415,10 @@
           "convidado": {
             "type": "boolean",
             "nullable": true
+          },
+          "modalidadesIds": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -10073,9 +11544,8 @@
             "format": "int32",
             "nullable": true
           },
-          "modalidadeId": {
-            "type": "integer",
-            "format": "int32",
+          "modalidadesIds": {
+            "type": "string",
             "nullable": true
           }
         }
@@ -10099,939 +11569,6 @@
           }
         }
       },
-      "UpdateAlunoModalidadesCommand": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "alunoId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "modalidades": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/Modalidade"
-            }
-          }
-        }
-      },
-      "Modalidade": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BaseAuditableEntity"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "nome": {
-                "type": "string",
-                "nullable": true
-              },
-              "vo2MaxIni": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "vo2MaxFim": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "vinteMetrosIni": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "vinteMetrosFim": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "shutlleRunIni": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "shutlleRunFim": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "flexibilidadeIni": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "flexibilidadeFim": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "preensaoManualIni": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "preensaoManualFim": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "abdominalPranchaIni": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "abdominalPranchaFim": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "impulsaoIni": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "impulsaoFim": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "envergaduraIni": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "envergaduraFim": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "pesoIni": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "pesoFim": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "alturaIni": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "alturaFim": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "status": {
-                "type": "boolean"
-              },
-              "alunos": {
-                "type": "array",
-                "nullable": true,
-                "items": {
-                  "$ref": "#/components/schemas/Aluno"
-                }
-              },
-              "linhaAcao": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/LinhaAcao"
-                  }
-                ]
-              },
-              "profissionais": {
-                "type": "array",
-                "nullable": true,
-                "items": {
-                  "$ref": "#/components/schemas/Profissional"
-                }
-              },
-              "byteImage": {
-                "type": "string",
-                "format": "byte",
-                "nullable": true
-              }
-            }
-          }
-        ]
-      },
-      "Aluno": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BaseAuditableEntity"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "aspNetUserId": {
-                "type": "string",
-                "nullable": true
-              },
-              "nome": {
-                "type": "string"
-              },
-              "email": {
-                "type": "string"
-              },
-              "sexo": {
-                "type": "string"
-              },
-              "dtNascimento": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "municipio": {
-                "$ref": "#/components/schemas/Municipio"
-              },
-              "localidade": {
-                "$ref": "#/components/schemas/Localidade"
-              },
-              "fomento": {
-                "$ref": "#/components/schemas/Fomentu"
-              },
-              "etnia": {
-                "type": "string",
-                "nullable": true
-              },
-              "nomeMae": {
-                "type": "string",
-                "nullable": true
-              },
-              "nomePai": {
-                "type": "string",
-                "nullable": true
-              },
-              "cpf": {
-                "type": "string",
-                "nullable": true
-              },
-              "telefone": {
-                "type": "string",
-                "nullable": true
-              },
-              "celular": {
-                "type": "string",
-                "nullable": true
-              },
-              "cep": {
-                "type": "string",
-                "nullable": true
-              },
-              "endereco": {
-                "type": "string",
-                "nullable": true
-              },
-              "numero": {
-                "type": "string",
-                "nullable": true
-              },
-              "bairro": {
-                "type": "string",
-                "nullable": true
-              },
-              "nomeFoto": {
-                "type": "string",
-                "nullable": true
-              },
-              "byteImage": {
-                "type": "string",
-                "format": "byte",
-                "nullable": true
-              },
-              "qrCode": {
-                "type": "string",
-                "format": "byte",
-                "nullable": true
-              },
-              "status": {
-                "type": "boolean"
-              },
-              "habilitado": {
-                "type": "boolean"
-              },
-              "idCliente": {
-                "type": "integer",
-                "format": "int32",
-                "nullable": true
-              },
-              "deficiencia": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/Deficiencia"
-                  }
-                ]
-              },
-              "modalidades": {
-                "type": "array",
-                "nullable": true,
-                "items": {
-                  "$ref": "#/components/schemas/Modalidade"
-                }
-              },
-              "parceiro": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/Parceiro"
-                  }
-                ]
-              },
-              "matricula": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/Matricula"
-                  }
-                ]
-              },
-              "voucher": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/Voucher"
-                  }
-                ]
-              },
-              "profissional": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/Profissional"
-                  }
-                ]
-              },
-              "nomeResponsavel": {
-                "type": "string",
-                "nullable": true
-              },
-              "linhaAcao": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/LinhaAcao"
-                  }
-                ]
-              },
-              "qualidadeDeVidas": {
-                "type": "array",
-                "nullable": true,
-                "items": {
-                  "$ref": "#/components/schemas/QualidadeDeVida"
-                }
-              },
-              "autorizacaoSaida": {
-                "type": "boolean",
-                "nullable": true
-              },
-              "autorizacaoConsentimentoAssentimento": {
-                "type": "boolean",
-                "nullable": true
-              },
-              "participacaoProgramaCompartilhamentoDados": {
-                "type": "boolean",
-                "nullable": true
-              },
-              "utilizacaoImagem": {
-                "type": "boolean",
-                "nullable": true
-              },
-              "copiaDocAlunoResponsavel": {
-                "type": "boolean",
-                "nullable": true
-              },
-              "convidado": {
-                "type": "boolean"
-              }
-            }
-          }
-        ]
-      },
-      "Municipio": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BaseAuditableEntity"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "codigo": {
-                "type": "integer",
-                "format": "int32"
-              },
-              "nome": {
-                "type": "string",
-                "nullable": true
-              },
-              "estado": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/Estado"
-                  }
-                ]
-              }
-            }
-          }
-        ]
-      },
-      "Estado": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BaseAuditableEntity"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "sigla": {
-                "type": "string",
-                "nullable": true
-              },
-              "nome": {
-                "type": "string",
-                "nullable": true
-              },
-              "municipios": {
-                "type": "array",
-                "nullable": true,
-                "items": {
-                  "$ref": "#/components/schemas/Municipio"
-                }
-              }
-            }
-          }
-        ]
-      },
-      "BaseAuditableEntity": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BaseEntity"
-          },
-          {
-            "type": "object",
-            "x-abstract": true,
-            "additionalProperties": false,
-            "properties": {
-              "created": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "createdBy": {
-                "type": "string",
-                "nullable": true
-              },
-              "lastModified": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "lastModifiedBy": {
-                "type": "string",
-                "nullable": true
-              }
-            }
-          }
-        ]
-      },
-      "BaseEntity": {
-        "type": "object",
-        "x-abstract": true,
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "domainEvents": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/BaseEvent"
-            }
-          }
-        }
-      },
-      "BaseEvent": {
-        "type": "object",
-        "x-abstract": true,
-        "additionalProperties": false
-      },
-      "Localidade": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BaseAuditableEntity"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "nome": {
-                "type": "string",
-                "nullable": true
-              },
-              "descricao": {
-                "type": "string",
-                "nullable": true
-              },
-              "status": {
-                "type": "boolean"
-              },
-              "municipio": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/Municipio"
-                  }
-                ]
-              }
-            }
-          }
-        ]
-      },
-      "Fomentu": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BaseAuditableEntity"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "codigo": {
-                "type": "string"
-              },
-              "nome": {
-                "type": "string"
-              },
-              "status": {
-                "type": "boolean"
-              },
-              "municipio": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/Municipio"
-                  }
-                ]
-              },
-              "localidade": {
-                "$ref": "#/components/schemas/Localidade"
-              },
-              "dtIni": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "dtFim": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "linhasAcoes": {
-                "type": "array",
-                "nullable": true,
-                "items": {
-                  "$ref": "#/components/schemas/LinhaAcao"
-                }
-              }
-            }
-          }
-        ]
-      },
-      "LinhaAcao": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BaseAuditableEntity"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "nome": {
-                "type": "string"
-              },
-              "status": {
-                "type": "boolean"
-              },
-              "fomentos": {
-                "type": "array",
-                "nullable": true,
-                "items": {
-                  "$ref": "#/components/schemas/Fomentu"
-                }
-              }
-            }
-          }
-        ]
-      },
-      "Deficiencia": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BaseAuditableEntity"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "nome": {
-                "type": "string"
-              },
-              "status": {
-                "type": "boolean"
-              },
-              "alunos": {
-                "type": "array",
-                "nullable": true,
-                "items": {
-                  "$ref": "#/components/schemas/Aluno"
-                }
-              }
-            }
-          }
-        ]
-      },
-      "Parceiro": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BaseAuditableEntity"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "aspNetUserId": {
-                "type": "string",
-                "nullable": true
-              },
-              "municipio": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/Municipio"
-                  }
-                ]
-              },
-              "nome": {
-                "type": "string"
-              },
-              "email": {
-                "type": "string"
-              },
-              "tipoPessoa": {
-                "type": "string"
-              },
-              "cpfCnpj": {
-                "type": "string"
-              },
-              "telefone": {
-                "type": "string",
-                "nullable": true
-              },
-              "celular": {
-                "type": "string",
-                "nullable": true
-              },
-              "cep": {
-                "type": "string",
-                "nullable": true
-              },
-              "endereco": {
-                "type": "string",
-                "nullable": true
-              },
-              "numero": {
-                "type": "integer",
-                "format": "int32",
-                "nullable": true
-              },
-              "bairro": {
-                "type": "string",
-                "nullable": true
-              },
-              "status": {
-                "type": "boolean"
-              },
-              "habilitado": {
-                "type": "boolean",
-                "nullable": true
-              },
-              "alunos": {
-                "type": "array",
-                "nullable": true,
-                "items": {
-                  "$ref": "#/components/schemas/Aluno"
-                }
-              },
-              "tipoParceria": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/TipoParceria"
-                  }
-                ]
-              }
-            }
-          }
-        ]
-      },
-      "TipoParceria": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BaseAuditableEntity"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "nome": {
-                "type": "string",
-                "nullable": true
-              },
-              "parceria": {
-                "type": "integer",
-                "format": "int32",
-                "nullable": true
-              },
-              "status": {
-                "type": "boolean"
-              }
-            }
-          }
-        ]
-      },
-      "Matricula": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BaseAuditableEntity"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "dtVencimentoParq": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "dtVencimentoAtestadoMedico": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "nomeResponsavel1": {
-                "type": "string",
-                "nullable": true
-              },
-              "parentescoResponsavel1": {
-                "type": "string",
-                "nullable": true
-              },
-              "cpfResponsavel1": {
-                "type": "string",
-                "nullable": true
-              },
-              "nomeResponsavel2": {
-                "type": "string",
-                "nullable": true
-              },
-              "parentescoResponsavel2": {
-                "type": "string",
-                "nullable": true
-              },
-              "cpfResponsavel2": {
-                "type": "string",
-                "nullable": true
-              },
-              "nomeResponsavel3": {
-                "type": "string",
-                "nullable": true
-              },
-              "parentescoResponsavel3": {
-                "type": "string",
-                "nullable": true
-              },
-              "cpfResponsavel3": {
-                "type": "string",
-                "nullable": true
-              },
-              "aluno": {
-                "$ref": "#/components/schemas/Aluno"
-              }
-            }
-          }
-        ]
-      },
-      "Voucher": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BaseAuditableEntity"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "local": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/Localidade"
-                  }
-                ]
-              },
-              "descricao": {
-                "type": "string",
-                "nullable": true
-              },
-              "turma": {
-                "type": "string",
-                "nullable": true
-              },
-              "serie": {
-                "type": "string",
-                "nullable": true
-              },
-              "aluno": {
-                "$ref": "#/components/schemas/Aluno"
-              }
-            }
-          }
-        ]
-      },
-      "Profissional": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BaseAuditableEntity"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "aspNetUserId": {
-                "type": "string",
-                "nullable": true
-              },
-              "nome": {
-                "type": "string"
-              },
-              "dtNascimento": {
-                "type": "string",
-                "format": "date-time",
-                "nullable": true
-              },
-              "email": {
-                "type": "string"
-              },
-              "sexo": {
-                "type": "string",
-                "nullable": true
-              },
-              "cpfCnpj": {
-                "type": "string"
-              },
-              "telefone": {
-                "type": "string",
-                "nullable": true
-              },
-              "celular": {
-                "type": "string",
-                "nullable": true
-              },
-              "endereco": {
-                "type": "string",
-                "nullable": true
-              },
-              "numero": {
-                "type": "integer",
-                "format": "int32",
-                "nullable": true
-              },
-              "cep": {
-                "type": "string",
-                "nullable": true
-              },
-              "bairro": {
-                "type": "string",
-                "nullable": true
-              },
-              "status": {
-                "type": "boolean"
-              },
-              "habilitado": {
-                "type": "boolean"
-              },
-              "municipio": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/Municipio"
-                  }
-                ]
-              },
-              "localidade": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/Localidade"
-                  }
-                ]
-              },
-              "modalidades": {
-                "type": "array",
-                "nullable": true,
-                "items": {
-                  "$ref": "#/components/schemas/Modalidade"
-                }
-              },
-              "perfil": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/Perfil"
-                  }
-                ]
-              }
-            }
-          }
-        ]
-      },
-      "Perfil": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BaseAuditableEntity"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "nome": {
-                "type": "string"
-              },
-              "descricao": {
-                "type": "string",
-                "nullable": true
-              },
-              "aspNetRoleId": {
-                "type": "string"
-              }
-            }
-          }
-        ]
-      },
-      "QualidadeDeVida": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BaseAuditableEntity"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "profissional": {
-                "$ref": "#/components/schemas/Profissional"
-              },
-              "aluno": {
-                "$ref": "#/components/schemas/Aluno"
-              },
-              "encaminhamentos": {
-                "type": "string",
-                "nullable": true
-              },
-              "respostas": {
-                "type": "string"
-              },
-              "statusQualidadeDeVida": {
-                "type": "string",
-                "nullable": true
-              }
-            }
-          }
-        ]
-      },
       "UpdateQrCodeCommand": {
         "type": "object",
         "additionalProperties": false,
@@ -11051,6 +11588,10 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
+          "matricula": {
+            "type": "string",
+            "nullable": true
+          },
           "sexo": {
             "type": "string",
             "nullable": true
@@ -11089,6 +11630,151 @@
             "items": {
               "$ref": "#/components/schemas/AlunoIndexDto"
             }
+          }
+        }
+      },
+      "CreateAtividadeCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "estruturaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "linhaAcaoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "categoriaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "modalidadeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "turma": {
+            "type": "string"
+          },
+          "hrInicial": {
+            "type": "string"
+          },
+          "hrFinal": {
+            "type": "string"
+          },
+          "profissionalId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "localidadeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "quantidadeAluno": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "diasSemana": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdateAtividadeCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "turma": {
+            "type": "string"
+          },
+          "hrInicial": {
+            "type": "string"
+          },
+          "hrFinal": {
+            "type": "string"
+          },
+          "quantidadeAluno": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "diasSemana": {
+            "type": "string"
+          }
+        }
+      },
+      "AtividadeDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "estruturaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeEstrutura": {
+            "type": "string"
+          },
+          "linhaAcaoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeLinhaAcao": {
+            "type": "string"
+          },
+          "categoriaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeCategoria": {
+            "type": "string"
+          },
+          "modalidadeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeModalidade": {
+            "type": "string"
+          },
+          "turma": {
+            "type": "string",
+            "nullable": true
+          },
+          "diasSemana": {
+            "type": "string",
+            "nullable": true
+          },
+          "hrInicial": {
+            "type": "string",
+            "format": "duration",
+            "nullable": true
+          },
+          "hrFinal": {
+            "type": "string",
+            "format": "duration",
+            "nullable": true
+          },
+          "profissionalId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeProfissional": {
+            "type": "string"
+          },
+          "localidadeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeLocalidade": {
+            "type": "string"
+          },
+          "status": {
+            "type": "boolean"
           }
         }
       },
@@ -11219,6 +11905,206 @@
           "video": {
             "type": "string",
             "nullable": true
+          }
+        }
+      },
+      "CreateCategoriaCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "codigo": {
+            "type": "string"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "idadeInicial": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idadeFinal": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "descricao": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "UpdateCategoriaCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "codigo": {
+            "type": "string"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "idadeInicial": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idadeFinal": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "descricao": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "boolean"
+          }
+        }
+      },
+      "CategoriaDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "codigo": {
+            "type": "string"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "idadeInicial": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idadeFinal": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "descricao": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "boolean"
+          }
+        }
+      },
+      "CertificadoDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cursoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tituloCurso": {
+            "type": "string",
+            "nullable": true
+          },
+          "imagemFrente": {
+            "type": "string"
+          },
+          "imagemVerso": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeImagemFrente": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeImagemVerso": {
+            "type": "string",
+            "nullable": true
+          },
+          "htmlFrente": {
+            "type": "string"
+          },
+          "htmlVerso": {
+            "type": "string"
+          },
+          "status": {
+            "type": "boolean"
+          }
+        }
+      },
+      "CreateCertificadoCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "cursoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "imagemFrente": {
+            "type": "string"
+          },
+          "imagemVerso": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeImagemFrente": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeImagemVerso": {
+            "type": "string",
+            "nullable": true
+          },
+          "htmlFrente": {
+            "type": "string"
+          },
+          "htmlVerso": {
+            "type": "string"
+          },
+          "status": {
+            "type": "boolean"
+          }
+        }
+      },
+      "UpdateCertificadoCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cursoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "imagemFrente": {
+            "type": "string"
+          },
+          "imagemVerso": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeImagemFrente": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeImagemVerso": {
+            "type": "string",
+            "nullable": true
+          },
+          "htmlFrente": {
+            "type": "string"
+          },
+          "htmlVerso": {
+            "type": "string"
+          },
+          "status": {
+            "type": "boolean"
           }
         }
       },
@@ -11354,6 +12240,10 @@
             "type": "string",
             "nullable": true
           },
+          "aspNetRoleId": {
+            "type": "string",
+            "nullable": true
+          },
           "nome": {
             "type": "string"
           },
@@ -11402,13 +12292,6 @@
           "habilitado": {
             "type": "boolean"
           },
-          "modalidades": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/ModalidadeDto"
-            }
-          },
           "estadoId": {
             "type": "integer",
             "format": "int32"
@@ -11430,133 +12313,27 @@
           "perfil": {
             "type": "string",
             "nullable": true
-          }
-        }
-      },
-      "ModalidadeDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
           },
-          "nome": {
+          "localidade": {
             "type": "string",
             "nullable": true
           },
-          "vo2MaxIni": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "vo2MaxFim": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "vinteMetrosIni": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "vinteMetrosFim": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "shutlleRunIni": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "shutlleRunFim": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "flexibilidadeIni": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "flexibilidadeFim": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "preensaoManualIni": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "preensaoManualFim": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "abdominalPranchaIni": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "abdominalPranchaFim": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "impulsaoIni": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "impulsaoFim": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "envergaduraIni": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "envergaduraFim": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "pesoIni": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "pesoFim": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "alturaIni": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "alturaFim": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "status": {
-            "type": "boolean"
-          },
-          "linhaAcao": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/LinhaAcaoDto"
-              }
-            ]
-          },
-          "byteImage": {
-            "type": "string",
-            "format": "byte",
-            "nullable": true
-          }
-        }
-      },
-      "LinhaAcaoDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nome": {
+          "cargo": {
             "type": "string",
             "nullable": true
           },
-          "status": {
-            "type": "boolean"
+          "modalidadesIds": {
+            "type": "string",
+            "nullable": true
+          },
+          "possuiAlunosVinculados": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "quantidadeAlunosVinculados": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
           }
         }
       },
@@ -11767,6 +12544,324 @@
                     "$ref": "#/components/schemas/Localidade"
                   }
                 ]
+              }
+            }
+          }
+        ]
+      },
+      "Perfil": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "nome": {
+                "type": "string"
+              },
+              "descricao": {
+                "type": "string",
+                "nullable": true
+              },
+              "aspNetRoleId": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "BaseAuditableEntity": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseEntity"
+          },
+          {
+            "type": "object",
+            "x-abstract": true,
+            "additionalProperties": false,
+            "properties": {
+              "created": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "createdBy": {
+                "type": "string",
+                "nullable": true
+              },
+              "lastModified": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "lastModifiedBy": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          }
+        ]
+      },
+      "BaseEntity": {
+        "type": "object",
+        "x-abstract": true,
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "domainEvents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BaseEvent"
+            }
+          }
+        }
+      },
+      "BaseEvent": {
+        "type": "object",
+        "x-abstract": true,
+        "additionalProperties": false
+      },
+      "Municipio": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "codigo": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "nome": {
+                "type": "string",
+                "nullable": true
+              },
+              "estado": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Estado"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "Estado": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "sigla": {
+                "type": "string",
+                "nullable": true
+              },
+              "nome": {
+                "type": "string",
+                "nullable": true
+              },
+              "municipios": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "$ref": "#/components/schemas/Municipio"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "Localidade": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "nome": {
+                "type": "string",
+                "nullable": true
+              },
+              "descricao": {
+                "type": "string",
+                "nullable": true
+              },
+              "status": {
+                "type": "boolean"
+              },
+              "municipio": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Municipio"
+                  }
+                ]
+              },
+              "fomentoLocalidades": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "$ref": "#/components/schemas/FomentoLocalidade"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "FomentoLocalidade": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "fomentoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "localidadeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fomento": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Fomentu"
+              }
+            ]
+          },
+          "localidade": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Localidade"
+              }
+            ]
+          },
+          "status": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Fomentu": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "codigo": {
+                "type": "string"
+              },
+              "nome": {
+                "type": "string"
+              },
+              "status": {
+                "type": "boolean"
+              },
+              "municipio": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Municipio"
+                  }
+                ]
+              },
+              "localidade": {
+                "$ref": "#/components/schemas/Localidade"
+              },
+              "dtIni": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "dtFim": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "fomentoLinhasAcoes": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "$ref": "#/components/schemas/FomentoLinhaAcao"
+                }
+              },
+              "fomentoLocalidades": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "$ref": "#/components/schemas/FomentoLocalidade"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "FomentoLinhaAcao": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "fomentoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "linhaAcaoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fomento": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Fomentu"
+              }
+            ]
+          },
+          "linhaAcao": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/LinhaAcao"
+              }
+            ]
+          },
+          "status": {
+            "type": "boolean"
+          }
+        }
+      },
+      "LinhaAcao": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "nome": {
+                "type": "string"
+              },
+              "status": {
+                "type": "boolean"
+              },
+              "fomentoLinhasAcoes": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "$ref": "#/components/schemas/FomentoLinhaAcao"
+                }
               }
             }
           }
@@ -12033,6 +13128,208 @@
           },
           "status": {
             "type": "boolean"
+          }
+        }
+      },
+      "ControleMaterialEstoqueSaidaDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "materialId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tituloMaterial": {
+            "type": "string"
+          },
+          "quantidade": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "solicitante": {
+            "type": "string",
+            "nullable": true
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        }
+      },
+      "CreateControleMaterialEstoqueSaidaCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "materialId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "quantidade": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "solicitante": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "UpdateControleMaterialEstoqueSaidaCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "solicitante": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "ControleMensalEstoqueDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "materialId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "qtdPrevista": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "dataMesSaida": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "totalSaidas": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "totalEstoque": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "qtdMateriaisDanificadosExtraviados": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "justificativaDanificadosExtraviados": {
+            "type": "string",
+            "nullable": true
+          },
+          "dataDanificadosExtraviados": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        }
+      },
+      "CreateControleMensalEstoqueCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "materialId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "qtdPrevista": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "dataMesSaida": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "totalSaidas": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "totalEstoque": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "qtdMateriaisDanificadosExtraviados": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "justificativaDanificadosExtraviados": {
+            "type": "string",
+            "nullable": true
+          },
+          "dataDanificadosExtraviados": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        }
+      },
+      "UpdateControleMensalEstoqueCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "materialId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "qtdPrevista": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "dataMesSaida": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "totalSaidas": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "totalEstoque": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "qtdMateriaisDanificadosExtraviados": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "justificativaDanificadosExtraviados": {
+            "type": "string",
+            "nullable": true
+          },
+          "dataDanificadosExtraviados": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
           }
         }
       },
@@ -13276,6 +14573,762 @@
           }
         }
       },
+      "Aluno": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "aspNetUserId": {
+                "type": "string",
+                "nullable": true
+              },
+              "nome": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "sexo": {
+                "type": "string"
+              },
+              "dtNascimento": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "municipio": {
+                "$ref": "#/components/schemas/Municipio"
+              },
+              "localidade": {
+                "$ref": "#/components/schemas/Localidade"
+              },
+              "fomento": {
+                "$ref": "#/components/schemas/Fomentu"
+              },
+              "etnia": {
+                "type": "string",
+                "nullable": true
+              },
+              "nomeMae": {
+                "type": "string",
+                "nullable": true
+              },
+              "nomePai": {
+                "type": "string",
+                "nullable": true
+              },
+              "cpf": {
+                "type": "string",
+                "nullable": true
+              },
+              "telefone": {
+                "type": "string",
+                "nullable": true
+              },
+              "celular": {
+                "type": "string",
+                "nullable": true
+              },
+              "cep": {
+                "type": "string",
+                "nullable": true
+              },
+              "endereco": {
+                "type": "string",
+                "nullable": true
+              },
+              "numero": {
+                "type": "string",
+                "nullable": true
+              },
+              "bairro": {
+                "type": "string",
+                "nullable": true
+              },
+              "nomeFoto": {
+                "type": "string",
+                "nullable": true
+              },
+              "byteImage": {
+                "type": "string",
+                "format": "byte",
+                "nullable": true
+              },
+              "qrCode": {
+                "type": "string",
+                "format": "byte",
+                "nullable": true
+              },
+              "status": {
+                "type": "boolean"
+              },
+              "habilitado": {
+                "type": "boolean"
+              },
+              "idCliente": {
+                "type": "integer",
+                "format": "int32",
+                "nullable": true
+              },
+              "deficiencia": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Deficiencia"
+                  }
+                ]
+              },
+              "parceiro": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Parceiro"
+                  }
+                ]
+              },
+              "matricula": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Matricula"
+                  }
+                ]
+              },
+              "voucher": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Voucher"
+                  }
+                ]
+              },
+              "profissional": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Profissional"
+                  }
+                ]
+              },
+              "nomeResponsavel": {
+                "type": "string",
+                "nullable": true
+              },
+              "linhaAcao": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/LinhaAcao"
+                  }
+                ]
+              },
+              "qualidadeDeVidas": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "$ref": "#/components/schemas/QualidadeDeVida"
+                }
+              },
+              "autorizacaoSaida": {
+                "type": "boolean",
+                "nullable": true
+              },
+              "autorizacaoConsentimentoAssentimento": {
+                "type": "boolean",
+                "nullable": true
+              },
+              "participacaoProgramaCompartilhamentoDados": {
+                "type": "boolean",
+                "nullable": true
+              },
+              "utilizacaoImagem": {
+                "type": "boolean",
+                "nullable": true
+              },
+              "copiaDocAlunoResponsavel": {
+                "type": "boolean",
+                "nullable": true
+              },
+              "convidado": {
+                "type": "boolean"
+              },
+              "alunoModalidades": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "$ref": "#/components/schemas/AlunoModalidade"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "Deficiencia": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "nome": {
+                "type": "string"
+              },
+              "status": {
+                "type": "boolean"
+              },
+              "alunos": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "$ref": "#/components/schemas/Aluno"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "Parceiro": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "aspNetUserId": {
+                "type": "string",
+                "nullable": true
+              },
+              "municipio": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Municipio"
+                  }
+                ]
+              },
+              "nome": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "tipoPessoa": {
+                "type": "string"
+              },
+              "cpfCnpj": {
+                "type": "string"
+              },
+              "telefone": {
+                "type": "string",
+                "nullable": true
+              },
+              "celular": {
+                "type": "string",
+                "nullable": true
+              },
+              "cep": {
+                "type": "string",
+                "nullable": true
+              },
+              "endereco": {
+                "type": "string",
+                "nullable": true
+              },
+              "numero": {
+                "type": "integer",
+                "format": "int32",
+                "nullable": true
+              },
+              "bairro": {
+                "type": "string",
+                "nullable": true
+              },
+              "status": {
+                "type": "boolean"
+              },
+              "habilitado": {
+                "type": "boolean",
+                "nullable": true
+              },
+              "alunos": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "$ref": "#/components/schemas/Aluno"
+                }
+              },
+              "tipoParceria": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/TipoParceria"
+                  }
+                ]
+              },
+              "razaoSocial": {
+                "type": "string"
+              },
+              "nomeContato": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          }
+        ]
+      },
+      "TipoParceria": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "nome": {
+                "type": "string",
+                "nullable": true
+              },
+              "parceria": {
+                "type": "integer",
+                "format": "int32",
+                "nullable": true
+              },
+              "status": {
+                "type": "boolean"
+              }
+            }
+          }
+        ]
+      },
+      "Matricula": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "dtVencimentoParq": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "dtVencimentoAtestadoMedico": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "nomeResponsavel1": {
+                "type": "string",
+                "nullable": true
+              },
+              "parentescoResponsavel1": {
+                "type": "string",
+                "nullable": true
+              },
+              "cpfResponsavel1": {
+                "type": "string",
+                "nullable": true
+              },
+              "nomeResponsavel2": {
+                "type": "string",
+                "nullable": true
+              },
+              "parentescoResponsavel2": {
+                "type": "string",
+                "nullable": true
+              },
+              "cpfResponsavel2": {
+                "type": "string",
+                "nullable": true
+              },
+              "nomeResponsavel3": {
+                "type": "string",
+                "nullable": true
+              },
+              "parentescoResponsavel3": {
+                "type": "string",
+                "nullable": true
+              },
+              "cpfResponsavel3": {
+                "type": "string",
+                "nullable": true
+              },
+              "aluno": {
+                "$ref": "#/components/schemas/Aluno"
+              }
+            }
+          }
+        ]
+      },
+      "Voucher": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "local": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Localidade"
+                  }
+                ]
+              },
+              "descricao": {
+                "type": "string",
+                "nullable": true
+              },
+              "turma": {
+                "type": "string",
+                "nullable": true
+              },
+              "serie": {
+                "type": "string",
+                "nullable": true
+              },
+              "aluno": {
+                "$ref": "#/components/schemas/Aluno"
+              }
+            }
+          }
+        ]
+      },
+      "Profissional": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "aspNetUserId": {
+                "type": "string",
+                "nullable": true
+              },
+              "nome": {
+                "type": "string"
+              },
+              "dtNascimento": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              },
+              "email": {
+                "type": "string"
+              },
+              "sexo": {
+                "type": "string",
+                "nullable": true
+              },
+              "cpfCnpj": {
+                "type": "string"
+              },
+              "telefone": {
+                "type": "string",
+                "nullable": true
+              },
+              "celular": {
+                "type": "string",
+                "nullable": true
+              },
+              "endereco": {
+                "type": "string",
+                "nullable": true
+              },
+              "numero": {
+                "type": "integer",
+                "format": "int32",
+                "nullable": true
+              },
+              "cep": {
+                "type": "string",
+                "nullable": true
+              },
+              "bairro": {
+                "type": "string",
+                "nullable": true
+              },
+              "status": {
+                "type": "boolean"
+              },
+              "habilitado": {
+                "type": "boolean"
+              },
+              "municipio": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Municipio"
+                  }
+                ]
+              },
+              "localidade": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Localidade"
+                  }
+                ]
+              },
+              "perfil": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Perfil"
+                  }
+                ]
+              },
+              "profissionalModalidades": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "$ref": "#/components/schemas/ProfissionalModalidade"
+                }
+              },
+              "cargo": {
+                "type": "string",
+                "nullable": true
+              },
+              "alunos": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "$ref": "#/components/schemas/Aluno"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "ProfissionalModalidade": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "profissionalId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "modalidadeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "profissional": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Profissional"
+              }
+            ]
+          },
+          "modalidade": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Modalidade"
+              }
+            ]
+          }
+        }
+      },
+      "Modalidade": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "nome": {
+                "type": "string",
+                "nullable": true
+              },
+              "vo2MaxIni": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "vo2MaxFim": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "vinteMetrosIni": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "vinteMetrosFim": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "shutlleRunIni": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "shutlleRunFim": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "flexibilidadeIni": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "flexibilidadeFim": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "preensaoManualIni": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "preensaoManualFim": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "abdominalPranchaIni": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "abdominalPranchaFim": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "impulsaoIni": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "impulsaoFim": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "envergaduraIni": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "envergaduraFim": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "pesoIni": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "pesoFim": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "alturaIni": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "alturaFim": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "status": {
+                "type": "boolean"
+              },
+              "linhaAcao": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/LinhaAcao"
+                  }
+                ]
+              },
+              "byteImage": {
+                "type": "string",
+                "format": "byte",
+                "nullable": true
+              },
+              "profissionalModalidades": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "$ref": "#/components/schemas/ProfissionalModalidade"
+                }
+              },
+              "alunoModalidades": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "$ref": "#/components/schemas/AlunoModalidade"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "AlunoModalidade": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "alunoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "modalidadeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "aluno": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Aluno"
+              }
+            ]
+          },
+          "modalidade": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Modalidade"
+              }
+            ]
+          }
+        }
+      },
+      "QualidadeDeVida": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "profissional": {
+                "$ref": "#/components/schemas/Profissional"
+              },
+              "aluno": {
+                "$ref": "#/components/schemas/Aluno"
+              },
+              "encaminhamentos": {
+                "type": "string",
+                "nullable": true
+              },
+              "respostas": {
+                "type": "string"
+              },
+              "statusQualidadeDeVida": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          }
+        ]
+      },
       "UpdateEscolaridadeCommand": {
         "type": "object",
         "additionalProperties": false,
@@ -13289,6 +15342,107 @@
           },
           "status": {
             "type": "boolean"
+          }
+        }
+      },
+      "CreateEstruturaCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "localidadeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "descricao": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "UpdateEstruturaCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "localidadeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "descricao": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "boolean"
+          }
+        }
+      },
+      "EstruturaDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "localidade": {
+            "$ref": "#/components/schemas/LocalidadeDto"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "descricao": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "boolean"
+          }
+        }
+      },
+      "LocalidadeDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true
+          },
+          "descricao": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "boolean"
+          },
+          "municipioId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "estadoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeMunicipio": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeEstado": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -13444,7 +15598,7 @@
             "type": "string",
             "nullable": true
           },
-          "localidade": {
+          "localidades": {
             "type": "string",
             "nullable": true
           },
@@ -13467,7 +15621,11 @@
             "type": "string",
             "nullable": true
           },
-          "linhaAcoes": {
+          "linhasAcoesIds": {
+            "type": "string",
+            "nullable": true
+          },
+          "localidadesIds": {
             "type": "string",
             "nullable": true
           }
@@ -13497,8 +15655,13 @@
           "dtFim": {
             "type": "string"
           },
-          "linhaAcoes": {
-            "type": "string"
+          "linhasAcoesIds": {
+            "type": "string",
+            "nullable": true
+          },
+          "localidadesIds": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -13533,8 +15696,13 @@
           "dtFim": {
             "type": "string"
           },
-          "linhaAcoes": {
-            "type": "string"
+          "linhasAcoesIds": {
+            "type": "string",
+            "nullable": true
+          },
+          "localidadesIds": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -13550,6 +15718,41 @@
             "type": "string"
           },
           "url": {
+            "type": "string"
+          }
+        }
+      },
+      "GrupoMaterialDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string"
+          }
+        }
+      },
+      "CreateGrupoMaterialCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "nome": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdateGrupoMaterialCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
             "type": "string"
           }
         }
@@ -14124,6 +16327,23 @@
           }
         }
       },
+      "LinhaAcaoDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "boolean"
+          }
+        }
+      },
       "CreateLinhaAcaoCommand": {
         "type": "object",
         "additionalProperties": false,
@@ -14149,43 +16369,6 @@
           },
           "status": {
             "type": "boolean"
-          }
-        }
-      },
-      "LocalidadeDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nome": {
-            "type": "string",
-            "nullable": true
-          },
-          "descricao": {
-            "type": "string",
-            "nullable": true
-          },
-          "status": {
-            "type": "boolean"
-          },
-          "municipioId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "estadoId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nomeMunicipio": {
-            "type": "string",
-            "nullable": true
-          },
-          "nomeEstado": {
-            "type": "string",
-            "nullable": true
           }
         }
       },
@@ -14235,7 +16418,7 @@
           }
         }
       },
-      "MatriculaDto": {
+      "MaterialDto": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -14243,115 +16426,98 @@
             "type": "integer",
             "format": "int32"
           },
-          "dtVencimentoParq": {
+          "tipoMaterialId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tituloTipoMaterial": {
+            "type": "string"
+          },
+          "unidadeMedida": {
+            "type": "string"
+          },
+          "descricao": {
+            "type": "string"
+          },
+          "qtdAdquirida": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        }
+      },
+      "CreateMaterialCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "tipoMaterialId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "unidadeMedida": {
+            "type": "string"
+          },
+          "descricao": {
+            "type": "string"
+          },
+          "qtdAdquirida": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        }
+      },
+      "UpdateMaterialCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "unidadeMedida": {
+            "type": "string"
+          },
+          "descricao": {
+            "type": "string"
+          },
+          "qtdAdquirida": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        }
+      },
+      "MateriaisFilterDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
             "type": "string",
             "nullable": true
           },
-          "dtVencimentoAtestadoMedico": {
+          "nomeMaterial": {
             "type": "string",
             "nullable": true
           },
-          "nomeResponsavel1": {
+          "grupoMaterialId": {
             "type": "string",
             "nullable": true
           },
-          "parentescoResponsavel1": {
+          "tipoMaterialId": {
             "type": "string",
             "nullable": true
           },
-          "cpfResponsavel1": {
-            "type": "string",
-            "nullable": true
-          },
-          "nomeResponsavel2": {
-            "type": "string",
-            "nullable": true
-          },
-          "parentescoResponsavel2": {
-            "type": "string",
-            "nullable": true
-          },
-          "cpfResponsavel2": {
-            "type": "string",
-            "nullable": true
-          },
-          "nomeResponsavel3": {
-            "type": "string",
-            "nullable": true
-          },
-          "parentescoResponsavel3": {
-            "type": "string",
-            "nullable": true
-          },
-          "cpfResponsavel3": {
-            "type": "string",
-            "nullable": true
-          },
-          "aluno": {
+          "materiais": {
+            "type": "array",
             "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/AlunoDto"
-              }
-            ]
+            "items": {
+              "$ref": "#/components/schemas/MaterialIndexDto"
+            }
           }
         }
       },
-      "CreateMatriculaCommand": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "dtVencimentoParq": {
-            "type": "string",
-            "nullable": true
-          },
-          "dtVencimentoAtestadoMedico": {
-            "type": "string",
-            "nullable": true
-          },
-          "nomeResponsavel1": {
-            "type": "string",
-            "nullable": true
-          },
-          "parentescoResponsavel1": {
-            "type": "string",
-            "nullable": true
-          },
-          "cpfResponsavel1": {
-            "type": "string",
-            "nullable": true
-          },
-          "nomeResponsavel2": {
-            "type": "string",
-            "nullable": true
-          },
-          "parentescoResponsavel2": {
-            "type": "string",
-            "nullable": true
-          },
-          "cpfResponsavel2": {
-            "type": "string",
-            "nullable": true
-          },
-          "nomeResponsavel3": {
-            "type": "string",
-            "nullable": true
-          },
-          "parentescoResponsavel3": {
-            "type": "string",
-            "nullable": true
-          },
-          "cpfResponsavel3": {
-            "type": "string",
-            "nullable": true
-          },
-          "alunoId": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "UpdateMatriculaCommand": {
+      "MaterialIndexDto": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -14359,53 +16525,19 @@
             "type": "integer",
             "format": "int32"
           },
-          "dtVencimentoParq": {
-            "type": "string",
-            "nullable": true
+          "tituloTipoMaterial": {
+            "type": "string"
           },
-          "dtVencimentoAtestadoMedico": {
-            "type": "string",
-            "nullable": true
+          "unidadeMedida": {
+            "type": "string"
           },
-          "nomeResponsavel1": {
-            "type": "string",
-            "nullable": true
+          "descricao": {
+            "type": "string"
           },
-          "parentescoResponsavel1": {
-            "type": "string",
-            "nullable": true
-          },
-          "cpfResponsavel1": {
-            "type": "string",
-            "nullable": true
-          },
-          "nomeResponsavel2": {
-            "type": "string",
-            "nullable": true
-          },
-          "parentescoResponsavel2": {
-            "type": "string",
-            "nullable": true
-          },
-          "cpfResponsavel2": {
-            "type": "string",
-            "nullable": true
-          },
-          "nomeResponsavel3": {
-            "type": "string",
-            "nullable": true
-          },
-          "parentescoResponsavel3": {
-            "type": "string",
-            "nullable": true
-          },
-          "cpfResponsavel3": {
-            "type": "string",
-            "nullable": true
-          },
-          "alunoId": {
+          "qtdAdquirida": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           }
         }
       },
@@ -14509,6 +16641,117 @@
           },
           "status": {
             "type": "boolean"
+          }
+        }
+      },
+      "ModalidadeDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true
+          },
+          "vo2MaxIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "vo2MaxFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "vinteMetrosIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "vinteMetrosFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "shutlleRunIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "shutlleRunFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "flexibilidadeIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "flexibilidadeFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "preensaoManualIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "preensaoManualFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "abdominalPranchaIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "abdominalPranchaFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "impulsaoIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "impulsaoFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "envergaduraIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "envergaduraFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pesoIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pesoFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "alturaIni": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "alturaFim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "status": {
+            "type": "boolean"
+          },
+          "byteImage": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "linhaAcaoId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "linhaAcao": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -15033,6 +17276,12 @@
                 "$ref": "#/components/schemas/TipoParceriaDto"
               }
             ]
+          },
+          "razaoSocial": {
+            "type": "string"
+          },
+          "nomeContato": {
+            "type": "string"
           }
         }
       },
@@ -15125,6 +17374,13 @@
             "items": {
               "$ref": "#/components/schemas/Aluno"
             }
+          },
+          "razaoSocial": {
+            "type": "string"
+          },
+          "nomeContato": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -15192,6 +17448,13 @@
             "items": {
               "$ref": "#/components/schemas/Aluno"
             }
+          },
+          "razaoSocial": {
+            "type": "string"
+          },
+          "nomeContato": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -15441,6 +17704,10 @@
           "perfilId": {
             "type": "integer",
             "format": "int32"
+          },
+          "cargo": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -15517,7 +17784,11 @@
           "habilitado": {
             "type": "boolean"
           },
-          "ambientesIds": {
+          "modalidadesIds": {
+            "type": "string",
+            "nullable": true
+          },
+          "cargo": {
             "type": "string",
             "nullable": true
           }
@@ -16833,6 +19104,52 @@
           }
         }
       },
+      "TipoMaterialDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "grupoMaterialId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tituloGrupoMaterial": {
+            "type": "string"
+          },
+          "nome": {
+            "type": "string"
+          }
+        }
+      },
+      "CreateTipoMaterialCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "grupoMaterialId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdateTipoMaterialCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string"
+          }
+        }
+      },
       "PaginatedListOfTodoItemBriefDto": {
         "type": "object",
         "additionalProperties": false,
@@ -17345,6 +19662,10 @@
           "localidadeId": {
             "type": "string",
             "nullable": true
+          },
+          "localidade": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -17375,6 +19696,10 @@
             "format": "int32"
           },
           "municipioId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "localidadeId": {
             "type": "integer",
             "format": "int32"
           }
@@ -17414,6 +19739,10 @@
             "format": "int32"
           },
           "municipioId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "localidadeId": {
             "type": "integer",
             "format": "int32"
           }
@@ -17488,69 +19817,6 @@
           },
           "statusVocacional": {
             "type": "string"
-          }
-        }
-      },
-      "CreateVoucherCommand": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "local": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/Localidade"
-              }
-            ]
-          },
-          "descricao": {
-            "type": "string",
-            "nullable": true
-          },
-          "turma": {
-            "type": "string",
-            "nullable": true
-          },
-          "serie": {
-            "type": "string",
-            "nullable": true
-          },
-          "aluno": {
-            "$ref": "#/components/schemas/Aluno"
-          }
-        }
-      },
-      "UpdateVoucherCommand": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "local": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/Localidade"
-              }
-            ]
-          },
-          "descricao": {
-            "type": "string",
-            "nullable": true
-          },
-          "turma": {
-            "type": "string",
-            "nullable": true
-          },
-          "serie": {
-            "type": "string",
-            "nullable": true
           }
         }
       },

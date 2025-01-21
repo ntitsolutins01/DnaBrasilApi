@@ -23,4 +23,6 @@ public class Parceiro : BaseAuditableEntity
     public bool? Habilitado { get; set; }
     public List<Aluno>? Alunos { get; set;  } 
     public required TipoParceria? TipoParceria { get; set; }
+    public required string RazaoSocial { get; set; }
+    public string? NomeContato { get; set; }
 }

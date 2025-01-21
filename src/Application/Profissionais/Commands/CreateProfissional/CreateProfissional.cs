@@ -1,4 +1,5 @@
-﻿using DnaBrasilApi.Application.Common.Interfaces;
+﻿using System.Globalization;
+using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Profissionais.Commands.CreateProfissional;
@@ -21,7 +22,8 @@ public record CreateProfissionalCommand : IRequest<int>
     public int? LocalidadeId { get; init; }
     public bool Habilitado { get; init; }
     public string? ModalidadesIds { get; init; }
-    public required int PerfilId { get; set; }
+    public required int PerfilId { get; init; }
+    public string? Cargo { get; init; }
 }
 
 public class CreateProfissionalCommandHandler : IRequestHandler<CreateProfissionalCommand, int>
@@ -60,29 +62,10 @@ public class CreateProfissionalCommandHandler : IRequestHandler<CreateProfission
             Guard.Against.NotFound((int)request.LocalidadeId, localidade);
         }
 
-        var list = new List<Modalidade>();
-
-        if (!string.IsNullOrWhiteSpace(request.ModalidadesIds))
-        {
-            List<int> listIds = request.ModalidadesIds.Split(',').Select(s => Convert.ToInt32(s)).ToList();
-
-            foreach (int id in listIds)
-            {
-                var Modalidade = await _context.Modalidades
-                    .FindAsync([id], cancellationToken);
-
-                list.Add(Modalidade!);
-            }
-        }
-        else
-        {
-            list = null;
-        }
-
         var entity = new Profissional
         {
             Nome = request.Nome!,
-            DtNascimento = request.DtNascimento == "" ? null : Convert.ToDateTime(request.DtNascimento),
+            DtNascimento = DateTime.ParseExact(request.DtNascimento!, "dd/MM/yyyy", CultureInfo.CreateSpecificCulture("pt-BR")),
             Email = request.Email!,
             Sexo = request.Sexo!,
             CpfCnpj = request.Cpf!,
@@ -94,13 +77,28 @@ public class CreateProfissionalCommandHandler : IRequestHandler<CreateProfission
             Bairro = request.Bairro,
             Municipio = municipio,
             AspNetUserId = request.AspNetUserId,
-            Modalidades = list,
+            //ProfissionalModalidades = list,
             Habilitado = request.Habilitado,
             Localidade = localidade,
-            Perfil = perfil
+            Perfil = perfil,
+            Cargo = request.Cargo
         };
 
         _context.Profissionais.Add(entity);
+
+        await _context.SaveChangesAsync(cancellationToken);
+
+        var listProfissionalModalidades = new List<ProfissionalModalidade>();
+
+        if (!string.IsNullOrEmpty(request.ModalidadesIds))
+        {
+            int[] arrModIds = request.ModalidadesIds.Split(',').Select(n => Convert.ToInt32(n)).ToArray();
+
+            listProfissionalModalidades.AddRange(arrModIds.Select(item => new ProfissionalModalidade() { ModalidadeId = item, ProfissionalId = entity.Id }));
+        }
+
+        entity.ProfissionalModalidades = listProfissionalModalidades;
+
 
         await _context.SaveChangesAsync(cancellationToken);
 

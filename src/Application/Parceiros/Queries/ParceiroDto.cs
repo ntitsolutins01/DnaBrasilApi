@@ -6,25 +6,27 @@ using DnaBrasilApi.Domain.Entities;
 namespace DnaBrasilApi.Application.Parceiros.Queries;
 public class ParceiroDto
 {
-    public int Id { get; set; }
-    public string? Nome { get; set; }
-    public string? Email { get; set; }
+    public int Id { get; init; }
+    public string? Nome { get; init; }
+    public string? Email { get; init; }
     public List<ProfissionalDto> Profissionais { get; } = new();
-    public string? TipoPessoa { get; set; }
-    public string? CpfCnpj { get; set; }
-    public string? Telefone { get; set; }
-    public string? Celular { get; set; }
-    public string? Cep { get; set; }
-    public string? Endereco { get; set; }
-    public int Numero { get; set; }
-    public string? Bairro { get; set; }
-    public int EstadoId { get; set; }
-    public string? Uf { get; set; }
-    public int MunicipioId { get; set; }
-    public bool Status { get; set; }
-    public bool? Habilitado { get; set; }
-    public List<AlunoDto>? Alunos { get; set; }
-    public required TipoParceriaDto? TipoParceria { get; set; }
+    public string? TipoPessoa { get; init; }
+    public string? CpfCnpj { get; init; }
+    public string? Telefone { get; init; }
+    public string? Celular { get; init; }
+    public string? Cep { get; init; }
+    public string? Endereco { get; init; }
+    public int Numero { get; init; }
+    public string? Bairro { get; init; }
+    public int EstadoId { get; init; }
+    public string? Uf { get; init; }
+    public int MunicipioId { get; init; }
+    public bool Status { get; init; }
+    public bool? Habilitado { get; init; }
+    public List<AlunoDto>? Alunos { get; init; }
+    public required TipoParceriaDto? TipoParceria { get; init; }
+    public required string RazaoSocial { get; init; }
+    public required string NomeContato { get; init; }
     private class Mapping : Profile
     {
         public Mapping()
