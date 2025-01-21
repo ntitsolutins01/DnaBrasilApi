@@ -6356,6 +6356,41 @@
         }
       }
     },
+    "/api/Modalidades/Profissional/{id}": {
+      "get": {
+        "tags": [
+          "Modalidades"
+        ],
+        "operationId": "GetModalidadesByProfissionalId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ModalidadeDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/ModulosEad": {
       "get": {
         "tags": [
@@ -11750,14 +11785,10 @@
             "nullable": true
           },
           "hrInicial": {
-            "type": "string",
-            "format": "duration",
-            "nullable": true
+            "type": "string"
           },
           "hrFinal": {
-            "type": "string",
-            "format": "duration",
-            "nullable": true
+            "type": "string"
           },
           "profissionalId": {
             "type": "integer",
