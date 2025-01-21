@@ -1,18 +1,21 @@
-﻿using DnaBrasilApi.Application.Common.Interfaces;
+﻿using System.Globalization;
+using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Atividades.Commands.CreateAtividade;
 public record CreateAtividadeCommand : IRequest<int>
 {
-    public required int EstruturaId { get; set; }
-    public required int LinhaAcaoId { get; set; }
-    public required int CategoriaId { get; set; }
-    public required int ModalidadeId { get; set; }
-    public string? Turma { get; set; }
-    public TimeSpan? HrInicial { get; set; }
-    public TimeSpan? HrFinal { get; set; }
-    public required int ProfissionalId { get; set; }
-    public required int LocalidadeId { get; set; }
+    public required int EstruturaId { get; init; }
+    public required int LinhaAcaoId { get; init; }
+    public required int CategoriaId { get; init; }
+    public required int ModalidadeId { get; init; }
+    public required string Turma { get; init; }
+    public required string HrInicial { get; init; }
+    public required string HrFinal { get; init; }
+    public required int ProfissionalId { get; init; }
+    public required int LocalidadeId { get; init; }
+    public required int QuantidadeAluno { get; init; }
+    public required string DiasSemana { get; init; }
 }
 
 public class CreateAtividadeCommandHandler : IRequestHandler<CreateAtividadeCommand, int>
@@ -63,10 +66,12 @@ public class CreateAtividadeCommandHandler : IRequestHandler<CreateAtividadeComm
             Categoria = categoria,
             Modalidade = modalidade,
             Turma = request.Turma,
-            HrInicial = request.HrInicial,
-            HrFinal = request.HrFinal,
+            HrInicial = TimeSpan.Parse(request.HrInicial, new CultureInfo("en-US")),
+            HrFinal = TimeSpan.Parse(request.HrFinal, new CultureInfo("en-US")),
             Profissional = profissional,
-            Localidade = localidade
+            Localidade = localidade,
+            QuantidadeAluno = request.QuantidadeAluno,
+            DiasSemana = request.DiasSemana
         };
 
         _context.Atividades.Add(entity);

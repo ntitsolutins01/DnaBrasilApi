@@ -510,9 +510,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Atividades/Atividade/{id}": {
+      },
       "get": {
         "tags": [
           "Atividades"
@@ -863,9 +861,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Categorias/Categoria/{id}": {
+      },
       "get": {
         "tags": [
           "Categorias"
@@ -1023,9 +1019,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Certificados/Certificado/{id}": {
+      },
       "get": {
         "tags": [
           "Certificados"
@@ -1217,32 +1211,7 @@
             }
           }
         }
-      }
-    },
-    "/api/ConfiguracaoSistema/Funcionalidades": {
-      "get": {
-        "tags": [
-          "ConfiguracaoSistema"
-        ],
-        "operationId": "GetFuncionalidadesAll",
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/FuncionalidadeDto"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/ConfiguracaoSistema/Funcionalidade/{id}": {
+      },
       "get": {
         "tags": [
           "ConfiguracaoSistema"
@@ -1272,7 +1241,65 @@
             }
           }
         }
-      },
+      }
+    },
+    "/api/ConfiguracaoSistema/Funcionalidades": {
+      "get": {
+        "tags": [
+          "ConfiguracaoSistema"
+        ],
+        "operationId": "GetFuncionalidadesAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FuncionalidadeDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ConfiguracaoSistema/Funcionalidade": {
+      "post": {
+        "tags": [
+          "ConfiguracaoSistema"
+        ],
+        "operationId": "CreateFuncionalidade",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateFuncionalidadeCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ConfiguracaoSistema/Funcionalidade/{id}": {
       "put": {
         "tags": [
           "ConfiguracaoSistema"
@@ -1339,39 +1366,6 @@
               "application/json": {
                 "schema": {
                   "type": "boolean"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/ConfiguracaoSistema/Funcionalidade": {
-      "post": {
-        "tags": [
-          "ConfiguracaoSistema"
-        ],
-        "operationId": "CreateFuncionalidade",
-        "requestBody": {
-          "x-name": "command",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateFuncionalidadeCommand"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 1
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "integer",
-                  "format": "int32"
                 }
               }
             }
@@ -1949,9 +1943,7 @@
             }
           }
         }
-      }
-    },
-    "/api/ControlesMateriaisEstoquesSaidas/ControleMaterialEstoqueSaida/{id}": {
+      },
       "get": {
         "tags": [
           "ControlesMateriaisEstoquesSaidas"
@@ -2144,9 +2136,7 @@
             }
           }
         }
-      }
-    },
-    "/api/ControlesMensaisEstoque/ControleMensalEstoque/{id}": {
+      },
       "get": {
         "tags": [
           "ControlesMensaisEstoque"
@@ -4111,9 +4101,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Estruturas/Estrutura/{id}": {
+      },
       "get": {
         "tags": [
           "Estruturas"
@@ -4789,9 +4777,7 @@
             }
           }
         }
-      }
-    },
-    "/api/GruposMateriais/GrupoMaterial/{id}": {
+      },
       "get": {
         "tags": [
           "GruposMateriais"
@@ -5920,9 +5906,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Materiais/Material/{id}": {
+      },
       "get": {
         "tags": [
           "Materiais"
@@ -6330,6 +6314,41 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ModalidadeDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Modalidades/LinhaAcao/{id}": {
+      "get": {
+        "tags": [
+          "Modalidades"
+        ],
+        "operationId": "GetModalidadesByLinhaAcaoId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ModalidadeDto"
+                  }
                 }
               }
             }
@@ -7003,9 +7022,7 @@
             }
           }
         }
-      }
-    },
-    "/api/TipoParcerias/TipoParceria/{id}": {
+      },
       "get": {
         "tags": [
           "TipoParcerias"
@@ -8083,6 +8100,36 @@
             }
           }
         }
+      },
+      "get": {
+        "tags": [
+          "Questionarios"
+        ],
+        "operationId": "GetQuestionarioById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuestionarioDto"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/api/Questionarios/TipoLaudo/{id}": {
@@ -8113,38 +8160,6 @@
                   "items": {
                     "$ref": "#/components/schemas/QuestionarioDto"
                   }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/Questionarios/Questionario/{id}": {
-      "get": {
-        "tags": [
-          "Questionarios"
-        ],
-        "operationId": "GetQuestionarioById",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "x-position": 1
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/QuestionarioDto"
                 }
               }
             }
@@ -9895,9 +9910,7 @@
             }
           }
         }
-      }
-    },
-    "/api/TiposMateriais/TipoMaterial/{id}": {
+      },
       "get": {
         "tags": [
           "TiposMateriais"
@@ -10904,6 +10917,37 @@
         }
       }
     },
+    "/api/Usuarios/AspNetUser/{aspNetUserId}": {
+      "get": {
+        "tags": [
+          "Usuarios"
+        ],
+        "operationId": "GetUsuarioByAspNetUserId",
+        "parameters": [
+          {
+            "name": "aspNetUserId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsuarioDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Vocacionais/{id}": {
       "get": {
         "tags": [
@@ -11610,18 +11654,13 @@
             "format": "int32"
           },
           "turma": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "hrInicial": {
-            "type": "string",
-            "format": "duration",
-            "nullable": true
+            "type": "string"
           },
           "hrFinal": {
-            "type": "string",
-            "format": "duration",
-            "nullable": true
+            "type": "string"
           },
           "profissionalId": {
             "type": "integer",
@@ -11630,6 +11669,13 @@
           "localidadeId": {
             "type": "integer",
             "format": "int32"
+          },
+          "quantidadeAluno": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "diasSemana": {
+            "type": "string"
           }
         }
       },
@@ -11642,18 +11688,20 @@
             "format": "int32"
           },
           "turma": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "hrInicial": {
-            "type": "string",
-            "format": "duration",
-            "nullable": true
+            "type": "string"
           },
           "hrFinal": {
-            "type": "string",
-            "format": "duration",
-            "nullable": true
+            "type": "string"
+          },
+          "quantidadeAluno": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "diasSemana": {
+            "type": "string"
           }
         }
       },
@@ -11697,7 +11745,7 @@
             "type": "string",
             "nullable": true
           },
-          "diaSemana": {
+          "diasSemana": {
             "type": "string",
             "nullable": true
           },
@@ -11958,20 +12006,22 @@
             "type": "integer",
             "format": "int32"
           },
-          "imagemFrente": {
+          "tituloCurso": {
             "type": "string",
-            "format": "byte"
+            "nullable": true
+          },
+          "imagemFrente": {
+            "type": "string"
           },
           "imagemVerso": {
             "type": "string",
-            "format": "byte",
             "nullable": true
           },
-          "nomeFotoFrente": {
+          "nomeImagemFrente": {
             "type": "string",
             "nullable": true
           },
-          "nomeFotoVerso": {
+          "nomeImagemVerso": {
             "type": "string",
             "nullable": true
           },
@@ -11994,20 +12044,18 @@
             "type": "integer",
             "format": "int32"
           },
-          "imgFrente": {
-            "type": "string",
-            "format": "byte"
+          "imagemFrente": {
+            "type": "string"
           },
-          "imgVerso": {
-            "type": "string",
-            "format": "byte",
-            "nullable": true
-          },
-          "nomeFotoFrente": {
+          "imagemVerso": {
             "type": "string",
             "nullable": true
           },
-          "nomeFotoVerso": {
+          "nomeImagemFrente": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeImagemVerso": {
             "type": "string",
             "nullable": true
           },
@@ -12034,20 +12082,18 @@
             "type": "integer",
             "format": "int32"
           },
-          "imgFrente": {
-            "type": "string",
-            "format": "byte"
+          "imagemFrente": {
+            "type": "string"
           },
-          "imgVerso": {
-            "type": "string",
-            "format": "byte",
-            "nullable": true
-          },
-          "nomeFotoFrente": {
+          "imagemVerso": {
             "type": "string",
             "nullable": true
           },
-          "nomeFotoVerso": {
+          "nomeImagemFrente": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeImagemVerso": {
             "type": "string",
             "nullable": true
           },
@@ -16693,17 +16739,18 @@
           "status": {
             "type": "boolean"
           },
-          "linhaAcao": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/LinhaAcaoDto"
-              }
-            ]
-          },
           "byteImage": {
             "type": "string",
             "format": "byte",
+            "nullable": true
+          },
+          "linhaAcaoId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "linhaAcao": {
+            "type": "string",
             "nullable": true
           }
         }

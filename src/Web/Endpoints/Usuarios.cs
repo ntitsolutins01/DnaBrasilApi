@@ -6,6 +6,7 @@ using DnaBrasilApi.Application.Usuarios.Queries.GetUsuarioByCpf;
 using DnaBrasilApi.Application.Usuarios.Queries.GetUsuarioByEmail;
 using DnaBrasilApi.Application.Usuarios.Queries.GetUsuarioById;
 using DnaBrasilApi.Application.Usuarios.Queries.GetUsuariosAll;
+using DnaBrasilApi.Application.Usuarios.Queries.GetUsuarioByAspNetUserId;
 
 namespace DnaBrasilApi.Web.Endpoints;
 /// <summary>
@@ -29,7 +30,8 @@ public class Usuarios : EndpointGroupBase
             .MapPut(UpdateUsuario, "{id}")
             .MapDelete(DeleteUsuario, "{id}")
             .MapGet(GetUsuarioByEmail, "Email/{email}")
-            .MapGet(GetUsuarioByCpf, "Cpf/{cpf}");
+            .MapGet(GetUsuarioByCpf, "Cpf/{cpf}")
+            .MapGet(GetUsuarioByAspNetUserId, "AspNetUser/{aspNetUserId}");
     }
     #endregion
 
@@ -115,6 +117,17 @@ public class Usuarios : EndpointGroupBase
     public async Task<UsuarioDto> GetUsuarioByCpf(ISender sender, string cpf)
     {
         return await sender.Send(new GetUsuarioByCpfQuery() { Cpf = cpf });
+    }
+
+    /// <summary>
+    /// Endpoint que busca um único Usuário por aspNetUserId
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="aspNetUserId">AspNetUserId de Usuário a ser buscado</param>
+    /// <returns>Retorna o objeto do Usuário </returns>
+    public async Task<UsuarioDto> GetUsuarioByAspNetUserId(ISender sender, string aspNetUserId)
+    {
+        return await sender.Send(new GetUsuarioByAspNetUserIdQuery() { AspNetUserId = aspNetUserId });
     }
     #endregion
 }

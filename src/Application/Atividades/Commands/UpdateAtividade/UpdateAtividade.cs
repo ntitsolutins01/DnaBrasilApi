@@ -1,13 +1,16 @@
-﻿using DnaBrasilApi.Application.Common.Interfaces;
+﻿using System.Globalization;
+using DnaBrasilApi.Application.Common.Interfaces;
 
 namespace DnaBrasilApi.Application.Atividades.Commands.UpdateAtividade;
 
 public record UpdateAtividadeCommand : IRequest <bool>
 {
     public required int Id { get; init; }
-    public string? Turma { get; set; }
-    public TimeSpan? HrInicial { get; set; }
-    public TimeSpan? HrFinal { get; set; }
+    public required string Turma { get; init; }
+    public required string HrInicial { get; init; }
+    public required string HrFinal { get; init; }
+    public required int QuantidadeAluno { get; init; }
+    public required string DiasSemana { get; init; }
 }
 
 public class UpdateAtividadeCommandHandler : IRequestHandler<UpdateAtividadeCommand, bool>
@@ -27,8 +30,10 @@ public class UpdateAtividadeCommandHandler : IRequestHandler<UpdateAtividadeComm
         Guard.Against.NotFound(request.Id, entity);
         
         entity.Turma = request.Turma;
-        entity.HrInicial = request.HrInicial;
-        entity.HrFinal = request.HrFinal;
+        entity.HrInicial = TimeSpan.Parse(request.HrInicial, new CultureInfo("en-US"));
+        entity.HrFinal = TimeSpan.Parse(request.HrFinal, new CultureInfo("en-US"));
+        entity.QuantidadeAluno = request.QuantidadeAluno;
+        entity.DiasSemana = request.DiasSemana;
 
         var result = await _context.SaveChangesAsync(cancellationToken);
 
