@@ -43,7 +43,7 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
         return result;
     }
 
-    private async Task<DesempenhoDto> DesempenhoAlunos(IQueryable<Aluno> aluno,
+    public async Task<DesempenhoDto> DesempenhoAlunos(IQueryable<Aluno> aluno,
         IQueryable<Laudo> laudo, CancellationToken cancellationToken)
     {
         var desempenhoEsportivo = await _context.TextosLaudos

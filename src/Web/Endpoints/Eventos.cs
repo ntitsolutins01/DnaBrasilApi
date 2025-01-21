@@ -10,7 +10,6 @@ namespace DnaBrasilApi.Web.Endpoints;
 public class Eventos : EndpointGroupBase
 {
     #region MapEndpoints
-
     /// <summary>
     /// Mapeamento dos Endpoints
     /// </summary>
@@ -23,7 +22,7 @@ public class Eventos : EndpointGroupBase
             .MapPost(CreateEvento)
             .MapPut(UpdateEvento, "{id}")
             .MapDelete(DeleteEvento, "{id}")
-            .MapGet(GetEventoById, "Evento/{id}");
+            .MapGet(GetEventoById, "{id}");
     }
     #endregion
 
@@ -90,5 +89,4 @@ public class Eventos : EndpointGroupBase
         return await sender.Send(new GetEventoByIdQuery() { Id = id });
     }
     #endregion
-
 }

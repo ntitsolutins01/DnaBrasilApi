@@ -1,6 +1,7 @@
 using System.Globalization;
 using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
+using DnaBrasilApi.Domain.GuardClauses;
 
 namespace DnaBrasilApi.Application.Alunos.Commands.CreateAluno;
 
@@ -39,6 +40,7 @@ public record CreateAlunoCommand : IRequest<int>
     public bool? UtilizacaoImagem { get; init; }
     public bool? CopiaDocAlunoResponsavel { get; init; }
     public bool? Convidado { get; init; } = false;
+    public string? ModalidadesIds { get; init; }
 }
 
 public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int>
@@ -52,6 +54,13 @@ public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int
 
     public async Task<int> Handle(CreateAlunoCommand request, CancellationToken cancellationToken)
     {
+        var emailExiste = _context.Alunos.Any(x => x != null && x.Email == request.Email );
+
+        Guard.Against.AlunoExiste(emailExiste);
+
+        var cpfExiste = _context.Alunos.Any(x => x != null && x.Cpf != null && x.Cpf == request.Cpf);
+
+        Guard.Against.AlunoExiste(cpfExiste);
 
         var municipio = await _context.Municipios.FindAsync(new object[] { request.MunicipioId }, cancellationToken);
 
@@ -132,6 +141,19 @@ public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int
         };
 
         _context.Alunos.Add(entity);
+
+        await _context.SaveChangesAsync(cancellationToken);
+
+        var listAlunoModalidades = new List<AlunoModalidade>();
+
+        if (!string.IsNullOrEmpty(request.ModalidadesIds))
+        {
+            int[] arrModIds = request.ModalidadesIds.Split(',').Select(n => Convert.ToInt32(n)).ToArray();
+
+            listAlunoModalidades.AddRange(arrModIds.Select(item => new AlunoModalidade() { ModalidadeId = item, AlunoId = entity.Id }));
+        }
+
+        entity.AlunoModalidades = listAlunoModalidades;
 
         await _context.SaveChangesAsync(cancellationToken);
 

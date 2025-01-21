@@ -15,6 +15,7 @@ public record UpdateUsuarioCommand : IRequest<bool>
     public required string AspNetRoleId { get; init; }
     public required int PerfilId { get; init; }
     public required int MunicipioId { get; init; }
+    public required int LocalidadeId { get; init; }
 }
 
 public class UpdateUsuarioCommandHandler : IRequestHandler<UpdateUsuarioCommand, bool>
@@ -29,15 +30,20 @@ public class UpdateUsuarioCommandHandler : IRequestHandler<UpdateUsuarioCommand,
     public async Task<bool> Handle(UpdateUsuarioCommand request, CancellationToken cancellationToken)
     {
         var entity = await _context.Usuarios
-            .FindAsync(new object[] { request.Id }, cancellationToken);
+            .FindAsync([request.Id], cancellationToken);
 
         Guard.Against.NotFound(request.Id, entity);
 
         var municipio = await _context.Municipios
-            .FindAsync(new object[] { request.MunicipioId }, cancellationToken);
+            .FindAsync([request.MunicipioId], cancellationToken);
 
         var perfil = await _context.Perfis
-            .FindAsync(new object[] { request.PerfilId }, cancellationToken);
+            .FindAsync([request.PerfilId], cancellationToken);
+
+        var localidade = await _context.Localidades
+            .FindAsync([request.LocalidadeId], cancellationToken);
+
+        Guard.Against.NotFound(request.LocalidadeId, localidade);
 
         entity.Nome = request.Nome;
         entity.Email = request.Email;
@@ -48,6 +54,7 @@ public class UpdateUsuarioCommandHandler : IRequestHandler<UpdateUsuarioCommand,
         entity.Municipio = municipio;
         entity.CpfCnpj = request.CpfCnpj;
         entity.TipoPessoa = request.TipoPessoa;
+        entity.Localidade = localidade;
 
         var result = await _context.SaveChangesAsync(cancellationToken);
 
