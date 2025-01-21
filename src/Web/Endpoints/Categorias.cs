@@ -23,7 +23,7 @@ public class Categorias : EndpointGroupBase
             .MapPut(UpdateCategoria, "{id}")
             .MapDelete(DeleteCategoria, "{id}")
             .MapGet(GetCategoriasAll)
-            .MapGet(GetCategoriaById, "Categoria/{id}");
+            .MapGet(GetCategoriaById, "{id}");
     }
     #endregion
 
