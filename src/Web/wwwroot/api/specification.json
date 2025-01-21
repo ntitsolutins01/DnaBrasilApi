@@ -1211,7 +1211,32 @@
             }
           }
         }
-      },
+      }
+    },
+    "/api/ConfiguracaoSistema/Funcionalidades": {
+      "get": {
+        "tags": [
+          "ConfiguracaoSistema"
+        ],
+        "operationId": "GetFuncionalidadesAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FuncionalidadeDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ConfiguracaoSistema/Funcionalidade/{id}": {
       "get": {
         "tags": [
           "ConfiguracaoSistema"
@@ -1241,65 +1266,7 @@
             }
           }
         }
-      }
-    },
-    "/api/ConfiguracaoSistema/Funcionalidades": {
-      "get": {
-        "tags": [
-          "ConfiguracaoSistema"
-        ],
-        "operationId": "GetFuncionalidadesAll",
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/FuncionalidadeDto"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/ConfiguracaoSistema/Funcionalidade": {
-      "post": {
-        "tags": [
-          "ConfiguracaoSistema"
-        ],
-        "operationId": "CreateFuncionalidade",
-        "requestBody": {
-          "x-name": "command",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateFuncionalidadeCommand"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 1
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/ConfiguracaoSistema/Funcionalidade/{id}": {
+      },
       "put": {
         "tags": [
           "ConfiguracaoSistema"
@@ -1366,6 +1333,39 @@
               "application/json": {
                 "schema": {
                   "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ConfiguracaoSistema/Funcionalidade": {
+      "post": {
+        "tags": [
+          "ConfiguracaoSistema"
+        ],
+        "operationId": "CreateFuncionalidade",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateFuncionalidadeCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
                 }
               }
             }
@@ -6327,6 +6327,41 @@
           "Modalidades"
         ],
         "operationId": "GetModalidadesByLinhaAcaoId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ModalidadeDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Modalidades/Profissional/{id}": {
+      "get": {
+        "tags": [
+          "Modalidades"
+        ],
+        "operationId": "GetModalidadesByProfissionalId",
         "parameters": [
           {
             "name": "id",
@@ -11750,14 +11785,10 @@
             "nullable": true
           },
           "hrInicial": {
-            "type": "string",
-            "format": "duration",
-            "nullable": true
+            "type": "string"
           },
           "hrFinal": {
-            "type": "string",
-            "format": "duration",
-            "nullable": true
+            "type": "string"
           },
           "profissionalId": {
             "type": "integer",
