@@ -26,7 +26,7 @@ public class Materiais : EndpointGroupBase
             .MapPost(CreateMaterial)
             .MapPut(UpdateMaterial, "{id}")
             .MapDelete(DeleteMaterial, "{id}")
-            .MapGet(GetMaterialById, "Material/{id}")
+            .MapGet(GetMaterialById, "{id}")
             .MapGet(GetMateriaisByTipoMaterialId, "TipoMaterial/{id}")
             .MapPost(GetMateriaisByFilter, "Filter"); ;
     }
