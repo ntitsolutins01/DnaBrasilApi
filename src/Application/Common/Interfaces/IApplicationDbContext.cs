@@ -67,6 +67,7 @@ public interface IApplicationDbContext
     DbSet<FomentoLinhaAcao> FomentoLinhasAcoes { get; }
     DbSet<Certificado> Certificados { get; }
     DbSet<AlunoModalidade> AlunoModalidades { get; }
+    DbSet<Ranking> Rankings { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }
