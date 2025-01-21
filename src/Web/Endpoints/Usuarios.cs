@@ -29,9 +29,9 @@ public class Usuarios : EndpointGroupBase
             .MapPost(CreateUsuario)
             .MapPut(UpdateUsuario, "{id}")
             .MapDelete(DeleteUsuario, "{id}")
-            .MapGet(GetUsuarioByEmail, "/Email/{email}")
-            .MapGet(GetUsuarioByCpf, "/Cpf/{cpf}")
-            .MapGet(GetUsuarioByAspNetUserId, "/AspNetUser/{aspNetUserId}");
+            .MapGet(GetUsuarioByEmail, "Email/{email}")
+            .MapGet(GetUsuarioByCpf, "Cpf/{cpf}")
+            .MapGet(GetUsuarioByAspNetUserId, "AspNetUser/{aspNetUserId}");
     }
     #endregion
 

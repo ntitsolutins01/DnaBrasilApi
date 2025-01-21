@@ -24,7 +24,7 @@ public class ControlesMensaisEstoque : EndpointGroupBase
             .MapPost(CreateControleMensalEstoque)
             .MapPut(UpdateControleMensalEstoque, "{id}")
             .MapDelete(DeleteControleMensalEstoque, "{id}")
-            .MapGet(GetControleMensalEstoqueById, "ControleMensalEstoque/{id}")
+            .MapGet(GetControleMensalEstoqueById, "{id}")
             .MapGet(GetControlesMensaisEstoqueByMaterialId, "Material/{id}");
     }
     #endregion
