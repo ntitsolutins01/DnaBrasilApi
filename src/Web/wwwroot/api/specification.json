@@ -11745,7 +11745,7 @@
             "type": "string",
             "nullable": true
           },
-          "diaSemana": {
+          "diasSemana": {
             "type": "string",
             "nullable": true
           },

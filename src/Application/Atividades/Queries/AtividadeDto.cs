@@ -14,7 +14,7 @@ public class AtividadeDto
     public required int ModalidadeId { get; init; }
     public required string NomeModalidade { get; init; }
     public string? Turma { get; init; }
-    public string? DiaSemana { get; init; }
+    public string? DiasSemana { get; init; }
     public TimeSpan? HrInicial { get; init; }
     public TimeSpan? HrFinal { get; init; }
     public required int ProfissionalId { get; init; }

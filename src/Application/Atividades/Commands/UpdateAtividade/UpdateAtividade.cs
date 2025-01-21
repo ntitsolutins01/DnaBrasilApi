@@ -30,8 +30,8 @@ public class UpdateAtividadeCommandHandler : IRequestHandler<UpdateAtividadeComm
         Guard.Against.NotFound(request.Id, entity);
         
         entity.Turma = request.Turma;
-        entity.HrInicial = TimeSpan.Parse(request.HrInicial);
-        entity.HrFinal = TimeSpan.Parse(request.HrFinal);
+        entity.HrInicial = TimeSpan.Parse(request.HrInicial, new CultureInfo("en-US"));
+        entity.HrFinal = TimeSpan.Parse(request.HrFinal, new CultureInfo("en-US"));
         entity.QuantidadeAluno = request.QuantidadeAluno;
         entity.DiasSemana = request.DiasSemana;
 
