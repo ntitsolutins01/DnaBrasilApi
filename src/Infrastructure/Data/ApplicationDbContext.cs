@@ -5,6 +5,7 @@ using DnaBrasilApi.Domain.Entities;
 using DnaBrasilApi.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace DnaBrasilApi.Infrastructure.Data;
 
@@ -75,7 +76,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<FomentoLinhaAcao> FomentoLinhasAcoes => Set<FomentoLinhaAcao>();
     public DbSet<Certificado> Certificados => Set<Certificado>();
     public DbSet<AlunoModalidade> AlunoModalidades => Set<AlunoModalidade>();
-
+    public DbSet<Ranking> Rankings => Set<Ranking>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

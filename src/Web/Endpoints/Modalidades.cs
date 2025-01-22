@@ -5,6 +5,7 @@ using DnaBrasilApi.Application.Modalidades.Queries;
 using DnaBrasilApi.Application.Modalidades.Queries.GetModalidadeById;
 using DnaBrasilApi.Application.Modalidades.Queries.GetAmbientesAll;
 using DnaBrasilApi.Application.Modalidades.Queries.GetModalidadesByLinhaAcaoId;
+using DnaBrasilApi.Application.Modalidades.Queries.GetModalidadesByProfissionalId;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -28,7 +29,8 @@ public class Modalidades : EndpointGroupBase
             .MapPut(UpdateModalidade, "{id}")
             .MapDelete(DeleteModalidade, "{id}")
             .MapGet(GetModalidadeById, "{id}")
-            .MapGet(GetModalidadesByLinhaAcaoId, "/LinhaAcao/{id}");
+            .MapGet(GetModalidadesByLinhaAcaoId, "/LinhaAcao/{id}")
+            .MapGet(GetModalidadesByProfissionalId, "/Profissional/{id}");
     }
     #endregion
 
@@ -102,6 +104,17 @@ public class Modalidades : EndpointGroupBase
     public async Task<List<ModalidadeDto>> GetModalidadesByLinhaAcaoId(ISender sender, int id)
     {
         return await sender.Send(new GetModalidadesByLinhaAcaoIdQuery(){ LinhaAcaoId = id });
+    }
+
+    /// <summary>
+    /// Endpoint que busca todas as modalidades por ProfissionalId
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="id">Id do profissional a ser buscado</param>
+    /// <returns>Retorna a lista de Modalidades</returns>
+    public async Task<List<ModalidadeDto>> GetModalidadesByProfissionalId(ISender sender, int id)
+    {
+        return await sender.Send(new GetModalidadesByProfissionalIdQuery(){ ProfissionalId = id });
     }
     #endregion
 }

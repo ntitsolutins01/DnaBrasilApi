@@ -24,7 +24,7 @@ public class TipoParcerias : EndpointGroupBase
             .MapPost(CreateTipoParceria)
             .MapPut(UpdateTipoParceria, "{id}")
             .MapDelete(DeleteTipoParceria, "{id}")
-            .MapGet(GetTipoParceriaById, "TipoParceria/{id}");
+            .MapGet(GetTipoParceriaById, "{id}");
     }
     #endregion
 
