@@ -542,6 +542,51 @@
         }
       }
     },
+    "/api/Atividades/Modalidade/{modalidadeId}/Profissional/{prodissionalId}": {
+      "get": {
+        "tags": [
+          "Atividades"
+        ],
+        "operationId": "GetTurmasByModalidadeIdProfissionalId",
+        "parameters": [
+          {
+            "name": "modalidadeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "prodissionalId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 2
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AtividadeDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Aulas": {
       "get": {
         "tags": [
