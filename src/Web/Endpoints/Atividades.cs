@@ -4,6 +4,7 @@ using DnaBrasilApi.Application.Atividades.Commands.DeleteAtividade;
 using DnaBrasilApi.Application.Atividades.Commands.UpdateAtividade;
 using DnaBrasilApi.Application.Atividades.Queries;
 using DnaBrasilApi.Application.Atividades.Queries.GetAtividadesAll;
+using DnaBrasilApi.Application.Atividades.Queries.GetTurmasByModalidadeIdProfissionalId;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -23,7 +24,8 @@ public class Atividades : EndpointGroupBase
             .MapPut(UpdateAtividade, "{id}")
             .MapDelete(DeleteAtividade, "{id}")
             .MapGet(GetAtividadesAll)
-            .MapGet(GetAtividadeById, "{id}");
+            .MapGet(GetAtividadeById, "{id}")
+            .MapGet(GetTurmasByModalidadeIdProfissionalId, "Modalidade/{modalidadeId}/Profissional/{prodissionalId}");
     }
     #endregion
 
@@ -88,6 +90,18 @@ public class Atividades : EndpointGroupBase
     public async Task<AtividadeDto> GetAtividadeById(ISender sender, int id)
     {
         return await sender.Send(new GetAtividadeByIdQuery() { Id = id });
+    }
+
+    /// <summary>
+    /// Endpoint que busca lista de turmas pelo id da modalidade e id do profissional 
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="modalidadeId">Id da modalidade</param>
+    /// <param name="prodissionalId">Id do profissional</param>
+    /// <returns>Retorna a lista de turmas</returns>
+    public async Task<List<AtividadeDto>> GetTurmasByModalidadeIdProfissionalId(ISender sender, int modalidadeId, int prodissionalId)
+    {
+        return await sender.Send(new GetTurmasByModalidadeIdProfissionalIdQuery() { ModalidadeId = modalidadeId, ProfissionalId = prodissionalId });
     }
     #endregion
 
