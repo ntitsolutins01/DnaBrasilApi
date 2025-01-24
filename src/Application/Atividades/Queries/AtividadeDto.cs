@@ -14,8 +14,8 @@ public class AtividadeDto
     public required string NomeCategoria { get; init; }
     public required int ModalidadeId { get; init; }
     public required string NomeModalidade { get; init; }
-    public string? Turma { get; init; }
-    public string? DiasSemana { get; init; }
+    public required string Turma { get; init; }
+    public required string DiasSemana { get; init; }
     public required string HrInicial { get; init; }
     public required string HrFinal { get; init; }
     public required int ProfissionalId { get; init; }

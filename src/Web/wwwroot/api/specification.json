@@ -384,6 +384,41 @@
         }
       }
     },
+    "/api/Alunos/Profissional/{id}": {
+      "get": {
+        "tags": [
+          "Alunos"
+        ],
+        "operationId": "GetNomeAlunosByProfissionalId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SelectListDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Atividades": {
       "post": {
         "tags": [
@@ -542,7 +577,7 @@
         }
       }
     },
-    "/api/Atividades/Modalidade/{modalidadeId}/Profissional/{prodissionalId}": {
+    "/api/Atividades/Modalidade/{modalidadeId}/Profissional/{profissionalId}": {
       "get": {
         "tags": [
           "Atividades"
@@ -560,7 +595,7 @@
             "x-position": 1
           },
           {
-            "name": "prodissionalId",
+            "name": "profissionalId",
             "in": "path",
             "required": true,
             "schema": {
@@ -568,6 +603,60 @@
               "format": "int32"
             },
             "x-position": 2
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AtividadeDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Atividades/Modalidade/{modalidadeId}/Profissional/{profissionalId}/Turma/{turma}": {
+      "get": {
+        "tags": [
+          "Atividades"
+        ],
+        "operationId": "GetAtividadeByModalidadeIdProfissionalIdTurma",
+        "parameters": [
+          {
+            "name": "modalidadeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "profissionalId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 2
+          },
+          {
+            "name": "turma",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-position": 3
           }
         ],
         "responses": {
@@ -11822,12 +11911,10 @@
             "type": "string"
           },
           "turma": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "diasSemana": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "hrInicial": {
             "type": "string"

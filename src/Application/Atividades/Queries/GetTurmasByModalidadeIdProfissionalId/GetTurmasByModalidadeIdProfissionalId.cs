@@ -27,6 +27,6 @@ public class GetTurmasByModalidadeIdProfissionalIdQueryHandler : IRequestHandler
             .ProjectTo<AtividadeDto>(_mapper.ConfigurationProvider)
             .ToListAsync(cancellationToken);
         
-        return result! == null ? throw new ArgumentNullException(nameof(result)) : result;
+        return result;
     }
 }
