@@ -11938,6 +11938,9 @@
           },
           "status": {
             "type": "boolean"
+          },
+          "turmaHora": {
+            "type": "string"
           }
         }
       },
