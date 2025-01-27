@@ -77,7 +77,8 @@ public class LaudoDto
                 .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Aluno.Email))
                 .ForMember(dest => dest.QrCode, opt => opt.MapFrom(src => src.Aluno.QrCode))
                 .ForMember(dest => dest.Estatura, opt => opt.MapFrom(src => src.Saude!.Altura))
-                .ForMember(dest => dest.Massa, opt => opt.MapFrom(src => src.Saude!.Massa))
+                .ForMember(dest => dest.Massa, opt => opt.MapFrom(src =>
+                    src.Saude != null ? Convert.ToDecimal(src.Saude.Massa) / 100 : 0m))
                 .ForMember(dest => dest.ByteImage, opt => opt.MapFrom(src => src.Aluno.ByteImage))
                 .ForMember(dest => dest.NomeFoto, opt => opt.MapFrom(src => src.Aluno.NomeFoto))
                 .ForMember(dest => dest.LocalidadeId, opt => opt.MapFrom(src => src.Aluno.Localidade.Id))
@@ -110,7 +111,7 @@ public class LaudoDto
         {
             try
             {
-                var inteiro = massa! * 100 * 100;
+                var inteiro = massa! * 100;
                 var dividendo = altura * altura;
                 var result = Convert.ToDecimal(inteiro) / Convert.ToDecimal(dividendo);
 
