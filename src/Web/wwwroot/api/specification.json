@@ -15861,6 +15861,11 @@
             "format": "int32",
             "nullable": true
           },
+          "modalidadeId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
           "nomeAluno": {
             "type": "string"
           },
@@ -15921,13 +15926,8 @@
             "type": "string",
             "nullable": true
           },
-          "modalidade": {
+          "nomeModalidade": {
             "type": "string",
-            "nullable": true
-          },
-          "modalidadeByteImage": {
-            "type": "string",
-            "format": "byte",
             "nullable": true
           },
           "imcSaude": {

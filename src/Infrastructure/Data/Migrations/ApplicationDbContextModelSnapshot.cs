@@ -1294,6 +1294,9 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("ModalidadeId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("QualidadeDeVidaId")
                         .HasColumnType("int");
 
@@ -1318,6 +1321,8 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.HasIndex("AlunoId");
 
                     b.HasIndex("ConsumoAlimentarId");
+
+                    b.HasIndex("ModalidadeId");
 
                     b.HasIndex("QualidadeDeVidaId");
 
@@ -3721,6 +3726,10 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                         .WithMany()
                         .HasForeignKey("ConsumoAlimentarId");
 
+                    b.HasOne("DnaBrasilApi.Domain.Entities.Modalidade", "Modalidade")
+                        .WithMany()
+                        .HasForeignKey("ModalidadeId");
+
                     b.HasOne("DnaBrasilApi.Domain.Entities.QualidadeDeVida", "QualidadeDeVida")
                         .WithMany()
                         .HasForeignKey("QualidadeDeVidaId");
@@ -3744,6 +3753,8 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.Navigation("Aluno");
 
                     b.Navigation("ConsumoAlimentar");
+
+                    b.Navigation("Modalidade");
 
                     b.Navigation("QualidadeDeVida");
 
