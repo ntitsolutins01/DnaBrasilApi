@@ -69,6 +69,7 @@ public class LaudoDto
                 .ForMember(dest => dest.SaudeId, opt => opt.MapFrom(src => src.Saude!.Id))
                 .ForMember(dest => dest.ConsumoAlimentarId, opt => opt.MapFrom(src => src.ConsumoAlimentar!.Id))
                 .ForMember(dest => dest.SaudeBucalId, opt => opt.MapFrom(src => src.SaudeBucal!.Id))
+                .ForMember(dest => dest.ModalidadeId, opt => opt.MapFrom(src => src.Modalidade!.Id))
                 .ForMember(dest => dest.AlunoId, opt => opt.MapFrom(src => src.Aluno!.Id))
                 .ForMember(dest => dest.ModalidadeId, opt => opt.MapFrom(src => src.Modalidade!.Id))
                 .ForMember(dest => dest.NomeAluno, opt => opt.MapFrom(src => src.Aluno.Nome))
