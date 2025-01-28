@@ -15926,10 +15926,6 @@
             "type": "string",
             "nullable": true
           },
-          "nomeModalidade": {
-            "type": "string",
-            "nullable": true
-          },
           "imcSaude": {
             "type": "string",
             "nullable": true

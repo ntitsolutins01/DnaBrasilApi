@@ -40,7 +40,7 @@ public class LaudoDto
     public decimal? Massa { get; init; }
     public byte[]? ByteImage { get; init; }
     public string? NomeFoto { get; init; }
-    public string? NomeModalidade { get; init; }
+
     #endregion
 
     #region Saude
@@ -85,7 +85,6 @@ public class LaudoDto
                 .ForMember(dest => dest.NomeFoto, opt => opt.MapFrom(src => src.Aluno.NomeFoto))
                 .ForMember(dest => dest.LocalidadeId, opt => opt.MapFrom(src => src.Aluno.Localidade.Id))
                 .ForMember(dest => dest.NomeLocalidade, opt => opt.MapFrom(src => src.Aluno.Localidade.Nome))
-                .ForMember(dest => dest.NomeModalidade, opt => opt.MapFrom(src => src.TalentoEsportivo!.EncaminhamentoTexo))
                 .ForMember(dest => dest.EncaminhamentoVocacionalId,
                     opt => opt.MapFrom(src => src.Vocacional!.Encaminhamento!.Id))
                 .ForMember(dest => dest.EncaminhamentoConsumoAlimentarId,
