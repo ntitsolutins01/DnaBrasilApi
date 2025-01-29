@@ -11398,6 +11398,10 @@
           "modalidadesIds": {
             "type": "string",
             "nullable": true
+          },
+          "modalidades": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
