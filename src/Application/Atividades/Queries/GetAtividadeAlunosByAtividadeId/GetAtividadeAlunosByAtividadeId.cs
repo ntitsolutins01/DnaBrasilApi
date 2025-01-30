@@ -1,4 +1,4 @@
-﻿using DnaBrasilApi.Application.Atividades.Queries.GetAtividadeAlunosByAtividadeId;
+using DnaBrasilApi.Application.Atividades.Queries.GetAtividadeAlunosByAtividadeId;
 using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
 

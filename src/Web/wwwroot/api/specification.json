@@ -473,6 +473,39 @@
         }
       }
     },
+    "/api/Atividades/Alunos": {
+      "post": {
+        "tags": [
+          "Atividades"
+        ],
+        "operationId": "CreateAtividadeAlunos",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAtividadeAlunoCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Atividades/{id}": {
       "put": {
         "tags": [
@@ -11891,6 +11924,19 @@
           }
         }
       },
+      "CreateAtividadeAlunoCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "atividadeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "alunosIds": {
+            "type": "string"
+          }
+        }
+      },
       "UpdateAtividadeCommand": {
         "type": "object",
         "additionalProperties": false,
@@ -14980,6 +15026,13 @@
                 "items": {
                   "$ref": "#/components/schemas/AlunoModalidade"
                 }
+              },
+              "atividadeAlunos": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "$ref": "#/components/schemas/AtividadeAluno"
+                }
               }
             }
           }
@@ -15543,6 +15596,155 @@
               "statusQualidadeDeVida": {
                 "type": "string",
                 "nullable": true
+              }
+            }
+          }
+        ]
+      },
+      "AtividadeAluno": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "atividadeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "alunoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "atividade": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Atividade"
+              }
+            ]
+          },
+          "aluno": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Aluno"
+              }
+            ]
+          }
+        }
+      },
+      "Atividade": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "estrutura": {
+                "$ref": "#/components/schemas/Estrutura"
+              },
+              "linhaAcao": {
+                "$ref": "#/components/schemas/LinhaAcao"
+              },
+              "categoria": {
+                "$ref": "#/components/schemas/Categoria"
+              },
+              "modalidade": {
+                "$ref": "#/components/schemas/Modalidade"
+              },
+              "turma": {
+                "type": "string"
+              },
+              "diasSemana": {
+                "type": "string"
+              },
+              "hrInicial": {
+                "type": "string",
+                "format": "duration"
+              },
+              "hrFinal": {
+                "type": "string",
+                "format": "duration"
+              },
+              "profissional": {
+                "$ref": "#/components/schemas/Profissional"
+              },
+              "localidade": {
+                "$ref": "#/components/schemas/Localidade"
+              },
+              "status": {
+                "type": "boolean"
+              },
+              "quantidadeAluno": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "atividadeAlunos": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "$ref": "#/components/schemas/AtividadeAluno"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "Estrutura": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "localidade": {
+                "$ref": "#/components/schemas/Localidade"
+              },
+              "nome": {
+                "type": "string"
+              },
+              "descricao": {
+                "type": "string",
+                "nullable": true
+              },
+              "status": {
+                "type": "boolean"
+              }
+            }
+          }
+        ]
+      },
+      "Categoria": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "codigo": {
+                "type": "string"
+              },
+              "nome": {
+                "type": "string"
+              },
+              "idadeInicial": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "idadeFinal": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "descricao": {
+                "type": "string",
+                "nullable": true
+              },
+              "status": {
+                "type": "boolean"
               }
             }
           }
