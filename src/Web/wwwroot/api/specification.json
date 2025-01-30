@@ -13916,14 +13916,6 @@
             "type": "integer",
             "format": "int32"
           },
-          "percentualSaude": {
-            "type": "object",
-            "nullable": true,
-            "additionalProperties": {
-              "type": "number",
-              "format": "decimal"
-            }
-          },
           "listTotalizadorSaudeSexo": {
             "nullable": true,
             "oneOf": [
@@ -14149,6 +14141,14 @@
             }
           },
           "valorTotalizadorSaudeFeminino": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "number",
+              "format": "decimal"
+            }
+          },
+          "percentualSaude": {
             "type": "object",
             "nullable": true,
             "additionalProperties": {
@@ -16000,6 +16000,11 @@
             "format": "int32",
             "nullable": true
           },
+          "modalidadeId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
           "nomeAluno": {
             "type": "string"
           },
@@ -16058,15 +16063,6 @@
           },
           "nomeFoto": {
             "type": "string",
-            "nullable": true
-          },
-          "modalidade": {
-            "type": "string",
-            "nullable": true
-          },
-          "modalidadeByteImage": {
-            "type": "string",
-            "format": "byte",
             "nullable": true
           },
           "imcSaude": {
