@@ -13777,14 +13777,6 @@
             "type": "integer",
             "format": "int32"
           },
-          "percentualSaude": {
-            "type": "object",
-            "nullable": true,
-            "additionalProperties": {
-              "type": "number",
-              "format": "decimal"
-            }
-          },
           "listTotalizadorSaudeSexo": {
             "nullable": true,
             "oneOf": [
@@ -14010,6 +14002,14 @@
             }
           },
           "valorTotalizadorSaudeFeminino": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "number",
+              "format": "decimal"
+            }
+          },
+          "percentualSaude": {
             "type": "object",
             "nullable": true,
             "additionalProperties": {
