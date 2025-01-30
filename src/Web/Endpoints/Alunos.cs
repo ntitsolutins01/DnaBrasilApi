@@ -11,6 +11,7 @@ using DnaBrasilApi.Application.Alunos.Queries.GetAlunosAll;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunosByFilter;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunosByLocalidade;
 using DnaBrasilApi.Application.Alunos.Queries.GetNomeAlunosAll;
+using DnaBrasilApi.Application.Alunos.Queries.GetNomeAlunosByProfissionalId;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DnaBrasilApi.Web.Endpoints;
@@ -35,7 +36,8 @@ public class Alunos : EndpointGroupBase
             .MapPut(UpdateAlunoFoto, "/UploadFoto/{id}")
             .MapPut(UpdateQrCode, "/QrCode/{id}")
             .MapDelete(DeleteAluno, "{id}")
-            .MapPost(GetAlunosByFilter, "Filter");
+            .MapPost(GetAlunosByFilter, "Filter")
+            .MapGet(GetNomeAlunosByProfissionalId, "/Profissional/{id}");
     }
     #endregion
 
@@ -172,6 +174,17 @@ public class Alunos : EndpointGroupBase
     public async Task<List<SelectListDto>> GetNomeAlunosAll(ISender sender, string id)
     {
         return await sender.Send(new GetNomeAlunosAllQuery() { LocalidadeId = id });
+    }
+
+    /// <summary>
+    /// Endpoint que busca Todos Nomes de Alunos pelo id do profissional
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="id">Id do profissional</param>
+    /// <returns>Retorna todos os Alunos</returns>
+    public async Task<List<SelectListDto>> GetNomeAlunosByProfissionalId(ISender sender, int id)
+    {
+        return await sender.Send(new GetNomeAlunosByProfissionalIdQuery() { ProfissionalId = id });
     }
     #endregion
 }

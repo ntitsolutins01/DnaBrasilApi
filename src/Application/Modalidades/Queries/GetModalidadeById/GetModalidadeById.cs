@@ -1,4 +1,5 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Domain.GuardClauses;
 
 namespace DnaBrasilApi.Application.Modalidades.Queries.GetModalidadeById;
 
@@ -20,6 +21,11 @@ public class GetModalidadeByIdQueryHandler : IRequestHandler<GetModalidadeByIdQu
 
     public async Task<ModalidadeDto> Handle(GetModalidadeByIdQuery request, CancellationToken cancellationToken)
     {
+        if (request.Id == 0)
+        {
+            Guard.Against.ModalidadeNaoEncontrada(true);
+        }
+
         var result = await _context.Modalidades
             .Where(x => x.Id == request.Id)
             .AsNoTracking()
