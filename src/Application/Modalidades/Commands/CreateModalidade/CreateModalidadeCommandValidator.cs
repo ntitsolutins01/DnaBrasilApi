@@ -7,5 +7,7 @@ public class CreateModalidadeCommandValidator : AbstractValidator<CreateModalida
         RuleFor(v => v.Nome)
             .MaximumLength(100)
             .NotNull().NotEmpty();
+        RuleFor(v => v.NomeByteImage)
+            .MaximumLength(200);
     }
 }
