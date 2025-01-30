@@ -1,4 +1,4 @@
-﻿using DnaBrasilApi.Application.Atividades.Queries.GetAtividadeById;
+using DnaBrasilApi.Application.Atividades.Queries.GetAtividadeById;
 using DnaBrasilApi.Application.Atividades.Commands.CreateAtividade;
 using DnaBrasilApi.Application.Atividades.Commands.DeleteAtividade;
 using DnaBrasilApi.Application.Atividades.Commands.UpdateAtividade;
@@ -26,6 +26,7 @@ public class Atividades : EndpointGroupBase
             .MapDelete(DeleteAtividade, "{id}")
             .MapGet(GetAtividadesAll)
             .MapGet(GetAtividadeById, "{id}")
+            .MapGet(GetAtividadeAlunosByAtividadeId, "{id}/Alunos")
             .MapGet(GetTurmasByModalidadeIdProfissionalId, "Modalidade/{modalidadeId}/Profissional/{profissionalId}")
             .MapGet(GetAtividadeByModalidadeIdProfissionalIdTurma, "Modalidade/{modalidadeId}/Profissional/{profissionalId}/Turma/{turma}");
     }
@@ -117,6 +118,12 @@ public class Atividades : EndpointGroupBase
     public async Task<List<AtividadeDto>> GetAtividadeByModalidadeIdProfissionalIdTurma(ISender sender, int modalidadeId, int profissionalId, string turma)
     {
         return await sender.Send(new GetAtividadeByModalidadeIdProfissionalIdTurmaQuery() { ModalidadeId = modalidadeId, ProfissionalId = profissionalId, Turma = turma });
+    }
+
+
+    public async Task<List<AtividadeDto>> GetAtividadeAlunosByAtividadeId(ISender sender, int id)
+    {
+        return await sender.Send(new GetAtividadeAlunosByAtividadeIdQuery() { AtividadeId = id });
     }
     #endregion
 
