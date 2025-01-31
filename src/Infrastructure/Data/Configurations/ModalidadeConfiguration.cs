@@ -13,5 +13,8 @@ public class ModalidadeConfiguration : IEntityTypeConfiguration<Modalidade>
 
         builder.Property(t => t.Status)
             .IsRequired();
+
+        builder.Property(t => t.NomeByteImage)
+            .HasMaxLength(200);
     }
 }
