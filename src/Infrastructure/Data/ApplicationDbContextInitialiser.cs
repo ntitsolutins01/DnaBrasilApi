@@ -1,5 +1,4 @@
-﻿using System.Runtime.InteropServices;
-using DnaBrasilApi.Domain.Constants;
+﻿using DnaBrasilApi.Domain.Constants;
 using DnaBrasilApi.Domain.Entities;
 using DnaBrasilApi.Infrastructure.Identity;
 using Microsoft.AspNetCore.Builder;

@@ -135,7 +135,7 @@ public class Atividades : EndpointGroupBase
     }
 
 
-    public async Task<List<AtividadeDto>> GetAtividadeAlunosByAtividadeId(ISender sender, int id)
+    public async Task<List<AtividadeAlunoDto>> GetAtividadeAlunosByAtividadeId(ISender sender, int id)
     {
         return await sender.Send(new GetAtividadeAlunosByAtividadeIdQuery() { AtividadeId = id });
     }
