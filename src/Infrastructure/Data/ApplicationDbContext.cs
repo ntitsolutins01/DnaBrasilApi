@@ -80,6 +80,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<AtividadeAluno> AtividadeAlunos => Set<AtividadeAluno>();
     public DbSet<EtapaEnsino> EtapasEnsino => Set<EtapaEnsino>();
     public DbSet<IdebDimensaoNacional> IdebDimensoesNacional => Set<IdebDimensaoNacional>();
+    public DbSet<IdebDimensaoEstadual> IdebDimensoesEstadual => Set<IdebDimensaoEstadual>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

@@ -71,6 +71,7 @@ public interface IApplicationDbContext
     DbSet<AtividadeAluno> AtividadeAlunos { get; }
     DbSet<EtapaEnsino> EtapasEnsino { get; }
     DbSet<IdebDimensaoNacional> IdebDimensoesNacional { get; }
+    DbSet<IdebDimensaoEstadual> IdebDimensoesEstadual { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }
