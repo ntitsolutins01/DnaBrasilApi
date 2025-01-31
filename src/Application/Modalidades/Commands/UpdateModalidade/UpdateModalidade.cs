@@ -30,7 +30,6 @@ public record UpdateModalidadeCommand : IRequest<bool>
     public bool Status { get; init; }
     public int? LinhaAcaoId { get; init; }
     public byte[]? ByteImage { get; init; }
-    public string? NomeByteImage { get; init; }
 }
 
 public class UpdateModalidadeCommandHandler : IRequestHandler<UpdateModalidadeCommand, bool>
@@ -83,7 +82,6 @@ public class UpdateModalidadeCommandHandler : IRequestHandler<UpdateModalidadeCo
         entity.Status = request.Status;
         entity.LinhaAcao = linhaAcao;
         entity.ByteImage = request.ByteImage;
-        entity.NomeByteImage = request.NomeByteImage;
 
         var result = await _context.SaveChangesAsync(cancellationToken);
 

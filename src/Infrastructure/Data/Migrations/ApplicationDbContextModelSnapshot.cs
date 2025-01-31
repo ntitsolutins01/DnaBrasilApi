@@ -1628,10 +1628,6 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                         .HasMaxLength(80)
                         .HasColumnType("nvarchar(80)");
 
-                    b.Property<string>("NomeByteImage")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
                     b.Property<int>("PesoFim")
                         .HasColumnType("int");
 
