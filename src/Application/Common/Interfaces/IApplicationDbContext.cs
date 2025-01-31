@@ -69,7 +69,7 @@ public interface IApplicationDbContext
     DbSet<AlunoModalidade> AlunoModalidades { get; }
     DbSet<Ranking> Rankings { get; }
     DbSet<AtividadeAluno> AtividadeAlunos { get; }
-    DbSet<NivelEscolaridade> NiveisEscolaridade { get; }
+    DbSet<EtapaEnsino> EtapasEnsino { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }
