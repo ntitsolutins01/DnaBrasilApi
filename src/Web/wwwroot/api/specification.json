@@ -15428,6 +15428,10 @@
                 "format": "byte",
                 "nullable": true
               },
+              "nomeByteImage": {
+                "type": "string",
+                "nullable": true
+              },
               "profissionalModalidades": {
                 "type": "array",
                 "nullable": true,
@@ -17066,6 +17070,10 @@
             "format": "byte",
             "nullable": true
           },
+          "nomeByteImage": {
+            "type": "string",
+            "nullable": true
+          },
           "linhaAcaoId": {
             "type": "integer",
             "format": "int32",
@@ -17176,6 +17184,10 @@
             "type": "string",
             "format": "byte",
             "nullable": true
+          },
+          "nomeByteImage": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -17282,6 +17294,10 @@
           "byteImage": {
             "type": "string",
             "format": "byte",
+            "nullable": true
+          },
+          "nomeByteImage": {
+            "type": "string",
             "nullable": true
           }
         }
