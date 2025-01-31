@@ -9,5 +9,7 @@ public class UpdateModalidadeCommandValidator : AbstractValidator<UpdateModalida
         RuleFor(v => v.Nome)
             .MaximumLength(100)
             .NotEmpty();
+        RuleFor(v => v.NomeByteImage)
+            .MaximumLength(200);
     }
 }

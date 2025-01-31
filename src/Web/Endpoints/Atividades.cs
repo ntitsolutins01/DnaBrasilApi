@@ -1,10 +1,8 @@
 using DnaBrasilApi.Application.Atividades.Queries.GetAtividadeById;
 using DnaBrasilApi.Application.Atividades.Commands.CreateAtividade;
-using DnaBrasilApi.Application.Atividades.Commands.CreateAtividadeAluno;
 using DnaBrasilApi.Application.Atividades.Commands.DeleteAtividade;
 using DnaBrasilApi.Application.Atividades.Commands.UpdateAtividade;
 using DnaBrasilApi.Application.Atividades.Queries;
-using DnaBrasilApi.Application.Atividades.Queries.GetAtividadeAlunosByAtividadeId;
 using DnaBrasilApi.Application.Atividades.Queries.GetAtividadeByModalidadeIdProfissionalIdTurma;
 using DnaBrasilApi.Application.Atividades.Queries.GetAtividadesAll;
 using DnaBrasilApi.Application.Atividades.Queries.GetTurmasByModalidadeIdProfissionalId;
@@ -24,7 +22,6 @@ public class Atividades : EndpointGroupBase
         app.MapGroup(this)
             //.RequireAuthorization()
             .MapPost(CreateAtividade)
-            .MapPost(CreateAtividadeAlunos,"Alunos")
             .MapPut(UpdateAtividade, "{id}")
             .MapDelete(DeleteAtividade, "{id}")
             .MapGet(GetAtividadesAll)
@@ -44,17 +41,6 @@ public class Atividades : EndpointGroupBase
     /// <param name="command">Objeto de inclusão da Atividade</param>
     /// <returns>Retorna Id da nova Atividade</returns>
     public async Task<int> CreateAtividade(ISender sender, CreateAtividadeCommand command)
-    {
-        return await sender.Send(command);
-    }
-
-    /// <summary>
-    /// Endpoint para inclusão de Atividade e Alunos
-    /// </summary>
-    /// <param name="sender">Sender</param>
-    /// <param name="command">Objeto de inclusão da Atividade e seus Alunos</param>
-    /// <returns>Retorna Id da Atividade</returns>
-    public async Task<int> CreateAtividadeAlunos(ISender sender, CreateAtividadeAlunoCommand command)
     {
         return await sender.Send(command);
     }

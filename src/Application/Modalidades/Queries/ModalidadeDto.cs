@@ -30,6 +30,7 @@ public class ModalidadeDto
     public int AlturaFim { get; init; }
     public bool Status { get; init; } = true;
     public byte[]? ByteImage { get; init; }
+    public string? NomeByteImage { get; init; }
     public int? LinhaAcaoId { get; init; }
     public string? LinhaAcao { get; init; }
     private class Mapping : Profile

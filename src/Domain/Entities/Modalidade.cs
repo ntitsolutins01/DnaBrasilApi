@@ -25,6 +25,7 @@ public class Modalidade : BaseAuditableEntity
     public bool Status { get; set; }
     public LinhaAcao? LinhaAcao { get; set; }
     public byte[]? ByteImage { get; set; }
+    public string? NomeByteImage { get; set; }
     public IList<ProfissionalModalidade>? ProfissionalModalidades { get; set; }
     public IList<AlunoModalidade>? AlunoModalidades { get; set; }
 }
