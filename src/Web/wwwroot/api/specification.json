@@ -473,6 +473,39 @@
         }
       }
     },
+    "/api/Atividades/Alunos": {
+      "post": {
+        "tags": [
+          "Atividades"
+        ],
+        "operationId": "CreateAtividadeAlunos",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAtividadeAlunoCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Atividades/{id}": {
       "put": {
         "tags": [
@@ -11891,6 +11924,19 @@
           }
         }
       },
+      "CreateAtividadeAlunoCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "atividadeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "alunosIds": {
+            "type": "string"
+          }
+        }
+      },
       "UpdateAtividadeCommand": {
         "type": "object",
         "additionalProperties": false,
@@ -15477,10 +15523,6 @@
                 "format": "byte",
                 "nullable": true
               },
-              "nomeByteImage": {
-                "type": "string",
-                "nullable": true
-              },
               "profissionalModalidades": {
                 "type": "array",
                 "nullable": true,
@@ -17119,10 +17161,6 @@
             "format": "byte",
             "nullable": true
           },
-          "nomeByteImage": {
-            "type": "string",
-            "nullable": true
-          },
           "linhaAcaoId": {
             "type": "integer",
             "format": "int32",
@@ -17233,10 +17271,6 @@
             "type": "string",
             "format": "byte",
             "nullable": true
-          },
-          "nomeByteImage": {
-            "type": "string",
-            "nullable": true
           }
         }
       },
@@ -17343,10 +17377,6 @@
           "byteImage": {
             "type": "string",
             "format": "byte",
-            "nullable": true
-          },
-          "nomeByteImage": {
-            "type": "string",
             "nullable": true
           }
         }
