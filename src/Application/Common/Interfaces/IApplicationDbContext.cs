@@ -70,6 +70,7 @@ public interface IApplicationDbContext
     DbSet<Ranking> Rankings { get; }
     DbSet<AtividadeAluno> AtividadeAlunos { get; }
     DbSet<EtapaEnsino> EtapasEnsino { get; }
+    DbSet<IdebDimensaoNacional> IdebDimensoesNacional { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

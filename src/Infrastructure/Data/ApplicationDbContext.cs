@@ -79,6 +79,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<Ranking> Rankings => Set<Ranking>();
     public DbSet<AtividadeAluno> AtividadeAlunos => Set<AtividadeAluno>();
     public DbSet<EtapaEnsino> EtapasEnsino => Set<EtapaEnsino>();
+    public DbSet<IdebDimensaoNacional> IdebDimensoesNacional => Set<IdebDimensaoNacional>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
