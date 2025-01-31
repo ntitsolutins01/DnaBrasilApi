@@ -577,6 +577,41 @@
         }
       }
     },
+    "/api/Atividades/{id}/Alunos": {
+      "get": {
+        "tags": [
+          "Atividades"
+        ],
+        "operationId": "GetAtividadeAlunosByAtividadeId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AtividadeAlunoDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Atividades/Modalidade/{modalidadeId}/Profissional/{profissionalId}": {
       "get": {
         "tags": [
@@ -11849,6 +11884,10 @@
           },
           "diasSemana": {
             "type": "string"
+          },
+          "modalidadesIds": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -11945,6 +11984,16 @@
           },
           "turmaHora": {
             "type": "string"
+          }
+        }
+      },
+      "AtividadeAlunoDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },
