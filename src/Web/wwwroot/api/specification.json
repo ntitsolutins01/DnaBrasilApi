@@ -12898,7 +12898,7 @@
             "type": "object",
             "additionalProperties": false,
             "properties": {
-              "codigo": {
+              "codigoIbge": {
                 "type": "integer",
                 "format": "int32"
               },
@@ -12941,6 +12941,10 @@
                 "items": {
                   "$ref": "#/components/schemas/Municipio"
                 }
+              },
+              "codigoIbge": {
+                "type": "integer",
+                "format": "int32"
               }
             }
           }
@@ -12973,6 +12977,11 @@
                     "$ref": "#/components/schemas/Municipio"
                   }
                 ]
+              },
+              "codigoInep": {
+                "type": "integer",
+                "format": "int32",
+                "nullable": true
               },
               "fomentoLocalidades": {
                 "type": "array",
@@ -14702,6 +14711,10 @@
             "type": "string",
             "nullable": true
           },
+          "codigoIbge": {
+            "type": "integer",
+            "format": "int32"
+          },
           "municipios": {
             "type": "array",
             "nullable": true,
@@ -14719,7 +14732,7 @@
             "type": "integer",
             "format": "int32"
           },
-          "codigo": {
+          "codigoIbge": {
             "type": "integer",
             "format": "int32"
           },
@@ -15864,6 +15877,11 @@
           "nomeEstado": {
             "type": "string",
             "nullable": true
+          },
+          "codigoInep": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
           }
         }
       },
@@ -16807,6 +16825,11 @@
           "municipioId": {
             "type": "integer",
             "format": "int32"
+          },
+          "codigoInep": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
           }
         }
       },
@@ -16832,6 +16855,11 @@
           "municipioId": {
             "type": "integer",
             "format": "int32"
+          },
+          "codigoInep": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
           }
         }
       },
