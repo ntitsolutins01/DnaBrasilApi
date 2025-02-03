@@ -71,7 +71,6 @@ public class LaudoDto
                 .ForMember(dest => dest.SaudeBucalId, opt => opt.MapFrom(src => src.SaudeBucal!.Id))
                 .ForMember(dest => dest.ModalidadeId, opt => opt.MapFrom(src => src.Modalidade!.Id))
                 .ForMember(dest => dest.AlunoId, opt => opt.MapFrom(src => src.Aluno!.Id))
-                .ForMember(dest => dest.ModalidadeId, opt => opt.MapFrom(src => src.Modalidade!.Id))
                 .ForMember(dest => dest.NomeAluno, opt => opt.MapFrom(src => src.Aluno.Nome))
                 .ForMember(dest => dest.Sexo, opt => opt.MapFrom(src => GetSexo(src.Aluno.Sexo)))
                 .ForMember(dest => dest.Etnia, opt => opt.MapFrom(src => src.Aluno.Etnia))
@@ -79,8 +78,7 @@ public class LaudoDto
                 .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Aluno.Email))
                 .ForMember(dest => dest.QrCode, opt => opt.MapFrom(src => src.Aluno.QrCode))
                 .ForMember(dest => dest.Estatura, opt => opt.MapFrom(src => src.Saude!.Altura))
-                .ForMember(dest => dest.Massa, opt => opt.MapFrom(src =>
-                    src.Saude != null ? Convert.ToDecimal(src.Saude.Massa) / 100 : 0m))
+                .ForMember(dest => dest.Massa, opt => opt.MapFrom(src => src.Saude != null ? Convert.ToDecimal(src.Saude.Massa) / 100 : 0m))
                 .ForMember(dest => dest.ByteImage, opt => opt.MapFrom(src => src.Aluno.ByteImage))
                 .ForMember(dest => dest.NomeFoto, opt => opt.MapFrom(src => src.Aluno.NomeFoto))
                 .ForMember(dest => dest.LocalidadeId, opt => opt.MapFrom(src => src.Aluno.Localidade.Id))
@@ -102,9 +100,6 @@ public class LaudoDto
                 .ForMember(dest => dest.Telefone, opt => opt.MapFrom(src => src.Aluno.Telefone))
                 .ForMember(dest => dest.Celular, opt => opt.MapFrom(src => src.Aluno.Celular))
                 .ForMember(dest => dest.ProfissionalId, opt => opt.MapFrom(src => src.Aluno.Profissional!.Id));
-
-            //.ForMember(dest => dest.Sexo, opt => opt.MapFrom(src => src.Aluno!.Sexo))
-            //.ForMember(dest => dest.DtNascimento, opt => opt.MapFrom(src => src.Aluno!.DtNascimento));
         }
 
         public static string GetImc(decimal? massa, decimal? altura)
