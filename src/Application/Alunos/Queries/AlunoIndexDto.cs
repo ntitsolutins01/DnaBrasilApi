@@ -11,6 +11,7 @@ public class AlunoIndexDto
     public string? MunicipioId { get; init; }
     public bool Status { get; init; }
     public bool Convidado { get; init; }
+    public bool PossuiLaudo { get; init; }
     private class Mapping : Profile
     {
         public Mapping()
@@ -18,7 +19,8 @@ public class AlunoIndexDto
             CreateMap<Aluno, AlunoIndexDto>()
                 .ForMember(dest => dest.Nome, opt => opt.MapFrom(src => src.Id +" - "+ src.Nome.ToUpper()))
                 .ForMember(dest => dest.MunicipioId, opt => opt.MapFrom(src => src.Municipio.Id))
-                .ForMember(dest => dest.DtNascimento, opt => opt.MapFrom(src => src.DtNascimento.ToString("dd/MM/yyyy")));
+                .ForMember(dest => dest.DtNascimento, opt => opt.MapFrom(src => src.DtNascimento.ToString("dd/MM/yyyy")))
+                .ForMember(dest => dest.PossuiLaudo, opt => opt.MapFrom(src => src.ListLaudo!.Any()));
         }
     }
 }

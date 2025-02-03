@@ -7,7 +7,8 @@ public record CreateLocalidadeCommand : IRequest<int>
     public required string? Nome { get; init; }
     public string? Descricao { get; init; }
     public bool Status { get; set; } = true;
-    public int MunicipioId { get; set; }
+    public int MunicipioId { get; init; }
+    public int? CodigoInep { get; init; }
 }
 
 public class CreateLocalidadeCommandHandler : IRequestHandler<CreateLocalidadeCommand, int>
@@ -27,7 +28,8 @@ public class CreateLocalidadeCommandHandler : IRequestHandler<CreateLocalidadeCo
             Nome = request.Nome,
             Descricao = request.Descricao,
             Status = request.Status,
-            Municipio = municipio   
+            Municipio = municipio,
+            CodigoInep = request.CodigoInep
         };
 
         _context.Localidades.Add(entity);

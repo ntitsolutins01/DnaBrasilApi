@@ -68,6 +68,10 @@ public interface IApplicationDbContext
     DbSet<Certificado> Certificados { get; }
     DbSet<AlunoModalidade> AlunoModalidades { get; }
     DbSet<Ranking> Rankings { get; }
+    DbSet<AtividadeAluno> AtividadeAlunos { get; }
+    DbSet<EtapaEnsino> EtapasEnsino { get; }
+    DbSet<IdebDimensaoNacional> IdebDimensoesNacional { get; }
+    DbSet<IdebDimensaoEstadual> IdebDimensoesEstadual { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }
