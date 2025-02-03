@@ -21,6 +21,7 @@ public class LaudoDto
     public int? EncaminhamentoSaudeBucalId { get; init; }
     public int? EncaminhamentoTalentoEsportivoId { get; init; }
     public int? ModalidadeId { get; init; }
+    public string? EncaminhamentoTexto { get; set; }
 
     #endregion
 
@@ -99,7 +100,8 @@ public class LaudoDto
                 .ForMember(dest => dest.Uf, opt => opt.MapFrom(src => src.Aluno.Localidade.Municipio!.Estado!.Sigla))
                 .ForMember(dest => dest.Telefone, opt => opt.MapFrom(src => src.Aluno.Telefone))
                 .ForMember(dest => dest.Celular, opt => opt.MapFrom(src => src.Aluno.Celular))
-                .ForMember(dest => dest.ProfissionalId, opt => opt.MapFrom(src => src.Aluno.Profissional!.Id));
+                .ForMember(dest => dest.ProfissionalId, opt => opt.MapFrom(src => src.Aluno.Profissional!.Id))
+                .ForMember(dest => dest.EncaminhamentoTexto, opt => opt.MapFrom(src => src.TalentoEsportivo!.EncaminhamentoTexo));
         }
 
         public static string GetImc(decimal? massa, decimal? altura)

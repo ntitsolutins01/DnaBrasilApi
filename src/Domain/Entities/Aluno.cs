@@ -32,7 +32,7 @@ public class Aluno : BaseAuditableEntity
     public Profissional? Profissional { get; set; }
     public string? NomeResponsavel { get; set; }
     public LinhaAcao? LinhaAcao { get; set; }
-    public List<QualidadeDeVida>? QualidadeDeVidas { get; set; }
+    public List<Laudo>? ListLaudo { get; set; }
     public bool? AutorizacaoSaida { get; set; } = false;
     public bool? AutorizacaoConsentimentoAssentimento { get; set; } = false;
     public bool? ParticipacaoProgramaCompartilhamentoDados { get; set; } = false;
