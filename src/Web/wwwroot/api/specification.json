@@ -12040,9 +12040,12 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "id": {
+          "alunoId": {
             "type": "integer",
             "format": "int32"
+          },
+          "nome": {
+            "type": "string"
           }
         }
       },
