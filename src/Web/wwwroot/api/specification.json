@@ -3422,6 +3422,38 @@
         }
       }
     },
+    "/api/DashboardsEad/IndicadoresEad": {
+      "post": {
+        "tags": [
+          "DashboardsEad"
+        ],
+        "operationId": "GetIndicadoresEadAlunosByFilter",
+        "requestBody": {
+          "x-name": "DashboardEad",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DashboardEadDto"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DashboardEadDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Deficiencias": {
       "get": {
         "tags": [
@@ -14582,6 +14614,64 @@
           "id": {
             "type": "integer",
             "format": "int32"
+          }
+        }
+      },
+      "DashboardEadDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "cursosDisponiveis": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cursosEmAndamento": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cursosFinalizados": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cadastrosMasculinos": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cadastrosFemininos": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "alunosCadastrados": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sexo": {
+            "type": "string",
+            "nullable": true
+          },
+          "fomentoId": {
+            "type": "string",
+            "nullable": true
+          },
+          "estado": {
+            "type": "string",
+            "nullable": true
+          },
+          "municipioId": {
+            "type": "string",
+            "nullable": true
+          },
+          "localidadeId": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipoCursoId": {
+            "type": "string",
+            "nullable": true
+          },
+          "cursoId": {
+            "type": "string",
+            "nullable": true
           }
         }
       },

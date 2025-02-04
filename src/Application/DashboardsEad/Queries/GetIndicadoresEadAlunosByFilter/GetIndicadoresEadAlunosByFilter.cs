@@ -2,26 +2,26 @@
 using DnaBrasilApi.Application.Dashboards.Queries;
 using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasilApi.Application.DashboardsEad.Queries.GetIndicadoresAlunosByFilter;
+namespace DnaBrasilApi.Application.DashboardsEad.Queries.GetIndicadoresEadAlunosByFilter;
 //[Authorize]
-public record GetIndicadoresAlunosByFilterQuery : IRequest<int>
+public record GetIndicadoresEadAlunosByFilterQuery : IRequest<int>
 {
-    public DashboardDto? SearchFilter { get; init; }
+    public DashboardEadDto? SearchFilter { get; init; }
 
 }
 
-public class GetIndicadoresAlunosByFilterQueryHandler : IRequestHandler<GetIndicadoresAlunosByFilterQuery, int>
+public class GetIndicadoresEadAlunosByFilterQueryHandler : IRequestHandler<GetIndicadoresEadAlunosByFilterQuery, int>
 {
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
 
-    public GetIndicadoresAlunosByFilterQueryHandler(IApplicationDbContext context, IMapper mapper)
+    public GetIndicadoresEadAlunosByFilterQueryHandler(IApplicationDbContext context, IMapper mapper)
     {
         _context = context;
         _mapper = mapper;
     }
 
-    public Task<int> Handle(GetIndicadoresAlunosByFilterQuery request, CancellationToken cancellationToken)
+    public Task<int> Handle(GetIndicadoresEadAlunosByFilterQuery request, CancellationToken cancellationToken)
     {
         IQueryable<Aluno> Alunos;
 
@@ -37,7 +37,7 @@ public class GetIndicadoresAlunosByFilterQueryHandler : IRequestHandler<GetIndic
         return Task.FromResult(result);
     }
 
-    private int FilterAlunos(IQueryable<Aluno> Alunos, DashboardDto search, CancellationToken cancellationToken)
+    private int FilterAlunos(IQueryable<Aluno> Alunos, DashboardEadDto search, CancellationToken cancellationToken)
     {
         if (!string.IsNullOrWhiteSpace(search.FomentoId))
         {
@@ -61,21 +61,21 @@ public class GetIndicadoresAlunosByFilterQueryHandler : IRequestHandler<GetIndic
             Alunos = Alunos.Where(u => u.Localidade!.Id == Convert.ToInt32(search.LocalidadeId));
         }
 
-        if (!string.IsNullOrWhiteSpace(search.DeficienciaId))
-        {
-            var deficiencias = _context.Deficiencias
-                .Include(i => i.Alunos)
-                .First(f => f.Id == Convert.ToInt32(search.DeficienciaId));
+        //if (!string.IsNullOrWhiteSpace(search.DeficienciaId))
+        //{
+        //    var deficiencias = _context.Deficiencias
+        //        .Include(i => i.Alunos)
+        //        .First(f => f.Id == Convert.ToInt32(search.DeficienciaId));
 
-            var listAlunos = deficiencias.Alunos!.Select(s => s.Id).ToList();
+        //    var listAlunos = deficiencias.Alunos!.Select(s => s.Id).ToList();
 
-            Alunos = Alunos.Where(u => listAlunos.Contains(u.Id));
-        }
+        //    Alunos = Alunos.Where(u => listAlunos.Contains(u.Id));
+        //}
 
-        if (!string.IsNullOrWhiteSpace(search.Etnia))
-        {
-            Alunos = Alunos.Where(u => u.Etnia!.Equals(search.Etnia));
-        }
+        //if (!string.IsNullOrWhiteSpace(search.Etnia))
+        //{
+        //    Alunos = Alunos.Where(u => u.Etnia!.Equals(search.Etnia));
+        //}
 
         return Alunos.Count();
     }
