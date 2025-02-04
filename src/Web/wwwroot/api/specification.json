@@ -611,6 +611,48 @@
       }
     },
     "/api/Atividades/{id}/Alunos": {
+      "put": {
+        "tags": [
+          "Atividades"
+        ],
+        "operationId": "UpdateAtividadeAluno",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAtividadeAlunoCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
       "get": {
         "tags": [
           "Atividades"
@@ -12041,8 +12083,7 @@
         "additionalProperties": false,
         "properties": {
           "alunoId": {
-            "type": "integer",
-            "format": "int32"
+            "type": "string"
           },
           "nome": {
             "type": "string"

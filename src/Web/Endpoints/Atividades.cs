@@ -8,6 +8,7 @@ using DnaBrasilApi.Application.Atividades.Queries.GetAtividadeAlunosByAtividadeI
 using DnaBrasilApi.Application.Atividades.Queries.GetAtividadeByModalidadeIdProfissionalIdTurma;
 using DnaBrasilApi.Application.Atividades.Queries.GetAtividadesAll;
 using DnaBrasilApi.Application.Atividades.Queries.GetTurmasByModalidadeIdProfissionalId;
+using DnaBrasilApi.Application.Atividades.Commands.DeleteAtividadeAluno;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -26,6 +27,7 @@ public class Atividades : EndpointGroupBase
             .MapPost(CreateAtividade)
             .MapPost(CreateAtividadeAlunos,"Alunos")
             .MapPut(UpdateAtividade, "{id}")
+            .MapPut(UpdateAtividadeAluno, "{id}/Alunos")
             .MapDelete(DeleteAtividade, "{id}")
             .MapGet(GetAtividadesAll)
             .MapGet(GetAtividadeById, "{id}")
@@ -49,17 +51,6 @@ public class Atividades : EndpointGroupBase
     }
 
     /// <summary>
-    /// Endpoint para inclusão de Atividade e Alunos
-    /// </summary>
-    /// <param name="sender">Sender</param>
-    /// <param name="command">Objeto de inclusão da Atividade e seus Alunos</param>
-    /// <returns>Retorna Id da Atividade</returns>
-    public async Task<int> CreateAtividadeAlunos(ISender sender, CreateAtividadeAlunoCommand command)
-    {
-        return await sender.Send(command);
-    }
-
-    /// <summary>
     /// Endpoint para alteração de Atividade
     /// </summary>
     /// <param name="sender">Sender</param>
@@ -71,6 +62,32 @@ public class Atividades : EndpointGroupBase
         if (id != command.Id) return false;
         var result = await sender.Send(command);
         return result;
+    }
+
+    /// <summary>
+    /// Endpoint para inclusão de Atividade e Alunos
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="command">Objeto de inclusão da Atividade e seus Alunos</param>
+    /// <returns>Retorna Id da Atividade</returns>
+    public async Task<int> CreateAtividadeAlunos(ISender sender, CreateAtividadeAlunoCommand command)
+    {
+        return await sender.Send(command);
+    }
+
+    /// <summary>
+    /// Endpoint para alteração de Atividade e Alunos
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="id">Id de alteração da Atividade</param>
+    /// <param name="command">Objeto de alteração da AtividadeAlunos</param>
+    /// <returns>Retorna true ou false</returns>
+    public async Task<bool> UpdateAtividadeAluno(ISender sender, int id, CreateAtividadeAlunoCommand command)
+    {
+        if (id != command.AtividadeId) return false;
+        await sender.Send(new DeleteAtividadeAlunoCommand() { AtividadeId = id });
+        var result = await sender.Send(command);
+        return result > 0;
     }
 
     /// <summary>
