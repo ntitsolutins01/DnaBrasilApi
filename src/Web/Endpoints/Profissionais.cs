@@ -8,7 +8,6 @@ using DnaBrasilApi.Application.Profissionais.Queries.GetProfissionalByCpfCnpj;
 using DnaBrasilApi.Application.Profissionais.Queries.GetProfissionalByEmail;
 using DnaBrasilApi.Application.Profissionais.Queries.GetProfissionalByLocalidade;
 using DnaBrasilApi.Application.Profissionais.Commands.DeleteProfissionalModalidade;
-using DnaBrasilApi.Application.Profissionais.Commands.PatchProfissional;
 
 namespace DnaBrasilApi.Web.Endpoints;
 /// <summary>
@@ -34,9 +33,7 @@ public class Profissionais : EndpointGroupBase
             .MapGet(GetProfissionalById, "{id}")
             .MapGet(GetProfissionalByEmail, "/Email/{email}")
             .MapGet(GetProfissionalByCpfCnpj, "/Cpf/{cpf}")
-            .MapGet(GetProfissionaisByLocalidade, "/Localidade/{id}")
-            .MapPut(PatchProfissional, "/Profile/{id}");  
-        
+            .MapGet(GetProfissionaisByLocalidade, "/Localidade/{id}");
     }
     #endregion
 
@@ -54,30 +51,16 @@ public class Profissionais : EndpointGroupBase
     }
 
     /// <summary>
-    /// Endpoint para alteração de Profissional
+    /// Endpoint para alteração de Profissionais
     /// </summary>
     /// <param name="sender">Sender</param>
-    /// <param name="id">Id de alteração de Profissional</param>
-    /// <param name="command">Objeto de alteração de Profissional</param>
+    /// <param name="id">Id de alteração de Profissionais</param>
+    /// <param name="command">Objeto de alteração de Profissionais</param>
     /// <returns>Retorna true ou false</returns>
     public async Task<bool> UpdateProfissional(ISender sender, int id, UpdateProfissionalCommand command)
     {
         if (id != command.Id) return false;
         await sender.Send(new DeleteProfissionalModalidadeCommand() { ProfissionalId = id });
-        var result = await sender.Send(command);
-        return result;
-    }
-
-    /// <summary>
-    /// Endpoint para alteração parcial de Profissional
-    /// </summary>
-    /// <param name="sender">Sender</param>
-    /// <param name="id">Id de alteração de Profissional</param>
-    /// <param name="command">Objeto de alteração de Profissional</param>
-    /// <returns>Retorna true ou false</returns>
-    public async Task<bool> PatchProfissional(ISender sender, int id, PatchProfissionalCommand command)
-    {
-        if (id != command.Id) return false;
         var result = await sender.Send(command);
         return result;
     }
