@@ -1,9 +1,13 @@
-﻿using DnaBrasilApi.Application.Atividades.Queries.GetAtividadeById;
+using DnaBrasilApi.Application.Atividades.Queries.GetAtividadeById;
 using DnaBrasilApi.Application.Atividades.Commands.CreateAtividade;
+using DnaBrasilApi.Application.Atividades.Commands.CreateAtividadeAluno;
 using DnaBrasilApi.Application.Atividades.Commands.DeleteAtividade;
 using DnaBrasilApi.Application.Atividades.Commands.UpdateAtividade;
 using DnaBrasilApi.Application.Atividades.Queries;
+using DnaBrasilApi.Application.Atividades.Queries.GetAtividadeAlunosByAtividadeId;
+using DnaBrasilApi.Application.Atividades.Queries.GetAtividadeByModalidadeIdProfissionalIdTurma;
 using DnaBrasilApi.Application.Atividades.Queries.GetAtividadesAll;
+using DnaBrasilApi.Application.Atividades.Queries.GetTurmasByModalidadeIdProfissionalId;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -20,10 +24,14 @@ public class Atividades : EndpointGroupBase
         app.MapGroup(this)
             //.RequireAuthorization()
             .MapPost(CreateAtividade)
+            .MapPost(CreateAtividadeAlunos,"Alunos")
             .MapPut(UpdateAtividade, "{id}")
             .MapDelete(DeleteAtividade, "{id}")
             .MapGet(GetAtividadesAll)
-            .MapGet(GetAtividadeById, "{id}");
+            .MapGet(GetAtividadeById, "{id}")
+            .MapGet(GetAtividadeAlunosByAtividadeId, "{id}/Alunos")
+            .MapGet(GetTurmasByModalidadeIdProfissionalId, "Modalidade/{modalidadeId}/Profissional/{profissionalId}")
+            .MapGet(GetAtividadeByModalidadeIdProfissionalIdTurma, "Modalidade/{modalidadeId}/Profissional/{profissionalId}/Turma/{turma}");
     }
     #endregion
 
@@ -36,6 +44,17 @@ public class Atividades : EndpointGroupBase
     /// <param name="command">Objeto de inclusão da Atividade</param>
     /// <returns>Retorna Id da nova Atividade</returns>
     public async Task<int> CreateAtividade(ISender sender, CreateAtividadeCommand command)
+    {
+        return await sender.Send(command);
+    }
+
+    /// <summary>
+    /// Endpoint para inclusão de Atividade e Alunos
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="command">Objeto de inclusão da Atividade e seus Alunos</param>
+    /// <returns>Retorna Id da Atividade</returns>
+    public async Task<int> CreateAtividadeAlunos(ISender sender, CreateAtividadeAlunoCommand command)
     {
         return await sender.Send(command);
     }
@@ -88,6 +107,37 @@ public class Atividades : EndpointGroupBase
     public async Task<AtividadeDto> GetAtividadeById(ISender sender, int id)
     {
         return await sender.Send(new GetAtividadeByIdQuery() { Id = id });
+    }
+
+    /// <summary>
+    /// Endpoint que busca lista de turmas pelo id da modalidade e id do profissional 
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="modalidadeId">Id da modalidade</param>
+    /// <param name="profissionalId">Id do profissional</param>
+    /// <returns>Retorna a lista de turmas</returns>
+    public async Task<List<AtividadeDto>> GetTurmasByModalidadeIdProfissionalId(ISender sender, int modalidadeId, int profissionalId)
+    {
+        return await sender.Send(new GetTurmasByModalidadeIdProfissionalIdQuery() { ModalidadeId = modalidadeId, ProfissionalId = profissionalId });
+    }
+
+    /// <summary>
+    /// Endpoopint que busca tividade pelo id da modalidade, id do profissional e turma
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="modalidadeId">Id da modalidade</param>
+    /// <param name="profissionalId">Id do profissional</param>
+    /// <param name="turma">Turma do profissional</param>
+    /// <returns>Retorna o objeto da Atividade</returns>
+    public async Task<List<AtividadeDto>> GetAtividadeByModalidadeIdProfissionalIdTurma(ISender sender, int modalidadeId, int profissionalId, string turma)
+    {
+        return await sender.Send(new GetAtividadeByModalidadeIdProfissionalIdTurmaQuery() { ModalidadeId = modalidadeId, ProfissionalId = profissionalId, Turma = turma });
+    }
+
+
+    public async Task<List<AtividadeAlunoDto>> GetAtividadeAlunosByAtividadeId(ISender sender, int id)
+    {
+        return await sender.Send(new GetAtividadeAlunosByAtividadeIdQuery() { AtividadeId = id });
     }
     #endregion
 
