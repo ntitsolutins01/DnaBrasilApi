@@ -23,10 +23,10 @@ public class GetAtividadeAlunosByAtividadeIdQueryHandler : IRequestHandler<GetAt
     public async Task<List<AtividadeAlunoDto>> Handle(GetAtividadeAlunosByAtividadeIdQuery request, CancellationToken cancellationToken)
     {
         var result = await _context.AtividadeAlunos
+            //.Include(i=>i.Aluno)
             .Where((x=>x.AtividadeId == request.AtividadeId))
             .AsNoTracking()
             .ProjectTo<AtividadeAlunoDto>(_mapper.ConfigurationProvider)
-            .OrderBy(t => t.Id)
             .ToListAsync(cancellationToken);
 
         return result == null ? throw new ArgumentNullException(nameof(result)) : result;
