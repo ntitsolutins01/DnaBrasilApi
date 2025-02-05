@@ -13402,10 +13402,17 @@
             "type": "integer",
             "format": "int32"
           },
+          "alunoId": {
+            "type": "integer",
+            "format": "int32"
+          },
           "eventoId": {
             "type": "integer",
             "format": "int32",
             "nullable": true
+          },
+          "nomeAluno": {
+            "type": "string"
           },
           "controle": {
             "type": "string"
@@ -13414,8 +13421,26 @@
             "type": "string",
             "nullable": true
           },
+          "municipioEstado": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeLocalidade": {
+            "type": "string",
+            "nullable": true
+          },
           "data": {
             "type": "string",
+            "nullable": true
+          },
+          "localidadeId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "municipioId": {
+            "type": "integer",
+            "format": "int32",
             "nullable": true
           },
           "status": {
@@ -13504,8 +13529,37 @@
             "type": "array",
             "nullable": true,
             "items": {
-              "$ref": "#/components/schemas/ControlePresencaDto"
+              "$ref": "#/components/schemas/ControlesPresencasDto"
             }
+          }
+        }
+      },
+      "ControlesPresencasDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "eventoId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "controle": {
+            "type": "string"
+          },
+          "justificativa": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "boolean"
           }
         }
       },

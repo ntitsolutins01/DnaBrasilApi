@@ -4,7 +4,7 @@ using DnaBrasilApi.Application.Profissionais.Queries;
 using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.ControlesPresencas.Queries;
-public class ControlePresencaDto
+public class ControlesPresencasDto
 {   
     public int Id { get; set; }
     public int? EventoId { get; set; }
@@ -16,7 +16,7 @@ public class ControlePresencaDto
     {
         public Mapping()
         {
-            CreateMap<ControlePresenca, ControlePresencaDto>()
+            CreateMap<ControlePresenca, ControlesPresencasDto>()
                 .ForMember(dest => dest.EventoId, opt => opt.MapFrom(src => src.Evento!.Id))
                 .ForMember(dest => dest.Data, opt => opt.MapFrom(src => src.Created.ToString("dd/MM/yyyy")));
         }

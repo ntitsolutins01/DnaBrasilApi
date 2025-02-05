@@ -50,7 +50,7 @@ public class GetControlesPresencasByAlunoIdQueryHandler : IRequestHandler<GetCon
             NomeLocalidade = aluno.Localidade?.Nome ?? "Sem localidade",
             ByteImage = null/*aluno.ByteImage*/,
             ControlesPresencas = controlesPresencas
-                .Select(cp => new ControlePresencaDto
+                .Select(cp => new ControlesPresencasDto
                 {
                     Id = cp.Id,
                     EventoId = cp.Evento?.Id ?? 0,
