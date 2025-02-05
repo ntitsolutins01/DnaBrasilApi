@@ -2406,7 +2406,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ControlePresencaDto"
+                    "$ref": "#/components/schemas/ControlePresencaAlunoDto"
                   }
                 }
               }
@@ -13402,17 +13402,10 @@
             "type": "integer",
             "format": "int32"
           },
-          "alunoId": {
-            "type": "integer",
-            "format": "int32"
-          },
           "eventoId": {
             "type": "integer",
             "format": "int32",
             "nullable": true
-          },
-          "nomeAluno": {
-            "type": "string"
           },
           "controle": {
             "type": "string"
@@ -13421,25 +13414,9 @@
             "type": "string",
             "nullable": true
           },
-          "municipioEstado": {
-            "type": "string",
-            "nullable": true
-          },
-          "nomeLocalidade": {
-            "type": "string",
-            "nullable": true
-          },
           "data": {
             "type": "string",
             "nullable": true
-          },
-          "localidadeId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "municipioId": {
-            "type": "integer",
-            "format": "int32"
           },
           "status": {
             "type": "boolean"
@@ -13488,6 +13465,47 @@
           },
           "status": {
             "type": "boolean"
+          }
+        }
+      },
+      "ControlePresencaAlunoDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "alunoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeAluno": {
+            "type": "string"
+          },
+          "municipioEstado": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeLocalidade": {
+            "type": "string",
+            "nullable": true
+          },
+          "localidadeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "municipioId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "byteImage": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "controlesPresencas": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ControlePresencaDto"
+            }
           }
         }
       },
