@@ -20,7 +20,6 @@ public class GetControlesPresencasByAlunoIdQueryHandler : IRequestHandler<GetCon
 
     public async Task<List<ControlePresencaAlunoDto>> Handle(GetControlesPresencasByAlunoIdQuery request, CancellationToken cancellationToken)
     {
-        // 1. Buscar os dados do aluno (sem duplicações)
         var aluno = await _context.Alunos
             .Where(a => a.Id == request.AlunoId)
             .Include(a => a.Municipio)
@@ -31,16 +30,14 @@ public class GetControlesPresencasByAlunoIdQueryHandler : IRequestHandler<GetCon
 
         if (aluno == null)
         {
-            return new List<ControlePresencaAlunoDto>(); // Retorna lista vazia se o aluno não for encontrado
+            return new List<ControlePresencaAlunoDto>(); 
         }
 
-        // 2. Buscar todos os controles de presença do aluno, garantindo que o Aluno não seja null
         var controlesPresencas = await _context.ControlesPresencas
             .Where(cp => cp.Aluno != null && cp.Aluno.Id == request.AlunoId)
             .AsNoTracking()
             .ToListAsync(cancellationToken);
 
-        // 3. Montar o DTO do aluno com os controles de presença
         var result = new ControlePresencaAlunoDto
         {
             AlunoId = aluno.Id,
