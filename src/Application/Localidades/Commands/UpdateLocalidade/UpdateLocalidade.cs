@@ -10,6 +10,7 @@ public record UpdateLocalidadeCommand : IRequest<bool>
     public string? Descricao { get; init; }
     public bool Status { get; set; } = true;
     public int MunicipioId { get; set; }
+    public int? CodigoInep { get; init; }
 }
 
 public class UpdateLocalidadeCommandHandler : IRequestHandler<UpdateLocalidadeCommand, bool>
@@ -34,6 +35,7 @@ public class UpdateLocalidadeCommandHandler : IRequestHandler<UpdateLocalidadeCo
         entity.Descricao = request.Descricao;
         entity.Status = request.Status;
         entity.Municipio = municipio;
+        entity.CodigoInep = request.CodigoInep;
 
         var result = await _context.SaveChangesAsync(cancellationToken);
 

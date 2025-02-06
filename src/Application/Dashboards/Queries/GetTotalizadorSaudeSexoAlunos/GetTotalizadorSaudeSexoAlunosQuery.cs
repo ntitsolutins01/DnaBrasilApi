@@ -94,9 +94,10 @@ public class GetTotalizadorSaudeSexoAlunosQueryHandler : IRequestHandler<GetTota
             { "indicePositivoSaude", 0 }
         };
 
-        int cont = 1;
-
-        var laudos = _context.Laudos.Where(x => verificaAlunos.Contains(x.Aluno.Id)).Include(i => i.Saude).Include(a => a.Aluno)
+        var laudos = _context.Laudos.Where(x => verificaAlunos.Contains(x.Aluno.Id))
+            .Include(a => a.Aluno)
+            .Include(i => i.Saude)
+            .Where(x => x.Saude != null)
             .AsNoTracking();
 
         foreach (var aluno in laudos)
@@ -234,10 +235,17 @@ public class GetTotalizadorSaudeSexoAlunosQueryHandler : IRequestHandler<GetTota
                         break;
                 }
             }
-            else
-            {
-                dict.Add(result!.Classificacao!, cont);
-            }
+            //else
+            //{
+            //    dict.Add(result!.Classificacao!, cont);
+            //}
+        }
+
+        var total = dict.Skip(0).Sum(x => x.Value);
+
+        foreach (KeyValuePair<string, decimal> item in dict)
+        {
+            dict[item.Key!] = Convert.ToDecimal((100 * item.Value / total).ToString("F"));
         }
 
         var totalMasc = dictTotalizadorSaudeMasculino.Skip(0).Sum(x => x.Value);
@@ -253,7 +261,8 @@ public class GetTotalizadorSaudeSexoAlunosQueryHandler : IRequestHandler<GetTota
             ValorTotalizadorSaudeMasculino = dictTotalizadorSaudeMasculino,
             ValorTotalizadorSaudeFeminino = dictTotalizadorSaudeFeminino,
             PercTotalizadorSaudeMasculino = percTotalizadorSaudeMasculino,
-            PercTotalizadorSaudeFeminino = percTotalizadorSaudeFeminino
+            PercTotalizadorSaudeFeminino = percTotalizadorSaudeFeminino,
+            PercentualSaude = dict
         };
     }
 
