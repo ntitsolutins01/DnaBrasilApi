@@ -72,6 +72,7 @@ public interface IApplicationDbContext
     DbSet<EtapaEnsino> EtapasEnsino { get; }
     DbSet<IdebDimensaoNacional> IdebDimensoesNacional { get; }
     DbSet<IdebDimensaoEstadual> IdebDimensoesEstadual { get; }
+    DbSet<ModeloCarteirinha> ModelosCarteirinhas { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }
