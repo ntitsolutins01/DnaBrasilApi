@@ -94,12 +94,12 @@ public class ModelosCarteirinhas : EndpointGroupBase
     }
 
     /// <summary>
-    ///  Endpoint que busca todos os Modelos de Carteirinha por FomentoId 
+    ///  Endpoint que busca um único Modelo de Carteirinha por FomentoId 
     /// </summary>
     /// <param name="sender">sender</param>
     /// <param name="fomentoId">fomentoId</param>
-    /// <returns>Retorna a lista de Modelos de Carteirinha por FomentoId </returns>
-    public async Task<List<ModeloCarteirinhaDto>> GetModeloCarteirinhaByFomentoId(ISender sender, int fomentoId)
+    /// <returns>Retorna o Modelo de Carteirinha por FomentoId </returns>
+    public async Task<ModeloCarteirinhaDto> GetModeloCarteirinhaByFomentoId(ISender sender, int fomentoId)
     {
         return await sender.Send(new GetModeloCarteirinhaByFomentoIdQuery() { FomentoId = fomentoId });
     }

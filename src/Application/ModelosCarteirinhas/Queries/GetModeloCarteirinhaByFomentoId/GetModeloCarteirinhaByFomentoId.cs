@@ -2,12 +2,12 @@
 
 namespace DnaBrasilApi.Application.ModelosCarteirinhas.Queries.GetModeloCarteirinhaByQuestionario;
 
-public record GetModeloCarteirinhaByFomentoIdQuery : IRequest<List<ModeloCarteirinhaDto>>
+public record GetModeloCarteirinhaByFomentoIdQuery : IRequest<ModeloCarteirinhaDto>
 {
     public required int FomentoId { get; init; }
 }
 
-public class GetModeloCarteirinhaByFomentoIdQueryHandler : IRequestHandler<GetModeloCarteirinhaByFomentoIdQuery, List<ModeloCarteirinhaDto>>
+public class GetModeloCarteirinhaByFomentoIdQueryHandler : IRequestHandler<GetModeloCarteirinhaByFomentoIdQuery, ModeloCarteirinhaDto>
 {
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
@@ -18,14 +18,19 @@ public class GetModeloCarteirinhaByFomentoIdQueryHandler : IRequestHandler<GetMo
         _mapper = mapper;
     }
 
-    public async Task<List<ModeloCarteirinhaDto>> Handle(GetModeloCarteirinhaByFomentoIdQuery request, CancellationToken cancellationToken)
+    public async Task<ModeloCarteirinhaDto> Handle(GetModeloCarteirinhaByFomentoIdQuery request, CancellationToken cancellationToken)
     {
         var result = await _context.ModelosCarteirinhas
             .Where(x => x.Fomento!.Id == request.FomentoId)
             .AsNoTracking()
             .ProjectTo<ModeloCarteirinhaDto>(_mapper.ConfigurationProvider)
             .OrderBy(t => t.Id)
-            .ToListAsync(cancellationToken);
+            .FirstOrDefaultAsync(cancellationToken);
+
+        if (result == null)
+        {
+            throw new KeyNotFoundException($"ModeloCarteirinha with FomentoId {request.FomentoId} not found.");
+        }
 
         return result;
     }
