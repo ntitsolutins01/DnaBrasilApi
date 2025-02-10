@@ -13,7 +13,8 @@ public record UpdateLaudoCommand : IRequest<bool>
     public int? QualidadeDeVidaId { get; init; }
     public int? SaudeBucalId { get; init; }
     public int? TalentoEsportivoId { get; init; }
-    public string? StatusLaudo { get; set; }
+    public string? StatusLaudo { get; init; }
+    public int? ModalidadeId { get; init; }
 }
 
 public class UpdateLaudoCommandHandler : IRequestHandler<UpdateLaudoCommand, bool>
@@ -36,6 +37,10 @@ public class UpdateLaudoCommandHandler : IRequestHandler<UpdateLaudoCommand, boo
         var aluno = await _context.Alunos.FindAsync(new object[] { request.AlunoId }, cancellationToken);
 
         Guard.Against.NotFound((int)request.AlunoId, aluno);
+
+        var modalidade = await _context.Modalidades.FindAsync([request.ModalidadeId], cancellationToken);
+
+        Guard.Against.NotFound((int)request.ModalidadeId!, modalidade);
 
         Saude? saude;
         Vocacional? vocacional = null;
@@ -80,19 +85,22 @@ public class UpdateLaudoCommandHandler : IRequestHandler<UpdateLaudoCommand, boo
                     : null;
 
 
-                request.StatusLaudo = qualidadeDeVida != null
-                                      &&
-                                      vocacional != null
-                                      &&
-                                      saude != null
-                                      &&
-                                      consumoAlimentar != null
-                                      &&
-                                      saudeBucal != null
-                                      &&
-                                      talentoEsportivo != null
-                    ? "F"
-                    : "A";
+                request = request with
+                {
+                    StatusLaudo = qualidadeDeVida != null
+                                  &&
+                                  vocacional != null
+                                  &&
+                                  saude != null
+                                  &&
+                                  consumoAlimentar != null
+                                  &&
+                                  saudeBucal != null
+                                  &&
+                                  talentoEsportivo != null
+                        ? "F"
+                        : "A"
+                };
                 break;
             case >= 12:
                 qualidadeDeVida = request.QualidadeDeVidaId != null
@@ -101,28 +109,34 @@ public class UpdateLaudoCommandHandler : IRequestHandler<UpdateLaudoCommand, boo
                     : null;
 
 
-                request.StatusLaudo = qualidadeDeVida != null
-                                      &&
-                                      saude != null
-                                      &&
-                                      consumoAlimentar != null
-                                      &&
-                                      saudeBucal != null
-                                      &&
-                                      talentoEsportivo != null
-                    ? "F"
-                    : "A";
+                request = request with
+                {
+                    StatusLaudo = qualidadeDeVida != null
+                                  &&
+                                  saude != null
+                                  &&
+                                  consumoAlimentar != null
+                                  &&
+                                  saudeBucal != null
+                                  &&
+                                  talentoEsportivo != null
+                        ? "F"
+                        : "A"
+                };
                 break;
             default:
-                request.StatusLaudo = saude != null
-                                      &&
-                                      consumoAlimentar != null
-                                      &&
-                                      saudeBucal != null
-                                      &&
-                                      talentoEsportivo != null
-                    ? "F"
-                    : "A";
+                request = request with
+                {
+                    StatusLaudo = saude != null
+                                  &&
+                                  consumoAlimentar != null
+                                  &&
+                                  saudeBucal != null
+                                  &&
+                                  talentoEsportivo != null
+                        ? "F"
+                        : "A"
+                };
                 break;
         }
 
@@ -133,6 +147,7 @@ public class UpdateLaudoCommandHandler : IRequestHandler<UpdateLaudoCommand, boo
         entity.SaudeBucal = saudeBucal;
         entity.TalentoEsportivo = talentoEsportivo;
         entity.StatusLaudo = request.StatusLaudo;
+        entity.Modalidade = modalidade;
 
         var result = await _context.SaveChangesAsync(cancellationToken);
 

@@ -14,4 +14,5 @@ public class Atividade : BaseAuditableEntity
     public required Localidade Localidade { get; set; }
     public bool Status { get; set; } = true;
     public required int QuantidadeAluno { get; set; }
+    public IList<AtividadeAluno>? AtividadeAlunos { get; set; }
 }

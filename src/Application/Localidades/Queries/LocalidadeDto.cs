@@ -6,11 +6,12 @@ public class LocalidadeDto
     public int Id { get; init; }
     public string? Nome { get; init; }
     public string? Descricao { get; init; }
-    public bool Status { get; set; }
-    public int MunicipioId { get; set; }
-    public int EstadoId { get; set; }
-    public string? NomeMunicipio { get; set; }
-    public string? NomeEstado { get; set; }
+    public bool Status { get; init; }
+    public int MunicipioId { get; init; }
+    public int EstadoId { get; init; }
+    public string? NomeMunicipio { get; init; }
+    public string? NomeEstado { get; init; }
+    public int? CodigoInep { get; init; }
 
     private class Mapping : Profile
     {

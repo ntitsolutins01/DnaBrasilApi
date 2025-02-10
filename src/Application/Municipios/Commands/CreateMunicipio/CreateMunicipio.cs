@@ -22,7 +22,7 @@ public class CreateMunicipioCommandHandler : IRequestHandler<CreateMunicipioComm
     {
         var entity = new Municipio
         {
-            Codigo = request.Codigo,
+            CodigoIbge = request.Codigo,
             Nome = request.Nome,
             Estado = request.Estado
         };
