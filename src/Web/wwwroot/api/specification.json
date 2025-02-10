@@ -12504,13 +12504,12 @@
             "type": "integer",
             "format": "int32"
           },
-          "cursoId": {
+          "fomentoId": {
             "type": "integer",
             "format": "int32"
           },
-          "tituloCurso": {
-            "type": "string",
-            "nullable": true
+          "nomeFomento": {
+            "type": "string"
           },
           "imagemFrente": {
             "type": "string"
@@ -12542,7 +12541,7 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "cursoId": {
+          "fomentoId": {
             "type": "integer",
             "format": "int32"
           },
@@ -12580,7 +12579,7 @@
             "type": "integer",
             "format": "int32"
           },
-          "cursoId": {
+          "fomentoId": {
             "type": "integer",
             "format": "int32"
           },

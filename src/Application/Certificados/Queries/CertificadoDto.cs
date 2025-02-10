@@ -6,8 +6,8 @@ namespace DnaBrasilApi.Application.Certificados.Queries;
 public class CertificadoDto
 {
     public required int Id { get; init; }
-    public required int CursoId { get; init; }
-    public string? TituloCurso { get; init; }
+    public required int FomentoId { get; init; }
+    public required string NomeFomento { get; init; }
     public required string ImagemFrente { get; init; }
     public string? ImagemVerso { get; init; }
     public string? NomeImagemFrente { get; init; }
@@ -21,7 +21,7 @@ public class CertificadoDto
         public Mapping()
         {
             CreateMap<Certificado, CertificadoDto>()
-                .ForMember(dest => dest.TituloCurso, opt => opt.MapFrom(src => src.Curso.Titulo));
+                .ForMember(dest => dest.NomeFomento, opt => opt.MapFrom(src => src.Fomento.Nome));
         }
     }
 }
