@@ -6635,6 +6635,196 @@
         }
       }
     },
+    "/api/ModelosCarteirinhas": {
+      "get": {
+        "tags": [
+          "ModelosCarteirinhas"
+        ],
+        "operationId": "GetModelosCarteirinhasAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ModeloCarteirinhaDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "ModelosCarteirinhas"
+        ],
+        "operationId": "CreateModeloCarteirinha",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateModeloCarteirinhaCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ModelosCarteirinhas/{id}": {
+      "put": {
+        "tags": [
+          "ModelosCarteirinhas"
+        ],
+        "operationId": "UpdateModeloCarteirinha",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateModeloCarteirinhaCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ModelosCarteirinhas"
+        ],
+        "operationId": "DeleteModeloCarteirinha",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ModelosCarteirinhas"
+        ],
+        "operationId": "GetModeloCarteirinhaById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModeloCarteirinhaDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ModelosCarteirinhas/Fomento/{fomentoId}": {
+      "get": {
+        "tags": [
+          "ModelosCarteirinhas"
+        ],
+        "operationId": "GetModeloCarteirinhaByFomentoId",
+        "parameters": [
+          {
+            "name": "fomentoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModeloCarteirinhaDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/ModulosEad": {
       "get": {
         "tags": [
@@ -17848,6 +18038,64 @@
           "byteImage": {
             "type": "string",
             "format": "byte",
+            "nullable": true
+          }
+        }
+      },
+      "ModeloCarteirinhaDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fomentoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeImagem": {
+            "type": "string",
+            "nullable": true
+          },
+          "urlImagem": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "CreateModeloCarteirinhaCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "fomentoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeImagem": {
+            "type": "string",
+            "nullable": true
+          },
+          "urlImagem": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "UpdateModeloCarteirinhaCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeImagem": {
+            "type": "string",
+            "nullable": true
+          },
+          "urlImagem": {
+            "type": "string",
             "nullable": true
           }
         }
