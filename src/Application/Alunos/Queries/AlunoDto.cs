@@ -4,6 +4,9 @@ using DnaBrasilApi.Domain.Entities;
 namespace DnaBrasilApi.Application.Alunos.Queries;
 public class AlunoDto
 {
+    /// <summary>
+    /// Matrícula do aluno - Identificador único
+    /// </summary>
     public int Id { get; set; }
     //public  string? AspNetUserId { get; set; }
     public string? Nome { get; set; }
