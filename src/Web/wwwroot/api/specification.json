@@ -12121,6 +12121,10 @@
             "type": "string",
             "nullable": true
           },
+          "profissionalId": {
+            "type": "string",
+            "nullable": true
+          },
           "deficienciaId": {
             "type": "string",
             "nullable": true
