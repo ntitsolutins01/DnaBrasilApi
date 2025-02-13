@@ -33,7 +33,7 @@ public class UpdateEncaminhamentoTalentoEsportivoCommandHandler : IRequestHandle
 
             var arr = new int[]
             {
-                request.AlunoId
+                34363
                 //38651, 38685, 38694, 38721, 38742, 38743, 38744, 38746, 38756, 38761, 38765, 38795, 38796, 39795, 39798
             };
 

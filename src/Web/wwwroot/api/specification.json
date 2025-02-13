@@ -786,6 +786,41 @@
         }
       }
     },
+    "/api/Atividades/Localidade/{id}": {
+      "get": {
+        "tags": [
+          "Atividades"
+        ],
+        "operationId": "GetAtividadeByLocalidadeId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AtividadeDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Aulas": {
       "get": {
         "tags": [
