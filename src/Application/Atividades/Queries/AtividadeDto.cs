@@ -1,3 +1,4 @@
+using System;
 using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Atividades.Queries;
@@ -13,15 +14,16 @@ public class AtividadeDto
     public required string NomeCategoria { get; init; }
     public required int ModalidadeId { get; init; }
     public required string NomeModalidade { get; init; }
-    public string? Turma { get; init; }
-    public string? DiasSemana { get; init; }
-    public TimeSpan? HrInicial { get; init; }
-    public TimeSpan? HrFinal { get; init; }
+    public required string Turma { get; init; }
+    public required string DiasSemana { get; init; }
+    public required string HrInicial { get; init; }
+    public required string HrFinal { get; init; }
     public required int ProfissionalId { get; init; }
     public required string NomeProfissional { get; init; }
     public required int LocalidadeId { get; init; }
     public required string NomeLocalidade { get; init; }
     public bool Status { get; init; }
+    public required string TurmaHora { get; init; }
 
     private class Mapping : Profile
     {
@@ -39,7 +41,15 @@ public class AtividadeDto
                 .ForMember(dest => dest.ProfissionalId, opt => opt.MapFrom(src => src.Profissional!.Id))
                 .ForMember(dest => dest.NomeProfissional, opt => opt.MapFrom(src => src.Profissional!.Nome))
                 .ForMember(dest => dest.LocalidadeId, opt => opt.MapFrom(src => src.Localidade!.Id))
-                .ForMember(dest => dest.NomeLocalidade, opt => opt.MapFrom(src => src.Localidade!.Nome));
+                .ForMember(dest => dest.NomeLocalidade, opt => opt.MapFrom(src => src.Localidade!.Nome))
+                .ForMember(dest => dest.HrInicial,
+                    opt => opt.MapFrom(src => new DateTime(src.HrInicial.Ticks).ToString("HH:mm")))
+                .ForMember(dest => dest.HrFinal,
+                    opt => opt.MapFrom(src => new DateTime(src.HrFinal.Ticks).ToString("HH:mm")))
+                .ForMember(dest => dest.TurmaHora,
+                    opt => opt.MapFrom(src =>
+                        src.Turma + " - " + new DateTime(src.HrInicial.Ticks).ToString("HH:mm") + " - " +
+                        new DateTime(src.HrFinal.Ticks).ToString("HH:mm")));
         }
     }
 }

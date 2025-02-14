@@ -226,7 +226,7 @@ public class UpdateEncaminhamentoTalentoEsportivoCommandHandler : IRequestHandle
 
                         var nome = q.FirstOrDefault()!.Value;
 
-                        var encaminhamentoTalentoEsportivo = encaminhamentos.First(x => x.Nome == nome);
+                        var encaminhamentoTalentoEsportivo = encaminhamentos.First(x => x.Nome.Contains(nome));
 
                         entity.EncaminhamentoTexo = q.FirstOrDefault()!.Value;
                         entity.Encaminhamento = encaminhamentoTalentoEsportivo;

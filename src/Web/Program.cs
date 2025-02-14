@@ -2,6 +2,10 @@ using DnaBrasilApi.Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//Log4net
+builder.Logging.ClearProviders();
+builder.Logging.AddLog4Net();
+
 // Add services to the container.
 builder.Services.AddKeyVaultIfConfigured(builder.Configuration);
 

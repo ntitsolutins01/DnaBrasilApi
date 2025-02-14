@@ -16,6 +16,7 @@ public record CreateAtividadeCommand : IRequest<int>
     public required int LocalidadeId { get; init; }
     public required int QuantidadeAluno { get; init; }
     public required string DiasSemana { get; init; }
+    public string? ModalidadesIds { get; init; }
 }
 
 public class CreateAtividadeCommandHandler : IRequestHandler<CreateAtividadeCommand, int>
