@@ -2,44 +2,24 @@
 
 namespace DnaBrasilApi.Application.Alunos.Queries.GetNomeAlunosAll;
 //[Authorize]
-public record GetNomeAlunosAllQuery : IRequest<List<SelectListDto>>
-{
-    public string? LocalidadeId { get; init; }
-}
+public record GetNomeAlunosAllQuery : IRequest<List<SelectListDto>>;
 
 public class GetNomeAlunosAllQueryHandler : IRequestHandler<GetNomeAlunosAllQuery, List<SelectListDto>>
 {
     private readonly IApplicationDbContext _context;
-    private readonly IMapper _mapper;
 
-    public GetNomeAlunosAllQueryHandler(IApplicationDbContext context, IMapper mapper)
+    public GetNomeAlunosAllQueryHandler(IApplicationDbContext context)
     {
         _context = context;
-        _mapper = mapper;
     }
 
     public async Task<List<SelectListDto>> Handle(GetNomeAlunosAllQuery request, CancellationToken cancellationToken)
     {
-        var result = new List<SelectListDto>();
-        var idLocalidade = Convert.ToInt32(request.LocalidadeId);
-
-        if (string.IsNullOrEmpty(request.LocalidadeId))
-        {
-            result = await _context.Alunos
+        var result = await _context.Alunos
                 .AsNoTracking()
                 .Select(s => new SelectListDto { Id = s.Id, Nome = s.Id + " - " + s.Nome.ToUpper() })
                 .OrderBy(t => t.Id)
                 .ToListAsync(cancellationToken);
-        }
-        else
-        {
-            result = await _context.Alunos
-                .Where(x => x.Localidade!.Id == idLocalidade)
-                .Select(s => new SelectListDto { Id = s.Id, Nome = s.Id + " - " + s.Nome.ToUpper() })
-                .AsNoTracking()
-                .OrderBy(t => t.Nome)
-                .ToListAsync(cancellationToken);
-        }
 
         return result;
     }

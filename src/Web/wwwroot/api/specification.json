@@ -176,19 +176,43 @@
         }
       }
     },
-    "/api/Alunos/NomeAlunos/{id}": {
+    "/api/Alunos/NomeAlunos": {
       "get": {
         "tags": [
           "Alunos"
         ],
         "operationId": "GetNomeAlunosAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SelectListDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Alunos/NomeAlunos/Localidade/{id}": {
+      "get": {
+        "tags": [
+          "Alunos"
+        ],
+        "operationId": "GetNomeAlunosByLocalidadeId",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "integer",
+              "format": "int32"
             },
             "x-position": 1
           }
