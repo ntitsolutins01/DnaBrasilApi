@@ -60,7 +60,6 @@ public interface IApplicationDbContext
     DbSet<GrupoMaterial> GruposMateriais { get; }
     DbSet<TipoMaterial> TiposMateriais { get; }
     DbSet<Material> Materiais { get; }
-    DbSet<ControleMensalEstoque> ControlesMensaisEstoque { get; }
     DbSet<ControleMaterialEstoqueSaida> ControlesMateriaisEstoquesSaidas { get; }
     DbSet<ProfissionalModalidade> ProfissionalModalidades { get; }
     DbSet<FomentoLocalidade> FomentoLocalidades { get; }

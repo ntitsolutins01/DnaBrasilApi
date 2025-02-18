@@ -4,6 +4,8 @@ using DnaBrasilApi.Domain.Entities;
 namespace DnaBrasilApi.Application.ControlesMateriaisEstoquesSaidas.Commands.CreateControleMaterialEstoqueSaida;
 public record CreateControleMaterialEstoqueSaidaCommand : IRequest<int>
 {
+    public required int MunicipioId { get; set; }
+    public required int LocalidadeId { get; set; }
     public required int MaterialId { get; set; }
     public required int Quantidade { get; set; }
     public string? Solicitante { get; set; }
@@ -20,6 +22,16 @@ public class CreateControleMaterialEstoqueSaidaCommandHandler : IRequestHandler<
 
     public async Task<int> Handle(CreateControleMaterialEstoqueSaidaCommand request, CancellationToken cancellationToken)
     {
+        var municipio = await _context.Municipios
+            .FindAsync([request.MunicipioId], cancellationToken);
+
+        Guard.Against.NotFound(request.MunicipioId, municipio);
+
+        var localidade = await _context.Localidades
+            .FindAsync([request.LocalidadeId], cancellationToken);
+
+        Guard.Against.NotFound(request.LocalidadeId, localidade);
+
         var material = await _context.Materiais
             .FindAsync([request.MaterialId], cancellationToken);
 
@@ -27,6 +39,8 @@ public class CreateControleMaterialEstoqueSaidaCommandHandler : IRequestHandler<
 
         var entity = new ControleMaterialEstoqueSaida
         {
+            Municipio = municipio,
+            Localidade = localidade,
             Material = material,
             Quantidade = request.Quantidade,
             Solicitante = request.Solicitante
