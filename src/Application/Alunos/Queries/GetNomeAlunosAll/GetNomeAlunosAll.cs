@@ -4,7 +4,7 @@ namespace DnaBrasilApi.Application.Alunos.Queries.GetNomeAlunosAll;
 //[Authorize]
 public record GetNomeAlunosAllQuery : IRequest<List<SelectListDto>>
 {
-    public required string LocalidadeId { get; init; }
+    public string? LocalidadeId { get; init; }
 }
 
 public class GetNomeAlunosAllQueryHandler : IRequestHandler<GetNomeAlunosAllQuery, List<SelectListDto>>

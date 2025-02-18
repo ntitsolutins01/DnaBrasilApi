@@ -171,7 +171,7 @@ public class Alunos : EndpointGroupBase
     /// <param name="sender">sender</param>
     /// <param name="id">id de todos os Alunos</param>
     /// <returns>Retorna todos os Alunos</returns>
-    public async Task<List<SelectListDto>> GetNomeAlunosAll(ISender sender, string id)
+    public async Task<List<SelectListDto>> GetNomeAlunosAll(ISender sender, string? id)
     {
         return await sender.Send(new GetNomeAlunosAllQuery() { LocalidadeId = id });
     }
