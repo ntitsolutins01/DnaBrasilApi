@@ -11,6 +11,7 @@ using DnaBrasilApi.Application.Alunos.Queries.GetAlunosAll;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunosByFilter;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunosByLocalidade;
 using DnaBrasilApi.Application.Alunos.Queries.GetNomeAlunosAll;
+using DnaBrasilApi.Application.Alunos.Queries.GetNomeAlunosByLocalidadeId;
 using DnaBrasilApi.Application.Alunos.Queries.GetNomeAlunosByProfissionalId;
 using Microsoft.AspNetCore.Mvc;
 
@@ -29,7 +30,8 @@ public class Alunos : EndpointGroupBase
             .MapGet(GetAlunoById, "{id}")
             .MapGet(GetAlunoByEmail, "/Email/{email}")
             .MapGet(GetAlunosByLocalidade, "/Localidade/{id}")
-            .MapGet(GetNomeAlunosAll, "/NomeAlunos/{id}")
+            .MapGet(GetNomeAlunosAll, "/NomeAlunos")
+            .MapGet(GetNomeAlunosByLocalidadeId, "/NomeAlunos/Localidade/{id}")
             .MapGet(GetAlunosAll)
             .MapPost(CreateAluno)
             .MapPut(UpdateAluno, "{id}")
@@ -169,11 +171,21 @@ public class Alunos : EndpointGroupBase
     /// Endpoint que busca Todos Nomes de Alunos
     /// </summary>
     /// <param name="sender">sender</param>
-    /// <param name="id">id de todos os Alunos</param>
-    /// <returns>Retorna todos os Alunos</returns>
-    public async Task<List<SelectListDto>> GetNomeAlunosAll(ISender sender, string id)
+    /// <returns>Retorna todos os nomes dos alunos para uma combo</returns>
+    public async Task<List<SelectListDto>> GetNomeAlunosAll(ISender sender)
     {
-        return await sender.Send(new GetNomeAlunosAllQuery() { LocalidadeId = id });
+        return await sender.Send(new GetNomeAlunosAllQuery());
+    }
+
+    /// <summary>
+    /// Endpoint que busca Todos Nomes de Alunos
+    /// </summary>
+    /// <param name="sender">sender</param>
+    /// <param name="id">Id da localidade dos alunos</param>
+    /// <returns>Retorna todos os nomes dos alunos para uma combo</returns>
+    public async Task<List<SelectListDto>> GetNomeAlunosByLocalidadeId(ISender sender, int id)
+    {
+        return await sender.Send(new GetNomeAlunosByLocalidadeIdQuery() { LocalidadeId = id });
     }
 
     /// <summary>

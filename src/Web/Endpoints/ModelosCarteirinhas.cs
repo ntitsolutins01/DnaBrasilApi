@@ -73,7 +73,7 @@ public class ModelosCarteirinhas : EndpointGroupBase
     #region Get Methods
 
     /// <summary>
-    /// Endpoint que busca todas as ModeloCarteirinha cadastradas
+    /// Endpoint que busca todas os modelos de carteirinhas cadastrados
     /// </summary>
     /// <param name="sender">Sender</param>
     /// <returns>Retorna a lista de ModeloCarteirinha</returns>

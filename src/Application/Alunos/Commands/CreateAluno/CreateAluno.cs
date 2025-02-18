@@ -54,13 +54,13 @@ public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int
 
     public async Task<int> Handle(CreateAlunoCommand request, CancellationToken cancellationToken)
     {
-        var emailExiste = _context.Alunos.Any(x => x != null && x.Email == request.Email );
+        //var emailExiste = _context.Alunos.Any(x => x != null && x.Email == request.Email );
 
-        Guard.Against.AlunoExiste(emailExiste);
+        //Guard.Against.AlunoExiste(emailExiste);
 
-        var cpfExiste = _context.Alunos.Any(x => x != null && x.Cpf != null && x.Cpf == request.Cpf);
+        //var cpfExiste = _context.Alunos.Any(x => x != null && x.Cpf != null && x.Cpf == request.Cpf);
 
-        Guard.Against.AlunoExiste(cpfExiste);
+        //Guard.Against.AlunoExiste(cpfExiste);
 
         var municipio = await _context.Municipios.FindAsync(new object[] { request.MunicipioId }, cancellationToken);
 

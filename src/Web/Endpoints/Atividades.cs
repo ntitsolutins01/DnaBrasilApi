@@ -9,6 +9,7 @@ using DnaBrasilApi.Application.Atividades.Queries.GetAtividadeByModalidadeIdProf
 using DnaBrasilApi.Application.Atividades.Queries.GetAtividadesAll;
 using DnaBrasilApi.Application.Atividades.Queries.GetTurmasByModalidadeIdProfissionalId;
 using DnaBrasilApi.Application.Atividades.Commands.DeleteAtividadeAluno;
+using DnaBrasilApi.Application.Atividades.Queries.GetAtividadeByLocalidadeId;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -33,7 +34,8 @@ public class Atividades : EndpointGroupBase
             .MapGet(GetAtividadeById, "{id}")
             .MapGet(GetAtividadeAlunosByAtividadeId, "{id}/Alunos")
             .MapGet(GetTurmasByModalidadeIdProfissionalId, "Modalidade/{modalidadeId}/Profissional/{profissionalId}")
-            .MapGet(GetAtividadeByModalidadeIdProfissionalIdTurma, "Modalidade/{modalidadeId}/Profissional/{profissionalId}/Turma/{turma}");
+            .MapGet(GetAtividadeByModalidadeIdProfissionalIdTurma, "Modalidade/{modalidadeId}/Profissional/{profissionalId}/Turma/{turma}")
+            .MapGet(GetAtividadeByLocalidadeId, "Localidade/{id}");
     }
     #endregion
 
@@ -139,7 +141,7 @@ public class Atividades : EndpointGroupBase
     }
 
     /// <summary>
-    /// Endpoopint que busca tividade pelo id da modalidade, id do profissional e turma
+    /// Endpoint que busca atividade pelo id da modalidade, id do profissional e turma
     /// </summary>
     /// <param name="sender">Sender</param>
     /// <param name="modalidadeId">Id da modalidade</param>
@@ -151,10 +153,26 @@ public class Atividades : EndpointGroupBase
         return await sender.Send(new GetAtividadeByModalidadeIdProfissionalIdTurmaQuery() { ModalidadeId = modalidadeId, ProfissionalId = profissionalId, Turma = turma });
     }
 
-
+    /// <summary>
+    /// Endpoint que Alunos por Id da atividade
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="id">Id da atividade</param>
+    /// <returns>Retorna a lista de atividades</returns>
     public async Task<List<AtividadeAlunoDto>> GetAtividadeAlunosByAtividadeId(ISender sender, int id)
     {
         return await sender.Send(new GetAtividadeAlunosByAtividadeIdQuery() { AtividadeId = id });
+    }
+
+    /// <summary>
+    /// Endpoint que busca atividades por id da localidade
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="id">Id da localidade</param>
+    /// <returns>Retorna a lista de atividades</returns>
+    public async Task<List<AtividadeDto>> GetAtividadeByLocalidadeId(ISender sender, int id)
+    {
+        return await sender.Send(new GetAtividadeByLocalidadeIdQuery() { LocalidadeId = id });
     }
     #endregion
 

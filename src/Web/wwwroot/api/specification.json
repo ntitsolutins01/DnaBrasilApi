@@ -176,19 +176,43 @@
         }
       }
     },
-    "/api/Alunos/NomeAlunos/{id}": {
+    "/api/Alunos/NomeAlunos": {
       "get": {
         "tags": [
           "Alunos"
         ],
         "operationId": "GetNomeAlunosAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SelectListDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Alunos/NomeAlunos/Localidade/{id}": {
+      "get": {
+        "tags": [
+          "Alunos"
+        ],
+        "operationId": "GetNomeAlunosByLocalidadeId",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "integer",
+              "format": "int32"
             },
             "x-position": 1
           }
@@ -786,6 +810,41 @@
         }
       }
     },
+    "/api/Atividades/Localidade/{id}": {
+      "get": {
+        "tags": [
+          "Atividades"
+        ],
+        "operationId": "GetAtividadeByLocalidadeId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AtividadeDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Aulas": {
       "get": {
         "tags": [
@@ -1348,42 +1407,7 @@
             }
           }
         }
-      }
-    },
-    "/api/ConfiguracaoSistema/Modulo": {
-      "post": {
-        "tags": [
-          "ConfiguracaoSistema"
-        ],
-        "operationId": "CreateModulo",
-        "requestBody": {
-          "x-name": "command",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateModuloCommand"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 1
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/ConfiguracaoSistema/{id}": {
+      },
       "put": {
         "tags": [
           "ConfiguracaoSistema"
@@ -1450,6 +1474,39 @@
               "application/json": {
                 "schema": {
                   "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ConfiguracaoSistema/Modulo": {
+      "post": {
+        "tags": [
+          "ConfiguracaoSistema"
+        ],
+        "operationId": "CreateModulo",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateModuloCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
                 }
               }
             }
@@ -11892,6 +11949,10 @@
             "nullable": true
           },
           "localidadeId": {
+            "type": "string",
+            "nullable": true
+          },
+          "profissionalId": {
             "type": "string",
             "nullable": true
           },

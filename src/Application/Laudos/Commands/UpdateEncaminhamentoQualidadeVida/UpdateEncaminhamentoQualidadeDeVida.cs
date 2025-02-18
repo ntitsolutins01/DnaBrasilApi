@@ -20,99 +20,108 @@ public class UpdateEncaminhamentoQualidadeDeVidaCommandHandler : IRequestHandler
 
     public async Task<bool> Handle(UpdateEncaminhamentoQualidadeDeVidaCommand request, CancellationToken cancellationToken)
     {
-        IQueryable<Aluno> alunos;
-
-        alunos = _context.Alunos//.Where(x => x.Id == 37315)//37315 - Feminino 38438
-            .AsNoTracking();
-
-        Dictionary<string, decimal> dict = new()
+        try
         {
-            { "BemEstarFisico", 0 },
-            { "MalEstarFisico", 0 },
-            { "AutoEstima", 0 },
-            { "BaixaAutoEstima", 0 },
-            { "FuncionamentoHarmonico", 0 },
-            { "Conflitos", 0 },
-            { "ContextosFavorecedores", 0 },
-            { "ContextosNaoFavorecedores", 0 }
-        };
+            IQueryable<Aluno> alunos;
 
-        var encaminhamento = new List<int>();
+            alunos = _context.Alunos//.Where(x => x.Id == 37315)//37315 - Feminino 38438
+                .AsNoTracking();
 
-        var encaminhamentos = _context.Encaminhamentos.Where(x => x.TipoLaudo.Id == (int)EnumTipoLaudo.QualidadeVida);
-
-        var verificaAlunos = alunos.Select(x => x.Id);
-
-        var laudos = _context.Laudos.Where(x => verificaAlunos.Contains(x.Aluno.Id))
-            .Include(i => i.QualidadeDeVida)
-            .Include(a => a.Aluno)
-            .AsNoTracking()
-            .OrderByDescending(t => t.QualidadeDeVida!.Id);
-
-        var listQualidadeDeVida = _context.QualidadeDeVidas
-            .AsNoTracking()
-            .OrderByDescending(t => t.Id);
-
-        int cont = 0;
-        decimal quadrante1;
-        decimal quadrante2;
-        decimal quadrante3;
-        decimal quadrante4;
-
-        var metricas = _context.TextosLaudos
-            .Where(x => x.TipoLaudo.Id == (int)EnumTipoLaudo.QualidadeVida).ToList();
-
-        var tot = listQualidadeDeVida.Count();
-
-        foreach (var qualidadeDeVida in listQualidadeDeVida)
-        {
-            List<int> listRespostas = qualidadeDeVida.Respostas.Split(',').Select(item => int.Parse(item)).ToList();
-
-            var respostas = _context.Respostas.Where(x => listRespostas.Contains(x.Id)).Include(i => i.Questionario);
-
-            quadrante1 = respostas.Where(x => x.Questionario.Quadrante == 1).Sum(s => s.ValorPesoResposta);
-            quadrante2 = respostas.Where(x => x.Questionario.Quadrante == 2).Sum(s => s.ValorPesoResposta);
-            quadrante3 = respostas.Where(x => x.Questionario.Quadrante == 3).Sum(s => s.ValorPesoResposta);
-            quadrante4 = respostas.Where(x => x.Questionario.Quadrante == 4).Sum(s => s.ValorPesoResposta);
-
-            var list = new List<decimal> { quadrante1, quadrante2, quadrante3, quadrante4 };
-
-            foreach (decimal quadrante in list)
+            Dictionary<string, decimal> dict = new()
             {
-                cont++;
+                { "BemEstarFisico", 0 },
+                { "MalEstarFisico", 0 },
+                { "AutoEstima", 0 },
+                { "BaixaAutoEstima", 0 },
+                { "FuncionamentoHarmonico", 0 },
+                { "Conflitos", 0 },
+                { "ContextosFavorecedores", 0 },
+                { "ContextosNaoFavorecedores", 0 }
+            };
 
-                var result = metricas.Find(
-                    delegate (TextoLaudo item)
-                    {
-                        return quadrante >= item.PontoInicial && quadrante <= item.PontoFinal && item.Quadrante == cont;
-                    }
-                );
+            var encaminhamento = new List<int>();
 
-                if (result == null || !dict.ContainsKey(result.Aviso.Split('.')[0]))
+            var encaminhamentos = _context.Encaminhamentos.Where(x => x.TipoLaudo.Id == (int)EnumTipoLaudo.QualidadeVida);
+
+            var verificaAlunos = alunos.Select(x => x.Id);
+
+            var laudos = _context.Laudos.Where(x => verificaAlunos.Contains(x.Aluno.Id))
+                .Include(i => i.QualidadeDeVida)
+                .Include(a => a.Aluno)
+                .AsNoTracking()
+                .OrderByDescending(t => t.QualidadeDeVida!.Id);
+
+            var listQualidadeDeVida = _context.QualidadeDeVidas
+                .AsNoTracking()
+                .OrderByDescending(t => t.Id);
+
+            int cont = 0;
+            decimal quadrante1;
+            decimal quadrante2;
+            decimal quadrante3;
+            decimal quadrante4;
+
+            var metricas = _context.TextosLaudos
+                .Where(x => x.TipoLaudo.Id == (int)EnumTipoLaudo.QualidadeVida).ToList();
+
+            var tot = listQualidadeDeVida.Count();
+
+            foreach (var qualidadeDeVida in listQualidadeDeVida)
+            {
+                List<int> listRespostas = qualidadeDeVida.Respostas.Split(',').Select(item => int.Parse(item)).ToList();
+
+                var respostas = _context.Respostas.Where(x => listRespostas.Contains(x.Id)).Include(i => i.Questionario);
+
+                quadrante1 = respostas.Where(x => x.Questionario.Quadrante == 1).Sum(s => s.ValorPesoResposta);
+                quadrante2 = respostas.Where(x => x.Questionario.Quadrante == 2).Sum(s => s.ValorPesoResposta);
+                quadrante3 = respostas.Where(x => x.Questionario.Quadrante == 3).Sum(s => s.ValorPesoResposta);
+                quadrante4 = respostas.Where(x => x.Questionario.Quadrante == 4).Sum(s => s.ValorPesoResposta);
+
+                var list = new List<decimal> { quadrante1, quadrante2, quadrante3, quadrante4 };
+
+                foreach (decimal quadrante in list)
                 {
-                    continue;
+                    cont++;
+
+                    var result = metricas.Find(
+                        delegate (TextoLaudo item)
+                        {
+                            return quadrante >= item.PontoInicial && quadrante <= item.PontoFinal && item.Quadrante == cont;
+                        }
+                    );
+
+                    if (result == null || !dict.ContainsKey(result.Aviso.Split('.')[0]))
+                    {
+                        continue;
+                    }
+
+                    var parametro = result.Aviso.Split('.').First();
+
+                    encaminhamento.Add(encaminhamentos.First(x => x.Parametro == parametro).Id);
                 }
 
-                var parametro = result.Aviso.Split('.').First();
+                cont = 0;
 
-                encaminhamento.Add(encaminhamentos.First(x => x.Parametro == parametro).Id);
+                var entity = await _context.QualidadeDeVidas
+                    .FindAsync([qualidadeDeVida.Id], cancellationToken);
+
+                Guard.Against.NotFound(qualidadeDeVida.Id, entity);
+
+                entity.Encaminhamentos = string.Join(",", encaminhamento); ;
+
+                await _context.SaveChangesAsync(cancellationToken);
+
+                encaminhamento = new List<int>();
+                //return final == 1;
             }
 
-            cont = 0;
-
-            var entity = await _context.QualidadeDeVidas
-                .FindAsync([qualidadeDeVida.Id], cancellationToken);
-
-            Guard.Against.NotFound(qualidadeDeVida.Id, entity);
-
-            entity.Encaminhamentos = string.Join(",", encaminhamento); ;
-
-            await _context.SaveChangesAsync(cancellationToken);
-
-            encaminhamento = new List<int>();
-            //return final == 1;
+            return true;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return false;
         }
 
-        return false;
     }
 }
