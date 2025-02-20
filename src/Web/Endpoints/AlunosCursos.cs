@@ -101,7 +101,7 @@ public class AlunosCursos : EndpointGroupBase
     /// <param name="sender">Sender</param>
     /// <param name="id">Id do módulo Ead</param>
     /// <returns>Retorna uma lista de AlunosCursos</returns>
-    public async Task<List<AlunoCursoDto>> GetCursosByAlunoId(ISender sender, int id)
+    public async Task<List<CursoDto>> GetCursosByAlunoId(ISender sender, int id)
     {
         return await sender.Send(new GetCursosByAlunoIdQuery() { AlunoId = id });
     }
