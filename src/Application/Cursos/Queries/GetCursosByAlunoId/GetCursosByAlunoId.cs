@@ -1,7 +1,6 @@
-﻿using DnaBrasilApi.Application.Cursos.Queries;
-using DnaBrasilApi.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasilApi.Application.AlunosCursos.Queries.GetCursosByAlunoId;
+namespace DnaBrasilApi.Application.Cursos.Queries.GetCursosByAlunoId;
 
 public record GetCursosByAlunoIdQuery : IRequest<List<CursoDto>>
 {

@@ -4,7 +4,6 @@ using DnaBrasilApi.Application.AlunosCursos.Commands.DeleteAlunoCurso;
 using DnaBrasilApi.Application.AlunosCursos.Commands.UpdateAlunoCurso;
 using DnaBrasilApi.Application.AlunosCursos.Queries;
 using DnaBrasilApi.Application.AlunosCursos.Queries.GetAlunosCursosAll;
-using DnaBrasilApi.Application.AlunosCursos.Queries.GetCursosByAlunoId;
 using DnaBrasilApi.Application.Cursos.Queries;
 
 namespace DnaBrasilApi.Web.Endpoints;
@@ -28,8 +27,7 @@ public class AlunosCursos : EndpointGroupBase
             .MapPost(CreateAlunoCurso)
             .MapPut(UpdateAlunoCurso, "{id}")
             .MapDelete(DeleteAlunoCurso, "{id}")
-            .MapGet(GetAlunoCursoById, "{id}")
-            .MapGet(GetCursosByAlunoId, "Curso/{id}");
+            .MapGet(GetAlunoCursoById, "{id}");
     }
     #endregion
 
@@ -94,16 +92,6 @@ public class AlunosCursos : EndpointGroupBase
     {
         return await sender.Send(new GetAlunoCursoByIdQuery() { Id = id });
     }
-
-    /// <summary>
-    /// Endpoint que busca uma lista de aulas
-    /// </summary>
-    /// <param name="sender">Sender</param>
-    /// <param name="id">Id do módulo Ead</param>
-    /// <returns>Retorna uma lista de AlunosCursos</returns>
-    public async Task<List<CursoDto>> GetCursosByAlunoId(ISender sender, int id)
-    {
-        return await sender.Send(new GetCursosByAlunoIdQuery() { AlunoId = id });
-    }
     #endregion
+
 }
