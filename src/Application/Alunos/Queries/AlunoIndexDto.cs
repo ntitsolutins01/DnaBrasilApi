@@ -12,6 +12,7 @@ public class AlunoIndexDto
     public bool Status { get; init; }
     public bool Convidado { get; init; }
     public bool PossuiLaudo { get; init; }
+    public string? Modalidades { get; init; }
     private class Mapping : Profile
     {
         public Mapping()
@@ -20,7 +21,13 @@ public class AlunoIndexDto
                 .ForMember(dest => dest.Nome, opt => opt.MapFrom(src => src.Id +" - "+ src.Nome.ToUpper()))
                 .ForMember(dest => dest.MunicipioId, opt => opt.MapFrom(src => src.Municipio.Id))
                 .ForMember(dest => dest.DtNascimento, opt => opt.MapFrom(src => src.DtNascimento.ToString("dd/MM/yyyy")))
-                .ForMember(dest => dest.PossuiLaudo, opt => opt.MapFrom(src => src.ListLaudo!.Any()));
+                .ForMember(dest => dest.PossuiLaudo, opt => opt.MapFrom(src => src.ListLaudo!.Any()))
+                .ForMember(dest => dest.Modalidades,
+                    opt => opt.MapFrom(src =>
+                        src.AlunoModalidades == null
+                            ? ""
+                            : string.Join(", ",
+                                src.AlunoModalidades!.Select(s => s.Modalidade!.Nome!.ToString()).ToArray())));
         }
     }
 }
