@@ -26,7 +26,7 @@ public class GetPercentualSaudeAlunosQueryHandler : IRequestHandler<GetPercentua
     {
         IQueryable<Aluno> alunos;
 
-        alunos = _context.Alunos
+        alunos = _context.Alunos.Where(x => x.Convidado == false)
             .AsNoTracking();
 
         var result = FilterAlunosPeriodo(alunos, request.SearchFilter!, cancellationToken);

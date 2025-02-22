@@ -24,7 +24,8 @@ public class GetTotalizadorEtniaAlunosQueryHandler : IRequestHandler<GetTotaliza
     {
         IQueryable<Aluno> alunos;
 
-        alunos = _context.Alunos.Where(x => x.Convidado == false)
+        alunos = _context.Alunos
+            .Where(x => x.Convidado == false)
             .AsNoTracking();
 
         var result = FilterAlunosPeriodo(alunos, request.SearchFilter!, cancellationToken);

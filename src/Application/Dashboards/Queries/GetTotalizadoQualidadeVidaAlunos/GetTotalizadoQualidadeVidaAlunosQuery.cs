@@ -28,6 +28,7 @@ public class
         IQueryable<Aluno> alunos;
 
         alunos = _context.Alunos//.Where(x=>x.Id==37051)
+            .Where(x => x.Convidado == false)
             .AsNoTracking();
 
         var result = FilterAlunosQualidadeVida(alunos, request.SearchFilter!, cancellationToken);
