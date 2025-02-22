@@ -11605,6 +11605,10 @@
           },
           "possuiLaudo": {
             "type": "boolean"
+          },
+          "modalidades": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
