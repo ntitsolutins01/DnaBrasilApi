@@ -2884,7 +2884,7 @@
         }
       }
     },
-    "/api/Cursos/Curso/{id}": {
+    "/api/Cursos/Aluno/{alunoId}": {
       "get": {
         "tags": [
           "Cursos"
@@ -2892,7 +2892,7 @@
         "operationId": "GetCursosByAlunoId",
         "parameters": [
           {
-            "name": "id",
+            "name": "alunoId",
             "in": "path",
             "required": true,
             "schema": {
