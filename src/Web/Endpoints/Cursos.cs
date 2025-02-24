@@ -106,11 +106,11 @@ public class Cursos : EndpointGroupBase
     }
 
     /// <summary>
-    /// Endpoint que busca uma lista de aulas
+    /// Endpoint que busca uma lista de cursos
     /// </summary>
     /// <param name="sender">Sender</param>
-    /// <param name="id">Id do módulo Ead</param>
-    /// <returns>Retorna uma lista de AlunosCursos</returns>
+    /// <param name="id">Id do aluno</param>
+    /// <returns>Retorna uma lista de Cursos</returns>
     public async Task<List<CursoDto>> GetCursosByAlunoId(ISender sender, int alunoId)
     {
         return await sender.Send(new GetCursosByAlunoIdQuery() { AlunoId = alunoId });
