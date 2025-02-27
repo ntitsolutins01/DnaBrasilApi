@@ -20598,14 +20598,6 @@
           "localidade": {
             "type": "string",
             "nullable": true
-          },
-          "fomentoId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nomeFomento": {
-            "type": "string",
-            "nullable": true
           }
         }
       },
