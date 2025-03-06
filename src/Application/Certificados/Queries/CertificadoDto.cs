@@ -22,7 +22,8 @@ public class CertificadoDto
         {
             CreateMap<Certificado, CertificadoDto>()
                 .ForMember(dest => dest.ImagemFrente, opt => opt.MapFrom(src => Path.GetFileName(src.ImagemFrente)))
-                .ForMember(dest => dest.ImagemVerso, opt => opt.MapFrom(src => Path.GetFileName(src.ImagemVerso)));
+                .ForMember(dest => dest.ImagemVerso, opt => opt.MapFrom(src => Path.GetFileName(src.ImagemVerso)))
+                .ForMember(dest => dest.NomeFomento, opt => opt.MapFrom(src => src.Fomento.Nome));
         }
     }
 }
