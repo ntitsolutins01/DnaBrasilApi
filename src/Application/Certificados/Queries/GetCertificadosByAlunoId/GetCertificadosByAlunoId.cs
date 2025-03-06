@@ -21,7 +21,7 @@ public class GetCertificadosByAlunoIdQueryHandler : IRequestHandler<GetCertifica
     public async Task<List<CertificadoDto>> Handle(GetCertificadosByAlunoIdQuery request, CancellationToken cancellationToken)
     {
         var result = await _context.AlunosCertificados
-            .Where(ac => ac.Aluno.Id == request.AlunoId)
+            .Where(ac => ac.AlunoId == request.AlunoId)
             .Include(ac => ac.Certificado)
             .AsNoTracking()
             .Select(ac => ac.Certificado)

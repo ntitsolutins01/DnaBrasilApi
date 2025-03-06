@@ -152,6 +152,30 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
             .WithMany(s => s.AtividadeAlunos)
             .HasForeignKey(sc => sc.AlunoId);
 
+        builder.Entity<AlunoCurso>().HasKey(sc => new { sc.AlunoId, sc.CursoId });
+
+        builder.Entity<AlunoCurso>()
+            .HasOne<Aluno>(sc => sc.Aluno)
+            .WithMany(s => s.AlunoCursos)
+            .HasForeignKey(sc => sc.AlunoId);
+
+        builder.Entity<AlunoCurso>()
+            .HasOne<Curso>(sc => sc.Curso)
+            .WithMany(s => s.AlunoCursos)
+            .HasForeignKey(sc => sc.CursoId);
+
+        builder.Entity<AlunoCertificado>().HasKey(sc => new { sc.AlunoId, sc.CertificadoId });
+
+        builder.Entity<AlunoCertificado>()
+            .HasOne<Aluno>(sc => sc.Aluno)
+            .WithMany(s => s.AlunoCertificados)
+            .HasForeignKey(sc => sc.AlunoId);
+
+        builder.Entity<AlunoCertificado>()
+            .HasOne<Certificado>(sc => sc.Certificado)
+            .WithMany(s => s.AlunoCertificados)
+            .HasForeignKey(sc => sc.CertificadoId);
+
         #endregion
 
         #region Required one-to-one with primary key to primary key relationship

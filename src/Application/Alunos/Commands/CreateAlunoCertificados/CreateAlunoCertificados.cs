@@ -1,11 +1,11 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasilApi.Application.AlunosCertificados.Commands.CreateAlunoCertificado;
+namespace DnaBrasilApi.Application.Alunos.Commands.CreateAlunoCertificados;
 public record CreateAlunoCertificadoCommand : IRequest<int>
 {
     public required int AlunoId { get; init; }
-    public required int CertificadoId { get; init; }
+    public required string CertificadosId { get; init; }
 }
 
 public class CreateAlunoCertificadoCommandHandler : IRequestHandler<CreateAlunoCertificadoCommand, int>
@@ -19,26 +19,20 @@ public class CreateAlunoCertificadoCommandHandler : IRequestHandler<CreateAlunoC
 
     public async Task<int> Handle(CreateAlunoCertificadoCommand request, CancellationToken cancellationToken)
     {
-        var aluno = await _context.Alunos
+        var estrutura = await _context.Alunos
             .FindAsync([request.AlunoId], cancellationToken);
 
-        Guard.Against.NotFound(request.AlunoId, aluno);
+        Guard.Against.NotFound(request.AlunoId, estrutura);
 
-        var certificado = await _context.Certificados
-            .FindAsync([request.CertificadoId], cancellationToken);
+        int[] arrAluIds = request.CertificadosId.Split(',').Select(n => Convert.ToInt32(n)).ToArray();
 
-        Guard.Against.NotFound(request.CertificadoId, certificado);
-
-        var entity = new AlunoCertificado
+        foreach (int id in arrAluIds)
         {
-            Aluno = aluno,
-            Certificado = certificado
-        };
-
-        _context.AlunosCertificados.Add(entity);
+            _context.AlunosCertificados.Add(new AlunoCertificado() { CertificadoId = id, AlunoId = request.AlunoId });
+        }
 
         await _context.SaveChangesAsync(cancellationToken);
 
-        return entity.Id;
+        return request.AlunoId;
     }
 }

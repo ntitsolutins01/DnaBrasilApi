@@ -10,4 +10,5 @@ public class Curso : BaseAuditableEntity
     public bool Status { get; set; } = true;
     public string? Imagem { get; set; }
     public string? NomeImagem { get; set; }
+    public IList<AlunoCurso>? AlunoCursos { get; set; }
 }
