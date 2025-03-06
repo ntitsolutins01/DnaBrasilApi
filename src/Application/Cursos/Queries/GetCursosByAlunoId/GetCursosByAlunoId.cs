@@ -21,7 +21,7 @@ public class GetCursosByAlunoIdQueryHandler : IRequestHandler<GetCursosByAlunoId
     public async Task<List<CursoDto>> Handle(GetCursosByAlunoIdQuery request, CancellationToken cancellationToken)
     {
         var result = await _context.AlunosCursos
-            .Where(ac => ac.Aluno.Id == request.AlunoId)
+            .Where(ac => ac.AlunoId == request.AlunoId)
             .Include(ac => ac.Curso)
             .AsNoTracking()
             .Select(ac => ac.Curso)
