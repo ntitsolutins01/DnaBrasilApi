@@ -81,6 +81,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<IdebDimensaoNacional> IdebDimensoesNacional => Set<IdebDimensaoNacional>();
     public DbSet<IdebDimensaoEstadual> IdebDimensoesEstadual => Set<IdebDimensaoEstadual>();
     public DbSet<ModeloCarteirinha> ModelosCarteirinhas => Set<ModeloCarteirinha>();
+    public DbSet<AlunoCurso> AlunosCursos => Set<AlunoCurso>();
+    public DbSet<AlunoCertificado> AlunosCertificados => Set<AlunoCertificado>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

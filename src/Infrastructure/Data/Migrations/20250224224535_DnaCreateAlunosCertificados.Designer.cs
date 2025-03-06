@@ -4,6 +4,7 @@ using DnaBrasilApi.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DnaBrasilApi.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250224224535_DnaCreateAlunosCertificados")]
+    partial class DnaCreateAlunosCertificados
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -488,7 +491,7 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("FomentoId")
+                    b.Property<int>("CursoId")
                         .HasColumnType("int");
 
                     b.Property<string>("HtmlFrente")
@@ -523,7 +526,7 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FomentoId");
+                    b.HasIndex("CursoId");
 
                     b.ToTable("Certificados");
                 });
@@ -3759,13 +3762,13 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("DnaBrasilApi.Domain.Entities.Certificado", b =>
                 {
-                    b.HasOne("DnaBrasilApi.Domain.Entities.Fomentu", "Fomento")
+                    b.HasOne("DnaBrasilApi.Domain.Entities.Curso", "Curso")
                         .WithMany()
-                        .HasForeignKey("FomentoId")
+                        .HasForeignKey("CursoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Fomento");
+                    b.Navigation("Curso");
                 });
 
             modelBuilder.Entity("DnaBrasilApi.Domain.Entities.ConsumoAlimentar", b =>
