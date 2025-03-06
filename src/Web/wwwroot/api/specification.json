@@ -4848,6 +4848,38 @@
         }
       }
     },
+    "/api/Fomentos/Fomento/Localidade/{id}": {
+      "get": {
+        "tags": [
+          "Fomentos"
+        ],
+        "operationId": "GetFomentoLocalidadesByLocalidadeId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FomentoDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/FotosEvento/{eventoId}": {
       "get": {
         "tags": [
@@ -12626,13 +12658,12 @@
             "type": "integer",
             "format": "int32"
           },
-          "cursoId": {
+          "fomentoId": {
             "type": "integer",
             "format": "int32"
           },
-          "tituloCurso": {
-            "type": "string",
-            "nullable": true
+          "nomeFomento": {
+            "type": "string"
           },
           "imagemFrente": {
             "type": "string"
@@ -12664,7 +12695,7 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "cursoId": {
+          "fomentoId": {
             "type": "integer",
             "format": "int32"
           },
@@ -12702,7 +12733,7 @@
             "type": "integer",
             "format": "int32"
           },
-          "cursoId": {
+          "fomentoId": {
             "type": "integer",
             "format": "int32"
           },
@@ -20946,6 +20977,14 @@
             "nullable": true
           },
           "localidade": {
+            "type": "string",
+            "nullable": true
+          },
+          "fomentoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeFomento": {
             "type": "string",
             "nullable": true
           }

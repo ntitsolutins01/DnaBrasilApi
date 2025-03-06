@@ -2,7 +2,7 @@
 
 public class Certificado : BaseAuditableEntity
 {
-    public required Curso Curso { get; set; }
+    public required Fomentu Fomento { get; set; }
     public required string ImagemFrente { get; set; }
     public string? ImagemVerso { get; set; }
     public string? NomeImagemFrente { get; set; }

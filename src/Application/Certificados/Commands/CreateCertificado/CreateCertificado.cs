@@ -4,7 +4,7 @@ using DnaBrasilApi.Domain.Entities;
 namespace DnaBrasilApi.Application.Certificados.Commands.CreateCertificado;
 public record CreateCertificadoCommand : IRequest<int>
 {
-    public required int CursoId { get; init; }
+    public required int FomentoId { get; init; }
     public required string ImagemFrente { get; init; }
     public string? ImagemVerso { get; init; }
     public string? NomeImagemFrente { get; init; }
@@ -26,14 +26,14 @@ public class CreateCertificadoCommandHandler : IRequestHandler<CreateCertificado
 
     public async Task<int> Handle(CreateCertificadoCommand request, CancellationToken cancellationToken)
     {
-        var curso = await _context.Cursos
-            .FindAsync([request.CursoId], cancellationToken);
+        var fomento = await _context.Fomentos
+            .FindAsync([request.FomentoId], cancellationToken);
 
-        Guard.Against.NotFound(request.CursoId, curso);
+        Guard.Against.NotFound(request.FomentoId, fomento);
 
         var entity = new Certificado
         {
-            Curso = curso,
+            Fomento = fomento,
             ImagemFrente = request.ImagemFrente,
             ImagemVerso = request.ImagemVerso,
             NomeImagemFrente = request.NomeImagemFrente,
