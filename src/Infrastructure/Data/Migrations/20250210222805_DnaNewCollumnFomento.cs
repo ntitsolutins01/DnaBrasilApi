@@ -30,7 +30,7 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                 column: "FomentoId",
                 principalTable: "Fomentos",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.NoAction);
         }
 
         /// <inheritdoc />
@@ -56,7 +56,7 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                 column: "CursoId",
                 principalTable: "Cursos",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.NoAction);
         }
     }
 }
