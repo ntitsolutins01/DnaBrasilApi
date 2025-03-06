@@ -4,6 +4,7 @@ using DnaBrasilApi.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DnaBrasilApi.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250224224535_DnaCreateAlunosCertificados")]
+    partial class DnaCreateAlunosCertificados
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -185,13 +188,33 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("DnaBrasilApi.Domain.Entities.AlunoCertificado", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
                     b.Property<int>("AlunoId")
                         .HasColumnType("int");
 
                     b.Property<int>("CertificadoId")
                         .HasColumnType("int");
 
-                    b.HasKey("AlunoId", "CertificadoId");
+                    b.Property<DateTimeOffset>("Created")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset>("LastModified")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AlunoId");
 
                     b.HasIndex("CertificadoId");
 
@@ -200,17 +223,37 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("DnaBrasilApi.Domain.Entities.AlunoCurso", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
                     b.Property<int>("AlunoId")
                         .HasColumnType("int");
 
+                    b.Property<DateTimeOffset>("Created")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("CursoId")
                         .HasColumnType("int");
+
+                    b.Property<DateTimeOffset>("LastModified")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Progresso")
                         .HasMaxLength(3)
                         .HasColumnType("int");
 
-                    b.HasKey("AlunoId", "CursoId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("AlunoId");
 
                     b.HasIndex("CursoId");
 
@@ -448,7 +491,7 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("FomentoId")
+                    b.Property<int>("CursoId")
                         .HasColumnType("int");
 
                     b.Property<string>("HtmlFrente")
@@ -483,7 +526,7 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FomentoId");
+                    b.HasIndex("CursoId");
 
                     b.ToTable("Certificados");
                 });
@@ -3574,13 +3617,13 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
             modelBuilder.Entity("DnaBrasilApi.Domain.Entities.AlunoCertificado", b =>
                 {
                     b.HasOne("DnaBrasilApi.Domain.Entities.Aluno", "Aluno")
-                        .WithMany("AlunoCertificados")
+                        .WithMany()
                         .HasForeignKey("AlunoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("DnaBrasilApi.Domain.Entities.Certificado", "Certificado")
-                        .WithMany("AlunoCertificados")
+                        .WithMany()
                         .HasForeignKey("CertificadoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -3593,13 +3636,13 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
             modelBuilder.Entity("DnaBrasilApi.Domain.Entities.AlunoCurso", b =>
                 {
                     b.HasOne("DnaBrasilApi.Domain.Entities.Aluno", "Aluno")
-                        .WithMany("AlunoCursos")
+                        .WithMany()
                         .HasForeignKey("AlunoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("DnaBrasilApi.Domain.Entities.Curso", "Curso")
-                        .WithMany("AlunoCursos")
+                        .WithMany()
                         .HasForeignKey("CursoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -3719,13 +3762,13 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("DnaBrasilApi.Domain.Entities.Certificado", b =>
                 {
-                    b.HasOne("DnaBrasilApi.Domain.Entities.Fomentu", "Fomento")
+                    b.HasOne("DnaBrasilApi.Domain.Entities.Curso", "Curso")
                         .WithMany()
-                        .HasForeignKey("FomentoId")
+                        .HasForeignKey("CursoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Fomento");
+                    b.Navigation("Curso");
                 });
 
             modelBuilder.Entity("DnaBrasilApi.Domain.Entities.ConsumoAlimentar", b =>
@@ -4498,10 +4541,6 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("DnaBrasilApi.Domain.Entities.Aluno", b =>
                 {
-                    b.Navigation("AlunoCertificados");
-
-                    b.Navigation("AlunoCursos");
-
                     b.Navigation("AlunoModalidades");
 
                     b.Navigation("AtividadeAlunos");
@@ -4516,16 +4555,6 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
             modelBuilder.Entity("DnaBrasilApi.Domain.Entities.Atividade", b =>
                 {
                     b.Navigation("AtividadeAlunos");
-                });
-
-            modelBuilder.Entity("DnaBrasilApi.Domain.Entities.Certificado", b =>
-                {
-                    b.Navigation("AlunoCertificados");
-                });
-
-            modelBuilder.Entity("DnaBrasilApi.Domain.Entities.Curso", b =>
-                {
-                    b.Navigation("AlunoCursos");
                 });
 
             modelBuilder.Entity("DnaBrasilApi.Domain.Entities.Deficiencia", b =>

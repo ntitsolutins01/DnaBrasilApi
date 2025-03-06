@@ -10,4 +10,5 @@ public class Certificado : BaseAuditableEntity
     public required string HtmlFrente { get; set; }
     public required string HtmlVerso { get; set; }
     public bool Status { get; set; } = true;
+    public IList<AlunoCertificado>? AlunoCertificados { get; set; }
 }

@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations.Schema;
 using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Certificados.Queries;
@@ -21,7 +21,8 @@ public class CertificadoDto
         public Mapping()
         {
             CreateMap<Certificado, CertificadoDto>()
-                .ForMember(dest => dest.NomeFomento, opt => opt.MapFrom(src => src.Fomento.Nome));
+                .ForMember(dest => dest.ImagemFrente, opt => opt.MapFrom(src => Path.GetFileName(src.ImagemFrente)))
+                .ForMember(dest => dest.ImagemVerso, opt => opt.MapFrom(src => Path.GetFileName(src.ImagemVerso)));
         }
     }
 }

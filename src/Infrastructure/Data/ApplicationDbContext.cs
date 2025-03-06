@@ -81,6 +81,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<IdebDimensaoNacional> IdebDimensoesNacional => Set<IdebDimensaoNacional>();
     public DbSet<IdebDimensaoEstadual> IdebDimensoesEstadual => Set<IdebDimensaoEstadual>();
     public DbSet<ModeloCarteirinha> ModelosCarteirinhas => Set<ModeloCarteirinha>();
+    public DbSet<AlunoCurso> AlunosCursos => Set<AlunoCurso>();
+    public DbSet<AlunoCertificado> AlunosCertificados => Set<AlunoCertificado>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -149,6 +151,30 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
             .HasOne<Aluno>(sc => sc.Aluno)
             .WithMany(s => s.AtividadeAlunos)
             .HasForeignKey(sc => sc.AlunoId);
+
+        builder.Entity<AlunoCurso>().HasKey(sc => new { sc.AlunoId, sc.CursoId });
+
+        builder.Entity<AlunoCurso>()
+            .HasOne<Aluno>(sc => sc.Aluno)
+            .WithMany(s => s.AlunoCursos)
+            .HasForeignKey(sc => sc.AlunoId);
+
+        builder.Entity<AlunoCurso>()
+            .HasOne<Curso>(sc => sc.Curso)
+            .WithMany(s => s.AlunoCursos)
+            .HasForeignKey(sc => sc.CursoId);
+
+        builder.Entity<AlunoCertificado>().HasKey(sc => new { sc.AlunoId, sc.CertificadoId });
+
+        builder.Entity<AlunoCertificado>()
+            .HasOne<Aluno>(sc => sc.Aluno)
+            .WithMany(s => s.AlunoCertificados)
+            .HasForeignKey(sc => sc.AlunoId);
+
+        builder.Entity<AlunoCertificado>()
+            .HasOne<Certificado>(sc => sc.Certificado)
+            .WithMany(s => s.AlunoCertificados)
+            .HasForeignKey(sc => sc.CertificadoId);
 
         #endregion
 
