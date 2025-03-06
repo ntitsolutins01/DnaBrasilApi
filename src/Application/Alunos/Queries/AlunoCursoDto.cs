@@ -1,12 +1,11 @@
 using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasilApi.Application.AlunosCursos.Queries;
+namespace DnaBrasilApi.Application.Alunos.Queries;
 
 public class AlunoCursoDto
 {
-    public required int Id { get; init; }
-    public required int AlunoId { get; init; }
-    public required int CursoId { get; init; }
+    public required string AlunoId { get; init; }
+    public required string CursoId { get; init; }
     public int Progresso { get; init; }
 
     private class Mapping : Profile

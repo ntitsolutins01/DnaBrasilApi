@@ -1,11 +1,11 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasilApi.Application.AlunosCursos.Commands.CreateAlunoCurso;
+namespace DnaBrasilApi.Application.Alunos.Commands.CreateAlunoCursos;
 public record CreateAlunoCursoCommand : IRequest<int>
 {
     public required int AlunoId { get; init; }
-    public required int CursoId { get; init; }
+    public required string CursosId { get; init; }
 }
 
 public class CreateAlunoCursoCommandHandler : IRequestHandler<CreateAlunoCursoCommand, int>
@@ -19,27 +19,20 @@ public class CreateAlunoCursoCommandHandler : IRequestHandler<CreateAlunoCursoCo
 
     public async Task<int> Handle(CreateAlunoCursoCommand request, CancellationToken cancellationToken)
     {
-        var aluno = await _context.Alunos
+        var estrutura = await _context.Alunos
             .FindAsync([request.AlunoId], cancellationToken);
 
-        Guard.Against.NotFound(request.AlunoId, aluno);
+        Guard.Against.NotFound(request.AlunoId, estrutura);
 
-        var curso = await _context.Cursos
-            .FindAsync([request.CursoId], cancellationToken);
+        int[] arrAluIds = request.CursosId.Split(',').Select(n => Convert.ToInt32(n)).ToArray();
 
-        Guard.Against.NotFound(request.CursoId, curso);
-
-        var entity = new AlunoCurso
+        foreach (int id in arrAluIds)
         {
-            Aluno = aluno,
-            Curso = curso,
-            Progresso = 0
-        };
-
-        _context.AlunosCursos.Add(entity);
+            _context.AlunosCursos.Add(new AlunoCurso() { CursoId = id, AlunoId = request.AlunoId });
+        }
 
         await _context.SaveChangesAsync(cancellationToken);
 
-        return entity.Id;
+        return request.AlunoId;
     }
 }

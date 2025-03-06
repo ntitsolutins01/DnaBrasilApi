@@ -127,7 +127,7 @@ public class ControlesPresencas : EndpointGroupBase
     /// <param name="sender">sender</param>
     /// <param name="alunoId">Id do Aluno</param>
     /// <returns>Retorna a lista de Controle de Presença</returns>
-    public async Task<List<ControlePresencaDto>> GetControlesPresencasByAlunoId(ISender sender, int alunoId)
+    public async Task<List<ControlePresencaAlunoDto>> GetControlesPresencasByAlunoId(ISender sender, int alunoId)
     {
         return await sender.Send(new GetControlesPresencasByAlunoIdQuery() { AlunoId = alunoId });
     }
