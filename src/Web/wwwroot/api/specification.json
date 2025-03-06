@@ -15009,8 +15009,8 @@
             "type": "object",
             "additionalProperties": false,
             "properties": {
-              "curso": {
-                "$ref": "#/components/schemas/Curso"
+              "fomento": {
+                "$ref": "#/components/schemas/Fomentu"
               },
               "imagemFrente": {
                 "type": "string"
@@ -20977,14 +20977,6 @@
             "nullable": true
           },
           "localidade": {
-            "type": "string",
-            "nullable": true
-          },
-          "fomentoId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nomeFomento": {
             "type": "string",
             "nullable": true
           }

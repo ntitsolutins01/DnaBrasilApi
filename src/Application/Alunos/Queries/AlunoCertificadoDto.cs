@@ -4,8 +4,8 @@ namespace DnaBrasilApi.Application.Alunos.Queries;
 
 public class AlunoCertificadoDto
 {
-    public required int AlunoId { get; init; }
-    public required int CertificadoId { get; init; }
+    public required string AlunoId { get; init; }
+    public required string CertificadoId { get; init; }
 
     private class Mapping : Profile
     {
