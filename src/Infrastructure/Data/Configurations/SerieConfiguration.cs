@@ -11,8 +11,5 @@ public class SerieConfiguration : IEntityTypeConfiguration<Serie>
         builder.Property(t => t.Nome)
             .HasMaxLength(50)
             .IsRequired();
-        builder.Property(t => t.Descricao)
-            .HasMaxLength(200)
-            .IsRequired();
     }
 }

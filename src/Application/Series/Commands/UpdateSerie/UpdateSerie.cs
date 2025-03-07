@@ -7,10 +7,9 @@ public record UpdateSerieCommand : IRequest <bool>
 {
     public int Id { get; init; }
     public required string Nome { get; init; }
-    public required string Descricao { get; init; }
-    public required int IdadeInicial { get; init; }
-    public required int IdadeFinal { get; init; }
-    public required int ScoreTotal { get; init; }
+    public required string Turma { get; init; }
+    public required int EtapaEnsinoId { get; init; }
+    public required int LocalidadeId { get; init; }
     public bool Status { get; init; }
 }
 
@@ -28,13 +27,22 @@ public class UpdateSerieCommandHandler : IRequestHandler<UpdateSerieCommand, boo
         var entity = await _context.Series
             .FindAsync(new object[] { request.Id }, cancellationToken);
 
-        Guard.Against.NotFound(request.Id, entity);
+        Guard.Against.NotFound(request.Id, entity); 
+        
+        var etapaEnsino = await _context.EtapasEnsino
+            .FindAsync([request.EtapaEnsinoId], cancellationToken);
+
+        Guard.Against.NotFound(request.EtapaEnsinoId, etapaEnsino);
+
+        var localidade = await _context.Localidades
+            .FindAsync([request.LocalidadeId], cancellationToken);
+
+        Guard.Against.NotFound(request.LocalidadeId, localidade);
 
         entity.Nome = request.Nome;
-        entity.Descricao = request.Descricao;
-        entity.IdadeInicial = request.IdadeInicial;
-        entity.IdadeFinal = request.IdadeFinal;
-        entity.ScoreTotal = request.ScoreTotal;
+        entity.Turma = request.Nome;
+        entity.EtapaEnsino = etapaEnsino;
+        entity.Localidade = localidade;
         entity.Status = request.Status;
 
         var result = await _context.SaveChangesAsync(cancellationToken);

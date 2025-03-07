@@ -13871,6 +13871,14 @@
                 "items": {
                   "$ref": "#/components/schemas/AlunoCertificado"
                 }
+              },
+              "serie": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Serie"
+                  }
+                ]
               }
             }
           }
@@ -15042,6 +15050,53 @@
                 "items": {
                   "$ref": "#/components/schemas/AlunoCertificado"
                 }
+              }
+            }
+          }
+        ]
+      },
+      "Serie": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "nome": {
+                "type": "string"
+              },
+              "turma": {
+                "type": "string"
+              },
+              "etapaEnsino": {
+                "$ref": "#/components/schemas/EtapaEnsino"
+              },
+              "localidade": {
+                "$ref": "#/components/schemas/Localidade"
+              },
+              "status": {
+                "type": "boolean"
+              }
+            }
+          }
+        ]
+      },
+      "EtapaEnsino": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "nome": {
+                "type": "string"
+              },
+              "status": {
+                "type": "boolean"
               }
             }
           }
@@ -19930,18 +19985,14 @@
           "nome": {
             "type": "string"
           },
-          "descricao": {
+          "turma": {
             "type": "string"
           },
-          "idadeInicial": {
+          "etapaEnsinoId": {
             "type": "integer",
             "format": "int32"
           },
-          "idadeFinal": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "scoreTotal": {
+          "localidadeId": {
             "type": "integer",
             "format": "int32"
           },
@@ -19961,18 +20012,14 @@
           "nome": {
             "type": "string"
           },
-          "descricao": {
+          "turma": {
             "type": "string"
           },
-          "idadeInicial": {
+          "etapaEnsinoId": {
             "type": "integer",
             "format": "int32"
           },
-          "idadeFinal": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "scoreTotal": {
+          "localidadeId": {
             "type": "integer",
             "format": "int32"
           },
