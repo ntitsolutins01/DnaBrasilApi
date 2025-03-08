@@ -27,8 +27,6 @@ public class Aluno : BaseAuditableEntity
     public int? IdCliente { get; set; }
     public Deficiencia? Deficiencia { get; set; }
     public Parceiro? Parceiro { get; set; }
-    public Matricula? Matricula { get; set; }
-    public Voucher? Voucher { get; set; }
     public Profissional? Profissional { get; set; }
     public string? NomeResponsavel { get; set; }
     public LinhaAcao? LinhaAcao { get; set; }
@@ -43,4 +41,5 @@ public class Aluno : BaseAuditableEntity
     public IList<AtividadeAluno>? AtividadeAlunos { get; set; }
     public IList<AlunoCurso>? AlunoCursos { get; set; }
     public IList<AlunoCertificado>? AlunoCertificados { get; set; }
+    //public Serie? Serie { get; set; }
 }
