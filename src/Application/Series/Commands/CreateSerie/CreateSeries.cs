@@ -1,42 +1,50 @@
-﻿using DnaBrasilApi.Application.Common.Interfaces;
-using DnaBrasilApi.Domain.Entities;
+﻿//using DnaBrasilApi.Application.Common.Interfaces;
+//using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasilApi.Application.Series.Commands.CreateSerie;
-public record CreateSerieCommand : IRequest<int>
-{
-    public required string Nome { get; init; }
-    public required string Descricao { get; init; }
-    public required int IdadeInicial { get; init; }
-    public required int IdadeFinal { get; init; }
-    public required int ScoreTotal { get; init; }
-    public bool Status { get; init; } = true;
-}
+//namespace DnaBrasilApi.Application.Series.Commands.CreateSerie;
+//public record CreateSerieCommand : IRequest<int>
+//{
+//    public required string Nome { get; init; }
+//    public required string Turma { get; init; }
+//    public required int EtapaEnsinoId { get; init; }
+//    public required int LocalidadeId { get; init; }
+//    public bool Status { get; init; } = true;
+//}
 
-public class CreateSerieCommandHandler : IRequestHandler<CreateSerieCommand, int>
-{
-    private readonly IApplicationDbContext _context;
+//public class CreateSerieCommandHandler : IRequestHandler<CreateSerieCommand, int>
+//{
+//    private readonly IApplicationDbContext _context;
 
-    public CreateSerieCommandHandler(IApplicationDbContext context)
-    {
-        _context = context;
-    }
+//    public CreateSerieCommandHandler(IApplicationDbContext context)
+//    {
+//        _context = context;
+//    }
 
-    public async Task<int> Handle(CreateSerieCommand request, CancellationToken cancellationToken)
-    {
-        var entity = new Serie
-        {
-            Nome = request.Nome,
-            Descricao = request.Descricao,
-            IdadeInicial = request.IdadeInicial,
-            IdadeFinal = request.IdadeFinal,
-            ScoreTotal = request.ScoreTotal,
-            Status = request.Status
-        };
+//    public async Task<int> Handle(CreateSerieCommand request, CancellationToken cancellationToken)
+//    {
+//        var etapaEnsino = await _context.EtapasEnsino
+//            .FindAsync([request.EtapaEnsinoId], cancellationToken);
 
-        _context.Series.Add(entity);
+//        Guard.Against.NotFound(request.EtapaEnsinoId, etapaEnsino);
 
-        await _context.SaveChangesAsync(cancellationToken);
+//        var localidade = await _context.Localidades
+//            .FindAsync([request.LocalidadeId], cancellationToken);
 
-        return entity.Id;
-    }
-}
+//        Guard.Against.NotFound(request.LocalidadeId, localidade);
+
+//        var entity = new Serie
+//        {
+//            Nome = request.Nome,
+//            Status = request.Status,
+//            Turma = request.Turma,
+//            EtapaEnsino = etapaEnsino,
+//            Localidade = localidade
+//        };
+
+//        _context.Series.Add(entity);
+
+//        await _context.SaveChangesAsync(cancellationToken);
+
+//        return entity.Id;
+//    }
+//}

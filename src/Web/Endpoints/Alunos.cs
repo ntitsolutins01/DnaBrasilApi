@@ -1,5 +1,9 @@
 ﻿using DnaBrasilApi.Application.Alunos.Commands.CreateAluno;
+using DnaBrasilApi.Application.Alunos.Commands.CreateAlunoCertificados;
+using DnaBrasilApi.Application.Alunos.Commands.CreateAlunoCursos;
 using DnaBrasilApi.Application.Alunos.Commands.DeleteAluno;
+using DnaBrasilApi.Application.Alunos.Commands.DeleteAlunoCertificado;
+using DnaBrasilApi.Application.Alunos.Commands.DeleteAlunoCurso;
 using DnaBrasilApi.Application.Alunos.Commands.DeleteAlunoModalidade;
 using DnaBrasilApi.Application.Alunos.Commands.UpdateAluno;
 using DnaBrasilApi.Application.Alunos.Commands.UpdateAlunoFoto;
@@ -11,6 +15,7 @@ using DnaBrasilApi.Application.Alunos.Queries.GetAlunosAll;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunosByFilter;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunosByLocalidade;
 using DnaBrasilApi.Application.Alunos.Queries.GetNomeAlunosAll;
+using DnaBrasilApi.Application.Alunos.Queries.GetNomeAlunosByLocalidadeId;
 using DnaBrasilApi.Application.Alunos.Queries.GetNomeAlunosByProfissionalId;
 using Microsoft.AspNetCore.Mvc;
 
@@ -29,10 +34,15 @@ public class Alunos : EndpointGroupBase
             .MapGet(GetAlunoById, "{id}")
             .MapGet(GetAlunoByEmail, "/Email/{email}")
             .MapGet(GetAlunosByLocalidade, "/Localidade/{id}")
-            .MapGet(GetNomeAlunosAll, "/NomeAlunos/{id}")
+            .MapGet(GetNomeAlunosAll, "/NomeAlunos")
+            .MapGet(GetNomeAlunosByLocalidadeId, "/NomeAlunos/Localidade/{id}")
             .MapGet(GetAlunosAll)
             .MapPost(CreateAluno)
+            .MapPost(CreateAlunoCursos, "Cursos")
+            .MapPost(CreateAlunoCertificados, "Certificados")
             .MapPut(UpdateAluno, "{id}")
+            .MapPut(UpdateAlunoCertificado, "{id}/Certificados")
+            .MapPut(UpdateAlunoCurso, "{id}/Cursos")
             .MapPut(UpdateAlunoFoto, "/UploadFoto/{id}")
             .MapPut(UpdateQrCode, "/QrCode/{id}")
             .MapDelete(DeleteAluno, "{id}")
@@ -67,6 +77,28 @@ public class Alunos : EndpointGroupBase
         await sender.Send(new DeleteAlunoModalidadeCommand() { AlunoId = id });
         var result = await sender.Send(command);
         return result;
+    }
+
+    /// <summary>
+    /// Endpoint para inclusão de Aluno e Curso
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="command">Objeto de inclusão da Aluno e seus Curso</param>
+    /// <returns>Retorna Id da Aluno</returns>
+    public async Task<int> CreateAlunoCursos(ISender sender, CreateAlunoCursoCommand command)
+    {
+        return await sender.Send(command);
+    }
+
+    /// <summary>
+    /// Endpoint para inclusão de Aluno e Certificado
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="command">Objeto de inclusão da Aluno e seus Certificado</param>
+    /// <returns>Retorna Id da Aluno</returns>
+    public async Task<int> CreateAlunoCertificados(ISender sender, CreateAlunoCertificadoCommand command)
+    {
+        return await sender.Send(command);
     }
 
     /// <summary>
@@ -106,6 +138,36 @@ public class Alunos : EndpointGroupBase
     public async Task<bool> DeleteAluno(ISender sender, int id)
     {
         return await sender.Send(new DeleteAlunoCommand(id));
+    }
+
+    /// <summary>
+    /// Endpoint para alteração de Aluno e Cursos
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="id">Id de alteração da Aluno</param>
+    /// <param name="command">Objeto de alteração da AlunoCurso</param>
+    /// <returns>Retorna true ou false</returns>
+    public async Task<bool> UpdateAlunoCurso(ISender sender, int id, CreateAlunoCursoCommand command)
+    {
+        if (id != command.AlunoId) return false;
+        await sender.Send(new DeleteAlunoCursoCommand() { AlunoId = id });
+        var result = await sender.Send(command);
+        return result > 0;
+    }
+
+    /// <summary>
+    /// Endpoint para alteração de Aluno e Certificados
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="id">Id de alteração da Aluno</param>
+    /// <param name="command">Objeto de alteração da AlunoCertificado</param>
+    /// <returns>Retorna true ou false</returns>
+    public async Task<bool> UpdateAlunoCertificado(ISender sender, int id, CreateAlunoCertificadoCommand command)
+    {
+        if (id != command.AlunoId) return false;
+        await sender.Send(new DeleteAlunoCertificadoCommand() { AlunoId = id });
+        var result = await sender.Send(command);
+        return result > 0;
     }
     #endregion
 
@@ -169,11 +231,21 @@ public class Alunos : EndpointGroupBase
     /// Endpoint que busca Todos Nomes de Alunos
     /// </summary>
     /// <param name="sender">sender</param>
-    /// <param name="id">id de todos os Alunos</param>
-    /// <returns>Retorna todos os Alunos</returns>
-    public async Task<List<SelectListDto>> GetNomeAlunosAll(ISender sender, string id)
+    /// <returns>Retorna todos os nomes dos alunos para uma combo</returns>
+    public async Task<List<SelectListDto>> GetNomeAlunosAll(ISender sender)
     {
-        return await sender.Send(new GetNomeAlunosAllQuery() { LocalidadeId = id });
+        return await sender.Send(new GetNomeAlunosAllQuery());
+    }
+
+    /// <summary>
+    /// Endpoint que busca Todos Nomes de Alunos
+    /// </summary>
+    /// <param name="sender">sender</param>
+    /// <param name="id">Id da localidade dos alunos</param>
+    /// <returns>Retorna todos os nomes dos alunos para uma combo</returns>
+    public async Task<List<SelectListDto>> GetNomeAlunosByLocalidadeId(ISender sender, int id)
+    {
+        return await sender.Send(new GetNomeAlunosByLocalidadeIdQuery() { LocalidadeId = id });
     }
 
     /// <summary>

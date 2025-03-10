@@ -29,6 +29,7 @@ public class
         IQueryable<Aluno> alunos;
 
         alunos = _context.Alunos//.Where(x=>x.Id== 38438)//37315 - Feminino
+            .Where(x => x.Convidado == false)
             .AsNoTracking();
 
         var result = FilterAlunosConsumo(alunos, request.SearchFilter!, cancellationToken);

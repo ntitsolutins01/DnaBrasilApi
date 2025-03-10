@@ -16,7 +16,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<TodoList> TodoLists => Set<TodoList>();
     public DbSet<TodoItem> TodoItems => Set<TodoItem>();
     public DbSet<TipoLaudo> TipoLaudos => Set<TipoLaudo>();
-    public DbSet<Serie> Series => Set<Serie>();
+    //public DbSet<Serie> Series => Set<Serie>();
     public DbSet<Estado> Estados => Set<Estado>();
     public DbSet<Municipio> Municipios => Set<Municipio>();
     public DbSet<Localidade> Localidades => Set<Localidade>();
@@ -30,8 +30,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<ConsumoAlimentar> ConsumoAlimentares => Set<ConsumoAlimentar>();
     public DbSet<Vocacional> Vocacionais => Set<Vocacional>();
     public DbSet<Aluno> Alunos => Set<Aluno>();
-    public DbSet<Matricula> Matriculas => Set<Matricula>();
-    public DbSet<Voucher> Vouchers => Set<Voucher>();
     public DbSet<Parceiro> Parceiros => Set<Parceiro>();
     public DbSet<PlanoAula> PlanosAulas => Set<PlanoAula>();
     public DbSet<Questionario> Questionarios => Set<Questionario>();
@@ -81,6 +79,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<IdebDimensaoNacional> IdebDimensoesNacional => Set<IdebDimensaoNacional>();
     public DbSet<IdebDimensaoEstadual> IdebDimensoesEstadual => Set<IdebDimensaoEstadual>();
     public DbSet<ModeloCarteirinha> ModelosCarteirinhas => Set<ModeloCarteirinha>();
+    public DbSet<AlunoCurso> AlunosCursos => Set<AlunoCurso>();
+    public DbSet<AlunoCertificado> AlunosCertificados => Set<AlunoCertificado>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -150,6 +150,30 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
             .WithMany(s => s.AtividadeAlunos)
             .HasForeignKey(sc => sc.AlunoId);
 
+        builder.Entity<AlunoCurso>().HasKey(sc => new { sc.AlunoId, sc.CursoId });
+
+        builder.Entity<AlunoCurso>()
+            .HasOne<Aluno>(sc => sc.Aluno)
+            .WithMany(s => s.AlunoCursos)
+            .HasForeignKey(sc => sc.AlunoId);
+
+        builder.Entity<AlunoCurso>()
+            .HasOne<Curso>(sc => sc.Curso)
+            .WithMany(s => s.AlunoCursos)
+            .HasForeignKey(sc => sc.CursoId);
+
+        builder.Entity<AlunoCertificado>().HasKey(sc => new { sc.AlunoId, sc.CertificadoId });
+
+        builder.Entity<AlunoCertificado>()
+            .HasOne<Aluno>(sc => sc.Aluno)
+            .WithMany(s => s.AlunoCertificados)
+            .HasForeignKey(sc => sc.AlunoId);
+
+        builder.Entity<AlunoCertificado>()
+            .HasOne<Certificado>(sc => sc.Certificado)
+            .WithMany(s => s.AlunoCertificados)
+            .HasForeignKey(sc => sc.CertificadoId);
+
         #endregion
 
         #region Required one-to-one with primary key to primary key relationship
@@ -158,16 +182,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
         //    .HasOne(e => e.Dependencia)
         //    .WithOne(e => e.Aluno)
         //    .HasForeignKey<Dependencia>();
-
-        builder.Entity<Aluno>()
-            .HasOne(e => e.Matricula)
-            .WithOne(e => e.Aluno)
-            .HasForeignKey<Matricula>();
-
-        builder.Entity<Aluno>()
-            .HasOne(e => e.Voucher)
-            .WithOne(e => e.Aluno)
-            .HasForeignKey<Voucher>();
 
         #endregion
 
