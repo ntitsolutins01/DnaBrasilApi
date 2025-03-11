@@ -6302,6 +6302,41 @@
         }
       }
     },
+    "/api/Materiais/Localidade/{id}": {
+      "get": {
+        "tags": [
+          "Materiais"
+        ],
+        "operationId": "GetMateriaisByLocalidadeId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MaterialDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Materiais/TipoMaterial/{id}": {
       "get": {
         "tags": [
@@ -17475,9 +17510,16 @@
             "type": "integer",
             "format": "int32"
           },
+          "localidadeId": {
+            "type": "integer",
+            "format": "int32"
+          },
           "tipoMaterialId": {
             "type": "integer",
             "format": "int32"
+          },
+          "nomeLocalidade": {
+            "type": "string"
           },
           "tituloTipoMaterial": {
             "type": "string"
@@ -17499,6 +17541,10 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
+          "localidadeId": {
+            "type": "integer",
+            "format": "int32"
+          },
           "tipoMaterialId": {
             "type": "integer",
             "format": "int32"
@@ -17573,6 +17619,9 @@
           "id": {
             "type": "integer",
             "format": "int32"
+          },
+          "nomeLocalidade": {
+            "type": "string"
           },
           "tituloTipoMaterial": {
             "type": "string"

@@ -4,6 +4,7 @@ namespace DnaBrasilApi.Application.Materiais.Queries;
 public class MaterialIndexDto
 {
     public required int Id { get; set; }
+    public required string NomeLocalidade { get; set; }
     public required string TituloTipoMaterial { get; set; }
     public required string UnidadeMedida { get; set; }
     public required string Descricao { get; set; }
@@ -13,6 +14,7 @@ public class MaterialIndexDto
         public Mapping()
         {
             CreateMap<Material, MaterialIndexDto>()
+                .ForMember(dest => dest.NomeLocalidade, opt => opt.MapFrom(src => src.Localidade!.Nome))
                 .ForMember(dest => dest.TituloTipoMaterial, opt => opt.MapFrom(src => src.TipoMaterial.Nome));
         }
     }

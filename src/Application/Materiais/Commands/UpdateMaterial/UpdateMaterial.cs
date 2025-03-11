@@ -28,7 +28,6 @@ public class UpdateMaterialCommandHandler : IRequestHandler<UpdateMaterialComman
 
         entity.UnidadeMedida = request.UnidadeMedida;
         entity.Descricao = request.Descricao;
-        entity.QtdAdquirida = request.QtdAdquirida;
 
         var result = await _context.SaveChangesAsync(cancellationToken);
 
