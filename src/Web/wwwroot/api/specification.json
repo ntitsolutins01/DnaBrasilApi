@@ -17591,6 +17591,10 @@
             "type": "string",
             "nullable": true
           },
+          "localidadeId": {
+            "type": "string",
+            "nullable": true
+          },
           "nomeMaterial": {
             "type": "string",
             "nullable": true
