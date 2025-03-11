@@ -17512,14 +17512,16 @@
           },
           "localidadeId": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "tipoMaterialId": {
             "type": "integer",
             "format": "int32"
           },
           "nomeLocalidade": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "tituloTipoMaterial": {
             "type": "string"
