@@ -22,7 +22,6 @@ public class GetMateriaisByTipoMaterialIdQueryHandler : IRequestHandler<GetMater
     {
         var result = await _context.Materiais
             .Include(i => i.TipoMaterial)
-            .Include(i => i.Localidade)
             .Where(x => x.TipoMaterial.Id == request.TipoMaterialId)
             .AsNoTracking()
             .ProjectTo<MaterialDto>(_mapper.ConfigurationProvider)

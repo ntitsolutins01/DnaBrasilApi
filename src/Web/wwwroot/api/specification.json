@@ -597,6 +597,199 @@
         }
       }
     },
+    "/api/ArquivosInventarios": {
+      "get": {
+        "tags": [
+          "ArquivosInventarios"
+        ],
+        "operationId": "GetArquivosInventariosAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ArquivosInventarioDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "ArquivosInventarios"
+        ],
+        "operationId": "CreateArquivosInventario",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateArquivosInventarioCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ArquivosInventarios/{id}": {
+      "put": {
+        "tags": [
+          "ArquivosInventarios"
+        ],
+        "operationId": "UpdateArquivosInventario",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateArquivosInventarioCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ArquivosInventarios"
+        ],
+        "operationId": "DeleteArquivosInventario",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ArquivosInventarios"
+        ],
+        "operationId": "GetArquivosInventarioById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArquivosInventarioDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ArquivosInventarios/Inventario/{id}": {
+      "get": {
+        "tags": [
+          "ArquivosInventarios"
+        ],
+        "operationId": "GetArquivosInventariosByInventarioId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ArquivosInventarioDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Atividades": {
       "post": {
         "tags": [
@@ -5173,6 +5366,231 @@
         }
       }
     },
+    "/api/Inventarios": {
+      "get": {
+        "tags": [
+          "Inventarios"
+        ],
+        "operationId": "GetInventariosAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/InventarioDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Inventarios"
+        ],
+        "operationId": "CreateInventario",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateInventarioCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Inventarios/{id}": {
+      "put": {
+        "tags": [
+          "Inventarios"
+        ],
+        "operationId": "UpdateInventario",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateInventarioCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Inventarios"
+        ],
+        "operationId": "DeleteInventario",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Inventarios"
+        ],
+        "operationId": "GetInventarioById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InventarioDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Inventarios/Material/{id}": {
+      "get": {
+        "tags": [
+          "Inventarios"
+        ],
+        "operationId": "GetInventariosByMaterialId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/InventarioDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Inventarios/Filter": {
+      "post": {
+        "tags": [
+          "Inventarios"
+        ],
+        "operationId": "GetInventariosByFilter",
+        "requestBody": {
+          "x-name": "search",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InventariosFilterDto"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InventariosFilterDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Laudos/{id}": {
       "get": {
         "tags": [
@@ -6295,41 +6713,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/MaterialDto"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/Materiais/Localidade/{id}": {
-      "get": {
-        "tags": [
-          "Materiais"
-        ],
-        "operationId": "GetMateriaisByLocalidadeId",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "x-position": 1
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/MaterialDto"
-                  }
                 }
               }
             }
@@ -12140,6 +12523,60 @@
           }
         }
       },
+      "ArquivosInventarioDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "inventarioId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pathArquivo": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeArquivo": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "CreateArquivosInventarioCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "inventarioId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pathArquivo": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeArquivo": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "UpdateArquivosInventarioCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeArquivo": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
       "CreateAtividadeCommand": {
         "type": "object",
         "additionalProperties": false,
@@ -16821,6 +17258,127 @@
           }
         }
       },
+      "InventarioDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "materialId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeMaterial": {
+            "type": "string"
+          },
+          "localidadeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeLocalidade": {
+            "type": "string"
+          },
+          "quantidade": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        }
+      },
+      "CreateInventarioCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "materialId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "localidadeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "quantidade": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        }
+      },
+      "UpdateInventarioCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "quantidade": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        }
+      },
+      "InventariosFilterDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeMaterial": {
+            "type": "string",
+            "nullable": true
+          },
+          "materialId": {
+            "type": "string",
+            "nullable": true
+          },
+          "localidadeId": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipoMaterialId": {
+            "type": "string",
+            "nullable": true
+          },
+          "grupoMaterialId": {
+            "type": "string",
+            "nullable": true
+          },
+          "inventarios": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/InventarioIndexDto"
+            }
+          }
+        }
+      },
+      "InventarioIndexDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeMaterial": {
+            "type": "string"
+          },
+          "nomeLocalidade": {
+            "type": "string"
+          },
+          "quantidade": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        }
+      },
       "LaudoDto": {
         "type": "object",
         "additionalProperties": false,
@@ -17510,18 +18068,9 @@
             "type": "integer",
             "format": "int32"
           },
-          "localidadeId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
           "tipoMaterialId": {
             "type": "integer",
             "format": "int32"
-          },
-          "nomeLocalidade": {
-            "type": "string",
-            "nullable": true
           },
           "tituloTipoMaterial": {
             "type": "string"
@@ -17531,11 +18080,6 @@
           },
           "descricao": {
             "type": "string"
-          },
-          "qtdAdquirida": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
           }
         }
       },
@@ -17543,10 +18087,6 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "localidadeId": {
-            "type": "integer",
-            "format": "int32"
-          },
           "tipoMaterialId": {
             "type": "integer",
             "format": "int32"
@@ -17556,11 +18096,6 @@
           },
           "descricao": {
             "type": "string"
-          },
-          "qtdAdquirida": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
           }
         }
       },
@@ -17577,11 +18112,6 @@
           },
           "descricao": {
             "type": "string"
-          },
-          "qtdAdquirida": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
           }
         }
       },
@@ -17590,10 +18120,6 @@
         "additionalProperties": false,
         "properties": {
           "id": {
-            "type": "string",
-            "nullable": true
-          },
-          "localidadeId": {
             "type": "string",
             "nullable": true
           },
@@ -17626,9 +18152,6 @@
             "type": "integer",
             "format": "int32"
           },
-          "nomeLocalidade": {
-            "type": "string"
-          },
           "tituloTipoMaterial": {
             "type": "string"
           },
@@ -17637,11 +18160,6 @@
           },
           "descricao": {
             "type": "string"
-          },
-          "qtdAdquirida": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
           }
         }
       },

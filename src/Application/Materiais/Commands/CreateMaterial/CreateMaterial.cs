@@ -4,11 +4,9 @@ using DnaBrasilApi.Domain.Entities;
 namespace DnaBrasilApi.Application.Materiais.Commands.CreateMaterial;
 public record CreateMaterialCommand : IRequest<int>
 {
-    public required int LocalidadeId { get; set; }
     public required int TipoMaterialId { get; set; }
     public required string UnidadeMedida { get; set; }
     public required string Descricao { get; set; }
-    public int? QtdAdquirida { get; set; }
 }
 
 public class CreateMaterialCommandHandler : IRequestHandler<CreateMaterialCommand, int>
@@ -22,11 +20,6 @@ public class CreateMaterialCommandHandler : IRequestHandler<CreateMaterialComman
 
     public async Task<int> Handle(CreateMaterialCommand request, CancellationToken cancellationToken)
     {
-        var localidade = await _context.Localidades
-            .FindAsync([request.LocalidadeId], cancellationToken);
-
-        Guard.Against.NotFound(request.LocalidadeId, localidade);
-        
         var tipoMaterial = await _context.TiposMateriais
             .FindAsync([request.TipoMaterialId], cancellationToken);
 
@@ -34,11 +27,9 @@ public class CreateMaterialCommandHandler : IRequestHandler<CreateMaterialComman
 
         var entity = new Material
         {
-            Localidade = localidade,
             TipoMaterial = tipoMaterial,
             UnidadeMedida = request.UnidadeMedida,
-            Descricao = request.Descricao,
-            QtdAdquirida = request.QtdAdquirida
+            Descricao = request.Descricao
         };
 
         _context.Materiais.Add(entity);

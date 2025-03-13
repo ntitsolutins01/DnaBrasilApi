@@ -81,6 +81,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<ModeloCarteirinha> ModelosCarteirinhas => Set<ModeloCarteirinha>();
     public DbSet<AlunoCurso> AlunosCursos => Set<AlunoCurso>();
     public DbSet<AlunoCertificado> AlunosCertificados => Set<AlunoCertificado>();
+    public DbSet<Inventario> Inventarios => Set<Inventario>();
+    public DbSet<ArquivosInventario> ArquivosInventarios => Set<ArquivosInventario>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

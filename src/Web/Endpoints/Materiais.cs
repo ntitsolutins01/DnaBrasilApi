@@ -7,7 +7,6 @@ using DnaBrasilApi.Application.Materiais.Queries.GetMateriaisAll;
 using DnaBrasilApi.Application.Materiais.Queries.GetMateriaisByTipoMaterialId;
 using DnaBrasilApi.Application.Materiais.Queries.GetMateriaisByFilter;
 using Microsoft.AspNetCore.Mvc;
-using DnaBrasilApi.Application.Materiais.Queries.GetMateriaisByLocalidadeId;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -28,7 +27,6 @@ public class Materiais : EndpointGroupBase
             .MapPut(UpdateMaterial, "{id}")
             .MapDelete(DeleteMaterial, "{id}")
             .MapGet(GetMaterialById, "{id}")
-            .MapGet(GetMateriaisByLocalidadeId, "Localidade/{id}")
             .MapGet(GetMateriaisByTipoMaterialId, "TipoMaterial/{id}")
             .MapPost(GetMateriaisByFilter, "Filter"); ;
     }
@@ -121,16 +119,6 @@ public class Materiais : EndpointGroupBase
         return await sender.Send(new GetMateriaisByTipoMaterialIdQuery() { TipoMaterialId = id });
     }
 
-    /// <summary>
-    /// Endpoint que busca uma lista de materiais pela localidade
-    /// </summary>
-    /// <param name="sender">Sender</param>
-    /// <param name="id">Id do módulo Ead</param>
-    /// <returns>Retorna uma lista de Materiais</returns>
-    public async Task<List<MaterialDto>> GetMateriaisByLocalidadeId(ISender sender, int id)
-    {
-        return await sender.Send(new GetMateriaisByLocalidadeIdQuery() { LocalidadeId = id });
-    }
     #endregion
 
 }
