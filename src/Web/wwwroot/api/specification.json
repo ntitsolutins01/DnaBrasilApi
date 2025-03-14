@@ -4500,6 +4500,61 @@
         }
       }
     },
+    "/api/EtapasEnsino": {
+      "get": {
+        "tags": [
+          "EtapasEnsino"
+        ],
+        "operationId": "GetEtapasEnsinoAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EtapaEnsinoDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/EtapasEnsino/{id}": {
+      "get": {
+        "tags": [
+          "EtapasEnsino"
+        ],
+        "operationId": "GetEtapaEnsinoById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EtapaEnsinoDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Eventos": {
       "get": {
         "tags": [
@@ -5664,6 +5719,70 @@
                   "items": {
                     "$ref": "#/components/schemas/EncaminhamentoDto"
                   }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Laudos/Encaminhamento/ConsumoAlimentar/{id}": {
+      "get": {
+        "tags": [
+          "Laudos"
+        ],
+        "operationId": "GetEncaminhamentoByConsumoAlimentarId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EncaminhamentoDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Laudos/Encaminhamento/SaudeBucal/{id}": {
+      "get": {
+        "tags": [
+          "Laudos"
+        ],
+        "operationId": "GetEncaminhamentoBySaudeBucalId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EncaminhamentoDto"
                 }
               }
             }
@@ -12254,6 +12373,9 @@
             "type": "string",
             "nullable": true
           },
+          "possuiFoto": {
+            "type": "boolean"
+          },
           "alunos": {
             "type": "array",
             "nullable": true,
@@ -16633,6 +16755,22 @@
           }
         }
       },
+      "EtapaEnsinoDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "status": {
+            "type": "boolean"
+          }
+        }
+      },
       "EventoDto": {
         "type": "object",
         "additionalProperties": false,
@@ -19798,6 +19936,16 @@
           "localidadeId": {
             "type": "integer",
             "format": "int32"
+          },
+          "nomeLocalidade": {
+            "type": "string"
+          },
+          "municipioEstado": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "boolean"
           }
         }
       },
