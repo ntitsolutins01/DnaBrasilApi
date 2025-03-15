@@ -4,7 +4,7 @@ public class ControleMaterialEstoqueSaida : BaseAuditableEntity
 {
     public required Municipio Municipio { get; set; }
     public required Localidade Localidade { get; set; }
-    public required Material Material { get; set; }
+    public required Inventario Inventario { get; set; }
     public required int Quantidade { get; set; }
     public string? Solicitante { get; set; }
 }

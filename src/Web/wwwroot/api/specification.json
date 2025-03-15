@@ -2658,12 +2658,12 @@
         }
       }
     },
-    "/api/ControlesMateriaisEstoquesSaidas/Material/{id}": {
+    "/api/ControlesMateriaisEstoquesSaidas/Inventario/{id}": {
       "get": {
         "tags": [
           "ControlesMateriaisEstoquesSaidas"
         ],
-        "operationId": "GetControlesMateriaisEstoquesSaidasByMaterialId",
+        "operationId": "GetControlesMateriaisEstoquesSaidasByInventarioId",
         "parameters": [
           {
             "name": "id",
@@ -5530,6 +5530,41 @@
           "Inventarios"
         ],
         "operationId": "GetInventariosByMaterialId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/InventarioDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Inventarios/Localidade/{id}": {
+      "get": {
+        "tags": [
+          "Inventarios"
+        ],
+        "operationId": "GetInventariosByLocalidadeId",
         "parameters": [
           {
             "name": "id",
@@ -15439,7 +15474,7 @@
             "type": "integer",
             "format": "int32"
           },
-          "materialId": {
+          "inventarioId": {
             "type": "integer",
             "format": "int32"
           },
@@ -15481,7 +15516,7 @@
             "type": "integer",
             "format": "int32"
           },
-          "materialId": {
+          "inventarioId": {
             "type": "integer",
             "format": "int32"
           },
@@ -17370,6 +17405,9 @@
             "type": "string"
           },
           "nomeLocalidade": {
+            "type": "string"
+          },
+          "nomeUndMedida": {
             "type": "string"
           },
           "quantidade": {

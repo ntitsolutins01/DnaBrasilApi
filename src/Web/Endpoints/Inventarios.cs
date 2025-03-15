@@ -5,6 +5,7 @@ using DnaBrasilApi.Application.Inventarios.Commands.UpdateInventario;
 using DnaBrasilApi.Application.Inventarios.Queries;
 using DnaBrasilApi.Application.Inventarios.Queries.GetInventariosAll;
 using DnaBrasilApi.Application.Inventarios.Queries.GetInventariosByMaterialId;
+using DnaBrasilApi.Application.Inventarios.Queries.GetInventariosByLocalidadeId;
 using DnaBrasilApi.Application.Inventarios.Queries.GetInventariosByFilter;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,6 +29,7 @@ public class Inventarios : EndpointGroupBase
             .MapDelete(DeleteInventario, "{id}")
             .MapGet(GetInventarioById, "{id}")
             .MapGet(GetInventariosByMaterialId, "Material/{id}")
+            .MapGet(GetInventariosByLocalidadeId, "Localidade/{id}")
             .MapPost(GetInventariosByFilter, "Filter"); ;
     }
     #endregion
@@ -117,6 +119,17 @@ public class Inventarios : EndpointGroupBase
     public async Task<List<InventarioDto>> GetInventariosByMaterialId(ISender sender, int id)
     {
         return await sender.Send(new GetInventariosByMaterialIdQuery() { MaterialId = id });
+    }
+
+    /// <summary>
+    /// Endpoint que busca uma lista de inventario pelo  localidade
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="id">Id do Localidade</param>
+    /// <returns>Retorna uma lista de Inventarios</returns>
+    public async Task<List<InventarioDto>> GetInventariosByLocalidadeId(ISender sender, int id)
+    {
+        return await sender.Send(new GetInventariosByLocalidadeIdQuery() { LocalidadeId = id });
     }
 
     #endregion
