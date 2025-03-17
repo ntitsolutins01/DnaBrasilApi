@@ -4,6 +4,7 @@ using DnaBrasilApi.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DnaBrasilApi.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250313211648_DnaCreateUpdadeControleMaterialTables")]
+    partial class DnaCreateUpdadeControleMaterialTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -696,9 +699,6 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("InventarioId")
-                        .HasColumnType("int");
-
                     b.Property<DateTimeOffset>("LastModified")
                         .HasColumnType("datetimeoffset");
 
@@ -706,6 +706,9 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("LocalidadeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MaterialId")
                         .HasColumnType("int");
 
                     b.Property<int>("MunicipioId")
@@ -720,9 +723,9 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("InventarioId");
-
                     b.HasIndex("LocalidadeId");
+
+                    b.HasIndex("MaterialId");
 
                     b.HasIndex("MunicipioId");
 
@@ -2721,54 +2724,6 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.ToTable("SaudeBucais");
                 });
 
-            modelBuilder.Entity("DnaBrasilApi.Domain.Entities.Serie", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTimeOffset>("Created")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("EtapaEnsinoId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTimeOffset>("LastModified")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("LocalidadeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Turma")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EtapaEnsinoId");
-
-                    b.HasIndex("LocalidadeId");
-
-                    b.ToTable("Series");
-                });
-
             modelBuilder.Entity("DnaBrasilApi.Domain.Entities.TalentoEsportivo", b =>
                 {
                     b.Property<int>("Id")
@@ -3768,15 +3723,15 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("DnaBrasilApi.Domain.Entities.ControleMaterialEstoqueSaida", b =>
                 {
-                    b.HasOne("DnaBrasilApi.Domain.Entities.Inventario", "Inventario")
-                        .WithMany()
-                        .HasForeignKey("InventarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("DnaBrasilApi.Domain.Entities.Localidade", "Localidade")
                         .WithMany()
                         .HasForeignKey("LocalidadeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DnaBrasilApi.Domain.Entities.Material", "Material")
+                        .WithMany()
+                        .HasForeignKey("MaterialId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -3786,9 +3741,9 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Inventario");
-
                     b.Navigation("Localidade");
+
+                    b.Navigation("Material");
 
                     b.Navigation("Municipio");
                 });
@@ -4287,25 +4242,6 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.Navigation("Encaminhamento");
 
                     b.Navigation("Profissional");
-                });
-
-            modelBuilder.Entity("DnaBrasilApi.Domain.Entities.Serie", b =>
-                {
-                    b.HasOne("DnaBrasilApi.Domain.Entities.EtapaEnsino", "EtapaEnsino")
-                        .WithMany()
-                        .HasForeignKey("EtapaEnsinoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DnaBrasilApi.Domain.Entities.Localidade", "Localidade")
-                        .WithMany()
-                        .HasForeignKey("LocalidadeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("EtapaEnsino");
-
-                    b.Navigation("Localidade");
                 });
 
             modelBuilder.Entity("DnaBrasilApi.Domain.Entities.TalentoEsportivo", b =>

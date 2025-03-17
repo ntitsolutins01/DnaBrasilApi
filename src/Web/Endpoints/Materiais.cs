@@ -109,7 +109,7 @@ public class Materiais : EndpointGroupBase
     }
 
     /// <summary>
-    /// Endpoint que busca uma lista de tipos de material
+    /// Endpoint que busca uma lista de materiais pelo tipos de material
     /// </summary>
     /// <param name="sender">Sender</param>
     /// <param name="id">Id do módulo Ead</param>
@@ -118,6 +118,7 @@ public class Materiais : EndpointGroupBase
     {
         return await sender.Send(new GetMateriaisByTipoMaterialIdQuery() { TipoMaterialId = id });
     }
+
     #endregion
 
 }

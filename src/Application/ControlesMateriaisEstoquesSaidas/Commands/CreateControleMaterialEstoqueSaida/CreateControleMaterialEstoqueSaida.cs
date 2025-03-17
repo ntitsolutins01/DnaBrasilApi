@@ -6,7 +6,7 @@ public record CreateControleMaterialEstoqueSaidaCommand : IRequest<int>
 {
     public required int MunicipioId { get; set; }
     public required int LocalidadeId { get; set; }
-    public required int MaterialId { get; set; }
+    public required int InventarioId { get; set; }
     public required int Quantidade { get; set; }
     public string? Solicitante { get; set; }
 }
@@ -32,16 +32,16 @@ public class CreateControleMaterialEstoqueSaidaCommandHandler : IRequestHandler<
 
         Guard.Against.NotFound(request.LocalidadeId, localidade);
 
-        var material = await _context.Materiais
-            .FindAsync([request.MaterialId], cancellationToken);
+        var inventario = await _context.Inventarios
+            .FindAsync([request.InventarioId], cancellationToken);
 
-        Guard.Against.NotFound(request.MaterialId, material);
+        Guard.Against.NotFound(request.InventarioId, inventario);
 
         var entity = new ControleMaterialEstoqueSaida
         {
             Municipio = municipio,
             Localidade = localidade,
-            Material = material,
+            Inventario = inventario,
             Quantidade = request.Quantidade,
             Solicitante = request.Solicitante
         };
