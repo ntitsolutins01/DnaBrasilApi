@@ -14484,6 +14484,13 @@
                 "items": {
                   "$ref": "#/components/schemas/AlunoCertificado"
                 }
+              },
+              "alunoDisciplinas": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "$ref": "#/components/schemas/AlunoDisciplina"
+                }
               }
             }
           }
@@ -15558,6 +15565,66 @@
                 "nullable": true,
                 "items": {
                   "$ref": "#/components/schemas/AlunoCertificado"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "AlunoDisciplina": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "alunoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "disciplinaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "aluno": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Aluno"
+              }
+            ]
+          },
+          "disciplina": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Disciplina"
+              }
+            ]
+          }
+        }
+      },
+      "Disciplina": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "nome": {
+                "type": "string"
+              },
+              "descricao": {
+                "type": "string",
+                "nullable": true
+              },
+              "status": {
+                "type": "boolean"
+              },
+              "alunoDisciplinas": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "$ref": "#/components/schemas/AlunoDisciplina"
                 }
               }
             }
@@ -19104,29 +19171,6 @@
             "nullable": true
           }
         }
-      },
-      "Disciplina": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BaseAuditableEntity"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "nome": {
-                "type": "string"
-              },
-              "descricao": {
-                "type": "string",
-                "nullable": true
-              },
-              "status": {
-                "type": "boolean"
-              }
-            }
-          }
-        ]
       },
       "CreateNotaCommand": {
         "type": "object",
