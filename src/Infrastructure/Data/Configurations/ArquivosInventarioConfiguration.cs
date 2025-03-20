@@ -1,0 +1,13 @@
+﻿using DnaBrasilApi.Domain.Entities;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore;
+
+namespace DnaBrasilApi.Infrastructure.Data.Configurations;
+internal class ArquivosInventarioConfiguration : IEntityTypeConfiguration<ArquivosInventario>
+{
+    public void Configure(EntityTypeBuilder<ArquivosInventario> builder)
+    {
+        builder.Property(t => t.NomeArquivo)
+            .HasMaxLength(50);
+    }
+}

@@ -72,6 +72,8 @@ public interface IApplicationDbContext
     DbSet<ModeloCarteirinha> ModelosCarteirinhas { get; }
     DbSet<AlunoCurso> AlunosCursos { get; }
     DbSet<AlunoCertificado> AlunosCertificados { get; }
+    DbSet<Inventario> Inventarios { get; }
+    DbSet<ArquivosInventario> ArquivosInventarios { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }
