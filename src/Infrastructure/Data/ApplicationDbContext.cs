@@ -16,7 +16,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<TodoList> TodoLists => Set<TodoList>();
     public DbSet<TodoItem> TodoItems => Set<TodoItem>();
     public DbSet<TipoLaudo> TipoLaudos => Set<TipoLaudo>();
-    //public DbSet<Serie> Series => Set<Serie>();
+    public DbSet<Serie> Series => Set<Serie>();
     public DbSet<Estado> Estados => Set<Estado>();
     public DbSet<Municipio> Municipios => Set<Municipio>();
     public DbSet<Localidade> Localidades => Set<Localidade>();

@@ -18,6 +18,8 @@ using DnaBrasilApi.Application.Laudos.Queries.GetLaudoById;
 using DnaBrasilApi.Application.Laudos.Queries.GetLaudosByFilter;
 using Microsoft.AspNetCore.Mvc;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoQualidadeVida;
+using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoByConsumoAlimentarId;
+using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoBySaudeBucalId;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -41,6 +43,8 @@ public class Laudos : EndpointGroupBase
             .MapGet(GetLaudoByAluno, "Aluno/{id}")
             .MapGet(GetEncaminhamentoBySaudeId, "Encaminhamento/Saude/{id}")
             .MapGet(GetEncaminhamentoByQualidadeDeVidaId, "Encaminhamento/QualidadeDeVida/{id}")
+            .MapGet(GetEncaminhamentoByConsumoAlimentarId, "Encaminhamento/ConsumoAlimentar/{id}")
+            .MapGet(GetEncaminhamentoBySaudeBucalId, "Encaminhamento/SaudeBucal/{id}")
             .MapGet(GetEncaminhamentoByVocacional, "Encaminhamentos/Vocacional")
             .MapGet(GetDesempenhoByAluno, "Desempenho/{id}")
             .MapPost(GetLaudosByFilter, "Filter");
@@ -199,7 +203,7 @@ public class Laudos : EndpointGroupBase
         return await sender.Send(new GetEncaminhamentoBySaudeIdQuery(id));
     }
     /// <summary>
-    /// Endpoint que busca Encaminhamento Quialidade de Vida por id
+    /// Endpoint que busca Encaminhamento Qualidade de Vida por id
     /// </summary>
     /// <param name="sender">sender</param>
     /// <param name="id">id que busca Encaminhamento Qualidade de Vidas por id</param>
@@ -216,6 +220,27 @@ public class Laudos : EndpointGroupBase
     public async Task<List<EncaminhamentoDto>> GetEncaminhamentoByVocacional(ISender sender)
     {
         return await sender.Send(new GetEncaminhamentoByVocacionalQuery());
+    }
+
+    /// <summary>
+    /// Endpoint que busca Encaminhamento Consumo Alimentar por id
+    /// </summary>
+    /// <param name="sender">sender</param>
+    /// <param name="id">id que busca Encaminhamento Consumo Alimentar por id</param>
+    /// <returns>retorna o Encaminhamento de Consumo Alimentar por id</returns>
+    public async Task <EncaminhamentoDto> GetEncaminhamentoByConsumoAlimentarId(ISender sender, int id)
+    {
+        return await sender.Send(new GetEncaminhamentoByConsumoAlimentarIdQuery(id));
+    }
+    /// <summary>
+    /// Endpoint que busca Encaminhamento Saúde Bucal por id
+    /// </summary>
+    /// <param name="sender">sender</param>
+    /// <param name="id">id que busca Encaminhamento Saúde Bucal por id</param>
+    /// <returns>retorna o Encaminhamento de Saúde Bucal por id</returns>
+    public async Task <EncaminhamentoDto> GetEncaminhamentoBySaudeBucalId(ISender sender, int id)
+    {
+        return await sender.Send(new GetEncaminhamentoBySaudeBucalIdQuery(id));
     }
     /// <summary>
     /// Endpoint que busca Desempenho por Aluno

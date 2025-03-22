@@ -15,6 +15,7 @@ public class AlunosFilterDto
     public string? DeficienciaId { get; set; }
     public string? Etnia { get; set; }
     public string? Nome { get; set; }
+    public bool PossuiFoto { get; set; }
     #endregion
 
     public List<AlunoIndexDto>? Alunos { get; set; }

@@ -94,6 +94,11 @@ public class GetAlunosByFilterQueryHandler : IRequestHandler<GetAlunosByFilterQu
             Alunos = Alunos.Where(u => u.Sexo!.Equals(search.Sexo));
         }
 
+        if (search.PossuiFoto)
+        {
+            Alunos = Alunos.Where(u => u.ByteImage != null);
+        }
+
         return Alunos;
     }
 }
