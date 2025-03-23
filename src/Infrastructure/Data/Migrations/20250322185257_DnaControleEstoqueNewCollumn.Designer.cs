@@ -4,6 +4,7 @@ using DnaBrasilApi.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DnaBrasilApi.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250322185257_DnaControleEstoqueNewCollumn")]
+    partial class DnaControleEstoqueNewCollumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -256,8 +259,8 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NomeArquivo")
-                        .HasMaxLength(80)
-                        .HasColumnType("nvarchar(80)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("PathArquivo")
                         .HasColumnType("nvarchar(max)");
@@ -711,10 +714,10 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.Property<int>("MunicipioId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Quantidade")
+                    b.Property<int>("ProfissionalId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UsuarioId")
+                    b.Property<int>("Quantidade")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -725,7 +728,7 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
 
                     b.HasIndex("MunicipioId");
 
-                    b.HasIndex("UsuarioId");
+                    b.HasIndex("ProfissionalId");
 
                     b.ToTable("ControlesMateriaisEstoquesSaidas");
                 });
@@ -3792,9 +3795,9 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DnaBrasilApi.Domain.Entities.Usuario", "Usuario")
+                    b.HasOne("DnaBrasilApi.Domain.Entities.Profissional", "Profissional")
                         .WithMany()
-                        .HasForeignKey("UsuarioId")
+                        .HasForeignKey("ProfissionalId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -3804,7 +3807,7 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
 
                     b.Navigation("Municipio");
 
-                    b.Navigation("Usuario");
+                    b.Navigation("Profissional");
                 });
 
             modelBuilder.Entity("DnaBrasilApi.Domain.Entities.ControlePresenca", b =>

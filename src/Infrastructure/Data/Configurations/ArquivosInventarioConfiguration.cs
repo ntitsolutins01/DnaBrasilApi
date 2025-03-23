@@ -8,6 +8,6 @@ internal class ArquivosInventarioConfiguration : IEntityTypeConfiguration<Arquiv
     public void Configure(EntityTypeBuilder<ArquivosInventario> builder)
     {
         builder.Property(t => t.NomeArquivo)
-            .HasMaxLength(50);
+            .HasMaxLength(80);
     }
 }

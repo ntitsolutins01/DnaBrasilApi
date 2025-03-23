@@ -4,6 +4,6 @@ internal class CreateArquivosInventarioCommandValidator : AbstractValidator<Crea
     public CreateArquivosInventarioCommandValidator()
     {
         RuleFor(v => v.NomeArquivo)
-            .MaximumLength(50);
+            .MaximumLength(80);
     }
 }
