@@ -714,9 +714,8 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.Property<int>("Quantidade")
                         .HasColumnType("int");
 
-                    b.Property<string>("Solicitante")
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
+                    b.Property<int>("UsuarioId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -725,6 +724,8 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.HasIndex("LocalidadeId");
 
                     b.HasIndex("MunicipioId");
+
+                    b.HasIndex("UsuarioId");
 
                     b.ToTable("ControlesMateriaisEstoquesSaidas");
                 });
@@ -1461,6 +1462,11 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
 
                     b.Property<int>("MaterialId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Motivo")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<int?>("Quantidade")
                         .HasColumnType("int");
@@ -3786,11 +3792,19 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("DnaBrasilApi.Domain.Entities.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Inventario");
 
                     b.Navigation("Localidade");
 
                     b.Navigation("Municipio");
+
+                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("DnaBrasilApi.Domain.Entities.ControlePresenca", b =>

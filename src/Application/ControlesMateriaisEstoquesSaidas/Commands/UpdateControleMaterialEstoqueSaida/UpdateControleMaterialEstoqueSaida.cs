@@ -5,7 +5,7 @@ namespace DnaBrasilApi.Application.ControlesMateriaisEstoquesSaidas.Commands.Upd
 public record UpdateControleMaterialEstoqueSaidaCommand : IRequest <bool>
 {
     public required int Id { get; set; }
-    public string? Solicitante { get; set; }
+    public required int ProfissionalId { get; set; }
 }
 
 public class UpdateControleMaterialEstoqueSaidaCommandHandler : IRequestHandler<UpdateControleMaterialEstoqueSaidaCommand, bool>
@@ -24,7 +24,12 @@ public class UpdateControleMaterialEstoqueSaidaCommandHandler : IRequestHandler<
 
         Guard.Against.NotFound(request.Id, entity);
 
-        entity.Solicitante = request.Solicitante;
+        var profissional = await _context.Usuarios
+            .FindAsync([request.ProfissionalId], cancellationToken);
+
+        Guard.Against.NotFound(request.ProfissionalId, profissional);
+
+        entity.Usuario = profissional;
 
         var result = await _context.SaveChangesAsync(cancellationToken);
 

@@ -1,7 +1,7 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
 
 namespace DnaBrasilApi.Application.ArquivosInventarios.Commands.DeleteArquivosInventario;
-public record DeleteArquivosInventarioCommand(int Id) : IRequest<bool>;
+public record DeleteArquivosInventarioCommand(int Value) : IRequest<bool>;
 
 public class DeleteArquivosInventarioCommandHandler : IRequestHandler<DeleteArquivosInventarioCommand, bool>
 {
@@ -15,9 +15,9 @@ public class DeleteArquivosInventarioCommandHandler : IRequestHandler<DeleteArqu
     public async Task<bool> Handle(DeleteArquivosInventarioCommand request, CancellationToken cancellationToken)
     {
         var entity = await _context.ArquivosInventarios
-            .FindAsync(new object[] { request.Id }, cancellationToken);
+            .FindAsync(new object[] { request.Value }, cancellationToken);
 
-        Guard.Against.NotFound(request.Id, entity);
+        Guard.Against.NotFound(request.Value, entity);
 
         _context.ArquivosInventarios.Remove(entity);
 
