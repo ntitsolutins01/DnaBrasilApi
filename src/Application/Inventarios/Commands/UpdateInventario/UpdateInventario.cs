@@ -6,6 +6,7 @@ public record UpdateInventarioCommand : IRequest <bool>
 {
     public required int Id { get; init; }
     public int? Quantidade { get; init; }
+    public required string Motivo { get; init; }
 }
 
 public class UpdateInventarioCommandHandler : IRequestHandler<UpdateInventarioCommand, bool>
@@ -25,6 +26,7 @@ public class UpdateInventarioCommandHandler : IRequestHandler<UpdateInventarioCo
         Guard.Against.NotFound(request.Id, entity);
 
         entity.Quantidade = request.Quantidade;
+        entity.Motivo = request.Motivo;
 
         var result = await _context.SaveChangesAsync(cancellationToken);
 

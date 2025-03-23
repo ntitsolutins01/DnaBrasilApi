@@ -7,6 +7,7 @@ public record CreateInventarioCommand : IRequest<int>
     public required int MaterialId { get; set; }
     public required int LocalidadeId { get; set; }
     public int? Quantidade { get; set; }
+    public required string Motivo { get; set; }
 }
 
 public class CreateInventarioCommandHandler : IRequestHandler<CreateInventarioCommand, int>
@@ -34,7 +35,8 @@ public class CreateInventarioCommandHandler : IRequestHandler<CreateInventarioCo
         {
             Material = material,
             Localidade = localidade,
-            Quantidade = request.Quantidade
+            Quantidade = request.Quantidade,
+            Motivo = request.Motivo
         };
 
         _context.Inventarios.Add(entity);

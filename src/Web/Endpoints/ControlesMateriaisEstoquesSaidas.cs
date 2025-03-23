@@ -96,7 +96,7 @@ public class ControlesMateriaisEstoquesSaidas : EndpointGroupBase
     /// Endpoint que busca uma lista de tipos de material
     /// </summary>
     /// <param name="sender">Sender</param>
-    /// <param name="id">Id do módulo Ead</param>
+    /// <param name="id">Id do inventario</param>
     /// <returns>Retorna uma lista de ControlesMateriaisEstoquesSaidas</returns>
     public async Task<List<ControleMaterialEstoqueSaidaDto>> GetControlesMateriaisEstoquesSaidasByInventarioId(ISender sender, int id)
     {

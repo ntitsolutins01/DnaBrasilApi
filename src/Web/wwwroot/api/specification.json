@@ -15773,7 +15773,11 @@
             "type": "integer",
             "format": "int32"
           },
-          "solicitante": {
+          "profissionalId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeProfissional": {
             "type": "string",
             "nullable": true
           },
@@ -15804,9 +15808,9 @@
             "type": "integer",
             "format": "int32"
           },
-          "solicitante": {
-            "type": "string",
-            "nullable": true
+          "profissionalId": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },
@@ -15818,9 +15822,9 @@
             "type": "integer",
             "format": "int32"
           },
-          "solicitante": {
-            "type": "string",
-            "nullable": true
+          "profissionalId": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },
@@ -17615,6 +17619,9 @@
             "type": "integer",
             "format": "int32",
             "nullable": true
+          },
+          "motivo": {
+            "type": "string"
           }
         }
       },
@@ -17634,6 +17641,9 @@
             "type": "integer",
             "format": "int32",
             "nullable": true
+          },
+          "motivo": {
+            "type": "string"
           }
         }
       },
@@ -17649,6 +17659,9 @@
             "type": "integer",
             "format": "int32",
             "nullable": true
+          },
+          "motivo": {
+            "type": "string"
           }
         }
       },
@@ -17710,6 +17723,9 @@
             "type": "integer",
             "format": "int32",
             "nullable": true
+          },
+          "motivo": {
+            "type": "string"
           }
         }
       },
@@ -17799,6 +17815,9 @@
             "type": "string"
           },
           "nomeLocalidade": {
+            "type": "string"
+          },
+          "nomeDeficiencia": {
             "type": "string"
           },
           "municipioEstado": {
