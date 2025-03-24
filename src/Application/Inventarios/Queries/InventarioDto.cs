@@ -11,6 +11,7 @@ public class InventarioDto
     public required int LocalidadeId { get; init; }
     public required string NomeLocalidade { get; init; }
     public int? Quantidade { get; init; }
+    public required string Motivo { get; init; }
 
     private class Mapping : Profile
     {

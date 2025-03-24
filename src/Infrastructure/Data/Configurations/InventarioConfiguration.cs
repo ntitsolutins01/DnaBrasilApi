@@ -7,6 +7,7 @@ internal class InventarioConfiguration : IEntityTypeConfiguration<Inventario>
 {
     public void Configure(EntityTypeBuilder<Inventario> builder)
     {
-        
+        builder.Property(t => t.Motivo)
+            .HasMaxLength(100);
     }
 }

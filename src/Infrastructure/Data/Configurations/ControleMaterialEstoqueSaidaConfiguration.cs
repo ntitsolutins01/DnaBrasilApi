@@ -7,7 +7,6 @@ internal class ControleMaterialEstoqueSaidaConfiguration : IEntityTypeConfigurat
 {
     public void Configure(EntityTypeBuilder<ControleMaterialEstoqueSaida> builder)
     {
-        builder.Property(t => t.Solicitante)
-            .HasMaxLength(150);
+        
     }
 }

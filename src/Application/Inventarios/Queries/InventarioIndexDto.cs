@@ -8,6 +8,7 @@ public class InventarioIndexDto
     public required string NomeLocalidade { get; init; }
     public required string NomeUndMedida { get; init; }
     public int? Quantidade { get; init; }
+    public required string Motivo { get; init; }
     private class Mapping : Profile
     {
         public Mapping()
