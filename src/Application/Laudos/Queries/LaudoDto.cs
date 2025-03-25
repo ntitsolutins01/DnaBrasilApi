@@ -81,7 +81,7 @@ public class LaudoDto
                 .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Aluno.Email))
                 .ForMember(dest => dest.QrCode, opt => opt.MapFrom(src => src.Aluno.QrCode))
                 .ForMember(dest => dest.Estatura, opt => opt.MapFrom(src => src.Saude!.Altura))
-                .ForMember(dest => dest.Massa, opt => opt.MapFrom(src => src.Saude != null ? Convert.ToDecimal(src.Saude.Massa) / 100 : 0m))
+                .ForMember(dest => dest.Massa, opt => opt.MapFrom(src => src.TalentoEsportivo!.Peso))
                 .ForMember(dest => dest.ByteImage, opt => opt.MapFrom(src => src.Aluno.ByteImage))
                 .ForMember(dest => dest.NomeFoto, opt => opt.MapFrom(src => src.Aluno.NomeFoto))
                 .ForMember(dest => dest.LocalidadeId, opt => opt.MapFrom(src => src.Aluno.Localidade.Id))
@@ -95,7 +95,7 @@ public class LaudoDto
                 .ForMember(dest => dest.EncaminhamentoTalentoEsportivoId,
                     opt => opt.MapFrom(src => src.TalentoEsportivo!.Encaminhamento!.Id))
                 .ForMember(dest => dest.ImcSaude,
-                    opt => opt.MapFrom(src => GetImc(src.Saude!.Massa, src.Saude!.Altura)))
+                    opt => opt.MapFrom(src => src.TalentoEsportivo!.Imc))
                 .ForMember(dest => dest.MunicipioEstado,
                     opt => opt.MapFrom(src =>
                         src.Aluno.Municipio.Nome!.ToString() + " / " + src.Aluno.Municipio.Estado!.Sigla!.ToString()))
