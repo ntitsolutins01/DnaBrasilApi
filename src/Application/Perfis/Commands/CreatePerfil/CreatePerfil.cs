@@ -8,6 +8,7 @@ public record CreatePerfilCommand : IRequest<int>
     public required string Nome { get; set; }
     public string? Descricao { get; set; }
     public required string AspNetRoleId { get; set; }
+    public int? BoolEad { get; set; }
 }
 
 public class CreatePerfilCommandHandler : IRequestHandler<CreatePerfilCommand, int>
@@ -25,7 +26,8 @@ public class CreatePerfilCommandHandler : IRequestHandler<CreatePerfilCommand, i
         {
             Nome = request.Nome,
             Descricao = request.Descricao,
-            AspNetRoleId = request.AspNetRoleId
+            AspNetRoleId = request.AspNetRoleId,
+            BoolEad = request.BoolEad
         };
 
         _context.Perfis.Add(entity);

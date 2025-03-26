@@ -1,6 +1,7 @@
 ﻿using DnaBrasilApi.Application.Alunos.Commands.CreateAluno;
 using DnaBrasilApi.Application.Alunos.Commands.CreateAlunoCertificados;
 using DnaBrasilApi.Application.Alunos.Commands.CreateAlunoCursos;
+using DnaBrasilApi.Application.Alunos.Commands.CreateAlunoPresencas;
 using DnaBrasilApi.Application.Alunos.Commands.DeleteAluno;
 using DnaBrasilApi.Application.Alunos.Commands.DeleteAlunoCertificado;
 using DnaBrasilApi.Application.Alunos.Commands.DeleteAlunoCurso;
@@ -17,6 +18,8 @@ using DnaBrasilApi.Application.Alunos.Queries.GetAlunosByLocalidade;
 using DnaBrasilApi.Application.Alunos.Queries.GetNomeAlunosAll;
 using DnaBrasilApi.Application.Alunos.Queries.GetNomeAlunosByLocalidadeId;
 using DnaBrasilApi.Application.Alunos.Queries.GetNomeAlunosByProfissionalId;
+using DnaBrasilApi.Application.Alunos.Queries.GetPresencasByAlunoId;
+using DnaBrasilApi.Application.Aulas.Queries;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DnaBrasilApi.Web.Endpoints;
@@ -40,6 +43,7 @@ public class Alunos : EndpointGroupBase
             .MapPost(CreateAluno)
             .MapPost(CreateAlunoCursos, "Cursos")
             .MapPost(CreateAlunoCertificados, "Certificados")
+            .MapPost(CreateAlunoPresencas, "Presencas")
             .MapPut(UpdateAluno, "{id}")
             .MapPut(UpdateAlunoCertificado, "{id}/Certificados")
             .MapPut(UpdateAlunoCurso, "{id}/Cursos")
@@ -97,6 +101,17 @@ public class Alunos : EndpointGroupBase
     /// <param name="command">Objeto de inclusão da Aluno e seus Certificado</param>
     /// <returns>Retorna Id da Aluno</returns>
     public async Task<int> CreateAlunoCertificados(ISender sender, CreateAlunoCertificadoCommand command)
+    {
+        return await sender.Send(command);
+    }
+
+    /// <summary>
+    /// Endpoint para inclusão de Aluno e Presenca
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="command">Objeto de inclusão da Aluno e suas Presencas</param>
+    /// <returns>Retorna Id da Aluno</returns>
+    public async Task<int> CreateAlunoPresencas(ISender sender, CreateAlunoPresencaCommand command)
     {
         return await sender.Send(command);
     }
@@ -257,6 +272,17 @@ public class Alunos : EndpointGroupBase
     public async Task<List<SelectListDto>> GetNomeAlunosByProfissionalId(ISender sender, int id)
     {
         return await sender.Send(new GetNomeAlunosByProfissionalIdQuery() { ProfissionalId = id });
+    }
+
+    /// <summary>
+    /// Endpoint que busca uma lista de presencas
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="id">Id do aluno</param>
+    /// <returns>Retorna uma lista de presencas</returns>
+    public async Task<List<AulaDto>> GetPresencasByAlunoId(ISender sender, int alunoId)
+    {
+        return await sender.Send(new GetPresencasByAlunoIdQuery() { AlunoId = alunoId });
     }
     #endregion
 }
