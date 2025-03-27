@@ -6,7 +6,7 @@ public record CreateAlunoPresencaCommand : IRequest<int>
 {
     public required int AlunoId { get; init; }
     public required string AulasId { get; init; }
-    public required int Presenca { get; init; }
+    public required bool Presenca { get; init; }
     public string? Justificativa { get; init; }
 }
 

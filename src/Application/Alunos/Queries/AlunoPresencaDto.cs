@@ -6,7 +6,7 @@ public class AlunoPresencaDto
 {
     public required string AlunoId { get; init; }
     public required string AulaId { get; init; }
-    public required string Presenca { get; init; }
+    public required bool Presenca { get; init; }
     public string? Justificativa { get; init; }
 
     private class Mapping : Profile

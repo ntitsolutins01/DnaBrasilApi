@@ -7,8 +7,6 @@ internal class CreateAlunoPresencaCommandValidator : AbstractValidator<CreateAlu
     public CreateAlunoPresencaCommandValidator()
     {
         RuleFor(v => v.Presenca)
-            .GreaterThanOrEqualTo(0)
-            .LessThanOrEqualTo(1)
             .NotEmpty();
         RuleFor(v => v.Justificativa)
             .MaximumLength(100);

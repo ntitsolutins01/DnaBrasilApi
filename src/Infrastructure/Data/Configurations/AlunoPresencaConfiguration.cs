@@ -8,7 +8,6 @@ internal class AlunoPresencaConfiguration : IEntityTypeConfiguration<AlunoPresen
     public void Configure(EntityTypeBuilder<AlunoPresenca> builder)
     {
         builder.Property(t => t.Presenca)
-            .HasMaxLength(1)
             .IsRequired();
         builder.Property(t => t.Justificativa)
             .HasMaxLength(100);

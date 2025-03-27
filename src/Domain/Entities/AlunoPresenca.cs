@@ -6,6 +6,6 @@ public class AlunoPresenca
     public int AulaId { get; set; }
     public Aluno? Aluno { get; set; }
     public Aula? Aula { get; set; }
-    public int Presenca { get; set; }
+    public bool Presenca { get; set; }
     public string? Justificativa { get; set; }
 }
