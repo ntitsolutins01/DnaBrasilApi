@@ -12,6 +12,7 @@ using DnaBrasilApi.Application.Alunos.Commands.UpdateQrCode;
 using DnaBrasilApi.Application.Alunos.Queries;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunoByEmail;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunoById;
+using DnaBrasilApi.Application.Alunos.Queries.GetAlunosCursosByCursoId;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunosAll;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunosByFilter;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunosByLocalidade;
@@ -51,7 +52,8 @@ public class Alunos : EndpointGroupBase
             .MapPut(UpdateQrCode, "/QrCode/{id}")
             .MapDelete(DeleteAluno, "{id}")
             .MapPost(GetAlunosByFilter, "Filter")
-            .MapGet(GetNomeAlunosByProfissionalId, "/Profissional/{id}");
+            .MapGet(GetNomeAlunosByProfissionalId, "/Profissional/{id}")
+            .MapGet(GetAlunosCursosByCursoId, "AlunoCurso/{cursoId}");
     }
     #endregion
 
@@ -283,6 +285,17 @@ public class Alunos : EndpointGroupBase
     public async Task<List<AulaDto>> GetPresencasByAlunoId(ISender sender, int alunoId)
     {
         return await sender.Send(new GetPresencasByAlunoIdQuery() { AlunoId = alunoId });
+    }
+
+    /// <summary>
+    /// Endpoint que busca um AlunoCurso
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="id">Id do aluno</param>
+    /// <returns>Retorna um AlunoCurso</returns>
+    public async Task<List<AlunoCursoDto>> GetAlunosCursosByCursoId(ISender sender, int cursoId)
+    {
+        return await sender.Send(new GetAlunosCursosByCursoIdQuery() { CursoId = cursoId });
     }
     #endregion
 }

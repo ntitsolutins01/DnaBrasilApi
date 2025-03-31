@@ -7,7 +7,6 @@ public class AulaDto
 {
     public required int Id { get; init; }
     public required int ModuloEadId { get; init; }
-    public required int CargaHoraria { get; init; }
     public required string NomeProfessor { get; init; }
     public required int ProfessorId { get; init; }
     public required string TituloModuloEad { get; init; }

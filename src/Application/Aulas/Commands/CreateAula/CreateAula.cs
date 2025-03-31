@@ -4,7 +4,6 @@ using DnaBrasilApi.Domain.Entities;
 namespace DnaBrasilApi.Application.Aulas.Commands.CreateAula;
 public record CreateAulaCommand : IRequest<int>
 {
-    public required int CargaHoraria { get; init; }
     public required int ProfessorId { get; init; }
     public required int ModuloEadId { get; init; }
     public required string Titulo { get; init; }
@@ -38,7 +37,6 @@ public class CreateAulaCommandHandler : IRequestHandler<CreateAulaCommand, int>
 
         var entity = new Aula
         {
-            CargaHoraria = request.CargaHoraria,
             Professor = professor,
             ModuloEad = moduloEad,
             Titulo = request.Titulo,
