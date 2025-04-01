@@ -354,6 +354,39 @@
         }
       }
     },
+    "/api/Alunos/Presencas": {
+      "post": {
+        "tags": [
+          "Alunos"
+        ],
+        "operationId": "CreateAlunoPresencas",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAlunoPresencaCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Alunos/{id}/Certificados": {
       "put": {
         "tags": [
@@ -12620,6 +12653,26 @@
           }
         }
       },
+      "CreateAlunoPresencaCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "alunoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "aulasId": {
+            "type": "string"
+          },
+          "presenca": {
+            "type": "boolean"
+          },
+          "justificativa": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
       "UpdateAlunoCommand": {
         "type": "object",
         "additionalProperties": false,
@@ -13774,6 +13827,13 @@
               "video": {
                 "type": "string",
                 "nullable": true
+              },
+              "alunoPresencas": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "$ref": "#/components/schemas/AlunoPresenca"
+                }
               }
             }
           }
@@ -13851,6 +13911,11 @@
               },
               "aspNetRoleId": {
                 "type": "string"
+              },
+              "boolEad": {
+                "type": "integer",
+                "format": "int32",
+                "nullable": true
               }
             }
           }
@@ -14483,6 +14548,13 @@
                 "nullable": true,
                 "items": {
                   "$ref": "#/components/schemas/AlunoCertificado"
+                }
+              },
+              "alunoPresencas": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "$ref": "#/components/schemas/AlunoPresenca"
                 }
               }
             }
@@ -15563,6 +15635,43 @@
             }
           }
         ]
+      },
+      "AlunoPresenca": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "alunoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "aulaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "aluno": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Aluno"
+              }
+            ]
+          },
+          "aula": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Aula"
+              }
+            ]
+          },
+          "presenca": {
+            "type": "boolean"
+          },
+          "justificativa": {
+            "type": "string",
+            "nullable": true
+          }
+        }
       },
       "CreateControleAcessoAulaCommand": {
         "type": "object",
@@ -19539,6 +19648,11 @@
           },
           "aspNetRoleId": {
             "type": "string"
+          },
+          "boolEad": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
           }
         }
       },
@@ -19555,6 +19669,11 @@
           },
           "aspNetRoleId": {
             "type": "string"
+          },
+          "boolEad": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
           }
         }
       },

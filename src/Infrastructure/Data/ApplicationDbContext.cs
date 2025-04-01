@@ -83,6 +83,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<AlunoCertificado> AlunosCertificados => Set<AlunoCertificado>();
     public DbSet<Inventario> Inventarios => Set<Inventario>();
     public DbSet<ArquivosInventario> ArquivosInventarios => Set<ArquivosInventario>();
+    public DbSet<AlunoPresenca> AlunosPresencas => Set<AlunoPresenca>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -175,6 +176,18 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
             .HasOne<Certificado>(sc => sc.Certificado)
             .WithMany(s => s.AlunoCertificados)
             .HasForeignKey(sc => sc.CertificadoId);
+
+        builder.Entity<AlunoPresenca>().HasKey(sc => new { sc.AlunoId, sc.AulaId });
+
+        builder.Entity<AlunoPresenca>()
+            .HasOne<Aluno>(sc => sc.Aluno)
+            .WithMany(s => s.AlunoPresencas)
+            .HasForeignKey(sc => sc.AlunoId);
+
+        builder.Entity<AlunoPresenca>()
+            .HasOne<Aula>(sc => sc.Aula)
+            .WithMany(s => s.AlunoPresencas)
+            .HasForeignKey(sc => sc.AulaId);
 
         #endregion
 
