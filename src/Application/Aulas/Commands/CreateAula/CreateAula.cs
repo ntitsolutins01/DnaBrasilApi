@@ -12,6 +12,7 @@ public record CreateAulaCommand : IRequest<int>
     public string? Material { get; init; }
     public string? NomeMaterial { get; init; }
     public string? Video { get; init; }
+    public string? NomeVideo { get; init; }
 }
 
 public class CreateAulaCommandHandler : IRequestHandler<CreateAulaCommand, int>
@@ -43,6 +44,7 @@ public class CreateAulaCommandHandler : IRequestHandler<CreateAulaCommand, int>
             Descricao = request.Descricao,
             Status = request.Status,
             Video = request.Video,
+            NomeVideo = request.NomeVideo,
             Material = request.Material,
             NomeMaterial = request.NomeMaterial
         };

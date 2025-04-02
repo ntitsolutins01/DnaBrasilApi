@@ -13245,6 +13245,10 @@
           "video": {
             "type": "string",
             "nullable": true
+          },
+          "nomeVideo": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -13281,6 +13285,10 @@
           "video": {
             "type": "string",
             "nullable": true
+          },
+          "nomeVideo": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -13315,6 +13323,10 @@
             "nullable": true
           },
           "video": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeVideo": {
             "type": "string",
             "nullable": true
           }
@@ -13895,6 +13907,10 @@
                 "nullable": true
               },
               "video": {
+                "type": "string",
+                "nullable": true
+              },
+              "nomeVideo": {
                 "type": "string",
                 "nullable": true
               },

@@ -10,5 +10,6 @@ public class Aula : BaseAuditableEntity
     public string? Material { get; set; }
     public string? NomeMaterial { get; set; }
     public string? Video { get; set; }
+    public string? NomeVideo { get; set; }
     public IList<AlunoPresenca>? AlunoPresencas { get; set; }
 }

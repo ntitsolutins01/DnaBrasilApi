@@ -18,7 +18,9 @@ public class AulaConfiguration : IEntityTypeConfiguration<Aula>
         builder.Property(t => t.NomeMaterial)
             .HasMaxLength(100);
         builder.Property(t => t.Video)
-            .HasMaxLength(500);
+            .HasMaxLength(200);
+        builder.Property(t => t.NomeVideo)
+            .HasMaxLength(100);
 
     }
 }

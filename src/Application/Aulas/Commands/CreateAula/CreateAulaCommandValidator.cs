@@ -13,5 +13,11 @@ internal class CreateAulaCommandValidator : AbstractValidator<CreateAulaCommand>
         RuleFor(v => v.Descricao)
             .MaximumLength(500)
             .WithMessage("A quantidade máxima de caracteres permitidos são de 500.");
+        RuleFor(v => v.NomeMaterial)
+            .MaximumLength(100)
+            .WithMessage("A quantidade máxima de caracteres permitidos são de 100.");
+        RuleFor(v => v.NomeVideo)
+            .MaximumLength(100)
+            .WithMessage("A quantidade máxima de caracteres permitidos são de 100.");
     }
 }

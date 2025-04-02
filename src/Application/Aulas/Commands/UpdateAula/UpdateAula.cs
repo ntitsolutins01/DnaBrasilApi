@@ -12,6 +12,7 @@ public record UpdateAulaCommand : IRequest <bool>
     public string? Material { get; init; }
     public string? NomeMaterial { get; init; }
     public string? Video { get; init; }
+    public string? NomeVideo { get; init; }
 }
 
 public class UpdateAulaCommandHandler : IRequestHandler<UpdateAulaCommand, bool>
