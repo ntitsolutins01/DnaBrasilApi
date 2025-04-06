@@ -8,7 +8,6 @@ namespace DnaBrasilApi.Application.ModulosEad.Queries;
 public class ModuloEadDto
 {
     public required int Id { get; init; }
-    public required int CargaHoraria { get; init; }
     public required string Titulo { get; init; }
     public string? Descricao { get; init; }
     public bool Status { get; init; } 
