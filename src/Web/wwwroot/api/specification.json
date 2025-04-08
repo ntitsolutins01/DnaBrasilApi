@@ -630,6 +630,50 @@
         }
       }
     },
+    "/api/Alunos/Presenca/{data}/{id}": {
+      "get": {
+        "tags": [
+          "Alunos"
+        ],
+        "operationId": "GetPresencasByDataAtividadeId",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 2
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AtividadeDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/ArquivosInventarios": {
       "get": {
         "tags": [
@@ -12670,6 +12714,9 @@
           "justificativa": {
             "type": "string",
             "nullable": true
+          },
+          "data": {
+            "type": "string"
           }
         }
       },
@@ -12891,6 +12938,76 @@
           }
         }
       },
+      "AtividadeDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "estruturaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeEstrutura": {
+            "type": "string"
+          },
+          "linhaAcaoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeLinhaAcao": {
+            "type": "string"
+          },
+          "categoriaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeCategoria": {
+            "type": "string"
+          },
+          "modalidadeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeModalidade": {
+            "type": "string"
+          },
+          "turma": {
+            "type": "string"
+          },
+          "diasSemana": {
+            "type": "string"
+          },
+          "hrInicial": {
+            "type": "string"
+          },
+          "hrFinal": {
+            "type": "string"
+          },
+          "profissionalId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeProfissional": {
+            "type": "string"
+          },
+          "localidadeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeLocalidade": {
+            "type": "string"
+          },
+          "status": {
+            "type": "boolean"
+          },
+          "turmaHora": {
+            "type": "string"
+          }
+        }
+      },
       "ArquivosInventarioDto": {
         "type": "object",
         "additionalProperties": false,
@@ -13030,76 +13147,6 @@
             "format": "int32"
           },
           "diasSemana": {
-            "type": "string"
-          }
-        }
-      },
-      "AtividadeDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "estruturaId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nomeEstrutura": {
-            "type": "string"
-          },
-          "linhaAcaoId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nomeLinhaAcao": {
-            "type": "string"
-          },
-          "categoriaId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nomeCategoria": {
-            "type": "string"
-          },
-          "modalidadeId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nomeModalidade": {
-            "type": "string"
-          },
-          "turma": {
-            "type": "string"
-          },
-          "diasSemana": {
-            "type": "string"
-          },
-          "hrInicial": {
-            "type": "string"
-          },
-          "hrFinal": {
-            "type": "string"
-          },
-          "profissionalId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nomeProfissional": {
-            "type": "string"
-          },
-          "localidadeId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nomeLocalidade": {
-            "type": "string"
-          },
-          "status": {
-            "type": "boolean"
-          },
-          "turmaHora": {
             "type": "string"
           }
         }
@@ -13827,13 +13874,6 @@
               "video": {
                 "type": "string",
                 "nullable": true
-              },
-              "alunoPresencas": {
-                "type": "array",
-                "nullable": true,
-                "items": {
-                  "$ref": "#/components/schemas/AlunoPresenca"
-                }
               }
             }
           }
@@ -13912,10 +13952,11 @@
               "aspNetRoleId": {
                 "type": "string"
               },
-              "boolEad": {
-                "type": "integer",
-                "format": "int32",
-                "nullable": true
+              "status": {
+                "type": "boolean"
+              },
+              "ead": {
+                "type": "boolean"
               }
             }
           }
@@ -15494,6 +15535,13 @@
                 "items": {
                   "$ref": "#/components/schemas/AtividadeAluno"
                 }
+              },
+              "alunoPresencas": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "$ref": "#/components/schemas/AlunoPresenca"
+                }
               }
             }
           }
@@ -15558,6 +15606,48 @@
             }
           }
         ]
+      },
+      "AlunoPresenca": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "alunoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "atividadeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "aluno": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Aluno"
+              }
+            ]
+          },
+          "atividade": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Atividade"
+              }
+            ]
+          },
+          "presenca": {
+            "type": "boolean"
+          },
+          "justificativa": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        }
       },
       "AlunoCertificado": {
         "type": "object",
@@ -15635,43 +15725,6 @@
             }
           }
         ]
-      },
-      "AlunoPresenca": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "alunoId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "aulaId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "aluno": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/Aluno"
-              }
-            ]
-          },
-          "aula": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/Aula"
-              }
-            ]
-          },
-          "presenca": {
-            "type": "boolean"
-          },
-          "justificativa": {
-            "type": "string",
-            "nullable": true
-          }
-        }
       },
       "CreateControleAcessoAulaCommand": {
         "type": "object",
@@ -19649,10 +19702,11 @@
           "aspNetRoleId": {
             "type": "string"
           },
-          "boolEad": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
+          "status": {
+            "type": "boolean"
+          },
+          "ead": {
+            "type": "boolean"
           }
         }
       },
@@ -19669,11 +19723,6 @@
           },
           "aspNetRoleId": {
             "type": "string"
-          },
-          "boolEad": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
           }
         }
       },
@@ -19691,6 +19740,12 @@
           "descricao": {
             "type": "string",
             "nullable": true
+          },
+          "status": {
+            "type": "boolean"
+          },
+          "ead": {
+            "type": "boolean"
           }
         }
       },

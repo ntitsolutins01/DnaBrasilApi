@@ -19,6 +19,8 @@ using DnaBrasilApi.Application.Alunos.Queries.GetNomeAlunosAll;
 using DnaBrasilApi.Application.Alunos.Queries.GetNomeAlunosByLocalidadeId;
 using DnaBrasilApi.Application.Alunos.Queries.GetNomeAlunosByProfissionalId;
 using DnaBrasilApi.Application.Alunos.Queries.GetPresencasByAlunoId;
+using DnaBrasilApi.Application.Alunos.Queries.GetPresencasByDataAtividadeId;
+using DnaBrasilApi.Application.Atividades.Queries;
 using DnaBrasilApi.Application.Aulas.Queries;
 using Microsoft.AspNetCore.Mvc;
 
@@ -51,7 +53,8 @@ public class Alunos : EndpointGroupBase
             .MapPut(UpdateQrCode, "/QrCode/{id}")
             .MapDelete(DeleteAluno, "{id}")
             .MapPost(GetAlunosByFilter, "Filter")
-            .MapGet(GetNomeAlunosByProfissionalId, "/Profissional/{id}");
+            .MapGet(GetNomeAlunosByProfissionalId, "/Profissional/{id}")
+            .MapGet(GetPresencasByDataAtividadeId, "/Presenca/{data}/{id}");
     }
     #endregion
 
@@ -280,9 +283,21 @@ public class Alunos : EndpointGroupBase
     /// <param name="sender">Sender</param>
     /// <param name="id">Id do aluno</param>
     /// <returns>Retorna uma lista de presencas</returns>
-    public async Task<List<AulaDto>> GetPresencasByAlunoId(ISender sender, int alunoId)
+    public async Task<List<AtividadeDto>> GetPresencasByAlunoId(ISender sender, int alunoId)
     {
         return await sender.Send(new GetPresencasByAlunoIdQuery() { AlunoId = alunoId });
+    }
+
+    /// <summary>
+    /// Endpoint que busca uma lista de presenças dos alunos por data e atividade 
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="data">Data da presença</param>
+    /// <param name="id">Id da atividade</param>
+    /// <returns>Retorna uma lista de presencas</returns>
+    public async Task<List<AtividadeDto>> GetPresencasByDataAtividadeId(ISender sender, string data, int id)
+    {
+        return await sender.Send(new GetPresencasByDataAtividadeIdQuery() { Data = data, AtividadeId = id});
     }
     #endregion
 }

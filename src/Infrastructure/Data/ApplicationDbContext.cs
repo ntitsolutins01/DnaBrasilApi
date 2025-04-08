@@ -177,7 +177,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
             .WithMany(s => s.AlunoCertificados)
             .HasForeignKey(sc => sc.CertificadoId);
 
-        builder.Entity<AlunoPresenca>().HasKey(sc => new { sc.AlunoId, sc.AulaId });
+        builder.Entity<AlunoPresenca>().HasKey(sc => new { sc.AlunoId, AulaId = sc.AtividadeId });
 
         builder.Entity<AlunoPresenca>()
             .HasOne<Aluno>(sc => sc.Aluno)
@@ -185,9 +185,9 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
             .HasForeignKey(sc => sc.AlunoId);
 
         builder.Entity<AlunoPresenca>()
-            .HasOne<Aula>(sc => sc.Aula)
+            .HasOne<Atividade>(sc => sc.Atividade)
             .WithMany(s => s.AlunoPresencas)
-            .HasForeignKey(sc => sc.AulaId);
+            .HasForeignKey(sc => sc.AtividadeId);
 
         #endregion
 
