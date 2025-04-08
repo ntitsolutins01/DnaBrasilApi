@@ -1,4 +1,4 @@
-﻿using DnaBrasilApi.Application.Alunos.Commands.CreateAluno;
+using DnaBrasilApi.Application.Alunos.Commands.CreateAluno;
 using DnaBrasilApi.Application.Alunos.Commands.CreateAlunoCertificados;
 using DnaBrasilApi.Application.Alunos.Commands.CreateAlunoCursos;
 using DnaBrasilApi.Application.Alunos.Commands.CreateAlunoPresencas;
@@ -12,6 +12,7 @@ using DnaBrasilApi.Application.Alunos.Commands.UpdateQrCode;
 using DnaBrasilApi.Application.Alunos.Queries;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunoByEmail;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunoById;
+using DnaBrasilApi.Application.Alunos.Queries.GetAlunosCursosByCursoId;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunosAll;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunosByFilter;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunosByLocalidade;
@@ -55,6 +56,7 @@ public class Alunos : EndpointGroupBase
             .MapPost(GetAlunosByFilter, "Filter")
             .MapGet(GetNomeAlunosByProfissionalId, "/Profissional/{id}")
             .MapGet(GetPresencasByDataAtividadeId, "/Presenca/{data}/{id}");
+            .MapGet(GetAlunosCursosByCursoId, "AlunoCurso/{cursoId}");
     }
     #endregion
 
@@ -286,18 +288,6 @@ public class Alunos : EndpointGroupBase
     public async Task<List<AtividadeDto>> GetPresencasByAlunoId(ISender sender, int alunoId)
     {
         return await sender.Send(new GetPresencasByAlunoIdQuery() { AlunoId = alunoId });
-    }
-
-    /// <summary>
-    /// Endpoint que busca uma lista de presenças dos alunos por data e atividade 
-    /// </summary>
-    /// <param name="sender">Sender</param>
-    /// <param name="data">Data da presença</param>
-    /// <param name="id">Id da atividade</param>
-    /// <returns>Retorna uma lista de presencas</returns>
-    public async Task<List<AtividadeDto>> GetPresencasByDataAtividadeId(ISender sender, string data, int id)
-    {
-        return await sender.Send(new GetPresencasByDataAtividadeIdQuery() { Data = data, AtividadeId = id});
     }
     #endregion
 }

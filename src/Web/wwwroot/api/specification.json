@@ -1432,7 +1432,42 @@
         "tags": [
           "Aulas"
         ],
-        "operationId": "GetAulasAllByModuloEadId",
+        "operationId": "GetAulasByModuloEadId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AulaDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Aulas/Curso/{id}": {
+      "get": {
+        "tags": [
+          "Aulas"
+        ],
+        "operationId": "GetAulasByCursoId",
         "parameters": [
           {
             "name": "id",
@@ -13175,10 +13210,6 @@
             "type": "integer",
             "format": "int32"
           },
-          "cargaHoraria": {
-            "type": "integer",
-            "format": "int32"
-          },
           "nomeProfessor": {
             "type": "string"
           },
@@ -13210,6 +13241,10 @@
           "video": {
             "type": "string",
             "nullable": true
+          },
+          "nomeVideo": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -13217,10 +13252,6 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "cargaHoraria": {
-            "type": "integer",
-            "format": "int32"
-          },
           "professorId": {
             "type": "integer",
             "format": "int32"
@@ -13250,6 +13281,10 @@
           "video": {
             "type": "string",
             "nullable": true
+          },
+          "nomeVideo": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -13262,10 +13297,6 @@
             "format": "int32"
           },
           "professorId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "cargaHoraria": {
             "type": "integer",
             "format": "int32"
           },
@@ -13288,6 +13319,10 @@
             "nullable": true
           },
           "video": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeVideo": {
             "type": "string",
             "nullable": true
           }
@@ -13843,10 +13878,6 @@
             "type": "object",
             "additionalProperties": false,
             "properties": {
-              "cargaHoraria": {
-                "type": "integer",
-                "format": "int32"
-              },
               "professor": {
                 "$ref": "#/components/schemas/Usuario"
               },
@@ -14275,10 +14306,6 @@
             "type": "object",
             "additionalProperties": false,
             "properties": {
-              "cargaHoraria": {
-                "type": "integer",
-                "format": "int32"
-              },
               "curso": {
                 "$ref": "#/components/schemas/Curso"
               },
@@ -19191,10 +19218,6 @@
             "type": "integer",
             "format": "int32"
           },
-          "cargaHoraria": {
-            "type": "integer",
-            "format": "int32"
-          },
           "titulo": {
             "type": "string"
           },
@@ -19218,10 +19241,6 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "cargaHoraria": {
-            "type": "integer",
-            "format": "int32"
-          },
           "cursoId": {
             "type": "integer",
             "format": "int32"
@@ -19243,10 +19262,6 @@
         "additionalProperties": false,
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "cargaHoraria": {
             "type": "integer",
             "format": "int32"
           },

@@ -1,6 +1,6 @@
 ﻿using DnaBrasilApi.Application.Aulas.Commands.DeleteAula;
-using DnaBrasilApi.Application.Aulas.Queries.GetAulasAllByModuloEadId;
 using DnaBrasilApi.Application.Aulas.Queries;
+using DnaBrasilApi.Application.Aulas.Queries.GetAulasByModuloEadId;
 using DnaBrasilApi.Application.Deficiencias.Commands.CreateDeficiencia;
 using DnaBrasilApi.Application.Deficiencias.Commands.DeleteDeficiencia;
 using DnaBrasilApi.Application.Deficiencias.Commands.UpdateDeficiencia;
@@ -100,9 +100,9 @@ public class Deficiencias : EndpointGroupBase
     /// <param name="sender">Sender</param>
     /// <param name="id">Id do módulo Ead</param>
     /// <returns>Retorna uma lista da Deficiencia</returns>
-    public async Task<List<AulaDto>> GetAulasAllByModuloEadId(ISender sender, int id)
+    public async Task<List<AulaDto>> GetAulasByModuloEadId(ISender sender, int id)
     {
-        return await sender.Send(new GetAulasAllByModuloEadIdQuery() { ModuloEadId = id });
+        return await sender.Send(new GetAulasByModuloEadIdQuery() { ModuloEadId = id });
     }
 
 
