@@ -25,46 +25,47 @@ public class CreateCargaCommandHandler : IRequestHandler<CreateCargaCommand, int
             .Include(i => i.Vocacional)
             .Include(i => i.ConsumoAlimentar)
             .Include(i => i.TalentoEsportivo)
-            .Include(i => i.Saude)
             .Include(i => i.SaudeBucal)
+            .Include(i => i.Saude)
             .AsNoTracking()
             .ToListAsync(cancellationToken);
 
-        //var list = await _context.QualidadeDeVidas
-        //    .Include(i => i.Aluno)
-        //    .AsNoTracking()
-        //    .ToListAsync(cancellationToken);
+        ////var list = await _context.QualidadeDeVidas
+        ////    .Include(i => i.Aluno)
+        ////    .AsNoTracking()
+        ////    .ToListAsync(cancellationToken);
 
-        //var list = await _context.ConsumoAlimentares
-        //    .Include(i => i.Aluno)
-        //    .AsNoTracking()
-        //    .ToListAsync(cancellationToken);
+        ////var list = await _context.Vocacionais
+        ////    .Include(i => i.Aluno)
+        ////    .AsNoTracking()
+        ////    .ToListAsync(cancellationToken);
 
-        //var list = await _context.Vocacionais
-        //    .Include(i => i.Aluno)
-        //    .AsNoTracking()
-        //    .ToListAsync(cancellationToken);
+        ////var list = await _context.ConsumoAlimentares
+        ////    .Include(i => i.Aluno)
+        ////    .AsNoTracking()
+        ////    .ToListAsync(cancellationToken);
 
-        //var list = await _context.SaudeBucais
-        //    .Include(i => i.Aluno)
-        //    .AsNoTracking()
-        //    .ToListAsync(cancellationToken);
+        ////var list = await _context.TalentosEsportivos
+        ////    .Include(i => i.Aluno)
+        ////    .AsNoTracking()
+        ////    .ToListAsync(cancellationToken);
 
-        //var list = await _context.TalentosEsportivos
-        //    .Include(i => i.Aluno)
-        //    .AsNoTracking()
-        //    .ToListAsync(cancellationToken);
+        ////var list = await _context.SaudeBucais
+        ////    .Include(i => i.Aluno)
+        ////    .AsNoTracking()
+        ////    .ToListAsync(cancellationToken);
 
         //var list = await _context.Saudes
         //    .Include(i => i.Aluno)
         //    .AsNoTracking()
         //    .ToListAsync(cancellationToken);
-        //var arrAlunos = new int[]
-        //{
-        //    };
-        
+
+        ////var arrAlunos = new int[]
+        ////{
+        ////    };
+
         //var alunos = await _context.Alunos
-        //    .Where(q=> q.Localidade.Id == 30)
+        //    .Where(q => q.Localidade.Id == 31)
         //    .AsNoTracking()
         //    .ToListAsync(cancellationToken);
 
@@ -74,125 +75,130 @@ public class CreateCargaCommandHandler : IRequestHandler<CreateCargaCommand, int
         //        .FindAsync(new object[] { aluno!.Id }, cancellationToken);
 
 
-            //var find = list.Find(
-            //    delegate (Vocacional bk)
-            //    {
-            //        return bk.Aluno!.Id == aluno.Id;
-            //    }
-            //);
-            //var find = list.Find(
-            //    delegate (QualidadeDeVida bk)
-            //    {
-            //        return bk.Aluno!.Id == aluno.Id;
-            //    }
-            //);
-            //var find = list.Find(
-            //    delegate (ConsumoAlimentar bk)
-            //    {
-            //        return bk.Aluno!.Id == aluno.Id;
-            //    }
-            //);
-            //var find = list.Find(
-            //    delegate (SaudeBucal bk)
-            //    {
-            //        return bk.Aluno!.Id == aluno.Id;
-            //    }
-            //);
-            //var find = list.Find(
-            //    delegate (TalentoEsportivo bk)
-            //    {
-            //        return bk.Aluno!.Id == aluno.Id;
-            //    }
-            //);
-            //var find = list.Find(
-            //    delegate (Saude bk)
-            //    {
-            //        return bk.Aluno!.Id == aluno.Id;
-            //    }
-            //);
-            //if (find != null)
-            //{
-            //    var findLaudos = laudos.Find(
-            //        delegate (Laudo bk)
-            //        {
-            //            return bk.Aluno!.Id == aluno.Id;
-            //        }
-            //    );
+        //    //var find = list.Find(
+        //    //    delegate (QualidadeDeVida bk)
+        //    //    {
+        //    //        return bk.Aluno!.Id == aluno.Id;
+        //    //    }
+        //    //);
+        //    //var find = list.Find(
+        //    //    delegate (Vocacional bk)
+        //    //    {
+        //    //        return bk.Aluno!.Id == aluno.Id;
+        //    //    }
+        //    //);
+        //    //var find = list.Find(
+        //    //    delegate (ConsumoAlimentar bk)
+        //    //    {
+        //    //        return bk.Aluno!.Id == aluno.Id;
+        //    //    }
+        //    //);
+        //    //var find = list.Find(
+        //    //    delegate (TalentoEsportivo bk)
+        //    //    {
+        //    //        return bk.Aluno!.Id == aluno.Id;
+        //    //    }
+        //    //);
+        //    //var find = list.Find(
+        //    //    delegate (SaudeBucal bk)
+        //    //    {
+        //    //        return bk.Aluno!.Id == aluno.Id;
+        //    //    }
+        //    //);
+        //    var find = list.Find(
+        //        delegate (Saude bk)
+        //        {
+        //            return bk.Aluno!.Id == aluno.Id;
+        //        }
+        //    );
+        //    if (find != null)
+        //    {
+        //        var findLaudos = laudos.Find(
+        //            delegate (Laudo bk)
+        //            {
+        //                return bk.Aluno!.Id == aluno.Id;
+        //            }
+        //        );
 
-            //var obj = await _context.Vocacionais
-            //    .FindAsync(new object[] { find!.Id }, cancellationToken);
-            //var obj = await _context.QualidadeDeVidas
-            //    .FindAsync(new object[] { find!.Id }, cancellationToken);
-            //var obj = await _context.ConsumoAlimentares
-            //    .FindAsync(new object[] { find!.Id }, cancellationToken);
-            //var obj = await _context.SaudeBucais
-            //    .FindAsync([find!.Id], cancellationToken);
-            //var obj = await _context.TalentosEsportivos
-            //    .FindAsync(new object[] { find!.Id }, cancellationToken);
-            //var obj = await _context.Saudes
-            //    .FindAsync(new object[] { find!.Id }, cancellationToken);
+        //        //var obj = await _context.QualidadeDeVidas
+        //        //    .FindAsync(new object[] { find!.Id }, cancellationToken);
+        //        //var obj = await _context.Vocacionais
+        //        //    .FindAsync(new object[] { find!.Id }, cancellationToken);
+        //        //var obj = await _context.ConsumoAlimentares
+        //        //    .FindAsync(new object[] { find!.Id }, cancellationToken);
+        //        //var obj = await _context.TalentosEsportivo
+        //        //.FindAsync(new object[] { find!.Id }, cancellationToken);
+        //        //var obj = await _context.SaudeBucais
+        //        //    .FindAsync([find!.Id], cancellationToken);
+        //        var obj = await _context.Saudes
+        //            .FindAsync(new object[] { find!.Id }, cancellationToken);
 
-            //if (findLaudos != null)
-            //{
+        //        if (findLaudos != null)
+        //        {
 
-            //    var entity = await _context.Laudos
-            //        .FindAsync([findLaudos.Id], cancellationToken);
+        //            var entity = await _context.Laudos
+        //                .FindAsync([findLaudos.Id], cancellationToken);
 
-            //    Guard.Against.NotFound(request.Id, entity);
+        //            Guard.Against.NotFound(request.Id, entity);
 
-            //if (
-            //findLaudos.QualidadeDeVida == null
-            //&&
-            //findLaudos.Vocacional == null
-            //&&
-            //findLaudos.Saude == null
-            //&&
-            //findLaudos.ConsumoAlimentar == null 
-            //&&
-            //findLaudos.SaudeBucal == null 
-            //&&
-            //findLaudos.TalentoEsportivo == null
-            //   )
-            //{
-            //entity.StatusLaudo = "A";
+        //            if (
+        //            //findLaudos.QualidadeDeVida != null
+        //            //&&
+        //            //findLaudos.Vocacional != null
+        //            //&&
+        //            findLaudos.Saude != null
+        //            //&&
+        //            //findLaudos.ConsumoAlimentar != null
+        //            //&&
+        //            //findLaudos.SaudeBucal != null
+        //            //&&
+        //            //findLaudos.TalentoEsportivo != null
+        //               )
+        //            {
+        //                //entity.StatusLaudo = "A";
 
-            //var results = await _context.SaveChangesAsync(cancellationToken);
+        //                //var results = await _context.SaveChangesAsync(cancellationToken);
 
-            //var teste = results == 1;//true
+        //                //var teste = results == 1;//true
 
-            //entity.Vocacional = obj;
-            //entity.QualidadeDeVida = obj;
-            //entity.ConsumoAlimentar = obj;
-            //entity.SaudeBucal = obj;
-            //entity.TalentoEsportivo = obj;
-            //entity.Saude = obj;
+        //                //entity.QualidadeDeVida = obj;
+        //                //entity.Vocacional = obj;
+        //                //entity.ConsumoAlimentar = obj;
+        //                //entity.TalentoEsportivo = obj;
+        //                //entity.SaudeBucal = obj;
+        //                entity.Saude = obj;
 
 
-            //var results = await _context.SaveChangesAsync(cancellationToken);
-            // }
-            //}
-            //else
-            //{
-            //    var entityLaudo = new Laudo()
-            //    {
-            //        Aluno = alunoObj!,
-            //        //Vocacional = obj
-            //        //QualidadeDeVida = obj
-            //        //ConsumoAlimentar = obj
-            //        //SaudeBucal = obj
-            //        TalentoEsportivo = obj
-            //        //Saude = obj
-            //    };
+        //                var results = await _context.SaveChangesAsync(cancellationToken);
+        //            }
+        //        }
+        //        else
+        //        {
+        //            var entityLaudo = new Laudo()
+        //            {
+        //                Aluno = alunoObj!,
+        //                //QualidadeDeVida = obj
+        //                //Vocacional = obj
+        //                //ConsumoAlimentar = obj
+        //                //TalentoEsportivo = obj
+        //                //SaudeBucal = obj
+        //                Saude = obj
+        //            };
 
-            //    _context.Laudos.Add(entityLaudo);
+        //            _context.Laudos.Add(entityLaudo);
 
-            //    await _context.SaveChangesAsync(cancellationToken);
+        //            await _context.SaveChangesAsync(cancellationToken);
 
-            //    var id = entityLaudo.Id;
-            //}
-            //}
+        //            var id = entityLaudo.Id;
+        //        }
+        //    }
         //}
-        laudos = laudos.Where(x => x.Aluno.Localidade!.Id == 30).ToList();
+        var arr = new int[]
+        {
+            30,31
+        };
+
+        laudos = laudos.Where(x => arr.Contains(x.Aluno.Localidade!.Id)).ToList();// x.Aluno.Localidade!.Id == 31).ToList();
 
         foreach (var item in laudos)
         {

@@ -1,4 +1,5 @@
-﻿using DnaBrasilApi.Application.Common.Interfaces;
+﻿using System.Globalization;
+using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Alunos.Commands.CreateAlunoPresencas;
@@ -8,6 +9,7 @@ public record CreateAlunoPresencaCommand : IRequest<int>
     public required string AulasId { get; init; }
     public required bool Presenca { get; init; }
     public string? Justificativa { get; init; }
+    public required string Data { get; init; }
 }
 
 public class CreateAlunoPresencaCommandHandler : IRequestHandler<CreateAlunoPresencaCommand, int>
@@ -32,10 +34,11 @@ public class CreateAlunoPresencaCommandHandler : IRequestHandler<CreateAlunoPres
         {
             _context.AlunosPresencas.Add(new AlunoPresenca()
             {
-                AulaId = id, 
+                AtividadeId = id, 
                 AlunoId = request.AlunoId,
                 Presenca = request.Presenca,
-                Justificativa = request.Justificativa
+                Justificativa = request.Justificativa,
+                Data = DateTime.ParseExact(request.Data, "dd/MM/yyyy", CultureInfo.CreateSpecificCulture("pt-BR"))
             });
         }
 

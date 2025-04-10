@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DnaBrasilApi.Domain.Entities;
 public class ModeloCarteirinha : BaseAuditableEntity
@@ -7,5 +7,5 @@ public class ModeloCarteirinha : BaseAuditableEntity
     public string? NomeImagemFrente { get; set; }
     public string? UrlImagemFrente { get; set; }
     public string? NomeImagemVerso { get; set; }
-    public string? UrlImagemVerso{ get; set; }
+    public string? UrlImagemVerso { get; set; }
 }

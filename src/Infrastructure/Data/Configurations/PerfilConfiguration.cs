@@ -15,7 +15,5 @@ public class PerfilConfiguration : IEntityTypeConfiguration<Perfil>
             .IsRequired();
         builder.Property(t => t.Descricao)
             .HasMaxLength(100);
-        builder.Property(t => t.BoolEad)
-            .HasMaxLength(1);
     }
 }
