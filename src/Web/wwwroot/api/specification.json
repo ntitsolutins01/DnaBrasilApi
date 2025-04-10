@@ -19113,11 +19113,19 @@
             "type": "integer",
             "format": "int32"
           },
-          "nomeImagem": {
+          "nomeImagemFrente": {
             "type": "string",
             "nullable": true
           },
-          "urlImagem": {
+          "urlImagemFrente": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeImagemVerso": {
+            "type": "string",
+            "nullable": true
+          },
+          "urlImagemVerso": {
             "type": "string",
             "nullable": true
           }
@@ -19131,11 +19139,19 @@
             "type": "integer",
             "format": "int32"
           },
-          "nomeImagem": {
+          "nomeImagemFrente": {
             "type": "string",
             "nullable": true
           },
-          "urlImagem": {
+          "urlImagemFrente": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeImagemVerso": {
+            "type": "string",
+            "nullable": true
+          },
+          "urlImagemVerso": {
             "type": "string",
             "nullable": true
           }
@@ -19149,11 +19165,19 @@
             "type": "integer",
             "format": "int32"
           },
-          "nomeImagem": {
+          "nomeImagemFrente": {
             "type": "string",
             "nullable": true
           },
-          "urlImagem": {
+          "urlImagemFrente": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeImagemVerso": {
+            "type": "string",
+            "nullable": true
+          },
+          "urlImagemVerso": {
             "type": "string",
             "nullable": true
           }

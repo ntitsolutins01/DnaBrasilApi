@@ -7,8 +7,10 @@ public class ModeloCarteirinhaDto
 {
     public int Id { get; init; }
     public int FomentoId { get; init; }
-    public string? NomeImagem { get; set; }
-    public string? UrlImagem { get; init; }
+    public string? NomeImagemFrente { get; set; }
+    public string? UrlImagemFrente { get; init; }
+    public string? NomeImagemVerso { get; set; }
+    public string? UrlImagemVerso { get; init; }
 
     private class Mapping : Profile
     {

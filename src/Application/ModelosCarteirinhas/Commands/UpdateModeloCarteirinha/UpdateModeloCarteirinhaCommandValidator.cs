@@ -4,9 +4,13 @@ public class UpdateModeloCarteirinhaCommandValidator : AbstractValidator<UpdateM
 {
     public UpdateModeloCarteirinhaCommandValidator()
     {
-        RuleFor(v => v.NomeImagem)
+        RuleFor(v => v.NomeImagemFrente)
             .MaximumLength(70);
-        RuleFor(v => v.UrlImagem)
+        RuleFor(v => v.UrlImagemFrente)
+            .MaximumLength(150);
+        RuleFor(v => v.NomeImagemVerso)
+            .MaximumLength(70);
+        RuleFor(v => v.UrlImagemVerso)
             .MaximumLength(150);
     }
 }
