@@ -27,6 +27,7 @@ public class GetTotalizadorTalentoEsportivoAlunosQueryHandler : IRequestHandler<
         IQueryable<Aluno> alunos;
 
         alunos = _context.Alunos//.Where(x=>x.Id== 38438)//37315 - Feminino
+            .Where(x => x.Convidado == false)
             .AsNoTracking();
 
         var result = FilterAlunosPeriodo(alunos, request.SearchFilter!, cancellationToken);

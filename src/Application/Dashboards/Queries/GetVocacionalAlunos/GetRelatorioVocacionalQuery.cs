@@ -25,6 +25,7 @@ public class GetRelatorioVocacionalQueryHandler : IRequestHandler<GetRelatorioVo
         IQueryable<Aluno> alunos;
 
         alunos = _context.Alunos//.Where(x=>x.Id==34493)
+            .Where(x => x.Convidado == false)
             .AsNoTracking();
 
         var result = FilterAlunos(alunos, request.SearchFilter!, cancellationToken);

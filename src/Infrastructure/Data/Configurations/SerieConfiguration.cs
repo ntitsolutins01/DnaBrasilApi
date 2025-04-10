@@ -9,10 +9,10 @@ public class SerieConfiguration : IEntityTypeConfiguration<Serie>
     public void Configure(EntityTypeBuilder<Serie> builder)
     {
         builder.Property(t => t.Nome)
-            .HasMaxLength(50)
+            .HasMaxLength(150)
             .IsRequired();
-        builder.Property(t => t.Descricao)
-            .HasMaxLength(200)
+        builder.Property(t => t.Turma)
+            .HasMaxLength(20)
             .IsRequired();
     }
 }

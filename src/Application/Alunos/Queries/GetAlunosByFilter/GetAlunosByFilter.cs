@@ -1,5 +1,4 @@
- using DnaBrasilApi.Application.Common.Interfaces;
-using DnaBrasilApi.Application.Dashboards.Queries;
+using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Alunos.Queries.GetAlunosByFilter;
@@ -62,6 +61,11 @@ public class GetAlunosByFilterQueryHandler : IRequestHandler<GetAlunosByFilterQu
             Alunos = Alunos.Where(u => u.Localidade!.Id == Convert.ToInt32(search.LocalidadeId));
         }
 
+        if (!string.IsNullOrWhiteSpace(search.ProfissionalId))
+        {
+            Alunos = Alunos.Where(u => u.Profissional!.Id == Convert.ToInt32(search.ProfissionalId));
+        }
+
         if (!string.IsNullOrWhiteSpace(search.DeficienciaId))
         {
             var deficiencias = _context.Deficiencias
@@ -88,6 +92,11 @@ public class GetAlunosByFilterQueryHandler : IRequestHandler<GetAlunosByFilterQu
         if (!string.IsNullOrWhiteSpace(search.Sexo))
         {
             Alunos = Alunos.Where(u => u.Sexo!.Equals(search.Sexo));
+        }
+
+        if (search.PossuiFoto)
+        {
+            Alunos = Alunos.Where(u => u.ByteImage != null);
         }
 
         return Alunos;

@@ -5,7 +5,7 @@ namespace DnaBrasilApi.Application.Certificados.Commands.UpdateCertificado;
 public record UpdateCertificadoCommand : IRequest <bool>
 {
     public required int Id { get; init; }
-    public required int CursoId { get; init; }
+    public required int FomentoId { get; init; }
     public required string ImagemFrente { get; init; }
     public string? ImagemVerso { get; init; }
     public string? NomeImagemFrente { get; init; }
@@ -31,12 +31,12 @@ public class UpdateCertificadoCommandHandler : IRequestHandler<UpdateCertificado
 
         Guard.Against.NotFound(request.Id, entity);
 
-        var curso = await _context.Cursos
-            .FindAsync([request.CursoId], cancellationToken);
+        var fomento = await _context.Fomentos
+            .FindAsync([request.FomentoId], cancellationToken);
 
-        Guard.Against.NotFound(request.CursoId, curso);
+        Guard.Against.NotFound(request.FomentoId, fomento);
 
-        entity.Curso = curso;
+        entity.Fomento = fomento;
         entity.ImagemFrente = request.ImagemFrente;
         entity.ImagemVerso = request.ImagemVerso;
         entity.NomeImagemFrente = request.NomeImagemFrente;

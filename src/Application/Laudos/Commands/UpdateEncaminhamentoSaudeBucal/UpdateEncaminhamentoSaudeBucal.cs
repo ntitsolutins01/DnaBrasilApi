@@ -23,6 +23,8 @@ public class UpdateEncaminhamentoSaudeBucalCommandHandler : IRequestHandler<Upda
         var encaminhamentos = _context.Encaminhamentos.Where(x => x.TipoLaudo.Id == (int)EnumTipoLaudo.SaudeBucal);
 
         var listSaudeBucal = _context.SaudeBucais
+            .Include(i => i.Encaminhamento)
+            .Where(x => x.Encaminhamento == null)
             .AsNoTracking()
             .OrderByDescending(t => t.Id);
 

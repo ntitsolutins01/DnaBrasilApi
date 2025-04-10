@@ -27,7 +27,7 @@ public class UpdateMunicipioCommandHandler : IRequestHandler<UpdateMunicipioComm
 
         Guard.Against.NotFound(request.Id, entity);
 
-        entity.Codigo = request.Codigo;
+        entity.CodigoIbge = request.Codigo;
         entity.Nome = request.Nome;
         entity.Estado = request.Estado;
 

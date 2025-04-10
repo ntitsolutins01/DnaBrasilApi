@@ -127,7 +127,7 @@ public class Dashboards : EndpointGroupBase
     }
     public async Task<DashboardDto> GetGraficosSaudeByFilter(ISender sender, [FromBody] DashboardDto dashboard)
     {
-        dashboard.PercentualSaude = await sender.Send(new GetPercentualSaudeAlunosQuery() { SearchFilter = dashboard });
+        //dashboard.PercentualSaude = await sender.Send(new GetPercentualSaudeAlunosQuery() { SearchFilter = dashboard });
         dashboard.ListTotalizadorSaudeSexo = await sender.Send(new GetTotalizadorSaudeSexoAlunosQuery() { SearchFilter = dashboard });
 
         return await Task.FromResult(dashboard);

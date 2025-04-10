@@ -25,10 +25,11 @@ public class GetAlunosBySexoQueryHandler : IRequestHandler<GetAlunosBySexoQuery,
     {
         int result = string.IsNullOrWhiteSpace(request.SearchFilter!.Sexo)
             ? await _context.Alunos
+                .Where(x => x.Convidado == false)
                 .AsNoTracking()
                 .CountAsync(cancellationToken)
             : await _context.Alunos
-                .Where(x => x.Sexo == request.SearchFilter!.Sexo)
+                .Where(x => x.Sexo == request.SearchFilter!.Sexo && x.Convidado == false)
                 .AsNoTracking()
                 .CountAsync(cancellationToken);
 

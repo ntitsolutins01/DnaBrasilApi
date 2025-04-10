@@ -4,7 +4,8 @@ using DnaBrasilApi.Application.Aulas.Commands.DeleteAula;
 using DnaBrasilApi.Application.Aulas.Commands.UpdateAula;
 using DnaBrasilApi.Application.Aulas.Queries;
 using DnaBrasilApi.Application.Aulas.Queries.GetAulasAll;
-using DnaBrasilApi.Application.Aulas.Queries.GetAulasAllByModuloEadId;
+using DnaBrasilApi.Application.Aulas.Queries.GetAulasByCursoId;
+using DnaBrasilApi.Application.Aulas.Queries.GetAulasByModuloEadId;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -28,7 +29,8 @@ public class Aulas : EndpointGroupBase
             .MapPut(UpdateAula, "{id}")
             .MapDelete(DeleteAula, "{id}")
             .MapGet(GetAulaById, "{id}")
-            .MapGet(GetAulasAllByModuloEadId, "ModuloEad/{id}");
+            .MapGet(GetAulasByModuloEadId, "ModuloEad/{id}")
+            .MapGet(GetAulasByCursoId, "Curso/{id}");
     }
     #endregion
 
@@ -100,9 +102,20 @@ public class Aulas : EndpointGroupBase
     /// <param name="sender">Sender</param>
     /// <param name="id">Id do módulo Ead</param>
     /// <returns>Retorna uma lista de Aulas</returns>
-    public async Task<List<AulaDto>> GetAulasAllByModuloEadId(ISender sender, int id)
+    public async Task<List<AulaDto>> GetAulasByModuloEadId(ISender sender, int id)
     {
-        return await sender.Send(new GetAulasAllByModuloEadIdQuery() { ModuloEadId = id });
+        return await sender.Send(new GetAulasByModuloEadIdQuery() { ModuloEadId = id });
+    }
+
+    /// <summary>
+    /// Endpoint que busca uma lista de aulas
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="id">Id do curso</param>
+    /// <returns>Retorna uma lista de Aulas</returns>
+    public async Task<List<AulaDto>> GetAulasByCursoId(ISender sender, int id)
+    {
+        return await sender.Send(new GetAulasByCursoIdQuery() { CursoId = id });
     }
     #endregion
 }

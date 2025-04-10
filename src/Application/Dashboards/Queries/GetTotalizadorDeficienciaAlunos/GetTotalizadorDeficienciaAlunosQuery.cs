@@ -27,6 +27,7 @@ public class GetTotalizadorDeficienciaAlunosQueryHandler : IRequestHandler<GetTo
         IQueryable<Aluno> alunos;
 
         alunos = _context.Alunos
+            .Where(x => x.Convidado == false)
             .Include(i=>i.Deficiencia)
             .AsNoTracking();
 
