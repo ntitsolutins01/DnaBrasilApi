@@ -13905,6 +13905,10 @@
               "video": {
                 "type": "string",
                 "nullable": true
+              },
+              "nomeVideo": {
+                "type": "string",
+                "nullable": true
               }
             }
           }

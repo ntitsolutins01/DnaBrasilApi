@@ -15,7 +15,7 @@ public class AulaDto
     public bool Status { get; init; }
     public string? Material { get; init; }
     public string? NomeMaterial { get; init; }
-    public string? Video { get; init; } 
+    public string? Video { get; init; }
     public string? NomeVideo { get; init; }
 
     private class Mapping : Profile
