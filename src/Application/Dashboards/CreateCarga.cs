@@ -20,58 +20,69 @@ public class CreateCargaCommandHandler : IRequestHandler<CreateCargaCommand, int
     {
 
         var laudos = await _context.Laudos
-            .Include(i => i.Aluno)
+            .Include(i => i.Aluno.Localidade)
             .Include(i => i.QualidadeDeVida)
             .Include(i => i.Vocacional)
             .Include(i => i.ConsumoAlimentar)
             .Include(i => i.TalentoEsportivo)
-            .Include(i => i.Saude)
             .Include(i => i.SaudeBucal)
+            .Include(i => i.Saude)
             .AsNoTracking()
             .ToListAsync(cancellationToken);
 
-        //var list = await _context.QualidadeDeVidas
+        ////var list = await _context.QualidadeDeVidas
+        ////    .Include(i => i.Aluno)
+        ////    .AsNoTracking()
+        ////    .ToListAsync(cancellationToken);
+
+        ////var list = await _context.Vocacionais
+        ////    .Include(i => i.Aluno)
+        ////    .AsNoTracking()
+        ////    .ToListAsync(cancellationToken);
+
+        ////var list = await _context.ConsumoAlimentares
+        ////    .Include(i => i.Aluno)
+        ////    .AsNoTracking()
+        ////    .ToListAsync(cancellationToken);
+
+        ////var list = await _context.TalentosEsportivos
+        ////    .Include(i => i.Aluno)
+        ////    .AsNoTracking()
+        ////    .ToListAsync(cancellationToken);
+
+        ////var list = await _context.SaudeBucais
+        ////    .Include(i => i.Aluno)
+        ////    .AsNoTracking()
+        ////    .ToListAsync(cancellationToken);
+
+        //var list = await _context.Saudes
         //    .Include(i => i.Aluno)
         //    .AsNoTracking()
         //    .ToListAsync(cancellationToken);
 
-        //var list = await _context.ConsumoAlimentares
-        //    .Include(i => i.Aluno)
+        ////var arrAlunos = new int[]
+        ////{
+        ////    };
+
+        //var alunos = await _context.Alunos
+        //    .Where(q => q.Localidade.Id == 31)
         //    .AsNoTracking()
         //    .ToListAsync(cancellationToken);
-
-        //var list = await _context.Vocacionais
-        //    .Include(i => i.Aluno)
-        //    .AsNoTracking()
-        //    .ToListAsync(cancellationToken);
-
-        //var list = await _context.SaudeBucais
-        //    .Include(i => i.Aluno)
-        //    .AsNoTracking()
-        //    .ToListAsync(cancellationToken);
-
-        //var list = await _context.TalentosEsportivos
-        //    .Include(i => i.Aluno)
-        //    .AsNoTracking()
-        //    .ToListAsync(cancellationToken);
-
-        var alunos = await _context.Alunos
-            .AsNoTracking()
-            .ToListAsync(cancellationToken);
 
         //foreach (Aluno aluno in alunos)
         //{
         //    var alunoObj = await _context.Alunos
         //        .FindAsync(new object[] { aluno!.Id }, cancellationToken);
 
+
         //    //var find = list.Find(
-        //    //    delegate (Vocacional bk)
+        //    //    delegate (QualidadeDeVida bk)
         //    //    {
         //    //        return bk.Aluno!.Id == aluno.Id;
         //    //    }
         //    //);
         //    //var find = list.Find(
-        //    //    delegate (QualidadeDeVida bk)
+        //    //    delegate (Vocacional bk)
         //    //    {
         //    //        return bk.Aluno!.Id == aluno.Id;
         //    //    }
@@ -83,18 +94,23 @@ public class CreateCargaCommandHandler : IRequestHandler<CreateCargaCommand, int
         //    //    }
         //    //);
         //    //var find = list.Find(
+        //    //    delegate (TalentoEsportivo bk)
+        //    //    {
+        //    //        return bk.Aluno!.Id == aluno.Id;
+        //    //    }
+        //    //);
+        //    //var find = list.Find(
         //    //    delegate (SaudeBucal bk)
         //    //    {
         //    //        return bk.Aluno!.Id == aluno.Id;
         //    //    }
         //    //);
         //    var find = list.Find(
-        //        delegate (TalentoEsportivo bk)
+        //        delegate (Saude bk)
         //        {
         //            return bk.Aluno!.Id == aluno.Id;
         //        }
         //    );
-
         //    if (find != null)
         //    {
         //        var findLaudos = laudos.Find(
@@ -104,65 +120,69 @@ public class CreateCargaCommandHandler : IRequestHandler<CreateCargaCommand, int
         //            }
         //        );
 
-        //        //var obj = await _context.Vocacionais
-        //        //    .FindAsync(new object[] { find!.Id }, cancellationToken);
         //        //var obj = await _context.QualidadeDeVidas
+        //        //    .FindAsync(new object[] { find!.Id }, cancellationToken);
+        //        //var obj = await _context.Vocacionais
         //        //    .FindAsync(new object[] { find!.Id }, cancellationToken);
         //        //var obj = await _context.ConsumoAlimentares
         //        //    .FindAsync(new object[] { find!.Id }, cancellationToken);
+        //        //var obj = await _context.TalentosEsportivo
+        //        //.FindAsync(new object[] { find!.Id }, cancellationToken);
         //        //var obj = await _context.SaudeBucais
-        //        //    .FindAsync(new object[] { find!.Id }, cancellationToken);
-        //        var obj = await _context.TalentosEsportivos
+        //        //    .FindAsync([find!.Id], cancellationToken);
+        //        var obj = await _context.Saudes
         //            .FindAsync(new object[] { find!.Id }, cancellationToken);
 
         //        if (findLaudos != null)
         //        {
 
         //            var entity = await _context.Laudos
-        //                .FindAsync(new object[] { findLaudos.Id }, cancellationToken);
+        //                .FindAsync([findLaudos.Id], cancellationToken);
 
         //            Guard.Against.NotFound(request.Id, entity);
 
-        //            //if (
-        //                //findLaudos.QualidadeDeVida == null
-        //                //&&
-        //                //findLaudos.Vocacional == null
-        //                //&&
-        //                //findLaudos.Saude == null
-        //                //&&
-        //                //findLaudos.ConsumoAlimentar == null 
-        //                //&&
-        //                //findLaudos.SaudeBucal == null 
-        //                //&&
-        //                //findLaudos.TalentoEsportivo == null
-        //             //   )
-        //            //{
+        //            if (
+        //            //findLaudos.QualidadeDeVida != null
+        //            //&&
+        //            //findLaudos.Vocacional != null
+        //            //&&
+        //            findLaudos.Saude != null
+        //            //&&
+        //            //findLaudos.ConsumoAlimentar != null
+        //            //&&
+        //            //findLaudos.SaudeBucal != null
+        //            //&&
+        //            //findLaudos.TalentoEsportivo != null
+        //               )
+        //            {
         //                //entity.StatusLaudo = "A";
 
         //                //var results = await _context.SaveChangesAsync(cancellationToken);
 
         //                //var teste = results == 1;//true
 
-        //                //entity.Vocacional = obj;
         //                //entity.QualidadeDeVida = obj;
+        //                //entity.Vocacional = obj;
         //                //entity.ConsumoAlimentar = obj;
+        //                //entity.TalentoEsportivo = obj;
         //                //entity.SaudeBucal = obj;
-        //                entity.TalentoEsportivo = obj;
+        //                entity.Saude = obj;
 
 
         //                var results = await _context.SaveChangesAsync(cancellationToken);
-        //           // }
+        //            }
         //        }
         //        else
         //        {
         //            var entityLaudo = new Laudo()
         //            {
         //                Aluno = alunoObj!,
-        //                //Vocacional = obj
         //                //QualidadeDeVida = obj
+        //                //Vocacional = obj
         //                //ConsumoAlimentar = obj
+        //                //TalentoEsportivo = obj
         //                //SaudeBucal = obj
-        //                TalentoEsportivo = obj
+        //                Saude = obj
         //            };
 
         //            _context.Laudos.Add(entityLaudo);
@@ -172,9 +192,13 @@ public class CreateCargaCommandHandler : IRequestHandler<CreateCargaCommand, int
         //            var id = entityLaudo.Id;
         //        }
         //    }
-
         //}
+        var arr = new int[]
+        {
+            30,31
+        };
 
+        laudos = laudos.Where(x => arr.Contains(x.Aluno.Localidade!.Id)).ToList();// x.Aluno.Localidade!.Id == 31).ToList();
 
         foreach (var item in laudos)
         {
@@ -195,42 +219,125 @@ public class CreateCargaCommandHandler : IRequestHandler<CreateCargaCommand, int
             //    .FindAsync(new object[] { find!.Id }, cancellationToken);
 
             var entity = await _context.Laudos
-                .FindAsync(new object[] { item.Id }, cancellationToken);
+                .FindAsync([item.Id], cancellationToken);
 
-            Guard.Against.NotFound(request.Id, entity);
+            Guard.Against.NotFound(item.Id, entity);
 
-            if (
-                item.QualidadeDeVida != null
-                &&
-                item.Vocacional != null
-                &&
-                item.Saude != null
-                &&
-                item.ConsumoAlimentar != null
-                &&
-                item.SaudeBucal != null
-                &&
-                item.TalentoEsportivo != null
-                )
+            var idade = GetIdade(item.Aluno.DtNascimento, DateTime.Now);
+
+            switch (idade)
             {
-                entity.StatusLaudo = "F";
+                case >= 14:
+                    if (
+                        item.QualidadeDeVida != null
+                        &&
+                        item.Vocacional != null
+                        &&
+                        item.Saude != null
+                        &&
+                        item.ConsumoAlimentar != null
+                        &&
+                        item.SaudeBucal != null
+                        &&
+                        item.TalentoEsportivo != null
+                    )
+                    {
+                        entity.StatusLaudo = "F";
 
-                var results = await _context.SaveChangesAsync(cancellationToken);
+                        var results = await _context.SaveChangesAsync(cancellationToken);
 
-                var teste = results == 1;//true
+                        var teste = results == 1;//true
+                    }
+                    else
+                    {
+                        entity.StatusLaudo = "A";
+
+                        var results = await _context.SaveChangesAsync(cancellationToken);
+
+                        var teste = results == 1;//true
+                    }
+                    break;
+                case >= 12:
+                    if (
+                        item.QualidadeDeVida != null
+                        &&
+                        item.Saude != null
+                        &&
+                        item.ConsumoAlimentar != null
+                        &&
+                        item.SaudeBucal != null
+                        &&
+                        item.TalentoEsportivo != null
+                    )
+                    {
+                        entity.StatusLaudo = "F";
+
+                        var results = await _context.SaveChangesAsync(cancellationToken);
+
+                        var teste = results == 1;//true
+                    }
+                    else
+                    {
+                        entity.StatusLaudo = "A";
+
+                        var results = await _context.SaveChangesAsync(cancellationToken);
+
+                        var teste = results == 1;//true
+                    }
+                    break;
+                default:
+                    if (
+                        item.Saude != null
+                        &&
+                        item.ConsumoAlimentar != null
+                        &&
+                        item.SaudeBucal != null
+                        &&
+                        item.TalentoEsportivo != null
+                    )
+                    {
+                        entity.StatusLaudo = "F";
+
+                        var results = await _context.SaveChangesAsync(cancellationToken);
+
+                        var teste = results == 1;//true
+                    }
+                    else
+                    {
+                        entity.StatusLaudo = "A";
+
+                        var results = await _context.SaveChangesAsync(cancellationToken);
+
+                        var teste = results == 1;//true
+                    }
+                    break;
             }
-            else
-            {
-                entity.StatusLaudo = "A";
-
-                var results = await _context.SaveChangesAsync(cancellationToken);
-
-                var teste = results == 1;//true
-            }
-
-
         }
 
+
         return 1;//true
+    }
+
+    private static int GetIdade(DateTime data, DateTime? now = null)
+    {
+        // Carrega a data do dia para comparação caso data informada seja nula
+
+        now = ((now == null) ? DateTime.Now : now);
+
+        try
+        {
+            int YearsOld = (now.Value.Year - data.Year);
+
+            if (now.Value.Month < data.Month || (now.Value.Month == data.Month && now.Value.Day < data.Day))
+            {
+                YearsOld--;
+            }
+
+            return YearsOld > 18 ? 99 : YearsOld < 4 ? 4 : YearsOld;
+        }
+        catch
+        {
+            return 0;
+        }
     }
 }

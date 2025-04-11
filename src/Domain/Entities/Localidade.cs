@@ -5,5 +5,6 @@ public class Localidade : BaseAuditableEntity
     public string? Descricao { get; set; }
     public bool Status { get; set; } =  true;
     public  Municipio? Municipio { get; set; }
+    public int? CodigoInep { get; set; }
     public IList<FomentoLocalidade>? FomentoLocalidades { get; set; }
 }

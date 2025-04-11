@@ -46,6 +46,11 @@ public class GetMateriaisByFilterQueryHandler : IRequestHandler<GetMateriaisByFi
             Materiais = Materiais.Where(u => u.Descricao!.ToString().Contains(search.NomeMaterial));
         }
 
+        if (!string.IsNullOrWhiteSpace(search.GrupoMaterialId))
+        {
+            Materiais = Materiais.Where(u => u.TipoMaterial.GrupoMaterial.Id.ToString().Equals(search.GrupoMaterialId));
+        }
+
         if (!string.IsNullOrWhiteSpace(search.TipoMaterialId))
         {
             Materiais = Materiais.Where(u => u.TipoMaterial.Id.ToString().Equals(search.TipoMaterialId));

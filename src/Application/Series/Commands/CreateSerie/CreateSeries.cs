@@ -5,10 +5,9 @@ namespace DnaBrasilApi.Application.Series.Commands.CreateSerie;
 public record CreateSerieCommand : IRequest<int>
 {
     public required string Nome { get; init; }
-    public required string Descricao { get; init; }
-    public required int IdadeInicial { get; init; }
-    public required int IdadeFinal { get; init; }
-    public required int ScoreTotal { get; init; }
+    public required string Turma { get; init; }
+    public required int EtapaEnsinoId { get; init; }
+    public required int LocalidadeId { get; init; }
     public bool Status { get; init; } = true;
 }
 
@@ -23,14 +22,23 @@ public class CreateSerieCommandHandler : IRequestHandler<CreateSerieCommand, int
 
     public async Task<int> Handle(CreateSerieCommand request, CancellationToken cancellationToken)
     {
+        var etapaEnsino = await _context.EtapasEnsino
+            .FindAsync([request.EtapaEnsinoId], cancellationToken);
+
+        Guard.Against.NotFound(request.EtapaEnsinoId, etapaEnsino);
+
+        var localidade = await _context.Localidades
+            .FindAsync([request.LocalidadeId], cancellationToken);
+
+        Guard.Against.NotFound(request.LocalidadeId, localidade);
+
         var entity = new Serie
         {
             Nome = request.Nome,
-            Descricao = request.Descricao,
-            IdadeInicial = request.IdadeInicial,
-            IdadeFinal = request.IdadeFinal,
-            ScoreTotal = request.ScoreTotal,
-            Status = request.Status
+            Status = request.Status,
+            Turma = request.Turma,
+            EtapaEnsino = etapaEnsino,
+            Localidade = localidade
         };
 
         _context.Series.Add(entity);

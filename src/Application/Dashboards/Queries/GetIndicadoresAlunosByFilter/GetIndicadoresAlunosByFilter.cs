@@ -29,9 +29,10 @@ public class GetIndicadoresAlunosByFilterQueryHandler : IRequestHandler<GetIndic
 
         Alunos = string.IsNullOrWhiteSpace(request.SearchFilter!.Sexo)
             ? _context.Alunos
+                .Where(x => x.Convidado == false)
                 .AsNoTracking()
             : _context.Alunos
-                .Where(x => x.Sexo == request.SearchFilter!.Sexo)
+                .Where(x => x.Sexo == request.SearchFilter!.Sexo && x.Convidado == false)
                 .AsNoTracking();
 
         var result = FilterAlunos(Alunos, request.SearchFilter!, cancellationToken);

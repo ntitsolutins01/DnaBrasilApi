@@ -4,7 +4,7 @@ using DnaBrasilApi.Application.ControlesMateriaisEstoquesSaidas.Commands.DeleteC
 using DnaBrasilApi.Application.ControlesMateriaisEstoquesSaidas.Commands.UpdateControleMaterialEstoqueSaida;
 using DnaBrasilApi.Application.ControlesMateriaisEstoquesSaidas.Queries;
 using DnaBrasilApi.Application.ControlesMateriaisEstoquesSaidas.Queries.GetControlesMateriaisEstoquesSaidasAll;
-using DnaBrasilApi.Application.ControlesMateriaisEstoquesSaidas.Queries.GetControlesMateriaisEstoquesSaidasByMaterialId;
+using DnaBrasilApi.Application.ControlesMateriaisEstoquesSaidas.Queries.GetControlesMateriaisEstoquesSaidasByInventarioId;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -25,7 +25,7 @@ public class ControlesMateriaisEstoquesSaidas : EndpointGroupBase
             .MapPut(UpdateControleMaterialEstoqueSaida, "{id}")
             .MapDelete(DeleteControleMaterialEstoqueSaida, "{id}")
             .MapGet(GetControleMaterialEstoqueSaidaById, "{id}")
-            .MapGet(GetControlesMateriaisEstoquesSaidasByMaterialId, "Material/{id}");
+            .MapGet(GetControlesMateriaisEstoquesSaidasByInventarioId, "Inventario/{id}");
     }
     #endregion
 
@@ -96,11 +96,11 @@ public class ControlesMateriaisEstoquesSaidas : EndpointGroupBase
     /// Endpoint que busca uma lista de tipos de material
     /// </summary>
     /// <param name="sender">Sender</param>
-    /// <param name="id">Id do módulo Ead</param>
+    /// <param name="id">Id do inventario</param>
     /// <returns>Retorna uma lista de ControlesMateriaisEstoquesSaidas</returns>
-    public async Task<List<ControleMaterialEstoqueSaidaDto>> GetControlesMateriaisEstoquesSaidasByMaterialId(ISender sender, int id)
+    public async Task<List<ControleMaterialEstoqueSaidaDto>> GetControlesMateriaisEstoquesSaidasByInventarioId(ISender sender, int id)
     {
-        return await sender.Send(new GetControlesMateriaisEstoquesSaidasByMaterialIdQuery() { MaterialId = id });
+        return await sender.Send(new GetControlesMateriaisEstoquesSaidasByInventarioIdQuery() { InventarioId = id });
     }
     #endregion
 

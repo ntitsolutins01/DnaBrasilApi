@@ -4,7 +4,6 @@ internal class CreateControleMaterialEstoqueSaidaCommandValidator : AbstractVali
 {
     public CreateControleMaterialEstoqueSaidaCommandValidator()
     {
-        RuleFor(v => v.Solicitante)
-            .MaximumLength(250);
+
     }
 }

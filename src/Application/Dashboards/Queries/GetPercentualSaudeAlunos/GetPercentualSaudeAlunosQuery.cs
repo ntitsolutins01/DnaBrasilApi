@@ -26,7 +26,7 @@ public class GetPercentualSaudeAlunosQueryHandler : IRequestHandler<GetPercentua
     {
         IQueryable<Aluno> alunos;
 
-        alunos = _context.Alunos
+        alunos = _context.Alunos.Where(x => x.Convidado == false)
             .AsNoTracking();
 
         var result = FilterAlunosPeriodo(alunos, request.SearchFilter!, cancellationToken);
@@ -80,7 +80,13 @@ public class GetPercentualSaudeAlunosQueryHandler : IRequestHandler<GetPercentua
 
         //int cont = 1;
 
-        var laudos = _context.Laudos.Where(x => verificaAlunos.Contains(x.Aluno.Id)).Include(i => i.Saude).Include(a=>a.Aluno)
+        //var laudos = _context.Laudos.Where(x => verificaAlunos.Contains(x.Aluno.Id)).Include(i => i.Saude).Include(a=>a.Aluno)
+        //    .AsNoTracking();
+
+        var laudos = _context.Laudos.Where(x => verificaAlunos.Contains(x.Aluno.Id))
+            .Include(a => a.Aluno)
+            .Include(i => i.Saude)
+            .Where(x => x.Saude != null)
             .AsNoTracking();
 
         foreach (var aluno in laudos)

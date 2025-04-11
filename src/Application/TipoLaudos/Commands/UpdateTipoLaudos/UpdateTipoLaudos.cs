@@ -23,7 +23,7 @@ public class UpdateTipoLaudoCommandHandler : IRequestHandler<UpdateTipoLaudoComm
     public async Task <bool> Handle(UpdateTipoLaudoCommand request, CancellationToken cancellationToken)
     {
         var entity = await _context.TipoLaudos
-            .FindAsync(new object[] { request.Id }, cancellationToken);
+            .FindAsync([request.Id], cancellationToken);
 
         Guard.Against.NotFound(request.Id, entity);
 

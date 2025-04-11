@@ -24,7 +24,7 @@ public class UpdateEncaminhamentoTalentoEsportivoV1CommandHandler : IRequestHand
 
         var arr = new int[]
         {
-            34906
+            34363
         };
 
         alunos = _context.Alunos.Where(x => arr.Contains(x.Id))//37315 - Feminino 38438

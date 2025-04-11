@@ -30,8 +30,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<ConsumoAlimentar> ConsumoAlimentares => Set<ConsumoAlimentar>();
     public DbSet<Vocacional> Vocacionais => Set<Vocacional>();
     public DbSet<Aluno> Alunos => Set<Aluno>();
-    public DbSet<Matricula> Matriculas => Set<Matricula>();
-    public DbSet<Voucher> Vouchers => Set<Voucher>();
     public DbSet<Parceiro> Parceiros => Set<Parceiro>();
     public DbSet<PlanoAula> PlanosAulas => Set<PlanoAula>();
     public DbSet<Questionario> Questionarios => Set<Questionario>();
@@ -69,7 +67,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<GrupoMaterial> GruposMateriais => Set<GrupoMaterial>();
     public DbSet<TipoMaterial> TiposMateriais => Set<TipoMaterial>();
     public DbSet<Material> Materiais => Set<Material>();
-    public DbSet<ControleMensalEstoque> ControlesMensaisEstoque => Set<ControleMensalEstoque>();
     public DbSet<ControleMaterialEstoqueSaida> ControlesMateriaisEstoquesSaidas => Set<ControleMaterialEstoqueSaida>();
     public DbSet<ProfissionalModalidade> ProfissionalModalidades => Set<ProfissionalModalidade>();
     public DbSet<FomentoLocalidade> FomentoLocalidades => Set<FomentoLocalidade>();
@@ -77,6 +74,16 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<Certificado> Certificados => Set<Certificado>();
     public DbSet<AlunoModalidade> AlunoModalidades => Set<AlunoModalidade>();
     public DbSet<Ranking> Rankings => Set<Ranking>();
+    public DbSet<AtividadeAluno> AtividadeAlunos => Set<AtividadeAluno>();
+    public DbSet<EtapaEnsino> EtapasEnsino => Set<EtapaEnsino>();
+    public DbSet<IdebDimensaoNacional> IdebDimensoesNacional => Set<IdebDimensaoNacional>();
+    public DbSet<IdebDimensaoEstadual> IdebDimensoesEstadual => Set<IdebDimensaoEstadual>();
+    public DbSet<ModeloCarteirinha> ModelosCarteirinhas => Set<ModeloCarteirinha>();
+    public DbSet<AlunoCurso> AlunosCursos => Set<AlunoCurso>();
+    public DbSet<AlunoCertificado> AlunosCertificados => Set<AlunoCertificado>();
+    public DbSet<Inventario> Inventarios => Set<Inventario>();
+    public DbSet<ArquivosInventario> ArquivosInventarios => Set<ArquivosInventario>();
+    public DbSet<AlunoPresenca> AlunosPresencas => Set<AlunoPresenca>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -134,6 +141,54 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
             .WithMany(s => s.AlunoModalidades)
             .HasForeignKey(sc => sc.ModalidadeId);
 
+        builder.Entity<AtividadeAluno>().HasKey(sc => new { sc.AtividadeId, sc.AlunoId });
+
+        builder.Entity<AtividadeAluno>()
+            .HasOne<Atividade>(sc => sc.Atividade)
+            .WithMany(s => s.AtividadeAlunos)
+            .HasForeignKey(sc => sc.AtividadeId);
+
+        builder.Entity<AtividadeAluno>()
+            .HasOne<Aluno>(sc => sc.Aluno)
+            .WithMany(s => s.AtividadeAlunos)
+            .HasForeignKey(sc => sc.AlunoId);
+
+        builder.Entity<AlunoCurso>().HasKey(sc => new { sc.AlunoId, sc.CursoId });
+
+        builder.Entity<AlunoCurso>()
+            .HasOne<Aluno>(sc => sc.Aluno)
+            .WithMany(s => s.AlunoCursos)
+            .HasForeignKey(sc => sc.AlunoId);
+
+        builder.Entity<AlunoCurso>()
+            .HasOne<Curso>(sc => sc.Curso)
+            .WithMany(s => s.AlunoCursos)
+            .HasForeignKey(sc => sc.CursoId);
+
+        builder.Entity<AlunoCertificado>().HasKey(sc => new { sc.AlunoId, sc.CertificadoId });
+
+        builder.Entity<AlunoCertificado>()
+            .HasOne<Aluno>(sc => sc.Aluno)
+            .WithMany(s => s.AlunoCertificados)
+            .HasForeignKey(sc => sc.AlunoId);
+
+        builder.Entity<AlunoCertificado>()
+            .HasOne<Certificado>(sc => sc.Certificado)
+            .WithMany(s => s.AlunoCertificados)
+            .HasForeignKey(sc => sc.CertificadoId);
+
+        builder.Entity<AlunoPresenca>().HasKey(sc => new { sc.AlunoId, AulaId = sc.AtividadeId });
+
+        builder.Entity<AlunoPresenca>()
+            .HasOne<Aluno>(sc => sc.Aluno)
+            .WithMany(s => s.AlunoPresencas)
+            .HasForeignKey(sc => sc.AlunoId);
+
+        builder.Entity<AlunoPresenca>()
+            .HasOne<Atividade>(sc => sc.Atividade)
+            .WithMany(s => s.AlunoPresencas)
+            .HasForeignKey(sc => sc.AtividadeId);
+
         #endregion
 
         #region Required one-to-one with primary key to primary key relationship
@@ -142,16 +197,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
         //    .HasOne(e => e.Dependencia)
         //    .WithOne(e => e.Aluno)
         //    .HasForeignKey<Dependencia>();
-
-        builder.Entity<Aluno>()
-            .HasOne(e => e.Matricula)
-            .WithOne(e => e.Aluno)
-            .HasForeignKey<Matricula>();
-
-        builder.Entity<Aluno>()
-            .HasOne(e => e.Voucher)
-            .WithOne(e => e.Aluno)
-            .HasForeignKey<Voucher>();
 
         #endregion
 
