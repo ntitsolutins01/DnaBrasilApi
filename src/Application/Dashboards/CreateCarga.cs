@@ -198,7 +198,9 @@ public class CreateCargaCommandHandler : IRequestHandler<CreateCargaCommand, int
             30,31
         };
 
-        laudos = laudos.Where(x => arr.Contains(x.Aluno.Localidade!.Id)).ToList();// x.Aluno.Localidade!.Id == 31).ToList();
+        laudos = laudos.ToList();// x.Aluno.Localidade!.Id == 31).ToList();
+
+        var count = laudos.Count();
 
         foreach (var item in laudos)
         {
@@ -248,14 +250,14 @@ public class CreateCargaCommandHandler : IRequestHandler<CreateCargaCommand, int
 
                         var teste = results == 1;//true
                     }
-                    else
-                    {
-                        entity.StatusLaudo = "A";
+                    //else
+                    //{
+                    //    entity.StatusLaudo = "A";
 
-                        var results = await _context.SaveChangesAsync(cancellationToken);
+                    //    var results = await _context.SaveChangesAsync(cancellationToken);
 
-                        var teste = results == 1;//true
-                    }
+                    //    var teste = results == 1;//true
+                    //}
                     break;
                 case >= 12:
                     if (
@@ -276,14 +278,14 @@ public class CreateCargaCommandHandler : IRequestHandler<CreateCargaCommand, int
 
                         var teste = results == 1;//true
                     }
-                    else
-                    {
-                        entity.StatusLaudo = "A";
+                    //else
+                    //{
+                    //    entity.StatusLaudo = "A";
 
-                        var results = await _context.SaveChangesAsync(cancellationToken);
+                    //    var results = await _context.SaveChangesAsync(cancellationToken);
 
-                        var teste = results == 1;//true
-                    }
+                    //    var teste = results == 1;//true
+                    //}
                     break;
                 default:
                     if (
@@ -302,14 +304,14 @@ public class CreateCargaCommandHandler : IRequestHandler<CreateCargaCommand, int
 
                         var teste = results == 1;//true
                     }
-                    else
-                    {
-                        entity.StatusLaudo = "A";
+                    //else
+                    //{
+                    //    entity.StatusLaudo = "A";
 
-                        var results = await _context.SaveChangesAsync(cancellationToken);
+                    //    var results = await _context.SaveChangesAsync(cancellationToken);
 
-                        var teste = results == 1;//true
-                    }
+                    //    var teste = results == 1;//true
+                    //}
                     break;
             }
         }
