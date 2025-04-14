@@ -4,7 +4,6 @@ using DnaBrasilApi.Domain.Entities;
 namespace DnaBrasilApi.Application.ModulosEad.Commands.CreateModuloEad;
 public record CreateModuloEadCommand : IRequest<int>
 {
-    public required int CargaHoraria { get; set; }
     public required int CursoId { get; set; }
     public required string Titulo { get; set; }
     public string? Descricao { get; set; }
@@ -29,7 +28,6 @@ public class CreateModuloEadCommandHandler : IRequestHandler<CreateModuloEadComm
 
         var entity = new ModuloEad
         {
-            CargaHoraria = request.CargaHoraria,
             Curso = curso,
             Titulo = request.Titulo,
             Descricao = request.Descricao,
