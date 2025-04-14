@@ -115,11 +115,11 @@ public class ControlesFrequencias : EndpointGroupBase
     /// Endpoint que Busca o controle de presença por id
     /// </summary>
     /// <param name="sender">sender</param>
-    /// <param name="eventoId">Disciplina id</param>
+    /// <param name="disciplinaId">Disciplina id</param>
     /// <returns>Retorna a lista de Controle de Presença</returns>
-    public async Task<List<ControleFrequenciaDto>> GetControlesFrequenciasByDisciplinaId(ISender sender, int eventoId)
+    public async Task<List<ControleFrequenciaDto>> GetControlesFrequenciasByDisciplinaId(ISender sender, int disciplinaId)
     {
-        return await sender.Send(new GetControlesFrequenciasByDisciplinaIdQuery() { DisciplinaId = eventoId });
+        return await sender.Send(new GetControlesFrequenciasByDisciplinaIdQuery() { DisciplinaId = disciplinaId });
     }
     /// <summary>
     /// Endpoint que Busca controle de Presença por Disciplina id
