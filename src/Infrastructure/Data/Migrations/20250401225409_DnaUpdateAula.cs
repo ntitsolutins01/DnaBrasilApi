@@ -21,20 +21,11 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                 oldMaxLength: 500,
                 oldNullable: true);
 
-            migrationBuilder.AddColumn<string>(
-                name: "NomeVideo",
-                table: "Aulas",
-                type: "nvarchar(100)",
-                maxLength: 100,
-                nullable: true);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "NomeVideo",
-                table: "Aulas");
 
             migrationBuilder.AlterColumn<string>(
                 name: "Video",

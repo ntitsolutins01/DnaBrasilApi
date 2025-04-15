@@ -595,15 +595,15 @@
         }
       }
     },
-    "/api/Alunos/Profissional/{id}": {
+    "/api/Alunos/AlunoCurso/{cursoId}": {
       "get": {
         "tags": [
           "Alunos"
         ],
-        "operationId": "GetNomeAlunosByProfissionalId",
+        "operationId": "GetAlunosCursosByCursoId",
         "parameters": [
           {
-            "name": "id",
+            "name": "cursoId",
             "in": "path",
             "required": true,
             "schema": {
@@ -621,7 +621,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/SelectListDto"
+                    "$ref": "#/components/schemas/AlunoCursoDto"
                   }
                 }
               }
@@ -674,15 +674,15 @@
         }
       }
     },
-    "/api/Alunos/AlunoCurso/{cursoId}": {
+    "/api/Alunos/Profissional/{id}": {
       "get": {
         "tags": [
           "Alunos"
         ],
-        "operationId": "GetAlunosCursosByCursoId",
+        "operationId": "GetNomeAlunosByProfissionalId",
         "parameters": [
           {
-            "name": "cursoId",
+            "name": "id",
             "in": "path",
             "required": true,
             "schema": {
@@ -700,7 +700,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/AlunoCursoDto"
+                    "$ref": "#/components/schemas/SelectListDto"
                   }
                 }
               }
@@ -13040,6 +13040,22 @@
           }
         }
       },
+      "AlunoCursoDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "alunoId": {
+            "type": "string"
+          },
+          "cursoId": {
+            "type": "string"
+          },
+          "progresso": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
       "AtividadeDto": {
         "type": "object",
         "additionalProperties": false,
@@ -13107,22 +13123,6 @@
           },
           "turmaHora": {
             "type": "string"
-          }
-        }
-      },
-      "AlunoCursoDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "alunoId": {
-            "type": "string"
-          },
-          "cursoId": {
-            "type": "string"
-          },
-          "progresso": {
-            "type": "integer",
-            "format": "int32"
           }
         }
       },
@@ -13997,16 +13997,6 @@
                 "type": "integer",
                 "format": "int32",
                 "nullable": true
-              "nomeVideo": {
-                "type": "string",
-                "nullable": true
-              },
-              "alunoPresencas": {
-                "type": "array",
-                "nullable": true,
-                "items": {
-                  "$ref": "#/components/schemas/AlunoPresenca"
-                }
               }
             }
           }
