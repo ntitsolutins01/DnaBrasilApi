@@ -22,10 +22,10 @@ public class UpdateEncaminhamentoQualidadeDeVidaCommandHandler : IRequestHandler
     {
         try
         {
-            IQueryable<Aluno> alunos;
+            //IQueryable<Aluno> alunos;
 
-            alunos = _context.Alunos//.Where(x => x.Id == 37315)//37315 - Feminino 38438
-                .AsNoTracking();
+            //alunos = _context.Alunos//.Where(x => arr.Contains(x.Id))//37315 - Feminino 38438
+            //    .AsNoTracking();
 
             Dictionary<string, decimal> dict = new()
             {
@@ -43,15 +43,16 @@ public class UpdateEncaminhamentoQualidadeDeVidaCommandHandler : IRequestHandler
 
             var encaminhamentos = _context.Encaminhamentos.Where(x => x.TipoLaudo.Id == (int)EnumTipoLaudo.QualidadeVida);
 
-            var verificaAlunos = alunos.Select(x => x.Id);
+            //var verificaAlunos = alunos.Select(x => x.Id);
 
-            var laudos = _context.Laudos.Where(x => verificaAlunos.Contains(x.Aluno.Id))
-                .Include(i => i.QualidadeDeVida)
-                .Include(a => a.Aluno)
-                .AsNoTracking()
-                .OrderByDescending(t => t.QualidadeDeVida!.Id);
+            //var laudos = _context.Laudos.Where(x => verificaAlunos.Contains(x.Aluno.Id))
+            //    .Include(i => i.QualidadeDeVida)
+            //    .Include(a => a.Aluno)
+            //    .AsNoTracking()
+            //    .OrderByDescending(t => t.QualidadeDeVida!.Id);
 
             var listQualidadeDeVida = _context.QualidadeDeVidas
+                .Where(x => x.Encaminhamentos == null)
                 .AsNoTracking()
                 .OrderByDescending(t => t.Id);
 

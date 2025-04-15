@@ -8,9 +8,13 @@ public class ModeloCarteirinhaConfiguration : IEntityTypeConfiguration<ModeloCar
 {
     public void Configure(EntityTypeBuilder<ModeloCarteirinha> builder)
     {
-        builder.Property(t => t.NomeImagem)
+        builder.Property(t => t.NomeImagemFrente)
             .HasMaxLength(70);
-        builder.Property(t => t.UrlImagem)
+        builder.Property(t => t.UrlImagemFrente)
+            .HasMaxLength(150);
+        builder.Property(t => t.NomeImagemVerso)
+            .HasMaxLength(70);
+        builder.Property(t => t.UrlImagemVerso)
             .HasMaxLength(150);
     }
 }

@@ -630,6 +630,50 @@
         }
       }
     },
+    "/api/Alunos/Presenca/{data}/{id}": {
+      "get": {
+        "tags": [
+          "Alunos"
+        ],
+        "operationId": "GetPresencasByDataAtividadeId",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 2
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AtividadeDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Alunos/AlunoCurso/{cursoId}": {
       "get": {
         "tags": [
@@ -4214,6 +4258,38 @@
                   "items": {
                     "$ref": "#/components/schemas/MunicipioDto"
                   }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/DivisoesAdministrativas/Municipio/{id}": {
+      "get": {
+        "tags": [
+          "DivisoesAdministrativas"
+        ],
+        "operationId": "GetMunicipioById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MunicipioDto"
                 }
               }
             }
@@ -12740,6 +12816,9 @@
           "justificativa": {
             "type": "string",
             "nullable": true
+          },
+          "data": {
+            "type": "string"
           }
         }
       },
@@ -12961,6 +13040,76 @@
           }
         }
       },
+      "AtividadeDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "estruturaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeEstrutura": {
+            "type": "string"
+          },
+          "linhaAcaoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeLinhaAcao": {
+            "type": "string"
+          },
+          "categoriaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeCategoria": {
+            "type": "string"
+          },
+          "modalidadeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeModalidade": {
+            "type": "string"
+          },
+          "turma": {
+            "type": "string"
+          },
+          "diasSemana": {
+            "type": "string"
+          },
+          "hrInicial": {
+            "type": "string"
+          },
+          "hrFinal": {
+            "type": "string"
+          },
+          "profissionalId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeProfissional": {
+            "type": "string"
+          },
+          "localidadeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeLocalidade": {
+            "type": "string"
+          },
+          "status": {
+            "type": "boolean"
+          },
+          "turmaHora": {
+            "type": "string"
+          }
+        }
+      },
       "AlunoCursoDto": {
         "type": "object",
         "additionalProperties": false,
@@ -13116,76 +13265,6 @@
             "format": "int32"
           },
           "diasSemana": {
-            "type": "string"
-          }
-        }
-      },
-      "AtividadeDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "estruturaId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nomeEstrutura": {
-            "type": "string"
-          },
-          "linhaAcaoId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nomeLinhaAcao": {
-            "type": "string"
-          },
-          "categoriaId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nomeCategoria": {
-            "type": "string"
-          },
-          "modalidadeId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nomeModalidade": {
-            "type": "string"
-          },
-          "turma": {
-            "type": "string"
-          },
-          "diasSemana": {
-            "type": "string"
-          },
-          "hrInicial": {
-            "type": "string"
-          },
-          "hrFinal": {
-            "type": "string"
-          },
-          "profissionalId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nomeProfissional": {
-            "type": "string"
-          },
-          "localidadeId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nomeLocalidade": {
-            "type": "string"
-          },
-          "status": {
-            "type": "boolean"
-          },
-          "turmaHora": {
             "type": "string"
           }
         }
@@ -13914,6 +13993,14 @@
                 "type": "string",
                 "nullable": true
               },
+              "ordem": {
+                "type": "integer",
+                "format": "int32",
+                "nullable": true
+              "nomeVideo": {
+                "type": "string",
+                "nullable": true
+              },
               "alunoPresencas": {
                 "type": "array",
                 "nullable": true,
@@ -13998,10 +14085,11 @@
               "aspNetRoleId": {
                 "type": "string"
               },
-              "boolEad": {
-                "type": "integer",
-                "format": "int32",
-                "nullable": true
+              "status": {
+                "type": "boolean"
+              },
+              "ead": {
+                "type": "boolean"
               }
             }
           }
@@ -15576,6 +15664,13 @@
                 "items": {
                   "$ref": "#/components/schemas/AtividadeAluno"
                 }
+              },
+              "alunoPresencas": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "$ref": "#/components/schemas/AlunoPresenca"
+                }
               }
             }
           }
@@ -15640,6 +15735,48 @@
             }
           }
         ]
+      },
+      "AlunoPresenca": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "alunoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "atividadeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "aluno": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Aluno"
+              }
+            ]
+          },
+          "atividade": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Atividade"
+              }
+            ]
+          },
+          "presenca": {
+            "type": "boolean"
+          },
+          "justificativa": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        }
       },
       "AlunoCertificado": {
         "type": "object",
@@ -15717,43 +15854,6 @@
             }
           }
         ]
-      },
-      "AlunoPresenca": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "alunoId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "aulaId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "aluno": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/Aluno"
-              }
-            ]
-          },
-          "aula": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/Aula"
-              }
-            ]
-          },
-          "presenca": {
-            "type": "boolean"
-          },
-          "justificativa": {
-            "type": "string",
-            "nullable": true
-          }
-        }
       },
       "CreateControleAcessoAulaCommand": {
         "type": "object",
@@ -19142,11 +19242,19 @@
             "type": "integer",
             "format": "int32"
           },
-          "nomeImagem": {
+          "nomeImagemFrente": {
             "type": "string",
             "nullable": true
           },
-          "urlImagem": {
+          "urlImagemFrente": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeImagemVerso": {
+            "type": "string",
+            "nullable": true
+          },
+          "urlImagemVerso": {
             "type": "string",
             "nullable": true
           }
@@ -19160,11 +19268,19 @@
             "type": "integer",
             "format": "int32"
           },
-          "nomeImagem": {
+          "nomeImagemFrente": {
             "type": "string",
             "nullable": true
           },
-          "urlImagem": {
+          "urlImagemFrente": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeImagemVerso": {
+            "type": "string",
+            "nullable": true
+          },
+          "urlImagemVerso": {
             "type": "string",
             "nullable": true
           }
@@ -19178,11 +19294,19 @@
             "type": "integer",
             "format": "int32"
           },
-          "nomeImagem": {
+          "nomeImagemFrente": {
             "type": "string",
             "nullable": true
           },
-          "urlImagem": {
+          "urlImagemFrente": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeImagemVerso": {
+            "type": "string",
+            "nullable": true
+          },
+          "urlImagemVerso": {
             "type": "string",
             "nullable": true
           }
@@ -19719,10 +19843,11 @@
           "aspNetRoleId": {
             "type": "string"
           },
-          "boolEad": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
+          "status": {
+            "type": "boolean"
+          },
+          "ead": {
+            "type": "boolean"
           }
         }
       },
@@ -19739,11 +19864,6 @@
           },
           "aspNetRoleId": {
             "type": "string"
-          },
-          "boolEad": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
           }
         }
       },
@@ -19761,6 +19881,12 @@
           "descricao": {
             "type": "string",
             "nullable": true
+          },
+          "status": {
+            "type": "boolean"
+          },
+          "ead": {
+            "type": "boolean"
           }
         }
       },

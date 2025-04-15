@@ -1,11 +1,9 @@
 ﻿
-using DnaBrasilApi.Application.Aulas.Commands.CreateAula;
-using DnaBrasilApi.Application.Aulas.Commands.DeleteAula;
-using DnaBrasilApi.Application.Aulas.Commands.UpdateAula;
 using DnaBrasilApi.Application.Estados.Queries;
 using DnaBrasilApi.Application.Estados.Queries.GetEstadoByUf;
 using DnaBrasilApi.Application.Estados.Queries.GetEstadosAll;
 using DnaBrasilApi.Application.Municipios.Queries;
+using DnaBrasilApi.Application.Municipios.Queries.GetMunicipioById;
 using DnaBrasilApi.Application.Municipios.Queries.GetMunicipiosByUf;
 
 namespace DnaBrasilApi.Web.Endpoints;
@@ -23,6 +21,7 @@ public class DivisoesAdministrativas : EndpointGroupBase
         app.MapGroup(this)
             .MapGet(GetEstadosAll, "Estados")
             .MapGet(GetMunicipiosByUf, "Municipios/{uf}")
+            .MapGet(GetMunicipioById, "Municipio/{id}")
             .MapGet(GetEstadoByUf, "Estado/{uf}");
     }
     #endregion
@@ -48,6 +47,7 @@ public class DivisoesAdministrativas : EndpointGroupBase
     {
         return await sender.Send(new GetMunicipioByUfQuery { Uf = uf });
     }
+
     /// <summary>
     /// Endpoint que busca o Estado pela Uf
     /// </summary>
@@ -59,7 +59,16 @@ public class DivisoesAdministrativas : EndpointGroupBase
         return await sender.Send(new GetEstadoByUfQuery() { Uf = uf });
     }
 
-
+    /// <summary>
+    /// Endpoint que busca o Municipio pelo Id
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public async Task<MunicipioDto> GetMunicipioById(ISender sender, int id)
+    {
+        return await sender.Send(new GetMunicipioByIdQuery() { Id = id });
+    }
 
     #endregion
 

@@ -1,4 +1,4 @@
-﻿using DnaBrasilApi.Domain.Entities;
+using DnaBrasilApi.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -24,6 +24,3 @@ public class AulaConfiguration : IEntityTypeConfiguration<Aula>
 
     }
 }
-
-
-

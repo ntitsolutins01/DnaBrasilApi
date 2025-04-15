@@ -19,6 +19,7 @@ public class GetTalentoEsportivoByIdQueryHandler : IRequestHandler<GetTalentoEsp
     public async Task<TalentoEsportivoDto> Handle(GetTalentoEsportivoByIdQuery request, CancellationToken cancellationToken)
     {
         var result = await _context.TalentosEsportivos
+            .Include(i=>i.Encaminhamento)
             .Where(x => x.Id == request.Id)
             .AsNoTracking()
             .ProjectTo<TalentoEsportivoDto>(_mapper.ConfigurationProvider)

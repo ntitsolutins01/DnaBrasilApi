@@ -6,8 +6,10 @@ namespace DnaBrasilApi.Application.ModelosCarteirinhas.Commands.CreateModeloCart
 public record CreateModeloCarteirinhaCommand : IRequest<int>
 {
     public required int FomentoId { get; init; }
-    public string? NomeImagem { get; init; }
-    public string? UrlImagem { get; init; }
+    public string? NomeImagemFrente { get; init; }
+    public string? UrlImagemFrente { get; init; }
+    public string? NomeImagemVerso { get; init; }
+    public string? UrlImagemVerso { get; init; }
 }
 
 public class CreateModeloCarteirinhaCommandHandler : IRequestHandler<CreateModeloCarteirinhaCommand, int>
@@ -29,8 +31,10 @@ public class CreateModeloCarteirinhaCommandHandler : IRequestHandler<CreateModel
         var entity = new ModeloCarteirinha
         {
             Fomento = fomento,
-            NomeImagem = request.NomeImagem,
-            UrlImagem = request.UrlImagem
+            NomeImagemFrente = request.NomeImagemFrente,
+            UrlImagemFrente = request.UrlImagemFrente,
+            NomeImagemVerso = request.NomeImagemVerso,
+            UrlImagemVerso = request.UrlImagemVerso
         };
 
         _context.ModelosCarteirinhas.Add(entity);
