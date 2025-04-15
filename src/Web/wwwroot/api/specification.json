@@ -4195,6 +4195,38 @@
         }
       }
     },
+    "/api/DivisoesAdministrativas/Municipio/{id}": {
+      "get": {
+        "tags": [
+          "DivisoesAdministrativas"
+        ],
+        "operationId": "GetMunicipioById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MunicipioDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/DivisoesAdministrativas/Estado/{uf}": {
       "get": {
         "tags": [
@@ -14275,10 +14307,6 @@
             "type": "object",
             "additionalProperties": false,
             "properties": {
-              "cargaHoraria": {
-                "type": "integer",
-                "format": "int32"
-              },
               "curso": {
                 "$ref": "#/components/schemas/Curso"
               },
@@ -19191,10 +19219,6 @@
             "type": "integer",
             "format": "int32"
           },
-          "cargaHoraria": {
-            "type": "integer",
-            "format": "int32"
-          },
           "titulo": {
             "type": "string"
           },
@@ -19218,10 +19242,6 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "cargaHoraria": {
-            "type": "integer",
-            "format": "int32"
-          },
           "cursoId": {
             "type": "integer",
             "format": "int32"
@@ -19243,10 +19263,6 @@
         "additionalProperties": false,
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "cargaHoraria": {
             "type": "integer",
             "format": "int32"
           },

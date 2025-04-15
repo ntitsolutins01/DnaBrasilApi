@@ -11,4 +11,5 @@ public class Aula : BaseAuditableEntity
     public string? NomeMaterial { get; set; }
     public string? Video { get; set; }
     public string? NomeVideo { get; set; }
+    public int? Ordem { get; set; }
 }
