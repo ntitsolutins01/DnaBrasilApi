@@ -17,6 +17,7 @@ public class AulaDto
     public string? NomeMaterial { get; init; }
     public string? Video { get; init; }
     public string? NomeVideo { get; init; }
+    public int? Ordem { get; init; }
 
     private class Mapping : Profile
     {

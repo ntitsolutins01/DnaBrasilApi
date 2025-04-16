@@ -13,6 +13,7 @@ public record UpdateAulaCommand : IRequest<bool>
     public string? NomeMaterial { get; init; }
     public string? Video { get; init; }
     public string? NomeVideo { get; init; }
+    public int? Ordem { get; init; }
 }
 
 public class UpdateAulaCommandHandler : IRequestHandler<UpdateAulaCommand, bool>
@@ -43,6 +44,7 @@ public class UpdateAulaCommandHandler : IRequestHandler<UpdateAulaCommand, bool>
         entity.Material = request.Material;
         entity.NomeMaterial = request.NomeMaterial;
         entity.Video = request.Video;
+        entity.Ordem = request.Ordem;
 
         var result = await _context.SaveChangesAsync(cancellationToken);
 

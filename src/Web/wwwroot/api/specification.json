@@ -13328,6 +13328,11 @@
           "nomeVideo": {
             "type": "string",
             "nullable": true
+          },
+          "ordem": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
           }
         }
       },
@@ -13368,6 +13373,11 @@
           "nomeVideo": {
             "type": "string",
             "nullable": true
+          },
+          "ordem": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
           }
         }
       },
@@ -13407,6 +13417,11 @@
           },
           "nomeVideo": {
             "type": "string",
+            "nullable": true
+          },
+          "ordem": {
+            "type": "integer",
+            "format": "int32",
             "nullable": true
           }
         }
