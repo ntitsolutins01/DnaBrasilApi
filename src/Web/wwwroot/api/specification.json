@@ -595,15 +595,15 @@
         }
       }
     },
-    "/api/Alunos/Profissional/{id}": {
+    "/api/Alunos/AlunoCurso/{cursoId}": {
       "get": {
         "tags": [
           "Alunos"
         ],
-        "operationId": "GetNomeAlunosByProfissionalId",
+        "operationId": "GetAlunosCursosByCursoId",
         "parameters": [
           {
-            "name": "id",
+            "name": "cursoId",
             "in": "path",
             "required": true,
             "schema": {
@@ -621,7 +621,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/SelectListDto"
+                    "$ref": "#/components/schemas/AlunoCursoDto"
                   }
                 }
               }
@@ -666,6 +666,41 @@
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/AtividadeDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Alunos/Profissional/{id}": {
+      "get": {
+        "tags": [
+          "Alunos"
+        ],
+        "operationId": "GetNomeAlunosByProfissionalId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SelectListDto"
                   }
                 }
               }
@@ -1432,7 +1467,42 @@
         "tags": [
           "Aulas"
         ],
-        "operationId": "GetAulasAllByModuloEadId",
+        "operationId": "GetAulasByModuloEadId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AulaDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Aulas/Curso/{id}": {
+      "get": {
+        "tags": [
+          "Aulas"
+        ],
+        "operationId": "GetAulasByCursoId",
         "parameters": [
           {
             "name": "id",
@@ -12967,6 +13037,22 @@
             "items": {
               "$ref": "#/components/schemas/AlunoIndexDto"
             }
+          }
+        }
+      },
+      "AlunoCursoDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "alunoId": {
+            "type": "string"
+          },
+          "cursoId": {
+            "type": "string"
+          },
+          "progresso": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },

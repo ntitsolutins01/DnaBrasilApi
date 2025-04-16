@@ -1,24 +1,24 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasilApi.Application.Aulas.Queries.GetAulasAllByModuloEadId;
+namespace DnaBrasilApi.Application.Aulas.Queries.GetAulasByModuloEadId;
 
-public record GetAulasAllByModuloEadIdQuery : IRequest<List<AulaDto>>
+public record GetAulasByModuloEadIdQuery : IRequest<List<AulaDto>>
 {
     public required int ModuloEadId { get; init; }
 }
 
-public class GetAulasAllByModuloEadIdQueryHandler : IRequestHandler<GetAulasAllByModuloEadIdQuery, List<AulaDto>>
+public class GetAulasByModuloEadIdQueryHandler : IRequestHandler<GetAulasByModuloEadIdQuery, List<AulaDto>>
 {
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
 
-    public GetAulasAllByModuloEadIdQueryHandler(IApplicationDbContext context, IMapper mapper)
+    public GetAulasByModuloEadIdQueryHandler(IApplicationDbContext context, IMapper mapper)
     {
         _context = context;
         _mapper = mapper;
     }
 
-    public async Task<List<AulaDto>> Handle(GetAulasAllByModuloEadIdQuery request, CancellationToken cancellationToken)
+    public async Task<List<AulaDto>> Handle(GetAulasByModuloEadIdQuery request, CancellationToken cancellationToken)
     {
         var result = await _context.Aulas
             .Include(i => i.ModuloEad)
