@@ -7,6 +7,7 @@ public record CreateModuloEadCommand : IRequest<int>
     public required int CursoId { get; set; }
     public required string Titulo { get; set; }
     public string? Descricao { get; set; }
+    public int? Ordem { get; set; }
     public bool Status { get; init; } = true;
 }
 
@@ -31,6 +32,7 @@ public class CreateModuloEadCommandHandler : IRequestHandler<CreateModuloEadComm
             Curso = curso,
             Titulo = request.Titulo,
             Descricao = request.Descricao,
+            Ordem = request.Ordem,
             Status = request.Status
         };
 

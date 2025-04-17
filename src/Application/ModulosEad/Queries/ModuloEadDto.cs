@@ -13,6 +13,7 @@ public class ModuloEadDto
     public bool Status { get; init; } 
     public required int CursoId { get; init; }
     public required string TituloCurso { get; init; }
+    public int? Ordem { get; init; }
     private class Mapping : Profile
     {
         public Mapping()
