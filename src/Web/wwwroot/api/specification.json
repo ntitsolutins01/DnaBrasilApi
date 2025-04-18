@@ -20835,14 +20835,6 @@
           "turma": {
             "type": "string"
           },
-          "etapaEnsinoId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "localidadeId": {
-            "type": "integer",
-            "format": "int32"
-          },
           "status": {
             "type": "boolean"
           }

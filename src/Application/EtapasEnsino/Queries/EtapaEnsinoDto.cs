@@ -12,7 +12,7 @@ public class EtapaEnsinoDto
     {
         public Mapping()
         {
-            CreateMap<Serie, SerieDto>();
+            CreateMap<EtapaEnsino, EtapaEnsinoDto>();
         }
     }
 }
