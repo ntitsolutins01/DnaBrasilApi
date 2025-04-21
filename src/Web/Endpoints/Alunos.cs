@@ -10,6 +10,7 @@ using DnaBrasilApi.Application.Alunos.Commands.UpdateAluno;
 using DnaBrasilApi.Application.Alunos.Commands.UpdateAlunoFoto;
 using DnaBrasilApi.Application.Alunos.Commands.UpdateQrCode;
 using DnaBrasilApi.Application.Alunos.Queries;
+using DnaBrasilApi.Application.Alunos.Queries.GetAlunoAulasByAlunoId;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunoByEmail;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunoById;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunosCursosByCursoId;
@@ -56,7 +57,8 @@ public class Alunos : EndpointGroupBase
             .MapPost(GetAlunosByFilter, "Filter")
             .MapGet(GetAlunosCursosByCursoId, "AlunoCurso/{cursoId}")
             .MapGet(GetPresencasByDataAtividadeId, "/Presenca/{data}/{id}")
-            .MapGet(GetNomeAlunosByProfissionalId, "/Profissional/{id}");
+            .MapGet(GetNomeAlunosByProfissionalId, "/Profissional/{id}")
+            .MapGet(GetAlunoAulasByAlunoId, "AlunoAula/{alunoId}");
     }
     #endregion
 
@@ -311,6 +313,17 @@ public class Alunos : EndpointGroupBase
     public async Task<List<AlunoCursoDto>> GetAlunosCursosByCursoId(ISender sender, int cursoId)
     {
         return await sender.Send(new GetAlunosCursosByCursoIdQuery() { CursoId = cursoId });
+    }
+
+    /// <summary>
+    /// Endpoint que busca um AlunoCurso
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="id">Id do aluno</param>
+    /// <returns>Retorna um AlunoCurso</returns>
+    public async Task<List<AlunoAulaDto>> GetAlunoAulasByAlunoId(ISender sender, int alunoId)
+    {
+        return await sender.Send(new GetAlunoAulasByAlunoIdQuery() { AlunoId = alunoId });
     }
     #endregion
 }

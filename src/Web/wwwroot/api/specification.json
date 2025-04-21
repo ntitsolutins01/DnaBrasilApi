@@ -709,6 +709,41 @@
         }
       }
     },
+    "/api/Alunos/AlunoAula/{alunoId}": {
+      "get": {
+        "tags": [
+          "Alunos"
+        ],
+        "operationId": "GetAlunoAulasByAlunoId",
+        "parameters": [
+          {
+            "name": "alunoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AlunoAulaDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/ArquivosInventarios": {
       "get": {
         "tags": [
@@ -13126,6 +13161,22 @@
           }
         }
       },
+      "AlunoAulaDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "alunoId": {
+            "type": "string"
+          },
+          "aulaId": {
+            "type": "string"
+          },
+          "progresso": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
       "ArquivosInventarioDto": {
         "type": "object",
         "additionalProperties": false,
@@ -14012,6 +14063,13 @@
                 "type": "integer",
                 "format": "int32",
                 "nullable": true
+              },
+              "alunoAulas": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "$ref": "#/components/schemas/AlunoAula"
+                }
               }
             }
           }
@@ -14735,6 +14793,13 @@
                 "nullable": true,
                 "items": {
                   "$ref": "#/components/schemas/AlunoPresenca"
+                }
+              },
+              "alunoAulas": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "$ref": "#/components/schemas/AlunoAula"
                 }
               }
             }
@@ -15864,6 +15929,40 @@
             }
           }
         ]
+      },
+      "AlunoAula": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "alunoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "aulaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "aluno": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Aluno"
+              }
+            ]
+          },
+          "aula": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Aula"
+              }
+            ]
+          },
+          "progresso": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
       },
       "CreateControleAcessoAulaCommand": {
         "type": "object",
