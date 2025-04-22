@@ -4,7 +4,7 @@ public class UpdateQuestaoEadCommandValidator : AbstractValidator<UpdateQuestaoE
 {
     public UpdateQuestaoEadCommandValidator()
     {
-       
+
         RuleFor(v => v.Pergunta)
             .MaximumLength(400)
             .NotEmpty();

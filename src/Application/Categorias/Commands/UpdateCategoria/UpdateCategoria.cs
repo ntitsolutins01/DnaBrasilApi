@@ -2,7 +2,7 @@
 
 namespace DnaBrasilApi.Application.Categorias.Commands.UpdateCategoria;
 
-public record UpdateCategoriaCommand : IRequest <bool>
+public record UpdateCategoriaCommand : IRequest<bool>
 {
     public required int Id { get; init; }
     public required string Codigo { get; init; }
@@ -22,7 +22,7 @@ public class UpdateCategoriaCommandHandler : IRequestHandler<UpdateCategoriaComm
         _context = context;
     }
 
-    public async Task <bool> Handle(UpdateCategoriaCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(UpdateCategoriaCommand request, CancellationToken cancellationToken)
     {
         var entity = await _context.Categorias
             .FindAsync([request.Id], cancellationToken);

@@ -1,11 +1,10 @@
-﻿using DnaBrasilApi.Application.ArquivosInventarios.Queries.GetArquivosInventarioById;
-using DnaBrasilApi.Application.ArquivosInventarios.Commands.CreateArquivosInventario;
+﻿using DnaBrasilApi.Application.ArquivosInventarios.Commands.CreateArquivosInventario;
 using DnaBrasilApi.Application.ArquivosInventarios.Commands.DeleteArquivosInventario;
 using DnaBrasilApi.Application.ArquivosInventarios.Commands.UpdateArquivosInventario;
 using DnaBrasilApi.Application.ArquivosInventarios.Queries;
+using DnaBrasilApi.Application.ArquivosInventarios.Queries.GetArquivosInventarioById;
 using DnaBrasilApi.Application.ArquivosInventarios.Queries.GetArquivosInventariosAll;
 using DnaBrasilApi.Application.ArquivosInventarios.Queries.GetArquivosInventariosByInventarioId;
-using Microsoft.AspNetCore.Mvc;
 
 namespace DnaBrasilApi.Web.Endpoints;
 

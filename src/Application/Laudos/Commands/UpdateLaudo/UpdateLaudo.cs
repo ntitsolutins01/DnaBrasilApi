@@ -5,7 +5,7 @@ namespace DnaBrasilApi.Application.Laudos.Commands.UpdateLaudo;
 
 public record UpdateLaudoCommand : IRequest<bool>
 {
-    public required  int Id { get; init; }
+    public required int Id { get; init; }
     public required int AlunoId { get; init; }
     public int? SaudeId { get; init; }
     public int? VocacionalId { get; init; }

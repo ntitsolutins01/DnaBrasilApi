@@ -1,6 +1,4 @@
-using DnaBrasilApi.Application.Atividades.Queries.GetAtividadeAlunosByAtividadeId;
 using DnaBrasilApi.Application.Common.Interfaces;
-using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Atividades.Queries.GetAtividadeAlunosByAtividadeId;
 //[Authorize]
@@ -24,7 +22,7 @@ public class GetAtividadeAlunosByAtividadeIdQueryHandler : IRequestHandler<GetAt
     {
         var result = await _context.AtividadeAlunos
             //.Include(i=>i.Aluno)
-            .Where((x=>x.AtividadeId == request.AtividadeId))
+            .Where((x => x.AtividadeId == request.AtividadeId))
             .AsNoTracking()
             .ProjectTo<AtividadeAlunoDto>(_mapper.ConfigurationProvider)
             .ToListAsync(cancellationToken);

@@ -1,8 +1,8 @@
-﻿using DnaBrasilApi.Application.Disciplinas.Queries.GetDisciplinaById;
-using DnaBrasilApi.Application.Disciplinas.Commands.CreateDisciplina;
+﻿using DnaBrasilApi.Application.Disciplinas.Commands.CreateDisciplina;
 using DnaBrasilApi.Application.Disciplinas.Commands.DeleteDisciplina;
 using DnaBrasilApi.Application.Disciplinas.Commands.UpdateDisciplina;
 using DnaBrasilApi.Application.Disciplinas.Queries;
+using DnaBrasilApi.Application.Disciplinas.Queries.GetDisciplinaById;
 using DnaBrasilApi.Application.Disciplinas.Queries.GetDisciplinasAll;
 
 namespace DnaBrasilApi.Web.Endpoints;

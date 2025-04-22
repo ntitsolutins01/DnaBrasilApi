@@ -2,7 +2,7 @@
 
 namespace DnaBrasilApi.Application.Certificados.Commands.UpdateCertificado;
 
-public record UpdateCertificadoCommand : IRequest <bool>
+public record UpdateCertificadoCommand : IRequest<bool>
 {
     public required int Id { get; init; }
     public required int FomentoId { get; init; }
@@ -24,7 +24,7 @@ public class UpdateCertificadoCommandHandler : IRequestHandler<UpdateCertificado
         _context = context;
     }
 
-    public async Task <bool> Handle(UpdateCertificadoCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(UpdateCertificadoCommand request, CancellationToken cancellationToken)
     {
         var entity = await _context.Certificados
             .FindAsync([request.Id], cancellationToken);

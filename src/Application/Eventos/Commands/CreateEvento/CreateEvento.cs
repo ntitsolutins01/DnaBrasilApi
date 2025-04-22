@@ -5,11 +5,11 @@ using DnaBrasilApi.Domain.Entities;
 namespace DnaBrasilApi.Application.Eventos.Commands.CreateEvento;
 public record CreateEventoCommand : IRequest<int>
 {
-   public required int LocalidadeId { get; init; }
-   public required string Titulo { get; init; }
-   public string? Descricao { get; init; }
-   public required string DataEvento { get; init; }
-   public bool Status { get; init; } = true;
+    public required int LocalidadeId { get; init; }
+    public required string Titulo { get; init; }
+    public string? Descricao { get; init; }
+    public required string DataEvento { get; init; }
+    public bool Status { get; init; } = true;
 }
 
 public class CreateEventoCommandHandler : IRequestHandler<CreateEventoCommand, int>

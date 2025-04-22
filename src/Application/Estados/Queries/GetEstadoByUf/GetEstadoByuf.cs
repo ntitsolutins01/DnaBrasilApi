@@ -26,7 +26,7 @@ public class GetEstadoByUfQueryHandler : IRequestHandler<GetEstadoByUfQuery, Est
             .ProjectTo<EstadoDto>(_mapper.ConfigurationProvider)
             .OrderBy(t => t.Id)
             .FirstOrDefaultAsync(cancellationToken);
-        
+
         return result == null ? throw new ArgumentNullException(nameof(result)) : result;
     }
 }

@@ -21,7 +21,7 @@ public class GetModulosEadAllByCursoIdQueryHandler : IRequestHandler<GetModulosE
     public async Task<List<ModuloEadDto>> Handle(GetModulosEadAllByCursoIdQuery request, CancellationToken cancellationToken)
     {
         var result = await _context.ModulosEad
-            .Include(i=>i.Curso)
+            .Include(i => i.Curso)
             //.Include(i=>i.Usuario)
             .Where(x => x.Curso.Id == request.CursoId)
             .AsNoTracking()

@@ -23,7 +23,7 @@ public class GetEstudantesByFilterQueryHandler : IRequestHandler<GetEstudantesBy
     {
         var Estudantes = _context.Alunos
             .AsNoTracking();
-            
+
         var result = FilterEstudantes(Estudantes, request.Search!)
             .ProjectTo<EstudanteDto>(_mapper.ConfigurationProvider)
             .OrderBy(t => t.Id)

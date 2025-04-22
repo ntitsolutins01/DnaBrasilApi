@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using DnaBrasilApi.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorConsumoAlimentarAlunos;
@@ -103,8 +102,8 @@ public class
             { "HabitosSatisfatorios", 0 },
             { "BonsHabitosAlimentares", 0 }
         };
-        
-        var laudos = _context.Laudos.Where(x => verificaAlunos.Contains(x.Aluno.Id)).Include(i => i.ConsumoAlimentar).Where(x=>x.ConsumoAlimentar != null)
+
+        var laudos = _context.Laudos.Where(x => verificaAlunos.Contains(x.Aluno.Id)).Include(i => i.ConsumoAlimentar).Where(x => x.ConsumoAlimentar != null)
             .Include(a => a.Aluno)
             .AsNoTracking();
 
@@ -117,8 +116,8 @@ public class
         {
             List<int> listRespostas = aluno.ConsumoAlimentar!.Respostas.Split(',').Select(item => int.Parse(item)).ToList();
 
-            var respostas = _context.Respostas.Where(x => listRespostas.Contains(x.Id)).Include(i=>i.Questionario);
-            
+            var respostas = _context.Respostas.Where(x => listRespostas.Contains(x.Id)).Include(i => i.Questionario);
+
             quadrante1 = respostas.Where(x => x.Questionario.Quadrante == 1).Sum(s => s.ValorPesoResposta);
 
             var result = metricas.Find(

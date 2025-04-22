@@ -4,9 +4,9 @@ namespace DnaBrasilApi.Domain.Entities;
 
 public class Nota : BaseAuditableEntity
 {
-   public required Aluno Aluno { get; set; }
+    public required Aluno Aluno { get; set; }
 
-   public required Disciplina Disciplina { get; set; }
+    public required Disciplina Disciplina { get; set; }
 
     [Column(TypeName = "decimal(10,2)")]
     public decimal? PrimeiroBimestre { get; set; }

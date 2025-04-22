@@ -2,8 +2,8 @@
 using DnaBrasilApi.Application.Modalidades.Commands.DeleteModalidade;
 using DnaBrasilApi.Application.Modalidades.Commands.UpdateModalidade;
 using DnaBrasilApi.Application.Modalidades.Queries;
-using DnaBrasilApi.Application.Modalidades.Queries.GetModalidadeById;
 using DnaBrasilApi.Application.Modalidades.Queries.GetAmbientesAll;
+using DnaBrasilApi.Application.Modalidades.Queries.GetModalidadeById;
 using DnaBrasilApi.Application.Modalidades.Queries.GetModalidadesByLinhaAcaoId;
 using DnaBrasilApi.Application.Modalidades.Queries.GetModalidadesByProfissionalId;
 
@@ -103,7 +103,7 @@ public class Modalidades : EndpointGroupBase
     /// <returns>Retorna a lista de Modalidades</returns>
     public async Task<List<ModalidadeDto>> GetModalidadesByLinhaAcaoId(ISender sender, int id)
     {
-        return await sender.Send(new GetModalidadesByLinhaAcaoIdQuery(){ LinhaAcaoId = id });
+        return await sender.Send(new GetModalidadesByLinhaAcaoIdQuery() { LinhaAcaoId = id });
     }
 
     /// <summary>
@@ -114,7 +114,7 @@ public class Modalidades : EndpointGroupBase
     /// <returns>Retorna a lista de Modalidades</returns>
     public async Task<List<ModalidadeDto>> GetModalidadesByProfissionalId(ISender sender, int id)
     {
-        return await sender.Send(new GetModalidadesByProfissionalIdQuery(){ ProfissionalId = id });
+        return await sender.Send(new GetModalidadesByProfissionalIdQuery() { ProfissionalId = id });
     }
     #endregion
 }

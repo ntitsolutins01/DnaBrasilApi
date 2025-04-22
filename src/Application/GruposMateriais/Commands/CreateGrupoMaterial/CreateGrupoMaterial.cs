@@ -4,7 +4,7 @@ using DnaBrasilApi.Domain.Entities;
 namespace DnaBrasilApi.Application.GruposMateriais.Commands.CreateGrupoMaterial;
 public record CreateGrupoMaterialCommand : IRequest<int>
 {
-    public required string Nome{ get; init; }
+    public required string Nome { get; init; }
 }
 
 public class CreateGrupoMaterialCommandHandler : IRequestHandler<CreateGrupoMaterialCommand, int>

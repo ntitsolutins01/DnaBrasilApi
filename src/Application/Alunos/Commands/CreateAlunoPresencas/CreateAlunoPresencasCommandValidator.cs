@@ -1,7 +1,4 @@
-﻿
-using Microsoft.EntityFrameworkCore;
-
-namespace DnaBrasilApi.Application.Alunos.Commands.CreateAlunoPresencas;
+﻿namespace DnaBrasilApi.Application.Alunos.Commands.CreateAlunoPresencas;
 internal class CreateAlunoPresencaCommandValidator : AbstractValidator<CreateAlunoPresencaCommand>
 {
     public CreateAlunoPresencaCommandValidator()

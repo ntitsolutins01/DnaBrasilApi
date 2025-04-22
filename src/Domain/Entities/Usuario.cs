@@ -2,7 +2,7 @@
 
 public class Usuario : BaseAuditableEntity
 {
-    public required string AspNetUserId { get; set; } 
+    public required string AspNetUserId { get; set; }
     public required string Nome { get; set; }
     public required string CpfCnpj { get; set; }
     public required string TipoPessoa { get; set; }

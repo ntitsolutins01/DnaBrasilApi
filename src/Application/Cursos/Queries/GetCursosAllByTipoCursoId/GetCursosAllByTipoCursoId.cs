@@ -21,8 +21,8 @@ public class GetCursosAllByTipoCursoIdQueryHandler : IRequestHandler<GetCursosAl
     public async Task<List<CursoDto>> Handle(GetCursosAllByTipoCursoIdQuery request, CancellationToken cancellationToken)
     {
         var result = await _context.Cursos
-            .Include(i=>i.TipoCurso)
-            .Include(i=>i.Usuario)
+            .Include(i => i.TipoCurso)
+            .Include(i => i.Usuario)
             .Where(x => x.TipoCurso.Id == request.TipoCursoId)
             .AsNoTracking()
             .ProjectTo<CursoDto>(_mapper.ConfigurationProvider)

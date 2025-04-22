@@ -1,11 +1,11 @@
-﻿using DnaBrasilApi.Application.Materiais.Queries.GetMaterialById;
-using DnaBrasilApi.Application.Materiais.Commands.CreateMaterial;
+﻿using DnaBrasilApi.Application.Materiais.Commands.CreateMaterial;
 using DnaBrasilApi.Application.Materiais.Commands.DeleteMaterial;
 using DnaBrasilApi.Application.Materiais.Commands.UpdateMaterial;
 using DnaBrasilApi.Application.Materiais.Queries;
 using DnaBrasilApi.Application.Materiais.Queries.GetMateriaisAll;
-using DnaBrasilApi.Application.Materiais.Queries.GetMateriaisByTipoMaterialId;
 using DnaBrasilApi.Application.Materiais.Queries.GetMateriaisByFilter;
+using DnaBrasilApi.Application.Materiais.Queries.GetMateriaisByTipoMaterialId;
+using DnaBrasilApi.Application.Materiais.Queries.GetMaterialById;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DnaBrasilApi.Web.Endpoints;

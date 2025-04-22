@@ -3,6 +3,6 @@ internal class CreateAlunoCursoCommandValidator : AbstractValidator<CreateAlunoC
 {
     public CreateAlunoCursoCommandValidator()
     {
-        
+
     }
 }

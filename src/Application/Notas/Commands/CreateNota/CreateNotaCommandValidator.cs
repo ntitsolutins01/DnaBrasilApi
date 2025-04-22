@@ -1,6 +1,4 @@
-﻿using DnaBrasilApi.Application.Notas.Commands.CreateNota;
-
-namespace DnaBrasilApi.Application.Notas.Commands.CreateNota;
+﻿namespace DnaBrasilApi.Application.Notas.Commands.CreateNota;
 internal class CreateNotaCommandValidator : AbstractValidator<CreateNotaCommand>
 {
     public CreateNotaCommandValidator()

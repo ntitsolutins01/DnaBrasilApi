@@ -1,15 +1,15 @@
-using DnaBrasilApi.Application.Atividades.Queries.GetAtividadeById;
 using DnaBrasilApi.Application.Atividades.Commands.CreateAtividade;
 using DnaBrasilApi.Application.Atividades.Commands.CreateAtividadeAluno;
 using DnaBrasilApi.Application.Atividades.Commands.DeleteAtividade;
+using DnaBrasilApi.Application.Atividades.Commands.DeleteAtividadeAluno;
 using DnaBrasilApi.Application.Atividades.Commands.UpdateAtividade;
 using DnaBrasilApi.Application.Atividades.Queries;
 using DnaBrasilApi.Application.Atividades.Queries.GetAtividadeAlunosByAtividadeId;
+using DnaBrasilApi.Application.Atividades.Queries.GetAtividadeById;
+using DnaBrasilApi.Application.Atividades.Queries.GetAtividadeByLocalidadeId;
 using DnaBrasilApi.Application.Atividades.Queries.GetAtividadeByModalidadeIdProfissionalIdTurma;
 using DnaBrasilApi.Application.Atividades.Queries.GetAtividadesAll;
 using DnaBrasilApi.Application.Atividades.Queries.GetTurmasByModalidadeIdProfissionalId;
-using DnaBrasilApi.Application.Atividades.Commands.DeleteAtividadeAluno;
-using DnaBrasilApi.Application.Atividades.Queries.GetAtividadeByLocalidadeId;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -26,7 +26,7 @@ public class Atividades : EndpointGroupBase
         app.MapGroup(this)
             //.RequireAuthorization()
             .MapPost(CreateAtividade)
-            .MapPost(CreateAtividadeAlunos,"Alunos")
+            .MapPost(CreateAtividadeAlunos, "Alunos")
             .MapPut(UpdateAtividade, "{id}")
             .MapPut(UpdateAtividadeAluno, "{id}/Alunos")
             .MapDelete(DeleteAtividade, "{id}")

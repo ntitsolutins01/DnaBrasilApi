@@ -6,6 +6,6 @@ internal class CreateModulosCommandValidator : AbstractValidator<CreateModuloCom
         RuleFor(v => v.Nome)
             .MaximumLength(150)
             .NotEmpty();
-        
+
     }
 }

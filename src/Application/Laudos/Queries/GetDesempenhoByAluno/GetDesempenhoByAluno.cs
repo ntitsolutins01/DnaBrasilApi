@@ -30,7 +30,7 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
             .Include(x => x.Aluno)
             .Include(x => x.Vocacional)
             .Include(x => x.Vocacional!.Encaminhamento)
-            .Include(x => x.SaudeBucal) 
+            .Include(x => x.SaudeBucal)
             .Include(x => x.SaudeBucal!.Encaminhamento)
             .Include(x => x.ConsumoAlimentar)
             .Include(x => x.ConsumoAlimentar!.Encaminhamento)
@@ -89,7 +89,7 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
             { "forcaMembrosSup", 0 },
             { "forcaExplosiva", 0 },
             { "aptidaoCardio", 0 },
-            
+
             { "shutlleRun", 0 },
             { "prancha", 0 },
             { "vo2Max", 0 },
@@ -104,7 +104,7 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
             { "forcaMembrosSup", 0 },
             { "forcaExplosiva", 0 },
             { "aptidaoCardio", 0 },
-            
+
             { "shutlleRun", 0 },
             { "prancha", 0 },
             { "vo2Max", 0 },
@@ -157,7 +157,7 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
         //var contador = 0;
 
         double velocidade = 0;
-        double impulsao =0;
+        double impulsao = 0;
         double shutlleRun = 0;
         double flexibilidadeMuscular = 0;
         double forcaMembrosSup = 0;
@@ -1014,52 +1014,52 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
 
         var scoreSaude = imcSaude;
 
-            return new DesempenhoDto()
-            {
-                ScoreTalentoEsportivo = Round(scoreTalentoEsportivo),
-                ScoreSaude = scoreSaude,
-                ScoreVida = scoreQualidadeVida,
-                ScoreVocacional = scoreVocacional,
-                ScoreSaudeBucal = saudeBucal,
-                ScoreConsumoAlimentar = consumoAlimentar,
-                ScoreDna = Round(scoreTalentoEsportivo + scoreSaude + scoreVocacional + saudeBucal + consumoAlimentar + scoreQualidadeVida),
-                AvisoVelocidade = avisoVelocidade,
-                AvisoImpulsao = avisoImpulsao,
-                AvisoShuttleRun = avisoShutlleRun,
-                AvisoFlexibilidadeMuscular = avisoFlexibilidadeMuscular,
-                AvisoForcaMembrosSup = avisoForcaMembrosSup,
-                AvisoAptidaoCardio = avisoAptidaoCardio,
-                AvisoPrancha = avisoPrancha,
-                AvisoImc = avisoImc,
-                AvisoBemEstar = avisoBemEstar,
-                AvisoAutoestima = avisoAutoestima,
-                AvisoFamilia = avisoFamilia,
-                AvisoContexto = avisoContexto,
-                AvisoSaudeBucal = avisoSaudeBucal,
-                AvisoConsumoAlimentar = avisoConsumoAlimentar,
-                DataTalentoEsportivo = dataTalentoEsportivo,
-                DataSaude = dataSaude,
-                DataVida = dataVida,
-                DataVocacional = dataVocacional,
-                DataSaudeBucal = dataSaudeBucal,
-                DataConsumoAlimentar = dataConsumoAlimentar,
-                TextoVelocidade = textoVelocidade,
-                TextoImpulsao = textoImpulsao,
-                TextoShuttleRun = textoShuttleRun,
-                TextoFlexibilidadeMuscular = textoFlexibilidadeMuscular,
-                TextoForcaMembrosSup = textoForcaMembrosSup,
-                TextoAptidaoCardio = textoAptidaoCardio,
-                TextoPrancha = textoPrancha,
-                TextoImc = textoImc,
-                TextoVocacional = textoVocacional,
-                TextoBemEstar = textoBemEstar,
-                TextoAutoestima = textoAutoestima,
-                TextoFamilia = textoFamilia,
-                TextoContexto = textoContexto,
-                TextoConsumoAlimentar = textoConsumoAlimentar,
-                TextoSaudeBucal = textoSaudeBucal,
-            };
-        }
+        return new DesempenhoDto()
+        {
+            ScoreTalentoEsportivo = Round(scoreTalentoEsportivo),
+            ScoreSaude = scoreSaude,
+            ScoreVida = scoreQualidadeVida,
+            ScoreVocacional = scoreVocacional,
+            ScoreSaudeBucal = saudeBucal,
+            ScoreConsumoAlimentar = consumoAlimentar,
+            ScoreDna = Round(scoreTalentoEsportivo + scoreSaude + scoreVocacional + saudeBucal + consumoAlimentar + scoreQualidadeVida),
+            AvisoVelocidade = avisoVelocidade,
+            AvisoImpulsao = avisoImpulsao,
+            AvisoShuttleRun = avisoShutlleRun,
+            AvisoFlexibilidadeMuscular = avisoFlexibilidadeMuscular,
+            AvisoForcaMembrosSup = avisoForcaMembrosSup,
+            AvisoAptidaoCardio = avisoAptidaoCardio,
+            AvisoPrancha = avisoPrancha,
+            AvisoImc = avisoImc,
+            AvisoBemEstar = avisoBemEstar,
+            AvisoAutoestima = avisoAutoestima,
+            AvisoFamilia = avisoFamilia,
+            AvisoContexto = avisoContexto,
+            AvisoSaudeBucal = avisoSaudeBucal,
+            AvisoConsumoAlimentar = avisoConsumoAlimentar,
+            DataTalentoEsportivo = dataTalentoEsportivo,
+            DataSaude = dataSaude,
+            DataVida = dataVida,
+            DataVocacional = dataVocacional,
+            DataSaudeBucal = dataSaudeBucal,
+            DataConsumoAlimentar = dataConsumoAlimentar,
+            TextoVelocidade = textoVelocidade,
+            TextoImpulsao = textoImpulsao,
+            TextoShuttleRun = textoShuttleRun,
+            TextoFlexibilidadeMuscular = textoFlexibilidadeMuscular,
+            TextoForcaMembrosSup = textoForcaMembrosSup,
+            TextoAptidaoCardio = textoAptidaoCardio,
+            TextoPrancha = textoPrancha,
+            TextoImc = textoImc,
+            TextoVocacional = textoVocacional,
+            TextoBemEstar = textoBemEstar,
+            TextoAutoestima = textoAutoestima,
+            TextoFamilia = textoFamilia,
+            TextoContexto = textoContexto,
+            TextoConsumoAlimentar = textoConsumoAlimentar,
+            TextoSaudeBucal = textoSaudeBucal,
+        };
+    }
 
     /// <summary>
     /// Calcula quantidade de anos passdos com base em duas datas, caso encontre qualquer problema retorna 0 

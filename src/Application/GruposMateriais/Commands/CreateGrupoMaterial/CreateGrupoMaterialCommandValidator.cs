@@ -1,6 +1,4 @@
-﻿using DnaBrasilApi.Application.GruposMateriais.Commands.CreateGrupoMaterial;
-
-namespace DnaBrasilApi.Application.GruposMateriais.Commands.CreateGrupoMaterial;
+﻿namespace DnaBrasilApi.Application.GruposMateriais.Commands.CreateGrupoMaterial;
 internal class CreateGrupoMaterialCommandValidator : AbstractValidator<CreateGrupoMaterialCommand>
 {
     public CreateGrupoMaterialCommandValidator()

@@ -5,7 +5,7 @@ namespace DnaBrasilApi.Application.TextosQuestoes.Commands.CreateTextoQuestao;
 
 public record CreateTextoQuestaoCommand : IRequest<int>
 {
-    public required int QuestaoEadId{ get; init; }
+    public required int QuestaoEadId { get; init; }
     public string? Texto { get; init; }
     public Byte[]? Imagem { get; init; }
 }

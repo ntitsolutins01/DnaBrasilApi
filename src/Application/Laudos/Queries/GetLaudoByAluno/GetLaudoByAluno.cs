@@ -19,7 +19,7 @@ namespace DnaBrasilApi.Application.Laudos.Queries.GetLaudoByAluno
         {
             var result = await _context.Laudos
                 .AsNoTracking()
-                .Where(x => x.Aluno.Id == request.AlunoId) 
+                .Where(x => x.Aluno.Id == request.AlunoId)
                 .ProjectTo<LaudoDto>(_mapper.ConfigurationProvider)
                 .FirstOrDefaultAsync(cancellationToken);
 

@@ -1,5 +1,4 @@
 using DnaBrasilApi.Application.Common.Interfaces;
-using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Dashboards;
 public record CreateCargaCommand : IRequest<int>

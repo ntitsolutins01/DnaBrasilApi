@@ -1,7 +1,4 @@
-﻿using DnaBrasilApi.Application.Laudos.Queries;
-using DnaBrasilApi.Application.Parceiros.Queries;
-
-namespace DnaBrasilApi.Application.Dashboards.Queries;
+﻿namespace DnaBrasilApi.Application.Dashboards.Queries;
 public class DashboardDto
 {
     public int AvaliacoesDna { get; set; }

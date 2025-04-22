@@ -1,5 +1,4 @@
-﻿using DnaBrasilApi.Application.Questionarios.Queries;
-using DnaBrasilApi.Domain.Entities;
+﻿using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Respostas.Queries;
 
@@ -11,7 +10,7 @@ public class RespostaDto
     public int TipoLaudoId { get; init; }
     public required string NomeTipoLaudo { get; set; }
     public required string RespostaQuestionario { get; set; }
-   public required decimal ValorPesoResposta { get; set; }
+    public required decimal ValorPesoResposta { get; set; }
 
 
     private class Mapping : Profile

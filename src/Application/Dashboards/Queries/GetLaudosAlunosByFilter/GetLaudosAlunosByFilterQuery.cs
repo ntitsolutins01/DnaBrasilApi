@@ -1,5 +1,4 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
-using DnaBrasilApi.Application.Dashboards.Queries;
 using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Dashboards.Queries.GetLaudosAlunosByFilter;
@@ -27,7 +26,7 @@ public class GetLaudosAlunosByFilterQueryHandler : IRequestHandler<GetLaudosAlun
 
         Laudos = string.IsNullOrWhiteSpace(request.SearchFilter!.StatusLaudo)
             ? _context.Laudos
-                .Include(i=>i.Aluno)
+                .Include(i => i.Aluno)
                 .AsNoTracking()
             : _context.Laudos
                 .Include(i => i.Aluno)

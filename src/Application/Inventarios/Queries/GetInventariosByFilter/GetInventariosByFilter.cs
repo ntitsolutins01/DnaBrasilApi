@@ -1,5 +1,4 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
-using DnaBrasilApi.Application.Dashboards.Queries;
 using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Inventarios.Queries.GetInventariosByFilter;
@@ -23,7 +22,7 @@ public class GetInventariosByFilterQueryHandler : IRequestHandler<GetInventarios
     public async Task<List<InventarioIndexDto>> Handle(GetInventariosByFilterQuery request, CancellationToken cancellationToken)
     {
         var Inventarios = _context.Inventarios
-            .Include(r=>r.Material)
+            .Include(r => r.Material)
             .AsNoTracking();
 
         var result = FilterInventarios(Inventarios, request.SearchFilter!, cancellationToken)

@@ -1,8 +1,8 @@
-﻿using DnaBrasilApi.Application.Certificados.Queries.GetCertificadoById;
-using DnaBrasilApi.Application.Certificados.Commands.CreateCertificado;
+﻿using DnaBrasilApi.Application.Certificados.Commands.CreateCertificado;
 using DnaBrasilApi.Application.Certificados.Commands.DeleteCertificado;
 using DnaBrasilApi.Application.Certificados.Commands.UpdateCertificado;
 using DnaBrasilApi.Application.Certificados.Queries;
+using DnaBrasilApi.Application.Certificados.Queries.GetCertificadoById;
 using DnaBrasilApi.Application.Certificados.Queries.GetCertificadosAll;
 using DnaBrasilApi.Application.Certificados.Queries.GetCertificadosByAlunoId;
 

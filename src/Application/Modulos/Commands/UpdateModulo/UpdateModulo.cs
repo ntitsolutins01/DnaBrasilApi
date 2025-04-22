@@ -1,9 +1,8 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
-using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Modulos.Commands.UpdateModulo;
 
-public record UpdateModuloCommand : IRequest <bool>
+public record UpdateModuloCommand : IRequest<bool>
 {
     public int Id { get; init; }
     public required string Nome { get; init; }
@@ -18,7 +17,7 @@ public class UpdateModuloCommandHandler : IRequestHandler<UpdateModuloCommand, b
         _context = context;
     }
 
-    public async Task <bool> Handle(UpdateModuloCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(UpdateModuloCommand request, CancellationToken cancellationToken)
     {
         var entity = await _context.Modulos
             .FindAsync(new object[] { request.Id }, cancellationToken);

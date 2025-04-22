@@ -1,5 +1,4 @@
-﻿using System.Text.RegularExpressions;
-using DnaBrasilApi.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 
 namespace DnaBrasilApi.Application.Profissionais.Commands.CreateProfissional;
 

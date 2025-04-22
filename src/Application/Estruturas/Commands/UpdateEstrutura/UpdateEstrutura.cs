@@ -2,7 +2,7 @@
 
 namespace DnaBrasilApi.Application.Estruturas.Commands.UpdateEstrutura;
 
-public record UpdateEstruturaCommand : IRequest <bool>
+public record UpdateEstruturaCommand : IRequest<bool>
 {
     public required int Id { get; init; }
     public required int LocalidadeId { get; init; }
@@ -20,7 +20,7 @@ public class UpdateEstruturaCommandHandler : IRequestHandler<UpdateEstruturaComm
         _context = context;
     }
 
-    public async Task <bool> Handle(UpdateEstruturaCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(UpdateEstruturaCommand request, CancellationToken cancellationToken)
     {
         var entity = await _context.Estruturas
             .FindAsync([request.Id], cancellationToken);
@@ -31,7 +31,7 @@ public class UpdateEstruturaCommandHandler : IRequestHandler<UpdateEstruturaComm
             .FindAsync([request.LocalidadeId], cancellationToken);
 
         Guard.Against.NotFound(request.LocalidadeId, localidade);
-        
+
         entity.Localidade = localidade;
         entity.Nome = request.Nome;
         entity.Descricao = request.Descricao;

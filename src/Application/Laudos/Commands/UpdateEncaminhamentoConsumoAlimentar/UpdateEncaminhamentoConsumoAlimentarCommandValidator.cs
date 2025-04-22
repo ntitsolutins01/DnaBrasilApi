@@ -4,6 +4,6 @@ public class UpdateEncaminhamentoConsumoAlimentarCommandValidator : AbstractVali
 {
     public UpdateEncaminhamentoConsumoAlimentarCommandValidator()
     {
-        
+
     }
 }

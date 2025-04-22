@@ -24,7 +24,7 @@ public class GetLocalidadesByFomentoQueryHandler : IRequestHandler<GetLocalidade
         {
             var result = await _context.Fomentos
                 .Where(x => x.Localidade.Id == request.Id)
-                .Select(s=>s.Localidade)
+                .Select(s => s.Localidade)
                 .AsNoTracking()
                 .ProjectTo<LocalidadeDto>(_mapper.ConfigurationProvider)
                 .OrderBy(t => t.Nome)

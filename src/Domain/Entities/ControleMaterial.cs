@@ -1,5 +1,5 @@
 ﻿namespace DnaBrasilApi.Domain.Entities;
-public  class ControleMaterial : BaseAuditableEntity
+public class ControleMaterial : BaseAuditableEntity
 {
     public required LinhaAcao LinhaAcao { get; set; }
     public required string Descricao { get; set; }

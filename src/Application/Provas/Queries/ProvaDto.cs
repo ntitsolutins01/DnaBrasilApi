@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using DnaBrasilApi.Application.Provas.Queries;
-using DnaBrasilApi.Domain.Entities;
+﻿using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Provas.Queries;
 
@@ -20,7 +18,7 @@ public class ProvaDto
     public int Tentativas { get; set; }
     public bool LiberarTentativa { get; set; }
     public bool Status { get; set; }
- 
+
     private class Mapping : Profile
     {
         public Mapping()

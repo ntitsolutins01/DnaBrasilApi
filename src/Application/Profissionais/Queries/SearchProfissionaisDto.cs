@@ -1,7 +1,4 @@
-﻿using DnaBrasilApi.Application.Municipios.Queries;
-using DnaBrasilApi.Domain.Entities;
-
-namespace DnaBrasilApi.Application.Profissionais.Queries;
+﻿namespace DnaBrasilApi.Application.Profissionais.Queries;
 public class SearchProfissionaisDto
 {
     public string? Nome { get; set; }

@@ -1,12 +1,10 @@
-﻿using DnaBrasilApi.Application.Localidades.Queries.GetLocalidadeById;
-using DnaBrasilApi.Application.Localidades.Queries;
-using DnaBrasilApi.Application.Localidades.Commands.CreateLocalidade;
+﻿using DnaBrasilApi.Application.Localidades.Commands.CreateLocalidade;
 using DnaBrasilApi.Application.Localidades.Commands.DeleteLocalidade;
 using DnaBrasilApi.Application.Localidades.Commands.UpdateLocalidade;
+using DnaBrasilApi.Application.Localidades.Queries;
+using DnaBrasilApi.Application.Localidades.Queries.GetLocalidadeById;
 using DnaBrasilApi.Application.Localidades.Queries.GetLocalidadesAll;
 using DnaBrasilApi.Application.Localidades.Queries.GetLocalidadesByFomento;
-using DnaBrasilApi.Application.Municipios.Queries.GetMunicipiosByUf;
-using DnaBrasilApi.Application.Municipios.Queries;
 using DnaBrasilApi.Application.Localidades.Queries.GetLocalidadesByMunicipio;
 
 namespace DnaBrasilApi.Web.Endpoints;

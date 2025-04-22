@@ -1,5 +1,4 @@
-﻿using System.Threading;
-using DnaBrasilApi.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
 using DnaBrasilApi.Domain.Enums;
 

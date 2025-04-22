@@ -34,7 +34,7 @@ public class CreateAlunoPresencaCommandHandler : IRequestHandler<CreateAlunoPres
         {
             _context.AlunosPresencas.Add(new AlunoPresenca()
             {
-                AtividadeId = id, 
+                AtividadeId = id,
                 AlunoId = request.AlunoId,
                 Presenca = request.Presenca,
                 Justificativa = request.Justificativa,

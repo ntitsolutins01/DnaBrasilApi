@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using DnaBrasilApi.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Dashboards.Queries.GetStatusLaudosAll;
@@ -20,12 +19,12 @@ public class GetStatusLaudosAllQueryHandler : IRequestHandler<GetStatusLaudosAll
         _mapper = mapper;
     }
 
-    public  Task<StatusLaudosDto> Handle(GetStatusLaudosAllQuery request, CancellationToken cancellationToken)
+    public Task<StatusLaudosDto> Handle(GetStatusLaudosAllQuery request, CancellationToken cancellationToken)
     {
         IQueryable<Laudo> laudos;
 
         laudos = _context.Laudos
-            .Include(i=>i.Aluno)
+            .Include(i => i.Aluno)
             .AsNoTracking();
 
         var result = FilterLaudos(laudos, request.SearchFilter!, cancellationToken);
@@ -33,19 +32,19 @@ public class GetStatusLaudosAllQueryHandler : IRequestHandler<GetStatusLaudosAll
         var statusLaudos = new StatusLaudosDto()
         {
             TotTalentoEsportivoFinalizado =
-                result.Include(i=>i.TalentoEsportivo).Count(c => c.TalentoEsportivo != null),
+                result.Include(i => i.TalentoEsportivo).Count(c => c.TalentoEsportivo != null),
             TotTalentoEsportivoAndamento =
                 result.Include(i => i.TalentoEsportivo).Count(c => c.TalentoEsportivo == null),
 
-            TotSaudeFinalizado = result.Include(i=>i.Saude).Count(c => c.Saude != null),
-            TotSaudeAndamento = result.Include(i=>i.Saude).Count(c => c.Saude == null),
+            TotSaudeFinalizado = result.Include(i => i.Saude).Count(c => c.Saude != null),
+            TotSaudeAndamento = result.Include(i => i.Saude).Count(c => c.Saude == null),
 
-            TotConsumoAlimentarFinalizado = result.Include(i=>i.ConsumoAlimentar).Count(c => c.ConsumoAlimentar != null),
-            TotConsumoAlimentarAndamento = result.Include(i=>i.ConsumoAlimentar).Count(c => c.ConsumoAlimentar == null),
+            TotConsumoAlimentarFinalizado = result.Include(i => i.ConsumoAlimentar).Count(c => c.ConsumoAlimentar != null),
+            TotConsumoAlimentarAndamento = result.Include(i => i.ConsumoAlimentar).Count(c => c.ConsumoAlimentar == null),
 
 
-            TotQualidadeDeVidaFinalizado =result.Include(i => i.QualidadeDeVida).Count(c => c.QualidadeDeVida != null),
-            TotQualidadeDeVidaAndamento =result.Include(i => i.QualidadeDeVida).Count(c => c.QualidadeDeVida == null),
+            TotQualidadeDeVidaFinalizado = result.Include(i => i.QualidadeDeVida).Count(c => c.QualidadeDeVida != null),
+            TotQualidadeDeVidaAndamento = result.Include(i => i.QualidadeDeVida).Count(c => c.QualidadeDeVida == null),
 
 
             TotVocacionalFinalizado = result.Include(i => i.Vocacional).Count(c => c.Vocacional != null),

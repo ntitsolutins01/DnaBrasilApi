@@ -1,6 +1,7 @@
 ﻿using DnaBrasilApi.Application.EtapasEnsino.Queries;
 using DnaBrasilApi.Application.EtapasEnsino.Queries.GetEtapaEnsinoById;
 using DnaBrasilApi.Application.EtapasEnsino.Queries.GetEtapasEnsinoAll;
+using DnaBrasilApi.Application.EtapasEnsino.Queries.GetEtapasEnsinoByLocalidadeId;
 
 namespace DnaBrasilApi.Web.Endpoints;
 /// <summary>
@@ -22,7 +23,8 @@ public class EtapasEnsino : EndpointGroupBase
             //.MapPost(CreateEtapaEnsino)
             //.MapPut(UpdateEtapaEnsino, "{id}")
             //.MapDelete(DeleteEtapaEnsino, "{id}")
-            .MapGet(GetEtapaEnsinoById, "{id}");
+            .MapGet(GetEtapaEnsinoById, "{id}")
+            .MapGet(GetEtapasByLocalidadeId, "Localidade/{id}");
     }
     #endregion
 
@@ -87,5 +89,18 @@ public class EtapasEnsino : EndpointGroupBase
     {
         return await sender.Send(new GetEtapaEnsinoByIdQuery() { Id = id });
     }
+
+    /// <summary>
+    /// Endpoint que busca uma única Etapas de Ensino por localidade
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="id">Id da localidade</param>
+    /// <returns>Retorna o objeto de com a lista de Etapas de Ensino </returns>
+    public async Task<EtapaEnsinoDto> GetEtapasByLocalidadeId(ISender sender, int id)
+    {
+        return await sender.Send(new GetEtapasEnsinoByLocalidadeIdQuery() { LocalidadeId = id });
+    }
+
+
     #endregion
 }

@@ -30,7 +30,7 @@ public class GetControlesPresencasByAlunoIdQueryHandler : IRequestHandler<GetCon
 
         if (aluno == null)
         {
-            return new List<ControlePresencaAlunoDto>(); 
+            return new List<ControlePresencaAlunoDto>();
         }
 
         var controlesPresencas = await _context.ControlesPresencas

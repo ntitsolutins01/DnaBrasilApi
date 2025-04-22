@@ -3,6 +3,6 @@ internal class UpdateAtividadeCommandValidator : AbstractValidator<UpdateAtivida
 {
     public UpdateAtividadeCommandValidator()
     {
-        
+
     }
 }

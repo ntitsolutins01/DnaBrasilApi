@@ -1,6 +1,5 @@
-﻿using DnaBrasilApi.Application.Aulas.Commands.DeleteAula;
+﻿using DnaBrasilApi.Application.Aulas.Queries;
 using DnaBrasilApi.Application.Aulas.Queries.GetAulasAllByModuloEadId;
-using DnaBrasilApi.Application.Aulas.Queries;
 using DnaBrasilApi.Application.Deficiencias.Commands.CreateDeficiencia;
 using DnaBrasilApi.Application.Deficiencias.Commands.DeleteDeficiencia;
 using DnaBrasilApi.Application.Deficiencias.Commands.UpdateDeficiencia;

@@ -1,13 +1,13 @@
-using DnaBrasilApi.Application.Profissionais.Queries.GetProfissionalById;
-using DnaBrasilApi.Application.Profissionais.Queries;
 using DnaBrasilApi.Application.Profissionais.Commands.CreateProfissional;
 using DnaBrasilApi.Application.Profissionais.Commands.DeleteProfissional;
+using DnaBrasilApi.Application.Profissionais.Commands.DeleteProfissionalModalidade;
 using DnaBrasilApi.Application.Profissionais.Commands.UpdateProfissional;
+using DnaBrasilApi.Application.Profissionais.Queries;
 using DnaBrasilApi.Application.Profissionais.Queries.GetProfissionaisAll;
 using DnaBrasilApi.Application.Profissionais.Queries.GetProfissionalByCpfCnpj;
 using DnaBrasilApi.Application.Profissionais.Queries.GetProfissionalByEmail;
+using DnaBrasilApi.Application.Profissionais.Queries.GetProfissionalById;
 using DnaBrasilApi.Application.Profissionais.Queries.GetProfissionalByLocalidade;
-using DnaBrasilApi.Application.Profissionais.Commands.DeleteProfissionalModalidade;
 
 namespace DnaBrasilApi.Web.Endpoints;
 /// <summary>
@@ -133,7 +133,7 @@ public class Profissionais : EndpointGroupBase
 
     public async Task<bool> DeleteProfissionalModalide(ISender sender, int id)
     {
-        return await sender.Send(new DeleteProfissionalModalidadeCommand(){ ProfissionalId = id});
+        return await sender.Send(new DeleteProfissionalModalidadeCommand() { ProfissionalId = id });
     }
     #endregion
 }

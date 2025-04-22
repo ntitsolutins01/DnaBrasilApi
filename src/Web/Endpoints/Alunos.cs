@@ -21,7 +21,6 @@ using DnaBrasilApi.Application.Alunos.Queries.GetNomeAlunosByProfissionalId;
 using DnaBrasilApi.Application.Alunos.Queries.GetPresencasByAlunoId;
 using DnaBrasilApi.Application.Alunos.Queries.GetPresencasByDataAtividadeId;
 using DnaBrasilApi.Application.Atividades.Queries;
-using DnaBrasilApi.Application.Aulas.Queries;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DnaBrasilApi.Web.Endpoints;
@@ -297,7 +296,7 @@ public class Alunos : EndpointGroupBase
     /// <returns>Retorna uma lista de presencas</returns>
     public async Task<List<AtividadeDto>> GetPresencasByDataAtividadeId(ISender sender, string data, int id)
     {
-        return await sender.Send(new GetPresencasByDataAtividadeIdQuery() { Data = data, AtividadeId = id});
+        return await sender.Send(new GetPresencasByDataAtividadeIdQuery() { Data = data, AtividadeId = id });
     }
     #endregion
 }

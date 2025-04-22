@@ -1,5 +1,5 @@
 ﻿namespace DnaBrasilApi.Domain.Entities;
-public class FomentoLinhaAcao 
+public class FomentoLinhaAcao
 {
     public int FomentoId { get; set; }
     public int LinhaAcaoId { get; set; }

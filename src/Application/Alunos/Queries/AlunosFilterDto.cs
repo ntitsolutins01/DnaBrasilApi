@@ -1,6 +1,4 @@
-﻿using DnaBrasilApi.Domain.Entities;
-
-namespace DnaBrasilApi.Application.Alunos.Queries;
+﻿namespace DnaBrasilApi.Application.Alunos.Queries;
 public class AlunosFilterDto
 {
 

@@ -25,7 +25,7 @@ public class GetControlePresencaByFilterQueryHandler : IRequestHandler<GetContro
         IQueryable<ControlePresenca> controlePresencas;
 
         controlePresencas = _context.ControlesPresencas
-            .Where(x=>x.Controle==request.SearchFilter!.Controle && x.Evento == null)
+            .Where(x => x.Controle == request.SearchFilter!.Controle && x.Evento == null)
             .Include(i => i.Aluno)
                 .AsNoTracking();
 
@@ -77,14 +77,14 @@ public class GetControlePresencaByFilterQueryHandler : IRequestHandler<GetContro
         var result = controlePresencas.Where(x => x.Created.Year == DateTime.Now.Year)
             .GroupBy(x => new { x.Created.Year, x.Created.Month })
             .Select(grp => new { grp.Key.Year, grp.Key.Month, Count = grp.Count() }).ToList();
-        
+
         List<int> list = [];
-        
+
         for (int i = 1; i <= 12; i++)
         {
-            if (result.Select(s=>s.Month).Contains(i))
+            if (result.Select(s => s.Month).Contains(i))
             {
-                list.Add(result.First(x=>x.Month==i).Count);
+                list.Add(result.First(x => x.Month == i).Count);
             }
             else
             {

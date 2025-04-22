@@ -4,6 +4,6 @@ internal class CreateAlunoCertificadoCommandValidator : AbstractValidator<Create
 {
     public CreateAlunoCertificadoCommandValidator()
     {
-        
+
     }
 }

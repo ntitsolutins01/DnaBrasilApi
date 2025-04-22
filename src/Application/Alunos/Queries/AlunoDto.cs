@@ -1,5 +1,4 @@
-﻿using DnaBrasilApi.Application.Laudos.Queries;
-using DnaBrasilApi.Domain.Entities;
+﻿using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Alunos.Queries;
 public class AlunoDto

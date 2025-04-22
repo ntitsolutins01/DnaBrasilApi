@@ -1,6 +1,5 @@
 ﻿using System.Globalization;
 using DnaBrasilApi.Application.Atividades.Queries;
-using DnaBrasilApi.Application.Aulas.Queries;
 using DnaBrasilApi.Application.Common.Interfaces;
 
 namespace DnaBrasilApi.Application.Alunos.Queries.GetPresencasByDataAtividadeId;

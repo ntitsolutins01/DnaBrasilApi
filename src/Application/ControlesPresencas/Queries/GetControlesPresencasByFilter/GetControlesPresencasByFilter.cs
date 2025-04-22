@@ -24,8 +24,8 @@ public class GetControlesPresencasByFilterQueryHandler : IRequestHandler<GetCont
     public async Task<PaginatedList<ControlePresencaDto>> Handle(GetControlesPresencasByFilterQuery request, CancellationToken cancellationToken)
     {
         var ControlePresencas = _context.ControlesPresencas
-            .Include(i=>i.Evento)
-            .Where(x=>x.Evento==null)
+            .Include(i => i.Evento)
+            .Where(x => x.Evento == null)
             .AsNoTracking();
 
         var result = FilterControlePresencas(ControlePresencas, request.SearchFilter!, cancellationToken)
@@ -40,7 +40,7 @@ public class GetControlesPresencasByFilterQueryHandler : IRequestHandler<GetCont
     {
         if (!string.IsNullOrWhiteSpace(search.FomentoId))
         {
-            var fomento = _context.Fomentos.Include(i=>i.Municipio).First(x => x.Id == Convert.ToInt32(search.FomentoId));
+            var fomento = _context.Fomentos.Include(i => i.Municipio).First(x => x.Id == Convert.ToInt32(search.FomentoId));
 
             ControlePresencas = ControlePresencas.Where(u => u.Aluno.Municipio!.Id == fomento.Municipio!.Id);
         }

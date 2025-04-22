@@ -1,9 +1,9 @@
-﻿using DnaBrasilApi.Application.Questionarios.Queries.GetQuestionarioById;
-using DnaBrasilApi.Application.Questionarios.Commands.CreateQuestionario;
+﻿using DnaBrasilApi.Application.Questionarios.Commands.CreateQuestionario;
 using DnaBrasilApi.Application.Questionarios.Commands.DeleteQuestionario;
 using DnaBrasilApi.Application.Questionarios.Commands.UpdateQuestionario;
 using DnaBrasilApi.Application.Questionarios.Queries;
 using DnaBrasilApi.Application.Questionarios.Queries.GetQuestionarioAll;
+using DnaBrasilApi.Application.Questionarios.Queries.GetQuestionarioById;
 using DnaBrasilApi.Application.Questionarios.Queries.GetQuestionarioByTipoLaudo;
 
 namespace DnaBrasilApi.Web.Endpoints;
