@@ -1,4 +1,5 @@
 using DnaBrasilApi.Application.Alunos.Commands.CreateAluno;
+using DnaBrasilApi.Application.Alunos.Commands.CreateAlunoAulas;
 using DnaBrasilApi.Application.Alunos.Commands.CreateAlunoCertificados;
 using DnaBrasilApi.Application.Alunos.Commands.CreateAlunoCursos;
 using DnaBrasilApi.Application.Alunos.Commands.CreateAlunoPresencas;
@@ -48,6 +49,7 @@ public class Alunos : EndpointGroupBase
             .MapPost(CreateAlunoCursos, "Cursos")
             .MapPost(CreateAlunoCertificados, "Certificados")
             .MapPost(CreateAlunoPresencas, "Presencas")
+            .MapPost(CreateAlunoAula, "Aulas")
             .MapPut(UpdateAluno, "{id}")
             .MapPut(UpdateAlunoCertificado, "{id}/Certificados")
             .MapPut(UpdateAlunoCurso, "{id}/Cursos")
@@ -119,6 +121,17 @@ public class Alunos : EndpointGroupBase
     /// <param name="command">Objeto de inclusão da Aluno e suas Presencas</param>
     /// <returns>Retorna Id da Aluno</returns>
     public async Task<int> CreateAlunoPresencas(ISender sender, CreateAlunoPresencaCommand command)
+    {
+        return await sender.Send(command);
+    }
+
+    /// <summary>
+    /// Endpoint para inclusão de Aluno e Aula
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="command">Objeto de inclusão da Aluno e suas Aulas</param>
+    /// <returns>Retorna Id da Aluno</returns>
+    public async Task<int> CreateAlunoAula(ISender sender, CreateAlunoAulaCommand command)
     {
         return await sender.Send(command);
     }

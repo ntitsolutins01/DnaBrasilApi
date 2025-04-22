@@ -387,6 +387,39 @@
         }
       }
     },
+    "/api/Alunos/Aulas": {
+      "post": {
+        "tags": [
+          "Alunos"
+        ],
+        "operationId": "CreateAlunoAula",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAlunoAulaCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Alunos/{id}/Certificados": {
       "put": {
         "tags": [
@@ -12853,6 +12886,19 @@
             "nullable": true
           },
           "data": {
+            "type": "string"
+          }
+        }
+      },
+      "CreateAlunoAulaCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "alunoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "aulaId": {
             "type": "string"
           }
         }
