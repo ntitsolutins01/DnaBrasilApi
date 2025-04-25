@@ -431,7 +431,7 @@
         }
       }
     },
-    "/api/Alunos/{id}/Cursos": {
+    "/api/Alunos/AlunosCursos/{alunoId}/{cursoId}": {
       "put": {
         "tags": [
           "Alunos"
@@ -439,7 +439,7 @@
         "operationId": "UpdateAlunoCurso",
         "parameters": [
           {
-            "name": "id",
+            "name": "alunoId",
             "in": "path",
             "required": true,
             "schema": {
@@ -447,6 +447,16 @@
               "format": "int32"
             },
             "x-position": 1
+          },
+          {
+            "name": "cursoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 2
           }
         ],
         "requestBody": {
@@ -454,12 +464,12 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateAlunoCursoCommand"
+                "$ref": "#/components/schemas/UpdateAlunoCursoCommand"
               }
             }
           },
           "required": true,
-          "x-position": 2
+          "x-position": 3
         },
         "responses": {
           "200": {
@@ -701,6 +711,109 @@
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/AlunoAulaDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Alunos/Aulas": {
+      "post": {
+        "tags": [
+          "Alunos"
+        ],
+        "operationId": "CreateAlunoAula",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAlunoAulaCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Alunos/AlunosCursos/Curso/{cursoId}": {
+      "get": {
+        "tags": [
+          "Alunos"
+        ],
+        "operationId": "GetAlunosCursosByCursoId",
+        "parameters": [
+          {
+            "name": "cursoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AlunoCursoDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Alunos/AlunosCursos/Aluno/{alunoId}": {
+      "get": {
+        "tags": [
+          "Alunos"
+        ],
+        "operationId": "GetAlunoCursosByAlunoId",
+        "parameters": [
+          {
+            "name": "alunoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AlunoCursoDto"
                   }
                 }
               }
@@ -12947,6 +13060,24 @@
           }
         }
       },
+      "UpdateAlunoCursoCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "alunoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cursoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "progresso": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
       "UpdateAlunoFotoCommand": {
         "type": "object",
         "additionalProperties": false,
@@ -13115,6 +13246,35 @@
             "type": "string"
           },
           "aulaId": {
+            "type": "string"
+          },
+          "progresso": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "CreateAlunoAulaCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "alunoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "aulaId": {
+            "type": "string"
+          }
+        }
+      },
+      "AlunoCursoDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "alunoId": {
+            "type": "string"
+          },
+          "cursoId": {
             "type": "string"
           },
           "progresso": {

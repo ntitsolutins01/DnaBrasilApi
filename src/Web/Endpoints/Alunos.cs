@@ -15,7 +15,6 @@ using DnaBrasilApi.Application.Alunos.Queries;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunoAulasByAlunoId;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunoByEmail;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunoById;
-using DnaBrasilApi.Application.Alunos.Queries.GetAlunoCursoByAlunoId;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunoCursosByAlunoId;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunosAll;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunosByFilter;
@@ -53,7 +52,7 @@ public class Alunos : EndpointGroupBase
             .MapPost(CreateAlunoPresencas, "Presencas")
             .MapPut(UpdateAluno, "{id}")
             .MapPut(UpdateAlunoCertificado, "{id}/Certificados")
-            .MapPut(UpdateAlunoCurso, "{id}/Cursos")
+            .MapPut(UpdateAlunoCurso, "/AlunosCursos/{alunoId}/{cursoId}")
             .MapPut(UpdateAlunoFoto, "/UploadFoto/{id}")
             .MapPut(UpdateQrCode, "/QrCode/{id}")
             .MapDelete(DeleteAluno, "{id}")
@@ -167,19 +166,18 @@ public class Alunos : EndpointGroupBase
         return await sender.Send(new DeleteAlunoCommand(id));
     }
 
-    /// <summary>
-    /// Endpoint para alteração de Aluno e Cursos
     /// </summary>
     /// <param name="sender">Sender</param>
-    /// <param name="id">Id de alteração da Aluno</param>
-    /// <param name="command">Objeto de alteração da AlunoCurso</param>
+    /// <param name="alunoId">Id de alteração do Aluno</param>
+    /// <param name="cursoId">Id de alteração do Curso</param>
+    /// <param name="command">Objeto de alteração do AlunoCurso</param>
     /// <returns>Retorna true ou false</returns>
-    public async Task<bool> UpdateAlunoCurso(ISender sender, int id, CreateAlunoCursoCommand command)
+    public async Task<bool> UpdateAlunoCurso(ISender sender, int alunoId, int cursoId, UpdateAlunoCursoCommand command)
     {
-        if (id != command.AlunoId) return false;
-        await sender.Send(new DeleteAlunoCursoCommand() { AlunoId = id });
+        if (alunoId != command.AlunoId | cursoId != command.CursoId) return false;
+        await sender.Send(new UpdateAlunoCursoCommand() { AlunoId = alunoId, CursoId = cursoId });
         var result = await sender.Send(command);
-        return result > 0;
+        return result;
     }
 
     /// <summary>
@@ -206,21 +204,6 @@ public class Alunos : EndpointGroupBase
     public async Task<int> CreateAlunoAula(ISender sender, CreateAlunoAulaCommand command)
     {
         return await sender.Send(command);
-    }
-
-    /// Endpoint para alteração de Aluno e Cursos
-    /// </summary>
-    /// <param name="sender">Sender</param>
-    /// <param name="alunoId">Id de alteração do Aluno</param>
-    /// <param name="cursoId">Id de alteração do Curso</param>
-    /// <param name="command">Objeto de alteração do AlunoCurso</param>
-    /// <returns>Retorna true ou false</returns>
-    public async Task<bool> UpdateAlunoCurso(ISender sender, int alunoId, int cursoId, UpdateAlunoCursoCommand command)
-    {
-        if (alunoId != command.AlunoId | cursoId != command.CursoId) return false;
-        await sender.Send(new UpdateAlunoCursoCommand() { AlunoId = alunoId, CursoId = cursoId });
-        var result = await sender.Send(command);
-        return result;
     }
 
     /// <summary>
