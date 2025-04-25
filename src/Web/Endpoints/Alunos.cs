@@ -8,12 +8,14 @@ using DnaBrasilApi.Application.Alunos.Commands.DeleteAlunoCertificado;
 using DnaBrasilApi.Application.Alunos.Commands.DeleteAlunoCurso;
 using DnaBrasilApi.Application.Alunos.Commands.DeleteAlunoModalidade;
 using DnaBrasilApi.Application.Alunos.Commands.UpdateAluno;
+using DnaBrasilApi.Application.Alunos.Commands.UpdateAlunoCurso;
 using DnaBrasilApi.Application.Alunos.Commands.UpdateAlunoFoto;
 using DnaBrasilApi.Application.Alunos.Commands.UpdateQrCode;
 using DnaBrasilApi.Application.Alunos.Queries;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunoAulasByAlunoId;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunoByEmail;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunoById;
+using DnaBrasilApi.Application.Alunos.Queries.GetAlunoCursosByAlunoId;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunosCursosByCursoId;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunosAll;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunosByFilter;
@@ -52,12 +54,13 @@ public class Alunos : EndpointGroupBase
             .MapPost(CreateAlunoAula, "Aulas")
             .MapPut(UpdateAluno, "{id}")
             .MapPut(UpdateAlunoCertificado, "{id}/Certificados")
-            .MapPut(UpdateAlunoCurso, "{id}/Cursos")
             .MapPut(UpdateAlunoFoto, "/UploadFoto/{id}")
             .MapPut(UpdateQrCode, "/QrCode/{id}")
+            .MapPut(UpdateAlunoCurso, "/AlunosCursos/{alunoId}/{cursoId}")
             .MapDelete(DeleteAluno, "{id}")
             .MapPost(GetAlunosByFilter, "Filter")
-            .MapGet(GetAlunosCursosByCursoId, "AlunoCurso/{cursoId}")
+            .MapGet(GetAlunosCursosByCursoId, "AlunosCursos/Curso/{cursoId}")
+            .MapGet(GetAlunoCursosByAlunoId, "AlunosCursos/Aluno/{alunoId}")
             .MapGet(GetPresencasByDataAtividadeId, "/Presenca/{data}/{id}")
             .MapGet(GetNomeAlunosByProfissionalId, "/Profissional/{id}")
             .MapGet(GetAlunoAulasByAlunoId, "AlunoAula/{alunoId}");
@@ -179,15 +182,16 @@ public class Alunos : EndpointGroupBase
     /// Endpoint para alteração de Aluno e Cursos
     /// </summary>
     /// <param name="sender">Sender</param>
-    /// <param name="id">Id de alteração da Aluno</param>
-    /// <param name="command">Objeto de alteração da AlunoCurso</param>
+    /// <param name="alunoId">Id de alteração do Aluno</param>
+    /// <param name="cursoId">Id de alteração do Curso</param>
+    /// <param name="command">Objeto de alteração do AlunoCurso</param>
     /// <returns>Retorna true ou false</returns>
-    public async Task<bool> UpdateAlunoCurso(ISender sender, int id, CreateAlunoCursoCommand command)
+    public async Task<bool> UpdateAlunoCurso(ISender sender, int alunoId, int cursoId, UpdateAlunoCursoCommand command)
     {
-        if (id != command.AlunoId) return false;
-        await sender.Send(new DeleteAlunoCursoCommand() { AlunoId = id });
+        if (alunoId != command.AlunoId | cursoId != command.CursoId) return false;
+        await sender.Send(new UpdateAlunoCursoCommand() { AlunoId = alunoId, CursoId = cursoId});
         var result = await sender.Send(command);
-        return result > 0;
+        return result;
     }
 
     /// <summary>
@@ -318,14 +322,25 @@ public class Alunos : EndpointGroupBase
     }
 
     /// <summary>
-    /// Endpoint que busca um AlunoCurso
+    /// Endpoint que busca uma lista de AlunoCurso
     /// </summary>
     /// <param name="sender">Sender</param>
-    /// <param name="id">Id do aluno</param>
-    /// <returns>Retorna um AlunoCurso</returns>
+    /// <param name="cursoId">Id do curso</param>
+    /// <returns>Retorna uma lista de AlunosCursos</returns>
     public async Task<List<AlunoCursoDto>> GetAlunosCursosByCursoId(ISender sender, int cursoId)
     {
         return await sender.Send(new GetAlunosCursosByCursoIdQuery() { CursoId = cursoId });
+    }
+
+    /// <summary>
+    /// Endpoint que busca uma lista de AlunoCurso
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="alunoId">Id do aluno</param>
+    /// <returns>Retorna uma lista de AlunosCursos</returns>
+    public async Task<List<AlunoCursoDto>> GetAlunoCursosByAlunoId(ISender sender, int alunoId)
+    {
+        return await sender.Send(new GetAlunoCursosByAlunoIdQuery() { AlunoId = alunoId });
     }
 
     /// <summary>

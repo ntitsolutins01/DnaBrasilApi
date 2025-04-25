@@ -464,50 +464,6 @@
         }
       }
     },
-    "/api/Alunos/{id}/Cursos": {
-      "put": {
-        "tags": [
-          "Alunos"
-        ],
-        "operationId": "UpdateAlunoCurso",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "x-position": 1
-          }
-        ],
-        "requestBody": {
-          "x-name": "command",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateAlunoCursoCommand"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 2
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "boolean"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/Alunos/UploadFoto/{id}": {
       "put": {
         "tags": [
@@ -596,6 +552,60 @@
         }
       }
     },
+    "/api/Alunos/AlunosCursos/{alunoId}/{cursoId}": {
+      "put": {
+        "tags": [
+          "Alunos"
+        ],
+        "operationId": "UpdateAlunoCurso",
+        "parameters": [
+          {
+            "name": "alunoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "cursoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 2
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAlunoCursoCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 3
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Alunos/Filter": {
       "post": {
         "tags": [
@@ -628,7 +638,7 @@
         }
       }
     },
-    "/api/Alunos/AlunoCurso/{cursoId}": {
+    "/api/Alunos/AlunosCursos/Curso/{cursoId}": {
       "get": {
         "tags": [
           "Alunos"
@@ -637,6 +647,41 @@
         "parameters": [
           {
             "name": "cursoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AlunoCursoDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Alunos/AlunosCursos/Aluno/{alunoId}": {
+      "get": {
+        "tags": [
+          "Alunos"
+        ],
+        "operationId": "GetAlunoCursosByAlunoId",
+        "parameters": [
+          {
+            "name": "alunoId",
             "in": "path",
             "required": true,
             "schema": {
@@ -13062,6 +13107,24 @@
             "type": "string",
             "format": "byte",
             "nullable": true
+          }
+        }
+      },
+      "UpdateAlunoCursoCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "alunoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cursoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "progresso": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },
