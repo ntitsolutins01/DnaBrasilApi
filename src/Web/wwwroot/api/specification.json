@@ -14886,6 +14886,14 @@
                   "$ref": "#/components/schemas/AlunoPresenca"
                 }
               },
+              "serie": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Serie"
+                  }
+                ]
+              },
               "alunoAulas": {
                 "type": "array",
                 "nullable": true,
@@ -16016,6 +16024,53 @@
                 "items": {
                   "$ref": "#/components/schemas/AlunoCertificado"
                 }
+              }
+            }
+          }
+        ]
+      },
+      "Serie": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "nome": {
+                "type": "string"
+              },
+              "turma": {
+                "type": "string"
+              },
+              "etapaEnsino": {
+                "$ref": "#/components/schemas/EtapaEnsino"
+              },
+              "localidade": {
+                "$ref": "#/components/schemas/Localidade"
+              },
+              "status": {
+                "type": "boolean"
+              }
+            }
+          }
+        ]
+      },
+      "EtapaEnsino": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "nome": {
+                "type": "string"
+              },
+              "status": {
+                "type": "boolean"
               }
             }
           }
