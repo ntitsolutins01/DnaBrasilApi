@@ -14414,6 +14414,11 @@
               },
               "status": {
                 "type": "boolean"
+              },
+              "ordem": {
+                "type": "integer",
+                "format": "int32",
+                "nullable": true
               }
             }
           }
@@ -19370,6 +19375,11 @@
           },
           "tituloCurso": {
             "type": "string"
+          },
+          "ordem": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
           }
         }
       },
@@ -19390,6 +19400,11 @@
           },
           "status": {
             "type": "boolean"
+          },
+          "ordem": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
           }
         }
       },
@@ -19410,6 +19425,11 @@
           },
           "status": {
             "type": "boolean"
+          },
+          "ordem": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
           }
         }
       },
