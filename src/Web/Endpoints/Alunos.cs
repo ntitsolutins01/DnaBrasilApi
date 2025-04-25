@@ -1,4 +1,5 @@
 ﻿using DnaBrasilApi.Application.Alunos.Commands.CreateAluno;
+using DnaBrasilApi.Application.Alunos.Commands.CreateAlunoAulas;
 using DnaBrasilApi.Application.Alunos.Commands.CreateAlunoCertificados;
 using DnaBrasilApi.Application.Alunos.Commands.CreateAlunoCursos;
 using DnaBrasilApi.Application.Alunos.Commands.CreateAlunoPresencas;
@@ -7,15 +8,19 @@ using DnaBrasilApi.Application.Alunos.Commands.DeleteAlunoCertificado;
 using DnaBrasilApi.Application.Alunos.Commands.DeleteAlunoCurso;
 using DnaBrasilApi.Application.Alunos.Commands.DeleteAlunoModalidade;
 using DnaBrasilApi.Application.Alunos.Commands.UpdateAluno;
+using DnaBrasilApi.Application.Alunos.Commands.UpdateAlunoCurso;
 using DnaBrasilApi.Application.Alunos.Commands.UpdateAlunoFoto;
 using DnaBrasilApi.Application.Alunos.Commands.UpdateQrCode;
 using DnaBrasilApi.Application.Alunos.Queries;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunoAulasByAlunoId;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunoByEmail;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunoById;
+using DnaBrasilApi.Application.Alunos.Queries.GetAlunoCursoByAlunoId;
+using DnaBrasilApi.Application.Alunos.Queries.GetAlunoCursosByAlunoId;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunosAll;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunosByFilter;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunosByLocalidade;
+using DnaBrasilApi.Application.Alunos.Queries.GetAlunosCursosByCursoId;
 using DnaBrasilApi.Application.Alunos.Queries.GetNomeAlunosAll;
 using DnaBrasilApi.Application.Alunos.Queries.GetNomeAlunosByLocalidadeId;
 using DnaBrasilApi.Application.Alunos.Queries.GetNomeAlunosByProfissionalId;
@@ -55,7 +60,10 @@ public class Alunos : EndpointGroupBase
             .MapPost(GetAlunosByFilter, "Filter")
             .MapGet(GetNomeAlunosByProfissionalId, "/Profissional/{id}")
             .MapGet(GetPresencasByDataAtividadeId, "/Presenca/{data}/{id}")
-            .MapGet(GetAlunoAulasByAlunoId, "AlunoAula/{alunoId}");
+            .MapGet(GetAlunoAulasByAlunoId, "AlunoAula/{alunoId}")
+            .MapPost(CreateAlunoAula, "Aulas")
+            .MapGet(GetAlunosCursosByCursoId, "AlunosCursos/Curso/{cursoId}")
+            .MapGet(GetAlunoCursosByAlunoId, "AlunosCursos/Aluno/{alunoId}");
     }
     #endregion
 
@@ -188,6 +196,55 @@ public class Alunos : EndpointGroupBase
         var result = await sender.Send(command);
         return result > 0;
     }
+
+    /// <summary>
+    /// Endpoint para inclusão de Aluno e Aula
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="command">Objeto de inclusão da Aluno e suas Aulas</param>
+    /// <returns>Retorna Id da Aluno</returns>
+    public async Task<int> CreateAlunoAula(ISender sender, CreateAlunoAulaCommand command)
+    {
+        return await sender.Send(command);
+    }
+
+    /// Endpoint para alteração de Aluno e Cursos
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="alunoId">Id de alteração do Aluno</param>
+    /// <param name="cursoId">Id de alteração do Curso</param>
+    /// <param name="command">Objeto de alteração do AlunoCurso</param>
+    /// <returns>Retorna true ou false</returns>
+    public async Task<bool> UpdateAlunoCurso(ISender sender, int alunoId, int cursoId, UpdateAlunoCursoCommand command)
+    {
+        if (alunoId != command.AlunoId | cursoId != command.CursoId) return false;
+        await sender.Send(new UpdateAlunoCursoCommand() { AlunoId = alunoId, CursoId = cursoId });
+        var result = await sender.Send(command);
+        return result;
+    }
+
+    /// <summary>
+    /// Endpoint que busca uma lista de AlunoCurso
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="cursoId">Id do curso</param>
+    /// <returns>Retorna uma lista de AlunosCursos</returns>
+    public async Task<List<AlunoCursoDto>> GetAlunosCursosByCursoId(ISender sender, int cursoId)
+    {
+        return await sender.Send(new GetAlunosCursosByCursoIdQuery() { CursoId = cursoId });
+    }
+
+    /// <summary>
+    /// Endpoint que busca uma lista de AlunoCurso
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="alunoId">Id do aluno</param>
+    /// <returns>Retorna uma lista de AlunosCursos</returns>
+    public async Task<List<AlunoCursoDto>> GetAlunoCursosByAlunoId(ISender sender, int alunoId)
+    {
+        return await sender.Send(new GetAlunoCursosByAlunoIdQuery() { AlunoId = alunoId });
+    }
+
     #endregion
 
     #region Get Methods
