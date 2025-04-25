@@ -10,6 +10,7 @@ using DnaBrasilApi.Application.Alunos.Commands.UpdateAluno;
 using DnaBrasilApi.Application.Alunos.Commands.UpdateAlunoFoto;
 using DnaBrasilApi.Application.Alunos.Commands.UpdateQrCode;
 using DnaBrasilApi.Application.Alunos.Queries;
+using DnaBrasilApi.Application.Alunos.Queries.GetAlunoAulasByAlunoId;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunoByEmail;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunoById;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunosAll;
@@ -21,7 +22,6 @@ using DnaBrasilApi.Application.Alunos.Queries.GetNomeAlunosByProfissionalId;
 using DnaBrasilApi.Application.Alunos.Queries.GetPresencasByAlunoId;
 using DnaBrasilApi.Application.Alunos.Queries.GetPresencasByDataAtividadeId;
 using DnaBrasilApi.Application.Atividades.Queries;
-using DnaBrasilApi.Application.Aulas.Queries;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DnaBrasilApi.Web.Endpoints;
@@ -54,7 +54,8 @@ public class Alunos : EndpointGroupBase
             .MapDelete(DeleteAluno, "{id}")
             .MapPost(GetAlunosByFilter, "Filter")
             .MapGet(GetNomeAlunosByProfissionalId, "/Profissional/{id}")
-            .MapGet(GetPresencasByDataAtividadeId, "/Presenca/{data}/{id}");
+            .MapGet(GetPresencasByDataAtividadeId, "/Presenca/{data}/{id}")
+            .MapGet(GetAlunoAulasByAlunoId, "AlunoAula/{alunoId}");
     }
     #endregion
 
@@ -298,6 +299,17 @@ public class Alunos : EndpointGroupBase
     public async Task<List<AtividadeDto>> GetPresencasByDataAtividadeId(ISender sender, string data, int id)
     {
         return await sender.Send(new GetPresencasByDataAtividadeIdQuery() { Data = data, AtividadeId = id});
+    }
+
+    /// <summary>
+    /// Endpoint que busca uma lista de Aluno Curso
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="id">Id do aluno</param>
+    /// <returns>Retorna uma lista de AlunoCurso</returns>
+    public async Task<List<AlunoAulaDto>> GetAlunoAulasByAlunoId(ISender sender, int alunoId)
+    {
+        return await sender.Send(new GetAlunoAulasByAlunoIdQuery() { AlunoId = alunoId });
     }
     #endregion
 }

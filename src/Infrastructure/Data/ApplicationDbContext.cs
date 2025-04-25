@@ -84,6 +84,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<Inventario> Inventarios => Set<Inventario>();
     public DbSet<ArquivosInventario> ArquivosInventarios => Set<ArquivosInventario>();
     public DbSet<AlunoPresenca> AlunosPresencas => Set<AlunoPresenca>();
+    public DbSet<AlunoAula> AlunosAulas => Set<AlunoAula>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -93,6 +94,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
 
         #region Basic many-to-many
 
+        // ProfissionalModalidade
         builder.Entity<ProfissionalModalidade>().HasKey(sc => new { sc.ProfissionalId, sc.ModalidadeId });
 
         builder.Entity<ProfissionalModalidade>()
@@ -105,6 +107,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
             .WithMany(s => s.ProfissionalModalidades)
             .HasForeignKey(sc => sc.ModalidadeId);
 
+        // FomentoLocalidade
         builder.Entity<FomentoLocalidade>().HasKey(sc => new { sc.FomentoId, sc.LocalidadeId });
 
         builder.Entity<FomentoLocalidade>()
@@ -117,6 +120,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
             .WithMany(s => s.FomentoLocalidades)
             .HasForeignKey(sc => sc.LocalidadeId);
 
+        // FomentoLinhaAcao
         builder.Entity<FomentoLinhaAcao>().HasKey(sc => new { sc.FomentoId, sc.LinhaAcaoId });
 
         builder.Entity<FomentoLinhaAcao>()
@@ -129,6 +133,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
             .WithMany(s => s.FomentoLinhasAcoes)
             .HasForeignKey(sc => sc.LinhaAcaoId);
 
+        // AlunoModalidade
         builder.Entity<AlunoModalidade>().HasKey(sc => new { sc.AlunoId, sc.ModalidadeId });
 
         builder.Entity<AlunoModalidade>()
@@ -141,6 +146,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
             .WithMany(s => s.AlunoModalidades)
             .HasForeignKey(sc => sc.ModalidadeId);
 
+        // AtividadeAluno
         builder.Entity<AtividadeAluno>().HasKey(sc => new { sc.AtividadeId, sc.AlunoId });
 
         builder.Entity<AtividadeAluno>()
@@ -153,6 +159,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
             .WithMany(s => s.AtividadeAlunos)
             .HasForeignKey(sc => sc.AlunoId);
 
+        // AlunoCurso
         builder.Entity<AlunoCurso>().HasKey(sc => new { sc.AlunoId, sc.CursoId });
 
         builder.Entity<AlunoCurso>()
@@ -165,6 +172,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
             .WithMany(s => s.AlunoCursos)
             .HasForeignKey(sc => sc.CursoId);
 
+        // AlunoCertificado
         builder.Entity<AlunoCertificado>().HasKey(sc => new { sc.AlunoId, sc.CertificadoId });
 
         builder.Entity<AlunoCertificado>()
@@ -177,6 +185,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
             .WithMany(s => s.AlunoCertificados)
             .HasForeignKey(sc => sc.CertificadoId);
 
+        // AlunoPresenca
         builder.Entity<AlunoPresenca>().HasKey(sc => new { sc.AlunoId, AulaId = sc.AtividadeId });
 
         builder.Entity<AlunoPresenca>()
@@ -188,6 +197,19 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
             .HasOne<Atividade>(sc => sc.Atividade)
             .WithMany(s => s.AlunoPresencas)
             .HasForeignKey(sc => sc.AtividadeId);
+
+        // AlunoAula
+        builder.Entity<AlunoAula>().HasKey(sc => new { sc.AlunoId, sc.AulaId });
+
+        builder.Entity<AlunoAula>()
+            .HasOne<Aluno>(sc => sc.Aluno)
+            .WithMany(s => s.AlunoAulas)
+            .HasForeignKey(sc => sc.AlunoId);
+
+        builder.Entity<AlunoAula>()
+            .HasOne<Aula>(sc => sc.Aula)
+            .WithMany(s => s.AlunoAulas)
+            .HasForeignKey(sc => sc.AulaId);
 
         #endregion
 

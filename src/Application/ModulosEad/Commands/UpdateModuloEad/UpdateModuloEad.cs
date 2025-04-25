@@ -8,6 +8,7 @@ public record UpdateModuloEadCommand : IRequest <bool>
     public required string Titulo { get; set; }
     public string? Descricao { get; set; }
     public bool Status { get; init; }
+    public int? Ordem { get; set; }
 }
 
 public class UpdateModuloEadCommandHandler : IRequestHandler<UpdateModuloEadCommand, bool>
@@ -30,6 +31,7 @@ public class UpdateModuloEadCommandHandler : IRequestHandler<UpdateModuloEadComm
         entity.Titulo = request.Titulo;
         entity.Descricao = request.Descricao;
         entity.Status = request.Status;
+        entity.Ordem = request.Ordem;
 
         var result = await _context.SaveChangesAsync(cancellationToken);
 
