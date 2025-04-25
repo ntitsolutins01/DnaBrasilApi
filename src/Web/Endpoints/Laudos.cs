@@ -20,6 +20,7 @@ using Microsoft.AspNetCore.Mvc;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoQualidadeVida;
 using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoByConsumoAlimentarId;
 using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoBySaudeBucalId;
+using DnaBrasilApi.Application.Laudos.Commands.UpdateModalidadeLaudo;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -33,6 +34,7 @@ public class Laudos : EndpointGroupBase
             .MapGet(GetLaudoById, "{id}")
             .MapPost(CreateLaudo)
             .MapPut(UpdateLaudo, "{id}")
+            .MapPut(UpdateModalidadeLaudo, "Modalidade/{alunoId}")
             .MapPut(UpdateEncaminhamentoTalentoEsportivo, "Encaminhamento/TalentoEsportivo/{alunoId}")
             .MapPut(UpdateEncaminhamentoTalentoEsportivoV1, "v1/Encaminhamento/TalentoEsportivo/{alunoId}")
             .MapPut(UpdateEncaminhamentoSaudeBucal, "Encaminhamento/SaudeBucal/{alunoId}")
@@ -86,6 +88,12 @@ public class Laudos : EndpointGroupBase
     public async Task<bool> UpdateEncaminhamentoTalentoEsportivo(ISender sender, int alunoId)
     {
         var result = await sender.Send(new UpdateEncaminhamentoTalentoEsportivoCommand(alunoId));
+        return result;
+    }
+    
+    public async Task<bool> UpdateModalidadeLaudo(ISender sender, int alunoId)
+    {
+        var result = await sender.Send(new UpdateModalidadeLaudoCommand(alunoId));
         return result;
     }
     /// <summary>

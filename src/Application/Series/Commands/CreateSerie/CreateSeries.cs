@@ -8,7 +8,7 @@ public record CreateSerieCommand : IRequest<int>
     public required string Turma { get; init; }
     public required int EtapaEnsinoId { get; init; }
     public required int LocalidadeId { get; init; }
-    public bool Status { get; init; } = true;
+    public bool Status { get; set; } = true;
 }
 
 public class CreateSerieCommandHandler : IRequestHandler<CreateSerieCommand, int>
@@ -35,7 +35,6 @@ public class CreateSerieCommandHandler : IRequestHandler<CreateSerieCommand, int
         var entity = new Serie
         {
             Nome = request.Nome,
-            Status = request.Status,
             Turma = request.Turma,
             EtapaEnsino = etapaEnsino,
             Localidade = localidade

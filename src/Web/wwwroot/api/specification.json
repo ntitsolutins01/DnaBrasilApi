@@ -5937,6 +5937,38 @@
         }
       }
     },
+    "/api/Laudos/Modalidade/{alunoId}": {
+      "put": {
+        "tags": [
+          "Laudos"
+        ],
+        "operationId": "UpdateModalidadeLaudo",
+        "parameters": [
+          {
+            "name": "alunoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Laudos/Encaminhamento/TalentoEsportivo/{alunoId}": {
       "put": {
         "tags": [
@@ -13906,6 +13938,11 @@
               "nomeVideo": {
                 "type": "string",
                 "nullable": true
+              },
+              "ordem": {
+                "type": "integer",
+                "format": "int32",
+                "nullable": true
               }
             }
           }
@@ -18028,7 +18065,6 @@
           },
           "dtNascimento": {
             "type": "string",
-            "format": "date-time",
             "nullable": true
           },
           "idade": {
@@ -20829,14 +20865,6 @@
           },
           "turma": {
             "type": "string"
-          },
-          "etapaEnsinoId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "localidadeId": {
-            "type": "integer",
-            "format": "int32"
           },
           "status": {
             "type": "boolean"
