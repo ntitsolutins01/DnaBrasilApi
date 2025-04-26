@@ -1,4 +1,4 @@
-﻿namespace DnaBrasilApi.Domain.Entities;
+namespace DnaBrasilApi.Domain.Entities;
 
 public class Aula : BaseAuditableEntity
 {

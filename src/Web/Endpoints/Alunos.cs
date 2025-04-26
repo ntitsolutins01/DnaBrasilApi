@@ -1,4 +1,4 @@
-﻿using DnaBrasilApi.Application.Alunos.Commands.CreateAluno;
+using DnaBrasilApi.Application.Alunos.Commands.CreateAluno;
 using DnaBrasilApi.Application.Alunos.Commands.CreateAlunoAulas;
 using DnaBrasilApi.Application.Alunos.Commands.CreateAlunoCertificados;
 using DnaBrasilApi.Application.Alunos.Commands.CreateAlunoCursos;

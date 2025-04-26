@@ -4,8 +4,8 @@ using DnaBrasilApi.Application.Aulas.Commands.DeleteAula;
 using DnaBrasilApi.Application.Aulas.Commands.UpdateAula;
 using DnaBrasilApi.Application.Aulas.Queries;
 using DnaBrasilApi.Application.Aulas.Queries.GetAulasAll;
-using DnaBrasilApi.Application.Aulas.Queries.GetAulasAllByModuloEadId;
 using DnaBrasilApi.Application.Aulas.Queries.GetAulasByCursoId;
+using DnaBrasilApi.Application.Aulas.Queries.GetAulasByModuloEadId;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -104,7 +104,7 @@ public class Aulas : EndpointGroupBase
     /// <returns>Retorna uma lista de Aulas</returns>
     public async Task<List<AulaDto>> GetAulasAllByModuloEadId(ISender sender, int id)
     {
-        return await sender.Send(new GetAulasAllByModuloEadIdQuery() { ModuloEadId = id });
+        return await sender.Send(new GetAulasByModuloEadIdQuery() { ModuloEadId = id });
     }
 
     /// <summary>

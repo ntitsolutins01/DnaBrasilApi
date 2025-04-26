@@ -44,5 +44,4 @@ public class Aluno : BaseAuditableEntity
     public IList<AlunoPresenca>? AlunoPresencas { get; set; }
     public IList<AlunoAula>? AlunoAulas { get; set; }
     //public Serie? Serie { get; set; }
-    public IList<AlunoAula>? AlunoAulas { get; set; }
 }

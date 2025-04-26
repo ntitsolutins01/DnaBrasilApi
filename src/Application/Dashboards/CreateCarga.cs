@@ -322,7 +322,7 @@ public class CreateCargaCommandHandler : IRequestHandler<CreateCargaCommand, int
 
     private static int GetIdade(DateTime data, DateTime? now = null)
     {
-        // Carrega a data do dia para comparação caso data informada seja nula
+        // Carrega a data do dia para comparaï¿½ï¿½o caso data informada seja nula
 
         now = ((now == null) ? DateTime.Now : now);
 
