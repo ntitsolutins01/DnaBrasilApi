@@ -44,6 +44,7 @@ public class AlunoDto
     public string? MunicipioId { get; init; }
     public string? ModalidadesIds { get; init; }
     public string? Modalidades { get; init; }
+    public string? SerieTurma { get; init; }
     private class Mapping : Profile
     {
         public Mapping()
@@ -78,7 +79,8 @@ public class AlunoDto
                         src.AlunoModalidades == null
                             ? ""
                             : string.Join(", ",
-                                src.AlunoModalidades!.Select(s => s.Modalidade!.Nome!.ToString()).ToArray())));
+                                src.AlunoModalidades!.Select(s => s.Modalidade!.Nome!.ToString()).ToArray())))
+                .ForMember(dest => dest.SerieTurma, opt => opt.MapFrom(src => src.Serie!.Nome + " - " + src.Serie!.Turma));
         }
     }
 

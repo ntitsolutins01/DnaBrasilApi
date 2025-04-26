@@ -12683,6 +12683,10 @@
           "modalidades": {
             "type": "string",
             "nullable": true
+          },
+          "serieTurma": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -12880,6 +12884,11 @@
           "modalidadesIds": {
             "type": "string",
             "nullable": true
+          },
+          "serieId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
           }
         }
       },
@@ -13056,6 +13065,11 @@
           },
           "modalidadesIds": {
             "type": "string",
+            "nullable": true
+          },
+          "serieId": {
+            "type": "integer",
+            "format": "int32",
             "nullable": true
           }
         }
