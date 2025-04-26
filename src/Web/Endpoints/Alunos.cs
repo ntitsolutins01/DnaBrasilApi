@@ -26,6 +26,8 @@ using DnaBrasilApi.Application.Alunos.Queries.GetNomeAlunosByProfissionalId;
 using DnaBrasilApi.Application.Alunos.Queries.GetPresencasByAlunoId;
 using DnaBrasilApi.Application.Alunos.Queries.GetPresencasByDataAtividadeId;
 using DnaBrasilApi.Application.Atividades.Queries;
+using DnaBrasilApi.Application.Aulas.Queries;
+using DnaBrasilApi.Application.Aulas.Queries.GetAulasByCursoId;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DnaBrasilApi.Web.Endpoints;
@@ -206,28 +208,6 @@ public class Alunos : EndpointGroupBase
         return await sender.Send(command);
     }
 
-    /// <summary>
-    /// Endpoint que busca uma lista de AlunoCurso
-    /// </summary>
-    /// <param name="sender">Sender</param>
-    /// <param name="cursoId">Id do curso</param>
-    /// <returns>Retorna uma lista de AlunosCursos</returns>
-    public async Task<List<AlunoCursoDto>> GetAlunosCursosByCursoId(ISender sender, int cursoId)
-    {
-        return await sender.Send(new GetAlunosCursosByCursoIdQuery() { CursoId = cursoId });
-    }
-
-    /// <summary>
-    /// Endpoint que busca uma lista de AlunoCurso
-    /// </summary>
-    /// <param name="sender">Sender</param>
-    /// <param name="alunoId">Id do aluno</param>
-    /// <returns>Retorna uma lista de AlunosCursos</returns>
-    public async Task<List<AlunoCursoDto>> GetAlunoCursosByAlunoId(ISender sender, int alunoId)
-    {
-        return await sender.Send(new GetAlunoCursosByAlunoIdQuery() { AlunoId = alunoId });
-    }
-
     #endregion
 
     #region Get Methods
@@ -351,5 +331,28 @@ public class Alunos : EndpointGroupBase
     {
         return await sender.Send(new GetAlunoAulasByAlunoIdQuery() { AlunoId = alunoId });
     }
+
+    /// <summary>
+    /// Endpoint que busca uma lista de AlunoCurso
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="cursoId">Id do curso</param>
+    /// <returns>Retorna uma lista de AlunosCursos</returns>
+    public async Task<List<AlunoCursoDto>> GetAlunosCursosByCursoId(ISender sender, int cursoId)
+    {
+        return await sender.Send(new GetAlunosCursosByCursoIdQuery() { CursoId = cursoId });
+    }
+
+    /// <summary>
+    /// Endpoint que busca uma lista de AlunoCurso
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="alunoId">Id do aluno</param>
+    /// <returns>Retorna uma lista de AlunosCursos</returns>
+    public async Task<List<AlunoCursoDto>> GetAlunoCursosByAlunoId(ISender sender, int alunoId)
+    {
+        return await sender.Send(new GetAlunoCursosByAlunoIdQuery() { AlunoId = alunoId });
+    }
+
     #endregion
 }
