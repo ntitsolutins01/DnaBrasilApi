@@ -10463,6 +10463,105 @@
         }
       }
     },
+    "/api/Series/Localidade/{localidadeId}/Etapa/{etapaId}": {
+      "get": {
+        "tags": [
+          "Series"
+        ],
+        "operationId": "GetSeriesByLocalidadeIdEtapaId",
+        "parameters": [
+          {
+            "name": "localidadeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "etapaId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 2
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SerieDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Series/Localidade/{localidadeId}/Etapa/{etapaId}/Serie/{serie}": {
+      "get": {
+        "tags": [
+          "Series"
+        ],
+        "operationId": "GetTurmasByLocalidadeIdEtapaIdSerie",
+        "parameters": [
+          {
+            "name": "localidadeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "etapaId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 2
+          },
+          {
+            "name": "serie",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-position": 3
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SerieDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/TalentosEsportivos": {
       "post": {
         "tags": [
@@ -12685,6 +12784,18 @@
             "nullable": true
           },
           "serieTurma": {
+            "type": "string",
+            "nullable": true
+          },
+          "serieId": {
+            "type": "string",
+            "nullable": true
+          },
+          "etapaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "serieNome": {
             "type": "string",
             "nullable": true
           }

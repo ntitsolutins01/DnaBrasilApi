@@ -45,6 +45,9 @@ public class AlunoDto
     public string? ModalidadesIds { get; init; }
     public string? Modalidades { get; init; }
     public string? SerieTurma { get; init; }
+    public string? SerieId { get; init; }
+    public string? EtapaId { get; init; }
+    public string? SerieNome { get; init; }
     private class Mapping : Profile
     {
         public Mapping()
@@ -80,7 +83,10 @@ public class AlunoDto
                             ? ""
                             : string.Join(", ",
                                 src.AlunoModalidades!.Select(s => s.Modalidade!.Nome!.ToString()).ToArray())))
-                .ForMember(dest => dest.SerieTurma, opt => opt.MapFrom(src => src.Serie!.Nome + " - " + src.Serie!.Turma));
+                .ForMember(dest => dest.SerieTurma, opt => opt.MapFrom(src => src.Serie!.Nome + " - " + src.Serie!.Turma))
+                .ForMember(dest => dest.SerieId, opt => opt.MapFrom(src => src.Serie!.Id))
+                .ForMember(dest => dest.SerieNome, opt => opt.MapFrom(src => src.Serie!.Nome))
+                .ForMember(dest => dest.EtapaId, opt => opt.MapFrom(src => src.Serie!.EtapaEnsino.Id));
         }
     }
 

@@ -4,6 +4,8 @@ using DnaBrasilApi.Application.Series.Commands.DeleteSerie;
 using DnaBrasilApi.Application.Series.Commands.UpdateSerie;
 using DnaBrasilApi.Application.Series.Queries;
 using DnaBrasilApi.Application.Series.Queries.GetSeriesAll;
+using DnaBrasilApi.Application.Series.Queries.GetSeriesByLocalidadeIdEtapaId;
+using DnaBrasilApi.Application.Series.Queries.GetTurmasByLocalidadeIdEtapaIdSerie;
 
 namespace DnaBrasilApi.Web.Endpoints;
 /// <summary>
@@ -25,7 +27,9 @@ public class Series : EndpointGroupBase
             .MapPost(CreateSerie)
             .MapPut(UpdateSerie, "{id}")
             .MapDelete(DeleteSerie, "{id}")
-            .MapGet(GetSerieById, "{id}");
+            .MapGet(GetSerieById, "{id}")
+            .MapGet(GetSeriesByLocalidadeIdEtapaId, "Localidade/{localidadeId}/Etapa/{etapaId}")
+            .MapGet(GetTurmasByLocalidadeIdEtapaIdSerie, "Localidade/{localidadeId}/Etapa/{etapaId}/Serie/{serie}");
     }
     #endregion
 
@@ -89,6 +93,31 @@ public class Series : EndpointGroupBase
     public async Task<SerieDto> GetSerieById(ISender sender, int id)
     {
         return await sender.Send(new GetSerieByIdQuery() { Id = id });
+    }
+
+    /// <summary>
+    /// Endpoint que busca uma lista de séries por localidade e etapa
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="localidadeId">Id da localidade</param>
+    /// <param name="etapaId">Id da etapa de ensino</param>
+    /// <returns>Retorna a lista de Série</returns>
+    public async Task<List<SerieDto>> GetSeriesByLocalidadeIdEtapaId(ISender sender, int localidadeId, int etapaId)
+    {
+        return await sender.Send(new GetSeriesByLocalidadeIdEtapaIdQuery() { LocalidadeId = localidadeId, EtapaId = etapaId });
+    }
+
+    /// <summary>
+    /// Endpoint que busca uma lista de séries por localidade, etapa e série
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="localidadeId">Id da localidade</param>
+    /// <param name="etapaId">Id da etapa de ensino</param>
+    /// <param name="serie">Série selecionada</param>
+    /// <returns>Retorna a lista de Série</returns>
+    public async Task<List<SerieDto>> GetTurmasByLocalidadeIdEtapaIdSerie(ISender sender, int localidadeId, int etapaId, string serie)
+    {
+        return await sender.Send(new GetTurmasByLocalidadeIdEtapaIdSerieQuery() { LocalidadeId = localidadeId, EtapaId = etapaId, Serie = serie });
     }
     #endregion
 }
