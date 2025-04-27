@@ -41,6 +41,7 @@ public record CreateAlunoCommand : IRequest<int>
     public bool? CopiaDocAlunoResponsavel { get; init; }
     public bool? Convidado { get; init; } = false;
     public string? ModalidadesIds { get; init; }
+    public int? SerieId { get; init; }
 }
 
 public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int>
@@ -103,6 +104,15 @@ public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int
             Guard.Against.NotFound((int)request.LinhaAcaoId, profissional);
         }
 
+        Serie? serie = null;
+
+        if (request.SerieId != null)
+        {
+            serie = await _context.Series.FindAsync(new object[] { request.SerieId }, cancellationToken);
+
+            Guard.Against.NotFound((int)request.SerieId, profissional);
+        }
+
         var entity = new Aluno
         {
             AspNetUserId = request.AspNetUserId,
@@ -137,7 +147,8 @@ public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int
             ParticipacaoProgramaCompartilhamentoDados = request.ParticipacaoProgramaCompartilhamentoDados,
             UtilizacaoImagem = request.UtilizacaoImagem,
             CopiaDocAlunoResponsavel = request.CopiaDocAlunoResponsavel,
-            Convidado = (bool)request.Convidado!
+            Convidado = (bool)request.Convidado!,
+            Serie = serie
         };
 
         _context.Alunos.Add(entity);

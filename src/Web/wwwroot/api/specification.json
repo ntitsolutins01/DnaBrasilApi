@@ -10463,6 +10463,105 @@
         }
       }
     },
+    "/api/Series/Localidade/{localidadeId}/Etapa/{etapaId}": {
+      "get": {
+        "tags": [
+          "Series"
+        ],
+        "operationId": "GetSeriesByLocalidadeIdEtapaId",
+        "parameters": [
+          {
+            "name": "localidadeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "etapaId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 2
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SerieDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Series/Localidade/{localidadeId}/Etapa/{etapaId}/Serie/{serie}": {
+      "get": {
+        "tags": [
+          "Series"
+        ],
+        "operationId": "GetTurmasByLocalidadeIdEtapaIdSerie",
+        "parameters": [
+          {
+            "name": "localidadeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "etapaId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 2
+          },
+          {
+            "name": "serie",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-position": 3
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SerieDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/TalentosEsportivos": {
       "post": {
         "tags": [
@@ -12683,6 +12782,22 @@
           "modalidades": {
             "type": "string",
             "nullable": true
+          },
+          "serieTurma": {
+            "type": "string",
+            "nullable": true
+          },
+          "serieId": {
+            "type": "string",
+            "nullable": true
+          },
+          "etapaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "serieNome": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -12880,6 +12995,11 @@
           "modalidadesIds": {
             "type": "string",
             "nullable": true
+          },
+          "serieId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
           }
         }
       },
@@ -13056,6 +13176,11 @@
           },
           "modalidadesIds": {
             "type": "string",
+            "nullable": true
+          },
+          "serieId": {
+            "type": "integer",
+            "format": "int32",
             "nullable": true
           }
         }
@@ -14886,6 +15011,14 @@
                   "$ref": "#/components/schemas/AlunoPresenca"
                 }
               },
+              "serie": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Serie"
+                  }
+                ]
+              },
               "alunoAulas": {
                 "type": "array",
                 "nullable": true,
@@ -16016,6 +16149,53 @@
                 "items": {
                   "$ref": "#/components/schemas/AlunoCertificado"
                 }
+              }
+            }
+          }
+        ]
+      },
+      "Serie": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "nome": {
+                "type": "string"
+              },
+              "turma": {
+                "type": "string"
+              },
+              "etapaEnsino": {
+                "$ref": "#/components/schemas/EtapaEnsino"
+              },
+              "localidade": {
+                "$ref": "#/components/schemas/Localidade"
+              },
+              "status": {
+                "type": "boolean"
+              }
+            }
+          }
+        ]
+      },
+      "EtapaEnsino": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "nome": {
+                "type": "string"
+              },
+              "status": {
+                "type": "boolean"
               }
             }
           }
