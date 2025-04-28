@@ -237,7 +237,7 @@ public class UpdateEncaminhamentoTalentoEsportivoCommandHandler : IRequestHandle
                             .FirstOrDefault(x => x.Nome!.Contains(entity.EncaminhamentoTexo));
 
                         var laudo = _context.Laudos
-                            .FirstOrDefault(l => l.TalentoEsportivo != null && l.TalentoEsportivo.Id == entity.Id);
+                            .FirstOrDefault(l => l.TalentoEsportivo != null && l.Aluno.Id == a);
 
                         if (laudo != null)
                         {

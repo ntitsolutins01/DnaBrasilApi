@@ -21,27 +21,31 @@ public class UpdateModalidadeLaudoCommandHandler : IRequestHandler<UpdateModalid
         {
 
             var laudos = await _context.Laudos
-                .Include(i=>i.Modalidade)
-                .Include(i=>i.TalentoEsportivo!.Encaminhamento)
-                .Where(x => x.Modalidade == null && x.TalentoEsportivo != null)
+                .Include(i => i.Modalidade)
+                .Include(i => i.TalentoEsportivo!.Encaminhamento)
+                .Where(x => x.Modalidade == null && x.TalentoEsportivo != null && x.StatusLaudo == "F")
                 .ToListAsync();
 
 
             foreach (Laudo item in laudos)
             {
-                var modalidade = _context.Modalidades
-                    .FirstOrDefault(x =>
-                        item.TalentoEsportivo != null && item.TalentoEsportivo.Encaminhamento != null &&
-                        x.Nome!.Contains(item.TalentoEsportivo.Encaminhamento.Nome));
+                var encaminhamento = item.TalentoEsportivo?.EncaminhamentoTexo?.Split(",")[0];
 
-                var laudo = _context.Laudos
-                    .FirstOrDefault(l =>
-                        l.TalentoEsportivo != null && item.TalentoEsportivo != null &&
-                        l.TalentoEsportivo.Id == item.TalentoEsportivo.Id);
-
-                if (laudo != null)
+                if (encaminhamento != null)
                 {
-                    laudo.Modalidade = modalidade;
+
+                    var modalidade = await _context.Modalidades
+                        .Where(x => x.Nome!.Equals(encaminhamento))
+                        .FirstAsync();
+
+                    var laudoEntity = await _context.Laudos
+                        .Where(x => x.Id == item.Id)
+                        .FirstAsync();
+
+                    //if (laudo != null)
+                    //{
+                    laudoEntity.Modalidade = modalidade;
+                    //}
                 }
 
                 await _context.SaveChangesAsync(cancellationToken);
