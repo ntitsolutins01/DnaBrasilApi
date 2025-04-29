@@ -6619,6 +6619,38 @@
         }
       }
     },
+    "/api/Laudos/ResumidosFilter": {
+      "post": {
+        "tags": [
+          "Laudos"
+        ],
+        "operationId": "GetLaudosResumidosByFilter",
+        "requestBody": {
+          "x-name": "search",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LaudosResumidosFilterDto"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LaudosResumidosFilterDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/LinhasAcoes": {
       "get": {
         "tags": [
@@ -18979,6 +19011,135 @@
           "usuarioEmail": {
             "type": "string",
             "nullable": true
+          }
+        }
+      },
+      "LaudosResumidosFilterDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "pageNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fomentoId": {
+            "type": "string",
+            "nullable": true
+          },
+          "estado": {
+            "type": "string",
+            "nullable": true
+          },
+          "municipioId": {
+            "type": "string",
+            "nullable": true
+          },
+          "localidadeId": {
+            "type": "string",
+            "nullable": true
+          },
+          "alunoId": {
+            "type": "string",
+            "nullable": true
+          },
+          "possuiFoto": {
+            "type": "boolean"
+          },
+          "finalizado": {
+            "type": "boolean"
+          },
+          "laudosResumidos": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/PaginatedListOfLaudoResumidoDto"
+              }
+            ]
+          },
+          "usuarioEmail": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "PaginatedListOfLaudoResumidoDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LaudoResumidoDto"
+            }
+          },
+          "pageNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "hasPreviousPage": {
+            "type": "boolean"
+          },
+          "hasNextPage": {
+            "type": "boolean"
+          }
+        }
+      },
+      "LaudoResumidoDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeModalidade": {
+            "type": "string"
+          },
+          "byteImageModalidade": {
+            "type": "string",
+            "format": "byte"
+          },
+          "byteImageFotoAluno": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "nomeAluno": {
+            "type": "string"
+          },
+          "nomeLocalidade": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "idade": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "etnia": {
+            "type": "string"
+          },
+          "nomeDeficiencia": {
+            "type": "string"
+          },
+          "dtNascimento": {
+            "type": "string"
+          },
+          "desempenho": {
+            "type": "string"
           }
         }
       },

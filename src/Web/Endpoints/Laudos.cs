@@ -21,6 +21,7 @@ using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoQualidadeVida
 using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoByConsumoAlimentarId;
 using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoBySaudeBucalId;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateModalidadeLaudo;
+using DnaBrasilApi.Application.Laudos.Queries.GetLaudosResumidosByFilter;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -49,7 +50,8 @@ public class Laudos : EndpointGroupBase
             .MapGet(GetEncaminhamentoBySaudeBucalId, "Encaminhamento/SaudeBucal/{id}")
             .MapGet(GetEncaminhamentoByVocacional, "Encaminhamentos/Vocacional")
             .MapGet(GetDesempenhoByAluno, "Desempenho/{id}")
-            .MapPost(GetLaudosByFilter, "Filter");
+            .MapPost(GetLaudosByFilter, "Filter")
+            .MapPost(GetLaudosResumidosByFilter, "ResumidosFilter");
     }
     #endregion
 
@@ -251,10 +253,10 @@ public class Laudos : EndpointGroupBase
         return await sender.Send(new GetEncaminhamentoBySaudeBucalIdQuery(id));
     }
     /// <summary>
-    /// Endpoint que busca Desempenho por Aluno
+    /// Endpoint que busca Desempenho do Aluno
     /// </summary>
     /// <param name="sender">sender</param>
-    /// <param name="id">ide que busca Desempenho por Aluno</param>
+    /// <param name="id">Id do Aluno</param>
     /// <returns>retorna lista de Desempenho por Aluno</returns>
     public async Task<DesempenhoDto> GetDesempenhoByAluno(ISender sender, int id)
     {
@@ -277,6 +279,25 @@ public class Laudos : EndpointGroupBase
         var result = await sender.Send(new GetLaudosByFilterQuery() { SearchFilter = search });
 
         search.Laudos = result;
+
+        return search;
+    }
+    /// <summary>
+    /// Endpoint que busca Laudos Resumidos por Filtro
+    /// </summary>
+    /// <param name="sender">sender</param>
+    /// <param name="search">filtro para pesquisa de Laudos Resumidos</param>
+    /// <returns>retorna a lista de laudos resumidos por Filtro</returns>
+    public async Task<LaudosResumidosFilterDto> GetLaudosResumidosByFilter(ISender sender, [FromBody] LaudosResumidosFilterDto search)
+    {
+        //var usuario = await sender.Send(new GetUsuarioByEmailQuery() { Email = search.UsuarioEmail! });
+
+        //search.MunicipioId = usuario.MunicipioId;
+        //search.Estado = usuario.Uf;
+
+        var result = await sender.Send(new GetLaudosResumidosByFilterQuery() { SearchFilter = search });
+
+        search.LaudosResumidos = result;
 
         return search;
     }
