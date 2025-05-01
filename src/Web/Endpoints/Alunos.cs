@@ -16,10 +16,10 @@ using DnaBrasilApi.Application.Alunos.Queries.GetAlunoAulasByAlunoId;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunoByEmail;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunoById;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunoCursosByAlunoId;
+using DnaBrasilApi.Application.Alunos.Queries.GetAlunosCursosByCursoId;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunosAll;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunosByFilter;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunosByLocalidade;
-using DnaBrasilApi.Application.Alunos.Queries.GetAlunosCursosByCursoId;
 using DnaBrasilApi.Application.Alunos.Queries.GetNomeAlunosAll;
 using DnaBrasilApi.Application.Alunos.Queries.GetNomeAlunosByLocalidadeId;
 using DnaBrasilApi.Application.Alunos.Queries.GetNomeAlunosByProfissionalId;
@@ -27,7 +27,6 @@ using DnaBrasilApi.Application.Alunos.Queries.GetPresencasByAlunoId;
 using DnaBrasilApi.Application.Alunos.Queries.GetPresencasByDataAtividadeId;
 using DnaBrasilApi.Application.Atividades.Queries;
 using DnaBrasilApi.Application.Aulas.Queries;
-using DnaBrasilApi.Application.Aulas.Queries.GetAulasByCursoId;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DnaBrasilApi.Web.Endpoints;
@@ -52,19 +51,19 @@ public class Alunos : EndpointGroupBase
             .MapPost(CreateAlunoCursos, "Cursos")
             .MapPost(CreateAlunoCertificados, "Certificados")
             .MapPost(CreateAlunoPresencas, "Presencas")
+            .MapPost(CreateAlunoAula, "Aulas")
             .MapPut(UpdateAluno, "{id}")
             .MapPut(UpdateAlunoCertificado, "{id}/Certificados")
-            .MapPut(UpdateAlunoCurso, "/AlunosCursos/{alunoId}/{cursoId}")
             .MapPut(UpdateAlunoFoto, "/UploadFoto/{id}")
             .MapPut(UpdateQrCode, "/QrCode/{id}")
+            .MapPut(UpdateAlunoCurso, "/AlunosCursos/{alunoId}/{cursoId}")
             .MapDelete(DeleteAluno, "{id}")
             .MapPost(GetAlunosByFilter, "Filter")
-            .MapGet(GetNomeAlunosByProfissionalId, "/Profissional/{id}")
-            .MapGet(GetPresencasByDataAtividadeId, "/Presenca/{data}/{id}")
-            .MapGet(GetAlunoAulasByAlunoId, "AlunoAula/{alunoId}")
-            .MapPost(CreateAlunoAula, "Aulas")
             .MapGet(GetAlunosCursosByCursoId, "AlunosCursos/Curso/{cursoId}")
-            .MapGet(GetAlunoCursosByAlunoId, "AlunosCursos/Aluno/{alunoId}");
+            .MapGet(GetAlunoCursosByAlunoId, "AlunosCursos/Aluno/{alunoId}")
+            .MapGet(GetPresencasByDataAtividadeId, "/Presenca/{data}/{id}")
+            .MapGet(GetNomeAlunosByProfissionalId, "/Profissional/{id}")
+            .MapGet(GetAlunoAulasByAlunoId, "AlunoAula/{alunoId}");
     }
     #endregion
 
@@ -130,6 +129,17 @@ public class Alunos : EndpointGroupBase
     }
 
     /// <summary>
+    /// Endpoint para inclusão de Aluno e Aula
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="command">Objeto de inclusão da Aluno e suas Aulas</param>
+    /// <returns>Retorna Id da Aluno</returns>
+    public async Task<int> CreateAlunoAula(ISender sender, CreateAlunoAulaCommand command)
+    {
+        return await sender.Send(command);
+    }
+
+    /// <summary>
     /// Endpoint para alteração de Qr Code
     /// </summary>
     /// <param name="sender">Sender</param>
@@ -168,6 +178,8 @@ public class Alunos : EndpointGroupBase
         return await sender.Send(new DeleteAlunoCommand(id));
     }
 
+    /// <summary>
+    /// Endpoint para alteração de Aluno e Cursos
     /// </summary>
     /// <param name="sender">Sender</param>
     /// <param name="alunoId">Id de alteração do Aluno</param>
@@ -196,18 +208,6 @@ public class Alunos : EndpointGroupBase
         var result = await sender.Send(command);
         return result > 0;
     }
-
-    /// <summary>
-    /// Endpoint para inclusão de Aluno e Aula
-    /// </summary>
-    /// <param name="sender">Sender</param>
-    /// <param name="command">Objeto de inclusão da Aluno e suas Aulas</param>
-    /// <returns>Retorna Id da Aluno</returns>
-    public async Task<int> CreateAlunoAula(ISender sender, CreateAlunoAulaCommand command)
-    {
-        return await sender.Send(command);
-    }
-
     #endregion
 
     #region Get Methods
@@ -318,18 +318,7 @@ public class Alunos : EndpointGroupBase
     /// <returns>Retorna uma lista de presencas</returns>
     public async Task<List<AtividadeDto>> GetPresencasByDataAtividadeId(ISender sender, string data, int id)
     {
-        return await sender.Send(new GetPresencasByDataAtividadeIdQuery() { Data = data, AtividadeId = id});
-    }
-
-    /// <summary>
-    /// Endpoint que busca uma lista de Aluno Curso
-    /// </summary>
-    /// <param name="sender">Sender</param>
-    /// <param name="id">Id do aluno</param>
-    /// <returns>Retorna uma lista de AlunoCurso</returns>
-    public async Task<List<AlunoAulaDto>> GetAlunoAulasByAlunoId(ISender sender, int alunoId)
-    {
-        return await sender.Send(new GetAlunoAulasByAlunoIdQuery() { AlunoId = alunoId });
+        return await sender.Send(new GetPresencasByDataAtividadeIdQuery() { Data = data, AtividadeId = id });
     }
 
     /// <summary>
@@ -354,5 +343,15 @@ public class Alunos : EndpointGroupBase
         return await sender.Send(new GetAlunoCursosByAlunoIdQuery() { AlunoId = alunoId });
     }
 
+    /// <summary>
+    /// Endpoint que busca um AlunoCurso
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="id">Id do aluno</param>
+    /// <returns>Retorna um AlunoCurso</returns>
+    public async Task<List<AlunoAulaDto>> GetAlunoAulasByAlunoId(ISender sender, int alunoId)
+    {
+        return await sender.Send(new GetAlunoAulasByAlunoIdQuery() { AlunoId = alunoId });
+    }
     #endregion
 }
