@@ -295,9 +295,23 @@ public class Laudos : EndpointGroupBase
         //search.MunicipioId = usuario.MunicipioId;
         //search.Estado = usuario.Uf;
 
+        var list = new List<LaudoResumidoDto>();
+
         var result = await sender.Send(new GetLaudosResumidosByFilterQuery() { SearchFilter = search });
 
-        search.LaudosResumidos = result;
+        foreach (var item in result)
+        {
+            item.Desempenho = await sender.Send(new GetDesempenhoByAlunoQuery((int)item.AlunoId!));
+            if (item.QualidadeDeVidaId != null)
+            {
+                item.EncaminhamentoQualidadeDeVida =
+                    await sender.Send(new GetEncaminhamentoByQualidadeDeVidaIdQuery((int)item.QualidadeDeVidaId));
+            }
+
+            list.Add(item);
+        }
+
+        search.LaudosResumidos = list;
 
         return search;
     }

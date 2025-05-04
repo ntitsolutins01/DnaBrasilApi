@@ -6,12 +6,12 @@ using DnaBrasilApi.Domain.Enums;
 
 namespace DnaBrasilApi.Application.Laudos.Queries.GetLaudosResumidosByFilter;
 
-public record GetLaudosResumidosByFilterQuery : IRequest<PaginatedList<LaudoResumidoDto>>
+public record GetLaudosResumidosByFilterQuery : IRequest<List<LaudoResumidoDto>>
 {
     public required LaudosResumidosFilterDto SearchFilter { get; init; }
 }
 
-public class GetLaudosResumidosByFilterQueryHandler : IRequestHandler<GetLaudosResumidosByFilterQuery, PaginatedList<LaudoResumidoDto>>
+public class GetLaudosResumidosByFilterQueryHandler : IRequestHandler<GetLaudosResumidosByFilterQuery, List<LaudoResumidoDto>>
 {
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
@@ -22,29 +22,36 @@ public class GetLaudosResumidosByFilterQueryHandler : IRequestHandler<GetLaudosR
         _mapper = mapper;
     }
 
-    public async Task<PaginatedList<LaudoResumidoDto>> Handle(GetLaudosResumidosByFilterQuery request, CancellationToken cancellationToken)
+    public async Task<List<LaudoResumidoDto>> Handle(GetLaudosResumidosByFilterQuery request, CancellationToken cancellationToken)
     {
         var laudos = _context.Laudos
             .Include(i => i.Aluno.Localidade)
             .Include(i => i.QualidadeDeVida)
-            .Include(i => i.Vocacional)
             .Include(i => i.ConsumoAlimentar)
             .Include(i => i.TalentoEsportivo)
             .Include(i => i.Saude)
             .Include(i => i.SaudeBucal)
-            .Where(u=>u.Id == 3939)
-                //u => u.Aluno.Municipio!.Estado!.Sigla!.Contains(request.SearchFilter.Estado!) &&
-                //u.Aluno.Municipio!.Id == Convert.ToInt32(request.SearchFilter.MunicipioId)
-
-                //)
+            .Include(i => i.Vocacional)
+            .Include(i => i.Modalidade)
+            .AsNoTracking()
+            .Where(x => x.Modalidade != null && x.StatusLaudo == "F" &&
+                        x.Aluno.Localidade!.Id == Convert.ToInt32(request.SearchFilter.LocalidadeId))
             .AsNoTracking();
+        
+        var result = await FilterLaudos(laudos, request.SearchFilter!, cancellationToken)
+                .ProjectTo<LaudoResumidoDto>(_mapper.ConfigurationProvider)
+                .OrderBy(o => o.TalentoEsportivo!.EncaminhamentoTexo)
+                .ToListAsync();
 
-        var result = FilterLaudos(laudos, request.SearchFilter!, cancellationToken)
-            .ProjectTo<LaudoResumidoDto>(_mapper.ConfigurationProvider)
-            .OrderByDescending(t => t.Id)
-            .PaginatedListAsync(request.SearchFilter.PageNumber, request.SearchFilter.PageSize);
+        //.Where(x=>x.Modalidade != null &&
+        //    x.Aluno.Localidade!.Id == Convert.ToInt32(request.SearchFilter.LocalidadeId) && 
+        //    x.StatusLaudo == "F")
+        //.ProjectTo<LaudoResumidoDto>(_mapper.ConfigurationProvider)
+        //.ToListAsync();
 
-        return await (result ?? throw new ArgumentNullException(nameof(result)));
+        var count = result.Count;
+
+        return result ?? throw new ArgumentNullException(nameof(result));
     }
 
     private IQueryable<Laudo> FilterLaudos(IQueryable<Laudo> laudos, LaudosResumidosFilterDto search, CancellationToken cancellationToken)

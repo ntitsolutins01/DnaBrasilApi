@@ -5,8 +5,6 @@ public class LaudosResumidosFilterDto
 {
 
     #region SearchFilter
-    public required int PageNumber { get; set; } = 1;
-    public required int PageSize { get; set; } = 10;
     public string? FomentoId { get; set; }
     public string? Estado { get; set; }
     public string? MunicipioId { get; set; }
@@ -17,6 +15,6 @@ public class LaudosResumidosFilterDto
 
     #endregion
 
-    public PaginatedList<LaudoResumidoDto>? LaudosResumidos { get; set; }
+    public List<LaudoResumidoDto>? LaudosResumidos { get; set; }
     public string? UsuarioEmail { get; set; }
 }
