@@ -12,7 +12,7 @@ public class SerieConfiguration : IEntityTypeConfiguration<Serie>
             .HasMaxLength(150)
             .IsRequired();
         builder.Property(t => t.Turma)
-            .HasMaxLength(20)
+            .HasMaxLength(100)
             .IsRequired();
     }
 }

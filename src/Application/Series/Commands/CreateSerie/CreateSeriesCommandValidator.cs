@@ -7,7 +7,7 @@ internal class CreateSeriesCommandValidator : AbstractValidator<CreateSerieComma
             .MaximumLength(150)
             .NotEmpty();
         RuleFor(v => v.Turma)
-            .MaximumLength(20)
+            .MaximumLength(100)
             .NotEmpty();
         //RuleFor(v => v.Descricao)
         //    .MaximumLength(200)

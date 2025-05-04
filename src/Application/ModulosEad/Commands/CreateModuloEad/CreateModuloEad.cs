@@ -9,6 +9,7 @@ public record CreateModuloEadCommand : IRequest<int>
     public string? Descricao { get; set; }
     public int? Ordem { get; set; }
     public bool Status { get; init; } = true;
+    public int? Ordem { get; set; }
 }
 
 public class CreateModuloEadCommandHandler : IRequestHandler<CreateModuloEadCommand, int>

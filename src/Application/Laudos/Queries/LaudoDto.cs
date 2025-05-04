@@ -34,7 +34,7 @@ public class LaudoDto
     public string? Sexo { get; init; }
     public string? Etnia { get; init; }
     public string? StatusLaudo { get; init; }
-    public DateTime? DtNascimento { get; init; }
+    public string? DtNascimento { get; init; }
     public int? Idade { get; init; }
     public string? Email { get; init; }
     public byte[]? QrCode { get; init; }
@@ -77,6 +77,7 @@ public class LaudoDto
                 .ForMember(dest => dest.NomeDeficiencia, opt => opt.MapFrom(src => src.Aluno.Deficiencia!.Nome))
                 .ForMember(dest => dest.Sexo, opt => opt.MapFrom(src => GetSexo(src.Aluno.Sexo)))
                 .ForMember(dest => dest.Etnia, opt => opt.MapFrom(src => src.Aluno.Etnia))
+                .ForMember(dest => dest.DtNascimento, opt => opt.MapFrom(src => src.Aluno.DtNascimento.ToString("dd/MM/yyyy")))
                 .ForMember(dest => dest.Idade, opt => opt.MapFrom(src => GetIdade(src.Aluno!.DtNascimento, null)))
                 .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Aluno.Email))
                 .ForMember(dest => dest.QrCode, opt => opt.MapFrom(src => src.Aluno.QrCode))

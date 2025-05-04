@@ -7,7 +7,7 @@ internal class UpdateSerieCommandValidator : AbstractValidator<UpdateSerieComman
             .MaximumLength(150)
             .NotEmpty();
         RuleFor(v => v.Turma)
-            .MaximumLength(20)
+            .MaximumLength(100)
             .NotEmpty();
     }
 }

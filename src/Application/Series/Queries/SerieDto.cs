@@ -4,8 +4,8 @@ namespace DnaBrasilApi.Application.Series.Queries;
 public class SerieDto
 {
     public int Id { get; init; }
-    public required string Nome { get; set; }
-    public required string Turma { get; set; }
+    public required string Nome { get; init; }
+    public required string Turma { get; init; }
     public required string NomeEtapaEnsino { get; init; }
     public required int LocalidadeId { get; init; }
     public required string NomeLocalidade { get; init; }

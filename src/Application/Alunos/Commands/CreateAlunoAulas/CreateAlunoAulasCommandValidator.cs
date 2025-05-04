@@ -1,8 +1,8 @@
-﻿namespace DnaBrasilApi.Application.Alunos.Commands.CreateAlunoAulas;
-internal class CreateAlunoAulaCommandValidator : AbstractValidator<CreateAlunoAulaCommand>
+namespace DnaBrasilApi.Application.Alunos.Commands.CreateAlunoAulas;
+internal class CreateAlunoAulasCommandValidator : AbstractValidator<CreateAlunoAulaCommand>
 {
-    public CreateAlunoAulaCommandValidator()
+    public CreateAlunoAulasCommandValidator()
     {
-        
+
     }
 }
