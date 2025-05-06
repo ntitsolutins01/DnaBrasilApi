@@ -1,6 +1,6 @@
 ﻿namespace DnaBrasilApi.Domain.Entities;
 
-public class AlunoCurso
+public class AlunoCurso : BaseAuditableEntity
 {
     public int AlunoId { get; set; }
     public int CursoId { get; set; }

@@ -14859,38 +14859,45 @@
         ]
       },
       "AlunoCurso": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "alunoId": {
-            "type": "integer",
-            "format": "int32"
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
           },
-          "cursoId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "aluno": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/Aluno"
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "alunoId": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "cursoId": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "aluno": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Aluno"
+                  }
+                ]
+              },
+              "curso": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Curso"
+                  }
+                ]
+              },
+              "progresso": {
+                "type": "integer",
+                "format": "int32"
               }
-            ]
-          },
-          "curso": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/Curso"
-              }
-            ]
-          },
-          "progresso": {
-            "type": "integer",
-            "format": "int32"
+            }
           }
-        }
+        ]
       },
       "Aluno": {
         "allOf": [
