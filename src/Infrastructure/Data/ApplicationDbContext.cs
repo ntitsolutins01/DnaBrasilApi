@@ -79,8 +79,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<IdebDimensaoNacional> IdebDimensoesNacional => Set<IdebDimensaoNacional>();
     public DbSet<IdebDimensaoEstadual> IdebDimensoesEstadual => Set<IdebDimensaoEstadual>();
     public DbSet<ModeloCarteirinha> ModelosCarteirinhas => Set<ModeloCarteirinha>();
-    public DbSet<AlunoCurso> AlunosCursos => Set<AlunoCurso>();
-    public DbSet<AlunoCertificado> AlunosCertificados => Set<AlunoCertificado>();
+    public DbSet<AlunoCursoCertificado> AlunoCursosCertificados => Set<AlunoCursoCertificado>();
     public DbSet<Inventario> Inventarios => Set<Inventario>();
     public DbSet<ArquivosInventario> ArquivosInventarios => Set<ArquivosInventario>();
     public DbSet<AlunoPresenca> AlunosPresencas => Set<AlunoPresenca>();
@@ -159,30 +158,22 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
             .WithMany(s => s.AtividadeAlunos)
             .HasForeignKey(sc => sc.AlunoId);
 
-        // AlunoCurso
-        builder.Entity<AlunoCurso>().HasKey(sc => new { sc.AlunoId, sc.CursoId });
+        // AlunoCursoCertificado
+        builder.Entity<AlunoCursoCertificado>().HasKey(sc => new { sc.AlunoId, sc.CursoId, sc.CertificadoId });
 
-        builder.Entity<AlunoCurso>()
+        builder.Entity<AlunoCursoCertificado>()
             .HasOne<Aluno>(sc => sc.Aluno)
-            .WithMany(s => s.AlunoCursos)
+            .WithMany(s => s.AlunoCursosCertificados)
             .HasForeignKey(sc => sc.AlunoId);
 
-        builder.Entity<AlunoCurso>()
+        builder.Entity<AlunoCursoCertificado>()
             .HasOne<Curso>(sc => sc.Curso)
-            .WithMany(s => s.AlunoCursos)
+            .WithMany(s => s.AlunoCursosCertificados)
             .HasForeignKey(sc => sc.CursoId);
 
-        // AlunoCertificado
-        builder.Entity<AlunoCertificado>().HasKey(sc => new { sc.AlunoId, sc.CertificadoId });
-
-        builder.Entity<AlunoCertificado>()
-            .HasOne<Aluno>(sc => sc.Aluno)
-            .WithMany(s => s.AlunoCertificados)
-            .HasForeignKey(sc => sc.AlunoId);
-
-        builder.Entity<AlunoCertificado>()
+        builder.Entity<AlunoCursoCertificado>()
             .HasOne<Certificado>(sc => sc.Certificado)
-            .WithMany(s => s.AlunoCertificados)
+            .WithMany(s => s.AlunoCursosCertificados)
             .HasForeignKey(sc => sc.CertificadoId);
 
         // AlunoPresenca
