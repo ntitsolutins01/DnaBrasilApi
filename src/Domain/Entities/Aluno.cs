@@ -39,10 +39,9 @@ public class Aluno : BaseAuditableEntity
     public bool Convidado { get; set; } = false;
     public IList<AlunoModalidade>? AlunoModalidades { get; set; }
     public IList<AtividadeAluno>? AtividadeAlunos { get; set; }
-    public IList<AlunoCurso>? AlunoCursos { get; set; }
-    public IList<AlunoCertificado>? AlunoCertificados { get; set; }
+    //public IList<AlunoCurso>? AlunoCursos { get; set; }
     public IList<AlunoPresenca>? AlunoPresencas { get; set; }
     public Serie? Serie { get; set; }
     public IList<AlunoAula>? AlunoAulas { get; set; }
-    //public Serie? Serie { get; set; }
+    public IList<AlunoCursoCertificado>? AlunoCursosCertificados { get; set; }
 }

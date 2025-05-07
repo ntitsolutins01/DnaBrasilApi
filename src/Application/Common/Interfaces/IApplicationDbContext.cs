@@ -70,8 +70,7 @@ public interface IApplicationDbContext
     DbSet<IdebDimensaoNacional> IdebDimensoesNacional { get; }
     DbSet<IdebDimensaoEstadual> IdebDimensoesEstadual { get; }
     DbSet<ModeloCarteirinha> ModelosCarteirinhas { get; }
-    DbSet<AlunoCurso> AlunosCursos { get; }
-    DbSet<AlunoCertificado> AlunosCertificados { get; }
+    DbSet<AlunoCursoCertificado> AlunoCursosCertificados { get; }
     DbSet<Inventario> Inventarios { get; }
     DbSet<ArquivosInventario> ArquivosInventarios { get; }
     DbSet<AlunoPresenca> AlunosPresencas { get; }

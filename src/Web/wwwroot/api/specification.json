@@ -288,72 +288,6 @@
         }
       }
     },
-    "/api/Alunos/Cursos": {
-      "post": {
-        "tags": [
-          "Alunos"
-        ],
-        "operationId": "CreateAlunoCursos",
-        "requestBody": {
-          "x-name": "command",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateAlunoCursoCommand"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 1
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/Alunos/Certificados": {
-      "post": {
-        "tags": [
-          "Alunos"
-        ],
-        "operationId": "CreateAlunoCertificados",
-        "requestBody": {
-          "x-name": "command",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateAlunoCertificadoCommand"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 1
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/Alunos/Presencas": {
       "post": {
         "tags": [
@@ -413,50 +347,6 @@
                 "schema": {
                   "type": "integer",
                   "format": "int32"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/Alunos/{id}/Certificados": {
-      "put": {
-        "tags": [
-          "Alunos"
-        ],
-        "operationId": "UpdateAlunoCertificado",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "x-position": 1
-          }
-        ],
-        "requestBody": {
-          "x-name": "command",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateAlunoCertificadoCommand"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 2
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "boolean"
                 }
               }
             }
@@ -552,60 +442,6 @@
         }
       }
     },
-    "/api/Alunos/AlunosCursos/{alunoId}/{cursoId}": {
-      "put": {
-        "tags": [
-          "Alunos"
-        ],
-        "operationId": "UpdateAlunoCurso",
-        "parameters": [
-          {
-            "name": "alunoId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "x-position": 1
-          },
-          {
-            "name": "cursoId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "x-position": 2
-          }
-        ],
-        "requestBody": {
-          "x-name": "command",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateAlunoCursoCommand"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 3
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "boolean"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/Alunos/Filter": {
       "post": {
         "tags": [
@@ -631,120 +467,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AlunosFilterDto"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/Alunos/AlunosCursos/Curso/{cursoId}": {
-      "get": {
-        "tags": [
-          "Alunos"
-        ],
-        "operationId": "GetAlunosCursosByCursoId",
-        "parameters": [
-          {
-            "name": "cursoId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "x-position": 1
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/AlunoCursoDto"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/Alunos/AlunosCursos/Aluno/{alunoId}": {
-      "get": {
-        "tags": [
-          "Alunos"
-        ],
-        "operationId": "GetAlunoCursosByAlunoId",
-        "parameters": [
-          {
-            "name": "alunoId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "x-position": 1
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/AlunoCursoDto"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/Alunos/Presenca/{data}/{id}": {
-      "get": {
-        "tags": [
-          "Alunos"
-        ],
-        "operationId": "GetPresencasByDataAtividadeId",
-        "parameters": [
-          {
-            "name": "data",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "x-position": 1
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "x-position": 2
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/AtividadeDto"
-                  }
                 }
               }
             }
@@ -1954,41 +1676,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/CertificadoDto"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/Certificados/Aluno/{alunoId}": {
-      "get": {
-        "tags": [
-          "Certificados"
-        ],
-        "operationId": "GetCertificadosByAlunoId",
-        "parameters": [
-          {
-            "name": "alunoId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "x-position": 1
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/CertificadoDto"
-                  }
                 }
               }
             }
@@ -3399,41 +3086,6 @@
         "parameters": [
           {
             "name": "tipoCursoId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "x-position": 1
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/CursoDto"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/Cursos/Aluno/{alunoId}": {
-      "get": {
-        "tags": [
-          "Cursos"
-        ],
-        "operationId": "GetCursosByAlunoId",
-        "parameters": [
-          {
-            "name": "alunoId",
             "in": "path",
             "required": true,
             "schema": {
@@ -13070,32 +12722,6 @@
           }
         }
       },
-      "CreateAlunoCursoCommand": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "alunoId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "cursosId": {
-            "type": "string"
-          }
-        }
-      },
-      "CreateAlunoCertificadoCommand": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "alunoId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "certificadosId": {
-            "type": "string"
-          }
-        }
-      },
       "CreateAlunoPresencaCommand": {
         "type": "object",
         "additionalProperties": false,
@@ -13299,24 +12925,6 @@
           }
         }
       },
-      "UpdateAlunoCursoCommand": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "alunoId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "cursoId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "progresso": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
       "AlunosFilterDto": {
         "type": "object",
         "additionalProperties": false,
@@ -13370,92 +12978,6 @@
             "items": {
               "$ref": "#/components/schemas/AlunoIndexDto"
             }
-          }
-        }
-      },
-      "AlunoCursoDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "alunoId": {
-            "type": "string"
-          },
-          "cursoId": {
-            "type": "string"
-          },
-          "progresso": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "AtividadeDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "estruturaId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nomeEstrutura": {
-            "type": "string"
-          },
-          "linhaAcaoId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nomeLinhaAcao": {
-            "type": "string"
-          },
-          "categoriaId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nomeCategoria": {
-            "type": "string"
-          },
-          "modalidadeId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nomeModalidade": {
-            "type": "string"
-          },
-          "turma": {
-            "type": "string"
-          },
-          "diasSemana": {
-            "type": "string"
-          },
-          "hrInicial": {
-            "type": "string"
-          },
-          "hrFinal": {
-            "type": "string"
-          },
-          "profissionalId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nomeProfissional": {
-            "type": "string"
-          },
-          "localidadeId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nomeLocalidade": {
-            "type": "string"
-          },
-          "status": {
-            "type": "boolean"
-          },
-          "turmaHora": {
-            "type": "string"
           }
         }
       },
@@ -13614,6 +13136,76 @@
             "format": "int32"
           },
           "diasSemana": {
+            "type": "string"
+          }
+        }
+      },
+      "AtividadeDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "estruturaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeEstrutura": {
+            "type": "string"
+          },
+          "linhaAcaoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeLinhaAcao": {
+            "type": "string"
+          },
+          "categoriaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeCategoria": {
+            "type": "string"
+          },
+          "modalidadeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeModalidade": {
+            "type": "string"
+          },
+          "turma": {
+            "type": "string"
+          },
+          "diasSemana": {
+            "type": "string"
+          },
+          "hrInicial": {
+            "type": "string"
+          },
+          "hrFinal": {
+            "type": "string"
+          },
+          "profissionalId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeProfissional": {
+            "type": "string"
+          },
+          "localidadeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeLocalidade": {
+            "type": "string"
+          },
+          "status": {
+            "type": "boolean"
+          },
+          "turmaHora": {
             "type": "string"
           }
         }
@@ -14828,11 +14420,11 @@
                 "type": "string",
                 "nullable": true
               },
-              "alunoCursos": {
+              "alunoCursosCertificados": {
                 "type": "array",
                 "nullable": true,
                 "items": {
-                  "$ref": "#/components/schemas/AlunoCurso"
+                  "$ref": "#/components/schemas/AlunoCursoCertificado"
                 }
               }
             }
@@ -14858,7 +14450,7 @@
           }
         ]
       },
-      "AlunoCurso": {
+      "AlunoCursoCertificado": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -14867,6 +14459,10 @@
             "format": "int32"
           },
           "cursoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "certificadoId": {
             "type": "integer",
             "format": "int32"
           },
@@ -14886,9 +14482,20 @@
               }
             ]
           },
+          "certificado": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Certificado"
+              }
+            ]
+          },
           "progresso": {
             "type": "integer",
             "format": "int32"
+          },
+          "status": {
+            "type": "boolean"
           }
         }
       },
@@ -15072,20 +14679,6 @@
                   "$ref": "#/components/schemas/AtividadeAluno"
                 }
               },
-              "alunoCursos": {
-                "type": "array",
-                "nullable": true,
-                "items": {
-                  "$ref": "#/components/schemas/AlunoCurso"
-                }
-              },
-              "alunoCertificados": {
-                "type": "array",
-                "nullable": true,
-                "items": {
-                  "$ref": "#/components/schemas/AlunoCertificado"
-                }
-              },
               "alunoPresencas": {
                 "type": "array",
                 "nullable": true,
@@ -15106,6 +14699,13 @@
                 "nullable": true,
                 "items": {
                   "$ref": "#/components/schemas/AlunoAula"
+                }
+              },
+              "alunoCursosCertificados": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "$ref": "#/components/schemas/AlunoCursoCertificado"
                 }
               }
             }
@@ -16159,83 +15759,6 @@
           }
         }
       },
-      "AlunoCertificado": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "alunoId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "certificadoId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "aluno": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/Aluno"
-              }
-            ]
-          },
-          "certificado": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/Certificado"
-              }
-            ]
-          }
-        }
-      },
-      "Certificado": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BaseAuditableEntity"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "fomento": {
-                "$ref": "#/components/schemas/Fomentu"
-              },
-              "imagemFrente": {
-                "type": "string"
-              },
-              "imagemVerso": {
-                "type": "string",
-                "nullable": true
-              },
-              "nomeImagemFrente": {
-                "type": "string",
-                "nullable": true
-              },
-              "nomeImagemVerso": {
-                "type": "string",
-                "nullable": true
-              },
-              "htmlFrente": {
-                "type": "string"
-              },
-              "htmlVerso": {
-                "type": "string"
-              },
-              "status": {
-                "type": "boolean"
-              },
-              "alunoCertificados": {
-                "type": "array",
-                "nullable": true,
-                "items": {
-                  "$ref": "#/components/schemas/AlunoCertificado"
-                }
-              }
-            }
-          }
-        ]
-      },
       "Serie": {
         "allOf": [
           {
@@ -16316,6 +15839,53 @@
             "format": "int32"
           }
         }
+      },
+      "Certificado": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "fomento": {
+                "$ref": "#/components/schemas/Fomentu"
+              },
+              "imagemFrente": {
+                "type": "string"
+              },
+              "imagemVerso": {
+                "type": "string",
+                "nullable": true
+              },
+              "nomeImagemFrente": {
+                "type": "string",
+                "nullable": true
+              },
+              "nomeImagemVerso": {
+                "type": "string",
+                "nullable": true
+              },
+              "htmlFrente": {
+                "type": "string"
+              },
+              "htmlVerso": {
+                "type": "string"
+              },
+              "status": {
+                "type": "boolean"
+              },
+              "alunoCursosCertificados": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "$ref": "#/components/schemas/AlunoCursoCertificado"
+                }
+              }
+            }
+          }
+        ]
       },
       "CreateControleAcessoAulaCommand": {
         "type": "object",

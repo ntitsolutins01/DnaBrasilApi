@@ -4,6 +4,7 @@ using DnaBrasilApi.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DnaBrasilApi.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250506040341_DnaCreateAlunoCursoMoreCollumns")]
+    partial class DnaCreateAlunoCursoMoreCollumns
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -207,7 +210,22 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.ToTable("AlunosAulas");
                 });
 
-            modelBuilder.Entity("DnaBrasilApi.Domain.Entities.AlunoCursoCertificado", b =>
+            modelBuilder.Entity("DnaBrasilApi.Domain.Entities.AlunoCertificado", b =>
+                {
+                    b.Property<int>("AlunoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CertificadoId")
+                        .HasColumnType("int");
+
+                    b.HasKey("AlunoId", "CertificadoId");
+
+                    b.HasIndex("CertificadoId");
+
+                    b.ToTable("AlunosCertificados");
+                });
+
+            modelBuilder.Entity("DnaBrasilApi.Domain.Entities.AlunoCurso", b =>
                 {
                     b.Property<int>("AlunoId")
                         .HasColumnType("int");
@@ -215,22 +233,30 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.Property<int>("CursoId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CertificadoId")
+                    b.Property<DateTimeOffset>("Created")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Id")
                         .HasColumnType("int");
+
+                    b.Property<DateTimeOffset>("LastModified")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Progresso")
+                        .HasMaxLength(3)
                         .HasColumnType("int");
 
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
-
-                    b.HasKey("AlunoId", "CursoId", "CertificadoId");
-
-                    b.HasIndex("CertificadoId");
+                    b.HasKey("AlunoId", "CursoId");
 
                     b.HasIndex("CursoId");
 
-                    b.ToTable("AlunoCursosCertificados");
+                    b.ToTable("AlunosCursos");
                 });
 
             modelBuilder.Entity("DnaBrasilApi.Domain.Entities.AlunoModalidade", b =>
@@ -3641,29 +3667,40 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.Navigation("Aula");
                 });
 
-            modelBuilder.Entity("DnaBrasilApi.Domain.Entities.AlunoCursoCertificado", b =>
+            modelBuilder.Entity("DnaBrasilApi.Domain.Entities.AlunoCertificado", b =>
                 {
                     b.HasOne("DnaBrasilApi.Domain.Entities.Aluno", "Aluno")
-                        .WithMany("AlunoCursosCertificados")
+                        .WithMany("AlunoCertificados")
                         .HasForeignKey("AlunoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("DnaBrasilApi.Domain.Entities.Certificado", "Certificado")
-                        .WithMany("AlunoCursosCertificados")
+                        .WithMany("AlunoCertificados")
                         .HasForeignKey("CertificadoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DnaBrasilApi.Domain.Entities.Curso", "Curso")
-                        .WithMany("AlunoCursosCertificados")
-                        .HasForeignKey("CursoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Aluno");
 
                     b.Navigation("Certificado");
+                });
+
+            modelBuilder.Entity("DnaBrasilApi.Domain.Entities.AlunoCurso", b =>
+                {
+                    b.HasOne("DnaBrasilApi.Domain.Entities.Aluno", "Aluno")
+                        .WithMany("AlunoCursos")
+                        .HasForeignKey("AlunoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DnaBrasilApi.Domain.Entities.Curso", "Curso")
+                        .WithMany("AlunoCursos")
+                        .HasForeignKey("CursoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Aluno");
 
                     b.Navigation("Curso");
                 });
@@ -4607,7 +4644,9 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                 {
                     b.Navigation("AlunoAulas");
 
-                    b.Navigation("AlunoCursosCertificados");
+                    b.Navigation("AlunoCertificados");
+
+                    b.Navigation("AlunoCursos");
 
                     b.Navigation("AlunoModalidades");
 
@@ -4632,12 +4671,12 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("DnaBrasilApi.Domain.Entities.Certificado", b =>
                 {
-                    b.Navigation("AlunoCursosCertificados");
+                    b.Navigation("AlunoCertificados");
                 });
 
             modelBuilder.Entity("DnaBrasilApi.Domain.Entities.Curso", b =>
                 {
-                    b.Navigation("AlunoCursosCertificados");
+                    b.Navigation("AlunoCursos");
                 });
 
             modelBuilder.Entity("DnaBrasilApi.Domain.Entities.Deficiencia", b =>
