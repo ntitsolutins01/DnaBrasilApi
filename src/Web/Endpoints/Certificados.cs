@@ -4,7 +4,7 @@ using DnaBrasilApi.Application.Certificados.Commands.DeleteCertificado;
 using DnaBrasilApi.Application.Certificados.Commands.UpdateCertificado;
 using DnaBrasilApi.Application.Certificados.Queries;
 using DnaBrasilApi.Application.Certificados.Queries.GetCertificadosAll;
-using DnaBrasilApi.Application.Certificados.Queries.GetCertificadosByAlunoId;
+//using DnaBrasilApi.Application.Certificados.Queries.GetCertificadosByAlunoId;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -24,8 +24,8 @@ public class Certificados : EndpointGroupBase
             .MapPost(CreateCertificado)
             .MapPut(UpdateCertificado, "{id}")
             .MapDelete(DeleteCertificado, "{id}")
-            .MapGet(GetCertificadoById, "{id}")
-            .MapGet(GetCertificadosByAlunoId, "Aluno/{alunoId}");
+            .MapGet(GetCertificadoById, "{id}");
+        //.MapGet(GetCertificadosByAlunoId, "Aluno/{alunoId}");
     }
     #endregion
 
@@ -92,16 +92,16 @@ public class Certificados : EndpointGroupBase
         return await sender.Send(new GetCertificadoByIdQuery() { Id = id });
     }
 
-    /// <summary>
-    /// Endpoint que busca uma lista de certificado
-    /// </summary>
-    /// <param name="sender">Sender</param>
-    /// <param name="id">Id do aluno</param>
-    /// <returns>Retorna uma lista de Certificados</returns>
-    public async Task<List<CertificadoDto>> GetCertificadosByAlunoId(ISender sender, int alunoId)
-    {
-        return await sender.Send(new GetCertificadosByAlunoIdQuery() { AlunoId = alunoId });
-    }
+    ///// <summary>
+    ///// Endpoint que busca uma lista de certificado
+    ///// </summary>
+    ///// <param name="sender">Sender</param>
+    ///// <param name="id">Id do aluno</param>
+    ///// <returns>Retorna uma lista de Certificados</returns>
+    //public async Task<List<CertificadoDto>> GetCertificadosByAlunoId(ISender sender, int alunoId)
+    //{
+    //    return await sender.Send(new GetCertificadosByAlunoIdQuery() { AlunoId = alunoId });
+    //}
     #endregion
 
 }
