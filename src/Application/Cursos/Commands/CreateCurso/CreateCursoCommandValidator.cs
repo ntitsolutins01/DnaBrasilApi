@@ -9,5 +9,11 @@ internal class CreateCursoCommandValidator : AbstractValidator<CreateCursoComman
         RuleFor(v => v.Descricao)
             .MaximumLength(500)
             .NotEmpty();
+        RuleFor(v => v.Imagem)
+            .MaximumLength(200)
+            .NotEmpty();
+        RuleFor(v => v.NomeImagem)
+            .MaximumLength(100)
+            .NotEmpty();
     }
 }
