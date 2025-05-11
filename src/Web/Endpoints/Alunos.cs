@@ -1,7 +1,7 @@
 using DnaBrasilApi.Application.Alunos.Commands.CreateAluno;
 using DnaBrasilApi.Application.Alunos.Commands.CreateAlunoAulas;
 //using DnaBrasilApi.Application.Alunos.Commands.CreateAlunoCertificados;
-//using DnaBrasilApi.Application.Alunos.Commands.CreateAlunoCursos;
+using DnaBrasilApi.Application.Alunos.Commands.CreateAlunoCursos;
 using DnaBrasilApi.Application.Alunos.Commands.CreateAlunoPresencas;
 using DnaBrasilApi.Application.Alunos.Commands.DeleteAluno;
 //using DnaBrasilApi.Application.Alunos.Commands.DeleteAlunoCertificado;
@@ -57,7 +57,7 @@ public class Alunos : EndpointGroupBase
             .MapPut(UpdateQrCode, "/QrCode/{id}")
             .MapDelete(DeleteAluno, "{id}")
             .MapPost(GetAlunosByFilter, "Filter")
-            //.MapPost(CreateAlunoCursos, "Cursos")
+            .MapPost(CreateAlunoCursos, "Cursos")
             //.MapPut(UpdateAlunoCurso, "/AlunosCursos/{alunoId}/{cursoId}")
             //.MapGet(GetAlunosCursosByCursoId, "AlunosCursos/Curso/{cursoId}")
             //.MapGet(GetAlunoCursosByAlunoId, "AlunosCursos/Aluno/{alunoId}")
@@ -95,16 +95,16 @@ public class Alunos : EndpointGroupBase
         return result;
     }
 
-    ///// <summary>
-    ///// Endpoint para inclusão de Aluno e Curso
-    ///// </summary>
-    ///// <param name="sender">Sender</param>
-    ///// <param name="command">Objeto de inclusão da Aluno e seus Curso</param>
-    ///// <returns>Retorna Id da Aluno</returns>
-    //public async Task<int> CreateAlunoCursos(ISender sender, CreateAlunoCursoCommand command)
-    //{
-    //    return await sender.Send(command);
-    //}
+    /// <summary>
+    /// Endpoint para inclusão de Aluno e Curso
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="command">Objeto de inclusão da Aluno e seus Curso</param>
+    /// <returns>Retorna Id da Aluno</returns>
+    public async Task<int> CreateAlunoCursos(ISender sender, CreateAlunoCursoCommand command)
+    {
+        return await sender.Send(command);
+    }
 
     ///// <summary>
     ///// Endpoint para inclusão de Aluno e Certificado

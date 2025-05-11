@@ -474,6 +474,39 @@
         }
       }
     },
+    "/api/Alunos/Cursos": {
+      "post": {
+        "tags": [
+          "Alunos"
+        ],
+        "operationId": "CreateAlunoCursos",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAlunoCursoCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Alunos/Profissional/{id}": {
       "get": {
         "tags": [
@@ -12981,6 +13014,19 @@
           }
         }
       },
+      "CreateAlunoCursoCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "alunoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cursosId": {
+            "type": "string"
+          }
+        }
+      },
       "AlunoAulaDto": {
         "type": "object",
         "additionalProperties": false,
@@ -14464,7 +14510,8 @@
           },
           "certificadoId": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "aluno": {
             "nullable": true,
