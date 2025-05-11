@@ -8,6 +8,12 @@ internal class UpdateCursoCommandValidator : AbstractValidator<UpdateCursoComman
             .NotEmpty();
         RuleFor(v => v.Descricao)
             .MaximumLength(500)
-            .NotEmpty(); ;
+            .NotEmpty();
+        RuleFor(v => v.Imagem)
+            .MaximumLength(200)
+            .NotEmpty();
+        RuleFor(v => v.NomeImagem)
+            .MaximumLength(100)
+            .NotEmpty();
     }
 }
