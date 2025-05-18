@@ -3,6 +3,6 @@
 //{
 //    public CreateAlunoCursoCommandValidator()
 //    {
-        
+
 //    }
 //}

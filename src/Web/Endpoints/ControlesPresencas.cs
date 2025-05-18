@@ -1,14 +1,14 @@
-﻿using DnaBrasilApi.Application.ControlesPresencas.Queries.GetControlesPresencasAll;
+﻿using DnaBrasilApi.Application.Common.Models;
 using DnaBrasilApi.Application.ControlesPresencas.Commands.CreateControlePresenca;
 using DnaBrasilApi.Application.ControlesPresencas.Commands.DeleteControlePresenca;
 using DnaBrasilApi.Application.ControlesPresencas.Commands.UpdateControlePresenca;
 using DnaBrasilApi.Application.ControlesPresencas.Queries;
 using DnaBrasilApi.Application.ControlesPresencas.Queries.GetControlePresencaById;
+using DnaBrasilApi.Application.ControlesPresencas.Queries.GetControlesPresencasAll;
 using DnaBrasilApi.Application.ControlesPresencas.Queries.GetControlesPresencasByAlunoId;
+using DnaBrasilApi.Application.ControlesPresencas.Queries.GetControlesPresencasByEventoId;
 using DnaBrasilApi.Application.ControlesPresencas.Queries.GetControlesPresencasByFilter;
 using Microsoft.AspNetCore.Mvc;
-using DnaBrasilApi.Application.ControlesPresencas.Queries.GetControlesPresencasByEventoId;
-using DnaBrasilApi.Application.Common.Models;
 
 namespace DnaBrasilApi.Web.Endpoints;
 

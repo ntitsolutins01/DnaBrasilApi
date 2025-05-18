@@ -1,8 +1,8 @@
-﻿using DnaBrasilApi.Application.Encaminhamentos.Queries.GetEncaminhamentoById;
-using DnaBrasilApi.Application.Encaminhamentos.Commands.CreateEncaminhamento;
+﻿using DnaBrasilApi.Application.Encaminhamentos.Commands.CreateEncaminhamento;
 using DnaBrasilApi.Application.Encaminhamentos.Commands.DeleteEncaminhamento;
 using DnaBrasilApi.Application.Encaminhamentos.Commands.UpdateEncaminhamento;
 using DnaBrasilApi.Application.Encaminhamentos.Queries;
+using DnaBrasilApi.Application.Encaminhamentos.Queries.GetEncaminhamentoById;
 using DnaBrasilApi.Application.Encaminhamentos.Queries.GetEncaminhamentosAll;
 using DnaBrasilApi.Application.Encaminhamentos.Queries.GetEncaminhamentosByTipoLaudoId;
 
@@ -25,7 +25,7 @@ public class Encaminhamentos : EndpointGroupBase
             .MapPut(UpdateEncaminhamento, "{id}")
             .MapDelete(DeleteEncaminhamento, "{id}")
             .MapGet(GetEncaminhamentoById, "{id}")
-            .MapGet(GetEncaminhamentosByTipoLaudoId,"TipoLaudo/{id}");
+            .MapGet(GetEncaminhamentosByTipoLaudoId, "TipoLaudo/{id}");
     }
     #endregion
 

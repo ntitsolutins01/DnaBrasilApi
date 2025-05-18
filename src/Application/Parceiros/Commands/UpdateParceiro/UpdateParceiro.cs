@@ -1,5 +1,4 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
-using DnaBrasilApi.Application.Parceiros.Commands.UpdateParceiro;
 using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Parceiros.Commands.UpdateParceiro;
@@ -25,7 +24,7 @@ public record UpdateParceiroCommand : IRequest<bool>
     public string? NomeContato { get; init; }
 }
 
-public class UpdateParceiroCommandHandler : IRequestHandler<UpdateParceiroCommand,bool>
+public class UpdateParceiroCommandHandler : IRequestHandler<UpdateParceiroCommand, bool>
 {
     private readonly IApplicationDbContext _context;
 

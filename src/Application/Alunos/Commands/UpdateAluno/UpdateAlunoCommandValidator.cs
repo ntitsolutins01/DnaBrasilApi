@@ -1,6 +1,4 @@
-﻿using System.Text.RegularExpressions;
-using DnaBrasilApi.Application.Common.Interfaces;
-using DnaBrasilApi.Application.Alunos.Commands.UpdateAluno;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 
 namespace DnaBrasilApi.Application.Alunos.Commands.UpdateAluno;
 

@@ -1,5 +1,3 @@
-using System.ComponentModel.DataAnnotations.Schema;
-
 namespace DnaBrasilApi.Domain.Entities;
 public class TextoQuestao : BaseAuditableEntity
 {

@@ -3,7 +3,7 @@ using DnaBrasilApi.Application.Common.Interfaces;
 
 namespace DnaBrasilApi.Application.ControlesAcessosAulas.Commands.UpdateControleAcessoAula;
 
-public record UpdateControleAcessoAulaCommand : IRequest <bool>
+public record UpdateControleAcessoAulaCommand : IRequest<bool>
 {
     public required int Id { get; init; }
     public required int AulaId { get; init; }
@@ -26,13 +26,13 @@ public class UpdateControleAcessoAulaCommandHandler : IRequestHandler<UpdateCont
         _context = context;
     }
 
-    public async Task <bool> Handle(UpdateControleAcessoAulaCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(UpdateControleAcessoAulaCommand request, CancellationToken cancellationToken)
     {
         var aula = await _context.Aulas
             .FindAsync([request.AulaId], cancellationToken);
 
         Guard.Against.NotFound(request.AulaId, aula);
-        
+
         var entity = await _context.ControlesAcessosAulas
             .FindAsync([request.Id], cancellationToken);
 

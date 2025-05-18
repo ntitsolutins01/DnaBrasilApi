@@ -1,8 +1,8 @@
-﻿using DnaBrasilApi.Application.Notas.Queries.GetNotaById;
-using DnaBrasilApi.Application.Notas.Commands.CreateNota;
+﻿using DnaBrasilApi.Application.Notas.Commands.CreateNota;
 using DnaBrasilApi.Application.Notas.Commands.DeleteNota;
 using DnaBrasilApi.Application.Notas.Commands.UpdateNota;
 using DnaBrasilApi.Application.Notas.Queries;
+using DnaBrasilApi.Application.Notas.Queries.GetNotaById;
 using DnaBrasilApi.Application.Notas.Queries.GetNotasAll;
 
 namespace DnaBrasilApi.Web.Endpoints;

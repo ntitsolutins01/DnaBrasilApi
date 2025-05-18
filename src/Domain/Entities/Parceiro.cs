@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DnaBrasilApi.Domain.Entities;
+﻿namespace DnaBrasilApi.Domain.Entities;
 public class Parceiro : BaseAuditableEntity
 {
     public string? AspNetUserId { get; set; }
@@ -21,7 +15,7 @@ public class Parceiro : BaseAuditableEntity
     public string? Bairro { get; set; }
     public bool Status { get; set; }
     public bool? Habilitado { get; set; }
-    public List<Aluno>? Alunos { get; set;  } 
+    public List<Aluno>? Alunos { get; set; }
     public required TipoParceria? TipoParceria { get; set; }
     public required string RazaoSocial { get; set; }
     public string? NomeContato { get; set; }

@@ -1,8 +1,8 @@
-﻿using DnaBrasilApi.Application.Series.Queries.GetSerieById;
-using DnaBrasilApi.Application.Series.Commands.CreateSerie;
+﻿using DnaBrasilApi.Application.Series.Commands.CreateSerie;
 using DnaBrasilApi.Application.Series.Commands.DeleteSerie;
 using DnaBrasilApi.Application.Series.Commands.UpdateSerie;
 using DnaBrasilApi.Application.Series.Queries;
+using DnaBrasilApi.Application.Series.Queries.GetSerieById;
 using DnaBrasilApi.Application.Series.Queries.GetSeriesAll;
 using DnaBrasilApi.Application.Series.Queries.GetSeriesByLocalidadeIdEtapaId;
 using DnaBrasilApi.Application.Series.Queries.GetTurmasByLocalidadeIdEtapaIdSerie;

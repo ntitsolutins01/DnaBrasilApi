@@ -16,17 +16,16 @@ using DnaBrasilApi.Application.Alunos.Queries.GetAlunoAulasByAlunoId;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunoByEmail;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunoById;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunoCursosByAlunoId;
-using DnaBrasilApi.Application.Alunos.Queries.GetAlunosCursosByCursoId;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunosAll;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunosByFilter;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunosByLocalidade;
+using DnaBrasilApi.Application.Alunos.Queries.GetAlunosCursosByCursoId;
 using DnaBrasilApi.Application.Alunos.Queries.GetNomeAlunosAll;
 using DnaBrasilApi.Application.Alunos.Queries.GetNomeAlunosByLocalidadeId;
 using DnaBrasilApi.Application.Alunos.Queries.GetNomeAlunosByProfissionalId;
 using DnaBrasilApi.Application.Alunos.Queries.GetPresencasByAlunoId;
 using DnaBrasilApi.Application.Alunos.Queries.GetPresencasByDataAtividadeId;
 using DnaBrasilApi.Application.Atividades.Queries;
-using DnaBrasilApi.Application.Aulas.Queries;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DnaBrasilApi.Web.Endpoints;

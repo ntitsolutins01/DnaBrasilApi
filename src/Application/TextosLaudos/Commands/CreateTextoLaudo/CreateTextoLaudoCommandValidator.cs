@@ -1,6 +1,4 @@
-﻿using DnaBrasilApi.Application.TextosLaudos.Commands.CreateTextoLaudo;
-
-namespace DnaBrasilApi.Application.TextosLaudos.Commands.CreateTextoLaudo;
+﻿namespace DnaBrasilApi.Application.TextosLaudos.Commands.CreateTextoLaudo;
 
 public class CreateTextoLaudoCommandValidator : AbstractValidator<CreateTextoLaudoCommand>
 {

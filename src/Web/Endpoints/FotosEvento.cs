@@ -1,5 +1,4 @@
-﻿using DnaBrasilApi.Application.Eventos.Commands.DeleteEvento;
-using DnaBrasilApi.Application.FotosEvento.Commands.CreateFotoEvento;
+﻿using DnaBrasilApi.Application.FotosEvento.Commands.CreateFotoEvento;
 using DnaBrasilApi.Application.FotosEvento.Commands.DeleteFotoEvento;
 using DnaBrasilApi.Application.FotosEvento.Queries;
 using DnaBrasilApi.Application.FotosEvento.Queries.GetFotoEventoById;
@@ -42,7 +41,9 @@ public class FotosEvento : EndpointGroupBase
         {
             var command = new CreateFotoEventoCommand()
             {
-                EventoId = item.EventoId, NomeArquivo = item.NomeArquivo, Url = item.Url
+                EventoId = item.EventoId,
+                NomeArquivo = item.NomeArquivo,
+                Url = item.Url
             };
 
             var idFoto = await sender.Send(command);

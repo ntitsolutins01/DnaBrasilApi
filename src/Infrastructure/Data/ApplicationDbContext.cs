@@ -1,11 +1,9 @@
 using System.Reflection;
-using System.Reflection.Emit;
 using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
 using DnaBrasilApi.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 
 namespace DnaBrasilApi.Infrastructure.Data;
 
@@ -56,7 +54,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<ControleAcessoAula> ControlesAcessosAulas => Set<ControleAcessoAula>();
     public DbSet<Evento> Eventos => Set<Evento>();
     public DbSet<FotoEvento> FotosEvento => Set<FotoEvento>();
-    public DbSet<Encaminhamento> Encaminhamentos=> Set<Encaminhamento>();
+    public DbSet<Encaminhamento> Encaminhamentos => Set<Encaminhamento>();
     public DbSet<ControleMaterial> ControlesMateriais => Set<ControleMaterial>();
     public DbSet<QuestaoEad> QuestoesEad => Set<QuestaoEad>();
     public DbSet<RespostaEad> RespostasEad => Set<RespostaEad>();

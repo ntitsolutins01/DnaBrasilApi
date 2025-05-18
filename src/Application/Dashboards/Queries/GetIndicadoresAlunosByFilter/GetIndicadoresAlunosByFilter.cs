@@ -1,8 +1,5 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
-using DnaBrasilApi.Application.Dashboards.Queries;
-using DnaBrasilApi.Application.Fomentos.Queries;
 using DnaBrasilApi.Domain.Entities;
-using MediatR;
 
 namespace DnaBrasilApi.Application.Dashboards.Queries.GetIndicadoresAlunosByFilter;
 //[Authorize]
@@ -48,7 +45,7 @@ public class GetIndicadoresAlunosByFilterQueryHandler : IRequestHandler<GetIndic
 
             Alunos = Alunos.Where(u => u.Fomento.Id == id);
         }
-        
+
         if (!string.IsNullOrWhiteSpace(search.Estado))
         {
             Alunos = Alunos.Where(u => u.Municipio!.Estado!.Sigla!.Contains(search.Estado));

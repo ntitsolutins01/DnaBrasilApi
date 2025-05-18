@@ -1,5 +1,4 @@
 using DnaBrasilApi.Domain.Entities;
-using AutoMapper;
 
 namespace DnaBrasilApi.Application.Inventarios.Queries;
 

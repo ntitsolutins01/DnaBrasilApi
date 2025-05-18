@@ -2,7 +2,7 @@
 
 namespace DnaBrasilApi.Application.Materiais.Commands.UpdateMaterial;
 
-public record UpdateMaterialCommand : IRequest <bool>
+public record UpdateMaterialCommand : IRequest<bool>
 {
     public required int Id { get; init; }
     public required string UnidadeMedida { get; init; }
@@ -18,7 +18,7 @@ public class UpdateMaterialCommandHandler : IRequestHandler<UpdateMaterialComman
         _context = context;
     }
 
-    public async Task <bool> Handle(UpdateMaterialCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(UpdateMaterialCommand request, CancellationToken cancellationToken)
     {
         var entity = await _context.Materiais
             .FindAsync([request.Id], cancellationToken);

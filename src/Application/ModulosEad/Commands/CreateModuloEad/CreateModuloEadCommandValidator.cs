@@ -1,6 +1,4 @@
-﻿using DnaBrasilApi.Application.ModulosEad.Commands.CreateModuloEad;
-
-namespace DnaBrasilApi.Application.ModulosEad.Commands.CreateModuloEad;
+﻿namespace DnaBrasilApi.Application.ModulosEad.Commands.CreateModuloEad;
 internal class CreateModuloEadCommandValidator : AbstractValidator<CreateModuloEadCommand>
 {
     public CreateModuloEadCommandValidator()

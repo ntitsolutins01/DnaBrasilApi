@@ -1,7 +1,6 @@
 ﻿using System.Globalization;
 using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
-using DnaBrasilApi.Domain.GuardClauses;
 
 namespace DnaBrasilApi.Application.Fomentos.Commands.CreateFomento;
 public record CreateFomentoCommand : IRequest<int>

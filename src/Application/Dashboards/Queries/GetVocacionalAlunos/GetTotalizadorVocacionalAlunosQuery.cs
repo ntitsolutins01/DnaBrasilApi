@@ -1,7 +1,5 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
-using DnaBrasilApi.Application.Common.Models;
 using DnaBrasilApi.Domain.Entities;
-using Boolean = System.Boolean;
 
 namespace DnaBrasilApi.Application.Dashboards.Queries.GetVocacionalAlunos;
 //[Authorize]

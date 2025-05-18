@@ -4,7 +4,7 @@ using DnaBrasilApi.Domain.Enums;
 
 namespace DnaBrasilApi.Application.Laudos.Commands.UpdateVocacional;
 
-public record UpdateVocacionalCommand : IRequest <bool>
+public record UpdateVocacionalCommand : IRequest<bool>
 {
     public required int Id { get; init; }
     public required int ProfissionalId { get; init; }
@@ -22,7 +22,7 @@ public class UpdateVocacionalCommandHandler : IRequestHandler<UpdateVocacionalCo
         _context = context;
     }
 
-    public async Task <bool> Handle(UpdateVocacionalCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(UpdateVocacionalCommand request, CancellationToken cancellationToken)
     {
         var entity = await _context.Vocacionais
             .FindAsync(new object[] { request.Id }, cancellationToken);

@@ -8,7 +8,6 @@ using DnaBrasilApi.Application.Fomentos.Queries.GetFomentoById;
 using DnaBrasilApi.Application.Fomentos.Queries.GetFomentoByLocalidadeId;
 using DnaBrasilApi.Application.Fomentos.Queries.GetFomentoLocalidadesByLocalidadeId;
 using DnaBrasilApi.Application.Fomentos.Queries.GetFomentosAll;
-using DnaBrasilApi.Application.Profissionais.Commands.DeleteProfissionalModalidade;
 
 namespace DnaBrasilApi.Web.Endpoints;
 

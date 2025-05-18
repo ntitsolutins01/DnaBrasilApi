@@ -22,7 +22,7 @@ public class CreateLocalidadeCommandHandler : IRequestHandler<CreateLocalidadeCo
 
     public async Task<int> Handle(CreateLocalidadeCommand request, CancellationToken cancellationToken)
     {
-        var municipio = _context.Municipios.Where(x=>x.Id == request.MunicipioId).FirstOrDefault();
+        var municipio = _context.Municipios.Where(x => x.Id == request.MunicipioId).FirstOrDefault();
         var entity = new Localidade
         {
             Nome = request.Nome,

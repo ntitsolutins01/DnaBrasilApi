@@ -1,8 +1,8 @@
-﻿using DnaBrasilApi.Application.Escolaridades.Queries.GetEscolaridadeById;
-using DnaBrasilApi.Application.Escolaridades.Queries;
-using DnaBrasilApi.Application.Escolaridades.Commands.CreateEscolaridade;
+﻿using DnaBrasilApi.Application.Escolaridades.Commands.CreateEscolaridade;
 using DnaBrasilApi.Application.Escolaridades.Commands.DeleteEscolaridade;
 using DnaBrasilApi.Application.Escolaridades.Commands.UpdateEscolaridade;
+using DnaBrasilApi.Application.Escolaridades.Queries;
+using DnaBrasilApi.Application.Escolaridades.Queries.GetEscolaridadeById;
 using DnaBrasilApi.Application.Escolaridades.Queries.GetEscolaridadesAll;
 
 namespace DnaBrasilApi.Web.Endpoints;

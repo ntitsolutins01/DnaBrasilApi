@@ -1,8 +1,5 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
-using DnaBrasilApi.Application.Common.Mappings;
-using DnaBrasilApi.Application.Common.Models;
 using DnaBrasilApi.Domain.Entities;
-using DnaBrasilApi.Domain.Enums;
 
 namespace DnaBrasilApi.Application.Laudos.Queries.GetLaudosResumidosByFilter;
 
@@ -37,7 +34,7 @@ public class GetLaudosResumidosByFilterQueryHandler : IRequestHandler<GetLaudosR
             .Where(x => x.Modalidade != null && x.StatusLaudo == "F" &&
                         x.Aluno.Localidade!.Id == Convert.ToInt32(request.SearchFilter.LocalidadeId))
             .AsNoTracking();
-        
+
         var result = await FilterLaudos(laudos, request.SearchFilter!, cancellationToken)
                 .ProjectTo<LaudoResumidoDto>(_mapper.ConfigurationProvider)
                 .OrderBy(o => o.TalentoEsportivo!.EncaminhamentoTexo)

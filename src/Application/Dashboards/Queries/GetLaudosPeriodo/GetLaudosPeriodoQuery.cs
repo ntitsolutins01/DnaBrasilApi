@@ -20,7 +20,7 @@ public class GetLaudosPeriodoQueryHandler : IRequestHandler<GetLaudosPeriodoQuer
         _mapper = mapper;
     }
 
-    public  Task<List<int>> Handle(GetLaudosPeriodoQuery request, CancellationToken cancellationToken)
+    public Task<List<int>> Handle(GetLaudosPeriodoQuery request, CancellationToken cancellationToken)
     {
         IQueryable<Laudo> laudos;
 
@@ -77,7 +77,7 @@ public class GetLaudosPeriodoQueryHandler : IRequestHandler<GetLaudosPeriodoQuer
         DateTime dataUltimos6Meses = DateTime.Now.Date.AddDays(-180);
         DateTime dataEm1Ano = DateTime.Now.Date.AddDays(-365);
 
-        var totUltimos3Meses= laudos.Count(x => x.Created > dataUltimos3Meses && x.Created < DateTimeOffset.Now);
+        var totUltimos3Meses = laudos.Count(x => x.Created > dataUltimos3Meses && x.Created < DateTimeOffset.Now);
         var totUltimos6Meses = laudos.Count(x => x.Created > dataUltimos6Meses && x.Created < DateTimeOffset.Now);
         var totdataEm1Ano = laudos.Count(x => x.Created > dataEm1Ano && x.Created < DateTimeOffset.Now);
 

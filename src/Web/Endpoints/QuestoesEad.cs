@@ -1,9 +1,9 @@
-﻿using DnaBrasilApi.Application.QuestoesEad.Queries.GetQuestaoEadById;
-using DnaBrasilApi.Application.QuestoesEad.Queries.GetQuestoesEadAll;
-using DnaBrasilApi.Application.QuestoesEad.Commands.CreateQuestaoEad;
+﻿using DnaBrasilApi.Application.QuestoesEad.Commands.CreateQuestaoEad;
 using DnaBrasilApi.Application.QuestoesEad.Commands.DeleteQuestaoEad;
 using DnaBrasilApi.Application.QuestoesEad.Commands.UpdateQuestaoEad;
 using DnaBrasilApi.Application.QuestoesEad.Queries;
+using DnaBrasilApi.Application.QuestoesEad.Queries.GetQuestaoEadById;
+using DnaBrasilApi.Application.QuestoesEad.Queries.GetQuestoesEadAll;
 
 namespace DnaBrasilApi.Web.Endpoints;
 

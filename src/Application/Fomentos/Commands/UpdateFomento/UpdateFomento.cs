@@ -4,7 +4,7 @@ using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Fomentos.Commands.UpdateFomento;
 
-public record UpdateFomentoCommand : IRequest <bool>
+public record UpdateFomentoCommand : IRequest<bool>
 {
     public required int Id { get; init; }
     public required int MunicipioId { get; init; }
@@ -27,7 +27,7 @@ public class UpdateFomentoCommandHandler : IRequestHandler<UpdateFomentoCommand,
         _context = context;
     }
 
-    public async Task <bool> Handle(UpdateFomentoCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(UpdateFomentoCommand request, CancellationToken cancellationToken)
     {
         var entity = await _context.Fomentos
             .FindAsync([request.Id], cancellationToken);

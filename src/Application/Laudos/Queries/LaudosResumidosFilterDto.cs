@@ -1,6 +1,4 @@
-﻿using DnaBrasilApi.Application.Common.Models;
-
-namespace DnaBrasilApi.Application.Laudos.Queries;
+﻿namespace DnaBrasilApi.Application.Laudos.Queries;
 public class LaudosResumidosFilterDto
 {
 

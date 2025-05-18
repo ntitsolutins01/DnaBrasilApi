@@ -2,7 +2,7 @@
 
 namespace DnaBrasilApi.Application.Inventarios.Commands.UpdateInventario;
 
-public record UpdateInventarioCommand : IRequest <bool>
+public record UpdateInventarioCommand : IRequest<bool>
 {
     public required int Id { get; init; }
     public int? Quantidade { get; init; }
@@ -18,7 +18,7 @@ public class UpdateInventarioCommandHandler : IRequestHandler<UpdateInventarioCo
         _context = context;
     }
 
-    public async Task <bool> Handle(UpdateInventarioCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(UpdateInventarioCommand request, CancellationToken cancellationToken)
     {
         var entity = await _context.Inventarios
             .FindAsync([request.Id], cancellationToken);

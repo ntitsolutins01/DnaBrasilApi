@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DnaBrasilApi.Application.TodoItems.Commands.CreateTodoItem;
-
-namespace DnaBrasilApi.Application.TipoLaudos.Commands.CreateTipoLaudos;
+﻿namespace DnaBrasilApi.Application.TipoLaudos.Commands.CreateTipoLaudos;
 internal class CreateTipoLaudosCommandValidator : AbstractValidator<CreateTipoLaudosCommand>
 {
     public CreateTipoLaudosCommandValidator()

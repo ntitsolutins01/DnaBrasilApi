@@ -3,6 +3,6 @@ internal class UpdateControleMaterialEstoqueSaidaCommandValidator : AbstractVali
 {
     public UpdateControleMaterialEstoqueSaidaCommandValidator()
     {
-        
+
     }
 }

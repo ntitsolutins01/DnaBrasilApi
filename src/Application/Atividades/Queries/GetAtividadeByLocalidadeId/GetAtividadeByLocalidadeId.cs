@@ -21,11 +21,11 @@ public class GetAtividadeByLocalidadeIdQueryHandler : IRequestHandler<GetAtivida
     public async Task<List<AtividadeDto>> Handle(GetAtividadeByLocalidadeIdQuery request, CancellationToken cancellationToken)
     {
         var result = await _context.Atividades
-            .Where(x => x.Localidade.Id == request.LocalidadeId )
+            .Where(x => x.Localidade.Id == request.LocalidadeId)
             .AsNoTracking()
             .ProjectTo<AtividadeDto>(_mapper.ConfigurationProvider)
             .ToListAsync(cancellationToken);
-        
+
         return result;
     }
 }

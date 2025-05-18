@@ -1,6 +1,4 @@
-﻿using DnaBrasilApi.Application.Alunos.Queries;
-using DnaBrasilApi.Application.Common.Interfaces;
-using DnaBrasilApi.Application.Fomentos.Queries;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Dashboards.Queries.GetAlunosBySexo;

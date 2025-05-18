@@ -1,5 +1,4 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
-using DnaBrasilApi.Application.Dashboards.Queries;
 using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Materiais.Queries.GetMateriaisByFilter;
@@ -23,7 +22,7 @@ public class GetMateriaisByFilterQueryHandler : IRequestHandler<GetMateriaisByFi
     public async Task<List<MaterialIndexDto>> Handle(GetMateriaisByFilterQuery request, CancellationToken cancellationToken)
     {
         var Materiais = _context.Materiais
-            .Include(r=>r.TipoMaterial)
+            .Include(r => r.TipoMaterial)
             .AsNoTracking();
 
         var result = FilterMateriais(Materiais, request.SearchFilter!, cancellationToken)

@@ -21,7 +21,7 @@ public class GetFomentoByLocalidadeIdQueryHandler : IRequestHandler<GetFomentoBy
     public async Task<FomentoDto> Handle(GetFomentoByLocalidadeIdQuery request, CancellationToken cancellationToken)
     {
         var result = await _context.Fomentos
-            .Include(i=>i.FomentoLocalidades)
+            .Include(i => i.FomentoLocalidades)
             .Where(x => x.Localidade.Id == request.Id)
             .AsNoTracking()
             .ProjectTo<FomentoDto>(_mapper.ConfigurationProvider)

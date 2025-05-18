@@ -1,8 +1,8 @@
-﻿using DnaBrasilApi.Application.Cursos.Queries.GetCursoById;
-using DnaBrasilApi.Application.Cursos.Queries;
-using DnaBrasilApi.Application.Cursos.Commands.CreateCurso;
+﻿using DnaBrasilApi.Application.Cursos.Commands.CreateCurso;
 using DnaBrasilApi.Application.Cursos.Commands.DeleteCurso;
 using DnaBrasilApi.Application.Cursos.Commands.UpdateCurso;
+using DnaBrasilApi.Application.Cursos.Queries;
+using DnaBrasilApi.Application.Cursos.Queries.GetCursoById;
 using DnaBrasilApi.Application.Cursos.Queries.GetCursosAll;
 using DnaBrasilApi.Application.Cursos.Queries.GetCursosAllByTipoCursoId;
 using DnaBrasilApi.Application.Cursos.Queries.GetCursosByAlunoId;

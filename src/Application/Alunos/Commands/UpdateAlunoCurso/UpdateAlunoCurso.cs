@@ -1,7 +1,4 @@
-﻿using System.Globalization;
-using DnaBrasilApi.Application.Common.Interfaces;
-using DnaBrasilApi.Domain.Entities;
-using Microsoft.EntityFrameworkCore.Design.Internal;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 
 namespace DnaBrasilApi.Application.Alunos.Commands.UpdateAlunoCurso;
 

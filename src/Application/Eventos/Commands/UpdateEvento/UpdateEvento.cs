@@ -1,16 +1,15 @@
 ﻿using System.Globalization;
 using DnaBrasilApi.Application.Common.Interfaces;
-using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Eventos.Commands.UpdateEvento;
 
-public record UpdateEventoCommand : IRequest <bool>
+public record UpdateEventoCommand : IRequest<bool>
 {
-   public required int Id { get; init; }
-   public required string Titulo { get; init; }
-   public string? Descricao { get; init; }
-   public required string DataEvento { get; init; }
-   public bool Status { get; init; }
+    public required int Id { get; init; }
+    public required string Titulo { get; init; }
+    public string? Descricao { get; init; }
+    public required string DataEvento { get; init; }
+    public bool Status { get; init; }
 }
 
 public class UpdateEventoCommandHandler : IRequestHandler<UpdateEventoCommand, bool>
@@ -22,7 +21,7 @@ public class UpdateEventoCommandHandler : IRequestHandler<UpdateEventoCommand, b
         _context = context;
     }
 
-    public async Task <bool> Handle(UpdateEventoCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(UpdateEventoCommand request, CancellationToken cancellationToken)
     {
 
         var entity = await _context.Eventos

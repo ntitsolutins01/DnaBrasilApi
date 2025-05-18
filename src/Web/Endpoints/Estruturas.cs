@@ -1,8 +1,8 @@
-﻿using DnaBrasilApi.Application.Estruturas.Queries.GetEstruturaById;
-using DnaBrasilApi.Application.Estruturas.Commands.CreateEstrutura;
+﻿using DnaBrasilApi.Application.Estruturas.Commands.CreateEstrutura;
 using DnaBrasilApi.Application.Estruturas.Commands.DeleteEstrutura;
 using DnaBrasilApi.Application.Estruturas.Commands.UpdateEstrutura;
 using DnaBrasilApi.Application.Estruturas.Queries;
+using DnaBrasilApi.Application.Estruturas.Queries.GetEstruturaById;
 using DnaBrasilApi.Application.Estruturas.Queries.GetEstruturasAll;
 using DnaBrasilApi.Application.Estruturas.Queries.GetEstruturasByLocalidade;
 

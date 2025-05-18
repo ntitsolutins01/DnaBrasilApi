@@ -1,8 +1,8 @@
-﻿using DnaBrasilApi.Application.TipoCursos.Queries.GetTipoCursoById;
-using DnaBrasilApi.Application.TipoCursos.Queries;
-using DnaBrasilApi.Application.TipoCursos.Commands.CreateTipoCurso;
+﻿using DnaBrasilApi.Application.TipoCursos.Commands.CreateTipoCurso;
 using DnaBrasilApi.Application.TipoCursos.Commands.DeleteTipoCurso;
 using DnaBrasilApi.Application.TipoCursos.Commands.UpdateTipoCurso;
+using DnaBrasilApi.Application.TipoCursos.Queries;
+using DnaBrasilApi.Application.TipoCursos.Queries.GetTipoCursoById;
 using DnaBrasilApi.Application.TipoCursos.Queries.GetTipoCursosAll;
 
 namespace DnaBrasilApi.Web.Endpoints;

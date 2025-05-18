@@ -1,11 +1,10 @@
-﻿using DnaBrasilApi.Application.ModulosEad.Queries.GetModuloEadById;
-using DnaBrasilApi.Application.ModulosEad.Commands.CreateModuloEad;
+﻿using DnaBrasilApi.Application.ModulosEad.Commands.CreateModuloEad;
 using DnaBrasilApi.Application.ModulosEad.Commands.DeleteModuloEad;
 using DnaBrasilApi.Application.ModulosEad.Commands.UpdateModuloEad;
 using DnaBrasilApi.Application.ModulosEad.Queries;
+using DnaBrasilApi.Application.ModulosEad.Queries.GetModuloEadById;
 using DnaBrasilApi.Application.ModulosEad.Queries.GetModulosEadAll;
 using DnaBrasilApi.Application.ModulosEad.Queries.GetModulosEadAllByCursoId;
-using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -26,7 +25,7 @@ public class ModulosEad : EndpointGroupBase
             .MapPut(UpdateModuloEad, "{id}")
             .MapDelete(DeleteModuloEad, "{id}")
             .MapGet(GetModuloEadById, "{id}")
-            .MapGet(GetModulosEadAllByCursoId, pattern:"Curso/{cursoId}");
+            .MapGet(GetModulosEadAllByCursoId, pattern: "Curso/{cursoId}");
     }
     #endregion
 
@@ -93,7 +92,7 @@ public class ModulosEad : EndpointGroupBase
         return await sender.Send(new GetModuloEadByIdQuery() { Id = id });
     }
 
-    
+
     public async Task<List<ModuloEadDto>> GetModulosEadAllByCursoId(ISender sender, int cursoId)
     {
         return await sender.Send(new GetModulosEadAllByCursoIdQuery() { CursoId = cursoId });

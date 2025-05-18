@@ -1,6 +1,4 @@
-﻿using DnaBrasilApi.Application.Aulas.Commands.CreateAula;
-
-namespace DnaBrasilApi.Application.Aulas.Commands.CreateAula;
+﻿namespace DnaBrasilApi.Application.Aulas.Commands.CreateAula;
 internal class CreateAulaCommandValidator : AbstractValidator<CreateAulaCommand>
 {
     public CreateAulaCommandValidator()

@@ -22,12 +22,12 @@ public class GetModalidadesByProfissionalIdQueryHandler : IRequestHandler<GetMod
     {
         var result = await _context.ProfissionalModalidades
             .Where(x => x.ProfissionalId == request.ProfissionalId)
-            .Include(i=>i.Modalidade)
-            .Select(s=>s.Modalidade)
+            .Include(i => i.Modalidade)
+            .Select(s => s.Modalidade)
             //.AsNoTracking()
             .ProjectTo<ModalidadeDto>(_mapper.ConfigurationProvider)
             .ToListAsync(cancellationToken);
-        
+
         return result! == null ? throw new ArgumentNullException(nameof(result)) : result;
     }
 }

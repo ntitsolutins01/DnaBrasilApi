@@ -1,8 +1,8 @@
-﻿using DnaBrasilApi.Application.Provas.Queries.GetProvaById;
-using DnaBrasilApi.Application.Provas.Commands.CreateProva;
+﻿using DnaBrasilApi.Application.Provas.Commands.CreateProva;
 using DnaBrasilApi.Application.Provas.Commands.DeleteProva;
 using DnaBrasilApi.Application.Provas.Commands.UpdateProva;
 using DnaBrasilApi.Application.Provas.Queries;
+using DnaBrasilApi.Application.Provas.Queries.GetProvaById;
 using DnaBrasilApi.Application.Provas.Queries.GetProvasAll;
 
 namespace DnaBrasilApi.Web.Endpoints;

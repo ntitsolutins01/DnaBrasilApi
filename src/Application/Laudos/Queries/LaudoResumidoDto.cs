@@ -1,5 +1,4 @@
 using DnaBrasilApi.Application.Encaminhamentos.Queries;
-using DnaBrasilApi.Application.Laudos.Queries.GetDesempenhoByAluno;
 using DnaBrasilApi.Application.TalentosEsportivos.Queries;
 using DnaBrasilApi.Domain.Entities;
 

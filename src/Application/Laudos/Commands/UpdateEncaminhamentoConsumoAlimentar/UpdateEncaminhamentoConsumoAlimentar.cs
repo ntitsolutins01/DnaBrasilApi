@@ -4,7 +4,7 @@ using DnaBrasilApi.Domain.Enums;
 
 namespace DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoConsumoAlimentar;
 
-public record UpdateEncaminhamentoConsumoAlimentarCommand : IRequest <bool>
+public record UpdateEncaminhamentoConsumoAlimentarCommand : IRequest<bool>
 {
     public int? AlunoId { get; init; }
 
@@ -23,7 +23,7 @@ public class UpdateEncaminhamentoConsumoAlimentarCommandHandler : IRequestHandle
     {
         var listConsumoAlimentar = _context.ConsumoAlimentares
             .Include(i => i.Encaminhamento)
-            .Where(x=>x.Encaminhamento == null)
+            .Where(x => x.Encaminhamento == null)
             .AsNoTracking()
             .OrderByDescending(t => t.Id);
 

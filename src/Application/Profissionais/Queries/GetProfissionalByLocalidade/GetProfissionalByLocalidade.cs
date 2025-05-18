@@ -27,7 +27,7 @@ public class GetProfissionalByLocalidadeQueryHandler : IRequestHandler<GetProfis
             .ProjectTo<ProfissionalDto>(_mapper.ConfigurationProvider)
             .OrderBy(t => t.Id)
             .ToListAsync(cancellationToken);
-        
+
         return result;
     }
 }

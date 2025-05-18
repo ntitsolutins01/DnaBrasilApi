@@ -87,7 +87,7 @@ public class ConfiguracaoSistema : EndpointGroupBase
     public async Task<int> CreateModulo(ISender sender, CreateModuloCommand command)
     {
         return await sender.Send(command);
-    
+
     }
 
     /// <summary>
@@ -161,6 +161,6 @@ public class ConfiguracaoSistema : EndpointGroupBase
         return await sender.Send(new GetModuloByIdQuery() { Id = id });
     }
 
-    
+
     #endregion
 }

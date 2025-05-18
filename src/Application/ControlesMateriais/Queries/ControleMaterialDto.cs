@@ -12,7 +12,7 @@ public class ControleMaterialDto
     public int? Saida { get; init; }
     public int? Disponivel { get; init; }
     public bool Status { get; init; }
-   
+
 
     private class Mapping : Profile
     {

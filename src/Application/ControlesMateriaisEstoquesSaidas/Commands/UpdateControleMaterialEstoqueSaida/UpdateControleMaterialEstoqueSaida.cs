@@ -2,7 +2,7 @@
 
 namespace DnaBrasilApi.Application.ControlesMateriaisEstoquesSaidas.Commands.UpdateControleMaterialEstoqueSaida;
 
-public record UpdateControleMaterialEstoqueSaidaCommand : IRequest <bool>
+public record UpdateControleMaterialEstoqueSaidaCommand : IRequest<bool>
 {
     public required int Id { get; set; }
     public required int ProfissionalId { get; set; }
@@ -17,7 +17,7 @@ public class UpdateControleMaterialEstoqueSaidaCommandHandler : IRequestHandler<
         _context = context;
     }
 
-    public async Task <bool> Handle(UpdateControleMaterialEstoqueSaidaCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(UpdateControleMaterialEstoqueSaidaCommand request, CancellationToken cancellationToken)
     {
         var entity = await _context.ControlesMateriaisEstoquesSaidas
             .FindAsync([request.Id], cancellationToken);

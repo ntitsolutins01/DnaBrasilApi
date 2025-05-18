@@ -1,11 +1,8 @@
-﻿using DnaBrasilApi.Application.Alunos.Queries;
-using DnaBrasilApi.Application.Eventos.Queries;
-using DnaBrasilApi.Application.Profissionais.Queries;
-using DnaBrasilApi.Domain.Entities;
+﻿using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.ControlesPresencas.Queries;
 public class ControlesPresencasDto
-{   
+{
     public int Id { get; set; }
     public int? EventoId { get; set; }
     public required string Controle { get; set; }

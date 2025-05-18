@@ -1,5 +1,4 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
-using DnaBrasilApi.Application.Cursos.Queries;
 using DnaBrasilApi.Application.Encaminhamentos.Queries;
 using DnaBrasilApi.Domain.Entities;
 
@@ -42,7 +41,7 @@ public class GetEncaminhamentoBySaudeIdQueryHandler : IRequestHandler<GetEncamin
         );
 
         var encaminhamento = await _context.Encaminhamentos
-            .Where(x=>resultMetrrica != null && x.Parametro.Equals(resultMetrrica.Classificacao))
+            .Where(x => resultMetrrica != null && x.Parametro.Equals(resultMetrrica.Classificacao))
             .AsNoTracking()
             .ProjectTo<EncaminhamentoDto>(_mapper.ConfigurationProvider)
             .FirstOrDefaultAsync(cancellationToken);

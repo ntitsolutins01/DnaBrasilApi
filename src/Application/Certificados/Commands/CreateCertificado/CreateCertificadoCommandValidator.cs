@@ -1,6 +1,4 @@
-﻿using DnaBrasilApi.Application.Certificados.Commands.CreateCertificado;
-
-namespace DnaBrasilApi.Application.Certificados.Commands.CreateCertificado;
+﻿namespace DnaBrasilApi.Application.Certificados.Commands.CreateCertificado;
 internal class CreateCertificadoCommandValidator : AbstractValidator<CreateCertificadoCommand>
 {
     public CreateCertificadoCommandValidator()

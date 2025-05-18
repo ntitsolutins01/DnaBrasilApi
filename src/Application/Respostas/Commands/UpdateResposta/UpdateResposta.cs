@@ -28,7 +28,7 @@ public class UpdateRespostaCommandHandler : IRequestHandler<UpdateRespostaComman
 
         entity.RespostaQuestionario = request.RespostaQuestionario;
         entity.ValorPesoResposta = request.ValorPesoResposta;
-        
+
 
         var result = await _context.SaveChangesAsync(cancellationToken);
 

@@ -23,7 +23,7 @@ public class GetProfissionaisByFilterQueryHandler : IRequestHandler<GetProfissio
     {
         var profissionais = _context.Profissionais
             .AsNoTracking();
-            
+
         var result = FilterProfissionais(profissionais, request.Search!)
             .ProjectTo<ProfissionalDto>(_mapper.ConfigurationProvider)
             .OrderBy(t => t.Id)
