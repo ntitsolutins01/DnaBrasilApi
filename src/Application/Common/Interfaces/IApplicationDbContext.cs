@@ -75,5 +75,6 @@ public interface IApplicationDbContext
     DbSet<ArquivosInventario> ArquivosInventarios { get; }
     DbSet<AlunoPresenca> AlunosPresencas { get; }
     DbSet<AlunoAula> AlunosAulas { get; }
+    DbSet<Educacional> Educacionais { get; }
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

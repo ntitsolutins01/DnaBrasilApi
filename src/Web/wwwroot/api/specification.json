@@ -4285,6 +4285,113 @@
         }
       }
     },
+    "/api/Educacionais/{id}": {
+      "get": {
+        "tags": [
+          "Educacionais"
+        ],
+        "operationId": "GetEducacionalById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EducacionalDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Educacionais"
+        ],
+        "operationId": "UpdateEducacional",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEducacionalCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Educacionais": {
+      "post": {
+        "tags": [
+          "Educacionais"
+        ],
+        "operationId": "CreateEducacional",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateEducacionalCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Encaminhamentos": {
       "get": {
         "tags": [
@@ -17590,6 +17697,134 @@
           }
         }
       },
+      "EducacionalDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "profissional": {
+            "$ref": "#/components/schemas/ProfissionalDto"
+          },
+          "aluno": {
+            "$ref": "#/components/schemas/AlunoDto"
+          },
+          "serie": {
+            "$ref": "#/components/schemas/SerieDto"
+          },
+          "pdf": {
+            "type": "string"
+          },
+          "respostas": {
+            "type": "string"
+          },
+          "encaminhamento": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/EncaminhamentoDto"
+              }
+            ]
+          },
+          "statusEducacional": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "SerieDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "turma": {
+            "type": "string"
+          },
+          "nomeEtapaEnsino": {
+            "type": "string"
+          },
+          "localidadeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeLocalidade": {
+            "type": "string"
+          },
+          "municipioEstado": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "boolean"
+          }
+        }
+      },
+      "CreateEducacionalCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "profissionalId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "alunoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "serieId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pdf": {
+            "type": "string"
+          },
+          "respostas": {
+            "type": "string"
+          },
+          "statusEducacional": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdateEducacionalCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "profissionalId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "alunoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "serieId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pdf": {
+            "type": "string"
+          },
+          "respostas": {
+            "type": "string"
+          },
+          "statusEducacional": {
+            "type": "string"
+          }
+        }
+      },
       "CreateEncaminhamentoCommand": {
         "type": "object",
         "additionalProperties": false,
@@ -21397,39 +21632,6 @@
           "alunoId": {
             "type": "integer",
             "format": "int32"
-          }
-        }
-      },
-      "SerieDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nome": {
-            "type": "string"
-          },
-          "turma": {
-            "type": "string"
-          },
-          "nomeEtapaEnsino": {
-            "type": "string"
-          },
-          "localidadeId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nomeLocalidade": {
-            "type": "string"
-          },
-          "municipioEstado": {
-            "type": "string",
-            "nullable": true
-          },
-          "status": {
-            "type": "boolean"
           }
         }
       },

@@ -82,6 +82,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<ArquivosInventario> ArquivosInventarios => Set<ArquivosInventario>();
     public DbSet<AlunoPresenca> AlunosPresencas => Set<AlunoPresenca>();
     public DbSet<AlunoAula> AlunosAulas => Set<AlunoAula>();
+    public DbSet<Educacional> Educacionais => Set<Educacional>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
