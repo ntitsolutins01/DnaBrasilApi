@@ -13786,21 +13786,6 @@
             "type": "integer",
             "format": "int32"
           },
-          "imagemFrente": {
-            "type": "string"
-          },
-          "imagemVerso": {
-            "type": "string",
-            "nullable": true
-          },
-          "nomeImagemFrente": {
-            "type": "string",
-            "nullable": true
-          },
-          "nomeImagemVerso": {
-            "type": "string",
-            "nullable": true
-          },
           "htmlFrente": {
             "type": "string"
           },
