@@ -241,7 +241,7 @@ public class Alunos : EndpointGroupBase
     /// <param name="sender">sender</param>
     /// <param name="email">email</param>
     /// <returns>Retorna uma lista de Email</returns>
-    public async Task<AlunoDto> GetAlunoByEmail(ISender sender, string email)
+    public async Task<AlunoDto?> GetAlunoByEmail(ISender sender, string email)
     {
         return await sender.Send(new GetAlunoByEmailQuery() { Email = email });
     }
