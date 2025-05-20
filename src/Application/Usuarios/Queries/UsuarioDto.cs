@@ -18,6 +18,7 @@ public class UsuarioDto
     public string? Uf { get; init; }
     public string? LocalidadeId { get; init; }
     public string? Localidade { get; init; }
+    //public int? FomentoId { get; init; }
     private class Mapping : Profile
     {
         public Mapping()
@@ -27,7 +28,10 @@ public class UsuarioDto
                 .ForMember(dest => dest.LocalidadeId, opt => opt.MapFrom(src => src.Localidade!.Id.ToString()))
                 .ForMember(dest => dest.Localidade, opt => opt.MapFrom(src => src.Localidade!.Nome!.ToString()))
                 .ForMember(dest => dest.MunicipioId, opt => opt.MapFrom(src => src.Municipio!.Id.ToString()))
-                .ForMember(dest => dest.MunicipioEstado, opt => opt.MapFrom(src => src.Municipio!.Nome!.ToString() + " / " + src.Municipio!.Estado!.Sigla!.ToString()));
+                .ForMember(dest => dest.MunicipioEstado,
+                    opt => opt.MapFrom(src =>
+                        src.Municipio!.Nome!.ToString() + " / " + src.Municipio!.Estado!.Sigla!.ToString()));
+            //.ForMember(dest => dest.FomentoId, opt => opt.MapFrom(src => src.Localidade!.FomentoLocalidades!.Where(x=>x.Status)));
         }
     }
 }

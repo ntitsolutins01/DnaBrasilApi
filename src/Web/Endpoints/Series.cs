@@ -5,6 +5,7 @@ using DnaBrasilApi.Application.Series.Queries;
 using DnaBrasilApi.Application.Series.Queries.GetSerieById;
 using DnaBrasilApi.Application.Series.Queries.GetSeriesAll;
 using DnaBrasilApi.Application.Series.Queries.GetSeriesByLocalidadeIdEtapaId;
+using DnaBrasilApi.Application.Series.Queries.GetTurmasByLocalidadeId;
 using DnaBrasilApi.Application.Series.Queries.GetTurmasByLocalidadeIdEtapaIdSerie;
 
 namespace DnaBrasilApi.Web.Endpoints;
@@ -29,7 +30,8 @@ public class Series : EndpointGroupBase
             .MapDelete(DeleteSerie, "{id}")
             .MapGet(GetSerieById, "{id}")
             .MapGet(GetSeriesByLocalidadeIdEtapaId, "Localidade/{localidadeId}/Etapa/{etapaId}")
-            .MapGet(GetTurmasByLocalidadeIdEtapaIdSerie, "Localidade/{localidadeId}/Etapa/{etapaId}/Serie/{serie}");
+            .MapGet(GetTurmasByLocalidadeIdEtapaIdSerie, "Localidade/{localidadeId}/Etapa/{etapaId}/Serie/{serie}")
+            .MapGet(GetTurmasByLocalidadeId, "Localidade/{localidadeId}");
     }
     #endregion
 
@@ -118,6 +120,17 @@ public class Series : EndpointGroupBase
     public async Task<List<SerieDto>> GetTurmasByLocalidadeIdEtapaIdSerie(ISender sender, int localidadeId, int etapaId, string serie)
     {
         return await sender.Send(new GetTurmasByLocalidadeIdEtapaIdSerieQuery() { LocalidadeId = localidadeId, EtapaId = etapaId, Serie = serie });
+    }
+
+    /// <summary>
+    /// Endpoint que busca uma lista de séries por localidade
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="localidadeId">Id da localidade</param>
+    /// <returns>Retorna a lista de Série</returns>
+    public async Task<List<SerieDto>> GetTurmasByLocalidadeId(ISender sender, int localidadeId)
+    {
+        return await sender.Send(new GetTurmasByLocalidadeIdQuery() { LocalidadeId = localidadeId });
     }
     #endregion
 }
