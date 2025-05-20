@@ -16,5 +16,7 @@ public class EncaminhamentoConfiguration : IEntityTypeConfiguration<Encaminhamen
             .IsRequired();
         builder.Property(t => t.Descricao)
             .HasMaxLength(500);
+        builder.Property(t => t.NomeImagem)
+            .HasMaxLength(100);
     }
 }
