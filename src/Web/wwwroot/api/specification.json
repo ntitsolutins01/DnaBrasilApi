@@ -14196,6 +14196,10 @@
             "type": "string",
             "format": "byte",
             "nullable": true
+          },
+          "nomeImagem": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -15722,6 +15726,10 @@
               "byteImage": {
                 "type": "string",
                 "format": "byte",
+                "nullable": true
+              },
+              "nomeImagem": {
+                "type": "string",
                 "nullable": true
               }
             }
@@ -17885,6 +17893,10 @@
             "type": "string",
             "format": "byte",
             "nullable": true
+          },
+          "nomeImagem": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -17912,6 +17924,10 @@
           "byteImage": {
             "type": "string",
             "format": "byte",
+            "nullable": true
+          },
+          "nomeImagem": {
+            "type": "string",
             "nullable": true
           }
         }
