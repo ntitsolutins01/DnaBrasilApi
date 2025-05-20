@@ -14196,6 +14196,10 @@
             "type": "string",
             "format": "byte",
             "nullable": true
+          },
+          "nomeImagem": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -15722,6 +15726,10 @@
               "byteImage": {
                 "type": "string",
                 "format": "byte",
+                "nullable": true
+              },
+              "nomeImagem": {
+                "type": "string",
                 "nullable": true
               }
             }
@@ -17885,6 +17893,10 @@
             "type": "string",
             "format": "byte",
             "nullable": true
+          },
+          "nomeImagem": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -17912,6 +17924,10 @@
           "byteImage": {
             "type": "string",
             "format": "byte",
+            "nullable": true
+          },
+          "nomeImagem": {
+            "type": "string",
             "nullable": true
           }
         }
@@ -21225,6 +21241,10 @@
           "pergunta": {
             "type": "string"
           },
+          "descricao": {
+            "type": "string",
+            "nullable": true
+          },
           "tipoLaudoId": {
             "type": "integer",
             "format": "int32"
@@ -21420,6 +21440,10 @@
           "respostaQuestionario": {
             "type": "string"
           },
+          "descricao": {
+            "type": "string",
+            "nullable": true
+          },
           "questionarioId": {
             "type": "integer",
             "format": "int32"
@@ -21440,6 +21464,10 @@
           },
           "respostaQuestionario": {
             "type": "string"
+          },
+          "descricao": {
+            "type": "string",
+            "nullable": true
           },
           "valorPesoResposta": {
             "type": "number",

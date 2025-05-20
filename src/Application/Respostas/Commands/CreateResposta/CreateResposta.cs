@@ -6,6 +6,7 @@ namespace DnaBrasilApi.Application.Respostas.Commands.CreateResposta;
 public record CreateRespostaCommand : IRequest<int>
 {
     public required string RespostaQuestionario { get; init; }
+    public string? Descricao { get; init; }
     public required int QuestionarioId { get; init; }
     public required decimal ValorPesoResposta { get; init; }
 }
@@ -30,7 +31,8 @@ public class CreateRespostaCommandHandler : IRequestHandler<CreateRespostaComman
         {
             RespostaQuestionario = request.RespostaQuestionario,
             Questionario = questionario!,
-            ValorPesoResposta = request.ValorPesoResposta
+            ValorPesoResposta = request.ValorPesoResposta,
+            Descricao = request.Descricao
         };
 
         _context.Respostas.Add(entity);
