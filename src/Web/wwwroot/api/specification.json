@@ -21225,6 +21225,10 @@
           "pergunta": {
             "type": "string"
           },
+          "descricao": {
+            "type": "string",
+            "nullable": true
+          },
           "tipoLaudoId": {
             "type": "integer",
             "format": "int32"
@@ -21420,6 +21424,10 @@
           "respostaQuestionario": {
             "type": "string"
           },
+          "descricao": {
+            "type": "string",
+            "nullable": true
+          },
           "questionarioId": {
             "type": "integer",
             "format": "int32"
@@ -21440,6 +21448,10 @@
           },
           "respostaQuestionario": {
             "type": "string"
+          },
+          "descricao": {
+            "type": "string",
+            "nullable": true
           },
           "valorPesoResposta": {
             "type": "number",

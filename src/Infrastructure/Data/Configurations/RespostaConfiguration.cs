@@ -10,6 +10,8 @@ internal class RespostaConfiguration : IEntityTypeConfiguration<Resposta>
         builder.Property(t => t.RespostaQuestionario)
             .HasMaxLength(300)
             .IsRequired();
+        builder.Property(t => t.RespostaQuestionario)
+            .HasMaxLength(500);
 
         builder.Property(t => t.ValorPesoResposta).HasPrecision(10, 2);
     }
