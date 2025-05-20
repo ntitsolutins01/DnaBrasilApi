@@ -10473,6 +10473,41 @@
         }
       }
     },
+    "/api/Series/Localidade/{localidadeId}": {
+      "get": {
+        "tags": [
+          "Series"
+        ],
+        "operationId": "GetTurmasByLocalidadeId",
+        "parameters": [
+          {
+            "name": "localidadeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SerieDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/TalentosEsportivos": {
       "post": {
         "tags": [
