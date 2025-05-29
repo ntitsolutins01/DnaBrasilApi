@@ -23,7 +23,7 @@ public class GetAlunosByLocalidadeQueryHandler : IRequestHandler<GetAlunosByLoca
         try
         {
             var result = await _context.Alunos
-                .Where(x => x.Localidade!.Id == request.LocalidadeId)
+                .Where(x => x.Localidade!.Id == request.LocalidadeId && x.Convidado != true)
                 .AsNoTracking()
                 .ProjectTo<AlunoIndexDto>(_mapper.ConfigurationProvider)
                 .OrderBy(t => t.Nome)
