@@ -13306,6 +13306,10 @@
           "possuiFoto": {
             "type": "boolean"
           },
+          "alunoId": {
+            "type": "string",
+            "nullable": true
+          },
           "alunos": {
             "type": "array",
             "nullable": true,
@@ -18655,6 +18659,11 @@
           },
           "encaminhamentoTexto": {
             "type": "string",
+            "nullable": true
+          },
+          "ordem": {
+            "type": "integer",
+            "format": "int32",
             "nullable": true
           },
           "nomeAluno": {
