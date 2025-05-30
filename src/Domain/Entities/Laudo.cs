@@ -10,4 +10,5 @@ public class Laudo : BaseAuditableEntity
     public Modalidade? Modalidade { get; set; }
     public required Aluno Aluno { get; set; }
     public string? StatusLaudo { get; set; }
+    public int? Ordem { get; set; }
 }
