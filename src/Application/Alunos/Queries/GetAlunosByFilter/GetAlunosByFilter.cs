@@ -34,6 +34,13 @@ public class GetAlunosByFilterQueryHandler : IRequestHandler<GetAlunosByFilterQu
 
     private IQueryable<Aluno> FilterAlunos(IQueryable<Aluno> Alunos, AlunosFilterDto search, CancellationToken cancellationToken)
     {
+        if (!string.IsNullOrWhiteSpace(search.AlunoId))
+        {
+            var alunoId = Convert.ToInt32(search.AlunoId);
+
+            Alunos = Alunos.Where(u => u.Id == alunoId);
+        }
+
         if (!string.IsNullOrWhiteSpace(search.FomentoId))
         {
             var fomento = Convert.ToInt32(search.FomentoId);
