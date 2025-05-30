@@ -21,7 +21,8 @@ public class LaudoDto
     public int? EncaminhamentoSaudeBucalId { get; init; }
     public int? EncaminhamentoTalentoEsportivoId { get; init; }
     public int? ModalidadeId { get; init; }
-    public string? EncaminhamentoTexto { get; set; }
+    public string? EncaminhamentoTexto { get; init; }
+    public int? Ordem { get; init; }
 
     #endregion
 

@@ -15598,6 +15598,11 @@
               "statusLaudo": {
                 "type": "string",
                 "nullable": true
+              },
+              "ordem": {
+                "type": "integer",
+                "format": "int32",
+                "nullable": true
               }
             }
           }
@@ -18778,6 +18783,11 @@
             "type": "integer",
             "format": "int32",
             "nullable": true
+          },
+          "ordem": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
           }
         }
       },
@@ -18828,6 +18838,11 @@
             "nullable": true
           },
           "modalidadeId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "ordem": {
             "type": "integer",
             "format": "int32",
             "nullable": true
