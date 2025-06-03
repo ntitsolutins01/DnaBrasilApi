@@ -12870,6 +12870,10 @@
             "type": "string",
             "nullable": true
           },
+          "nomeAluno": {
+            "type": "string",
+            "nullable": true
+          },
           "email": {
             "type": "string",
             "nullable": true
@@ -12879,6 +12883,10 @@
             "nullable": true
           },
           "municipioId": {
+            "type": "string",
+            "nullable": true
+          },
+          "municipioEstado": {
             "type": "string",
             "nullable": true
           },
@@ -12892,6 +12900,14 @@
             "type": "boolean"
           },
           "modalidades": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeLocalidade": {
+            "type": "string",
+            "nullable": true
+          },
+          "serieTurma": {
             "type": "string",
             "nullable": true
           }
