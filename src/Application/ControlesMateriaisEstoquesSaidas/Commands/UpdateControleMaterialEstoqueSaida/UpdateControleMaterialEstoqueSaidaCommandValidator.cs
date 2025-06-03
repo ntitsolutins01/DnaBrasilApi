@@ -3,7 +3,6 @@ internal class UpdateControleMaterialEstoqueSaidaCommandValidator : AbstractVali
 {
     public UpdateControleMaterialEstoqueSaidaCommandValidator()
     {
-        RuleFor(v => v.Solicitante)
-            .MaximumLength(250);
+
     }
 }

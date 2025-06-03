@@ -5,6 +5,6 @@ internal class CreateControleAcessoAulaCommandValidator : AbstractValidator<Crea
     {
         RuleFor(v => v.LiberacaoAula)
             .MaximumLength(100);
-        
+
     }
 }

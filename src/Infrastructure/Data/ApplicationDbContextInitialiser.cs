@@ -1,5 +1,4 @@
-﻿using System.Runtime.InteropServices;
-using DnaBrasilApi.Domain.Constants;
+﻿using DnaBrasilApi.Domain.Constants;
 using DnaBrasilApi.Domain.Entities;
 using DnaBrasilApi.Infrastructure.Identity;
 using Microsoft.AspNetCore.Builder;
@@ -83,7 +82,7 @@ public class ApplicationDbContextInitialiser
             await _userManager.CreateAsync(administrator, "Administrator1!");
             if (!string.IsNullOrWhiteSpace(administratorRole.Name))
             {
-                await _userManager.AddToRolesAsync(administrator, new [] { administratorRole.Name });
+                await _userManager.AddToRolesAsync(administrator, new[] { administratorRole.Name });
             }
         }
 

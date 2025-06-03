@@ -4,9 +4,11 @@ using DnaBrasilApi.Domain.Entities;
 namespace DnaBrasilApi.Application.ControlesMateriaisEstoquesSaidas.Commands.CreateControleMaterialEstoqueSaida;
 public record CreateControleMaterialEstoqueSaidaCommand : IRequest<int>
 {
-    public required int MaterialId { get; set; }
+    public required int MunicipioId { get; set; }
+    public required int LocalidadeId { get; set; }
+    public required int InventarioId { get; set; }
     public required int Quantidade { get; set; }
-    public string? Solicitante { get; set; }
+    public required int ProfissionalId { get; set; }
 }
 
 public class CreateControleMaterialEstoqueSaidaCommandHandler : IRequestHandler<CreateControleMaterialEstoqueSaidaCommand, int>
@@ -20,16 +22,33 @@ public class CreateControleMaterialEstoqueSaidaCommandHandler : IRequestHandler<
 
     public async Task<int> Handle(CreateControleMaterialEstoqueSaidaCommand request, CancellationToken cancellationToken)
     {
-        var material = await _context.Materiais
-            .FindAsync([request.MaterialId], cancellationToken);
+        var municipio = await _context.Municipios
+            .FindAsync([request.MunicipioId], cancellationToken);
 
-        Guard.Against.NotFound(request.MaterialId, material);
+        Guard.Against.NotFound(request.MunicipioId, municipio);
+
+        var localidade = await _context.Localidades
+            .FindAsync([request.LocalidadeId], cancellationToken);
+
+        Guard.Against.NotFound(request.LocalidadeId, localidade);
+
+        var inventario = await _context.Inventarios
+            .FindAsync([request.InventarioId], cancellationToken);
+
+        Guard.Against.NotFound(request.InventarioId, inventario);
+
+        var profissional = await _context.Usuarios
+            .FindAsync([request.ProfissionalId], cancellationToken);
+
+        Guard.Against.NotFound(request.ProfissionalId, profissional);
 
         var entity = new ControleMaterialEstoqueSaida
         {
-            Material = material,
+            Municipio = municipio,
+            Localidade = localidade,
+            Inventario = inventario,
             Quantidade = request.Quantidade,
-            Solicitante = request.Solicitante
+            Usuario = profissional
         };
 
         _context.ControlesMateriaisEstoquesSaidas.Add(entity);

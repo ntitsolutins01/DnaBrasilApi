@@ -1,5 +1,4 @@
-﻿using DnaBrasilApi.Application.Alunos.Queries;
-using DnaBrasilApi.Domain.Entities;
+﻿using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Deficiencias.Queries;
 public class DeficienciaDto

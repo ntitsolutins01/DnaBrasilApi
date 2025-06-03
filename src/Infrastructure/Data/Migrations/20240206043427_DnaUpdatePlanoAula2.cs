@@ -10,7 +10,7 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            
+
 
             migrationBuilder.AddColumn<string>(
                 name: "NomeArquivo",
@@ -23,7 +23,7 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            
+
 
             migrationBuilder.DropColumn(
                 name: "NomeArquivo",

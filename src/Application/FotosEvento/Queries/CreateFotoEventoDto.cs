@@ -1,6 +1,4 @@
-﻿using DnaBrasilApi.Domain.Entities;
-
-namespace DnaBrasilApi.Application.FotosEvento.Queries;
+﻿namespace DnaBrasilApi.Application.FotosEvento.Queries;
 
 public class CreateFotoEventoDto
 {

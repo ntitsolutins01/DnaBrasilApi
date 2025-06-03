@@ -84,7 +84,7 @@ public class CreateQualidadeDeVidaCommandHandler : IRequestHandler<CreateQualida
             cont++;
 
             var result = metricas.Find(
-                delegate(TextoLaudo item)
+                delegate (TextoLaudo item)
                 {
                     return quadrante.Value >= item.PontoInicial && quadrante.Value <= item.PontoFinal &&
                            item.Quadrante == quadrante.Key;

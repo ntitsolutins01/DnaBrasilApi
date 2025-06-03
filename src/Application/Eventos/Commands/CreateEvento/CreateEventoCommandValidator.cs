@@ -1,6 +1,4 @@
-﻿using DnaBrasilApi.Application.Eventos.Commands.CreateEvento;
-
-namespace DnaBrasilApi.Application.Eventos.Commands.CreateEvento;
+﻿namespace DnaBrasilApi.Application.Eventos.Commands.CreateEvento;
 internal class CreateEventoCommandValidator : AbstractValidator<CreateEventoCommand>
 {
     public CreateEventoCommandValidator()

@@ -9,7 +9,7 @@ public class ProvaConfiguration : IEntityTypeConfiguration<Prova>
     public void Configure(EntityTypeBuilder<Prova> builder)
     {
         builder.Property(t => t.Titulo).HasMaxLength(250);
-        
+
     }
 }
 

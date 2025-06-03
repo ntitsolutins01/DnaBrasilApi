@@ -6,8 +6,8 @@ using DnaBrasilApi.Application.Fomentos.Commands.UpdateFomento;
 using DnaBrasilApi.Application.Fomentos.Queries;
 using DnaBrasilApi.Application.Fomentos.Queries.GetFomentoById;
 using DnaBrasilApi.Application.Fomentos.Queries.GetFomentoByLocalidadeId;
+using DnaBrasilApi.Application.Fomentos.Queries.GetFomentoLocalidadesByLocalidadeId;
 using DnaBrasilApi.Application.Fomentos.Queries.GetFomentosAll;
-using DnaBrasilApi.Application.Profissionais.Commands.DeleteProfissionalModalidade;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -23,6 +23,7 @@ public class Fomentos : EndpointGroupBase
             .MapPut(UpdateFomento, "{id}")
             .MapDelete(DeleteFomento, "{id}")
             .MapGet(GetFomentoByLocalidadeId, "/Localidade/{id}")
+            .MapGet(GetFomentoLocalidadesByLocalidadeId, "Fomento/Localidade/{id}")
             .MapGet(GetFomentoById, "{id}");
     }
     #endregion
@@ -100,6 +101,17 @@ public class Fomentos : EndpointGroupBase
     public async Task<FomentoDto> GetFomentoByLocalidadeId(ISender sender, int id)
     {
         return await sender.Send(new GetFomentoByLocalidadeIdQuery() { Id = id });
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public async Task<FomentoDto> GetFomentoLocalidadesByLocalidadeId(ISender sender, int id)
+    {
+        return await sender.Send(new GetFomentoLocalidadesByLocalidadeIdQuery() { Id = id });
     }
     #endregion
 }

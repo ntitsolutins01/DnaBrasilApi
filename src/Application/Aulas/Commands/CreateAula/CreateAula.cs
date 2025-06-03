@@ -1,10 +1,9 @@
-﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Aulas.Commands.CreateAula;
 public record CreateAulaCommand : IRequest<int>
 {
-    public required int CargaHoraria { get; init; }
     public required int ProfessorId { get; init; }
     public required int ModuloEadId { get; init; }
     public required string Titulo { get; init; }
@@ -13,6 +12,8 @@ public record CreateAulaCommand : IRequest<int>
     public string? Material { get; init; }
     public string? NomeMaterial { get; init; }
     public string? Video { get; init; }
+    public string? NomeVideo { get; init; }
+    public int? Ordem { get; init; }
 }
 
 public class CreateAulaCommandHandler : IRequestHandler<CreateAulaCommand, int>
@@ -38,15 +39,16 @@ public class CreateAulaCommandHandler : IRequestHandler<CreateAulaCommand, int>
 
         var entity = new Aula
         {
-            CargaHoraria = request.CargaHoraria,
             Professor = professor,
             ModuloEad = moduloEad,
             Titulo = request.Titulo,
             Descricao = request.Descricao,
             Status = request.Status,
             Video = request.Video,
+            NomeVideo = request.NomeVideo,
             Material = request.Material,
-            NomeMaterial = request.NomeMaterial
+            NomeMaterial = request.NomeMaterial,
+            Ordem = request.Ordem
         };
 
         _context.Aulas.Add(entity);

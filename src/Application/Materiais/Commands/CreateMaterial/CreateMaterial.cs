@@ -7,7 +7,6 @@ public record CreateMaterialCommand : IRequest<int>
     public required int TipoMaterialId { get; set; }
     public required string UnidadeMedida { get; set; }
     public required string Descricao { get; set; }
-    public int? QtdAdquirida { get; set; }
 }
 
 public class CreateMaterialCommandHandler : IRequestHandler<CreateMaterialCommand, int>
@@ -30,8 +29,7 @@ public class CreateMaterialCommandHandler : IRequestHandler<CreateMaterialComman
         {
             TipoMaterial = tipoMaterial,
             UnidadeMedida = request.UnidadeMedida,
-            Descricao = request.Descricao,
-            QtdAdquirida = request.QtdAdquirida
+            Descricao = request.Descricao
         };
 
         _context.Materiais.Add(entity);

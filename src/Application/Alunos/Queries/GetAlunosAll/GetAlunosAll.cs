@@ -1,6 +1,4 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
-using DnaBrasilApi.Application.Common.Security;
-using DnaBrasilApi.Domain.Constants;
 
 namespace DnaBrasilApi.Application.Alunos.Queries.GetAlunosAll;
 

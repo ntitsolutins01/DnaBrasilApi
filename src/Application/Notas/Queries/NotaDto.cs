@@ -30,7 +30,7 @@ public class NotaDto
         public Mapping()
         {
             CreateMap<Nota, NotaDto>()
-                .ForMember(dest => dest.LocalidadeMunicipioUf, opt => opt.MapFrom(src => src.Aluno.Localidade.Nome + " - " +src.Aluno.Municipio!.Nome!.ToString() + " / " + src.Aluno.Municipio!.Estado!.Sigla!.ToString()));
+                .ForMember(dest => dest.LocalidadeMunicipioUf, opt => opt.MapFrom(src => src.Aluno.Localidade.Nome + " - " + src.Aluno.Municipio!.Nome!.ToString() + " / " + src.Aluno.Municipio!.Estado!.Sigla!.ToString()));
         }
     }
 }

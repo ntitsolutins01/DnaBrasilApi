@@ -22,7 +22,7 @@ public class GetEstadosAllQueryHandler : IRequestHandler<GetEstadosAllQuery, Lis
             .ProjectTo<EstadoDto>(_mapper.ConfigurationProvider)
             .OrderBy(t => t.Nome)
             .ToListAsync(cancellationToken);
-        
+
         return result == null ? throw new ArgumentNullException(nameof(result)) : result;
     }
 }

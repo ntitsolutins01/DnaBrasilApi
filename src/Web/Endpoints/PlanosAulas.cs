@@ -1,8 +1,8 @@
-﻿using DnaBrasilApi.Application.PlanosAulas.Queries.GetPlanoAulaById;
-using DnaBrasilApi.Application.PlanosAulas.Queries;
-using DnaBrasilApi.Application.PlanosAulas.Commands.CreatePlanoAula;
+﻿using DnaBrasilApi.Application.PlanosAulas.Commands.CreatePlanoAula;
 using DnaBrasilApi.Application.PlanosAulas.Commands.DeletePlanoAula;
 using DnaBrasilApi.Application.PlanosAulas.Commands.UpdatePlanoAula;
+using DnaBrasilApi.Application.PlanosAulas.Queries;
+using DnaBrasilApi.Application.PlanosAulas.Queries.GetPlanoAulaById;
 using DnaBrasilApi.Application.PlanosAulas.Queries.GetPlanosAulasAll;
 
 namespace DnaBrasilApi.Web.Endpoints;

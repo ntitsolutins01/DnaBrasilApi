@@ -1,4 +1,4 @@
-﻿namespace DnaBrasilApi.Domain.Entities;
+namespace DnaBrasilApi.Domain.Entities;
 public class Aluno : BaseAuditableEntity
 {
     public string? AspNetUserId { get; set; }
@@ -27,12 +27,10 @@ public class Aluno : BaseAuditableEntity
     public int? IdCliente { get; set; }
     public Deficiencia? Deficiencia { get; set; }
     public Parceiro? Parceiro { get; set; }
-    public Matricula? Matricula { get; set; }
-    public Voucher? Voucher { get; set; }
     public Profissional? Profissional { get; set; }
     public string? NomeResponsavel { get; set; }
     public LinhaAcao? LinhaAcao { get; set; }
-    public List<QualidadeDeVida>? QualidadeDeVidas { get; set; }
+    public List<Laudo>? ListLaudo { get; set; }
     public bool? AutorizacaoSaida { get; set; } = false;
     public bool? AutorizacaoConsentimentoAssentimento { get; set; } = false;
     public bool? ParticipacaoProgramaCompartilhamentoDados { get; set; } = false;
@@ -40,4 +38,10 @@ public class Aluno : BaseAuditableEntity
     public bool? CopiaDocAlunoResponsavel { get; set; } = false;
     public bool Convidado { get; set; } = false;
     public IList<AlunoModalidade>? AlunoModalidades { get; set; }
+    public IList<AtividadeAluno>? AtividadeAlunos { get; set; }
+    //public IList<AlunoCurso>? AlunoCursos { get; set; }
+    public IList<AlunoPresenca>? AlunoPresencas { get; set; }
+    public Serie? Serie { get; set; }
+    public IList<AlunoAula>? AlunoAulas { get; set; }
+    public IList<AlunoCursoCertificado>? AlunoCursosCertificados { get; set; }
 }

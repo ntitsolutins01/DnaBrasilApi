@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DnaBrasilApi.Domain.Entities;
+﻿using DnaBrasilApi.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -17,9 +12,9 @@ public class TalentoEsportivoConfiguration : IEntityTypeConfiguration<TalentoEsp
         builder.Property(t => t.Velocidade).HasPrecision(10, 2);
         builder.Property(t => t.Abdominal).HasPrecision(10, 2);
         builder.Property(t => t.Vo2Max).HasPrecision(10, 2);
-        builder.Property(t => t.ImpulsaoHorizontal).HasPrecision(10, 2); 
-        builder.Property(t => t.Envergadura).HasPrecision(10, 2); 
-        builder.Property(t => t.ShuttleRun).HasPrecision(10, 2); 
+        builder.Property(t => t.ImpulsaoHorizontal).HasPrecision(10, 2);
+        builder.Property(t => t.Envergadura).HasPrecision(10, 2);
+        builder.Property(t => t.ShuttleRun).HasPrecision(10, 2);
         builder.Property(t => t.StatusTalentosEsportivos).HasMaxLength(1);
     }
 }

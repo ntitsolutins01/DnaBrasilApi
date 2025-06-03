@@ -1,5 +1,4 @@
-﻿using DnaBrasilApi.Application.Alunos.Queries;
-using DnaBrasilApi.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 
 namespace DnaBrasilApi.Application.Estruturas.Queries.GetEstruturasByLocalidade;
 

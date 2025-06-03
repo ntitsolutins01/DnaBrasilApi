@@ -1,7 +1,5 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
-using DnaBrasilApi.Application.Common.Models;
 using DnaBrasilApi.Domain.Entities;
-using Boolean = System.Boolean;
 
 namespace DnaBrasilApi.Application.Dashboards.Queries.GetVocacionalAlunos;
 //[Authorize]
@@ -27,6 +25,7 @@ public class GetTotalizadorVocacionalAlunosQueryHandler : IRequestHandler<GetTot
         IQueryable<Aluno> alunos;
 
         alunos = _context.Alunos//.Where(x=>x.Id==34493)
+            .Where(x => x.Convidado == false)
             .AsNoTracking();
 
         var result = FilterAlunos(alunos, request.SearchFilter!, cancellationToken);

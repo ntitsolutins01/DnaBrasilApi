@@ -4,7 +4,7 @@ public class CreateQuestaoEadCommandValidator : AbstractValidator<CreateQuestaoE
 {
     public CreateQuestaoEadCommandValidator()
     {
-        
+
         RuleFor(v => v.Pergunta)
             .MaximumLength(400)
             .NotEmpty();

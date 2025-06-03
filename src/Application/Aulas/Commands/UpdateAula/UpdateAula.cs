@@ -1,18 +1,19 @@
-﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Application.Common.Interfaces;
 
 namespace DnaBrasilApi.Application.Aulas.Commands.UpdateAula;
 
-public record UpdateAulaCommand : IRequest <bool>
+public record UpdateAulaCommand : IRequest<bool>
 {
     public required int Id { get; init; }
     public required int ProfessorId { get; init; }
-    public required int CargaHoraria { get; set; }
     public required string Titulo { get; init; }
     public string? Descricao { get; init; }
     public bool Status { get; init; }
     public string? Material { get; init; }
     public string? NomeMaterial { get; init; }
     public string? Video { get; init; }
+    public string? NomeVideo { get; init; }
+    public int? Ordem { get; init; }
 }
 
 public class UpdateAulaCommandHandler : IRequestHandler<UpdateAulaCommand, bool>
@@ -24,7 +25,7 @@ public class UpdateAulaCommandHandler : IRequestHandler<UpdateAulaCommand, bool>
         _context = context;
     }
 
-    public async Task <bool> Handle(UpdateAulaCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(UpdateAulaCommand request, CancellationToken cancellationToken)
     {
         var entity = await _context.Aulas
             .FindAsync([request.Id], cancellationToken);
@@ -35,15 +36,15 @@ public class UpdateAulaCommandHandler : IRequestHandler<UpdateAulaCommand, bool>
             .FindAsync([request.ProfessorId], cancellationToken);
 
         Guard.Against.NotFound(request.ProfessorId, professor);
-        
+
         entity.Titulo = request.Titulo;
-        entity.CargaHoraria = request.CargaHoraria;
         entity.Descricao = request.Descricao;
         entity.Status = request.Status;
         entity.Professor = professor;
         entity.Material = request.Material;
         entity.NomeMaterial = request.NomeMaterial;
         entity.Video = request.Video;
+        entity.Ordem = request.Ordem;
 
         var result = await _context.SaveChangesAsync(cancellationToken);
 

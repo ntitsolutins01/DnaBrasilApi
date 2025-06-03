@@ -1,11 +1,11 @@
-﻿using DnaBrasilApi.Application.Materiais.Queries.GetMaterialById;
-using DnaBrasilApi.Application.Materiais.Commands.CreateMaterial;
+﻿using DnaBrasilApi.Application.Materiais.Commands.CreateMaterial;
 using DnaBrasilApi.Application.Materiais.Commands.DeleteMaterial;
 using DnaBrasilApi.Application.Materiais.Commands.UpdateMaterial;
 using DnaBrasilApi.Application.Materiais.Queries;
 using DnaBrasilApi.Application.Materiais.Queries.GetMateriaisAll;
-using DnaBrasilApi.Application.Materiais.Queries.GetMateriaisByTipoMaterialId;
 using DnaBrasilApi.Application.Materiais.Queries.GetMateriaisByFilter;
+using DnaBrasilApi.Application.Materiais.Queries.GetMateriaisByTipoMaterialId;
+using DnaBrasilApi.Application.Materiais.Queries.GetMaterialById;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DnaBrasilApi.Web.Endpoints;
@@ -109,7 +109,7 @@ public class Materiais : EndpointGroupBase
     }
 
     /// <summary>
-    /// Endpoint que busca uma lista de tipos de material
+    /// Endpoint que busca uma lista de materiais pelo tipos de material
     /// </summary>
     /// <param name="sender">Sender</param>
     /// <param name="id">Id do módulo Ead</param>
@@ -118,6 +118,7 @@ public class Materiais : EndpointGroupBase
     {
         return await sender.Send(new GetMateriaisByTipoMaterialIdQuery() { TipoMaterialId = id });
     }
+
     #endregion
 
 }

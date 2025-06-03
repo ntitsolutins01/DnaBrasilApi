@@ -2,7 +2,7 @@
 
 namespace DnaBrasilApi.Application.TipoLaudos.Commands.UpdateTipoLaudos;
 
-public record UpdateTipoLaudoCommand : IRequest <bool>
+public record UpdateTipoLaudoCommand : IRequest<bool>
 {
     public required int Id { get; init; }
     public required string Nome { get; init; }
@@ -20,10 +20,10 @@ public class UpdateTipoLaudoCommandHandler : IRequestHandler<UpdateTipoLaudoComm
         _context = context;
     }
 
-    public async Task <bool> Handle(UpdateTipoLaudoCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(UpdateTipoLaudoCommand request, CancellationToken cancellationToken)
     {
         var entity = await _context.TipoLaudos
-            .FindAsync(new object[] { request.Id }, cancellationToken);
+            .FindAsync([request.Id], cancellationToken);
 
         Guard.Against.NotFound(request.Id, entity);
 

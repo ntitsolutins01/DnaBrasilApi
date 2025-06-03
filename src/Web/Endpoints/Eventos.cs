@@ -1,8 +1,8 @@
-﻿using DnaBrasilApi.Application.Eventos.Queries.GetEventoById;
-using DnaBrasilApi.Application.Eventos.Commands.CreateEvento;
+﻿using DnaBrasilApi.Application.Eventos.Commands.CreateEvento;
 using DnaBrasilApi.Application.Eventos.Commands.DeleteEvento;
 using DnaBrasilApi.Application.Eventos.Commands.UpdateEvento;
 using DnaBrasilApi.Application.Eventos.Queries;
+using DnaBrasilApi.Application.Eventos.Queries.GetEventoById;
 using DnaBrasilApi.Application.Eventos.Queries.GetEventosAll;
 
 namespace DnaBrasilApi.Web.Endpoints;

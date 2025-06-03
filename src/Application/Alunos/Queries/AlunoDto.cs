@@ -1,45 +1,52 @@
-﻿using DnaBrasilApi.Application.Laudos.Queries;
-using DnaBrasilApi.Domain.Entities;
+﻿using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Alunos.Queries;
 public class AlunoDto
 {
-    public int Id { get; set; }
-    //public  string? AspNetUserId { get; set; }
-    public string? Nome { get; set; }
-    public string? Email { get; set; }
-    public string? Sexo { get; set; }
-    public string? DtNascimento { get; set; }
-    public string? NomeMae { get; set; }
-    public string? NomePai { get; set; }
-    public string? Cpf { get; set; }
-    public string? Telefone { get; set; }
-    public string? Celular { get; set; }
-    public string? Cep { get; set; }
-    public string? Endereco { get; set; }
-    public string? Numero { get; set; }
-    public string? Bairro { get; set; }
-    public string? Url { get; set; }
-    public bool Status { get; set; }
-    public bool Habilitado { get; set; }
-    public string? Etnia { get; set; }
-    public int Idade { get; set; }
-    public string? NomeMunicipio { get; set; }
-    public string? NomeLocalidade { get; set; }
-    public string? MunicipioEstado { get; set; }
-    public string? Controle { get; set; }
-    public string? Estado { get; set; }
-    public string? NomeFoto { get; set; }
-    public byte[]? ByteImage { get; set; }
-    public byte[]? QrCode { get; set; }
-    public string? ModalidadeLinhaAcao { get; set; }
-    public string? LinhaAcaoId { get; set; }
-    public string? FomentoId { get; set; }
-    public string? LocalidadeId { get; set; }
-    public string? DeficienciaId { get; set; }
-    public string? ProfissionalId { get; set; }
-    public string? MunicipioId { get; set; }
-    public string? ModalidadesIds { get; set; }
+    /// <summary>
+    /// Matrícula do aluno - Identificador único
+    /// </summary>
+    public int Id { get; init; }
+    //public  string? AspNetUserId { get; init; }
+    public string? Nome { get; init; }
+    public string? Email { get; init; }
+    public string? Sexo { get; init; }
+    public string? DtNascimento { get; init; }
+    public string? NomeMae { get; init; }
+    public string? NomePai { get; init; }
+    public string? Cpf { get; init; }
+    public string? Telefone { get; init; }
+    public string? Celular { get; init; }
+    public string? Cep { get; init; }
+    public string? Endereco { get; init; }
+    public string? Numero { get; init; }
+    public string? Bairro { get; init; }
+    public string? Url { get; init; }
+    public bool Status { get; init; }
+    public bool Habilitado { get; init; }
+    public string? Etnia { get; init; }
+    public int Idade { get; init; }
+    public string? NomeMunicipio { get; init; }
+    public string? NomeLocalidade { get; init; }
+    public string? MunicipioEstado { get; init; }
+    public string? Controle { get; init; }
+    public string? Estado { get; init; }
+    public string? NomeFoto { get; init; }
+    public byte[]? ByteImage { get; init; }
+    public byte[]? QrCode { get; init; }
+    public string? ModalidadeLinhaAcao { get; init; }
+    public string? LinhaAcaoId { get; init; }
+    public string? FomentoId { get; init; }
+    public string? LocalidadeId { get; init; }
+    public string? DeficienciaId { get; init; }
+    public string? ProfissionalId { get; init; }
+    public string? MunicipioId { get; init; }
+    public string? ModalidadesIds { get; init; }
+    public string? Modalidades { get; init; }
+    public string? SerieTurma { get; init; }
+    public string? SerieId { get; init; }
+    public string? EtapaId { get; init; }
+    public string? SerieNome { get; init; }
     private class Mapping : Profile
     {
         public Mapping()
@@ -68,7 +75,17 @@ public class AlunoDto
                         src.AlunoModalidades == null
                             ? ""
                             : string.Join(",",
-                                src.AlunoModalidades!.Select(s => s.ModalidadeId.ToString()).ToArray())));
+                                src.AlunoModalidades!.Select(s => s.ModalidadeId.ToString()).ToArray())))
+                .ForMember(dest => dest.Modalidades,
+                    opt => opt.MapFrom(src =>
+                        src.AlunoModalidades == null
+                            ? ""
+                            : string.Join(", ",
+                                src.AlunoModalidades!.Select(s => s.Modalidade!.Nome!.ToString()).ToArray())))
+                .ForMember(dest => dest.SerieTurma, opt => opt.MapFrom(src => src.Serie!.Nome + " - " + src.Serie!.Turma))
+                .ForMember(dest => dest.SerieId, opt => opt.MapFrom(src => src.Serie!.Id))
+                .ForMember(dest => dest.SerieNome, opt => opt.MapFrom(src => src.Serie!.Nome))
+                .ForMember(dest => dest.EtapaId, opt => opt.MapFrom(src => src.Serie!.EtapaEnsino.Id));
         }
     }
 

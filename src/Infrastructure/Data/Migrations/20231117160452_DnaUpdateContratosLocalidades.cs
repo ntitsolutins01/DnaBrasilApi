@@ -10,12 +10,12 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            
+
 
             migrationBuilder.DropTable(
                 name: "ContratosLocais");
 
-           
+
             migrationBuilder.CreateTable(
                 name: "ContratosLocalidades",
                 columns: table => new
@@ -45,18 +45,18 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                 table: "ContratosLocalidades",
                 column: "LocalidadeId");
 
-           
+
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            
+
 
             migrationBuilder.DropTable(
                 name: "ContratosLocalidades");
 
-            
+
             migrationBuilder.CreateTable(
                 name: "ContratosLocais",
                 columns: table => new
@@ -86,7 +86,7 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                 table: "ContratosLocais",
                 column: "LocalId");
 
-            
+
         }
     }
 }

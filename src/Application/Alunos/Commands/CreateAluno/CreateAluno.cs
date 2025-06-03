@@ -1,7 +1,6 @@
 using System.Globalization;
 using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
-using DnaBrasilApi.Domain.GuardClauses;
 
 namespace DnaBrasilApi.Application.Alunos.Commands.CreateAluno;
 
@@ -41,6 +40,7 @@ public record CreateAlunoCommand : IRequest<int>
     public bool? CopiaDocAlunoResponsavel { get; init; }
     public bool? Convidado { get; init; } = false;
     public string? ModalidadesIds { get; init; }
+    public int? SerieId { get; init; }
 }
 
 public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int>
@@ -54,13 +54,13 @@ public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int
 
     public async Task<int> Handle(CreateAlunoCommand request, CancellationToken cancellationToken)
     {
-        var emailExiste = _context.Alunos.Any(x => x != null && x.Email == request.Email );
+        //var emailExiste = _context.Alunos.Any(x => x != null && x.Email == request.Email );
 
-        Guard.Against.AlunoExiste(emailExiste);
+        //Guard.Against.AlunoExiste(emailExiste);
 
-        var cpfExiste = _context.Alunos.Any(x => x != null && x.Cpf != null && x.Cpf == request.Cpf);
+        //var cpfExiste = _context.Alunos.Any(x => x != null && x.Cpf != null && x.Cpf == request.Cpf);
 
-        Guard.Against.AlunoExiste(cpfExiste);
+        //Guard.Against.AlunoExiste(cpfExiste);
 
         var municipio = await _context.Municipios.FindAsync(new object[] { request.MunicipioId }, cancellationToken);
 
@@ -103,6 +103,15 @@ public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int
             Guard.Against.NotFound((int)request.LinhaAcaoId, profissional);
         }
 
+        Serie? serie = null;
+
+        if (request.SerieId != null)
+        {
+            serie = await _context.Series.FindAsync(new object[] { request.SerieId }, cancellationToken);
+
+            Guard.Against.NotFound((int)request.SerieId, profissional);
+        }
+
         var entity = new Aluno
         {
             AspNetUserId = request.AspNetUserId,
@@ -137,7 +146,8 @@ public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int
             ParticipacaoProgramaCompartilhamentoDados = request.ParticipacaoProgramaCompartilhamentoDados,
             UtilizacaoImagem = request.UtilizacaoImagem,
             CopiaDocAlunoResponsavel = request.CopiaDocAlunoResponsavel,
-            Convidado = (bool)request.Convidado!
+            Convidado = (bool)request.Convidado!,
+            Serie = serie
         };
 
         _context.Alunos.Add(entity);

@@ -6,5 +6,7 @@ public class UpdateRespostaCommandValidator : AbstractValidator<UpdateRespostaCo
     {
         RuleFor(v => v.RespostaQuestionario)
             .MaximumLength(300);
+        RuleFor(v => v.Descricao)
+            .MaximumLength(500);
     }
 }

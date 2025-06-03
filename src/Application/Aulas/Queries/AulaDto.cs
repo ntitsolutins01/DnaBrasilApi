@@ -1,4 +1,3 @@
-using System.ComponentModel.DataAnnotations.Schema;
 using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Aulas.Queries;
@@ -7,7 +6,6 @@ public class AulaDto
 {
     public required int Id { get; init; }
     public required int ModuloEadId { get; init; }
-    public required int CargaHoraria { get; init; }
     public required string NomeProfessor { get; init; }
     public required int ProfessorId { get; init; }
     public required string TituloModuloEad { get; init; }
@@ -17,6 +15,8 @@ public class AulaDto
     public string? Material { get; init; }
     public string? NomeMaterial { get; init; }
     public string? Video { get; init; }
+    public string? NomeVideo { get; init; }
+    public int? Ordem { get; init; }
 
     private class Mapping : Profile
     {

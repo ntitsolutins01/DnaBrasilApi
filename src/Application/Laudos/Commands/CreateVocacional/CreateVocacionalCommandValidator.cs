@@ -1,8 +1,8 @@
-﻿namespace DnaBrasilApi.Application.Laudos.Commands.CreateVocacional;
+﻿namespace DnaBrasilApi.Application.Laudos.Commands.CreateEducacional;
 
-public class CreateVocacionalCommandValidator : AbstractValidator<CreateVocacionalCommand>
+public class CreateEducacionalCommandValidator : AbstractValidator<CreateEducacionalCommand>
 {
-    public CreateVocacionalCommandValidator()
+    public CreateEducacionalCommandValidator()
     {
         RuleFor(v => v.Respostas)
             .MaximumLength(500)

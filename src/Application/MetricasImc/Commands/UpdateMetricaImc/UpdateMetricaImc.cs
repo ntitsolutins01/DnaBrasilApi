@@ -31,7 +31,7 @@ public class UpdateMetricaImcCommandHandler : IRequestHandler<UpdateMetricaImcCo
         Guard.Against.NotFound(request.Id, entity);
 
         entity.Idade = request.Idade;
-        entity.Sexo = request.Sexo; 
+        entity.Sexo = request.Sexo;
         entity.Classificacao = request.Classificacao;
         entity.ValorInicial = request.ValorInicial;
         entity.ValorFinal = request.ValorFinal;

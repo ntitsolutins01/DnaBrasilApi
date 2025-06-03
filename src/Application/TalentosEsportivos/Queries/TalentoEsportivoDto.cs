@@ -1,4 +1,4 @@
-﻿using DnaBrasilApi.Application.Profissionais.Queries;
+﻿using DnaBrasilApi.Application.Encaminhamentos.Queries;
 using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.TalentosEsportivos.Queries;
@@ -14,11 +14,12 @@ public class TalentoEsportivoDto
     public decimal? Abdominal { get; init; }
     public decimal? Imc { get; init; }
     public decimal? ShuttleRun { get; init; }
-    public string? Encaminhamento { get; init; }
+    public EncaminhamentoDto? Encaminhamento { get; init; }
     public decimal? Altura { get; init; }
     public decimal? Peso { get; init; }
     public decimal? Envergadura { get; init; }
     public int AlunoId { get; init; }
+    public string? EncaminhamentoTexo { get; init; }
 
     private class Mapping : Profile
     {

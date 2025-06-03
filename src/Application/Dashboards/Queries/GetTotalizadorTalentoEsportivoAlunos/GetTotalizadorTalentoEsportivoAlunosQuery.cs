@@ -1,7 +1,5 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
-using DnaBrasilApi.Application.Laudos.Queries;
 using DnaBrasilApi.Domain.Entities;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorTalentoEsportivoAlunos;
 //[Authorize]
@@ -27,6 +25,7 @@ public class GetTotalizadorTalentoEsportivoAlunosQueryHandler : IRequestHandler<
         IQueryable<Aluno> alunos;
 
         alunos = _context.Alunos//.Where(x=>x.Id== 38438)//37315 - Feminino
+            .Where(x => x.Convidado == false)
             .AsNoTracking();
 
         var result = FilterAlunosPeriodo(alunos, request.SearchFilter!, cancellationToken);

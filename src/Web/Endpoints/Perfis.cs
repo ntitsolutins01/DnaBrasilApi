@@ -1,5 +1,4 @@
-﻿using Azure.Core;
-using DnaBrasilApi.Application.Perfis.Commands.CreatePerfil;
+﻿using DnaBrasilApi.Application.Perfis.Commands.CreatePerfil;
 using DnaBrasilApi.Application.Perfis.Commands.DeletePerfil;
 using DnaBrasilApi.Application.Perfis.Commands.UpdatePerfil;
 using DnaBrasilApi.Application.Perfis.Queries;

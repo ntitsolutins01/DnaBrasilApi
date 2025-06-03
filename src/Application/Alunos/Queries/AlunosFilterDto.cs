@@ -1,6 +1,4 @@
-﻿using DnaBrasilApi.Domain.Entities;
-
-namespace DnaBrasilApi.Application.Alunos.Queries;
+﻿namespace DnaBrasilApi.Application.Alunos.Queries;
 public class AlunosFilterDto
 {
 
@@ -11,9 +9,13 @@ public class AlunosFilterDto
     public string? Estado { get; set; }
     public string? MunicipioId { get; set; }
     public string? LocalidadeId { get; set; }
+    public string? ProfissionalId { get; set; }
     public string? DeficienciaId { get; set; }
     public string? Etnia { get; set; }
     public string? Nome { get; set; }
+    public bool PossuiFoto { get; set; }
+    public string? AlunoId { get; set; }
+    public string? SerieId { get; set; }
     #endregion
 
     public List<AlunoIndexDto>? Alunos { get; set; }

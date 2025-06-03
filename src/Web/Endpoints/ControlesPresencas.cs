@@ -1,14 +1,14 @@
-﻿using DnaBrasilApi.Application.ControlesPresencas.Queries.GetControlesPresencasAll;
+﻿using DnaBrasilApi.Application.Common.Models;
 using DnaBrasilApi.Application.ControlesPresencas.Commands.CreateControlePresenca;
 using DnaBrasilApi.Application.ControlesPresencas.Commands.DeleteControlePresenca;
 using DnaBrasilApi.Application.ControlesPresencas.Commands.UpdateControlePresenca;
 using DnaBrasilApi.Application.ControlesPresencas.Queries;
 using DnaBrasilApi.Application.ControlesPresencas.Queries.GetControlePresencaById;
+using DnaBrasilApi.Application.ControlesPresencas.Queries.GetControlesPresencasAll;
 using DnaBrasilApi.Application.ControlesPresencas.Queries.GetControlesPresencasByAlunoId;
+using DnaBrasilApi.Application.ControlesPresencas.Queries.GetControlesPresencasByEventoId;
 using DnaBrasilApi.Application.ControlesPresencas.Queries.GetControlesPresencasByFilter;
 using Microsoft.AspNetCore.Mvc;
-using DnaBrasilApi.Application.ControlesPresencas.Queries.GetControlesPresencasByEventoId;
-using DnaBrasilApi.Application.Common.Models;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -127,7 +127,7 @@ public class ControlesPresencas : EndpointGroupBase
     /// <param name="sender">sender</param>
     /// <param name="alunoId">Id do Aluno</param>
     /// <returns>Retorna a lista de Controle de Presença</returns>
-    public async Task<List<ControlePresencaDto>> GetControlesPresencasByAlunoId(ISender sender, int alunoId)
+    public async Task<List<ControlePresencaAlunoDto>> GetControlesPresencasByAlunoId(ISender sender, int alunoId)
     {
         return await sender.Send(new GetControlesPresencasByAlunoIdQuery() { AlunoId = alunoId });
     }

@@ -1,4 +1,3 @@
-using System.Text.RegularExpressions;
 using DnaBrasilApi.Application.Common.Interfaces;
 
 namespace DnaBrasilApi.Application.PlanosAulas.Commands.UpdatePlanoAula;

@@ -4,9 +4,9 @@ using DnaBrasilApi.Domain.Enums;
 
 namespace DnaBrasilApi.Application.Laudos.Commands.UpdateSaudeBucal;
 
-public record UpdateSaudeBucalCommand : IRequest <bool>
+public record UpdateSaudeBucalCommand : IRequest<bool>
 {
-    public required  int Id { get; init; }
+    public required int Id { get; init; }
     public required int ProfissionalId { get; init; }
     public required string Respostas { get; init; }
     public required string StatusSaudeBucal { get; init; }

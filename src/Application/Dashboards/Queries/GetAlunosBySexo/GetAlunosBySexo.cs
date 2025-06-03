@@ -1,6 +1,4 @@
-﻿using DnaBrasilApi.Application.Alunos.Queries;
-using DnaBrasilApi.Application.Common.Interfaces;
-using DnaBrasilApi.Application.Fomentos.Queries;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Dashboards.Queries.GetAlunosBySexo;
@@ -25,10 +23,11 @@ public class GetAlunosBySexoQueryHandler : IRequestHandler<GetAlunosBySexoQuery,
     {
         int result = string.IsNullOrWhiteSpace(request.SearchFilter!.Sexo)
             ? await _context.Alunos
+                .Where(x => x.Convidado == false)
                 .AsNoTracking()
                 .CountAsync(cancellationToken)
             : await _context.Alunos
-                .Where(x => x.Sexo == request.SearchFilter!.Sexo)
+                .Where(x => x.Sexo == request.SearchFilter!.Sexo && x.Convidado == false)
                 .AsNoTracking()
                 .CountAsync(cancellationToken);
 

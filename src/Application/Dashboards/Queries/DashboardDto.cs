@@ -1,7 +1,4 @@
-﻿using DnaBrasilApi.Application.Laudos.Queries;
-using DnaBrasilApi.Application.Parceiros.Queries;
-
-namespace DnaBrasilApi.Application.Dashboards.Queries;
+﻿namespace DnaBrasilApi.Application.Dashboards.Queries;
 public class DashboardDto
 {
     public int AvaliacoesDna { get; set; }
@@ -18,7 +15,6 @@ public class DashboardDto
     public int Ultimos3Meses { get; set; }
     public int Ultimos6Meses { get; set; }
     public int Em1Ano { get; set; }
-    public Dictionary<string, decimal>? PercentualSaude { get; set; }
     public TotalizadorSexoSaudeDto? ListTotalizadorSaudeSexo { get; set; }
     public TotalizadorTalentoDto? ListTotalizadorTalento { get; set; }
     public TotalizadorDesempenhoDto? ListTotalizadorDesempenho { get; set; }

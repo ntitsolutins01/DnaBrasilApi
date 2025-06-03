@@ -1,6 +1,4 @@
-﻿using DnaBrasilApi.Domain.Entities;
-
-namespace DnaBrasilApi.Application.Materiais.Queries;
+﻿namespace DnaBrasilApi.Application.Materiais.Queries;
 public class MateriaisFilterDto
 {
 

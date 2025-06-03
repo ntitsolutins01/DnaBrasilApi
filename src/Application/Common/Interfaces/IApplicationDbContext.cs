@@ -21,8 +21,6 @@ public interface IApplicationDbContext
     DbSet<ConsumoAlimentar> ConsumoAlimentares { get; }
     DbSet<Vocacional> Vocacionais { get; }
     DbSet<Aluno> Alunos { get; }
-    DbSet<Matricula> Matriculas { get; }
-    DbSet<Voucher> Vouchers { get; }
     DbSet<Parceiro> Parceiros { get; }
     DbSet<PlanoAula> PlanosAulas { get; }
     DbSet<Questionario> Questionarios { get; }
@@ -60,7 +58,6 @@ public interface IApplicationDbContext
     DbSet<GrupoMaterial> GruposMateriais { get; }
     DbSet<TipoMaterial> TiposMateriais { get; }
     DbSet<Material> Materiais { get; }
-    DbSet<ControleMensalEstoque> ControlesMensaisEstoque { get; }
     DbSet<ControleMaterialEstoqueSaida> ControlesMateriaisEstoquesSaidas { get; }
     DbSet<ProfissionalModalidade> ProfissionalModalidades { get; }
     DbSet<FomentoLocalidade> FomentoLocalidades { get; }
@@ -68,6 +65,16 @@ public interface IApplicationDbContext
     DbSet<Certificado> Certificados { get; }
     DbSet<AlunoModalidade> AlunoModalidades { get; }
     DbSet<Ranking> Rankings { get; }
-
+    DbSet<AtividadeAluno> AtividadeAlunos { get; }
+    DbSet<EtapaEnsino> EtapasEnsino { get; }
+    DbSet<IdebDimensaoNacional> IdebDimensoesNacional { get; }
+    DbSet<IdebDimensaoEstadual> IdebDimensoesEstadual { get; }
+    DbSet<ModeloCarteirinha> ModelosCarteirinhas { get; }
+    DbSet<AlunoCursoCertificado> AlunoCursosCertificados { get; }
+    DbSet<Inventario> Inventarios { get; }
+    DbSet<ArquivosInventario> ArquivosInventarios { get; }
+    DbSet<AlunoPresenca> AlunosPresencas { get; }
+    DbSet<AlunoAula> AlunosAulas { get; }
+    DbSet<Educacional> Educacionais { get; }
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

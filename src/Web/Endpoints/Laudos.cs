@@ -1,23 +1,27 @@
+using DnaBrasilApi.Application.Common.Models;
 using DnaBrasilApi.Application.Encaminhamentos.Queries;
 using DnaBrasilApi.Application.Laudos.Commands.CreateLaudo;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoConsumoAlimentar;
+using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoQualidadeVida;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoSaudeBucal;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoTalentoEsportivo;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoTalentoEsportivoV1;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoVocacional;
-using DnaBrasilApi.Application.Laudos.Queries;
-using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoByQualidadeDeVidaId;
-using DnaBrasilApi.Application.Laudos.Queries.GetLaudosAll;
-using DnaBrasilApi.Application.Laudos.Queries.GetLaudoByAluno;
-using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoBySaudeId;
-using DnaBrasilApi.Application.Common.Models;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateLaudo;
-using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoByVocacional;
+using DnaBrasilApi.Application.Laudos.Commands.UpdateModalidadeLaudo;
+using DnaBrasilApi.Application.Laudos.Queries;
 using DnaBrasilApi.Application.Laudos.Queries.GetDesempenhoByAluno;
+using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoByConsumoAlimentarId;
+using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoByQualidadeDeVidaId;
+using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoBySaudeBucalId;
+using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoBySaudeId;
+using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoByVocacional;
+using DnaBrasilApi.Application.Laudos.Queries.GetLaudoByAluno;
 using DnaBrasilApi.Application.Laudos.Queries.GetLaudoById;
+using DnaBrasilApi.Application.Laudos.Queries.GetLaudosAll;
 using DnaBrasilApi.Application.Laudos.Queries.GetLaudosByFilter;
+using DnaBrasilApi.Application.Laudos.Queries.GetLaudosResumidosByFilter;
 using Microsoft.AspNetCore.Mvc;
-using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoQualidadeVida;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -31,6 +35,7 @@ public class Laudos : EndpointGroupBase
             .MapGet(GetLaudoById, "{id}")
             .MapPost(CreateLaudo)
             .MapPut(UpdateLaudo, "{id}")
+            .MapPut(UpdateModalidadeLaudo, "Modalidade/{alunoId}")
             .MapPut(UpdateEncaminhamentoTalentoEsportivo, "Encaminhamento/TalentoEsportivo/{alunoId}")
             .MapPut(UpdateEncaminhamentoTalentoEsportivoV1, "v1/Encaminhamento/TalentoEsportivo/{alunoId}")
             .MapPut(UpdateEncaminhamentoSaudeBucal, "Encaminhamento/SaudeBucal/{alunoId}")
@@ -41,9 +46,12 @@ public class Laudos : EndpointGroupBase
             .MapGet(GetLaudoByAluno, "Aluno/{id}")
             .MapGet(GetEncaminhamentoBySaudeId, "Encaminhamento/Saude/{id}")
             .MapGet(GetEncaminhamentoByQualidadeDeVidaId, "Encaminhamento/QualidadeDeVida/{id}")
+            .MapGet(GetEncaminhamentoByConsumoAlimentarId, "Encaminhamento/ConsumoAlimentar/{id}")
+            .MapGet(GetEncaminhamentoBySaudeBucalId, "Encaminhamento/SaudeBucal/{id}")
             .MapGet(GetEncaminhamentoByVocacional, "Encaminhamentos/Vocacional")
             .MapGet(GetDesempenhoByAluno, "Desempenho/{id}")
-            .MapPost(GetLaudosByFilter, "Filter");
+            .MapPost(GetLaudosByFilter, "Filter")
+            .MapPost(GetLaudosResumidosByFilter, "ResumidosFilter");
     }
     #endregion
 
@@ -82,6 +90,12 @@ public class Laudos : EndpointGroupBase
     public async Task<bool> UpdateEncaminhamentoTalentoEsportivo(ISender sender, int alunoId)
     {
         var result = await sender.Send(new UpdateEncaminhamentoTalentoEsportivoCommand(alunoId));
+        return result;
+    }
+
+    public async Task<bool> UpdateModalidadeLaudo(ISender sender, int alunoId)
+    {
+        var result = await sender.Send(new UpdateModalidadeLaudoCommand(alunoId));
         return result;
     }
     /// <summary>
@@ -199,7 +213,7 @@ public class Laudos : EndpointGroupBase
         return await sender.Send(new GetEncaminhamentoBySaudeIdQuery(id));
     }
     /// <summary>
-    /// Endpoint que busca Encaminhamento Quialidade de Vida por id
+    /// Endpoint que busca Encaminhamento Qualidade de Vida por id
     /// </summary>
     /// <param name="sender">sender</param>
     /// <param name="id">id que busca Encaminhamento Qualidade de Vidas por id</param>
@@ -217,11 +231,32 @@ public class Laudos : EndpointGroupBase
     {
         return await sender.Send(new GetEncaminhamentoByVocacionalQuery());
     }
+
     /// <summary>
-    /// Endpoint que busca Desempenho por Aluno
+    /// Endpoint que busca Encaminhamento Consumo Alimentar por id
     /// </summary>
     /// <param name="sender">sender</param>
-    /// <param name="id">ide que busca Desempenho por Aluno</param>
+    /// <param name="id">id que busca Encaminhamento Consumo Alimentar por id</param>
+    /// <returns>retorna o Encaminhamento de Consumo Alimentar por id</returns>
+    public async Task<EncaminhamentoDto> GetEncaminhamentoByConsumoAlimentarId(ISender sender, int id)
+    {
+        return await sender.Send(new GetEncaminhamentoByConsumoAlimentarIdQuery(id));
+    }
+    /// <summary>
+    /// Endpoint que busca Encaminhamento Saúde Bucal por id
+    /// </summary>
+    /// <param name="sender">sender</param>
+    /// <param name="id">id que busca Encaminhamento Saúde Bucal por id</param>
+    /// <returns>retorna o Encaminhamento de Saúde Bucal por id</returns>
+    public async Task<EncaminhamentoDto> GetEncaminhamentoBySaudeBucalId(ISender sender, int id)
+    {
+        return await sender.Send(new GetEncaminhamentoBySaudeBucalIdQuery(id));
+    }
+    /// <summary>
+    /// Endpoint que busca Desempenho do Aluno
+    /// </summary>
+    /// <param name="sender">sender</param>
+    /// <param name="id">Id do Aluno</param>
     /// <returns>retorna lista de Desempenho por Aluno</returns>
     public async Task<DesempenhoDto> GetDesempenhoByAluno(ISender sender, int id)
     {
@@ -244,6 +279,39 @@ public class Laudos : EndpointGroupBase
         var result = await sender.Send(new GetLaudosByFilterQuery() { SearchFilter = search });
 
         search.Laudos = result;
+
+        return search;
+    }
+    /// <summary>
+    /// Endpoint que busca Laudos Resumidos por Filtro
+    /// </summary>
+    /// <param name="sender">sender</param>
+    /// <param name="search">filtro para pesquisa de Laudos Resumidos</param>
+    /// <returns>retorna a lista de laudos resumidos por Filtro</returns>
+    public async Task<LaudosResumidosFilterDto> GetLaudosResumidosByFilter(ISender sender, [FromBody] LaudosResumidosFilterDto search)
+    {
+        //var usuario = await sender.Send(new GetUsuarioByEmailQuery() { Email = search.UsuarioEmail! });
+
+        //search.MunicipioId = usuario.MunicipioId;
+        //search.Estado = usuario.Uf;
+
+        var list = new List<LaudoResumidoDto>();
+
+        var result = await sender.Send(new GetLaudosResumidosByFilterQuery() { SearchFilter = search });
+
+        foreach (var item in result)
+        {
+            item.Desempenho = await sender.Send(new GetDesempenhoByAlunoQuery((int)item.AlunoId!));
+            if (item.QualidadeDeVidaId != null)
+            {
+                item.EncaminhamentoQualidadeDeVida =
+                    await sender.Send(new GetEncaminhamentoByQualidadeDeVidaIdQuery((int)item.QualidadeDeVidaId));
+            }
+
+            list.Add(item);
+        }
+
+        search.LaudosResumidos = list;
 
         return search;
     }

@@ -35,6 +35,7 @@ public record UpdateAlunoCommand : IRequest<bool>
     public string? Etnia { get; set; }
     public int? ProfissionalId { get; set; }
     public string? ModalidadesIds { get; init; }
+    public int? SerieId { get; init; }
 }
 
 public class UpdateAlunoCommandHandler : IRequestHandler<UpdateAlunoCommand, bool>
@@ -97,12 +98,21 @@ public class UpdateAlunoCommandHandler : IRequestHandler<UpdateAlunoCommand, boo
             Guard.Against.NotFound((int)request.LinhaAcaoId, profissional);
         }
 
+        Serie? serie = null;
+
+        if (request.SerieId != null)
+        {
+            serie = await _context.Series.FindAsync(new object[] { request.SerieId }, cancellationToken);
+
+            Guard.Against.NotFound((int)request.SerieId, profissional);
+        }
+
         entity.AspNetUserId = request.AspNetUserId;
         entity.Nome = request.Nome!;
         entity.Email = request.Email!;
         entity.Sexo = request.Sexo!;
         entity.Etnia = request.Etnia!;
-        entity.DtNascimento = DateTime.ParseExact(request.DtNascimento!, "dd/MM/yyyy", CultureInfo.CreateSpecificCulture("pt-BR")); 
+        entity.DtNascimento = DateTime.ParseExact(request.DtNascimento!, "dd/MM/yyyy", CultureInfo.CreateSpecificCulture("pt-BR"));
         entity.NomeMae = request.NomeMae;
         entity.NomePai = request.NomePai;
         entity.Cpf = request.Cpf;
@@ -133,6 +143,7 @@ public class UpdateAlunoCommandHandler : IRequestHandler<UpdateAlunoCommand, boo
         }
 
         entity.AlunoModalidades = listAlunoModalidades;
+        entity.Serie = serie;
 
         var result = await _context.SaveChangesAsync(cancellationToken);
 

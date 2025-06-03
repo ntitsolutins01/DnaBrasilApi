@@ -30,7 +30,7 @@ public class UpdateQuestaoEadCommandHandler : IRequestHandler<UpdateQuestaoEadCo
         entity.Enunciado = request.Pergunta;
         entity.Referencia = request.Referencia;
         entity.Questao = request.Questao;
-        
+
         var result = await _context.SaveChangesAsync(cancellationToken);
 
         return result == 1;//true

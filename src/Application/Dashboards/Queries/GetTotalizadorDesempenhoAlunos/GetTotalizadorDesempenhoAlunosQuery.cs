@@ -1,6 +1,5 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
-using MediatR;
 
 namespace DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorDesempenhoAlunos;
 //[Authorize]
@@ -26,6 +25,7 @@ public class GetTotalizadorDesempenhoAlunosQueryHandler : IRequestHandler<GetTot
         IQueryable<Aluno> alunos;
 
         alunos = _context.Alunos//.Where(x => x.Id == 37297)//37315 - Feminino 38438
+            .Where(x => x.Convidado == false)
             .AsNoTracking();
 
         var result = FilterDesempenhoAlunos(alunos, request.SearchFilter!, cancellationToken);
@@ -87,7 +87,7 @@ public class GetTotalizadorDesempenhoAlunosQueryHandler : IRequestHandler<GetTot
             { "forcaMembrosSup", 0 },
             { "forcaExplosiva", 0 },
             { "aptidaoCardio", 0 },
-            
+
             { "shutlleRun", 0 },
             { "prancha", 0 },
             { "vo2Max", 0 }
@@ -100,7 +100,7 @@ public class GetTotalizadorDesempenhoAlunosQueryHandler : IRequestHandler<GetTot
             { "forcaMembrosSup", 0 },
             { "forcaExplosiva", 0 },
             { "aptidaoCardio", 0 },
-            
+
             { "shutlleRun", 0 },
             { "prancha", 0 },
             { "vo2Max", 0 }
@@ -112,7 +112,7 @@ public class GetTotalizadorDesempenhoAlunosQueryHandler : IRequestHandler<GetTot
             { "forcaMembrosSup", 0 },
             { "forcaExplosiva", 0 },
             { "aptidaoCardio", 0 },
-            
+
             { "resAbdominal", 0 },
             { "shutlleRun", 0 },
             { "prancha", 0 },
@@ -370,7 +370,7 @@ public class GetTotalizadorDesempenhoAlunosQueryHandler : IRequestHandler<GetTot
                                 //encaminhamento!.AddRange(modalidades
                                 //    .Where(x => flexibilidadeMuscular >= x.FlexibilidadeIni &&
                                 //                flexibilidadeMuscular <= x.FlexibilidadeFim)
-                                    //.Select(s => s.Nome).ToList()!);
+                                //.Select(s => s.Nome).ToList()!);
                                 break;
                             }
                         case "Preensão Manual" when
@@ -428,7 +428,7 @@ public class GetTotalizadorDesempenhoAlunosQueryHandler : IRequestHandler<GetTot
                                 //    .Select(s => s.Nome).ToList()!);
                                 break;
                             }
-                        case "Vo2 Max" when 
+                        case "Vo2 Max" when
                             aluno.TalentoEsportivo.Vo2Max >= item.PontoInicial &&
                             aluno.TalentoEsportivo.Vo2Max <= item.PontoFinal:
                             {
@@ -550,15 +550,15 @@ public class GetTotalizadorDesempenhoAlunosQueryHandler : IRequestHandler<GetTot
             //    .FindAsync(new object[] { aluno.TalentoEsportivo.Id }, cancellationToken);
 
             //Guard.Against.NotFound(aluno.TalentoEsportivo.Id, entity);
-            
+
             //entity.Encaminhamento = q.FirstOrDefault()!.Value;
 
             //var result = await _context.SaveChangesAsync(cancellationToken);
 
             //encaminhamento = new List<string>();
         }
-        
-        
+
+
 
         var totalMasc = dictTotalizadorDesempenhoMasculino.Skip(0).Sum(x => x.Value);
 

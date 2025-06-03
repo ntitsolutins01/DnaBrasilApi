@@ -1,4 +1,4 @@
-﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
 using DnaBrasilApi.Domain.Enums;
 
@@ -34,7 +34,6 @@ public class UpdateEncaminhamentoTalentoEsportivoCommandHandler : IRequestHandle
             var arr = new int[]
             {
                 request.AlunoId
-                //38651, 38685, 38694, 38721, 38742, 38743, 38744, 38746, 38756, 38761, 38765, 38795, 38796, 39795, 39798
             };
 
             foreach (int a in arr)
@@ -226,11 +225,24 @@ public class UpdateEncaminhamentoTalentoEsportivoCommandHandler : IRequestHandle
 
                         var nome = q.FirstOrDefault()!.Value;
 
-                        var encaminhamentoTalentoEsportivo = encaminhamentos.First(x => x.Nome == nome);
+                        var encaminhamentoTalentoEsportivo = encaminhamentos.First(x => x.Nome.Contains(nome));
 
                         entity.EncaminhamentoTexo = q.FirstOrDefault()!.Value;
                         entity.Encaminhamento = encaminhamentoTalentoEsportivo;
                         entity.Imc = GetImc((decimal)talentoEsportivo.Altura!, (decimal)talentoEsportivo.Peso!);
+
+                        await _context.SaveChangesAsync(cancellationToken);
+
+                        var modalidade = _context.Modalidades
+                            .FirstOrDefault(x => x.Nome!.Contains(entity.EncaminhamentoTexo));
+
+                        var laudo = _context.Laudos
+                            .FirstOrDefault(l => l.TalentoEsportivo != null && l.TalentoEsportivo.Id == entity.Id);
+
+                        if (laudo != null)
+                        {
+                            laudo.Modalidade = modalidade;
+                        }
 
                         await _context.SaveChangesAsync(cancellationToken);
                     }
@@ -251,8 +263,9 @@ public class UpdateEncaminhamentoTalentoEsportivoCommandHandler : IRequestHandle
 
             return true;
         }
-        catch
+        catch (Exception ex)
         {
+            Console.Write(ex.Message);
             return false;
         }
     }

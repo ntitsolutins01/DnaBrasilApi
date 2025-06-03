@@ -1,9 +1,9 @@
-﻿using DnaBrasilApi.Application.Respostas.Queries.GetRespostaById;
-using DnaBrasilApi.Application.Respostas.Commands.CreateResposta;
+﻿using DnaBrasilApi.Application.Respostas.Commands.CreateResposta;
 using DnaBrasilApi.Application.Respostas.Commands.DeleteResposta;
 using DnaBrasilApi.Application.Respostas.Commands.UpdateResposta;
 using DnaBrasilApi.Application.Respostas.Queries;
 using DnaBrasilApi.Application.Respostas.Queries.GetRespostaAll;
+using DnaBrasilApi.Application.Respostas.Queries.GetRespostaById;
 
 namespace DnaBrasilApi.Web.Endpoints;
 /// <summary>

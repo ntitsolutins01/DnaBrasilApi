@@ -1,6 +1,6 @@
 ﻿using DnaBrasilApi.Domain.Entities;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DnaBrasilApi.Infrastructure.Data.Configurations;
 public class SaudeBucalConfiguration : IEntityTypeConfiguration<SaudeBucal>
@@ -9,7 +9,7 @@ public class SaudeBucalConfiguration : IEntityTypeConfiguration<SaudeBucal>
     {
         builder.Property(t => t.Respostas)
             .HasMaxLength(500)
-            .IsRequired(); 
+            .IsRequired();
         builder.Property(t => t.StatusSaudeBucal)
             .HasMaxLength(1);
     }

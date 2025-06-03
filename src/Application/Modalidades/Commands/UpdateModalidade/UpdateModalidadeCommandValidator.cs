@@ -1,6 +1,4 @@
-﻿using DnaBrasilApi.Application.Modalidades.Commands.UpdateModalidade;
-
-namespace DnaBrasilApi.Application.Modalidades.Commands.UpdateModalidade;
+﻿namespace DnaBrasilApi.Application.Modalidades.Commands.UpdateModalidade;
 
 public class UpdateModalidadeCommandValidator : AbstractValidator<UpdateModalidadeCommand>
 {

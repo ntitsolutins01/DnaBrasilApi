@@ -1,7 +1,5 @@
-﻿using System.Linq;
-using DnaBrasilApi.Application.Common.Interfaces;
+﻿using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorDeficienciaAlunos;
 //[Authorize]
@@ -27,7 +25,8 @@ public class GetTotalizadorDeficienciaAlunosQueryHandler : IRequestHandler<GetTo
         IQueryable<Aluno> alunos;
 
         alunos = _context.Alunos
-            .Include(i=>i.Deficiencia)
+            .Where(x => x.Convidado == false)
+            .Include(i => i.Deficiencia)
             .AsNoTracking();
 
         var result = FilterAlunos(alunos, request.SearchFilter!, cancellationToken);
@@ -75,7 +74,7 @@ public class GetTotalizadorDeficienciaAlunosQueryHandler : IRequestHandler<GetTo
             alunos = alunos.Where(u => u.Etnia!.Equals(search.Etnia));
         }
 
-        var defici = _context.Deficiencias.Where(x => x.Status).Select(s=>s.Nome).ToList();
+        var defici = _context.Deficiencias.Where(x => x.Status).Select(s => s.Nome).ToList();
 
         Dictionary<string, decimal> dict = new();
         Dictionary<string, decimal> dictTotalizadorDeficienciaMasculino = new();

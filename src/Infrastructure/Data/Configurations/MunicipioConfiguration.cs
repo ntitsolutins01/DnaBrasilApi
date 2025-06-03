@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DnaBrasilApi.Domain.Entities;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using DnaBrasilApi.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using System.Diagnostics;
-using System.Reflection.Emit;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DnaBrasilApi.Infrastructure.Data.Configurations;
 public class MunicipioConfiguration : IEntityTypeConfiguration<Municipio>
@@ -17,8 +10,8 @@ public class MunicipioConfiguration : IEntityTypeConfiguration<Municipio>
         builder.Property(t => t.Nome)
             .HasMaxLength(150)
             .IsRequired();
-        builder.Property(t => t.Codigo)
-            .IsRequired();   
-            
+        builder.Property(t => t.CodigoIbge)
+            .IsRequired();
+
     }
 }

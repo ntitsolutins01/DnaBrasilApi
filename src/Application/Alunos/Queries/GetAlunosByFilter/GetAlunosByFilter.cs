@@ -1,5 +1,4 @@
- using DnaBrasilApi.Application.Common.Interfaces;
-using DnaBrasilApi.Application.Dashboards.Queries;
+using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Alunos.Queries.GetAlunosByFilter;
@@ -35,6 +34,13 @@ public class GetAlunosByFilterQueryHandler : IRequestHandler<GetAlunosByFilterQu
 
     private IQueryable<Aluno> FilterAlunos(IQueryable<Aluno> Alunos, AlunosFilterDto search, CancellationToken cancellationToken)
     {
+        if (!string.IsNullOrWhiteSpace(search.AlunoId))
+        {
+            var alunoId = Convert.ToInt32(search.AlunoId);
+
+            Alunos = Alunos.Where(u => u.Id == alunoId);
+        }
+
         if (!string.IsNullOrWhiteSpace(search.FomentoId))
         {
             var fomento = Convert.ToInt32(search.FomentoId);
@@ -60,6 +66,11 @@ public class GetAlunosByFilterQueryHandler : IRequestHandler<GetAlunosByFilterQu
         if (!string.IsNullOrWhiteSpace(search.LocalidadeId))
         {
             Alunos = Alunos.Where(u => u.Localidade!.Id == Convert.ToInt32(search.LocalidadeId));
+        }
+
+        if (!string.IsNullOrWhiteSpace(search.ProfissionalId))
+        {
+            Alunos = Alunos.Where(u => u.Profissional!.Id == Convert.ToInt32(search.ProfissionalId));
         }
 
         if (!string.IsNullOrWhiteSpace(search.DeficienciaId))
@@ -88,6 +99,18 @@ public class GetAlunosByFilterQueryHandler : IRequestHandler<GetAlunosByFilterQu
         if (!string.IsNullOrWhiteSpace(search.Sexo))
         {
             Alunos = Alunos.Where(u => u.Sexo!.Equals(search.Sexo));
+        }
+
+        if (search.PossuiFoto)
+        {
+            Alunos = Alunos.Where(u => u.ByteImage != null);
+        }
+
+        if (!string.IsNullOrWhiteSpace(search.SerieId))
+        {
+            var serieId = Convert.ToInt32(search.SerieId);
+
+            Alunos = Alunos.Where(u => u.Serie != null && u.Serie.Id == serieId);
         }
 
         return Alunos;
