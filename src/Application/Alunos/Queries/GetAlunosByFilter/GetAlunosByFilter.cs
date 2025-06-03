@@ -106,6 +106,13 @@ public class GetAlunosByFilterQueryHandler : IRequestHandler<GetAlunosByFilterQu
             Alunos = Alunos.Where(u => u.ByteImage != null);
         }
 
+        if (!string.IsNullOrWhiteSpace(search.SerieId))
+        {
+            var serieId = Convert.ToInt32(search.SerieId);
+
+            Alunos = Alunos.Where(u => u.Serie != null && u.Serie.Id == serieId);
+        }
+
         return Alunos;
     }
 }
