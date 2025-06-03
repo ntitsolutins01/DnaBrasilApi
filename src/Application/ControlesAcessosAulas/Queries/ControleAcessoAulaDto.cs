@@ -14,7 +14,7 @@ public class ControleAcessoAulaDto
     public DateTime? DataLiberacao { get; set; }
     public DateTime DataEncerramento { get; set; }
     public bool Status { get; set; }
- 
+
     private class Mapping : Profile
     {
         public Mapping()

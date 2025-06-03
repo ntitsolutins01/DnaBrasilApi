@@ -1,11 +1,9 @@
 using System.Reflection;
-using System.Reflection.Emit;
 using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
 using DnaBrasilApi.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 
 namespace DnaBrasilApi.Infrastructure.Data;
 
@@ -56,7 +54,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<ControleAcessoAula> ControlesAcessosAulas => Set<ControleAcessoAula>();
     public DbSet<Evento> Eventos => Set<Evento>();
     public DbSet<FotoEvento> FotosEvento => Set<FotoEvento>();
-    public DbSet<Encaminhamento> Encaminhamentos=> Set<Encaminhamento>();
+    public DbSet<Encaminhamento> Encaminhamentos => Set<Encaminhamento>();
     public DbSet<ControleMaterial> ControlesMateriais => Set<ControleMaterial>();
     public DbSet<QuestaoEad> QuestoesEad => Set<QuestaoEad>();
     public DbSet<RespostaEad> RespostasEad => Set<RespostaEad>();
@@ -84,6 +82,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<ArquivosInventario> ArquivosInventarios => Set<ArquivosInventario>();
     public DbSet<AlunoPresenca> AlunosPresencas => Set<AlunoPresenca>();
     public DbSet<AlunoAula> AlunosAulas => Set<AlunoAula>();
+    public DbSet<Educacional> Educacionais => Set<Educacional>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -159,7 +158,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
             .HasForeignKey(sc => sc.AlunoId);
 
         // AlunoCursoCertificado
-        builder.Entity<AlunoCursoCertificado>().HasKey(sc => new { sc.AlunoId, sc.CursoId, sc.CertificadoId });
+        builder.Entity<AlunoCursoCertificado>().HasKey(sc => new { sc.AlunoId, sc.CursoId });
 
         builder.Entity<AlunoCursoCertificado>()
             .HasOne<Aluno>(sc => sc.Aluno)
@@ -170,11 +169,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
             .HasOne<Curso>(sc => sc.Curso)
             .WithMany(s => s.AlunoCursosCertificados)
             .HasForeignKey(sc => sc.CursoId);
-
-        builder.Entity<AlunoCursoCertificado>()
-            .HasOne<Certificado>(sc => sc.Certificado)
-            .WithMany(s => s.AlunoCursosCertificados)
-            .HasForeignKey(sc => sc.CertificadoId);
 
         // AlunoPresenca
         builder.Entity<AlunoPresenca>().HasKey(sc => new { sc.AlunoId, AulaId = sc.AtividadeId });

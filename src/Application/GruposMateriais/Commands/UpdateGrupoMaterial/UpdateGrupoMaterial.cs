@@ -2,7 +2,7 @@
 
 namespace DnaBrasilApi.Application.GruposMateriais.Commands.UpdateGrupoMaterial;
 
-public record UpdateGrupoMaterialCommand : IRequest <bool>
+public record UpdateGrupoMaterialCommand : IRequest<bool>
 {
     public required int Id { get; init; }
     public required string Nome { get; init; }
@@ -17,7 +17,7 @@ public class UpdateGrupoMaterialCommandHandler : IRequestHandler<UpdateGrupoMate
         _context = context;
     }
 
-    public async Task <bool> Handle(UpdateGrupoMaterialCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(UpdateGrupoMaterialCommand request, CancellationToken cancellationToken)
     {
         var entity = await _context.GruposMateriais
             .FindAsync([request.Id], cancellationToken);

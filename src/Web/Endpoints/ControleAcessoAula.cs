@@ -1,8 +1,8 @@
-﻿using DnaBrasilApi.Application.ControlesAcessosAulas.Queries.GetControleAcessoAulaById;
-using DnaBrasilApi.Application.ControlesAcessosAulas.Commands.CreateControleAcessoAula;
+﻿using DnaBrasilApi.Application.ControlesAcessosAulas.Commands.CreateControleAcessoAula;
 using DnaBrasilApi.Application.ControlesAcessosAulas.Commands.DeleteControleAcessoAula;
 using DnaBrasilApi.Application.ControlesAcessosAulas.Commands.UpdateControleAcessoAula;
 using DnaBrasilApi.Application.ControlesAcessosAulas.Queries;
+using DnaBrasilApi.Application.ControlesAcessosAulas.Queries.GetControleAcessoAulaById;
 using DnaBrasilApi.Application.ControlesAcessosAulas.Queries.GetControlesAcessosAulasAll;
 
 namespace DnaBrasilApi.Web.Endpoints;

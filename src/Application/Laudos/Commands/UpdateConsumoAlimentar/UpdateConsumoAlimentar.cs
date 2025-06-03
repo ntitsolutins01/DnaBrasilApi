@@ -4,9 +4,9 @@ using DnaBrasilApi.Domain.Enums;
 
 namespace DnaBrasilApi.Application.Laudos.Commands.UpdateConsumoAlimentar;
 
-public record UpdateConsumoAlimentarCommand : IRequest <bool>
+public record UpdateConsumoAlimentarCommand : IRequest<bool>
 {
-    public required  int Id { get; init; }
+    public required int Id { get; init; }
     public required int ProfissionalId { get; init; }
     public required string Respostas { get; init; }
     public required string StatusConsumoAlimentar { get; init; }
@@ -21,7 +21,7 @@ public class UpdateConsumoAlimentarCommandHandler : IRequestHandler<UpdateConsum
         _context = context;
     }
 
-    public async Task <bool> Handle(UpdateConsumoAlimentarCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(UpdateConsumoAlimentarCommand request, CancellationToken cancellationToken)
     {
         var entity = await _context.ConsumoAlimentares
             .FindAsync([request.Id], cancellationToken);

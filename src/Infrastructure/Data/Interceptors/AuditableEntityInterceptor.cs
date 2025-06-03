@@ -28,7 +28,7 @@ public class AuditableEntityInterceptor : SaveChangesInterceptor
 
     public override ValueTask<InterceptionResult<int>> SavingChangesAsync(DbContextEventData eventData, InterceptionResult<int> result, CancellationToken cancellationToken = default)
     {
-        
+
 
         try
         {
@@ -38,8 +38,8 @@ public class AuditableEntityInterceptor : SaveChangesInterceptor
         }
         catch (Exception e)
         {
-                Console.WriteLine(e);
-                throw;
+            Console.WriteLine(e);
+            throw;
         }
     }
 
@@ -53,7 +53,7 @@ public class AuditableEntityInterceptor : SaveChangesInterceptor
             {
                 entry.Entity.CreatedBy = _user.Id;
                 entry.Entity.Created = _dateTime.GetUtcNow();
-            } 
+            }
 
             if (entry.State == EntityState.Added || entry.State == EntityState.Modified || entry.HasChangedOwnedEntities())
             {
@@ -67,8 +67,8 @@ public class AuditableEntityInterceptor : SaveChangesInterceptor
 public static class Extensions
 {
     public static bool HasChangedOwnedEntities(this EntityEntry entry) =>
-        entry.References.Any(r => 
-            r.TargetEntry != null && 
-            r.TargetEntry.Metadata.IsOwned() && 
+        entry.References.Any(r =>
+            r.TargetEntry != null &&
+            r.TargetEntry.Metadata.IsOwned() &&
             (r.TargetEntry.State == EntityState.Added || r.TargetEntry.State == EntityState.Modified));
 }

@@ -3,7 +3,7 @@ using DnaBrasilApi.Application.Common.Interfaces;
 
 namespace DnaBrasilApi.Application.Atividades.Commands.UpdateAtividade;
 
-public record UpdateAtividadeCommand : IRequest <bool>
+public record UpdateAtividadeCommand : IRequest<bool>
 {
     public required int Id { get; init; }
     public required string Turma { get; init; }
@@ -22,13 +22,13 @@ public class UpdateAtividadeCommandHandler : IRequestHandler<UpdateAtividadeComm
         _context = context;
     }
 
-    public async Task <bool> Handle(UpdateAtividadeCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(UpdateAtividadeCommand request, CancellationToken cancellationToken)
     {
         var entity = await _context.Atividades
             .FindAsync([request.Id], cancellationToken);
 
         Guard.Against.NotFound(request.Id, entity);
-        
+
         entity.Turma = request.Turma;
         entity.HrInicial = TimeSpan.Parse(request.HrInicial, new CultureInfo("en-US"));
         entity.HrFinal = TimeSpan.Parse(request.HrFinal, new CultureInfo("en-US"));

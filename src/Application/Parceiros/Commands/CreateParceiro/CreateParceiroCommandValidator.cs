@@ -1,5 +1,4 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
-using Microsoft.EntityFrameworkCore;
 
 namespace DnaBrasilApi.Application.Parceiros.Commands.CreateParceiro;
 

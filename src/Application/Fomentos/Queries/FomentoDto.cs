@@ -3,20 +3,20 @@
 namespace DnaBrasilApi.Application.Fomentos.Queries;
 public class FomentoDto
 {
-    public int Id { get; set; }
-    public string? IdIdMunicipio { get; set; }
-    public string? Codigo { get; set; }
-    public string? Nome { get; set; }
-    public string? MunicipioEstado { get; set; }
-    public string? MunicipioId { get; set; }
-    public string? Localidades { get; set; }
-    public string? LocalidadeId { get; set; }
-    public string? DtIni { get; set; }
-    public string? DtFim { get; set; }
-    public bool Status { get; set; }
-    public string? Sigla { get; set; }
-    public string? LinhasAcoesIds { get; set; }
-    public string? LocalidadesIds { get; set; }
+    public int Id { get; init; }
+    public string? IdIdMunicipio { get; init; }
+    public string? Codigo { get; init; }
+    public string? Nome { get; init; }
+    public string? MunicipioEstado { get; init; }
+    public string? MunicipioId { get; init; }
+    public string? Localidades { get; init; }
+    public string? LocalidadeId { get; init; }
+    public string? DtIni { get; init; }
+    public string? DtFim { get; init; }
+    public bool Status { get; init; }
+    public string? Sigla { get; init; }
+    public string? LinhasAcoesIds { get; init; }
+    public string? LocalidadesIds { get; init; }
 
     private class Mapping : Profile
     {

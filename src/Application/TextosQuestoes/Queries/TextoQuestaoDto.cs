@@ -1,5 +1,4 @@
-﻿using DnaBrasilApi.Application.TextosLaudos.Queries;
-using DnaBrasilApi.Domain.Entities;
+﻿using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.TextosQuestoes.Queries;
 

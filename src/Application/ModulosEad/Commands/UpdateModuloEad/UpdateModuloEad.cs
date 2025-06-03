@@ -2,7 +2,7 @@
 
 namespace DnaBrasilApi.Application.ModulosEad.Commands.UpdateModuloEad;
 
-public record UpdateModuloEadCommand : IRequest <bool>
+public record UpdateModuloEadCommand : IRequest<bool>
 {
     public required int Id { get; init; }
     public required string Titulo { get; set; }
@@ -20,14 +20,14 @@ public class UpdateModuloEadCommandHandler : IRequestHandler<UpdateModuloEadComm
         _context = context;
     }
 
-    public async Task <bool> Handle(UpdateModuloEadCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(UpdateModuloEadCommand request, CancellationToken cancellationToken)
     {
         var entity = await _context.ModulosEad
             .FindAsync([request.Id], cancellationToken);
 
         Guard.Against.NotFound(request.Id, entity);
 
-        
+
         entity.Titulo = request.Titulo;
         entity.Descricao = request.Descricao;
         entity.Status = request.Status;

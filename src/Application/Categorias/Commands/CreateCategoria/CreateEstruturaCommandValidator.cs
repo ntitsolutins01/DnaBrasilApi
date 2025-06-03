@@ -1,7 +1,4 @@
-﻿
-using DnaBrasilApi.Application.Categorias.Commands.CreateCategoria;
-
-namespace DnaBrasilApi.Application.Categorias.Commands.CreateCategoria;
+﻿namespace DnaBrasilApi.Application.Categorias.Commands.CreateCategoria;
 internal class CreateCategoriaCommandValidator : AbstractValidator<CreateCategoriaCommand>
 {
     public CreateCategoriaCommandValidator()

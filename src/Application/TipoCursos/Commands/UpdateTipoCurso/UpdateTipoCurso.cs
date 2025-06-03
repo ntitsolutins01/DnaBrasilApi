@@ -2,7 +2,7 @@
 
 namespace DnaBrasilApi.Application.TipoCursos.Commands.UpdateTipoCurso;
 
-public record UpdateTipoCursoCommand : IRequest <bool>
+public record UpdateTipoCursoCommand : IRequest<bool>
 {
     public required int Id { get; init; }
     public required string Nome { get; init; }
@@ -18,7 +18,7 @@ public class UpdateTipoCursoCommandHandler : IRequestHandler<UpdateTipoCursoComm
         _context = context;
     }
 
-    public async Task <bool> Handle(UpdateTipoCursoCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(UpdateTipoCursoCommand request, CancellationToken cancellationToken)
     {
         var entity = await _context.TipoCursos
             .FindAsync(new object[] { request.Id }, cancellationToken);

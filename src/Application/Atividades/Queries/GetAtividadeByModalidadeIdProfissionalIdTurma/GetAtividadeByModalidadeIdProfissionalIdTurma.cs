@@ -23,13 +23,13 @@ public class GetAtividadeByModalidadeIdProfissionalIdTurmaQueryHandler : IReques
     public async Task<List<AtividadeDto>> Handle(GetAtividadeByModalidadeIdProfissionalIdTurmaQuery request, CancellationToken cancellationToken)
     {
         var result = await _context.Atividades
-            .Where(x => x.Profissional.Id == request.ProfissionalId 
+            .Where(x => x.Profissional.Id == request.ProfissionalId
                         && x.Modalidade.Id == request.ModalidadeId
                         && x.Turma == request.Turma)
             .AsNoTracking()
             .ProjectTo<AtividadeDto>(_mapper.ConfigurationProvider)
             .ToListAsync(cancellationToken);
-        
+
         return result;
     }
 }

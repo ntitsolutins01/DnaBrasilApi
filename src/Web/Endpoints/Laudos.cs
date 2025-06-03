@@ -1,27 +1,27 @@
+using DnaBrasilApi.Application.Common.Models;
 using DnaBrasilApi.Application.Encaminhamentos.Queries;
 using DnaBrasilApi.Application.Laudos.Commands.CreateLaudo;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoConsumoAlimentar;
+using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoQualidadeVida;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoSaudeBucal;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoTalentoEsportivo;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoTalentoEsportivoV1;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoVocacional;
-using DnaBrasilApi.Application.Laudos.Queries;
-using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoByQualidadeDeVidaId;
-using DnaBrasilApi.Application.Laudos.Queries.GetLaudosAll;
-using DnaBrasilApi.Application.Laudos.Queries.GetLaudoByAluno;
-using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoBySaudeId;
-using DnaBrasilApi.Application.Common.Models;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateLaudo;
-using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoByVocacional;
-using DnaBrasilApi.Application.Laudos.Queries.GetDesempenhoByAluno;
-using DnaBrasilApi.Application.Laudos.Queries.GetLaudoById;
-using DnaBrasilApi.Application.Laudos.Queries.GetLaudosByFilter;
-using Microsoft.AspNetCore.Mvc;
-using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoQualidadeVida;
-using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoByConsumoAlimentarId;
-using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoBySaudeBucalId;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateModalidadeLaudo;
+using DnaBrasilApi.Application.Laudos.Queries;
+using DnaBrasilApi.Application.Laudos.Queries.GetDesempenhoByAluno;
+using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoByConsumoAlimentarId;
+using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoByQualidadeDeVidaId;
+using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoBySaudeBucalId;
+using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoBySaudeId;
+using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoByVocacional;
+using DnaBrasilApi.Application.Laudos.Queries.GetLaudoByAluno;
+using DnaBrasilApi.Application.Laudos.Queries.GetLaudoById;
+using DnaBrasilApi.Application.Laudos.Queries.GetLaudosAll;
+using DnaBrasilApi.Application.Laudos.Queries.GetLaudosByFilter;
 using DnaBrasilApi.Application.Laudos.Queries.GetLaudosResumidosByFilter;
+using Microsoft.AspNetCore.Mvc;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -92,7 +92,7 @@ public class Laudos : EndpointGroupBase
         var result = await sender.Send(new UpdateEncaminhamentoTalentoEsportivoCommand(alunoId));
         return result;
     }
-    
+
     public async Task<bool> UpdateModalidadeLaudo(ISender sender, int alunoId)
     {
         var result = await sender.Send(new UpdateModalidadeLaudoCommand(alunoId));
@@ -238,7 +238,7 @@ public class Laudos : EndpointGroupBase
     /// <param name="sender">sender</param>
     /// <param name="id">id que busca Encaminhamento Consumo Alimentar por id</param>
     /// <returns>retorna o Encaminhamento de Consumo Alimentar por id</returns>
-    public async Task <EncaminhamentoDto> GetEncaminhamentoByConsumoAlimentarId(ISender sender, int id)
+    public async Task<EncaminhamentoDto> GetEncaminhamentoByConsumoAlimentarId(ISender sender, int id)
     {
         return await sender.Send(new GetEncaminhamentoByConsumoAlimentarIdQuery(id));
     }
@@ -248,7 +248,7 @@ public class Laudos : EndpointGroupBase
     /// <param name="sender">sender</param>
     /// <param name="id">id que busca Encaminhamento Saúde Bucal por id</param>
     /// <returns>retorna o Encaminhamento de Saúde Bucal por id</returns>
-    public async Task <EncaminhamentoDto> GetEncaminhamentoBySaudeBucalId(ISender sender, int id)
+    public async Task<EncaminhamentoDto> GetEncaminhamentoBySaudeBucalId(ISender sender, int id)
     {
         return await sender.Send(new GetEncaminhamentoBySaudeBucalIdQuery(id));
     }

@@ -11,6 +11,7 @@ public class EncaminhamentoDto
     public string? Descricao { get; init; }
     public bool Status { get; init; }
     public byte[]? ByteImage { get; set; }
+    public string? NomeImagem { get; init; }
 
 
     private class Mapping : Profile

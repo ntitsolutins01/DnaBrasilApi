@@ -1,9 +1,8 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
-using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Disciplinas.Commands.UpdateDisciplina;
 
-public record UpdateDisciplinaCommand : IRequest <bool>
+public record UpdateDisciplinaCommand : IRequest<bool>
 {
     public required int Id { get; init; }
     public required string Nome { get; init; }
@@ -20,7 +19,7 @@ public class UpdateDisciplinaCommandHandler : IRequestHandler<UpdateDisciplinaCo
         _context = context;
     }
 
-    public async Task <bool> Handle(UpdateDisciplinaCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(UpdateDisciplinaCommand request, CancellationToken cancellationToken)
     {
         var entity = await _context.Disciplinas
             .FindAsync(new object[] { request.Id }, cancellationToken);

@@ -1,4 +1,3 @@
-using System.Text.RegularExpressions;
 using DnaBrasilApi.Application.Common.Interfaces;
 
 namespace DnaBrasilApi.Application.Profissionais.Commands.UpdateProfissional;
@@ -25,7 +24,7 @@ public class UpdateProfissionalCommandValidator : AbstractValidator<UpdateProfis
             .NotEmpty().WithMessage("É necessário um endereço de e-mail")
             .EmailAddress().WithMessage("É necessário um e-mail válido");
 
-        
+
         RuleFor(v => v.Endereco)
             .MaximumLength(200);
 

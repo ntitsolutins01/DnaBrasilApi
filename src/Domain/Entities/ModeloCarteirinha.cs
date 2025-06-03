@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace DnaBrasilApi.Domain.Entities;
+﻿namespace DnaBrasilApi.Domain.Entities;
 public class ModeloCarteirinha : BaseAuditableEntity
 {
     public required Fomentu Fomento { get; set; }

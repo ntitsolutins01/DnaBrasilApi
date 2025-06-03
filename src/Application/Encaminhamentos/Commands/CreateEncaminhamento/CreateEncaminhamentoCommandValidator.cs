@@ -1,6 +1,4 @@
-﻿using DnaBrasilApi.Application.Encaminhamentos.Commands.CreateEncaminhamento;
-
-namespace DnaBrasilApi.Application.Encaminhamentos.Commands.CreateEncaminhamento;
+﻿namespace DnaBrasilApi.Application.Encaminhamentos.Commands.CreateEncaminhamento;
 internal class CreateEncaminhamentoCommandValidator : AbstractValidator<CreateEncaminhamentoCommand>
 {
     public CreateEncaminhamentoCommandValidator()

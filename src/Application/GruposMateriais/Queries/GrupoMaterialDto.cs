@@ -1,4 +1,3 @@
-using System.ComponentModel.DataAnnotations.Schema;
 using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.GruposMateriais.Queries;

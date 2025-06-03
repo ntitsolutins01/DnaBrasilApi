@@ -27,7 +27,7 @@ public class GetProfissionalByCpfCnpjQueryHandler : IRequestHandler<GetProfissio
             .ProjectTo<ProfissionalDto>(_mapper.ConfigurationProvider)
             .OrderBy(t => t.Id)
             .FirstOrDefaultAsync(cancellationToken);
-        
+
         return result!;
     }
 }

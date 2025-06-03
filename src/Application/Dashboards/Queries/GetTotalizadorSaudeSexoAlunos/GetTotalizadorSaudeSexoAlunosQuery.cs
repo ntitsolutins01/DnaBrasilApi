@@ -1,7 +1,5 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
-using DnaBrasilApi.Application.Laudos.Queries;
 using DnaBrasilApi.Domain.Entities;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorSaudeSexoAlunos;
 //[Authorize]

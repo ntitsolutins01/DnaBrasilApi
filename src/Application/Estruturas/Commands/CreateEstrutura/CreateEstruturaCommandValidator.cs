@@ -1,7 +1,4 @@
-﻿
-using DnaBrasilApi.Application.Estruturas.Commands.CreateEstrutura;
-
-namespace DnaBrasilApi.Application.Estruturas.Commands.CreateEstrutura;
+﻿namespace DnaBrasilApi.Application.Estruturas.Commands.CreateEstrutura;
 internal class CreateEstruturaCommandValidator : AbstractValidator<CreateEstruturaCommand>
 {
     public CreateEstruturaCommandValidator()

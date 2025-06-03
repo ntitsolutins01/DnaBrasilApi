@@ -1,5 +1,4 @@
 ﻿using DnaBrasilApi.Application.Encaminhamentos.Queries;
-using DnaBrasilApi.Application.Profissionais.Queries;
 using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.TalentosEsportivos.Queries;

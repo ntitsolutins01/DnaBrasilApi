@@ -1,8 +1,8 @@
-﻿using DnaBrasilApi.Application.LinhasAcoes.Queries.GetLinhaAcaoById;
-using DnaBrasilApi.Application.LinhasAcoes.Commands.CreateLinhaAcao;
+﻿using DnaBrasilApi.Application.LinhasAcoes.Commands.CreateLinhaAcao;
 using DnaBrasilApi.Application.LinhasAcoes.Commands.DeleteLinhaAcao;
 using DnaBrasilApi.Application.LinhasAcoes.Commands.UpdateLinhaAcao;
 using DnaBrasilApi.Application.LinhasAcoes.Queries;
+using DnaBrasilApi.Application.LinhasAcoes.Queries.GetLinhaAcaoById;
 using DnaBrasilApi.Application.LinhasAcoes.Queries.GetLinhasAcoesAll;
 
 namespace DnaBrasilApi.Web.Endpoints;

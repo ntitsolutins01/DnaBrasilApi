@@ -19,11 +19,11 @@ public class GetNomeAlunosByLocalidadeIdQueryHandler : IRequestHandler<GetNomeAl
     public async Task<List<SelectListDto>> Handle(GetNomeAlunosByLocalidadeIdQuery request, CancellationToken cancellationToken)
     {
         var result = await _context.Alunos
-                .Where(x => x.Localidade!.Id == request.LocalidadeId && x.Convidado == false)
-                .OrderBy(t => t.Nome)
-                .Select(s => new SelectListDto { Id = s.Id, Nome = s.Id + " - " + s.Nome.ToUpper() })
-                .AsNoTracking()
-                .ToListAsync(cancellationToken);
+            .Where(x => x.Localidade!.Id == request.LocalidadeId && x.Convidado == false)                
+            .OrderBy(t => t.Nome)
+            .Select(s => new SelectListDto { Id = s.Id, Nome = s.Id + " - " + s.Nome.ToUpper() })
+            .AsNoTracking()
+            .ToListAsync(cancellationToken);
 
         return result;
     }

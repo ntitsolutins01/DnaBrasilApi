@@ -3,8 +3,8 @@
 public class ModuloEad : BaseAuditableEntity
 {
     public required Curso Curso { get; set; }
-    public required string Titulo { get; set; }    
-    public string?  Descricao { get; set; }  
+    public required string Titulo { get; set; }
+    public string? Descricao { get; set; }
     public bool Status { get; set; } = true;
     public int? Ordem { get; set; }
 }

@@ -1,9 +1,8 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
-using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Laudos.Commands.UpdateSaude;
 
-public record UpdateSaudeCommand : IRequest <bool>
+public record UpdateSaudeCommand : IRequest<bool>
 {
     public required int Id { get; init; }
     public required decimal EnvergaduraSaude { get; init; }
@@ -21,7 +20,7 @@ public class UpdateSaudeCommandHandler : IRequestHandler<UpdateSaudeCommand, boo
         _context = context;
     }
 
-    public async Task <bool> Handle(UpdateSaudeCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(UpdateSaudeCommand request, CancellationToken cancellationToken)
     {
         var entity = await _context.Saudes
             .FindAsync([request.Id], cancellationToken);

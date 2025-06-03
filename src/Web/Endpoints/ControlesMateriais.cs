@@ -1,8 +1,8 @@
-﻿using DnaBrasilApi.Application.ControlesMateriais.Queries.GetControleMaterialById;
-using DnaBrasilApi.Application.ControlesMateriais.Commands.CreateControleMaterial;
+﻿using DnaBrasilApi.Application.ControlesMateriais.Commands.CreateControleMaterial;
 using DnaBrasilApi.Application.ControlesMateriais.Commands.DeleteControleMaterial;
 using DnaBrasilApi.Application.ControlesMateriais.Commands.UpdateControleMaterial;
 using DnaBrasilApi.Application.ControlesMateriais.Queries;
+using DnaBrasilApi.Application.ControlesMateriais.Queries.GetControleMaterialById;
 using DnaBrasilApi.Application.ControlesMateriais.Queries.GetControlesMateriaisAll;
 
 namespace DnaBrasilApi.Web.Endpoints;

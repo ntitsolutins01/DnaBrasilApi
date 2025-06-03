@@ -1,5 +1,4 @@
-﻿using DnaBrasilApi.Application.Alunos.Queries;
-using DnaBrasilApi.Application.Common.Models;
+﻿using DnaBrasilApi.Application.Common.Models;
 
 namespace DnaBrasilApi.Application.ControlesPresencas.Queries;
 public class ControlesPresencasFilterDto

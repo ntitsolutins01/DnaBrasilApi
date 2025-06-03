@@ -1,6 +1,5 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
-using DnaBrasilApi.Domain.Enums;
 
 namespace DnaBrasilApi.Application.Laudos.Commands.UpdateModalidadeLaudo;
 
@@ -21,8 +20,8 @@ public class UpdateModalidadeLaudoCommandHandler : IRequestHandler<UpdateModalid
         {
 
             var laudos = await _context.Laudos
-                .Include(i=>i.Modalidade)
-                .Include(i=>i.TalentoEsportivo!.Encaminhamento)
+                .Include(i => i.Modalidade)
+                .Include(i => i.TalentoEsportivo!.Encaminhamento)
                 .Where(x => x.Modalidade == null && x.TalentoEsportivo != null)
                 .ToListAsync();
 

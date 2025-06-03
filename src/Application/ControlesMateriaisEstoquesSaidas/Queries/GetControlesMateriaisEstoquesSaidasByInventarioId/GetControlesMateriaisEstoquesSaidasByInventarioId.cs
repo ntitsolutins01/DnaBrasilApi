@@ -21,7 +21,7 @@ public class GetControlesMateriaisEstoquesSaidasByInventarioIdQueryHandler : IRe
     public async Task<List<ControleMaterialEstoqueSaidaDto>> Handle(GetControlesMateriaisEstoquesSaidasByInventarioIdQuery request, CancellationToken cancellationToken)
     {
         var result = await _context.ControlesMateriaisEstoquesSaidas
-            .Include(i=>i.Inventario)
+            .Include(i => i.Inventario)
             .Where(x => x.Inventario.Id == request.InventarioId)
             .AsNoTracking()
             .ProjectTo<ControleMaterialEstoqueSaidaDto>(_mapper.ConfigurationProvider)

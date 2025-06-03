@@ -26,7 +26,7 @@ public class GetUsuarioByCpfQueryHandler : IRequestHandler<GetUsuarioByCpfQuery,
             .ProjectTo<UsuarioDto>(_mapper.ConfigurationProvider)
             .OrderBy(t => t.Id)
             .FirstOrDefaultAsync(cancellationToken);
-        
+
         return result!;
     }
 }

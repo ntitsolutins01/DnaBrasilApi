@@ -9,7 +9,7 @@ public class ControleAcessoAulaConfiguration : IEntityTypeConfiguration<Controle
     public void Configure(EntityTypeBuilder<ControleAcessoAula> builder)
     {
         builder.Property(t => t.LiberacaoAula).HasMaxLength(100);
-        
+
     }
 }
 

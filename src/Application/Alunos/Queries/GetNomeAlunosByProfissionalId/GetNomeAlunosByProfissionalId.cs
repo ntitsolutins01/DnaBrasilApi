@@ -22,12 +22,12 @@ public class GetNomeAlunosByProfissionalIdQueryHandler : IRequestHandler<GetNome
     {
         var result = new List<SelectListDto>();
 
-            result = await _context.Alunos
-                .Where(x => x.Profissional!.Id == request.ProfissionalId)
-                .Select(s => new SelectListDto { Id = s.Id, Nome = s.Id + " - " + s.Nome.ToUpper() })
-                .AsNoTracking()
-                .OrderBy(t => t.Nome)
-                .ToListAsync(cancellationToken);
+        result = await _context.Alunos
+            .Where(x => x.Profissional!.Id == request.ProfissionalId)
+            .Select(s => new SelectListDto { Id = s.Id, Nome = s.Id + " - " + s.Nome.ToUpper() })
+            .AsNoTracking()
+            .OrderBy(t => t.Nome)
+            .ToListAsync(cancellationToken);
 
         return result;
     }

@@ -7,8 +7,8 @@ public record CreateMetricaImcCommand : IRequest<int>
 {
     public int? Idade { get; set; }
     public string? Sexo { get; set; }
-    public string? Classificacao{ get; init; }
-    public decimal ValorInicial{ get; init; }
+    public string? Classificacao { get; init; }
+    public decimal ValorInicial { get; init; }
     public decimal ValorFinal { get; init; }
     public bool Status { get; init; } = true;
 }

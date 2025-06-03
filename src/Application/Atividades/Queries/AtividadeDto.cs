@@ -1,4 +1,3 @@
-using System;
 using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Atividades.Queries;

@@ -23,7 +23,7 @@ public class UpdateEncaminhamentoVocacionalCommandHandler : IRequestHandler<Upda
 
         var listVocacionais = _context.Vocacionais
             .Include(i => i.Encaminhamento)
-            .Where(x=>x.Encaminhamento == null)
+            .Where(x => x.Encaminhamento == null)
             .AsNoTracking()
             .OrderByDescending(t => t.Id);
 

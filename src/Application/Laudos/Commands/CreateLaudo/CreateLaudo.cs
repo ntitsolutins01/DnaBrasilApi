@@ -14,6 +14,7 @@ public record CreateLaudoCommand : IRequest<int>
     public int? TalentoEsportivoId { get; init; }
     public string? StatusLaudo { get; init; }
     public int? ModalidadeId { get; init; }
+    public int? Ordem { get; init; }
 }
 
 public class CreateLaudoCommandHandler : IRequestHandler<CreateLaudoCommand, int>
@@ -142,7 +143,8 @@ public class CreateLaudoCommandHandler : IRequestHandler<CreateLaudoCommand, int
             SaudeBucal = saudeBucal,
             TalentoEsportivo = talentoEsportivo,
             StatusLaudo = request.StatusLaudo,
-            Modalidade = modalidade
+            Modalidade = modalidade,
+            Ordem =request.Ordem
 
         };
 

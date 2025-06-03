@@ -1,6 +1,6 @@
 ﻿namespace DnaBrasilApi.Application.Dashboards.Queries
 {
-	public class StatusLaudosDto
+    public class StatusLaudosDto
     {
         public int TotTalentoEsportivoFinalizado { get; set; }
         public int TotTalentoEsportivoAndamento { get; set; }

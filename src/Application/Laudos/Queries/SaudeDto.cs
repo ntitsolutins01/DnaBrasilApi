@@ -34,7 +34,7 @@ public class SaudeDto
             {
                 var inteiro = massa! * 100 * 100;
                 var dividendo = altura * altura;
-                var result = Convert.ToDecimal(inteiro)  / Convert.ToDecimal(dividendo);
+                var result = Convert.ToDecimal(inteiro) / Convert.ToDecimal(dividendo);
 
                 Double doublVal = Convert.ToDouble(String.Format("{0:0.00}", result));
 

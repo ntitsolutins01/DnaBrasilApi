@@ -3,7 +3,7 @@
 namespace DnaBrasilApi.Application.Parceiros.Commands.DeleteParceiro;
 public record DeleteParceiroCommand(int Id) : IRequest<bool>;
 
-public class DeleteParceiroCommandHandler : IRequestHandler<DeleteParceiroCommand,bool>
+public class DeleteParceiroCommandHandler : IRequestHandler<DeleteParceiroCommand, bool>
 {
     private readonly IApplicationDbContext _context;
 

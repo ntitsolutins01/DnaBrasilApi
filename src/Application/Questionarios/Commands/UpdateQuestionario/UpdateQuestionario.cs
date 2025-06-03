@@ -31,7 +31,7 @@ public class UpdateQuestionarioCommandHandler : IRequestHandler<UpdateQuestionar
         entity.Pergunta = request.Pergunta;
         entity.Quadrante = request.Quadrante;
         entity.Questao = request.Questao;
-        
+
         var result = await _context.SaveChangesAsync(cancellationToken);
 
         return result == 1;//true

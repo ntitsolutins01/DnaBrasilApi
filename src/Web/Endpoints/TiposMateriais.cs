@@ -1,8 +1,8 @@
-﻿using DnaBrasilApi.Application.TiposMateriais.Queries.GetTipoMaterialById;
-using DnaBrasilApi.Application.TiposMateriais.Commands.CreateTipoMaterial;
+﻿using DnaBrasilApi.Application.TiposMateriais.Commands.CreateTipoMaterial;
 using DnaBrasilApi.Application.TiposMateriais.Commands.DeleteTipoMaterial;
 using DnaBrasilApi.Application.TiposMateriais.Commands.UpdateTipoMaterial;
 using DnaBrasilApi.Application.TiposMateriais.Queries;
+using DnaBrasilApi.Application.TiposMateriais.Queries.GetTipoMaterialById;
 using DnaBrasilApi.Application.TiposMateriais.Queries.GetTiposMateriaisAll;
 using DnaBrasilApi.Application.TiposMateriais.Queries.GetTiposMateriaisByGrupoMaterialId;
 

@@ -1,11 +1,11 @@
-﻿using DnaBrasilApi.Application.Cursos.Queries.GetCursoById;
-using DnaBrasilApi.Application.Cursos.Queries;
-using DnaBrasilApi.Application.Cursos.Commands.CreateCurso;
+﻿using DnaBrasilApi.Application.Cursos.Commands.CreateCurso;
 using DnaBrasilApi.Application.Cursos.Commands.DeleteCurso;
 using DnaBrasilApi.Application.Cursos.Commands.UpdateCurso;
+using DnaBrasilApi.Application.Cursos.Queries;
+using DnaBrasilApi.Application.Cursos.Queries.GetCursoById;
 using DnaBrasilApi.Application.Cursos.Queries.GetCursosAll;
 using DnaBrasilApi.Application.Cursos.Queries.GetCursosAllByTipoCursoId;
-//using DnaBrasilApi.Application.Cursos.Queries.GetCursosByAlunoId;
+using DnaBrasilApi.Application.Cursos.Queries.GetCursosByAlunoId;
 
 namespace DnaBrasilApi.Web.Endpoints;
 /// <summary>
@@ -28,8 +28,8 @@ public class Cursos : EndpointGroupBase
             .MapPut(UpdateCurso, "{id}")
             .MapDelete(DeleteCurso, "{id}")
             .MapGet(GetCursoById, "{id}")
-            .MapGet(GetCursosAllByTipoCursoId, "TipoCurso/{tipoCursoId}");
-        //.MapGet(GetCursosByAlunoId, "Aluno/{alunoId}");
+            .MapGet(GetCursosAllByTipoCursoId, "TipoCurso/{tipoCursoId}")
+            .MapGet(GetCursosByAlunoId, "Aluno/{alunoId}");
     }
     #endregion
 
@@ -105,16 +105,16 @@ public class Cursos : EndpointGroupBase
         return await sender.Send(new GetCursosAllByTipoCursoIdQuery() { TipoCursoId = tipoCursoId });
     }
 
-    ///// <summary>
-    ///// Endpoint que busca uma lista de cursos
-    ///// </summary>
-    ///// <param name="sender">Sender</param>
-    ///// <param name="id">Id do aluno</param>
-    ///// <returns>Retorna uma lista de Cursos</returns>
-    //public async Task<List<CursoDto>> GetCursosByAlunoId(ISender sender, int alunoId)
-    //{
-    //    return await sender.Send(new GetCursosByAlunoIdQuery() { AlunoId = alunoId });
-    //}
+    /// <summary>
+    /// Endpoint que busca uma lista de cursos
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="id">Id do aluno</param>
+    /// <returns>Retorna uma lista de Cursos</returns>
+    public async Task<List<CursoDto>> GetCursosByAlunoId(ISender sender, int alunoId)
+    {
+        return await sender.Send(new GetCursosByAlunoIdQuery() { AlunoId = alunoId });
+    }
 
     #endregion
 }

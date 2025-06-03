@@ -1,4 +1,3 @@
-using DnaBrasilApi.Application.Localidades.Queries;
 using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Categorias.Queries;

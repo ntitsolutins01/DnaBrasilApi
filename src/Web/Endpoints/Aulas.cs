@@ -1,8 +1,8 @@
-﻿using DnaBrasilApi.Application.Aulas.Queries.GetAulaById;
-using DnaBrasilApi.Application.Aulas.Commands.CreateAula;
+﻿using DnaBrasilApi.Application.Aulas.Commands.CreateAula;
 using DnaBrasilApi.Application.Aulas.Commands.DeleteAula;
 using DnaBrasilApi.Application.Aulas.Commands.UpdateAula;
 using DnaBrasilApi.Application.Aulas.Queries;
+using DnaBrasilApi.Application.Aulas.Queries.GetAulaById;
 using DnaBrasilApi.Application.Aulas.Queries.GetAulasAll;
 using DnaBrasilApi.Application.Aulas.Queries.GetAulasByCursoId;
 using DnaBrasilApi.Application.Aulas.Queries.GetAulasByModuloEadId;

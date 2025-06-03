@@ -1,8 +1,8 @@
-﻿using DnaBrasilApi.Application.Categorias.Queries.GetCategoriaById;
-using DnaBrasilApi.Application.Categorias.Commands.CreateCategoria;
+﻿using DnaBrasilApi.Application.Categorias.Commands.CreateCategoria;
 using DnaBrasilApi.Application.Categorias.Commands.DeleteCategoria;
 using DnaBrasilApi.Application.Categorias.Commands.UpdateCategoria;
 using DnaBrasilApi.Application.Categorias.Queries;
+using DnaBrasilApi.Application.Categorias.Queries.GetCategoriaById;
 using DnaBrasilApi.Application.Categorias.Queries.GetCategoriasAll;
 
 namespace DnaBrasilApi.Web.Endpoints;

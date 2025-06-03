@@ -3,21 +3,21 @@ using DnaBrasilApi.Application.Common.Interfaces;
 
 namespace DnaBrasilApi.Application.Provas.Commands.UpdateProva;
 
-public record UpdateProvaCommand : IRequest <bool>
+public record UpdateProvaCommand : IRequest<bool>
 {
     public required int Id { get; init; }
     public required int AulaId { get; init; }
     public required string Titulo { get; init; }
-    public bool ProvaRequisito { get; init; } 
+    public bool ProvaRequisito { get; init; }
     public required int Peso { get; init; }
     public required int MediaAprovacao { get; init; }
     public required string LiberacaoProva { get; init; }
     public required string DataLiberacao { get; init; }
     public required string DuracaoProva { get; init; }
     public string? DataEncerramento { get; init; }
-    public bool PermitirTentativas { get; init; } 
+    public bool PermitirTentativas { get; init; }
     public int Tentativas { get; init; }
-    public bool LiberarTentativa { get; init; } 
+    public bool LiberarTentativa { get; init; }
     public bool Status { get; init; }
 }
 
@@ -30,13 +30,13 @@ public class UpdateProvaCommandHandler : IRequestHandler<UpdateProvaCommand, boo
         _context = context;
     }
 
-    public async Task <bool> Handle(UpdateProvaCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(UpdateProvaCommand request, CancellationToken cancellationToken)
     {
         var aula = await _context.Aulas
             .FindAsync([request.AulaId], cancellationToken);
 
         Guard.Against.NotFound(request.AulaId, aula);
-        
+
         var entity = await _context.Provas
             .FindAsync([request.Id], cancellationToken);
 

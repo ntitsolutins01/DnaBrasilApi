@@ -7,10 +7,10 @@ public record CreateSaudeCommand : IRequest<int>
 {
     public required int AlunoId { get; init; }
     public required int ProfissionalId { get; init; }
-    public required  decimal EnvergaduraSaude { get; init; }
-    public required  decimal MassaCorporalSaude { get; init; }
-    public required  decimal AlturaSaude { get; init; }
-    public required  string StatusSaude { get; init; }
+    public required decimal EnvergaduraSaude { get; init; }
+    public required decimal MassaCorporalSaude { get; init; }
+    public required decimal AlturaSaude { get; init; }
+    public required string StatusSaude { get; init; }
 }
 
 public class CreateSaudeCommandHandler : IRequestHandler<CreateSaudeCommand, int>

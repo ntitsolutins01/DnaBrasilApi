@@ -1,7 +1,4 @@
-﻿using DnaBrasilApi.Application.Alunos.Queries;
-using DnaBrasilApi.Application.LinhasAcoes.Queries;
-using DnaBrasilApi.Application.Profissionais.Queries;
-using DnaBrasilApi.Domain.Entities;
+﻿using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Modalidades.Queries;
 public class ModalidadeDto
