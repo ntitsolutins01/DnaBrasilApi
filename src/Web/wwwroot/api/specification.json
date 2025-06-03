@@ -13326,6 +13326,10 @@
             "type": "string",
             "nullable": true
           },
+          "serieId": {
+            "type": "string",
+            "nullable": true
+          },
           "alunos": {
             "type": "array",
             "nullable": true,
