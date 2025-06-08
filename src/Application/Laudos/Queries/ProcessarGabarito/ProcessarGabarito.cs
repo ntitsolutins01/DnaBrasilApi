@@ -15,12 +15,11 @@ public record ProcessarGabaritoCommand : IRequest<Dictionary<string, object>>
 public class ProcessarGabaritoCommandHandler : IRequestHandler<ProcessarGabaritoCommand, Dictionary<string, object>>
 {
     private readonly IApplicationDbContext _context;
-    private readonly HttpClient _httpClient;
+    private readonly HttpClient _httpClient = new HttpClient();
 
-    public ProcessarGabaritoCommandHandler(IApplicationDbContext context, HttpClient httpClient)
+    public ProcessarGabaritoCommandHandler(IApplicationDbContext context)
     {
         _context = context;
-        _httpClient = httpClient;
     }
 
     public async Task<Dictionary<string, object>> Handle(ProcessarGabaritoCommand request, CancellationToken cancellationToken)
@@ -28,14 +27,21 @@ public class ProcessarGabaritoCommandHandler : IRequestHandler<ProcessarGabarito
         if (request.ByteImage is null)
             throw new Exception("Imagem não fornecida.");
 
-        using var content = new MultipartFormDataContent();
-        var imageContent = new ByteArrayContent(request.ByteImage);
-        imageContent.Headers.ContentType = MediaTypeHeaderValue.Parse("image/jpeg");
+        var base64Image = Convert.ToBase64String(request.ByteImage);
 
-        var response = await _httpClient.PostAsync("http://localhost:5050/corrigir", content, cancellationToken);
+        var body = new { image = base64Image };
+
+        var jsonContent = new StringContent(
+            JsonSerializer.Serialize(body),
+            System.Text.Encoding.UTF8,
+            "application/json"
+        );
+
+        var response = await _httpClient.PostAsync("http://localhost:5050/corrigir", jsonContent, cancellationToken);
         response.EnsureSuccessStatusCode();
 
         var json = await response.Content.ReadAsStringAsync(cancellationToken);
+
         var data = JsonSerializer.Deserialize<Dictionary<string, object>>(json)!;
 
         return data;
