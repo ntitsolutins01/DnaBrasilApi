@@ -100,6 +100,11 @@ public class GetLaudosByFilterQueryHandler : IRequestHandler<GetLaudosByFilterQu
             laudos = laudos.Where(u => u.StatusLaudo == "F");
         }
 
+        if (search.Ordem != null)
+        {
+            laudos = laudos.Where(u => u.Ordem == search.Ordem);
+        }
+
         return laudos;
     }
 }
