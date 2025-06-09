@@ -21,4 +21,5 @@ public class LaudosFilterDto
 
     public PaginatedList<LaudoDto>? Laudos { get; set; }
     public string? UsuarioEmail { get; set; }
+    public int? Ordem { get; set; }
 }
