@@ -21,6 +21,7 @@ using DnaBrasilApi.Application.Laudos.Queries.GetLaudoById;
 using DnaBrasilApi.Application.Laudos.Queries.GetLaudosAll;
 using DnaBrasilApi.Application.Laudos.Queries.GetLaudosByFilter;
 using DnaBrasilApi.Application.Laudos.Queries.GetLaudosResumidosByFilter;
+using DnaBrasilApi.Application.Laudos.Queries.ProcessarGabarito;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DnaBrasilApi.Web.Endpoints;
@@ -51,7 +52,8 @@ public class Laudos : EndpointGroupBase
             .MapGet(GetEncaminhamentoByVocacional, "Encaminhamentos/Vocacional")
             .MapGet(GetDesempenhoByAluno, "Desempenho/{id}")
             .MapPost(GetLaudosByFilter, "Filter")
-            .MapPost(GetLaudosResumidosByFilter, "ResumidosFilter");
+            .MapPost(GetLaudosResumidosByFilter, "ResumidosFilter")
+            .MapPost(ProcessarGabarito, "ProcessarGabarito");
     }
     #endregion
 
@@ -315,5 +317,12 @@ public class Laudos : EndpointGroupBase
 
         return search;
     }
+
+    public async Task<Dictionary<string, object>> ProcessarGabarito(ISender sender, byte[] bytes)
+    {
+        var result = await sender.Send(new ProcessarGabaritoCommand() { ByteImage = bytes });
+        return result;
+    }
+
     #endregion
 }

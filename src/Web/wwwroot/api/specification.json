@@ -6637,6 +6637,40 @@
         }
       }
     },
+    "/api/Laudos/ProcessarGabarito": {
+      "post": {
+        "tags": [
+          "Laudos"
+        ],
+        "operationId": "ProcessarGabarito",
+        "requestBody": {
+          "x-name": "bytes",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string",
+                "format": "byte"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/LinhasAcoes": {
       "get": {
         "tags": [
