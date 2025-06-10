@@ -7,8 +7,7 @@ public record UpdateEducacionalCommand : IRequest<bool>
     public required int Id { get; init; }
     public required int ProfissionalId { get; init; }
     public required int AlunoId { get; init; }
-    public required int SerieId { get; init; }
-    public required string Pdf { get; init; }
+    public required string Gabarito { get; init; }
     public required string Respostas { get; init; }
     public required string StatusEducacional { get; init; }
 }
@@ -37,16 +36,11 @@ public class UpdateEducacionalCommandHandler : IRequestHandler<UpdateEducacional
 
         Guard.Against.NotFound(request.ProfissionalId, profissional);
 
-        var serie = await _context.Series.FindAsync([request.SerieId], cancellationToken);
-
-        Guard.Against.NotFound(request.SerieId, serie);
-
         entity.Profissional = profissional;
         entity.Respostas = request.Respostas;
         entity.StatusEducacional = request.StatusEducacional;
         //entity.Encaminhamento = GetEncaminhamento(request.Respostas, aluno);
-        entity.Serie = serie;
-        entity.Pdf = request.Pdf;
+        entity.Gabarito = request.Gabarito;
 
         await _context.SaveChangesAsync(cancellationToken);
         var result = await _context.SaveChangesAsync(cancellationToken);

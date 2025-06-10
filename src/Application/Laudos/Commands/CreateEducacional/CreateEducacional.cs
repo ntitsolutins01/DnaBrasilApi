@@ -8,8 +8,7 @@ public record CreateEducacionalCommand : IRequest<int>
 {
     public required int ProfissionalId { get; init; }
     public required int AlunoId { get; init; }
-    public required int SerieId { get; init; }
-    public required string Pdf { get; init; }
+    public required string Gabarito { get; init; }
     public required string Respostas { get; init; }
     public required string StatusEducacional { get; init; }
 }
@@ -33,10 +32,6 @@ public class CreateEducacionalCommandHandler : IRequestHandler<CreateEducacional
 
         Guard.Against.NotFound((int)request.ProfissionalId, profissional);
 
-        var serie = await _context.Series.FindAsync([request.SerieId], cancellationToken);
-
-        Guard.Against.NotFound((int)request.SerieId, serie);
-
         var entity = new Educacional
         {
             Profissional = profissional,
@@ -44,8 +39,7 @@ public class CreateEducacionalCommandHandler : IRequestHandler<CreateEducacional
             Respostas = request.Respostas,
             StatusEducacional = request.StatusEducacional,
             //Encaminhamento = GetEncaminhamento(request.Respostas, aluno),
-            Serie = serie,
-            Pdf = request.Pdf
+            Gabarito = request.Gabarito
         };
 
         _context.Educacionais.Add(entity);
