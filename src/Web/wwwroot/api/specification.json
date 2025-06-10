@@ -17832,10 +17832,7 @@
           "aluno": {
             "$ref": "#/components/schemas/AlunoDto"
           },
-          "serie": {
-            "$ref": "#/components/schemas/SerieDto"
-          },
-          "pdf": {
+          "gabarito": {
             "type": "string"
           },
           "respostas": {
@@ -17855,39 +17852,6 @@
           }
         }
       },
-      "SerieDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nome": {
-            "type": "string"
-          },
-          "turma": {
-            "type": "string"
-          },
-          "nomeEtapaEnsino": {
-            "type": "string"
-          },
-          "localidadeId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nomeLocalidade": {
-            "type": "string"
-          },
-          "municipioEstado": {
-            "type": "string",
-            "nullable": true
-          },
-          "status": {
-            "type": "boolean"
-          }
-        }
-      },
       "CreateEducacionalCommand": {
         "type": "object",
         "additionalProperties": false,
@@ -17900,11 +17864,7 @@
             "type": "integer",
             "format": "int32"
           },
-          "serieId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "pdf": {
+          "gabarito": {
             "type": "string"
           },
           "respostas": {
@@ -17931,11 +17891,7 @@
             "type": "integer",
             "format": "int32"
           },
-          "serieId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "pdf": {
+          "gabarito": {
             "type": "string"
           },
           "respostas": {
@@ -21793,6 +21749,39 @@
           "alunoId": {
             "type": "integer",
             "format": "int32"
+          }
+        }
+      },
+      "SerieDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "turma": {
+            "type": "string"
+          },
+          "nomeEtapaEnsino": {
+            "type": "string"
+          },
+          "localidadeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeLocalidade": {
+            "type": "string"
+          },
+          "municipioEstado": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "boolean"
           }
         }
       },
