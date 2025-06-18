@@ -38,7 +38,8 @@ public class DeleteLocalidadeCommandHandler : IRequestHandler<DeleteLocalidadeCo
         _context.Localidades.Remove(entity);
 
         var result = await _context.SaveChangesAsync(cancellationToken);
-        return result == 1;
+
+        return result >= 1;
     }
 
 }
