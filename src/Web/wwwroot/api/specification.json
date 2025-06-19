@@ -5203,6 +5203,39 @@
         }
       }
     },
+    "/api/Fomentos/VincularLocalidades": {
+      "post": {
+        "tags": [
+          "Fomentos"
+        ],
+        "operationId": "CreateFomentoLocalidades",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateFomentoLocalidadesCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Fomentos/{id}": {
       "put": {
         "tags": [
@@ -18373,6 +18406,19 @@
           "localidadesIds": {
             "type": "string",
             "nullable": true
+          }
+        }
+      },
+      "CreateFomentoLocalidadesCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "fomentoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "localidadesIds": {
+            "type": "string"
           }
         }
       },
