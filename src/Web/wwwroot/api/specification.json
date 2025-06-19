@@ -4285,6 +4285,141 @@
         }
       }
     },
+    "/api/DocumentosAluno/{alunoId}": {
+      "get": {
+        "tags": [
+          "DocumentosAluno"
+        ],
+        "operationId": "GetDocumentosAllByalunoId",
+        "parameters": [
+          {
+            "name": "alunoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DocumentoAlunoDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/DocumentosAluno": {
+      "post": {
+        "tags": [
+          "DocumentosAluno"
+        ],
+        "operationId": "CreateDocumentoAluno",
+        "requestBody": {
+          "x-name": "list",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CreateDocumentoAlunoDto"
+                }
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/DocumentosAluno/{id}": {
+      "delete": {
+        "tags": [
+          "DocumentosAluno"
+        ],
+        "operationId": "DeleteDocumentoAluno",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/DocumentosAluno/Documento/{id}": {
+      "get": {
+        "tags": [
+          "DocumentosAluno"
+        ],
+        "operationId": "GetDocumentoAlunoById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentoAlunoDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Educacionais/{id}": {
       "get": {
         "tags": [
@@ -17848,6 +17983,44 @@
           "nome": {
             "type": "string",
             "nullable": true
+          }
+        }
+      },
+      "DocumentoAlunoDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeAluno": {
+            "type": "string"
+          },
+          "nomeDocumento": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "status": {
+            "type": "boolean"
+          }
+        }
+      },
+      "CreateDocumentoAlunoDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "alunoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeDocumento": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
           }
         }
       },
