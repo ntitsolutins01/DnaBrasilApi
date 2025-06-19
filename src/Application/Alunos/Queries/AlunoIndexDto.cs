@@ -1,4 +1,5 @@
-﻿using DnaBrasilApi.Domain.Entities;
+﻿using DnaBrasilApi.Application.DocumentosAluno.Queries;
+using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Alunos.Queries;
 public class AlunoIndexDto
@@ -17,6 +18,7 @@ public class AlunoIndexDto
     public string? Modalidades { get; init; }
     public string? NomeLocalidade { get; init; }
     public string? SerieTurma { get; init; }
+    public List<DocumentoAlunoDto>? Documentos { get; set; }
     private class Mapping : Profile
     {
         public Mapping()

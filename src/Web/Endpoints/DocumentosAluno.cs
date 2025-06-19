@@ -18,10 +18,10 @@ public class DocumentosAluno : EndpointGroupBase
     {
         app.MapGroup(this)
             //.RequireAuthorization()
-            .MapGet(GetDocumentosAllByalunoId, "{alunoId}")
+            .MapGet(GetDocumentosAllByalunoId, "/Aluno/{alunoId}")
             .MapPost(CreateDocumentoAluno)
             .MapDelete(DeleteDocumentoAluno, "{id}")
-            .MapGet(GetDocumentoAlunoById, "Documento/{id}");
+            .MapGet(GetDocumentoAlunoById, "{id}");
     }
     #endregion
 

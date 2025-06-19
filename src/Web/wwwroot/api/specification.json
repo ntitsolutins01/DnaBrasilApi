@@ -4285,7 +4285,7 @@
         }
       }
     },
-    "/api/DocumentosAluno/{alunoId}": {
+    "/api/DocumentosAluno/Aluno/{alunoId}": {
       "get": {
         "tags": [
           "DocumentosAluno"
@@ -4386,9 +4386,7 @@
             }
           }
         }
-      }
-    },
-    "/api/DocumentosAluno/Documento/{id}": {
+      },
       "get": {
         "tags": [
           "DocumentosAluno"
@@ -13115,6 +13113,35 @@
           "serieTurma": {
             "type": "string",
             "nullable": true
+          },
+          "documentos": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/DocumentoAlunoDto"
+            }
+          }
+        }
+      },
+      "DocumentoAlunoDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeAluno": {
+            "type": "string"
+          },
+          "nomeDocumento": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "status": {
+            "type": "boolean"
           }
         }
       },
@@ -15326,6 +15353,13 @@
                 "items": {
                   "$ref": "#/components/schemas/AlunoCursoCertificado"
                 }
+              },
+              "documentos": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "$ref": "#/components/schemas/DocumentoAluno"
+                }
               }
             }
           }
@@ -16467,6 +16501,31 @@
             "format": "int32"
           }
         }
+      },
+      "DocumentoAluno": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "aluno": {
+                "$ref": "#/components/schemas/Aluno"
+              },
+              "nomeDocumento": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              },
+              "status": {
+                "type": "boolean"
+              }
+            }
+          }
+        ]
       },
       "Certificado": {
         "allOf": [
@@ -17983,28 +18042,6 @@
           "nome": {
             "type": "string",
             "nullable": true
-          }
-        }
-      },
-      "DocumentoAlunoDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nomeAluno": {
-            "type": "string"
-          },
-          "nomeDocumento": {
-            "type": "string"
-          },
-          "url": {
-            "type": "string"
-          },
-          "status": {
-            "type": "boolean"
           }
         }
       },
