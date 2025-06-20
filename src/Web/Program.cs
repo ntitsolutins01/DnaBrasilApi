@@ -13,6 +13,17 @@ builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddWebServices();
 
+// Habilita CORS para todas as origens
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+    });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -29,6 +40,9 @@ else
 app.UseHealthChecks("/health");
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
+// Ativa o CORS
+app.UseCors("AllowAll");
 
 app.UseSwaggerUi(settings =>
 {
