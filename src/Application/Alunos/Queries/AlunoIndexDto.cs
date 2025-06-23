@@ -19,6 +19,7 @@ public class AlunoIndexDto
     public string? NomeLocalidade { get; init; }
     public string? SerieTurma { get; init; }
     public List<DocumentoAlunoDto>? Documentos { get; set; }
+    public bool Habilitado { get; init; }
     private class Mapping : Profile
     {
         public Mapping()

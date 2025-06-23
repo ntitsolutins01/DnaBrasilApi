@@ -10,6 +10,7 @@ using DnaBrasilApi.Application.Alunos.Commands.DeleteAlunoModalidade;
 using DnaBrasilApi.Application.Alunos.Commands.UpdateAluno;
 using DnaBrasilApi.Application.Alunos.Commands.UpdateAlunoCurso;
 using DnaBrasilApi.Application.Alunos.Commands.UpdateAlunoFoto;
+using DnaBrasilApi.Application.Alunos.Commands.UpdateHabilitarAluno;
 using DnaBrasilApi.Application.Alunos.Commands.UpdateQrCode;
 using DnaBrasilApi.Application.Alunos.Queries;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunoAulasByAlunoId;
@@ -27,6 +28,7 @@ using DnaBrasilApi.Application.Alunos.Queries.GetPresencasByAlunoId;
 using DnaBrasilApi.Application.Alunos.Queries.GetPresencasByDataAtividadeId;
 using DnaBrasilApi.Application.Atividades.Queries;
 using Microsoft.AspNetCore.Mvc;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -62,7 +64,8 @@ public class Alunos : EndpointGroupBase
             .MapGet(GetAlunoCursosByAlunoId, "AlunosCursos/Aluno/{alunoId}")
             //.MapGet(GetPresencasByDataAtividadeId, "/Presenca/{data}/{id}")
             .MapGet(GetNomeAlunosByProfissionalId, "/Profissional/{id}")
-            .MapGet(GetAlunoAulasByAlunoId, "AlunoAula/{alunoId}");
+            .MapGet(GetAlunoAulasByAlunoId, "AlunoAula/{alunoId}")
+            .MapPut(UpdateHabilitarAluno, "/Habilitar/{alunoId}");
     }
     #endregion
 
@@ -207,6 +210,20 @@ public class Alunos : EndpointGroupBase
     //    var result = await sender.Send(command);
     //    return result > 0;
     //}
+
+    /// <summary>
+    /// Endpoint para habilitar aluno a operar no sistema
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="alunoId">Id do aluno</param>
+    /// <param name="command">Objeto para habilitar o Aluno</param>
+    /// <returns>Retorna true ou false</returns>
+    public async Task<bool> UpdateHabilitarAluno(ISender sender, int alunoId, UpdateHabilitarAlunoCommand command)
+    {
+        if (alunoId != command.AlunoId) return false;
+        var result = await sender.Send(command);
+        return result;
+    }
     #endregion
 
     #region Get Methods
