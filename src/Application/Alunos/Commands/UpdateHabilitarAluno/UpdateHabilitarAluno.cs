@@ -1,11 +1,15 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Application.Common.Security;
+using DnaBrasilApi.Domain.Constants;
 
 namespace DnaBrasilApi.Application.Alunos.Commands.UpdateHabilitarAluno;
 
+[Authorize(Roles = Roles.Administrador)]
+[Authorize(Policy = Policies.Habilitar)]
 public record UpdateHabilitarAlunoCommand : IRequest<bool>
 {
-    public int AlunoId { get; init; }
-    public required string AspNetUserId { get; set; }
+    public required int AlunoId { get; init; }
+    public required string AspNetUserId { get; init; }
 }
 
 public class UpdateHabilitarAlunoCommandHandler : IRequestHandler<UpdateHabilitarAlunoCommand, bool>

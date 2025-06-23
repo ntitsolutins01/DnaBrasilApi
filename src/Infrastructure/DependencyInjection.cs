@@ -41,6 +41,12 @@ public static class DependencyInjection
                     policy.RequireRole(Roles.Administrador));
             options.AddPolicy(Policies.Excluir, policy => 
                     policy.RequireRole(Roles.Administrador));
+            options.AddPolicy(Policies.Habilitar, policy => 
+                    policy.RequireRole(Roles.Administrador));
+            options.AddPolicy(Policies.Download, policy => 
+                    policy.RequireRole(Roles.Administrador));
+            options.AddPolicy(Policies.Upload, policy => 
+                    policy.RequireRole(Roles.Administrador));
             });
 
         services.AddAuthentication().AddCookie(IdentityConstants.ApplicationScheme);

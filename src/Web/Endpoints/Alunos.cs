@@ -211,8 +211,16 @@ public class Alunos : EndpointGroupBase
     //    return result > 0;
     //}
 
+    /// <summary>
+    /// Endpoint para habilitar aluno a operar no sistema
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="alunoId">Id do aluno</param>
+    /// <param name="command">Objeto para habilitar o Aluno</param>
+    /// <returns>Retorna true ou false</returns>
     public async Task<bool> UpdateHabilitarAluno(ISender sender, int alunoId, UpdateHabilitarAlunoCommand command)
     {
+        if (alunoId != command.AlunoId) return false;
         var result = await sender.Send(command);
         return result;
     }
