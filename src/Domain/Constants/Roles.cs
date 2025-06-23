@@ -2,5 +2,6 @@
 
 public abstract class Roles
 {
-    public const string Administrator = nameof(Administrator);
+    public const string Administrador = nameof(Administrador);
+    public const string Gestor = nameof(Gestor);
 }

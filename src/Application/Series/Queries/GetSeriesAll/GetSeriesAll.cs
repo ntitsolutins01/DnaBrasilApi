@@ -1,7 +1,12 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Application.Common.Security;
+using DnaBrasilApi.Domain.Constants;
 
 namespace DnaBrasilApi.Application.Series.Queries.GetSeriesAll;
-//[Authorize]
+
+[Authorize(Roles = Roles.Administrador)]
+[Authorize(Roles = Roles.Gestor)]
+[Authorize(Policy = Policies.Consultar)]
 public record GetSeriesAllQuery : IRequest<List<SerieDto>>;
 
 public class GetSeriesAllQueryHandler : IRequestHandler<GetSeriesAllQuery, List<SerieDto>>

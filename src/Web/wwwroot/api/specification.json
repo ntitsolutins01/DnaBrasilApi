@@ -701,6 +701,50 @@
         }
       }
     },
+    "/api/Alunos/Habilitar/{alunoId}": {
+      "put": {
+        "tags": [
+          "Alunos"
+        ],
+        "operationId": "UpdateHabilitarAluno",
+        "parameters": [
+          {
+            "name": "alunoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateHabilitarAlunoCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/ArquivosInventarios": {
       "get": {
         "tags": [
@@ -13120,6 +13164,9 @@
             "items": {
               "$ref": "#/components/schemas/DocumentoAlunoDto"
             }
+          },
+          "habilitado": {
+            "type": "boolean"
           }
         }
       },
@@ -13650,6 +13697,19 @@
           "progresso": {
             "type": "integer",
             "format": "int32"
+          }
+        }
+      },
+      "UpdateHabilitarAlunoCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "alunoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "aspNetUserId": {
+            "type": "string"
           }
         }
       },
