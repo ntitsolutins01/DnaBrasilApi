@@ -1,6 +1,7 @@
 ﻿using DnaBrasilApi.Application.Laudos.Commands.CreateEducacional;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateEducacional;
 using DnaBrasilApi.Application.Laudos.Queries;
+using DnaBrasilApi.Application.Laudos.Queries.GetEducacionaisAll;
 using DnaBrasilApi.Application.Laudos.Queries.GetEducacionalById;
 
 namespace DnaBrasilApi.Web.Endpoints;
@@ -21,7 +22,8 @@ public class Educacionais : EndpointGroupBase
             //.RequireAuthorization()
             .MapGet(GetEducacionalById, "{id}")
             .MapPost(CreateEducacional)
-            .MapPut(UpdateEducacional, "{id}");
+            .MapPut(UpdateEducacional, "{id}")
+            .MapGet(GetEducacionaisAll);
     }
     #endregion
 
@@ -65,5 +67,16 @@ public class Educacionais : EndpointGroupBase
     {
         return await sender.Send(new GetEducacionalByIdQuery() { Id = id });
     }
+
+    /// <summary>
+    /// Endpoint que busca todos os Educacionais cadastrados
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <returns>Retorna a lista de Educacionais</returns>
+    public async Task<List<EducacionalDto>> GetEducacionaisAll(ISender sender)
+    {
+        return await sender.Send(new GetEducacionaisAllQuery());
+    }
+
     #endregion
 }
