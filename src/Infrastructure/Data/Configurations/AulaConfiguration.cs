@@ -14,13 +14,13 @@ public class AulaConfiguration : IEntityTypeConfiguration<Aula>
         builder.Property(t => t.Descricao)
             .HasMaxLength(500);
         builder.Property(t => t.Material)
-            .HasMaxLength(200);
+            .HasMaxLength(1000);
         builder.Property(t => t.NomeMaterial)
-            .HasMaxLength(100);
+            .HasMaxLength(200);
         builder.Property(t => t.Video)
-            .HasMaxLength(500);
+            .HasMaxLength(1000);
         builder.Property(t => t.NomeVideo)
-            .HasMaxLength(100);
+            .HasMaxLength(200);
 
     }
 }
