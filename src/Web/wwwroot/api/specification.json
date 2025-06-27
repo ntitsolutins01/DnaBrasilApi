@@ -4567,6 +4567,27 @@
             }
           }
         }
+      },
+      "get": {
+        "tags": [
+          "Educacionais"
+        ],
+        "operationId": "GetEducacionaisAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EducacionalDto"
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/api/Encaminhamentos": {
@@ -18152,6 +18173,14 @@
           "statusEducacional": {
             "type": "string",
             "nullable": true
+          },
+          "imagem": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeImagem": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -18172,6 +18201,14 @@
           },
           "respostas": {
             "type": "string"
+          },
+          "imagem": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeImagem": {
+            "type": "string",
+            "nullable": true
           },
           "statusEducacional": {
             "type": "string"

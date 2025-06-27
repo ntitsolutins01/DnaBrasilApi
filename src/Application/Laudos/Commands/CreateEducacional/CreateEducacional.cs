@@ -10,6 +10,8 @@ public record CreateEducacionalCommand : IRequest<int>
     public required int AlunoId { get; init; }
     public required string Gabarito { get; init; }
     public required string Respostas { get; init; }
+    public string? Imagem { get; init; }
+    public string? NomeImagem { get; init; }
     public required string StatusEducacional { get; init; }
 }
 
@@ -62,7 +64,9 @@ public class CreateEducacionalCommandHandler : IRequestHandler<CreateEducacional
             Respostas = request.Respostas,
             StatusEducacional = request.StatusEducacional,
             Gabarito = request.Gabarito.Split("Educacional")[1],
-            Encaminhamento = encaminhamento
+            Encaminhamento = encaminhamento,
+            Imagem = request.Imagem,
+            NomeImagem = request.NomeImagem
         };
 
         _context.Educacionais.Add(entity);

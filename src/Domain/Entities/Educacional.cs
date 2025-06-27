@@ -7,4 +7,6 @@ public class Educacional : BaseAuditableEntity
     public required string Respostas { get; set; }
     public Encaminhamento? Encaminhamento { get; set; }
     public string? StatusEducacional { get; set; }
+    public string? Imagem { get; set; }
+    public string? NomeImagem { get; set; }
 }

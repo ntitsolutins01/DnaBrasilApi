@@ -13,6 +13,8 @@ public class EducacionalDto
     public required string Respostas { get; init; }
     public EncaminhamentoDto? Encaminhamento { get; init; }
     public string? StatusEducacional { get; init; }
+    public string? Imagem { get; init; }
+    public string? NomeImagem { get; init; }
     private class Mapping : Profile
     {
         public Mapping()

@@ -44,6 +44,7 @@ public class UpdateAulaCommandHandler : IRequestHandler<UpdateAulaCommand, bool>
         entity.Material = request.Material;
         entity.NomeMaterial = request.NomeMaterial;
         entity.Video = request.Video;
+        entity.NomeVideo = request.NomeVideo;
         entity.Ordem = request.Ordem;
 
         var result = await _context.SaveChangesAsync(cancellationToken);
