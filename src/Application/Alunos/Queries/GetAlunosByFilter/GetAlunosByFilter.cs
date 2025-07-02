@@ -1,5 +1,7 @@
+using System.Globalization;
 using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
+using MediatR;
 
 namespace DnaBrasilApi.Application.Alunos.Queries.GetAlunosByFilter;
 
@@ -104,6 +106,31 @@ public class GetAlunosByFilterQueryHandler : IRequestHandler<GetAlunosByFilterQu
         if (search.PossuiFoto)
         {
             Alunos = Alunos.Where(u => u.ByteImage != null);
+        }
+
+        if (!string.IsNullOrWhiteSpace(search.SerieId))
+        {
+            var serieId = Convert.ToInt32(search.SerieId);
+
+            Alunos = Alunos.Where(u => u.Serie != null && u.Serie.Id == serieId);
+        }
+
+        if (!string.IsNullOrWhiteSpace(search.Email))
+        {
+            Alunos = Alunos.Where(u => u.Email.Trim().ToUpper() == search.Email.Trim().ToUpper());
+        }
+
+        if (!string.IsNullOrWhiteSpace(search.DataNascimento))
+        {
+            var data = DateTime.ParseExact(search.DataNascimento, "dd/MM/yyyy",
+                CultureInfo.CreateSpecificCulture("pt-BR"));
+
+            Alunos = Alunos.Where(u => u.DtNascimento == data);
+        }
+
+        if (!string.IsNullOrWhiteSpace(search.Cpf))
+        {
+            Alunos = Alunos.Where(u => u.Cpf == search.Cpf);
         }
 
         return Alunos;

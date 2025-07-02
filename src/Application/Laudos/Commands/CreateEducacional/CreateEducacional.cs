@@ -8,9 +8,10 @@ public record CreateEducacionalCommand : IRequest<int>
 {
     public required int ProfissionalId { get; init; }
     public required int AlunoId { get; init; }
-    public required int SerieId { get; init; }
-    public required string Pdf { get; init; }
+    public required string Gabarito { get; init; }
     public required string Respostas { get; init; }
+    public string? Imagem { get; init; }
+    public string? NomeImagem { get; init; }
     public required string StatusEducacional { get; init; }
 }
 
@@ -26,16 +27,35 @@ public class CreateEducacionalCommandHandler : IRequestHandler<CreateEducacional
     public async Task<int> Handle(CreateEducacionalCommand request, CancellationToken cancellationToken)
     {
         var aluno = await _context.Alunos.FindAsync([request.AlunoId], cancellationToken);
-
+        
         Guard.Against.NotFound((int)request.AlunoId, aluno);
 
         var profissional = await _context.Profissionais.FindAsync([request.ProfissionalId], cancellationToken);
-
+        
         Guard.Against.NotFound((int)request.ProfissionalId, profissional);
 
-        var serie = await _context.Series.FindAsync([request.SerieId], cancellationToken);
+        var respostaIds = request.Respostas
+            .Split(',', StringSplitOptions.RemoveEmptyEntries)
+            .Select(id => int.Parse(id))
+            .ToList();
 
-        Guard.Against.NotFound((int)request.SerieId, serie);
+        var respostas = await _context.Respostas
+            .Where(r => respostaIds.Contains(r.Id) && r.Id != 0)
+            .ToListAsync(cancellationToken);
+
+        var acertos = respostas.Count(r => r.ValorPesoResposta != 0);
+
+        int encaminhamentoId;
+        if (acertos <= 5)
+            encaminhamentoId = 12; //"Defasagem"
+        else if (acertos <= 10)
+            encaminhamentoId = 13; //"Intermediário"
+        else
+            encaminhamentoId = 14; //"Adequado"
+
+        var encaminhamento = await _context.Encaminhamentos.FindAsync([encaminhamentoId], cancellationToken);
+        
+        Guard.Against.NotFound(encaminhamentoId, encaminhamento);
 
         var entity = new Educacional
         {
@@ -43,149 +63,146 @@ public class CreateEducacionalCommandHandler : IRequestHandler<CreateEducacional
             Aluno = aluno,
             Respostas = request.Respostas,
             StatusEducacional = request.StatusEducacional,
-            //Encaminhamento = GetEncaminhamento(request.Respostas, aluno),
-            Serie = serie,
-            Pdf = request.Pdf
+            Gabarito = request.Gabarito.Split("Educacional")[1],
+            Encaminhamento = encaminhamento,
+            Imagem = request.Imagem,
+            NomeImagem = request.NomeImagem
         };
 
         _context.Educacionais.Add(entity);
-
         await _context.SaveChangesAsync(cancellationToken);
 
         return entity.Id;
     }
-
-    //private Encaminhamento GetEncaminhamento(string strRespostas, Aluno aluno)
-    //{
-    //    Dictionary<string, decimal> dict = new()
-    //    {
-    //        { "TecnologiasAplicadas", 0 },
-    //        { "CienciasExatasNaturais", 0 },
-    //        { "Artistico", 0 },
-    //        { "CienciasHumanas", 0 },
-    //        { "Empreendedorismo", 0 },
-    //        { "CienciasContabeisAdministrativas", 0 }
-    //    };
-
-    //    var encaminhamentos = _context.Encaminhamentos.Where(x => x.TipoLaudo.Id == (int)EnumTipoLaudo.Vocacional);
-
-    //    decimal respostas1;
-    //    decimal respostas2;
-    //    decimal respostas3;
-    //    decimal respostas4;
-
-    //    var metricas = _context.TextosLaudos
-    //        .Where(x => x.TipoLaudo.Id == 6).ToList();
-
-    //    List<int> listRespostas = strRespostas.Split(',').Select(item => int.Parse(item)).ToList();
-
-    //    var respostas = _context.Respostas.Where(x => listRespostas.Contains(x.Id)).Include(i => i.Questionario);
-
-    //    respostas1 = respostas.Count(x => x.ValorPesoResposta == 1);
-    //    respostas2 = respostas.Count(x => x.ValorPesoResposta == 2);
-    //    respostas3 = respostas.Count(x => x.ValorPesoResposta == 3);
-    //    respostas4 = respostas.Count(x => x.ValorPesoResposta == 4);
-
-    //    Dictionary<int, decimal> dicRespostas = new()
-    //    {
-    //        { 1, respostas1 },
-    //        { 2, respostas2 },
-    //        { 3, respostas3 },
-    //        { 4, respostas4 }
-    //    };
-
-    //    var sortedDict = from entry in dicRespostas orderby entry.Value descending select entry;
-
-    //    if (sortedDict.First().Key != 1 && sortedDict.First().Key != 4)
-    //    {
-    //        var result = metricas.Find(
-    //            delegate (TextoLaudo item)
-
-    //            {
-    //                return sortedDict.First().Key == 2 ? item.PontoFinal == 2 : item.PontoFinal == 3;
-    //            }
-    //        );
-
-    //        //if (result == null || !dict.ContainsKey(result.Aviso.Split('.')[0]))
-    //        //{
-    //        //    return;
-    //        //}
-
-    //        var value = dict[result!.Aviso.Split('.')[0]];
-
-    //        value += 1;
-
-    //        dict[result!.Aviso.Split('.')[0]] = value;
-
-    //        if (aluno.Sexo == "M")
-    //        {
-    //            var parametro = result.Aviso.Split('.').First();
-
-    //            var encaminhamentoVocacional = encaminhamentos.First(x => x.Parametro == parametro);
-
-    //            return encaminhamentoVocacional;
-    //        }
-    //        else
-    //        {
-    //            var parametro = result.Aviso.Split('.').First();
-
-    //            var encaminhamentoVocacional = encaminhamentos.First(x => x.Parametro == parametro);
-
-    //            return encaminhamentoVocacional;
-    //        }
-    //    }
-    //    else
-    //    {
-    //        var result = metricas.Find(
-    //            delegate (TextoLaudo item)
-
-    //            {
-    //                switch (sortedDict.First().Key)
-    //                {
-    //                    case 1 when IsPrime((int)sortedDict.First().Value):
-    //                        return item.PontoFinal == (decimal?)1.1;
-    //                    case 1 when !IsPrime((int)sortedDict.First().Value):
-    //                        return item.PontoFinal == (decimal?)1.2;
-    //                    case 4 when IsPrime((int)sortedDict.First().Value):
-    //                        return item.PontoFinal == (decimal?)4.1;
-    //                    case 4 when !IsPrime((int)sortedDict.First().Value):
-    //                        return item.PontoFinal == (decimal?)4.2;
-    //                }
-
-    //                return false;
-    //            }
-    //        );
-
-    //        //if (result == null || !dict.ContainsKey(result.Aviso.Split('.')[0]))
-    //        //{
-    //        //    continue;
-    //        //}
-
-
-    //        var value = dict[result!.Aviso.Split('.')[0]];
-
-    //        value += 1;
-
-    //        dict[result.Aviso.Split('.')[0]] = value;
-
-    //        if (aluno.Sexo == "M")
-    //        {
-    //            var parametro = result.Aviso.Split('.').First();
-
-    //            var encaminhamentoVocacional = encaminhamentos.First(x => x.Parametro == parametro);
-
-    //            return encaminhamentoVocacional;
-    //        }
-    //        else
-    //        {
-    //            var parametro = result.Aviso.Split('.').First();
-
-    //            var encaminhamentoVocacional = encaminhamentos.First(x => x.Parametro == parametro);
-
-    //            return encaminhamentoVocacional;
-    //        }
-    //    }
-    //}
-
-    
 }
+//private Encaminhamento GetEncaminhamento(string strRespostas, Aluno aluno)
+//{
+//    Dictionary<string, decimal> dict = new()
+//    {
+//        { "TecnologiasAplicadas", 0 },
+//        { "CienciasExatasNaturais", 0 },
+//        { "Artistico", 0 },
+//        { "CienciasHumanas", 0 },
+//        { "Empreendedorismo", 0 },
+//        { "CienciasContabeisAdministrativas", 0 }
+//    };
+
+//    var encaminhamentos = _context.Encaminhamentos.Where(x => x.TipoLaudo.Id == (int)EnumTipoLaudo.Vocacional);
+
+//    decimal respostas1;
+//    decimal respostas2;
+//    decimal respostas3;
+//    decimal respostas4;
+
+//    var metricas = _context.TextosLaudos
+//        .Where(x => x.TipoLaudo.Id == 6).ToList();
+
+//    List<int> listRespostas = strRespostas.Split(',').Select(item => int.Parse(item)).ToList();
+
+//    var respostas = _context.Respostas.Where(x => listRespostas.Contains(x.Id)).Include(i => i.Questionario);
+
+//    respostas1 = respostas.Count(x => x.ValorPesoResposta == 1);
+//    respostas2 = respostas.Count(x => x.ValorPesoResposta == 2);
+//    respostas3 = respostas.Count(x => x.ValorPesoResposta == 3);
+//    respostas4 = respostas.Count(x => x.ValorPesoResposta == 4);
+
+//    Dictionary<int, decimal> dicRespostas = new()
+//    {
+//        { 1, respostas1 },
+//        { 2, respostas2 },
+//        { 3, respostas3 },
+//        { 4, respostas4 }
+//    };
+
+//    var sortedDict = from entry in dicRespostas orderby entry.Value descending select entry;
+
+//    if (sortedDict.First().Key != 1 && sortedDict.First().Key != 4)
+//    {
+//        var result = metricas.Find(
+//            delegate (TextoLaudo item)
+
+//            {
+//                return sortedDict.First().Key == 2 ? item.PontoFinal == 2 : item.PontoFinal == 3;
+//            }
+//        );
+
+//        //if (result == null || !dict.ContainsKey(result.Aviso.Split('.')[0]))
+//        //{
+//        //    return;
+//        //}
+
+//        var value = dict[result!.Aviso.Split('.')[0]];
+
+//        value += 1;
+
+//        dict[result!.Aviso.Split('.')[0]] = value;
+
+//        if (aluno.Sexo == "M")
+//        {
+//            var parametro = result.Aviso.Split('.').First();
+
+//            var encaminhamentoVocacional = encaminhamentos.First(x => x.Parametro == parametro);
+
+//            return encaminhamentoVocacional;
+//        }
+//        else
+//        {
+//            var parametro = result.Aviso.Split('.').First();
+
+//            var encaminhamentoVocacional = encaminhamentos.First(x => x.Parametro == parametro);
+
+//            return encaminhamentoVocacional;
+//        }
+//    }
+//    else
+//    {
+//        var result = metricas.Find(
+//            delegate (TextoLaudo item)
+
+//            {
+//                switch (sortedDict.First().Key)
+//                {
+//                    case 1 when IsPrime((int)sortedDict.First().Value):
+//                        return item.PontoFinal == (decimal?)1.1;
+//                    case 1 when !IsPrime((int)sortedDict.First().Value):
+//                        return item.PontoFinal == (decimal?)1.2;
+//                    case 4 when IsPrime((int)sortedDict.First().Value):
+//                        return item.PontoFinal == (decimal?)4.1;
+//                    case 4 when !IsPrime((int)sortedDict.First().Value):
+//                        return item.PontoFinal == (decimal?)4.2;
+//                }
+
+//                return false;
+//            }
+//        );
+
+//        //if (result == null || !dict.ContainsKey(result.Aviso.Split('.')[0]))
+//        //{
+//        //    continue;
+//        //}
+
+
+//        var value = dict[result!.Aviso.Split('.')[0]];
+
+//        value += 1;
+
+//        dict[result.Aviso.Split('.')[0]] = value;
+
+//        if (aluno.Sexo == "M")
+//        {
+//            var parametro = result.Aviso.Split('.').First();
+
+//            var encaminhamentoVocacional = encaminhamentos.First(x => x.Parametro == parametro);
+
+//            return encaminhamentoVocacional;
+//        }
+//        else
+//        {
+//            var parametro = result.Aviso.Split('.').First();
+
+//            var encaminhamentoVocacional = encaminhamentos.First(x => x.Parametro == parametro);
+
+//            return encaminhamentoVocacional;
+//        }
+//    }
+//} 
