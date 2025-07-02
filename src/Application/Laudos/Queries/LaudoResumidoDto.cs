@@ -59,6 +59,7 @@ public class LaudoResumidoDto
                 .ForMember(dest => dest.DtNascimento,
                     opt => opt.MapFrom(src => src.Aluno.DtNascimento.ToString("dd/MM/yyyy")))
                 .ForMember(dest => dest.ImcSaude, opt => opt.MapFrom(src => src.TalentoEsportivo!.Imc))
+                .ForMember(dest => dest.ByteImageFotoAluno, opt => opt.MapFrom(src => src.Aluno!.ByteImage))
                 .ForMember(dest => dest.EncaminhamentoSaudeBucal,
                     opt => opt.MapFrom(src => src.SaudeBucal!.Encaminhamento))
                 .ForMember(dest => dest.EncaminhamentoConsumoAlimentar,
