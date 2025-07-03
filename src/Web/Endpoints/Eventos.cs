@@ -4,6 +4,7 @@ using DnaBrasilApi.Application.Eventos.Commands.UpdateEvento;
 using DnaBrasilApi.Application.Eventos.Queries;
 using DnaBrasilApi.Application.Eventos.Queries.GetEventoById;
 using DnaBrasilApi.Application.Eventos.Queries.GetEventosAll;
+using DnaBrasilApi.Application.Eventos.Queries.GetEventosByMesAno;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -22,7 +23,8 @@ public class Eventos : EndpointGroupBase
             .MapPost(CreateEvento)
             .MapPut(UpdateEvento, "{id}")
             .MapDelete(DeleteEvento, "{id}")
-            .MapGet(GetEventoById, "{id}");
+            .MapGet(GetEventoById, "{id}")
+            .MapGet(GetEventosByMesAno, "Mes/{mes}/Ano/{ano}");
     }
     #endregion
 
@@ -87,6 +89,17 @@ public class Eventos : EndpointGroupBase
     public async Task<EventoDto> GetEventoById(ISender sender, int id)
     {
         return await sender.Send(new GetEventoByIdQuery() { Id = id });
+    }
+
+    /// <summary>
+    /// Endpoint que busca os eventos do mes informado
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="mesAno">Mes Ano</param>
+    /// <returns>Retorna uma lista de eventos do mês ano informado </returns>
+    public async Task<List<EventoDto>> GetEventosByMesAno(ISender sender, int mes, int ano)
+    {
+        return await sender.Send(new GetEventosByMesAnoQuery() { Mes = mes, Ano = ano });
     }
     #endregion
 }
