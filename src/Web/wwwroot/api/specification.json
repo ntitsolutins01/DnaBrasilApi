@@ -5347,6 +5347,51 @@
         }
       }
     },
+    "/api/Eventos/Mes/{mes}/Ano/{ano}": {
+      "get": {
+        "tags": [
+          "Eventos"
+        ],
+        "operationId": "GetEventosByMesAno",
+        "parameters": [
+          {
+            "name": "mes",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "ano",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 2
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EventoDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Fomentos": {
       "get": {
         "tags": [
