@@ -30,7 +30,7 @@ public class AlunoIndexDto
                 .ForMember(dest => dest.MunicipioId, opt => opt.MapFrom(src => src.Municipio.Id))
                 .ForMember(dest => dest.DtNascimento, opt => opt.MapFrom(src => src.DtNascimento.ToString("dd/MM/yyyy")))
                 .ForMember(dest => dest.PossuiLaudoFinalizado, opt => 
-                    opt.MapFrom(src => src.ListLaudo!.Any(s => s.StatusLaudo != "A") || src.ListLaudo!.Count == 0))
+                    opt.MapFrom(src => src.Laudos!.Any(s => s.StatusLaudo != "A") || src.Laudos!.Count == 0))
                 .ForMember(dest => dest.Modalidades,
                     opt => opt.MapFrom(src =>
                         src.AlunoModalidades == null
