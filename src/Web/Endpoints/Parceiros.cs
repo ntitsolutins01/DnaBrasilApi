@@ -1,10 +1,13 @@
-﻿using DnaBrasilApi.Application.Parceiros.Commands.CreateParceiro;
+﻿using DnaBrasilApi.Application.Cursos.Queries.GetCursosByAlunoId;
+using DnaBrasilApi.Application.Cursos.Queries;
+using DnaBrasilApi.Application.Parceiros.Commands.CreateParceiro;
 using DnaBrasilApi.Application.Parceiros.Commands.DeleteParceiro;
 using DnaBrasilApi.Application.Parceiros.Commands.UpdateParceiro;
 using DnaBrasilApi.Application.Parceiros.Queries;
 using DnaBrasilApi.Application.Parceiros.Queries.GetParceiroAll;
 using DnaBrasilApi.Application.Parceiros.Queries.GetParceiroByAspNetUserId;
 using DnaBrasilApi.Application.Parceiros.Queries.GetParceiroById;
+using DnaBrasilApi.Application.Parceiros.Queries.GetParceirosByMunicipioId;
 
 namespace DnaBrasilApi.Web.Endpoints;
 /// <summary>
@@ -27,7 +30,8 @@ public class Parceiros : EndpointGroupBase
             .MapPut(UpdateParceiro, "{id}")
             .MapDelete(DeleteParceiro, "{id}")
             .MapGet(GetParceiroById, "{id}")
-            .MapGet(GetParceiroByAspNetUserId, "AspNetUser/{id}");
+            .MapGet(GetParceiroByAspNetUserId, "AspNetUser/{id}")
+            .MapGet(GetParceirosByMunicipioId, "Municipio/{municipioId}");
     }
     #endregion
 
@@ -102,6 +106,17 @@ public class Parceiros : EndpointGroupBase
     public async Task<ParceiroDto> GetParceiroByAspNetUserId(ISender sender, string aspNetUserId)
     {
         return await sender.Send(new GetParceiroByAspNetUserIdQuery() { AspNetUserId = aspNetUserId });
+    }
+
+    /// <summary>
+    /// Endpoint que busca uma lista de parceiros
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="municipioId">Id do municipio</param>
+    /// <returns>Retorna uma lista de Parceiros</returns>
+    public async Task<List<ParceiroDto>> GetParceirosByMunicipioId(ISender sender, int municipioId)
+    {
+        return await sender.Send(new GetParceirosByMunicipioIdQuery() { MunicipioId = municipioId });
     }
     #endregion
 }

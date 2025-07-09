@@ -5347,6 +5347,51 @@
         }
       }
     },
+    "/api/Eventos/Mes/{mes}/Ano/{ano}": {
+      "get": {
+        "tags": [
+          "Eventos"
+        ],
+        "operationId": "GetEventosByMesAno",
+        "parameters": [
+          {
+            "name": "mes",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "ano",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 2
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EventoDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Fomentos": {
       "get": {
         "tags": [
@@ -8622,6 +8667,41 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ParceiroDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Parceiros/Municipio/{municipioId}": {
+      "get": {
+        "tags": [
+          "Parceiros"
+        ],
+        "operationId": "GetParceirosByMunicipioId",
+        "parameters": [
+          {
+            "name": "municipioId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ParceiroDto"
+                  }
                 }
               }
             }
@@ -13119,6 +13199,67 @@
           "serieNome": {
             "type": "string",
             "nullable": true
+          },
+          "laudos": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/LaudoOrdemDto"
+            }
+          }
+        }
+      },
+      "LaudoOrdemDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ordem": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "dataCriacao": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "talentoEsportivoId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "qualidadeDeVidaId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "vocacionalId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "saudeId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "saudeBucalId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "consumoAlimentarId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "statusLaudo": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -13972,6 +14113,9 @@
             "format": "int32"
           },
           "nomeProfessor": {
+            "type": "string"
+          },
+          "nomeCurso": {
             "type": "string"
           },
           "professorId": {
@@ -15362,7 +15506,7 @@
                   }
                 ]
               },
-              "listLaudo": {
+              "laudos": {
                 "type": "array",
                 "nullable": true,
                 "items": {
