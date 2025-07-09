@@ -2,9 +2,9 @@
 
 namespace DnaBrasilApi.Application.Laudos.Queries.GetLaudoByAluno
 {
-    public record GetLaudoByAlunoQuery(int AlunoId) : IRequest<LaudoDto>;
+    public record GetLaudoByAlunoQuery(int AlunoId) : IRequest<LaudoDto?>;
 
-    public class GetLaudoByAlunoQueryHandler : IRequestHandler<GetLaudoByAlunoQuery, LaudoDto>
+    public class GetLaudoByAlunoQueryHandler : IRequestHandler<GetLaudoByAlunoQuery, LaudoDto?>
     {
         private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
@@ -15,7 +15,7 @@ namespace DnaBrasilApi.Application.Laudos.Queries.GetLaudoByAluno
             _mapper = mapper;
         }
 
-        public async Task<LaudoDto> Handle(GetLaudoByAlunoQuery request, CancellationToken cancellationToken)
+        public async Task<LaudoDto?> Handle(GetLaudoByAlunoQuery request, CancellationToken cancellationToken)
         {
             var result = await _context.Laudos
                 .AsNoTracking()
@@ -24,7 +24,7 @@ namespace DnaBrasilApi.Application.Laudos.Queries.GetLaudoByAluno
                 .ProjectTo<LaudoDto>(_mapper.ConfigurationProvider)
                 .FirstOrDefaultAsync(cancellationToken);
 
-            return result == null ? throw new ArgumentNullException(nameof(result)) : result;
+            return result == null ? null : result;
         }
     }
 }

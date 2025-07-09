@@ -187,7 +187,7 @@ public class Laudos : EndpointGroupBase
     /// <param name="sender">sender</param>
     /// <param name="id">id que busca laudos por Aluno</param>
     /// <returns>retorna a lista de Laudos por Aluno </returns>
-    public async Task<LaudoDto> GetLaudoByAluno(ISender sender, int id)
+    public async Task<LaudoDto?> GetLaudoByAluno(ISender sender, int id)
     {
         var laudo = await sender.Send(new GetLaudoByAlunoQuery(id));
         return laudo;

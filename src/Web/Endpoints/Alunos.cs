@@ -9,6 +9,7 @@ using DnaBrasilApi.Application.Alunos.Commands.DeleteAluno;
 using DnaBrasilApi.Application.Alunos.Commands.DeleteAlunoModalidade;
 using DnaBrasilApi.Application.Alunos.Commands.UpdateAluno;
 using DnaBrasilApi.Application.Alunos.Commands.UpdateAlunoCurso;
+using DnaBrasilApi.Application.Alunos.Commands.UpdateAlunoEmail;
 using DnaBrasilApi.Application.Alunos.Commands.UpdateAlunoFoto;
 using DnaBrasilApi.Application.Alunos.Commands.UpdateHabilitarAluno;
 using DnaBrasilApi.Application.Alunos.Commands.UpdateProfileAluno;
@@ -67,6 +68,7 @@ public class Alunos : EndpointGroupBase
             .MapGet(GetNomeAlunosByProfissionalId, "/Profissional/{id}")
             .MapGet(GetAlunoAulasByAlunoId, "AlunoAula/{alunoId}")
             .MapPut(UpdateHabilitarAluno, "/Habilitar/{alunoId}");
+        //.MapPut(UpdateAlunoEmail, "/AlunoEmail/{alunoId}");
     }
     #endregion
 
@@ -385,4 +387,22 @@ public class Alunos : EndpointGroupBase
         return await sender.Send(new GetAlunoAulasByAlunoIdQuery() { AlunoId = alunoId });
     }
     #endregion
+
+    //public async Task<bool> UpdateAlunoEmail(ISender sender, int alunoId, UpdateAlunoEmailCommand command)
+    //{
+    //    var arr = new int[]
+    //            {
+
+    //            };
+
+    //    foreach (int id in arr)
+    //    {
+    //        command.Id = id;
+    //        command.Email = id.ToString() + "@dnadobrasil.gov.br";
+
+    //        await sender.Send(command);
+
+    //    }
+    //    return true;
+    //}
 }
