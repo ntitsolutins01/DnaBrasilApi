@@ -14349,25 +14349,10 @@
           "nomeFomento": {
             "type": "string"
           },
-          "imagemFrente": {
+          "nome": {
             "type": "string"
           },
-          "imagemVerso": {
-            "type": "string",
-            "nullable": true
-          },
-          "nomeImagemFrente": {
-            "type": "string",
-            "nullable": true
-          },
-          "nomeImagemVerso": {
-            "type": "string",
-            "nullable": true
-          },
-          "htmlFrente": {
-            "type": "string"
-          },
-          "htmlVerso": {
+          "url": {
             "type": "string"
           },
           "status": {
@@ -14383,25 +14368,10 @@
             "type": "integer",
             "format": "int32"
           },
-          "imagemFrente": {
+          "nome": {
             "type": "string"
           },
-          "imagemVerso": {
-            "type": "string",
-            "nullable": true
-          },
-          "nomeImagemFrente": {
-            "type": "string",
-            "nullable": true
-          },
-          "nomeImagemVerso": {
-            "type": "string",
-            "nullable": true
-          },
-          "htmlFrente": {
-            "type": "string"
-          },
-          "htmlVerso": {
+          "url": {
             "type": "string"
           },
           "status": {
@@ -14421,10 +14391,10 @@
             "type": "integer",
             "format": "int32"
           },
-          "htmlFrente": {
+          "nome": {
             "type": "string"
           },
-          "htmlVerso": {
+          "url": {
             "type": "string"
           },
           "status": {
@@ -16764,25 +16734,10 @@
               "fomento": {
                 "$ref": "#/components/schemas/Fomentu"
               },
-              "imagemFrente": {
+              "nome": {
                 "type": "string"
               },
-              "imagemVerso": {
-                "type": "string",
-                "nullable": true
-              },
-              "nomeImagemFrente": {
-                "type": "string",
-                "nullable": true
-              },
-              "nomeImagemVerso": {
-                "type": "string",
-                "nullable": true
-              },
-              "htmlFrente": {
-                "type": "string"
-              },
-              "htmlVerso": {
+              "url": {
                 "type": "string"
               },
               "status": {
