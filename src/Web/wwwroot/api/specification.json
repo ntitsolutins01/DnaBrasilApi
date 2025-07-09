@@ -8718,6 +8718,41 @@
         }
       }
     },
+    "/api/Parceiros/Municipio/{municipioId}": {
+      "get": {
+        "tags": [
+          "Parceiros"
+        ],
+        "operationId": "GetParceirosByMunicipioId",
+        "parameters": [
+          {
+            "name": "municipioId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ParceiroDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/TipoParcerias": {
       "get": {
         "tags": [
