@@ -3348,6 +3348,49 @@
         }
       }
     },
+    "/api/Cursos/Progresso": {
+      "get": {
+        "tags": [
+          "Cursos"
+        ],
+        "operationId": "GetQuantidadeCursosByProgresso",
+        "parameters": [
+          {
+            "name": "ProgressoIni",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "ProgressoFim",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 2
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Dashboards/valida": {
       "post": {
         "tags": [
@@ -3405,6 +3448,38 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DashboardDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Dashboards/IndicadoresEad": {
+      "post": {
+        "tags": [
+          "Dashboards"
+        ],
+        "operationId": "GetIndicadoresEadByFilter",
+        "requestBody": {
+          "x-name": "dashboardEad",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DashboardEadDto"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DashboardEadDto"
                 }
               }
             }
@@ -18064,6 +18139,77 @@
               "type": "number",
               "format": "decimal"
             }
+          }
+        }
+      },
+      "DashboardEadDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "cursosDisponiveis": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cursosEmAndamento": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cursosFinalizados": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cadastrosMasculinos": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cadastrosFemininos": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "alunosCadastrados": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sexo": {
+            "type": "string",
+            "nullable": true
+          },
+          "fomentoId": {
+            "type": "string",
+            "nullable": true
+          },
+          "estado": {
+            "type": "string",
+            "nullable": true
+          },
+          "municipioId": {
+            "type": "string",
+            "nullable": true
+          },
+          "localidadeId": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipoCursoId": {
+            "type": "string",
+            "nullable": true
+          },
+          "cursoId": {
+            "type": "string",
+            "nullable": true
+          },
+          "deficienciaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "etnia": {
+            "type": "string",
+            "nullable": true
+          },
+          "perfilId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
           }
         }
       },

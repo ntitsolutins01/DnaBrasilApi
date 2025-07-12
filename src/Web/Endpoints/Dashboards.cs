@@ -1,4 +1,6 @@
-﻿using DnaBrasilApi.Application.Dashboards;
+﻿using DnaBrasilApi.Application.Cursos.Queries.GetCursosAll;
+using DnaBrasilApi.Application.Cursos.Queries.GetQuantidadeCursosByProgresso;
+using DnaBrasilApi.Application.Dashboards;
 using DnaBrasilApi.Application.Dashboards.Queries;
 using DnaBrasilApi.Application.Dashboards.Queries.GetControlePresencaByFilter;
 using DnaBrasilApi.Application.Dashboards.Queries.GetIndicadoresAlunosByFilter;
@@ -14,6 +16,8 @@ using DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorSaudeBucalAlunos
 using DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorSaudeSexoAlunos;
 using DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorTalentoEsportivoAlunos;
 using DnaBrasilApi.Application.Dashboards.Queries.GetVocacionalAlunos;
+using DnaBrasilApi.Application.Usuarios.Queries.GetQtUsuariosByPerfilId;
+using DnaBrasilApi.Application.Usuarios.Queries.GetUsuariosAll;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DnaBrasilApi.Web.Endpoints;
@@ -26,6 +30,7 @@ public class Dashboards : EndpointGroupBase
             //.RequireAuthorization()
             .MapPost(GetValida, "valida")
             .MapPost(GetIndicadoresAlunosByFilter, "Indicadores")
+            .MapPost(GetIndicadoresEadByFilter, "IndicadoresEad")
             .MapPost(GetControlePresencaByFilter, "ControlePresenca")
             .MapPost(GetLaudosPeriodoByFilter, "LaudosPeriodo")
             .MapPost(GetStatusLaudosByFilter, "StatusLaudos")
@@ -70,6 +75,27 @@ public class Dashboards : EndpointGroupBase
 
 
         return await Task.FromResult(dashboard);
+    }
+    public async Task<DashboardEadDto> GetIndicadoresEadByFilter(ISender sender, [FromBody] DashboardEadDto dashboardEad)
+    {
+        dashboardEad.CursosEmAndamento = await sender.Send(new GetQuantidadeCursosByProgressoQuery(){ProgressoIni = 0,ProgressoFim = 100});
+        dashboardEad.CursosFinalizados = await sender.Send(new GetQuantidadeCursosByProgressoQuery(){ProgressoIni = 99,ProgressoFim = 100});
+        
+        var cursos = await sender.Send(new GetCursosAllQuery());
+        dashboardEad.CursosDisponiveis = cursos.Count;
+
+        dashboardEad.AlunosCadastrados = await sender.Send(new GetQtUsuariosByPerfilIdQuery() { SearchFilter = dashboardEad });
+
+        dashboardEad.Sexo = "F";
+        dashboardEad.CadastrosFemininos = await sender.Send(new GetQtUsuariosByPerfilIdQuery() { SearchFilter = dashboardEad });
+        dashboardEad.Sexo = "M";
+        dashboardEad.CadastrosMasculinos = await sender.Send(new GetQtUsuariosByPerfilIdQuery() { SearchFilter = dashboardEad });
+        dashboardEad.Sexo = "";
+
+
+
+
+        return await Task.FromResult(dashboardEad);
     }
     public async Task<DashboardDto> GetControlePresencaByFilter(ISender sender, [FromBody] DashboardDto dashboard)
     {

@@ -1,43 +1,43 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Application.Dashboards.Queries;
 using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasilApi.Application.Dashboards.Queries.GetIndicadoresAlunosByFilter;
+namespace DnaBrasilApi.Application.Usuarios.Queries.GetQtUsuariosByPerfilId;
 //[Authorize]
-public record GetIndicadoresAlunosByFilterQuery : IRequest<int>
+public record GetQtUsuariosByPerfilIdQuery : IRequest<int>
 {
-    public DashboardDto? SearchFilter { get; init; }
+    public DashboardEadDto? SearchFilter { get; init; }
+};
 
-}
-
-public class GetIndicadoresAlunosByFilterQueryHandler : IRequestHandler<GetIndicadoresAlunosByFilterQuery, int>
+public class GetQtUsuariosByPerfilIdQueryHandler : IRequestHandler<GetQtUsuariosByPerfilIdQuery, int>
 {
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
 
-    public GetIndicadoresAlunosByFilterQueryHandler(IApplicationDbContext context, IMapper mapper)
+    public GetQtUsuariosByPerfilIdQueryHandler(IApplicationDbContext context, IMapper mapper)
     {
         _context = context;
         _mapper = mapper;
     }
 
-    public Task<int> Handle(GetIndicadoresAlunosByFilterQuery request, CancellationToken cancellationToken)
+    public Task<int> Handle(GetQtUsuariosByPerfilIdQuery request, CancellationToken cancellationToken)
     {
-            IQueryable<Aluno> Alunos;
+        IQueryable<Aluno> Alunos;
 
-            Alunos = string.IsNullOrWhiteSpace(request.SearchFilter!.Sexo)
-                ? _context.Alunos
-                    .Where(x => x.Convidado == false)
-                    .AsNoTracking()
-                : _context.Alunos
-                    .Where(x => x.Sexo == request.SearchFilter!.Sexo && x.Convidado == false)
-                    .AsNoTracking();
+        Alunos = string.IsNullOrWhiteSpace(request.SearchFilter!.Sexo)
+            ? _context.Alunos
+                .Where(x => x.Convidado == false && x.AspNetUserId != null)
+                .AsNoTracking()
+            : _context.Alunos
+                .Where(x => x.Sexo == request.SearchFilter!.Sexo && x.Convidado == false && x.AspNetUserId != null)
+                .AsNoTracking();
 
         var result = FilterAlunos(Alunos, request.SearchFilter!, cancellationToken);
 
         return Task.FromResult(result);
     }
 
-    private int FilterAlunos(IQueryable<Aluno> Alunos, DashboardDto search, CancellationToken cancellationToken)
+    private int FilterAlunos(IQueryable<Aluno> Alunos, DashboardEadDto search, CancellationToken cancellationToken)
     {
         if (!string.IsNullOrWhiteSpace(search.FomentoId))
         {
@@ -80,4 +80,3 @@ public class GetIndicadoresAlunosByFilterQueryHandler : IRequestHandler<GetIndic
         return Alunos.Count();
     }
 }
-
