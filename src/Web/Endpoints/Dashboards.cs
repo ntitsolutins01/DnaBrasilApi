@@ -13,6 +13,7 @@ using DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorDeficienciaAluno
 using DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorDesempenhoAlunos;
 using DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorEtniaAlunos;
 using DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorSaudeBucalAlunos;
+using DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorEducacionalAlunos;
 using DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorSaudeSexoAlunos;
 using DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorTalentoEsportivoAlunos;
 using DnaBrasilApi.Application.Dashboards.Queries.GetVocacionalAlunos;
@@ -38,6 +39,7 @@ public class Dashboards : EndpointGroupBase
             .MapPost(GetGraficosSaudeByFilter, "GraficosSaude")
             .MapPost(GetGraficosEtniaByFilter, "GraficosEtnia")
             .MapPost(GetGraficosSaudeBucalByFilter, "GraficosSaudeBucal")
+            .MapPost(GetGraficosEducacionalByFilter, "GraficosEducacional")
             .MapPost(GetGraficosDeficienciasByFilter, "GraficosDeficiencia")
             .MapPost(GetGraficosTalentoByFilter, "GraficosTalento")
             .MapPost(GetGraficoPercDesempenhoFisicoMotorByFilter, "GraficoPercDesempenhoFisicoMotor")
@@ -147,6 +149,13 @@ public class Dashboards : EndpointGroupBase
     {
         dashboard.ListTotalizadorSaudeBucal =
             await sender.Send(new GetTotalizadorSaudeBucalAlunosQuery() { SearchFilter = dashboard });
+
+        return await Task.FromResult(dashboard);
+    }
+    public async Task<DashboardDto> GetGraficosEducacionalByFilter(ISender sender, [FromBody] DashboardDto dashboard)
+    {
+        dashboard.ListTotalizadorEducacional =
+            await sender.Send(new GetTotalizadorEducacionalAlunosQuery() { SearchFilter = dashboard });
 
         return await Task.FromResult(dashboard);
     }

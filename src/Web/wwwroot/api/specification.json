@@ -3711,6 +3711,38 @@
         }
       }
     },
+    "/api/Dashboards/GraficosEducacional": {
+      "post": {
+        "tags": [
+          "Dashboards"
+        ],
+        "operationId": "GetGraficosEducacionalByFilter",
+        "requestBody": {
+          "x-name": "dashboard",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DashboardDto"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DashboardDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Dashboards/GraficosDeficiencia": {
       "post": {
         "tags": [
@@ -16129,6 +16161,14 @@
                   }
                 ]
               },
+              "educacional": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Educacional"
+                  }
+                ]
+              },
               "modalidade": {
                 "nullable": true,
                 "oneOf": [
@@ -16486,6 +16526,51 @@
                 "type": "string"
               },
               "statusSaudeBucal": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          }
+        ]
+      },
+      "Educacional": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "profissional": {
+                "$ref": "#/components/schemas/Profissional"
+              },
+              "aluno": {
+                "$ref": "#/components/schemas/Aluno"
+              },
+              "gabarito": {
+                "type": "string"
+              },
+              "respostas": {
+                "type": "string"
+              },
+              "encaminhamento": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Encaminhamento"
+                  }
+                ]
+              },
+              "statusEducacional": {
+                "type": "string",
+                "nullable": true
+              },
+              "imagem": {
+                "type": "string",
+                "nullable": true
+              },
+              "nomeImagem": {
                 "type": "string",
                 "nullable": true
               }
@@ -17626,6 +17711,14 @@
               }
             ]
           },
+          "listTotalizadorEducacional": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/TotalizadorEducacionalDto"
+              }
+            ]
+          },
           "listTotalizadorQualidadeVida": {
             "nullable": true,
             "oneOf": [
@@ -18041,6 +18134,52 @@
             }
           },
           "percentualSaudeBucal": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "number",
+              "format": "decimal"
+            }
+          }
+        }
+      },
+      "TotalizadorEducacionalDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "percTotalizadorEducacionalMasculino": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "number",
+              "format": "decimal"
+            }
+          },
+          "percTotalizadorEducacionalFeminino": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "number",
+              "format": "decimal"
+            }
+          },
+          "valorTotalizadorEducacionalMasculino": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "number",
+              "format": "decimal"
+            }
+          },
+          "valorTotalizadorEducacionalFeminino": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "number",
+              "format": "decimal"
+            }
+          },
+          "percentualEducacional": {
             "type": "object",
             "nullable": true,
             "additionalProperties": {
