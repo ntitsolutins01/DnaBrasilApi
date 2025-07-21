@@ -20,6 +20,7 @@ using DnaBrasilApi.Application.Dashboards.Queries.GetVocacionalAlunos;
 using DnaBrasilApi.Application.Usuarios.Queries.GetQtUsuariosByPerfilId;
 using DnaBrasilApi.Application.Usuarios.Queries.GetUsuariosAll;
 using Microsoft.AspNetCore.Mvc;
+using Azure.Core;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -80,11 +81,11 @@ public class Dashboards : EndpointGroupBase
     }
     public async Task<DashboardEadDto> GetIndicadoresEadByFilter(ISender sender, [FromBody] DashboardEadDto dashboardEad)
     {
-        dashboardEad.CursosEmAndamento = await sender.Send(new GetQuantidadeCursosByProgressoQuery(){ProgressoIni = 0,ProgressoFim = 100});
-        dashboardEad.CursosFinalizados = await sender.Send(new GetQuantidadeCursosByProgressoQuery(){ProgressoIni = 99,ProgressoFim = 100});
+        dashboardEad.CursosEmAndamento = await sender.Send(new GetQuantidadeCursosByProgressoQuery(){ProgressoIni = 0,ProgressoFim = 100, CursoId = dashboardEad.CursoId});
+        dashboardEad.CursosFinalizados = await sender.Send(new GetQuantidadeCursosByProgressoQuery(){ProgressoIni = 99,ProgressoFim = 100, CursoId = dashboardEad.CursoId});
         
         var cursos = await sender.Send(new GetCursosAllQuery());
-        dashboardEad.CursosDisponiveis = cursos.Count;
+        dashboardEad.CursosDisponiveis = dashboardEad.CursoId == null ? cursos.Count : cursos.Count(x => x.Id == Convert.ToInt32(dashboardEad.CursoId));
 
         dashboardEad.AlunosCadastrados = await sender.Send(new GetQtUsuariosByPerfilIdQuery() { SearchFilter = dashboardEad });
 

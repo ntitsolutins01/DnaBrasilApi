@@ -39,42 +39,66 @@ public class GetQtUsuariosByPerfilIdQueryHandler : IRequestHandler<GetQtUsuarios
 
     private int FilterAlunos(IQueryable<Aluno> Alunos, DashboardEadDto search, CancellationToken cancellationToken)
     {
-        if (!string.IsNullOrWhiteSpace(search.FomentoId))
+        switch (string.IsNullOrWhiteSpace(search.FomentoId))
         {
-            var id = Convert.ToInt32(search.FomentoId.Split("-")[0]);
+            case false:
+                {
+                    var id = Convert.ToInt32(search.FomentoId?.Split("-")[0]);
 
-            Alunos = Alunos.Where(u => u.Fomento.Id == id);
+                    Alunos = Alunos.Where(u => u.Fomento.Id == id);
+                    break;
+                }
         }
 
-        if (!string.IsNullOrWhiteSpace(search.Estado))
+        Alunos = string.IsNullOrWhiteSpace(search.Estado) switch
         {
-            Alunos = Alunos.Where(u => u.Municipio!.Estado!.Sigla!.Contains(search.Estado));
+            false => Alunos.Where(u => u.Municipio!.Estado!.Sigla!.Contains(search.Estado!)),
+            _ => Alunos
+        };
+
+        Alunos = string.IsNullOrWhiteSpace(search.MunicipioId) switch
+        {
+            false => Alunos.Where(u => u.Municipio!.Id == Convert.ToInt32(search.MunicipioId)),
+            _ => Alunos
+        };
+
+        Alunos = string.IsNullOrWhiteSpace(search.LocalidadeId) switch
+        {
+            false => Alunos.Where(u => u.Localidade!.Id == Convert.ToInt32(search.LocalidadeId)),
+            _ => Alunos
+        };
+
+        switch (string.IsNullOrWhiteSpace(search.DeficienciaId))
+        {
+            case false:
+                {
+                    var deficiencias = _context.Deficiencias
+                        .Include(i => i.Alunos)
+                        .First(f => f.Id == Convert.ToInt32(search.DeficienciaId));
+
+                    var listAlunos = deficiencias.Alunos!.Select(s => s.Id).ToList();
+
+                    Alunos = Alunos.Where(u => listAlunos.Contains(u.Id));
+                    break;
+                }
         }
 
-        if (!string.IsNullOrWhiteSpace(search.MunicipioId))
+        Alunos = string.IsNullOrWhiteSpace(search.Etnia) switch
         {
-            Alunos = Alunos.Where(u => u.Municipio!.Id == Convert.ToInt32(search.MunicipioId));
-        }
+            false => Alunos.Where(u => u.Etnia!.Equals(search.Etnia)),
+            _ => Alunos
+        };
 
-        if (!string.IsNullOrWhiteSpace(search.LocalidadeId))
+        switch (string.IsNullOrWhiteSpace(search.CursoId))
         {
-            Alunos = Alunos.Where(u => u.Localidade!.Id == Convert.ToInt32(search.LocalidadeId));
-        }
+            case false:
+                {
+                    var alunosCursos = _context.AlunoCursosCertificados.Where(x => x.CursoId == Convert.ToInt32(search.CursoId))
+                        .Select(s => s.AlunoId).ToList();
 
-        if (!string.IsNullOrWhiteSpace(search.DeficienciaId))
-        {
-            var deficiencias = _context.Deficiencias
-                .Include(i => i.Alunos)
-                .First(f => f.Id == Convert.ToInt32(search.DeficienciaId));
-
-            var listAlunos = deficiencias.Alunos!.Select(s => s.Id).ToList();
-
-            Alunos = Alunos.Where(u => listAlunos.Contains(u.Id));
-        }
-
-        if (!string.IsNullOrWhiteSpace(search.Etnia))
-        {
-            Alunos = Alunos.Where(u => u.Etnia!.Equals(search.Etnia));
+                    Alunos = Alunos.Where(u => alunosCursos.Contains(u.Id));
+                    break;
+                }
         }
 
         return Alunos.Count();

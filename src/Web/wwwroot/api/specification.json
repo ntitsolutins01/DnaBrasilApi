@@ -3374,6 +3374,15 @@
               "format": "int32"
             },
             "x-position": 2
+          },
+          {
+            "name": "CursoId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 3
           }
         ],
         "responses": {
@@ -13950,6 +13959,22 @@
           },
           "status": {
             "type": "boolean"
+          },
+          "matricula": {
+            "type": "string",
+            "nullable": true
+          },
+          "idade": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeAluno": {
+            "type": "string",
+            "nullable": true
+          },
+          "localidadeMunicipioUf": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
