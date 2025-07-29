@@ -561,7 +561,7 @@
         }
       }
     },
-    "/api/Alunos/AlunosCursos/Curso/{cursoId}": {
+    "/api/Alunos/AlunosCursos/Curso/{cursoId}/{idTipoCurso}": {
       "get": {
         "tags": [
           "Alunos"
@@ -577,6 +577,16 @@
               "format": "int32"
             },
             "x-position": 1
+          },
+          {
+            "name": "idTipoCurso",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 2
           }
         ],
         "responses": {

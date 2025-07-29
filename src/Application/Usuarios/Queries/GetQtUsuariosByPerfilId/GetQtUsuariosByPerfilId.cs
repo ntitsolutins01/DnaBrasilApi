@@ -22,22 +22,27 @@ public class GetQtUsuariosByPerfilIdQueryHandler : IRequestHandler<GetQtUsuarios
 
     public Task<int> Handle(GetQtUsuariosByPerfilIdQuery request, CancellationToken cancellationToken)
     {
-        IQueryable<Aluno> Alunos;
+        IQueryable<AlunoCursoCertificado> Alunos;
 
-        Alunos = string.IsNullOrWhiteSpace(request.SearchFilter!.Sexo)
-            ? _context.Alunos
-                .Where(x => x.Convidado == false && x.AspNetUserId != null)
-                .AsNoTracking()
-            : _context.Alunos
-                .Where(x => x.Sexo == request.SearchFilter!.Sexo && x.Convidado == false && x.AspNetUserId != null)
+        if (string.IsNullOrWhiteSpace(request.SearchFilter!.Sexo))
+        {
+            Alunos = _context.AlunoCursosCertificados
+                .Where(x => x.Aluno!.Convidado == false)
                 .AsNoTracking();
+        }
+        else
+        {
+            Alunos = _context.AlunoCursosCertificados
+                .Where(x => x.Aluno!.Sexo == request.SearchFilter!.Sexo && x.Aluno!.Convidado == false)
+                .AsNoTracking();
+        }
 
         var result = FilterAlunos(Alunos, request.SearchFilter!, cancellationToken);
 
         return Task.FromResult(result);
     }
 
-    private int FilterAlunos(IQueryable<Aluno> Alunos, DashboardEadDto search, CancellationToken cancellationToken)
+    private int FilterAlunos(IQueryable<AlunoCursoCertificado> Alunos, DashboardEadDto search, CancellationToken cancellationToken)
     {
         switch (string.IsNullOrWhiteSpace(search.FomentoId))
         {
@@ -45,26 +50,26 @@ public class GetQtUsuariosByPerfilIdQueryHandler : IRequestHandler<GetQtUsuarios
                 {
                     var id = Convert.ToInt32(search.FomentoId?.Split("-")[0]);
 
-                    Alunos = Alunos.Where(u => u.Fomento.Id == id);
+                    Alunos = Alunos.Where(u => u.Aluno!.Fomento.Id == id);
                     break;
                 }
         }
 
         Alunos = string.IsNullOrWhiteSpace(search.Estado) switch
         {
-            false => Alunos.Where(u => u.Municipio!.Estado!.Sigla!.Contains(search.Estado!)),
+            false => Alunos.Where(u => u.Aluno!.Municipio!.Estado!.Sigla!.Contains(search.Estado!)),
             _ => Alunos
         };
 
         Alunos = string.IsNullOrWhiteSpace(search.MunicipioId) switch
         {
-            false => Alunos.Where(u => u.Municipio!.Id == Convert.ToInt32(search.MunicipioId)),
+            false => Alunos.Where(u => u.Aluno!.Municipio!.Id == Convert.ToInt32(search.MunicipioId)),
             _ => Alunos
         };
 
         Alunos = string.IsNullOrWhiteSpace(search.LocalidadeId) switch
         {
-            false => Alunos.Where(u => u.Localidade!.Id == Convert.ToInt32(search.LocalidadeId)),
+            false => Alunos.Where(u => u.Aluno!.Localidade!.Id == Convert.ToInt32(search.LocalidadeId)),
             _ => Alunos
         };
 
@@ -78,29 +83,37 @@ public class GetQtUsuariosByPerfilIdQueryHandler : IRequestHandler<GetQtUsuarios
 
                     var listAlunos = deficiencias.Alunos!.Select(s => s.Id).ToList();
 
-                    Alunos = Alunos.Where(u => listAlunos.Contains(u.Id));
+                    Alunos = Alunos.Where(u => listAlunos.Contains(u.Aluno!.Id));
                     break;
                 }
         }
 
         Alunos = string.IsNullOrWhiteSpace(search.Etnia) switch
         {
-            false => Alunos.Where(u => u.Etnia!.Equals(search.Etnia)),
+            false => Alunos.Where(u => u.Aluno!.Etnia!.Equals(search.Etnia)),
             _ => Alunos
         };
 
-        switch (string.IsNullOrWhiteSpace(search.CursoId))
+        if (!string.IsNullOrWhiteSpace(search.CursoId))
         {
-            case false:
-                {
-                    var alunosCursos = _context.AlunoCursosCertificados.Where(x => x.CursoId == Convert.ToInt32(search.CursoId))
-                        .Select(s => s.AlunoId).ToList();
+            var alunosCursos = _context.AlunoCursosCertificados.Where(x => x.CursoId == Convert.ToInt32(search.CursoId))
+                .Select(s => s.AlunoId).ToList();
 
-                    Alunos = Alunos.Where(u => alunosCursos.Contains(u.Id));
-                    break;
-                }
+            Alunos = Alunos.Where(u => alunosCursos.Contains(u.Aluno!.Id));
         }
 
+        Alunos = string.IsNullOrWhiteSpace(search.CursoId) switch
+        {
+            false => Alunos.Where(u => u.CursoId == Convert.ToInt32(search.CursoId)),
+            _ => Alunos
+        };
+
+        Alunos = string.IsNullOrWhiteSpace(search.TipoCursoId) switch
+        {
+            false => Alunos.Where(u => u.Curso!.TipoCurso.Id == Convert.ToInt32(search.TipoCursoId)),
+            _ => Alunos
+        };
         return Alunos.Count();
     }
+
 }

@@ -5,6 +5,7 @@ namespace DnaBrasilApi.Application.Alunos.Queries.GetAlunosCursosByCursoId;
 public record GetAlunosCursosByCursoIdQuery : IRequest<List<AlunoCursoDto>>
 {
     public required int CursoId { get; init; }
+    public required int IdTipoCurso { get; init; }
 }
 
 public class GetAlunosCursosByCursoIdQueryHandler : IRequestHandler<GetAlunosCursosByCursoIdQuery, List<AlunoCursoDto>>
@@ -20,11 +21,24 @@ public class GetAlunosCursosByCursoIdQueryHandler : IRequestHandler<GetAlunosCur
 
     public async Task<List<AlunoCursoDto>> Handle(GetAlunosCursosByCursoIdQuery request, CancellationToken cancellationToken)
     {
-        var result = await _context.AlunoCursosCertificados
-            .Where((x => x.CursoId == request.CursoId))
-            .AsNoTracking()
-            .ProjectTo<AlunoCursoDto>(_mapper.ConfigurationProvider)
-            .ToListAsync(cancellationToken);
+        List<AlunoCursoDto> result;
+
+        if (request.IdTipoCurso != 0)
+        {
+            result = await _context.AlunoCursosCertificados
+                .Where((x => x.Curso!.TipoCurso.Id == request.IdTipoCurso))
+                .AsNoTracking()
+                .ProjectTo<AlunoCursoDto>(_mapper.ConfigurationProvider)
+                .ToListAsync(cancellationToken);
+        }
+        else
+        {
+            result = await _context.AlunoCursosCertificados
+                .Where((x => x.CursoId == request.CursoId))
+                .AsNoTracking()
+                .ProjectTo<AlunoCursoDto>(_mapper.ConfigurationProvider)
+                .ToListAsync(cancellationToken);
+        }
 
         return result == null ? throw new ArgumentNullException(nameof(result)) : result;
     }
