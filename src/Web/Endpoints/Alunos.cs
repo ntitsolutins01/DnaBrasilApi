@@ -62,7 +62,7 @@ public class Alunos : EndpointGroupBase
             .MapPost(GetAlunosByFilter, "Filter")
             .MapPost(CreateAlunoCursos, "Cursos")
             .MapPut(UpdateAlunoCurso, "/AlunosCursos/{alunoId}/{cursoId}")
-            .MapGet(GetAlunosCursosByCursoId, "AlunosCursos/Curso/{cursoId}")
+            .MapGet(GetAlunosCursosByCursoId, "AlunosCursos/Curso/{cursoId}/{idTipoCurso}")
             .MapGet(GetAlunoCursosByAlunoId, "AlunosCursos/Aluno/{alunoId}")
             //.MapGet(GetPresencasByDataAtividadeId, "/Presenca/{data}/{id}")
             .MapGet(GetNomeAlunosByProfissionalId, "/Profissional/{id}")
@@ -360,9 +360,9 @@ public class Alunos : EndpointGroupBase
     /// <param name="sender">Sender</param>
     /// <param name="cursoId">Id do curso</param>
     /// <returns>Retorna uma lista de AlunosCursos</returns>
-    public async Task<List<AlunoCursoDto>> GetAlunosCursosByCursoId(ISender sender, int cursoId)
+    public async Task<List<AlunoCursoDto>> GetAlunosCursosByCursoId(ISender sender, int cursoId, int idTipoCurso)
     {
-        return await sender.Send(new GetAlunosCursosByCursoIdQuery() { CursoId = cursoId });
+        return await sender.Send(new GetAlunosCursosByCursoIdQuery() { CursoId = cursoId, IdTipoCurso = idTipoCurso});
     }
 
     /// <summary>

@@ -561,7 +561,7 @@
         }
       }
     },
-    "/api/Alunos/AlunosCursos/Curso/{cursoId}": {
+    "/api/Alunos/AlunosCursos/Curso/{cursoId}/{idTipoCurso}": {
       "get": {
         "tags": [
           "Alunos"
@@ -577,6 +577,16 @@
               "format": "int32"
             },
             "x-position": 1
+          },
+          {
+            "name": "idTipoCurso",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 2
           }
         ],
         "responses": {
@@ -3374,6 +3384,24 @@
               "format": "int32"
             },
             "x-position": 2
+          },
+          {
+            "name": "CursoId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 3
+          },
+          {
+            "name": "TipoCursoId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 4
           }
         ],
         "responses": {
@@ -13950,6 +13978,22 @@
           },
           "status": {
             "type": "boolean"
+          },
+          "matricula": {
+            "type": "string",
+            "nullable": true
+          },
+          "idade": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeAluno": {
+            "type": "string",
+            "nullable": true
+          },
+          "localidadeMunicipioUf": {
+            "type": "string",
+            "nullable": true
           }
         }
       },

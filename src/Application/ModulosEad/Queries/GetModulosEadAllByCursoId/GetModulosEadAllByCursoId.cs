@@ -23,7 +23,7 @@ public class GetModulosEadAllByCursoIdQueryHandler : IRequestHandler<GetModulosE
         var result = await _context.ModulosEad
             .Include(i => i.Curso)
             //.Include(i=>i.Usuario)
-            .Where(x => x.Curso.Id == request.CursoId)
+            .Where(x => x.Curso.Id == request.CursoId && x.Status == true)
             .AsNoTracking()
             .ProjectTo<ModuloEadDto>(_mapper.ConfigurationProvider)
             .ToListAsync(cancellationToken);
