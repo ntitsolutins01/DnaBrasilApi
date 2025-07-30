@@ -36,6 +36,37 @@ public class GetAlunosByFilterQueryHandler : IRequestHandler<GetAlunosByFilterQu
 
     private IQueryable<Aluno> FilterAlunos(IQueryable<Aluno> Alunos, AlunosFilterDto search, CancellationToken cancellationToken)
     {
+        if (!string.IsNullOrWhiteSpace(search.LocalidadeId))
+        {
+            Alunos = Alunos.Where(u => u.Localidade!.Id == Convert.ToInt32(search.LocalidadeId));
+        }
+        else
+        {
+
+            if (!string.IsNullOrWhiteSpace(search.MunicipioId))
+            {
+                Alunos = Alunos.Where(u => u.Municipio!.Id == Convert.ToInt32(search.MunicipioId));
+            }
+            else
+            {
+
+                if (!string.IsNullOrWhiteSpace(search.Estado))
+                {
+                    Alunos = Alunos.Where(u => u.Municipio!.Estado!.Sigla!.Contains(search.Estado));
+                }
+                else
+                {
+                    if (!string.IsNullOrWhiteSpace(search.FomentoId))
+                    {
+                        var fomento = Convert.ToInt32(search.FomentoId);
+
+                        Alunos = Alunos.Where(u => u.Fomento!.Id == fomento);
+                    }
+
+                }
+            }
+        }
+
         if (!string.IsNullOrWhiteSpace(search.AlunoId))
         {
             var alunoId = Convert.ToInt32(search.AlunoId);
@@ -43,31 +74,9 @@ public class GetAlunosByFilterQueryHandler : IRequestHandler<GetAlunosByFilterQu
             Alunos = Alunos.Where(u => u.Id == alunoId);
         }
 
-        if (!string.IsNullOrWhiteSpace(search.FomentoId))
-        {
-            var fomento = Convert.ToInt32(search.FomentoId);
-
-            Alunos = Alunos.Where(u => u.Fomento!.Id == fomento);
-        }
-
         if (!string.IsNullOrWhiteSpace(search.Nome))
         {
             Alunos = Alunos.Where(u => u.Nome.Contains(search.Nome));
-        }
-
-        if (!string.IsNullOrWhiteSpace(search.Estado))
-        {
-            Alunos = Alunos.Where(u => u.Municipio!.Estado!.Sigla!.Contains(search.Estado));
-        }
-
-        if (!string.IsNullOrWhiteSpace(search.MunicipioId))
-        {
-            Alunos = Alunos.Where(u => u.Municipio!.Id == Convert.ToInt32(search.MunicipioId));
-        }
-
-        if (!string.IsNullOrWhiteSpace(search.LocalidadeId))
-        {
-            Alunos = Alunos.Where(u => u.Localidade!.Id == Convert.ToInt32(search.LocalidadeId));
         }
 
         if (!string.IsNullOrWhiteSpace(search.ProfissionalId))
