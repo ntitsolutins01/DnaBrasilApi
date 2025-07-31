@@ -15436,6 +15436,13 @@
               },
               "status": {
                 "type": "boolean"
+              },
+              "cursos": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "$ref": "#/components/schemas/Curso"
+                }
               }
             }
           }
@@ -22956,6 +22963,13 @@
           },
           "status": {
             "type": "boolean"
+          },
+          "cursos": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/CursoDto"
+            }
           }
         }
       },
