@@ -4,6 +4,7 @@ using DnaBrasilApi.Application.Estados.Queries.GetEstadoByUf;
 using DnaBrasilApi.Application.Estados.Queries.GetEstadosAll;
 using DnaBrasilApi.Application.Municipios.Queries;
 using DnaBrasilApi.Application.Municipios.Queries.GetMunicipioById;
+using DnaBrasilApi.Application.Municipios.Queries.GetMunicipiosByFomentoId;
 using DnaBrasilApi.Application.Municipios.Queries.GetMunicipiosByUf;
 
 namespace DnaBrasilApi.Web.Endpoints;
@@ -22,7 +23,8 @@ public class DivisoesAdministrativas : EndpointGroupBase
             .MapGet(GetEstadosAll, "Estados")
             .MapGet(GetMunicipiosByUf, "Municipios/{uf}")
             .MapGet(GetMunicipioById, "Municipio/{id}")
-            .MapGet(GetEstadoByUf, "Estado/{uf}");
+            .MapGet(GetEstadoByUf, "Estado/{uf}")
+            .MapGet(GetMunicipiosByFomentoId, "Municipio/Fomento/{id}");
     }
     #endregion
 
@@ -68,6 +70,17 @@ public class DivisoesAdministrativas : EndpointGroupBase
     public async Task<MunicipioDto> GetMunicipioById(ISender sender, int id)
     {
         return await sender.Send(new GetMunicipioByIdQuery() { Id = id });
+    }
+
+    /// <summary>
+    /// Endpoint que busca os Municipios de um fomento
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="id">Id do fomento</param>
+    /// <returns>retorna uma lista de municipios</returns>
+    public async Task<List<MunicipioDto>> GetMunicipiosByFomentoId(ISender sender, int id)
+    {
+        return await sender.Send(new GetMunicipiosByFomentoIdQuery { Id = id });
     }
 
     #endregion
