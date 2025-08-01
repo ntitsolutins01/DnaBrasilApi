@@ -14,6 +14,6 @@ public class PerfilConfiguration : IEntityTypeConfiguration<Perfil>
             .HasMaxLength(50)
             .IsRequired();
         builder.Property(t => t.Descricao)
-            .HasMaxLength(100);
+            .HasMaxLength(500);
     }
 }
