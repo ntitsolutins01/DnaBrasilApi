@@ -18,9 +18,7 @@ using DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorSaudeSexoAlunos;
 using DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorTalentoEsportivoAlunos;
 using DnaBrasilApi.Application.Dashboards.Queries.GetVocacionalAlunos;
 using DnaBrasilApi.Application.Usuarios.Queries.GetQtUsuariosByPerfilId;
-using DnaBrasilApi.Application.Usuarios.Queries.GetUsuariosAll;
 using Microsoft.AspNetCore.Mvc;
-using Azure.Core;
 
 namespace DnaBrasilApi.Web.Endpoints;
 

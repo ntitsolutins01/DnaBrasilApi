@@ -18,6 +18,7 @@ public class GetTipoCursosAllQueryHandler : IRequestHandler<GetTipoCursosAllQuer
     public async Task<List<TipoCursoDto>> Handle(GetTipoCursosAllQuery request, CancellationToken cancellationToken)
     {
         var result = await _context.TipoCursos
+            .Where(x=>x.Status)
             .AsNoTracking()
             .ProjectTo<TipoCursoDto>(_mapper.ConfigurationProvider)
             .OrderBy(t => t.Nome)
