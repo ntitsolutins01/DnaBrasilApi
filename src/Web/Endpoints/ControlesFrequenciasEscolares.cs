@@ -4,6 +4,7 @@ using DnaBrasilApi.Application.ControlesFrequenciasEscolares.Commands.UpdateCont
 using DnaBrasilApi.Application.ControlesFrequenciasEscolares.Queries;
 using DnaBrasilApi.Application.ControlesFrequenciasEscolares.Queries.GetControleFrequenciaEscolarById;
 using DnaBrasilApi.Application.ControlesFrequenciasEscolares.Queries.GetControlesFrequenciasEscolaresAll;
+using DnaBrasilApi.Application.ControlesFrequenciasEscolares.Queries.GetControlesFrequenciasEscolaresByAlunoId;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -26,7 +27,8 @@ public class ControlesFrequenciasEscolares : EndpointGroupBase
             .MapPost(CreateControleFrequenciaEscolar)
             .MapPut(UpdateControleFrequenciaEscolar, "{id}")
             .MapDelete(DeleteControleFrequenciaEscolar, "{id}")
-            .MapGet(GetControleFrequenciaEscolarById, "{id}");
+            .MapGet(GetControleFrequenciaEscolarById, "{id}")
+            .MapGet(GetControlesFrequenciasEscolaresByAlunoId, "Aluno/{id}");
     }
     #endregion
 
@@ -91,6 +93,17 @@ public class ControlesFrequenciasEscolares : EndpointGroupBase
     public async Task<ControleFrequenciaEscolarDto> GetControleFrequenciaEscolarById(ISender sender, int id)
     {
         return await sender.Send(new GetControleFrequenciaEscolarByIdQuery() { Id = id });
+    }
+
+    /// <summary>
+    /// Endpoint que busca uma lista de frequencias escolares pelo aluno
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="id">Id do aluno</param>
+    /// <returns>Retorna uma lista de Frequencias Escolares</returns>
+    public async Task<List<ControleFrequenciaEscolarDto>> GetControlesFrequenciasEscolaresByAlunoId(ISender sender, int id)
+    {
+        return await sender.Send(new GetControlesFrequenciasEscolaresByAlunoIdQuery() { AlunoId = id });
     }
     #endregion
 }

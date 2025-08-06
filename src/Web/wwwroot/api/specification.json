@@ -2658,6 +2658,41 @@
         }
       }
     },
+    "/api/ControlesFrequenciasEscolares/Aluno/{id}": {
+      "get": {
+        "tags": [
+          "ControlesFrequenciasEscolares"
+        ],
+        "operationId": "GetControlesFrequenciasEscolaresByAlunoId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ControleFrequenciaEscolarDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/ControlesMateriais": {
       "get": {
         "tags": [
@@ -17251,6 +17286,11 @@
           },
           "disciplinaId": {
             "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "type": "string",
+            "format": "date-time",
             "nullable": true
           }
         }
