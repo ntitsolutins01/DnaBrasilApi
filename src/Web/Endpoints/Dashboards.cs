@@ -99,7 +99,7 @@ public class Dashboards : EndpointGroupBase
             {
                 dashboardEad.CursosDisponiveis = cursos.Count(x => x.TipoCursoId == Convert.ToInt32(dashboardEad.TipoCursoId));
             }
-            if (dashboardEad.CursoId != "" && dashboardEad.TipoCursoId == "")
+            if (dashboardEad.CursoId != "")
             {
                 dashboardEad.CursosDisponiveis = cursos.Count(x => x.Id == Convert.ToInt32(dashboardEad.CursoId));
             }
