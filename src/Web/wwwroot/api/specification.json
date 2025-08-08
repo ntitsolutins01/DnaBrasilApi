@@ -17288,10 +17288,13 @@
             "type": "string",
             "nullable": true
           },
-          "data": {
+          "profissionalId": {
             "type": "string",
-            "format": "date-time",
             "nullable": true
+          },
+          "dataFrequencia": {
+            "type": "string",
+            "format": "date-time"
           }
         }
       },
@@ -17313,6 +17316,13 @@
           "disciplinaId": {
             "type": "string",
             "nullable": true
+          },
+          "profissionalId": {
+            "type": "string",
+            "nullable": true
+          },
+          "dataFrequencia": {
+            "type": "string"
           }
         }
       },

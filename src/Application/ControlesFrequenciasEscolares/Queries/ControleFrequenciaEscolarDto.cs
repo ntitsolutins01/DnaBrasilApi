@@ -11,14 +11,13 @@ public class ControleFrequenciaEscolarDto
     public string? AlunoId { get; init; }
     public string? SerieId { get; init; }
     public string? DisciplinaId { get; init; }
-    public DateTimeOffset? Data { get; init; }
-
-    private class Mapping : Profile
+    public string? ProfissionalId { get; init; }
+    public required DateTime DataFrequencia { get; init; }
+        private class Mapping : Profile
     {
         public Mapping()
         {
-            CreateMap<ControleFrequenciaEscolar, ControleFrequenciaEscolarDto>()
-                .ForMember(dest => dest.Data, opt => opt.MapFrom(src => src.Created));
+            CreateMap<ControleFrequenciaEscolar, ControleFrequenciaEscolarDto>();
         }
     }
 }
