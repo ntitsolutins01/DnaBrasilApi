@@ -7,6 +7,7 @@ public class LaudoDto
 
     #region Ids
 
+    public int? EducacionalId { get; init; }
     public int? TalentoEsportivoId { get; init; }
     public int? VocacionalId { get; init; }
     public int? QualidadeDeVidaId { get; init; }
@@ -66,6 +67,7 @@ public class LaudoDto
         public Mapping()
         {
             CreateMap<Laudo, LaudoDto>()
+                .ForMember(dest => dest.EducacionalId, opt => opt.MapFrom(src => src.Educacional!.Id))
                 .ForMember(dest => dest.TalentoEsportivoId, opt => opt.MapFrom(src => src.TalentoEsportivo!.Id))
                 .ForMember(dest => dest.VocacionalId, opt => opt.MapFrom(src => src.Vocacional!.Id))
                 .ForMember(dest => dest.QualidadeDeVidaId, opt => opt.MapFrom(src => src.QualidadeDeVida!.Id))

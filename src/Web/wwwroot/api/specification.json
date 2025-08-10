@@ -19435,6 +19435,11 @@
             "type": "integer",
             "format": "int32"
           },
+          "educacionalId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
           "talentoEsportivoId": {
             "type": "integer",
             "format": "int32",
