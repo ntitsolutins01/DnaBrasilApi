@@ -4,6 +4,7 @@ using DnaBrasilApi.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DnaBrasilApi.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250801195538_DnaCreateControlesFrequenciasEscolares")]
+    partial class DnaCreateControlesFrequenciasEscolares
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -686,9 +689,6 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("DataFrequencia")
-                        .HasColumnType("datetime2");
-
                     b.Property<int?>("DisciplinaId")
                         .HasColumnType("int");
 
@@ -698,9 +698,6 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ProfissionalId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("SerieId")
                         .HasColumnType("int");
 
@@ -709,8 +706,6 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.HasIndex("AlunoId");
 
                     b.HasIndex("DisciplinaId");
-
-                    b.HasIndex("ProfissionalId");
 
                     b.HasIndex("SerieId");
 
@@ -4022,10 +4017,6 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                         .WithMany()
                         .HasForeignKey("DisciplinaId");
 
-                    b.HasOne("DnaBrasilApi.Domain.Entities.Profissional", "Profissional")
-                        .WithMany()
-                        .HasForeignKey("ProfissionalId");
-
                     b.HasOne("DnaBrasilApi.Domain.Entities.Serie", "Serie")
                         .WithMany()
                         .HasForeignKey("SerieId");
@@ -4033,8 +4024,6 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.Navigation("Aluno");
 
                     b.Navigation("Disciplina");
-
-                    b.Navigation("Profissional");
 
                     b.Navigation("Serie");
                 });
