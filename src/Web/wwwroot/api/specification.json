@@ -19757,6 +19757,11 @@
             "format": "int32",
             "nullable": true
           },
+          "encaminhamentoEducacionalId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
           "encaminhamentoConsumoAlimentarId": {
             "type": "integer",
             "format": "int32",
