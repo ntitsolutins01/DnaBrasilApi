@@ -21,7 +21,7 @@ public class GetAlunosCursosByCursoIdQueryHandler : IRequestHandler<GetAlunosCur
 
     public async Task<List<AlunoCursoDto>> Handle(GetAlunosCursosByCursoIdQuery request, CancellationToken cancellationToken)
     {
-        List<AlunoCursoDto> result;
+        List<AlunoCursoDto> result = [];
 
         if (request.IdTipoCurso != 0)
         {
@@ -31,7 +31,8 @@ public class GetAlunosCursosByCursoIdQueryHandler : IRequestHandler<GetAlunosCur
                 .ProjectTo<AlunoCursoDto>(_mapper.ConfigurationProvider)
                 .ToListAsync(cancellationToken);
         }
-        else
+
+        if (request.CursoId != 0)
         {
             result = await _context.AlunoCursosCertificados
                 .Where((x => x.CursoId == request.CursoId))
@@ -40,6 +41,6 @@ public class GetAlunosCursosByCursoIdQueryHandler : IRequestHandler<GetAlunosCur
                 .ToListAsync(cancellationToken);
         }
 
-        return result == null ? throw new ArgumentNullException(nameof(result)) : result;
+        return result;
     }
 }
