@@ -5,6 +5,9 @@ using DnaBrasilApi.Application.ControlesFrequenciasEscolares.Queries;
 using DnaBrasilApi.Application.ControlesFrequenciasEscolares.Queries.GetControleFrequenciaEscolarById;
 using DnaBrasilApi.Application.ControlesFrequenciasEscolares.Queries.GetControlesFrequenciasEscolaresAll;
 using DnaBrasilApi.Application.ControlesFrequenciasEscolares.Queries.GetControlesFrequenciasEscolaresByAlunoId;
+using DnaBrasilApi.Application.Eventos.Queries.GetEventosByMesAno;
+using DnaBrasilApi.Application.Eventos.Queries;
+using DnaBrasilApi.Application.ControlesFrequenciasEscolares.Queries.GetControlesFrequenciasEscolaresByAlunoMesAno;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -28,7 +31,8 @@ public class ControlesFrequenciasEscolares : EndpointGroupBase
             .MapPut(UpdateControleFrequenciaEscolar, "{id}")
             .MapDelete(DeleteControleFrequenciaEscolar, "{id}")
             .MapGet(GetControleFrequenciaEscolarById, "{id}")
-            .MapGet(GetControlesFrequenciasEscolaresByAlunoId, "Aluno/{id}");
+            .MapGet(GetControlesFrequenciasEscolaresByAlunoId, "Aluno/{id}")
+            .MapGet(GetControlesFrequenciasEscolaresByAlunoMesAno, "Aluno/{alunoId}/Mes/{mes}/Ano/{ano}");
     }
     #endregion
 
@@ -105,5 +109,19 @@ public class ControlesFrequenciasEscolares : EndpointGroupBase
     {
         return await sender.Send(new GetControlesFrequenciasEscolaresByAlunoIdQuery() { AlunoId = id });
     }
+
+    /// <summary>
+    /// Endpoint que busca as frequências de um aluno do mes informado
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="alunoId">Id do Aluno</param>
+    /// <param name="mes">Mes</param>
+    /// <param name="ano">Ano</param>
+    /// <returns>Retorna uma lista de frequências do mês ano informado </returns>
+    public async Task<List<ControleFrequenciaEscolarDto>> GetControlesFrequenciasEscolaresByAlunoMesAno(ISender sender, int alunoId, int mes, int ano)
+    {
+        return await sender.Send(new GetControlesFrequenciasEscolaresByAlunoMesAnoQuery() { AlunoId = alunoId, Mes = mes, Ano = ano });
+    }
+
     #endregion
 }

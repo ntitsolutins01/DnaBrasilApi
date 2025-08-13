@@ -2693,6 +2693,61 @@
         }
       }
     },
+    "/api/ControlesFrequenciasEscolares/Aluno/{alunoId}/Mes/{mes}/Ano/{ano}": {
+      "get": {
+        "tags": [
+          "ControlesFrequenciasEscolares"
+        ],
+        "operationId": "GetControlesFrequenciasEscolaresByAlunoMesAno",
+        "parameters": [
+          {
+            "name": "alunoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "mes",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 2
+          },
+          {
+            "name": "ano",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 3
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ControleFrequenciaEscolarDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/ControlesMateriais": {
       "get": {
         "tags": [
@@ -19753,6 +19808,11 @@
             "nullable": true
           },
           "encaminhamentoVocacionalId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "encaminhamentoEducacionalId": {
             "type": "integer",
             "format": "int32",
             "nullable": true
