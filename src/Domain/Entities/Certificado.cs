@@ -3,12 +3,8 @@
 public class Certificado : BaseAuditableEntity
 {
     public required Fomentu Fomento { get; set; }
-    public required string ImagemFrente { get; set; }
-    public string? ImagemVerso { get; set; }
-    public string? NomeImagemFrente { get; set; }
-    public string? NomeImagemVerso { get; set; }
-    public required string HtmlFrente { get; set; }
-    public required string HtmlVerso { get; set; }
+    public required string Nome { get; set; }
+    public required string Url { get; set; }
     public bool Status { get; set; } = true;
     public IList<AlunoCursoCertificado>? AlunoCursosCertificados { get; set; }
 }

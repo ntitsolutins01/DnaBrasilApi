@@ -21,6 +21,7 @@ public class DashboardDto
     public TotalizadorDeficienciaDto? ListTotalizadorDeficiencia { get; set; }
     public TotalizadorEtniaDto? ListTotalizadorEtnia { get; set; }
     public TotalizadorSaudeBucalDto? ListTotalizadorSaudeBucal { get; set; }
+    public TotalizadorEducacionalDto? ListTotalizadorEducacional { get; set; }
     public TotalizadorQualidadeVidaDto? ListTotalizadorQualidadeVida { get; set; }
     public TotalizadorConsumoAlimentarDto? ListTotalizadorConsumoAlimentar { get; set; }
     public VocacionalDto? ListTotalizadorVocacional { get; set; }

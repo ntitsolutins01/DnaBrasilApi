@@ -11,4 +11,5 @@ public class Curso : BaseAuditableEntity
     public string? Imagem { get; set; }
     public string? NomeImagem { get; set; }
     public IList<AlunoCursoCertificado>? AlunoCursosCertificados { get; set; }
+
 }

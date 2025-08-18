@@ -47,11 +47,11 @@ public class CreateEducacionalCommandHandler : IRequestHandler<CreateEducacional
 
         int encaminhamentoId;
         if (acertos <= 5)
-            encaminhamentoId = 12; //"Defasagem"
+            encaminhamentoId = 96; //"Defasagem"
         else if (acertos <= 10)
-            encaminhamentoId = 13; //"Intermediário"
+            encaminhamentoId = 97; //"Intermediário"
         else
-            encaminhamentoId = 14; //"Adequado"
+            encaminhamentoId = 98; //"Adequado"
 
         var encaminhamento = await _context.Encaminhamentos.FindAsync([encaminhamentoId], cancellationToken);
         

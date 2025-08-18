@@ -22,15 +22,15 @@ public class GetIndicadoresAlunosByFilterQueryHandler : IRequestHandler<GetIndic
 
     public Task<int> Handle(GetIndicadoresAlunosByFilterQuery request, CancellationToken cancellationToken)
     {
-        IQueryable<Aluno> Alunos;
+            IQueryable<Aluno> Alunos;
 
-        Alunos = string.IsNullOrWhiteSpace(request.SearchFilter!.Sexo)
-            ? _context.Alunos
-                .Where(x => x.Convidado == false)
-                .AsNoTracking()
-            : _context.Alunos
-                .Where(x => x.Sexo == request.SearchFilter!.Sexo && x.Convidado == false)
-                .AsNoTracking();
+            Alunos = string.IsNullOrWhiteSpace(request.SearchFilter!.Sexo)
+                ? _context.Alunos
+                    .Where(x => x.Convidado == false && x.IdCliente == null)
+                    .AsNoTracking()
+                : _context.Alunos
+                    .Where(x => x.Sexo == request.SearchFilter!.Sexo && x.Convidado == false && x.IdCliente == null)
+                    .AsNoTracking();
 
         var result = FilterAlunos(Alunos, request.SearchFilter!, cancellationToken);
 

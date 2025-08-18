@@ -1,4 +1,6 @@
-﻿using DnaBrasilApi.Application.Dashboards;
+﻿using DnaBrasilApi.Application.Cursos.Queries.GetCursosAll;
+using DnaBrasilApi.Application.Cursos.Queries.GetQuantidadeCursosByProgresso;
+using DnaBrasilApi.Application.Dashboards;
 using DnaBrasilApi.Application.Dashboards.Queries;
 using DnaBrasilApi.Application.Dashboards.Queries.GetControlePresencaByFilter;
 using DnaBrasilApi.Application.Dashboards.Queries.GetIndicadoresAlunosByFilter;
@@ -11,9 +13,11 @@ using DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorDeficienciaAluno
 using DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorDesempenhoAlunos;
 using DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorEtniaAlunos;
 using DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorSaudeBucalAlunos;
+using DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorEducacionalAlunos;
 using DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorSaudeSexoAlunos;
 using DnaBrasilApi.Application.Dashboards.Queries.GetTotalizadorTalentoEsportivoAlunos;
 using DnaBrasilApi.Application.Dashboards.Queries.GetVocacionalAlunos;
+using DnaBrasilApi.Application.Usuarios.Queries.GetQtUsuariosByPerfilId;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DnaBrasilApi.Web.Endpoints;
@@ -26,6 +30,7 @@ public class Dashboards : EndpointGroupBase
             //.RequireAuthorization()
             .MapPost(GetValida, "valida")
             .MapPost(GetIndicadoresAlunosByFilter, "Indicadores")
+            .MapPost(GetIndicadoresEadByFilter, "IndicadoresEad")
             .MapPost(GetControlePresencaByFilter, "ControlePresenca")
             .MapPost(GetLaudosPeriodoByFilter, "LaudosPeriodo")
             .MapPost(GetStatusLaudosByFilter, "StatusLaudos")
@@ -33,6 +38,7 @@ public class Dashboards : EndpointGroupBase
             .MapPost(GetGraficosSaudeByFilter, "GraficosSaude")
             .MapPost(GetGraficosEtniaByFilter, "GraficosEtnia")
             .MapPost(GetGraficosSaudeBucalByFilter, "GraficosSaudeBucal")
+            .MapPost(GetGraficosEducacionalByFilter, "GraficosEducacional")
             .MapPost(GetGraficosDeficienciasByFilter, "GraficosDeficiencia")
             .MapPost(GetGraficosTalentoByFilter, "GraficosTalento")
             .MapPost(GetGraficoPercDesempenhoFisicoMotorByFilter, "GraficoPercDesempenhoFisicoMotor")
@@ -70,6 +76,48 @@ public class Dashboards : EndpointGroupBase
 
 
         return await Task.FromResult(dashboard);
+    }
+    public async Task<DashboardEadDto> GetIndicadoresEadByFilter(ISender sender, [FromBody] DashboardEadDto dashboardEad)
+    {
+        if (!string.IsNullOrWhiteSpace(dashboardEad.CursoId))
+        {
+            dashboardEad.CursosEmAndamento = await sender.Send(new GetQuantidadeCursosByProgressoQuery() { ProgressoIni = 0, ProgressoFim = 100, CursoId = dashboardEad.CursoId });
+            dashboardEad.CursosFinalizados = await sender.Send(new GetQuantidadeCursosByProgressoQuery() { ProgressoIni = 99, ProgressoFim = 100, CursoId = dashboardEad.CursoId });
+        }
+
+
+        var cursos = await sender.Send(new GetCursosAllQuery());
+
+        if (dashboardEad.CursoId == null && dashboardEad.TipoCursoId == null)
+        {
+            dashboardEad.CursosDisponiveis = cursos.Count;
+        }
+        else
+        {
+
+            if (dashboardEad.TipoCursoId != "")
+            {
+                dashboardEad.CursosDisponiveis = cursos.Count(x => x.TipoCursoId == Convert.ToInt32(dashboardEad.TipoCursoId));
+            }
+            if (dashboardEad.CursoId != "")
+            {
+                dashboardEad.CursosDisponiveis = cursos.Count(x => x.Id == Convert.ToInt32(dashboardEad.CursoId));
+            }
+            
+        }
+
+        dashboardEad.AlunosCadastrados = await sender.Send(new GetQtUsuariosByPerfilIdQuery() { SearchFilter = dashboardEad });
+
+        dashboardEad.Sexo = "F";
+        dashboardEad.CadastrosFemininos = await sender.Send(new GetQtUsuariosByPerfilIdQuery() { SearchFilter = dashboardEad });
+        dashboardEad.Sexo = "M";
+        dashboardEad.CadastrosMasculinos = await sender.Send(new GetQtUsuariosByPerfilIdQuery() { SearchFilter = dashboardEad });
+        dashboardEad.Sexo = "";
+
+
+
+
+        return await Task.FromResult(dashboardEad);
     }
     public async Task<DashboardDto> GetControlePresencaByFilter(ISender sender, [FromBody] DashboardDto dashboard)
     {
@@ -121,6 +169,13 @@ public class Dashboards : EndpointGroupBase
     {
         dashboard.ListTotalizadorSaudeBucal =
             await sender.Send(new GetTotalizadorSaudeBucalAlunosQuery() { SearchFilter = dashboard });
+
+        return await Task.FromResult(dashboard);
+    }
+    public async Task<DashboardDto> GetGraficosEducacionalByFilter(ISender sender, [FromBody] DashboardDto dashboard)
+    {
+        dashboard.ListTotalizadorEducacional =
+            await sender.Send(new GetTotalizadorEducacionalAlunosQuery() { SearchFilter = dashboard });
 
         return await Task.FromResult(dashboard);
     }
