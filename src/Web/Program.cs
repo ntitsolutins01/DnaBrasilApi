@@ -1,3 +1,5 @@
+using System.Net.Http.Headers;
+using DnaBrasilApi.Application.Laudos.Queries.ProcessarGabarito;
 using DnaBrasilApi.Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,6 +25,19 @@ builder.Services.AddCors(options =>
             .AllowAnyHeader();
     });
 });
+
+// Configura a ApiPython para processar gabaritos
+var pythonApiBaseUrl = builder.Configuration["PythonApi:BaseUrl"]
+                       ?? throw new InvalidOperationException("PythonApi:BaseUrl não configurada.");
+
+builder.Services.AddHttpClient("PythonApi", client =>
+{
+    client.BaseAddress = new Uri(pythonApiBaseUrl);
+    client.Timeout = TimeSpan.FromSeconds(60);
+    client.DefaultRequestHeaders.Accept.Add(
+        new MediaTypeWithQualityHeaderValue("application/json"));
+});
+
 
 var app = builder.Build();
 
