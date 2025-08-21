@@ -6168,7 +6168,7 @@
         }
       }
     },
-    "/api/FotosEvento/Foto/{id}": {
+    "/api/FotosEvento/Fotos/{id}": {
       "get": {
         "tags": [
           "FotosEvento"

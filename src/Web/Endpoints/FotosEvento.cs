@@ -21,7 +21,7 @@ public class FotosEvento : EndpointGroupBase
             .MapGet(GetFotosAllByEventoId, "{eventoId}")
             .MapPost(CreateFotoEvento)
             .MapDelete(DeleteFotoEvento, "{id}")
-            .MapGet(GetFotoEventoById, "Foto/{id}");
+            .MapGet(GetFotoEventoById, "Fotos/{id}");
     }
     #endregion
 
