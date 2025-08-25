@@ -6192,7 +6192,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/FotoEventoDto"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FotoEventoDto"
+                  }
                 }
               }
             }
