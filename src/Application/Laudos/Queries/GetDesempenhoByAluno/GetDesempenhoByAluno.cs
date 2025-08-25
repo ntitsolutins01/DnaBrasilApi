@@ -82,6 +82,12 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
             .Distinct()
             .ToListAsync();
 
+        var desempenhoEducacional = await _context.TextosLaudos
+            .Where(x => x.TipoLaudo!.Id == 16)
+            .Select(s => s.Classificacao)
+            .Distinct()
+            .ToListAsync();
+
         Dictionary<string, decimal> dict = new()
         {
             { "velocidade", 0 },
@@ -154,6 +160,10 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
             .Include(a => a.Aluno)
             .AsNoTracking();
 
+        var laudoEducacional = _context.Laudos.Where(x => verificaAluno.Contains(x.Aluno.Id)).Include(i => i.Educacional).Where(x => x.Educacional != null)
+            .Include(a => a.Aluno)
+            .AsNoTracking();
+
         //var contador = 0;
 
         double velocidade = 0;
@@ -176,6 +186,7 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
         DateTimeOffset? dataVocacional = null;
         DateTimeOffset? dataConsumoAlimentar = null;
         DateTimeOffset? dataSaudeBucal = null;
+        DateTimeOffset? dataEducacional = null;
 
         string avisoVelocidade = "";
         string avisoImpulsao = "";
@@ -216,6 +227,8 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
         string textoSaudeBucal = "";
 
         string textoConsumoAlimentar = "";
+
+        string textoEducacional = "";
 
         // -------------------------------------------------- Talento Espotivo ------------------------------------
         var alunoEportivo = laudoEsportivo.FirstOrDefault();
@@ -1008,6 +1021,86 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
             }
         }
 
+        // -------------------------------------------------- Educacional ------------------------------------
+        var scoreEducacional = 0;
+        var alunoEducacional = laudoConsumoAlimentar.FirstOrDefault();
+        if (laudo.Any(x => x.Educacional != null))
+        {
+            switch (alunoEducacional!.Educacional!.Id)
+            {
+                case 96:
+                    {
+                        scoreEducacional = 0;
+                        break;
+                    }
+                case 97:
+                    {
+                        scoreEducacional = 50;
+                        break;
+                    }
+                case 98:
+                    {
+                        scoreEducacional = 100;
+                        break;
+                    }
+                default:
+                    {
+                        scoreEducacional = 0;
+                        break;
+                    }
+            }
+        }
+
+        if (alunoEducacional?.Educacional != null)
+        {
+            var desempenho = desempenhoEducacional.FirstOrDefault();
+            if (desempenho != null)
+            {
+                textoLaudo = _context.TextosLaudos
+                    .Where(x =>
+                        x.Classificacao!.Equals(desempenho) &&
+                        (x.Aviso!.Trim().Equals("Defasagem.Defasagem") ||
+                         x.Aviso.Trim().Equals("Intermediario.Intermediário") ||
+                         x.Aviso.Trim().Equals("Adequado.Adequado")))
+                    .ToList();
+
+                dataEducacional = textoLaudo.FirstOrDefault()?.Created;
+
+                var param = laudo.FirstOrDefault()?.Educacional?.Encaminhamento?.Parametro?.Trim();
+
+                var paramNormalized = param switch
+                {
+                    "Defasagem" => "Defasagem.Defasagem",
+                    "Intermediario" => "Intermediario.Intermediário",
+                    "Adequado" => "Adequado.Adequado",
+                    _ => param
+                };
+
+                if (textoLaudo.Any())
+                {
+                    foreach (var laudoItem in textoLaudo)
+                    {
+                        var avisoLaudo = laudoItem.Aviso?.Trim();
+
+                        if (avisoLaudo!.Equals(paramNormalized))
+                        {
+                            var nota = laudoItem.Aviso;
+
+                            textoEducacional = nota switch
+                            {
+                                "Defasagem.Defasagem" => textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Defasagem.Defasagem")?.Texto ?? "",
+                                "Intermediario.Intermediário" => textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Intermediario.Intermediário")?.Texto ?? "",
+                                "Adequado.Adequado" => textoLaudo.FirstOrDefault(t => t.Aviso == "Adequado.Adequado")?.Texto ?? "",
+                                _ => ""
+                            };
+
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
         // -------------------------------------------------- Calculo Scores ------------------------------------
         var scoreTalentoEsportivo = velocidade + impulsao + shutlleRun + flexibilidadeMuscular
                                     + forcaMembrosSup + aptidaoCardio + prancha;
@@ -1022,7 +1115,8 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
             ScoreVocacional = scoreVocacional,
             ScoreSaudeBucal = saudeBucal,
             ScoreConsumoAlimentar = consumoAlimentar,
-            ScoreDna = Round(scoreTalentoEsportivo + scoreSaude + scoreVocacional + saudeBucal + consumoAlimentar + scoreQualidadeVida),
+            ScoreEducacional = scoreEducacional,
+            ScoreDna = Round(scoreTalentoEsportivo + scoreSaude + scoreVocacional + saudeBucal + consumoAlimentar + scoreQualidadeVida + scoreEducacional),
             AvisoVelocidade = avisoVelocidade,
             AvisoImpulsao = avisoImpulsao,
             AvisoShuttleRun = avisoShutlleRun,
@@ -1043,6 +1137,7 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
             DataVocacional = dataVocacional,
             DataSaudeBucal = dataSaudeBucal,
             DataConsumoAlimentar = dataConsumoAlimentar,
+            DataEducacional = dataEducacional,
             TextoVelocidade = textoVelocidade,
             TextoImpulsao = textoImpulsao,
             TextoShuttleRun = textoShuttleRun,
@@ -1058,6 +1153,7 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
             TextoContexto = textoContexto,
             TextoConsumoAlimentar = textoConsumoAlimentar,
             TextoSaudeBucal = textoSaudeBucal,
+            TextoEducacional = textoEducacional
         };
     }
 

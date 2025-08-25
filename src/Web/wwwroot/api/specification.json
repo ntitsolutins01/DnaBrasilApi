@@ -20144,6 +20144,10 @@
             "type": "integer",
             "format": "int32"
           },
+          "scoreEducacional": {
+            "type": "integer",
+            "format": "int32"
+          },
           "scoreDna": {
             "type": "integer",
             "format": "int32"
@@ -20234,6 +20238,11 @@
             "format": "date-time",
             "nullable": true
           },
+          "dataEducacional": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
           "textoVelocidade": {
             "type": "string",
             "nullable": true
@@ -20291,6 +20300,10 @@
             "nullable": true
           },
           "textoSaudeBucal": {
+            "type": "string",
+            "nullable": true
+          },
+          "textoEducacional": {
             "type": "string",
             "nullable": true
           }
