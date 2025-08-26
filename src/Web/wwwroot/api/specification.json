@@ -6168,7 +6168,7 @@
         }
       }
     },
-    "/api/FotosEvento/Foto/{id}": {
+    "/api/FotosEvento/Fotos/{id}": {
       "get": {
         "tags": [
           "FotosEvento"
@@ -6192,7 +6192,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/FotoEventoDto"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FotoEventoDto"
+                  }
                 }
               }
             }
