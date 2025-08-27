@@ -1023,81 +1023,42 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
 
         // -------------------------------------------------- Educacional ------------------------------------
         var scoreEducacional = 0;
-        var alunoEducacional = laudoConsumoAlimentar.FirstOrDefault();
-        if (laudo.Any(x => x.Educacional != null))
-        {
-            switch (alunoEducacional!.Educacional!.Id)
-            {
-                case 96:
-                    {
-                        scoreEducacional = 0;
-                        break;
-                    }
-                case 97:
-                    {
-                        scoreEducacional = 50;
-                        break;
-                    }
-                case 98:
-                    {
-                        scoreEducacional = 100;
-                        break;
-                    }
-                default:
-                    {
-                        scoreEducacional = 0;
-                        break;
-                    }
-            }
-        }
+
+        var alunoEducacional = laudoEducacional.FirstOrDefault();
 
         if (alunoEducacional?.Educacional != null)
         {
-            var desempenho = desempenhoEducacional.FirstOrDefault();
-            if (desempenho != null)
+            var educacional = _context.Educacionais
+                .AsNoTracking()
+                .Where(x => x.Aluno.Id == alunoEducacional.Aluno.Id)  
+                .OrderByDescending(x => x.Created)
+                .FirstOrDefault();
+
+            var encaminhamento = _context.Encaminhamentos
+                .AsNoTracking()
+                .Where(x => x.Id == educacional!.Encaminhamento!.Id)
+                .FirstOrDefault();
+
+            if (encaminhamento != null)
             {
-                textoLaudo = _context.TextosLaudos
-                    .Where(x =>
-                        x.Classificacao!.Equals(desempenho) &&
-                        (x.Aviso!.Trim().Equals("Defasagem.Defasagem") ||
-                         x.Aviso.Trim().Equals("Intermediario.Intermediário") ||
-                         x.Aviso.Trim().Equals("Adequado.Adequado")))
-                    .ToList();
 
-                dataEducacional = textoLaudo.FirstOrDefault()?.Created;
-
-                var param = laudo.FirstOrDefault()?.Educacional?.Encaminhamento?.Parametro?.Trim();
-
-                var paramNormalized = param switch
+                scoreEducacional = encaminhamento.Id switch
                 {
-                    "Defasagem" => "Defasagem.Defasagem",
-                    "Intermediario" => "Intermediario.Intermediário",
-                    "Adequado" => "Adequado.Adequado",
-                    _ => param
+                    96 => 0,
+                    97 => 50,
+                    98 => 100,
+                    _ => 0
                 };
 
-                if (textoLaudo.Any())
-                {
-                    foreach (var laudoItem in textoLaudo)
-                    {
-                        var avisoLaudo = laudoItem.Aviso?.Trim();
+                textoEducacional = encaminhamento.Descricao!;
 
-                        if (avisoLaudo!.Equals(paramNormalized))
-                        {
-                            var nota = laudoItem.Aviso;
-
-                            textoEducacional = nota switch
-                            {
-                                "Defasagem.Defasagem" => textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Defasagem.Defasagem")?.Texto ?? "",
-                                "Intermediario.Intermediário" => textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Intermediario.Intermediário")?.Texto ?? "",
-                                "Adequado.Adequado" => textoLaudo.FirstOrDefault(t => t.Aviso == "Adequado.Adequado")?.Texto ?? "",
-                                _ => ""
-                            };
-
-                            break;
-                        }
-                    }
-                }
+                dataEducacional = educacional!.Created;
+            }
+            else
+            {
+                scoreEducacional = 0;
+                textoEducacional = string.Empty;
+                dataEducacional = null;
             }
         }
 
