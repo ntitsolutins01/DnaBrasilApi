@@ -186,7 +186,8 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
         DateTimeOffset? dataVocacional = null;
         DateTimeOffset? dataConsumoAlimentar = null;
         DateTimeOffset? dataSaudeBucal = null;
-        DateTimeOffset? dataEducacional = null;
+        DateTimeOffset? dataMatematica = null;
+        DateTimeOffset? dataPortugues = null;
 
         string avisoVelocidade = "";
         string avisoImpulsao = "";
@@ -228,7 +229,8 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
 
         string textoConsumoAlimentar = "";
 
-        string textoEducacional = "";
+        string textoMatematica = "";
+        string textoPortugues = "";
 
         // -------------------------------------------------- Talento Espotivo ------------------------------------
         var alunoEportivo = laudoEsportivo.FirstOrDefault();
@@ -1022,27 +1024,43 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
         }
 
         // -------------------------------------------------- Educacional ------------------------------------
-        var scoreEducacional = 0;
-
         var alunoEducacional = laudoEducacional.FirstOrDefault();
+
+        int scoreMatematica = 0;
+
+        int scorePortugues = 0;
 
         if (alunoEducacional?.Educacional != null)
         {
-            var educacional = _context.Educacionais
+            var educacionalMatematica = _context.Educacionais
                 .AsNoTracking()
-                .Where(x => x.Aluno.Id == alunoEducacional.Aluno.Id)  
+                .Where(x => x.Aluno.Id == alunoEducacional.Aluno.Id &&
+                            x.Gabarito.Contains("MT"))
                 .OrderByDescending(x => x.Created)
                 .FirstOrDefault();
 
-            var encaminhamento = _context.Encaminhamentos
+            var educacionalPortugues = _context.Educacionais
                 .AsNoTracking()
-                .Where(x => x.Id == educacional!.Encaminhamento!.Id)
+                .Where(x => x.Aluno.Id == alunoEducacional.Aluno.Id &&
+                            x.Gabarito.Contains("LP"))
+                .OrderByDescending(x => x.Created)
                 .FirstOrDefault();
 
-            if (encaminhamento != null)
-            {
+            var encaminhamentoMatematica = educacionalMatematica != null
+                ? _context.Encaminhamentos
+                    .AsNoTracking()
+                    .FirstOrDefault(x => x.Id == educacionalMatematica.Encaminhamento!.Id)
+                : null;
 
-                scoreEducacional = encaminhamento.Id switch
+            var encaminhamentoPortugues = educacionalPortugues != null
+                ? _context.Encaminhamentos
+                    .AsNoTracking()
+                    .FirstOrDefault(x => x.Id == educacionalPortugues.Encaminhamento!.Id)
+                : null;
+
+            if (encaminhamentoMatematica != null)
+            {
+                scoreMatematica = encaminhamentoMatematica.Id switch
                 {
                     96 => 0,
                     97 => 50,
@@ -1050,15 +1068,22 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
                     _ => 0
                 };
 
-                textoEducacional = encaminhamento.Descricao!;
-
-                dataEducacional = educacional!.Created;
+                textoMatematica = encaminhamentoMatematica.Descricao!;
+                dataMatematica = encaminhamentoMatematica.Created;
             }
-            else
+
+            if (encaminhamentoPortugues != null)
             {
-                scoreEducacional = 0;
-                textoEducacional = string.Empty;
-                dataEducacional = null;
+                scorePortugues = encaminhamentoPortugues.Id switch
+                {
+                    96 => 0,
+                    97 => 50,
+                    98 => 100,
+                    _ => 0
+                };
+
+                textoPortugues = encaminhamentoPortugues.Descricao!;
+                dataPortugues = encaminhamentoPortugues!.Created;
             }
         }
 
@@ -1076,8 +1101,9 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
             ScoreVocacional = scoreVocacional,
             ScoreSaudeBucal = saudeBucal,
             ScoreConsumoAlimentar = consumoAlimentar,
-            ScoreEducacional = scoreEducacional,
-            ScoreDna = Round(scoreTalentoEsportivo + scoreSaude + scoreVocacional + saudeBucal + consumoAlimentar + scoreQualidadeVida + scoreEducacional),
+            ScoreMatematica = scoreMatematica,
+            ScorePortugues = scorePortugues,
+            ScoreDna = Round(scoreTalentoEsportivo + scoreSaude + scoreVocacional + saudeBucal + consumoAlimentar + scoreQualidadeVida + scoreMatematica + scorePortugues),
             AvisoVelocidade = avisoVelocidade,
             AvisoImpulsao = avisoImpulsao,
             AvisoShuttleRun = avisoShutlleRun,
@@ -1098,7 +1124,8 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
             DataVocacional = dataVocacional,
             DataSaudeBucal = dataSaudeBucal,
             DataConsumoAlimentar = dataConsumoAlimentar,
-            DataEducacional = dataEducacional,
+            DataMatematica = dataMatematica,
+            DataPortugues = dataPortugues,
             TextoVelocidade = textoVelocidade,
             TextoImpulsao = textoImpulsao,
             TextoShuttleRun = textoShuttleRun,
@@ -1114,7 +1141,8 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
             TextoContexto = textoContexto,
             TextoConsumoAlimentar = textoConsumoAlimentar,
             TextoSaudeBucal = textoSaudeBucal,
-            TextoEducacional = textoEducacional
+            TextoMatematica = textoMatematica,
+            TextoPortugues = textoPortugues
         };
     }
 
