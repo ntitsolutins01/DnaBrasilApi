@@ -96,7 +96,8 @@ public class GetTotalizadorEducacionalAlunosQueryHandler : IRequestHandler<GetTo
             { "ADEQUADO", 0 }
         };
 
-        var laudos = _context.Laudos.Where(x => verificaAlunos.Contains(x.Aluno.Id)).Include(i => i.Educacional).Where(x => x.Educacional != null)
+        // TO DO: Arrumar a logica dos totalizador para Matematica e Portugues
+        var laudos = _context.Laudos.Where(x => verificaAlunos.Contains(x.Aluno.Id)).Include(i => i.EducacionalMatematica).Where(x => x.EducacionalMatematica != null)
             .Include(a => a.Aluno)
             .AsNoTracking();
 
@@ -107,7 +108,7 @@ public class GetTotalizadorEducacionalAlunosQueryHandler : IRequestHandler<GetTo
 
         foreach (var aluno in laudos)
         {
-            List<int> listRespostas = aluno.Educacional!.Respostas.Split(',').Select(item => int.Parse(item)).ToList();
+            List<int> listRespostas = aluno.EducacionalMatematica!.Respostas.Split(',').Select(item => int.Parse(item)).ToList();
 
             var respostas = _context.Respostas.Where(x => listRespostas.Contains(x.Id)).Include(i => i.Questionario);
 

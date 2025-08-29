@@ -16498,7 +16498,15 @@
                   }
                 ]
               },
-              "educacional": {
+              "educacionalMatematica": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Educacional"
+                  }
+                ]
+              },
+              "educacionalPortugues": {
                 "nullable": true,
                 "oneOf": [
                   {
@@ -19760,7 +19768,12 @@
             "type": "integer",
             "format": "int32"
           },
-          "educacionalId": {
+          "educacionalMatematicaId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "educacionalPortuguesId": {
             "type": "integer",
             "format": "int32",
             "nullable": true
@@ -19815,7 +19828,12 @@
             "format": "int32",
             "nullable": true
           },
-          "encaminhamentoEducacionalId": {
+          "encaminhamentoMatematicaId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "encaminhamentoPortuguesId": {
             "type": "integer",
             "format": "int32",
             "nullable": true
@@ -20147,7 +20165,11 @@
             "type": "integer",
             "format": "int32"
           },
-          "scoreEducacional": {
+          "scoreMatematica": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "scorePortugues": {
             "type": "integer",
             "format": "int32"
           },
@@ -20241,7 +20263,12 @@
             "format": "date-time",
             "nullable": true
           },
-          "dataEducacional": {
+          "dataMatematica": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "dataPortugues": {
             "type": "string",
             "format": "date-time",
             "nullable": true
@@ -20306,7 +20333,11 @@
             "type": "string",
             "nullable": true
           },
-          "textoEducacional": {
+          "textoMatematica": {
+            "type": "string",
+            "nullable": true
+          },
+          "textoPortugues": {
             "type": "string",
             "nullable": true
           }

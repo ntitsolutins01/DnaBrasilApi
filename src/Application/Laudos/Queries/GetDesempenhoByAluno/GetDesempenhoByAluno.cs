@@ -160,8 +160,12 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
             .Include(a => a.Aluno)
             .AsNoTracking();
 
-        var laudoEducacional = _context.Laudos.Where(x => verificaAluno.Contains(x.Aluno.Id)).Include(i => i.Educacional).Where(x => x.Educacional != null)
-            .Include(a => a.Aluno)
+        var laudoEducacional = _context.Laudos
+            .Where(x => verificaAluno.Contains(x.Aluno.Id) &&
+                        (x.EducacionalMatematica != null || x.EducacionalPortugues != null))
+            .Include(x => x.EducacionalMatematica)
+            .Include(x => x.EducacionalPortugues)
+            .Include(x => x.Aluno)
             .AsNoTracking();
 
         //var contador = 0;
@@ -1026,64 +1030,44 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
         // -------------------------------------------------- Educacional ------------------------------------
         var alunoEducacional = laudoEducacional.FirstOrDefault();
 
-        int scoreMatematica = 0;
+        int scoreMatematica = 0, scorePortugues = 0;
 
-        int scorePortugues = 0;
-
-        if (alunoEducacional?.Educacional != null)
+        if (alunoEducacional != null &&
+            (alunoEducacional.EducacionalMatematica != null || alunoEducacional.EducacionalPortugues != null))
         {
-            var educacionalMatematica = _context.Educacionais
-                .AsNoTracking()
-                .Where(x => x.Aluno.Id == alunoEducacional.Aluno.Id &&
-                            x.Gabarito.Contains("MT"))
-                .OrderByDescending(x => x.Created)
-                .FirstOrDefault();
+            var educacionalMT = alunoEducacional.EducacionalMatematica;
+            var educacionalLP = alunoEducacional.EducacionalPortugues;
 
-            var educacionalPortugues = _context.Educacionais
-                .AsNoTracking()
-                .Where(x => x.Aluno.Id == alunoEducacional.Aluno.Id &&
-                            x.Gabarito.Contains("LP"))
-                .OrderByDescending(x => x.Created)
-                .FirstOrDefault();
-
-            var encaminhamentoMatematica = educacionalMatematica != null
-                ? _context.Encaminhamentos
-                    .AsNoTracking()
-                    .FirstOrDefault(x => x.Id == educacionalMatematica.Encaminhamento!.Id)
-                : null;
-
-            var encaminhamentoPortugues = educacionalPortugues != null
-                ? _context.Encaminhamentos
-                    .AsNoTracking()
-                    .FirstOrDefault(x => x.Id == educacionalPortugues.Encaminhamento!.Id)
-                : null;
-
-            if (encaminhamentoMatematica != null)
+            if (educacionalMT != null)
             {
-                scoreMatematica = encaminhamentoMatematica.Id switch
-                {
-                    96 => 0,
-                    97 => 50,
-                    98 => 100,
-                    _ => 0
-                };
+                var encMT = educacionalMT.Encaminhamento
+                            ?? (educacionalMT.Encaminhamento != null
+                                ? _context.Encaminhamentos.AsNoTracking()
+                                    .FirstOrDefault(e => e.Id == educacionalMT.Encaminhamento.Id)
+                                : null);
 
-                textoMatematica = encaminhamentoMatematica.Descricao!;
-                dataMatematica = encaminhamentoMatematica.Created;
+                if (encMT != null)
+                {
+                    scoreMatematica = encMT.Id switch { 96 => 0, 97 => 50, 98 => 100, _ => 0 };
+                    textoMatematica = encMT.Descricao!;
+                    dataMatematica = encMT.Created;
+                }
             }
 
-            if (encaminhamentoPortugues != null)
+            if (educacionalLP != null)
             {
-                scorePortugues = encaminhamentoPortugues.Id switch
-                {
-                    96 => 0,
-                    97 => 50,
-                    98 => 100,
-                    _ => 0
-                };
+                var encLP = educacionalLP.Encaminhamento
+                            ?? (educacionalLP.Encaminhamento != null
+                                ? _context.Encaminhamentos.AsNoTracking()
+                                    .FirstOrDefault(e => e.Id == educacionalLP.Encaminhamento.Id)
+                                : null);
 
-                textoPortugues = encaminhamentoPortugues.Descricao!;
-                dataPortugues = encaminhamentoPortugues!.Created;
+                if (encLP != null)
+                {
+                    scorePortugues = encLP.Id switch { 96 => 0, 97 => 50, 98 => 100, _ => 0 };
+                    textoPortugues = encLP.Descricao!;
+                    dataPortugues = encLP.Created;
+                }
             }
         }
 
