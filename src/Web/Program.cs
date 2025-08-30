@@ -1,3 +1,5 @@
+using System.Net.Http.Headers;
+using DnaBrasilApi.Application.Laudos.Queries.ProcessarGabarito;
 using DnaBrasilApi.Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +14,30 @@ builder.Services.AddKeyVaultIfConfigured(builder.Configuration);
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddWebServices();
+
+// Habilita CORS para todas as origens
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+    });
+});
+
+// Configura a ApiPython para processar gabaritos
+var pythonApiBaseUrl = builder.Configuration["PythonApi:BaseUrl"]
+                       ?? throw new InvalidOperationException("PythonApi:BaseUrl não configurada.");
+
+builder.Services.AddHttpClient("PythonApi", client =>
+{
+    client.BaseAddress = new Uri(pythonApiBaseUrl);
+    client.Timeout = TimeSpan.FromSeconds(60);
+    client.DefaultRequestHeaders.Accept.Add(
+        new MediaTypeWithQualityHeaderValue("application/json"));
+});
+
 
 var app = builder.Build();
 
@@ -29,6 +55,9 @@ else
 app.UseHealthChecks("/health");
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
+// Ativa o CORS
+app.UseCors("AllowAll");
 
 app.UseSwaggerUi(settings =>
 {

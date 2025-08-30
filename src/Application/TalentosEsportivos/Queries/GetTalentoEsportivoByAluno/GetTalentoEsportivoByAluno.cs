@@ -2,9 +2,9 @@
 
 namespace DnaBrasilApi.Application.TalentosEsportivos.Queries.GetTalentoEsportivoByAluno;
 
-public record GetTalentoEsportivoByAlunoQuery(int AlunoId) : IRequest<TalentoEsportivoDto>;
+public record GetTalentoEsportivoByAlunoQuery(int AlunoId) : IRequest<List<TalentoEsportivoDto>>;
 
-public class GetTalentoEsportivoByAlunoQueryHandler : IRequestHandler<GetTalentoEsportivoByAlunoQuery, TalentoEsportivoDto>
+public class GetTalentoEsportivoByAlunoQueryHandler : IRequestHandler<GetTalentoEsportivoByAlunoQuery, List<TalentoEsportivoDto>>
 {
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
@@ -15,7 +15,7 @@ public class GetTalentoEsportivoByAlunoQueryHandler : IRequestHandler<GetTalento
         _mapper = mapper;
     }
 
-    public async Task<TalentoEsportivoDto> Handle(GetTalentoEsportivoByAlunoQuery request, CancellationToken cancellationToken)
+    public async Task<List<TalentoEsportivoDto>> Handle(GetTalentoEsportivoByAlunoQuery request, CancellationToken cancellationToken)
     {
         var aluno = await _context.Alunos
             .FindAsync(new object[] { request.AlunoId }, cancellationToken);
@@ -34,7 +34,7 @@ public class GetTalentoEsportivoByAlunoQueryHandler : IRequestHandler<GetTalento
             .Include(i => i.Profissional)
             .AsNoTracking()
             .ProjectTo<TalentoEsportivoDto>(_mapper.ConfigurationProvider)
-            .FirstOrDefaultAsync(cancellationToken);
+            .ToListAsync(cancellationToken);
 
         return result == null ? throw new ArgumentNullException(nameof(result)) : result;
     }

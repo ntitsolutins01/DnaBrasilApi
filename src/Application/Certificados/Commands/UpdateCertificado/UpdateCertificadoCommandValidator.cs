@@ -3,13 +3,12 @@ internal class UpdateCertificadoCommandValidator : AbstractValidator<UpdateCerti
 {
     public UpdateCertificadoCommandValidator()
     {
-        RuleFor(v => v.HtmlFrente)
+        RuleFor(v => v.Url)
             .MaximumLength(2000)
             .NotEmpty()
-            .WithMessage("O html é obrigatório.");
-        RuleFor(v => v.HtmlVerso)
-            .MaximumLength(2000)
-            .NotEmpty()
-            .WithMessage("O html é obrigatório.");
+            .WithMessage("A url é obrigatória.");
+        RuleFor(v => v.Nome)
+            .MaximumLength(100)
+            .WithMessage("O tamanho máximo é 100.");
     }
 }

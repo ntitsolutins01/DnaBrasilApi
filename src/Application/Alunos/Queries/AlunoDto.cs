@@ -1,4 +1,7 @@
-﻿using DnaBrasilApi.Domain.Entities;
+﻿using DnaBrasilApi.Application.DocumentosAluno.Queries;
+using DnaBrasilApi.Application.FotosEvento.Queries;
+using DnaBrasilApi.Application.Laudos.Queries;
+using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Alunos.Queries;
 public class AlunoDto
@@ -47,6 +50,7 @@ public class AlunoDto
     public string? SerieId { get; init; }
     public string? EtapaId { get; init; }
     public string? SerieNome { get; init; }
+    public List<LaudoOrdemDto>? Laudos { get; init; }
     private class Mapping : Profile
     {
         public Mapping()

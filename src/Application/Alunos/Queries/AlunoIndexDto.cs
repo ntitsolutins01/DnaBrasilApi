@@ -1,4 +1,5 @@
-﻿using DnaBrasilApi.Domain.Entities;
+﻿using DnaBrasilApi.Application.DocumentosAluno.Queries;
+using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Alunos.Queries;
 public class AlunoIndexDto
@@ -17,6 +18,8 @@ public class AlunoIndexDto
     public string? Modalidades { get; init; }
     public string? NomeLocalidade { get; init; }
     public string? SerieTurma { get; init; }
+    public List<DocumentoAlunoDto>? Documentos { get; set; }
+    public bool Habilitado { get; init; }
     private class Mapping : Profile
     {
         public Mapping()
@@ -27,7 +30,7 @@ public class AlunoIndexDto
                 .ForMember(dest => dest.MunicipioId, opt => opt.MapFrom(src => src.Municipio.Id))
                 .ForMember(dest => dest.DtNascimento, opt => opt.MapFrom(src => src.DtNascimento.ToString("dd/MM/yyyy")))
                 .ForMember(dest => dest.PossuiLaudoFinalizado, opt => 
-                    opt.MapFrom(src => src.ListLaudo!.Any(s => s.StatusLaudo != "A") || src.ListLaudo!.Count == 0))
+                    opt.MapFrom(src => src.Laudos!.Any(s => s.StatusLaudo != "A") || src.Laudos!.Count == 0))
                 .ForMember(dest => dest.Modalidades,
                     opt => opt.MapFrom(src =>
                         src.AlunoModalidades == null

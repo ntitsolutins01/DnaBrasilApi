@@ -26,19 +26,31 @@ public static class DependencyInjection
             options.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>());
 
             options.UseSqlServer(connectionString);
-            //    , opt =>
-            //{
-            //    opt.CommandTimeout(180); // 3 minutes
-            //}
         });
 
         services.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<ApplicationDbContext>());
 
         services.AddScoped<ApplicationDbContextInitialiser>();
 
-        services.AddAuthentication()
-            .AddBearerToken(IdentityConstants.BearerScheme)
-            .AddCookie(IdentityConstants.ApplicationScheme);
+        services.AddAuthorization(options =>{
+            options.AddPolicy(Policies.Consultar, policy => 
+                    policy.RequireRole(Roles.Administrador));
+            options.AddPolicy(Policies.Incluir, policy => 
+                    policy.RequireRole(Roles.Administrador));
+            options.AddPolicy(Policies.Alterar, policy => 
+                    policy.RequireRole(Roles.Administrador));
+            options.AddPolicy(Policies.Excluir, policy => 
+                    policy.RequireRole(Roles.Administrador));
+            options.AddPolicy(Policies.Habilitar, policy => 
+                    policy.RequireRole(Roles.Administrador));
+            options.AddPolicy(Policies.Download, policy => 
+                    policy.RequireRole(Roles.Administrador));
+            options.AddPolicy(Policies.Upload, policy => 
+                    policy.RequireRole(Roles.Administrador));
+            });
+
+        services.AddAuthentication().AddCookie(IdentityConstants.ApplicationScheme);
+            //.AddBearerToken(IdentityConstants.BearerScheme);
 
         services.AddAuthorizationBuilder();
 
@@ -50,9 +62,6 @@ public static class DependencyInjection
 
         services.AddSingleton(TimeProvider.System);
         services.AddTransient<IIdentityService, IdentityService>();
-
-        services.AddAuthorization(options =>
-            options.AddPolicy(Policies.CanPurge, policy => policy.RequireRole(Roles.Administrator)));
 
         return services;
     }

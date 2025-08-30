@@ -5,12 +5,8 @@ namespace DnaBrasilApi.Application.Certificados.Commands.CreateCertificado;
 public record CreateCertificadoCommand : IRequest<int>
 {
     public required int FomentoId { get; init; }
-    public required string ImagemFrente { get; init; }
-    public string? ImagemVerso { get; init; }
-    public string? NomeImagemFrente { get; init; }
-    public string? NomeImagemVerso { get; init; }
-    public required string HtmlFrente { get; init; }
-    public required string HtmlVerso { get; init; }
+    public required string Nome { get; init; }
+    public required string Url { get; init; }
 
     public bool Status { get; init; } = true;
 }
@@ -34,12 +30,8 @@ public class CreateCertificadoCommandHandler : IRequestHandler<CreateCertificado
         var entity = new Certificado
         {
             Fomento = fomento,
-            ImagemFrente = request.ImagemFrente,
-            ImagemVerso = request.ImagemVerso,
-            NomeImagemFrente = request.NomeImagemFrente,
-            NomeImagemVerso = request.NomeImagemVerso,
-            HtmlFrente = request.HtmlFrente,
-            HtmlVerso = request.HtmlVerso,
+            Nome = request.Nome,
+            Url = request.Url,
             Status = request.Status
         };
 

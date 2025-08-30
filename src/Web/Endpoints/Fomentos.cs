@@ -1,4 +1,5 @@
 ﻿using DnaBrasilApi.Application.Fomentos.Commands.CreateFomento;
+using DnaBrasilApi.Application.Fomentos.Commands.CreateFomentoLocalidades;
 using DnaBrasilApi.Application.Fomentos.Commands.DeleteFomento;
 using DnaBrasilApi.Application.Fomentos.Commands.DeleteFomentoLinhasAcoes;
 using DnaBrasilApi.Application.Fomentos.Commands.DeleteFomentoLocalidades;
@@ -20,6 +21,7 @@ public class Fomentos : EndpointGroupBase
             //.RequireAuthorization()
             .MapGet(GetFomentosAll)
             .MapPost(CreateFomento)
+            .MapPost(CreateFomentoLocalidades, "/VincularLocalidades")
             .MapPut(UpdateFomento, "{id}")
             .MapDelete(DeleteFomento, "{id}")
             .MapGet(GetFomentoByLocalidadeId, "/Localidade/{id}")
@@ -112,6 +114,20 @@ public class Fomentos : EndpointGroupBase
     public async Task<FomentoDto> GetFomentoLocalidadesByLocalidadeId(ISender sender, int id)
     {
         return await sender.Send(new GetFomentoLocalidadesByLocalidadeIdQuery() { Id = id });
+    }
+    #endregion
+
+    #region Custom Methods
+
+    /// <summary>
+    /// Endpoint para vicular localidades a um fomento
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="command">Objeto de vinculação de localidades a um Fomento</param>
+    /// <returns>Retorna Id do Fomento vinculado</returns>
+    public async Task<int> CreateFomentoLocalidades(ISender sender, CreateFomentoLocalidadesCommand command)
+    {
+        return await sender.Send(command);
     }
     #endregion
 }

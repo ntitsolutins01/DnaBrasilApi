@@ -65,12 +65,12 @@ public class TalentosEsportivos : EndpointGroupBase
     #region Get Methods
 
     /// <summary>
-    /// Endpoint que busca Talento Esportivo por Aluno Consulta
+    /// Endpoint que busca os talentos esportivos do aluno
     /// </summary>
     /// <param name="sender">sender</param>
-    /// <param name="alunoId">alunoid</param>
+    /// <param name="alunoId">Id do aluno</param>
     /// <returns>Retorna uma lista de Talento Esportivo</returns>
-    public async Task<TalentoEsportivoDto> GetTalentoEsportivoByAlunoQuery(ISender sender, int alunoId)
+    public async Task<List<TalentoEsportivoDto>> GetTalentoEsportivoByAlunoQuery(ISender sender, int alunoId)
     {
         return await sender.Send(new GetTalentoEsportivoByAlunoQuery(alunoId));
     }
@@ -78,8 +78,8 @@ public class TalentosEsportivos : EndpointGroupBase
     /// Endpoint que busca Talento Esportivo por id de Consulta
     /// </summary>
     /// <param name="sender">sender</param>
-    /// <param name="id">Id de Talento Esportivo por Consulta a ser buscada</param>
-    /// <returns>Retorna uma lista de Talento Esportivo por id de Consulta</returns>
+    /// <param name="id">Id do Talento Esportivo</param>
+    /// <returns>Retorna um Talento Esportivo</returns>
     public async Task<TalentoEsportivoDto> GetTalentoEsportivoByIdQuery(ISender sender, int id)
     {
         return await sender.Send(new GetTalentoEsportivoByIdQuery(id));

@@ -109,7 +109,7 @@ public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int
         {
             serie = await _context.Series.FindAsync(new object[] { request.SerieId }, cancellationToken);
 
-            Guard.Against.NotFound((int)request.SerieId, profissional);
+            Guard.Against.NotFound((int)request.SerieId, serie);
         }
 
         var entity = new Aluno

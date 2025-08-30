@@ -104,7 +104,7 @@ public class UpdateAlunoCommandHandler : IRequestHandler<UpdateAlunoCommand, boo
         {
             serie = await _context.Series.FindAsync(new object[] { request.SerieId }, cancellationToken);
 
-            Guard.Against.NotFound((int)request.SerieId, profissional);
+            Guard.Against.NotFound((int)request.SerieId, serie);
         }
 
         entity.AspNetUserId = request.AspNetUserId;

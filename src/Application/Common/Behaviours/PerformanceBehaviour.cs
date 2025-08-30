@@ -37,6 +37,7 @@ public class PerformanceBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequ
         {
             var requestName = typeof(TRequest).Name;
             var userId = _user.Id ?? string.Empty;
+            var userPerfil = _user.Perfil ?? string.Empty;
             var userName = string.Empty;
 
             if (!string.IsNullOrEmpty(userId))

@@ -6,6 +6,8 @@ using DnaBrasilApi.Application.Cursos.Queries.GetCursoById;
 using DnaBrasilApi.Application.Cursos.Queries.GetCursosAll;
 using DnaBrasilApi.Application.Cursos.Queries.GetCursosAllByTipoCursoId;
 using DnaBrasilApi.Application.Cursos.Queries.GetCursosByAlunoId;
+using DnaBrasilApi.Application.Cursos.Queries.GetQuantidadeCursosByProgresso;
+using DnaBrasilApi.Application.Laudos.Queries.GetLaudosAll;
 
 namespace DnaBrasilApi.Web.Endpoints;
 /// <summary>
@@ -29,7 +31,8 @@ public class Cursos : EndpointGroupBase
             .MapDelete(DeleteCurso, "{id}")
             .MapGet(GetCursoById, "{id}")
             .MapGet(GetCursosAllByTipoCursoId, "TipoCurso/{tipoCursoId}")
-            .MapGet(GetCursosByAlunoId, "Aluno/{alunoId}");
+            .MapGet(GetCursosByAlunoId, "Aluno/{alunoId}")
+            .MapGet(GetQuantidadeCursosByProgresso, "Progresso");
     }
     #endregion
 
@@ -114,6 +117,17 @@ public class Cursos : EndpointGroupBase
     public async Task<List<CursoDto>> GetCursosByAlunoId(ISender sender, int alunoId)
     {
         return await sender.Send(new GetCursosByAlunoIdQuery() { AlunoId = alunoId });
+    }
+
+    /// <summary>
+    /// Endpoint que busca a quantidade de cursos em andamento
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="progresso">Progresso inicial e final de andamento do curso</param>
+    /// <returns>Retorna a quantidade de cursos em andamento</returns>
+    public async Task<int> GetQuantidadeCursosByProgresso(ISender sender, [AsParameters] GetQuantidadeCursosByProgressoQuery progresso)
+    {
+        return await sender.Send(progresso);
     }
 
     #endregion

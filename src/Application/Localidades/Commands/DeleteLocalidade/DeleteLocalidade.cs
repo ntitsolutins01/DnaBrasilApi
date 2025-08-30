@@ -24,10 +24,22 @@ public class DeleteLocalidadeCommandHandler : IRequestHandler<DeleteLocalidadeCo
 
         Guard.Against.PossuiProfissionais(possuiProfissionais);
 
+        var possuiAlunos = _context.Alunos.Any(x => x.Localidade != null && x.Localidade.Id == request.Id);
+
+        Guard.Against.PossuiAlunosLocalidades(possuiAlunos);
+
+        var list = await _context.FomentoLocalidades
+            .Where(x => x.LocalidadeId == request.Id)
+            .AsNoTracking()
+            .ToListAsync(cancellationToken);
+
+        _context.FomentoLocalidades.RemoveRange(list);
+
         _context.Localidades.Remove(entity);
 
         var result = await _context.SaveChangesAsync(cancellationToken);
-        return result == 1;
+
+        return result >= 1;
     }
 
 }

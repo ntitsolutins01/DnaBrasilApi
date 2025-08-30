@@ -30,7 +30,7 @@ public class Aluno : BaseAuditableEntity
     public Profissional? Profissional { get; set; }
     public string? NomeResponsavel { get; set; }
     public LinhaAcao? LinhaAcao { get; set; }
-    public List<Laudo>? ListLaudo { get; set; }
+    public List<Laudo>? Laudos { get; set; }
     public bool? AutorizacaoSaida { get; set; } = false;
     public bool? AutorizacaoConsentimentoAssentimento { get; set; } = false;
     public bool? ParticipacaoProgramaCompartilhamentoDados { get; set; } = false;
@@ -44,4 +44,5 @@ public class Aluno : BaseAuditableEntity
     public Serie? Serie { get; set; }
     public IList<AlunoAula>? AlunoAulas { get; set; }
     public IList<AlunoCursoCertificado>? AlunoCursosCertificados { get; set; }
+    public List<DocumentoAluno>? Documentos { get; set; }
 }
