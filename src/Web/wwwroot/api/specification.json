@@ -6791,7 +6791,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateLaudoCommand"
+                "$ref": "#/components/schemas/UpdateLaudoEducacionalCommand"
               }
             }
           },
@@ -20100,6 +20100,27 @@
             "type": "integer",
             "format": "int32",
             "nullable": true
+          }
+        }
+      },
+      "UpdateLaudoEducacionalCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "alunoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "educacionalId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "materia": {
+            "type": "string"
           }
         }
       },
