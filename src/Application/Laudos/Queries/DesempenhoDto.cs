@@ -7,6 +7,7 @@ public class DesempenhoDto
     public int ScoreVocacional { get; init; }
     public int ScoreSaudeBucal { get; init; }
     public int ScoreConsumoAlimentar { get; init; }
+    public int ScoreEducacional { get; init; }
     public int ScoreDna { get; init; }
     public string? AvisoVelocidade { get; init; }
     public string? AvisoImpulsao { get; init; }
@@ -28,6 +29,7 @@ public class DesempenhoDto
     public DateTimeOffset? DataVocacional { get; init; }
     public DateTimeOffset? DataConsumoAlimentar { get; init; }
     public DateTimeOffset? DataSaudeBucal { get; init; }
+    public DateTimeOffset? DataEducacional { get; init; }
     public string? TextoVelocidade { get; init; }
     public string? TextoImpulsao { get; init; }
     public string? TextoShuttleRun { get; init; }
@@ -43,4 +45,5 @@ public class DesempenhoDto
     public string? TextoVocacional { get; init; }
     public string? TextoConsumoAlimentar { get; init; }
     public string? TextoSaudeBucal { get; init; }
+    public string? TextoEducacional { get; init; }
 }

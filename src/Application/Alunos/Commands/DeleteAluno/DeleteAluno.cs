@@ -20,9 +20,9 @@ public class DeleteAlunoCommandHandler : IRequestHandler<DeleteAlunoCommand, boo
 
         Guard.Against.NotFound(request.Id, entity);
 
-        var possuiFuncionalidades = _context.Funcionalidades.Any(x => x.Modulo != null && x.Modulo.Id == request.Id);
+        var possuiLaudos = _context.Laudos.Any(x => x.Aluno.Id == request.Id);
 
-        Guard.Against.PossuiFuncionalidades(possuiFuncionalidades);
+        Guard.Against.PossuiLaudos(possuiLaudos);
 
         _context.Alunos.Remove(entity);
 

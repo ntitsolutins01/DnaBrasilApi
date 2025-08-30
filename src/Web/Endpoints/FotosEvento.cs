@@ -21,7 +21,7 @@ public class FotosEvento : EndpointGroupBase
             .MapGet(GetFotosAllByEventoId, "{eventoId}")
             .MapPost(CreateFotoEvento)
             .MapDelete(DeleteFotoEvento, "{id}")
-            .MapGet(GetFotoEventoById, "Foto/{id}");
+            .MapGet(GetFotoEventoById, "Fotos/{id}");
     }
     #endregion
 
@@ -86,7 +86,7 @@ public class FotosEvento : EndpointGroupBase
     /// <param name="sender">Sender</param>
     /// <param name="id">Id da foto do Evento a ser buscada</param>
     /// <returns>Retorna o objeto da foto do Evento </returns>
-    public async Task<FotoEventoDto> GetFotoEventoById(ISender sender, int id)
+    public async Task<List<FotoEventoDto>> GetFotoEventoById(ISender sender, int id)
     {
         return await sender.Send(new GetFotoEventoByIdQuery() { Id = id });
     }
