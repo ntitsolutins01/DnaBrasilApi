@@ -1,6 +1,5 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
-using DnaBrasilApi.Domain.Enums;
 
 public record CreateEducacionalCommand : IRequest<int>
 {
