@@ -1,5 +1,4 @@
 using System.Net.Http.Headers;
-using DnaBrasilApi.Application.Laudos.Queries.ProcessarGabarito;
 using DnaBrasilApi.Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
