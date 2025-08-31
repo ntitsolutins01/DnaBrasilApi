@@ -35,9 +35,19 @@ public class QuestoesEad : EndpointGroupBase
     /// <param name="sender">Sender</param>
     /// <param name="command">Objeto de inclusão de Questões Ead</param>
     /// <returns>Retorna Id de nova Questões Ead</returns>
-    public async Task<int> CreateQuestaoEad(ISender sender, CreateQuestaoEadCommand command)
+    public async Task<int> CreateQuestaoEad(ISender sender, QuestaoEadModel questaoEadModel)
     {
-        return await sender.Send(command);
+        var questaoId = await sender.Send(new CreateQuestaoEadCommand()
+        {
+            AulaId = questaoEadModel.AulaId,
+            NumeroQuestao = questaoEadModel.NumeroQuestao,
+            Enunciado = questaoEadModel.Enunciado,
+            Referencia = questaoEadModel.Referencia
+        });
+
+
+
+        return questaoId;
     }
 
     /// <summary>

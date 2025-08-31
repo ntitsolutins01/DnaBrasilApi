@@ -10429,11 +10429,11 @@
         ],
         "operationId": "CreateQuestaoEad",
         "requestBody": {
-          "x-name": "command",
+          "x-name": "questaoEadModel",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateQuestaoEadCommand"
+                "$ref": "#/components/schemas/QuestaoEadModel"
               }
             }
           },
@@ -22547,7 +22547,7 @@
             "type": "string",
             "nullable": true
           },
-          "pergunta": {
+          "enunciado": {
             "type": "string"
           },
           "respostas": {
@@ -22557,7 +22557,7 @@
               "$ref": "#/components/schemas/RespostaEadDto"
             }
           },
-          "questao": {
+          "numeroQuestao": {
             "type": "integer",
             "format": "int32"
           }
@@ -22571,8 +22571,9 @@
             "type": "integer",
             "format": "int32"
           },
-          "questao": {
-            "$ref": "#/components/schemas/QuestaoEad"
+          "questaoId": {
+            "type": "integer",
+            "format": "int32"
           },
           "tipoResposta": {
             "type": "string"
@@ -22587,54 +22588,78 @@
           "valorPesoResposta": {
             "type": "number",
             "format": "decimal"
+          },
+          "enunciado": {
+            "type": "string"
           }
         }
       },
-      "QuestaoEad": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BaseAuditableEntity"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "aula": {
-                "$ref": "#/components/schemas/Aula"
-              },
-              "enunciado": {
-                "type": "string"
-              },
-              "referencia": {
-                "type": "string",
-                "nullable": true
-              },
-              "questao": {
-                "type": "integer",
-                "format": "int32"
-              }
-            }
-          }
-        ]
-      },
-      "CreateQuestaoEadCommand": {
+      "QuestaoEadModel": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "pergunta": {
-            "type": "string"
-          },
-          "referencia": {
-            "type": "string",
-            "nullable": true
-          },
-          "questao": {
+          "id": {
             "type": "integer",
             "format": "int32"
           },
           "aulaId": {
             "type": "integer",
             "format": "int32"
+          },
+          "referencia": {
+            "type": "string",
+            "nullable": true
+          },
+          "enunciado": {
+            "type": "string"
+          },
+          "respostas": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/RespostaEadModel"
+            }
+          },
+          "numeroQuestao": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "listTextos": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "listImagens": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "RespostaEadModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tipoResposta": {
+            "type": "string"
+          },
+          "resposta": {
+            "type": "string"
+          },
+          "valorPesoResposta": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "respostaCerta": {
+            "type": "boolean"
           }
         }
       },
@@ -22711,9 +22736,8 @@
           "tipoResposta": {
             "type": "string"
           },
-          "tipoAlternativa": {
-            "type": "string",
-            "nullable": true
+          "respostaCerta": {
+            "type": "boolean"
           },
           "resposta": {
             "type": "string"
@@ -22735,9 +22759,8 @@
           "tipoResposta": {
             "type": "string"
           },
-          "tipoAlternativa": {
-            "type": "string",
-            "nullable": true
+          "respostaCerta": {
+            "type": "boolean"
           },
           "resposta": {
             "type": "string"

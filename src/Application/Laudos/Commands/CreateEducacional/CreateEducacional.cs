@@ -42,14 +42,11 @@ public class CreateEducacionalCommandHandler : IRequestHandler<CreateEducacional
 
         static int PointsFor(Resposta r) => r.ValorPesoResposta switch
         {
-            return r.ValorPesoResposta switch
-            {
-                1 => 10,   // Nível 1
-                2 => 30,   // Nível 2
-                3 => 50,   // Nível 3
-                _ => 0     // Errada
-            };
-        }
+            1 => 10,   // Nível 1
+            2 => 30,   // Nível 2
+            3 => 50,   // Nível 3
+            _ => 0     // Errada
+        };
 
         var n1 = respostas.Count(r => r.ValorPesoResposta == 1);
         var n2 = respostas.Count(r => r.ValorPesoResposta == 2);
