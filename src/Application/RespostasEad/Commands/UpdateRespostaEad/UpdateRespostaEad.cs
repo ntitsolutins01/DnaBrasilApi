@@ -6,7 +6,7 @@ public record UpdateRespostaEadCommand : IRequest<bool>
 {
     public int Id { get; init; }
     public required string TipoResposta { get; init; }
-    public string? TipoAlternativa { get; init; }
+    public bool RespostaCerta { get; init; }
     public required string Resposta { get; init; }
     public required decimal ValorPesoResposta { get; init; }
 
@@ -29,7 +29,7 @@ public class UpdateRespostaEadCommandHandler : IRequestHandler<UpdateRespostaEad
         Guard.Against.NotFound(request.Id, entity);
 
         entity.TipoResposta = request.TipoResposta;
-        entity.TipoAlternativa = request.TipoAlternativa;
+        entity.RespostaCerta = request.RespostaCerta;
         entity.Resposta = request.Resposta;
         entity.ValorPesoResposta = request.ValorPesoResposta;
 
