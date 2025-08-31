@@ -10,7 +10,7 @@ public class QuestaoEadDto
     public string? Referencia { get; init; }
     public required string Pergunta { get; init; }
     public List<RespostaEadDto>? Respostas { get; init; }
-    public required int NumeroQuestao { get; init; }
+    public required int NumeroQuestao { get; init; } 
 
     private class Mapping : Profile
     {

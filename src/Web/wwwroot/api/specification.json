@@ -22557,7 +22557,7 @@
               "$ref": "#/components/schemas/RespostaEadDto"
             }
           },
-          "questao": {
+          "numeroQuestao": {
             "type": "integer",
             "format": "int32"
           }
@@ -22571,8 +22571,9 @@
             "type": "integer",
             "format": "int32"
           },
-          "questao": {
-            "$ref": "#/components/schemas/QuestaoEad"
+          "questaoId": {
+            "type": "integer",
+            "format": "int32"
           },
           "tipoResposta": {
             "type": "string"
@@ -22587,35 +22588,11 @@
           "valorPesoResposta": {
             "type": "number",
             "format": "decimal"
+          },
+          "enunciado": {
+            "type": "string"
           }
         }
-      },
-      "QuestaoEad": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BaseAuditableEntity"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "aula": {
-                "$ref": "#/components/schemas/Aula"
-              },
-              "enunciado": {
-                "type": "string"
-              },
-              "referencia": {
-                "type": "string",
-                "nullable": true
-              },
-              "questao": {
-                "type": "integer",
-                "format": "int32"
-              }
-            }
-          }
-        ]
       },
       "CreateQuestaoEadCommand": {
         "type": "object",
@@ -22711,9 +22688,8 @@
           "tipoResposta": {
             "type": "string"
           },
-          "tipoAlternativa": {
-            "type": "string",
-            "nullable": true
+          "respostaCerta": {
+            "type": "boolean"
           },
           "resposta": {
             "type": "string"
@@ -22735,9 +22711,8 @@
           "tipoResposta": {
             "type": "string"
           },
-          "tipoAlternativa": {
-            "type": "string",
-            "nullable": true
+          "respostaCerta": {
+            "type": "boolean"
           },
           "resposta": {
             "type": "string"
