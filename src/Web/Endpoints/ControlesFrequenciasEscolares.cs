@@ -5,8 +5,6 @@ using DnaBrasilApi.Application.ControlesFrequenciasEscolares.Queries;
 using DnaBrasilApi.Application.ControlesFrequenciasEscolares.Queries.GetControleFrequenciaEscolarById;
 using DnaBrasilApi.Application.ControlesFrequenciasEscolares.Queries.GetControlesFrequenciasEscolaresAll;
 using DnaBrasilApi.Application.ControlesFrequenciasEscolares.Queries.GetControlesFrequenciasEscolaresByAlunoId;
-using DnaBrasilApi.Application.Eventos.Queries.GetEventosByMesAno;
-using DnaBrasilApi.Application.Eventos.Queries;
 using DnaBrasilApi.Application.ControlesFrequenciasEscolares.Queries.GetControlesFrequenciasEscolaresByAlunoMesAno;
 
 namespace DnaBrasilApi.Web.Endpoints;

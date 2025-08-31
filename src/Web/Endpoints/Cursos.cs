@@ -7,7 +7,6 @@ using DnaBrasilApi.Application.Cursos.Queries.GetCursosAll;
 using DnaBrasilApi.Application.Cursos.Queries.GetCursosAllByTipoCursoId;
 using DnaBrasilApi.Application.Cursos.Queries.GetCursosByAlunoId;
 using DnaBrasilApi.Application.Cursos.Queries.GetQuantidadeCursosByProgresso;
-using DnaBrasilApi.Application.Laudos.Queries.GetLaudosAll;
 
 namespace DnaBrasilApi.Web.Endpoints;
 /// <summary>

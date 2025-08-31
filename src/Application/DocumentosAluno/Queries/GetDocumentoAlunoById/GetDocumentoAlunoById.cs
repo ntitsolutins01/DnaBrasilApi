@@ -1,5 +1,4 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
-using DnaBrasilApi.Application.FotosEvento.Queries;
 
 namespace DnaBrasilApi.Application.DocumentosAluno.Queries.GetDocumentoAlunoById;
 
