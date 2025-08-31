@@ -8,7 +8,7 @@ public class QuestaoEadDto
     public int Id { get; init; }
     public required string NomeAula { get; init; }
     public string? Referencia { get; init; }
-    public required string Pergunta { get; init; }
+    public required string Enunciado { get; init; }
     public List<RespostaEadDto>? Respostas { get; init; }
     public required int NumeroQuestao { get; init; } 
 

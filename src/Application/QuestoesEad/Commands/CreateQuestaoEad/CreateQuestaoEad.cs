@@ -4,9 +4,9 @@ using DnaBrasilApi.Domain.Entities;
 namespace DnaBrasilApi.Application.QuestoesEad.Commands.CreateQuestaoEad;
 public record CreateQuestaoEadCommand : IRequest<int>
 {
-    public required string Pergunta { get; init; }
+    public required string Enunciado { get; init; }
     public string? Referencia { get; init; }
-    public required int Questao { get; init; }
+    public required int NumeroQuestao { get; init; }
     public required int AulaId { get; init; }
 }
 
@@ -28,9 +28,9 @@ public class CreateQuestaoEadCommandHandler : IRequestHandler<CreateQuestaoEadCo
 
         var entity = new QuestaoEad
         {
-            Enunciado = request.Pergunta,
+            Enunciado = request.Enunciado,
             Referencia = request.Referencia,
-            NumeroQuestao = request.Questao,
+            NumeroQuestao = request.NumeroQuestao,
             Aula = aula
         };
 
