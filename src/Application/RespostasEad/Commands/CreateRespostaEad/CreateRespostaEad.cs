@@ -7,7 +7,7 @@ public record CreateRespostaEadCommand : IRequest<int>
 {
     public required int QuestaoId { get; init; }
     public required string TipoResposta { get; init; }
-    public string? TipoAlternativa { get; init; }
+    public bool RespostaCerta { get; init; }
     public required string Resposta { get; init; }
     public required decimal ValorPesoResposta { get; init; }
 }
@@ -32,7 +32,7 @@ public class CreateRespostaEadCommandHandler : IRequestHandler<CreateRespostaEad
         {
             Questao = questao,
             TipoResposta = request.TipoResposta,
-            TipoAlternativa = request.TipoAlternativa,
+            RespostaCerta = request.RespostaCerta,
             Resposta = request.Resposta,
             ValorPesoResposta = request.ValorPesoResposta
         };

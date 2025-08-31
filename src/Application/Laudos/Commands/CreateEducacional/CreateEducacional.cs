@@ -1,4 +1,4 @@
-﻿using DnaBrasilApi.Application.Common.Interfaces;
+using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
 
 public record CreateEducacionalCommand : IRequest<int>
@@ -40,13 +40,16 @@ public class CreateEducacionalCommandHandler : IRequestHandler<CreateEducacional
             .Where(r => respostaIds.Contains(r.Id))
             .ToListAsync(cancellationToken);
 
-        int PointsFor(Resposta r) => r.ValorPesoResposta switch
+        static int PointsFor(Resposta r) => r.ValorPesoResposta switch
         {
-            1 => 10,   // Nível 1
-            2 => 30,   // Nível 2
-            3 => 50,   // Nível 3
-            _ => 0     // Errada
-        };
+            return r.ValorPesoResposta switch
+            {
+                1 => 10,   // Nível 1
+                2 => 30,   // Nível 2
+                3 => 50,   // Nível 3
+                _ => 0     // Errada
+            };
+        }
 
         var n1 = respostas.Count(r => r.ValorPesoResposta == 1);
         var n2 = respostas.Count(r => r.ValorPesoResposta == 2);

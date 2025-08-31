@@ -30,7 +30,7 @@ public class CreateQuestaoEadCommandHandler : IRequestHandler<CreateQuestaoEadCo
         {
             Enunciado = request.Pergunta,
             Referencia = request.Referencia,
-            Questao = request.Questao,
+            NumeroQuestao = request.Questao,
             Aula = aula
         };
 
