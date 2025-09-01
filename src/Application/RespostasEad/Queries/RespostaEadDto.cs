@@ -8,10 +8,10 @@ public class RespostaEadDto
     public int Id { get; init; }
     public int QuestaoId { get; init; }
     public required string TipoResposta { get; init; }
-    public string? TipoAlternativa { get; init; }
     public required string Resposta { get; init; }
     public required decimal ValorPesoResposta { get; init; }
-    public required string Enunciado { get; set; }
+    public required string Enunciado { get; init; }
+    public bool RespostaCerta { get; init; }
 
     private class Mapping : Profile
     {
