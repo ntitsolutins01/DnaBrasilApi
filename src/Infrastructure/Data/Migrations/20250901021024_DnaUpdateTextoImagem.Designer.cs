@@ -4,6 +4,7 @@ using DnaBrasilApi.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DnaBrasilApi.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250901021024_DnaUpdateTextoImagem")]
+    partial class DnaUpdateTextoImagem
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1694,10 +1697,7 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("EducacionalMatematicaId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("EducacionalPortuguesId")
+                    b.Property<int?>("EducacionalId")
                         .HasColumnType("int");
 
                     b.Property<DateTimeOffset>("LastModified")
@@ -1737,9 +1737,7 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
 
                     b.HasIndex("ConsumoAlimentarId");
 
-                    b.HasIndex("EducacionalMatematicaId");
-
-                    b.HasIndex("EducacionalPortuguesId");
+                    b.HasIndex("EducacionalId");
 
                     b.HasIndex("ModalidadeId");
 
@@ -3118,8 +3116,7 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                         .HasColumnType("nvarchar(1000)");
 
                     b.Property<string>("Tipo")
-                        .HasMaxLength(1)
-                        .HasColumnType("nvarchar(1)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -4336,13 +4333,9 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                         .WithMany()
                         .HasForeignKey("ConsumoAlimentarId");
 
-                    b.HasOne("DnaBrasilApi.Domain.Entities.Educacional", "EducacionalMatematica")
+                    b.HasOne("DnaBrasilApi.Domain.Entities.Educacional", "Educacional")
                         .WithMany()
-                        .HasForeignKey("EducacionalMatematicaId");
-
-                    b.HasOne("DnaBrasilApi.Domain.Entities.Educacional", "EducacionalPortugues")
-                        .WithMany()
-                        .HasForeignKey("EducacionalPortuguesId");
+                        .HasForeignKey("EducacionalId");
 
                     b.HasOne("DnaBrasilApi.Domain.Entities.Modalidade", "Modalidade")
                         .WithMany()
@@ -4372,9 +4365,7 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
 
                     b.Navigation("ConsumoAlimentar");
 
-                    b.Navigation("EducacionalMatematica");
-
-                    b.Navigation("EducacionalPortugues");
+                    b.Navigation("Educacional");
 
                     b.Navigation("Modalidade");
 

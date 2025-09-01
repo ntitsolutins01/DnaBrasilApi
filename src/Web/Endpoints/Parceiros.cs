@@ -1,6 +1,4 @@
-﻿using DnaBrasilApi.Application.Cursos.Queries.GetCursosByAlunoId;
-using DnaBrasilApi.Application.Cursos.Queries;
-using DnaBrasilApi.Application.Parceiros.Commands.CreateParceiro;
+﻿using DnaBrasilApi.Application.Parceiros.Commands.CreateParceiro;
 using DnaBrasilApi.Application.Parceiros.Commands.DeleteParceiro;
 using DnaBrasilApi.Application.Parceiros.Commands.UpdateParceiro;
 using DnaBrasilApi.Application.Parceiros.Queries;

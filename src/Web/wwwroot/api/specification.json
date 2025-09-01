@@ -3,7 +3,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "DnaBrasilApi API",
-    "version": "1.0.0"
+    "version": "3.0.0"
   },
   "paths": {
     "/api/Alunos/{id}": {
@@ -10473,11 +10473,11 @@
         ],
         "operationId": "CreateQuestaoEad",
         "requestBody": {
-          "x-name": "command",
+          "x-name": "questaoEadModel",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateQuestaoEadCommand"
+                "$ref": "#/components/schemas/QuestaoEadModel"
               }
             }
           },
@@ -11730,7 +11730,7 @@
         "tags": [
           "TextosQuestoes"
         ],
-        "operationId": "GetTextosQuestoesAll",
+        "operationId": "GetTextosImagensQuestoesAll",
         "responses": {
           "200": {
             "description": "",
@@ -11739,7 +11739,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/TextoQuestaoDto"
+                    "$ref": "#/components/schemas/TextoImagemQuestaoDto"
                   }
                 }
               }
@@ -11757,7 +11757,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateTextoQuestaoCommand"
+                "$ref": "#/components/schemas/CreateTextoImagemQuestaoCommand"
               }
             }
           },
@@ -11802,7 +11802,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateTextoQuestaoCommand"
+                "$ref": "#/components/schemas/UpdateTextoImagemQuestaoCommand"
               }
             }
           },
@@ -11856,7 +11856,7 @@
         "tags": [
           "TextosQuestoes"
         ],
-        "operationId": "GetTextoQuestaoById",
+        "operationId": "GetTextoImagemQuestaoById",
         "parameters": [
           {
             "name": "id",
@@ -11875,7 +11875,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TextoQuestaoDto"
+                  "$ref": "#/components/schemas/TextoImagemQuestaoDto"
                 }
               }
             }
@@ -14636,6 +14636,107 @@
             "type": "integer",
             "format": "int32",
             "nullable": true
+          },
+          "questoes": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/QuestaoEadDto"
+            }
+          }
+        }
+      },
+      "QuestaoEadDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeAula": {
+            "type": "string"
+          },
+          "referencia": {
+            "type": "string",
+            "nullable": true
+          },
+          "enunciado": {
+            "type": "string"
+          },
+          "numeroQuestao": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "textosImagens": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/TextoImagemQuestaoDto"
+            }
+          },
+          "respostas": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/RespostaEadDto"
+            }
+          }
+        }
+      },
+      "TextoImagemQuestaoDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "questaoEadId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ordem": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tipo": {
+            "type": "string",
+            "nullable": true
+          },
+          "textoImagem": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "RespostaEadDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "questaoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tipoResposta": {
+            "type": "string"
+          },
+          "resposta": {
+            "type": "string"
+          },
+          "valorPesoResposta": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "enunciado": {
+            "type": "string"
+          },
+          "respostaCerta": {
+            "type": "boolean"
           }
         }
       },
@@ -15280,6 +15381,13 @@
                 "nullable": true,
                 "items": {
                   "$ref": "#/components/schemas/AlunoAula"
+                }
+              },
+              "questoes": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "$ref": "#/components/schemas/QuestaoEad"
                 }
               }
             }
@@ -17298,6 +17406,104 @@
                 "items": {
                   "$ref": "#/components/schemas/AlunoCursoCertificado"
                 }
+              }
+            }
+          }
+        ]
+      },
+      "QuestaoEad": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "aula": {
+                "$ref": "#/components/schemas/Aula"
+              },
+              "enunciado": {
+                "type": "string"
+              },
+              "referencia": {
+                "type": "string",
+                "nullable": true
+              },
+              "numeroQuestao": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "textosImagens": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "$ref": "#/components/schemas/TextoImagemQuestao"
+                }
+              },
+              "respostas": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "$ref": "#/components/schemas/RespostaEad"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "TextoImagemQuestao": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "questaoEad": {
+                "$ref": "#/components/schemas/QuestaoEad"
+              },
+              "ordem": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "tipo": {
+                "type": "string",
+                "nullable": true
+              },
+              "textoImagem": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          }
+        ]
+      },
+      "RespostaEad": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "questao": {
+                "$ref": "#/components/schemas/QuestaoEad"
+              },
+              "tipoResposta": {
+                "type": "string"
+              },
+              "resposta": {
+                "type": "string"
+              },
+              "valorPesoResposta": {
+                "type": "number",
+                "format": "decimal"
+              },
+              "respostaCerta": {
+                "type": "boolean"
               }
             }
           }
@@ -22628,7 +22834,7 @@
           }
         }
       },
-      "QuestaoEadDto": {
+      "QuestaoEadModel": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -22636,30 +22842,51 @@
             "type": "integer",
             "format": "int32"
           },
-          "nomeAula": {
-            "type": "string"
+          "aulaId": {
+            "type": "integer",
+            "format": "int32"
           },
           "referencia": {
             "type": "string",
             "nullable": true
           },
-          "pergunta": {
+          "enunciado": {
             "type": "string"
           },
           "respostas": {
             "type": "array",
             "nullable": true,
             "items": {
-              "$ref": "#/components/schemas/RespostaEadDto"
+              "$ref": "#/components/schemas/RespostaEadModel"
             }
           },
-          "questao": {
+          "numeroQuestao": {
             "type": "integer",
             "format": "int32"
+          },
+          "listTextos": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          },
+          "listImagens": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
           }
         }
       },
-      "RespostaEadDto": {
+      "RespostaEadModel": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -22667,15 +22894,8 @@
             "type": "integer",
             "format": "int32"
           },
-          "questao": {
-            "$ref": "#/components/schemas/QuestaoEad"
-          },
           "tipoResposta": {
             "type": "string"
-          },
-          "tipoAlternativa": {
-            "type": "string",
-            "nullable": true
           },
           "resposta": {
             "type": "string"
@@ -22683,54 +22903,9 @@
           "valorPesoResposta": {
             "type": "number",
             "format": "decimal"
-          }
-        }
-      },
-      "QuestaoEad": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BaseAuditableEntity"
           },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "aula": {
-                "$ref": "#/components/schemas/Aula"
-              },
-              "enunciado": {
-                "type": "string"
-              },
-              "referencia": {
-                "type": "string",
-                "nullable": true
-              },
-              "questao": {
-                "type": "integer",
-                "format": "int32"
-              }
-            }
-          }
-        ]
-      },
-      "CreateQuestaoEadCommand": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "pergunta": {
-            "type": "string"
-          },
-          "referencia": {
-            "type": "string",
-            "nullable": true
-          },
-          "questao": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "aulaId": {
-            "type": "integer",
-            "format": "int32"
+          "respostaCerta": {
+            "type": "boolean"
           }
         }
       },
@@ -22807,9 +22982,8 @@
           "tipoResposta": {
             "type": "string"
           },
-          "tipoAlternativa": {
-            "type": "string",
-            "nullable": true
+          "respostaCerta": {
+            "type": "boolean"
           },
           "resposta": {
             "type": "string"
@@ -22831,9 +23005,8 @@
           "tipoResposta": {
             "type": "string"
           },
-          "tipoAlternativa": {
-            "type": "string",
-            "nullable": true
+          "respostaCerta": {
+            "type": "boolean"
           },
           "resposta": {
             "type": "string"
@@ -23368,7 +23541,29 @@
           }
         }
       },
-      "TextoQuestaoDto": {
+      "CreateTextoImagemQuestaoCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "questaoEadId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tipo": {
+            "type": "string",
+            "nullable": true
+          },
+          "textoImagem": {
+            "type": "string",
+            "nullable": true
+          },
+          "ordem": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "UpdateTextoImagemQuestaoCommand": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -23380,52 +23575,17 @@
             "type": "integer",
             "format": "int32"
           },
-          "texto": {
+          "tipo": {
             "type": "string",
             "nullable": true
           },
-          "imagem": {
+          "textoImagem": {
             "type": "string",
-            "format": "byte",
             "nullable": true
-          }
-        }
-      },
-      "CreateTextoQuestaoCommand": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "questaoEadId": {
+          },
+          "ordem": {
             "type": "integer",
             "format": "int32"
-          },
-          "texto": {
-            "type": "string",
-            "nullable": true
-          },
-          "imagem": {
-            "type": "string",
-            "format": "byte",
-            "nullable": true
-          }
-        }
-      },
-      "UpdateTextoQuestaoCommand": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "texto": {
-            "type": "string",
-            "nullable": true
-          },
-          "imagem": {
-            "type": "string",
-            "format": "byte",
-            "nullable": true
           }
         }
       },

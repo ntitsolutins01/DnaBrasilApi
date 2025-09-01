@@ -1,6 +1,4 @@
-﻿using System.Runtime.InteropServices.JavaScript;
-using DnaBrasilApi.Application.ControlesMateriais.Queries;
-using DnaBrasilApi.Domain.Entities;
+﻿using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.ControlesFrequenciasEscolares.Queries;
 

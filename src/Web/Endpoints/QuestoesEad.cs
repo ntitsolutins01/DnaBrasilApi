@@ -4,6 +4,8 @@ using DnaBrasilApi.Application.QuestoesEad.Commands.UpdateQuestaoEad;
 using DnaBrasilApi.Application.QuestoesEad.Queries;
 using DnaBrasilApi.Application.QuestoesEad.Queries.GetQuestaoEadById;
 using DnaBrasilApi.Application.QuestoesEad.Queries.GetQuestoesEadAll;
+using DnaBrasilApi.Application.RespostasEad.Commands.CreateRespostaEad;
+using DnaBrasilApi.Application.TextosQuestoes.Commands.CreateTextoImagemQuestao;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -35,9 +37,60 @@ public class QuestoesEad : EndpointGroupBase
     /// <param name="sender">Sender</param>
     /// <param name="command">Objeto de inclusão de Questões Ead</param>
     /// <returns>Retorna Id de nova Questões Ead</returns>
-    public async Task<int> CreateQuestaoEad(ISender sender, CreateQuestaoEadCommand command)
+    public async Task<int> CreateQuestaoEad(ISender sender, QuestaoEadModel questaoEadModel)
     {
-        return await sender.Send(command);
+        var questaoId = await sender.Send(new CreateQuestaoEadCommand()
+        {
+            AulaId = questaoEadModel.AulaId,
+            NumeroQuestao = questaoEadModel.NumeroQuestao,
+            Enunciado = questaoEadModel.Enunciado,
+            Referencia = questaoEadModel.Referencia
+        });
+
+        if (questaoEadModel.ListImagens != null)
+        {
+            foreach (var item in questaoEadModel.ListImagens)
+            {
+                await sender.Send(new CreateTextoImagemQuestaoCommand()
+                {
+                    QuestaoEadId = questaoId,
+                    Ordem = item.First().Key,
+                    TextoImagem = item.First().Value,
+                    Tipo = "I"
+                });
+            }
+        }
+
+        if (questaoEadModel.ListTextos != null)
+        {
+            foreach (var item in questaoEadModel.ListTextos)
+            {
+                await sender.Send(new CreateTextoImagemQuestaoCommand()
+                {
+                    QuestaoEadId = questaoId,
+                    Ordem = item.First().Key,
+                    TextoImagem = item.First().Value,
+                    Tipo = "T"
+                });
+            }
+        }
+
+        if (questaoEadModel.Respostas != null)
+        {
+            foreach (var item in questaoEadModel.Respostas)
+            {
+                await sender.Send(new CreateRespostaEadCommand
+                {
+                    QuestaoId = questaoId,
+                    TipoResposta = item.TipoResposta,
+                    Resposta = item.Resposta,
+                    ValorPesoResposta = item.ValorPesoResposta,
+                    RespostaCerta = item.RespostaCerta
+                });
+            }
+        }
+
+        return questaoId;
     }
 
     /// <summary>

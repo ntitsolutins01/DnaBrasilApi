@@ -10,10 +10,8 @@ internal class RespostaEadConfiguration : IEntityTypeConfiguration<RespostaEad>
         builder.Property(t => t.TipoResposta)
             .HasMaxLength(1)
             .IsRequired();
-        builder.Property(t => t.TipoAlternativa)
-            .HasMaxLength(6);
         builder.Property(t => t.Resposta)
-            .HasMaxLength(1000)
+            .HasMaxLength(2000)
             .IsRequired();
         builder.Property(t => t.ValorPesoResposta).HasPrecision(10, 2);
     }

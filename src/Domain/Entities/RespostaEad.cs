@@ -5,9 +5,9 @@ public class RespostaEad : BaseAuditableEntity
 {
     public required QuestaoEad Questao { get; set; }
     public required string TipoResposta { get; set; }
-    public string? TipoAlternativa { get; set; }
     public required string Resposta { get; set; }
     [Column(TypeName = "decimal(10,2)")]
     public required decimal ValorPesoResposta { get; set; }
+    public bool RespostaCerta { get; set; }
 
 }

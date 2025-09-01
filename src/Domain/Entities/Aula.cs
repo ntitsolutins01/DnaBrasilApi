@@ -13,4 +13,5 @@ public class Aula : BaseAuditableEntity
     public string? NomeVideo { get; set; }
     public int? Ordem { get; set; }
     public IList<AlunoAula>? AlunoAulas { get; set; }
+    public IList<QuestaoEad>? Questoes { get; set; }
 }

@@ -5,12 +5,10 @@ public class CreateRespostaEadCommandValidator : AbstractValidator<CreateRespost
     public CreateRespostaEadCommandValidator()
     {
         RuleFor(v => v.Resposta)
-            .MaximumLength(1000)
+            .MaximumLength(2000)
             .NotEmpty();
         RuleFor(v => v.TipoResposta)
             .MaximumLength(1)
             .NotEmpty();
-        RuleFor(v => v.TipoAlternativa)
-            .MaximumLength(6);
     }
 }

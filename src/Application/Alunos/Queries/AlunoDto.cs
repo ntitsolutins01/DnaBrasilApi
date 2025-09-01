@@ -1,6 +1,4 @@
-﻿using DnaBrasilApi.Application.DocumentosAluno.Queries;
-using DnaBrasilApi.Application.FotosEvento.Queries;
-using DnaBrasilApi.Application.Laudos.Queries;
+﻿using DnaBrasilApi.Application.Laudos.Queries;
 using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Alunos.Queries;
