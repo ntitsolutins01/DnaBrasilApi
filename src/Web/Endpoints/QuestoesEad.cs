@@ -4,6 +4,8 @@ using DnaBrasilApi.Application.QuestoesEad.Commands.UpdateQuestaoEad;
 using DnaBrasilApi.Application.QuestoesEad.Queries;
 using DnaBrasilApi.Application.QuestoesEad.Queries.GetQuestaoEadById;
 using DnaBrasilApi.Application.QuestoesEad.Queries.GetQuestoesEadAll;
+using DnaBrasilApi.Application.RespostasEad.Commands.CreateRespostaEad;
+using DnaBrasilApi.Application.TextosQuestoes.Commands.CreateTextoImagemQuestao;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -45,7 +47,48 @@ public class QuestoesEad : EndpointGroupBase
             Referencia = questaoEadModel.Referencia
         });
 
+        if (questaoEadModel.ListImagens != null)
+        {
+            foreach (var item in questaoEadModel.ListImagens)
+            {
+                await sender.Send(new CreateTextoImagemQuestaoCommand()
+                {
+                    QuestaoEadId = questaoId,
+                    Ordem = item.Item1,
+                    TextoImagem = item.Item2,
+                    Tipo = "I"
+                });
+            }
+        }
 
+        if (questaoEadModel.ListTextos != null)
+        {
+            foreach (var item in questaoEadModel.ListTextos)
+            {
+                await sender.Send(new CreateTextoImagemQuestaoCommand()
+                {
+                    QuestaoEadId = questaoId,
+                    Ordem = item.Item1,
+                    TextoImagem = item.Item2,
+                    Tipo = "F"
+                });
+            }
+        }
+
+        if (questaoEadModel.Respostas != null)
+        {
+            foreach (var item in questaoEadModel.Respostas)
+            {
+                await sender.Send(new CreateRespostaEadCommand
+                {
+                    QuestaoId = questaoId,
+                    TipoResposta = item.TipoResposta,
+                    Resposta = item.Resposta,
+                    ValorPesoResposta = item.ValorPesoResposta,
+                    RespostaCerta = item.RespostaCerta
+                });
+            }
+        }
 
         return questaoId;
     }
