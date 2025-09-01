@@ -11686,7 +11686,7 @@
         "tags": [
           "TextosQuestoes"
         ],
-        "operationId": "GetTextosQuestoesAll",
+        "operationId": "GetTextosImagensQuestoesAll",
         "responses": {
           "200": {
             "description": "",
@@ -11695,7 +11695,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/TextoQuestaoDto"
+                    "$ref": "#/components/schemas/TextoImagemQuestaoDto"
                   }
                 }
               }
@@ -11812,7 +11812,7 @@
         "tags": [
           "TextosQuestoes"
         ],
-        "operationId": "GetTextoQuestaoById",
+        "operationId": "GetTextoImagemQuestaoById",
         "parameters": [
           {
             "name": "id",
@@ -11831,7 +11831,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TextoQuestaoDto"
+                  "$ref": "#/components/schemas/TextoImagemQuestaoDto"
                 }
               }
             }
@@ -23295,7 +23295,7 @@
           }
         }
       },
-      "TextoQuestaoDto": {
+      "TextoImagemQuestaoDto": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -23307,13 +23307,16 @@
             "type": "integer",
             "format": "int32"
           },
-          "texto": {
+          "ordem": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tipo": {
             "type": "string",
             "nullable": true
           },
-          "imagem": {
+          "textoImagem": {
             "type": "string",
-            "format": "byte",
             "nullable": true
           }
         }

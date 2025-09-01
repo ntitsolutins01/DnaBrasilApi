@@ -2,8 +2,8 @@
 using DnaBrasilApi.Application.TextosQuestoes.Commands.DeleteTextoImagemQuestao;
 using DnaBrasilApi.Application.TextosQuestoes.Commands.UpdateTextoImagemQuestao;
 using DnaBrasilApi.Application.TextosQuestoes.Queries;
-using DnaBrasilApi.Application.TextosQuestoes.Queries.GetTextoQuestaoById;
-using DnaBrasilApi.Application.TextosQuestoes.Queries.GetTextosQuestoesAll;
+using DnaBrasilApi.Application.TextosQuestoes.Queries.GetTextoImagemQuestaoById;
+using DnaBrasilApi.Application.TextosQuestoes.Queries.GetTextosImagensQuestoesAll;
 
 namespace DnaBrasilApi.Web.Endpoints;
 /// <summary>
@@ -25,7 +25,7 @@ public class TextosQuestoes : EndpointGroupBase
             .MapPost(CreateTextoQuestao)
             .MapPut(UpdateTextoQuestao, "{id}")
             .MapDelete(DeleteTextoQuestao, "{id}")
-            .MapGet(GetTextoQuestaoById, "{id}");
+            .MapGet(GetTextoImagemQuestaoById, "{id}");
     }
     #endregion
 
@@ -77,7 +77,7 @@ public class TextosQuestoes : EndpointGroupBase
     /// <returns>Retorna a lista de Texto Questão</returns>
     public async Task<List<TextoImagemQuestaoDto>> GetTextosImagensQuestoesAll(ISender sender)
     {
-        return await sender.Send(new GetTextosQuestoesAllQuery());
+        return await sender.Send(new GetTextosImagensQuestoesAllQuery());
     }
 
     /// <summary>
@@ -88,7 +88,7 @@ public class TextosQuestoes : EndpointGroupBase
     /// <returns>Retorna o objeto de Texto Questão </returns>
     public async Task<TextoImagemQuestaoDto> GetTextoImagemQuestaoById(ISender sender, int id)
     {
-        return await sender.Send(new GetTextoQuestaoByIdQuery() { Id = id });
+        return await sender.Send(new GetTextoImagemQuestaoByIdQuery() { Id = id });
     }
     #endregion
 }
