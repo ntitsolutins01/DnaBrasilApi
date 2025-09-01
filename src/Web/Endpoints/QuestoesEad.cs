@@ -54,8 +54,8 @@ public class QuestoesEad : EndpointGroupBase
                 await sender.Send(new CreateTextoImagemQuestaoCommand()
                 {
                     QuestaoEadId = questaoId,
-                    Ordem = item.Item1,
-                    TextoImagem = item.Item2,
+                    Ordem = item.First().Key,
+                    TextoImagem = item.First().Value,
                     Tipo = "I"
                 });
             }
@@ -68,9 +68,9 @@ public class QuestoesEad : EndpointGroupBase
                 await sender.Send(new CreateTextoImagemQuestaoCommand()
                 {
                     QuestaoEadId = questaoId,
-                    Ordem = item.Item1,
-                    TextoImagem = item.Item2,
-                    Tipo = "F"
+                    Ordem = item.First().Key,
+                    TextoImagem = item.First().Value,
+                    Tipo = "T"
                 });
             }
         }

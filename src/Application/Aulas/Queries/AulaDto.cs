@@ -1,3 +1,4 @@
+using DnaBrasilApi.Application.QuestoesEad.Queries;
 using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.Aulas.Queries;
@@ -18,6 +19,7 @@ public class AulaDto
     public string? Video { get; init; }
     public string? NomeVideo { get; init; }
     public int? Ordem { get; init; }
+    public IList<QuestaoEadDto>? Questoes { get; set; }
 
     private class Mapping : Profile
     {

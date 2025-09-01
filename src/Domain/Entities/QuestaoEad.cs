@@ -5,5 +5,7 @@ public class QuestaoEad : BaseAuditableEntity
     public required string Enunciado { get; set; }
     public string? Referencia { get; set; }
     public required int NumeroQuestao { get; set; }
+    public IList<TextoImagemQuestao>? TextosImagens { get; set; }
+    public IList<RespostaEad>? Respostas { get; set; }
 
 }
