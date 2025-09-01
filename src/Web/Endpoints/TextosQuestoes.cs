@@ -1,6 +1,6 @@
-﻿using DnaBrasilApi.Application.TextosQuestoes.Commands.CreateTextoQuestao;
-using DnaBrasilApi.Application.TextosQuestoes.Commands.DeleteTextoQuestao;
-using DnaBrasilApi.Application.TextosQuestoes.Commands.UpdateTextoQuestao;
+﻿using DnaBrasilApi.Application.TextosQuestoes.Commands.CreateTextoImagemQuestao;
+using DnaBrasilApi.Application.TextosQuestoes.Commands.DeleteTextoImagemQuestao;
+using DnaBrasilApi.Application.TextosQuestoes.Commands.UpdateTextoImagemQuestao;
 using DnaBrasilApi.Application.TextosQuestoes.Queries;
 using DnaBrasilApi.Application.TextosQuestoes.Queries.GetTextoQuestaoById;
 using DnaBrasilApi.Application.TextosQuestoes.Queries.GetTextosQuestoesAll;
@@ -21,7 +21,7 @@ public class TextosQuestoes : EndpointGroupBase
     {
         app.MapGroup(this)
             //.RequireAuthorization()
-            .MapGet(GetTextosQuestoesAll)
+            .MapGet(GetTextosImagensQuestoesAll)
             .MapPost(CreateTextoQuestao)
             .MapPut(UpdateTextoQuestao, "{id}")
             .MapDelete(DeleteTextoQuestao, "{id}")
@@ -37,7 +37,7 @@ public class TextosQuestoes : EndpointGroupBase
     /// <param name="sender">Sender</param>
     /// <param name="command">Objeto de inclusão de Texto Questão</param>
     /// <returns>Retorna Id de novo Texto Questão</returns>
-    public async Task<int> CreateTextoQuestao(ISender sender, CreateTextoQuestaoCommand command)
+    public async Task<int> CreateTextoQuestao(ISender sender, CreateTextoImagemQuestaoCommand command)
     {
         return await sender.Send(command);
     }
@@ -49,7 +49,7 @@ public class TextosQuestoes : EndpointGroupBase
     /// <param name="id">Id de alteração de Texto Questão</param>
     /// <param name="command">Objeto de alteração de Texto Questão</param>
     /// <returns>Retorna true ou false</returns>
-    public async Task<bool> UpdateTextoQuestao(ISender sender, int id, UpdateTextoQuestaoCommand command)
+    public async Task<bool> UpdateTextoQuestao(ISender sender, int id, UpdateTextoImagemQuestaoCommand command)
     {
         if (id != command.Id) return false;
         var result = await sender.Send(command);
@@ -64,7 +64,7 @@ public class TextosQuestoes : EndpointGroupBase
     /// <returns>Retorna true ou false</returns>
     public async Task<bool> DeleteTextoQuestao(ISender sender, int id)
     {
-        return await sender.Send(new DeleteTextoQuestaoCommand(id));
+        return await sender.Send(new DeleteTextoImagemQuestaoCommand(id));
     }
     #endregion
 
@@ -75,7 +75,7 @@ public class TextosQuestoes : EndpointGroupBase
     /// </summary>
     /// <param name="sender">Sender</param>
     /// <returns>Retorna a lista de Texto Questão</returns>
-    public async Task<List<TextoQuestaoDto>> GetTextosQuestoesAll(ISender sender)
+    public async Task<List<TextoImagemQuestaoDto>> GetTextosImagensQuestoesAll(ISender sender)
     {
         return await sender.Send(new GetTextosQuestoesAllQuery());
     }
@@ -86,7 +86,7 @@ public class TextosQuestoes : EndpointGroupBase
     /// <param name="sender">Sender</param>
     /// <param name="id">Id de Texto Questão a ser buscado</param>
     /// <returns>Retorna o objeto de Texto Questão </returns>
-    public async Task<TextoQuestaoDto> GetTextoQuestaoById(ISender sender, int id)
+    public async Task<TextoImagemQuestaoDto> GetTextoImagemQuestaoById(ISender sender, int id)
     {
         return await sender.Send(new GetTextoQuestaoByIdQuery() { Id = id });
     }

@@ -11713,7 +11713,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateTextoQuestaoCommand"
+                "$ref": "#/components/schemas/CreateTextoImagemQuestaoCommand"
               }
             }
           },
@@ -11758,7 +11758,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateTextoQuestaoCommand"
+                "$ref": "#/components/schemas/UpdateTextoImagemQuestaoCommand"
               }
             }
           },
@@ -23318,7 +23318,7 @@
           }
         }
       },
-      "CreateTextoQuestaoCommand": {
+      "CreateTextoImagemQuestaoCommand": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -23326,18 +23326,21 @@
             "type": "integer",
             "format": "int32"
           },
-          "texto": {
+          "tipo": {
             "type": "string",
             "nullable": true
           },
-          "imagem": {
+          "textoImagem": {
             "type": "string",
-            "format": "byte",
             "nullable": true
+          },
+          "ordem": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },
-      "UpdateTextoQuestaoCommand": {
+      "UpdateTextoImagemQuestaoCommand": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -23345,14 +23348,21 @@
             "type": "integer",
             "format": "int32"
           },
-          "texto": {
+          "questaoEadId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tipo": {
             "type": "string",
             "nullable": true
           },
-          "imagem": {
+          "textoImagem": {
             "type": "string",
-            "format": "byte",
             "nullable": true
+          },
+          "ordem": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },

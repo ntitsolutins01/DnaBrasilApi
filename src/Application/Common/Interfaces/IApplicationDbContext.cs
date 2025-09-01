@@ -51,7 +51,7 @@ public interface IApplicationDbContext
     DbSet<ControleMaterial> ControlesMateriais { get; }
     DbSet<QuestaoEad> QuestoesEad { get; }
     DbSet<RespostaEad> RespostasEad { get; }
-    DbSet<TextoQuestao> TextosQuestoes { get; }
+    DbSet<TextoImagemQuestao> TextosImagensQuestoes { get; }
     DbSet<Estrutura> Estruturas { get; }
     DbSet<Categoria> Categorias { get; }
     DbSet<Atividade> Atividades { get; }
