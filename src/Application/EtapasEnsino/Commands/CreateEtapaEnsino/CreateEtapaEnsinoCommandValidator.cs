@@ -1,6 +1,4 @@
-﻿using DnaBrasilApi.Application.EtapasEnsino.Commands.CreateEtapaEnsino;
-
-namespace DnaBrasilApi.Application.Deficiencias.Commands.CreateEtapaEnsino;
+﻿namespace DnaBrasilApi.Application.EtapasEnsino.Commands.CreateEtapaEnsino;
 
 public class CreateEtapaEnsinoCommandValidator : AbstractValidator<CreateEtapaEnsinoCommand>
 {

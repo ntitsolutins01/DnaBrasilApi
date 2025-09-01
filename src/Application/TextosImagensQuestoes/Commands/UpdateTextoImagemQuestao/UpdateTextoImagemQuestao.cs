@@ -1,6 +1,6 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasilApi.Application.TextosQuestoes.Commands.UpdateTextoImagemQuestao;
+namespace DnaBrasilApi.Application.TextosImagensQuestoes.Commands.UpdateTextoImagemQuestao;
 
 public record UpdateTextoImagemQuestaoCommand : IRequest<bool>
 {

@@ -1,4 +1,4 @@
-﻿using DnaBrasilApi.Application.ControlesMateriaisEstoquesSaidas.Commands.CreateControleMaterialEstoqueSaida;
+﻿namespace DnaBrasilApi.Application.ControlesMateriaisEstoquesSaidas.Commands.CreateControleMaterialEstoqueSaida;
 
 internal class CreateControleMaterialEstoqueSaidaCommandValidator : AbstractValidator<CreateControleMaterialEstoqueSaidaCommand>
 {

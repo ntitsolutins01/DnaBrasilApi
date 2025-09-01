@@ -1,7 +1,8 @@
 ﻿using System.Reflection;
 using DnaBrasilApi.Application.Common.Behaviours;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace Microsoft.Extensions.DependencyInjection;
+namespace DnaBrasilApi.Application;
 
 public static class DependencyInjection
 {

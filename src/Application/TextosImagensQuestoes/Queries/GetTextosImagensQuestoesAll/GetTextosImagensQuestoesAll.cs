@@ -1,6 +1,6 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasilApi.Application.TextosQuestoes.Queries.GetTextosImagensQuestoesAll;
+namespace DnaBrasilApi.Application.TextosImagensQuestoes.Queries.GetTextosImagensQuestoesAll;
 //[Authorize]
 public record GetTextosImagensQuestoesAllQuery : IRequest<List<TextoImagemQuestaoDto>>;
 
