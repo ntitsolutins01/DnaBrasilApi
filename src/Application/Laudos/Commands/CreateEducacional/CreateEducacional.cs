@@ -56,17 +56,26 @@ public class CreateEducacionalCommandHandler : IRequestHandler<CreateEducacional
         var totalScore = respostas.Sum(PointsFor);
 
         int encaminhamentoId;
-        if (totalScore >= 220 && totalScore <= 450 && (n1 + n2) >= 3 && n3 >= 2)
-        {
-            encaminhamentoId = 98; // Adequado
-        }
-        else if (totalScore >= 120 && totalScore <= 219 && (n1 + n2) >= 3)
-        {
-            encaminhamentoId = 97; // Intermediário
-        }
-        else
+
+        // Regra 1: até 2 acertos de peso 1 -> Defasagem
+        if (n1 <= 2)
         {
             encaminhamentoId = 96; // Defasagem
+        }
+        // Regra 2: mais de 3 acertos de peso 1, mas até 2 de peso 2 -> Defasagem
+        else if (n2 <= 2)
+        {
+            encaminhamentoId = 96; // Defasagem
+        }
+        // Regras 3, 4 e 5: com >=3 em peso 1 e >=3 em peso 2,
+        // a decisão depende do peso 3
+        else
+        {
+            if (n3 >= 2)
+                encaminhamentoId = 98; // Adequado
+            else
+                // n3 == 0 ou 1 -> Intermediário (cobre regras 3 e 4)
+                encaminhamentoId = 97; // Intermediário
         }
 
         var encaminhamento = await _context.Encaminhamentos.FindAsync([encaminhamentoId], cancellationToken);
