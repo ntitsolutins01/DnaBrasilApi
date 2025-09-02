@@ -13,6 +13,7 @@ public class LaudoOrdemDto
     public int? SaudeBucalId { get; init; }
     public int? ConsumoAlimentarId { get; init; }
     public string? StatusLaudo { get; init; }
+    public string? Sexo { get; init; }
 
     private class Mapping : Profile
     {
@@ -25,6 +26,7 @@ public class LaudoOrdemDto
                 .ForMember(dest => dest.VocacionalId, opt => opt.MapFrom(src => src.Vocacional!.Id))
                 .ForMember(dest => dest.SaudeId, opt => opt.MapFrom(src => src.Saude!.Id))
                 .ForMember(dest => dest.SaudeBucalId, opt => opt.MapFrom(src => src.SaudeBucal!.Id))
+                .ForMember(dest => dest.Sexo, opt => opt.MapFrom(src => src.Aluno!.Sexo))
                 .ForMember(dest => dest.ConsumoAlimentarId, opt => opt.MapFrom(src => src.ConsumoAlimentar!.Id));
         }
     }

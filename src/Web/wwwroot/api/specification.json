@@ -13681,6 +13681,10 @@
           "statusLaudo": {
             "type": "string",
             "nullable": true
+          },
+          "sexo": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
