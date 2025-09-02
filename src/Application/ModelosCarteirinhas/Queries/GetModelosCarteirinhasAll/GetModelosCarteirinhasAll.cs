@@ -1,6 +1,6 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasilApi.Application.ModelosCarteirinhas.Queries.GetModeloCarteirinhaAll;
+namespace DnaBrasilApi.Application.ModelosCarteirinhas.Queries.GetModelosCarteirinhasAll;
 //[Authorize]
 public record GetModelosCarteirinhasAllQuery : IRequest<List<ModeloCarteirinhaDto>>;
 

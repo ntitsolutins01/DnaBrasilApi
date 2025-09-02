@@ -1,6 +1,6 @@
 ﻿
 
-namespace DnaBrasilApi.Application.TextosQuestoes.Commands.CreateTextoImagemQuestao;
+namespace DnaBrasilApi.Application.TextosImagensQuestoes.Commands.CreateTextoImagemQuestao;
 
 public class CreateTextoQuestaoCommandValidator : AbstractValidator<CreateTextoImagemQuestaoCommand>
 {

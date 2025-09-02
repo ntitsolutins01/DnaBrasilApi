@@ -1,6 +1,6 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasilApi.Application.TextosQuestoes.Commands.DeleteTextoImagemQuestao;
+namespace DnaBrasilApi.Application.TextosImagensQuestoes.Commands.DeleteTextoImagemQuestao;
 public record DeleteTextoImagemQuestaoCommand(int Id) : IRequest<bool>;
 
 public class DeleteTextoImagemQuestaoCommandHandler : IRequestHandler<DeleteTextoImagemQuestaoCommand, bool>

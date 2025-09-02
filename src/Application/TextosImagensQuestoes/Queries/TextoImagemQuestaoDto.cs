@@ -1,6 +1,6 @@
 ﻿using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasilApi.Application.TextosQuestoes.Queries;
+namespace DnaBrasilApi.Application.TextosImagensQuestoes.Queries;
 
 public class TextoImagemQuestaoDto
 {

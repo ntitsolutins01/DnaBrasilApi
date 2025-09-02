@@ -1,9 +1,9 @@
-﻿using DnaBrasilApi.Application.TextosQuestoes.Commands.CreateTextoImagemQuestao;
-using DnaBrasilApi.Application.TextosQuestoes.Commands.DeleteTextoImagemQuestao;
-using DnaBrasilApi.Application.TextosQuestoes.Commands.UpdateTextoImagemQuestao;
-using DnaBrasilApi.Application.TextosQuestoes.Queries;
-using DnaBrasilApi.Application.TextosQuestoes.Queries.GetTextoImagemQuestaoById;
-using DnaBrasilApi.Application.TextosQuestoes.Queries.GetTextosImagensQuestoesAll;
+﻿using DnaBrasilApi.Application.TextosImagensQuestoes.Commands.CreateTextoImagemQuestao;
+using DnaBrasilApi.Application.TextosImagensQuestoes.Commands.DeleteTextoImagemQuestao;
+using DnaBrasilApi.Application.TextosImagensQuestoes.Commands.UpdateTextoImagemQuestao;
+using DnaBrasilApi.Application.TextosImagensQuestoes.Queries;
+using DnaBrasilApi.Application.TextosImagensQuestoes.Queries.GetTextoImagemQuestaoById;
+using DnaBrasilApi.Application.TextosImagensQuestoes.Queries.GetTextosImagensQuestoesAll;
 
 namespace DnaBrasilApi.Web.Endpoints;
 /// <summary>

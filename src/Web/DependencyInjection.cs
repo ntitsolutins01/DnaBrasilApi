@@ -3,11 +3,10 @@ using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Infrastructure.Data;
 using DnaBrasilApi.Web.Services;
 using Microsoft.AspNetCore.Mvc;
-
 using NSwag;
 using NSwag.Generation.Processors.Security;
 
-namespace Microsoft.Extensions.DependencyInjection;
+namespace DnaBrasilApi.Web;
 
 public static class DependencyInjection
 {
@@ -34,7 +33,7 @@ public static class DependencyInjection
 
         services.AddOpenApiDocument((configure, sp) =>
         {
-            configure.Title = "DnaBrasilApi API";
+            configure.Title = "Dna do Brasil API";
             configure.Version = "3.0.0";
 
             // Add JWT

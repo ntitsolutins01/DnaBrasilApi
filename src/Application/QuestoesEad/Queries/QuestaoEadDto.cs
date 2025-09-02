@@ -1,5 +1,5 @@
 ﻿using DnaBrasilApi.Application.RespostasEad.Queries;
-using DnaBrasilApi.Application.TextosQuestoes.Queries;
+using DnaBrasilApi.Application.TextosImagensQuestoes.Queries;
 using DnaBrasilApi.Domain.Entities;
 
 namespace DnaBrasilApi.Application.QuestoesEad.Queries;

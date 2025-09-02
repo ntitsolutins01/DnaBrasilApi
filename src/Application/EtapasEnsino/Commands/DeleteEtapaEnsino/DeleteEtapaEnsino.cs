@@ -1,6 +1,6 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasilApi.Application.Deficiencias.Commands.DeleteEtapaEnsino;
+namespace DnaBrasilApi.Application.EtapasEnsino.Commands.DeleteEtapaEnsino;
 
 public record DeleteEtapaEnsinoCommand(int Id) : IRequest<bool>;
 

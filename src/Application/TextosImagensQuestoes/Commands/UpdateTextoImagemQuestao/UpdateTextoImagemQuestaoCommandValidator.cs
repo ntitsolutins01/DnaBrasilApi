@@ -1,4 +1,4 @@
-﻿namespace DnaBrasilApi.Application.TextosQuestoes.Commands.UpdateTextoImagemQuestao;
+﻿namespace DnaBrasilApi.Application.TextosImagensQuestoes.Commands.UpdateTextoImagemQuestao;
 
 public class UpdateTextoImagemQuestaoCommandValidator : AbstractValidator<UpdateTextoImagemQuestaoCommand>
 {

@@ -1,6 +1,8 @@
 using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
 
+namespace DnaBrasilApi.Application.Laudos.Commands.CreateEducacional;
+
 public record CreateEducacionalCommand : IRequest<int>
 {
     public required int ProfissionalId { get; init; }
