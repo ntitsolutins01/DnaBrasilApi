@@ -32,10 +32,11 @@ public class CreateLaudoCommandHandler : IRequestHandler<CreateLaudoCommand, int
 
         Guard.Against.NotFound((int)request.AlunoId, aluno);
 
-        var modalidade = await _context.Modalidades.FindAsync([request.ModalidadeId], cancellationToken);
+        //var modalidade = await _context.Modalidades.FindAsync([request.ModalidadeId], cancellationToken);
 
-        Guard.Against.NotFound((int)request.ModalidadeId!, modalidade);
+        //Guard.Against.NotFound((int)request.ModalidadeId!, modalidade);
 
+        Modalidade? modalidade;
         Saude? saude;
         Vocacional? vocacional = null;
         ConsumoAlimentar? consumoAlimentar;
@@ -44,6 +45,11 @@ public class CreateLaudoCommandHandler : IRequestHandler<CreateLaudoCommand, int
         TalentoEsportivo? talentoEsportivo;
 
         var idade = GetIdade(aluno.DtNascimento, DateTime.Now);
+
+        modalidade = request.ModalidadeId != null
+            ? await _context.Modalidades
+                .FindAsync([request.ModalidadeId!], cancellationToken)
+            : null;
 
         saude = request.SaudeId != null
             ? await _context.Saudes

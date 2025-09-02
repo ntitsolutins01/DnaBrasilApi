@@ -8,6 +8,7 @@ using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoTalentoEsport
 using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoTalentoEsportivoV1;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateEncaminhamentoVocacional;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateLaudo;
+using DnaBrasilApi.Application.Laudos.Commands.UpdateLaudoEducacional;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateModalidadeLaudo;
 using DnaBrasilApi.Application.Laudos.Queries;
 using DnaBrasilApi.Application.Laudos.Queries.GetDesempenhoByAluno;
@@ -36,6 +37,7 @@ public class Laudos : EndpointGroupBase
             .MapGet(GetLaudoById, "{id}")
             .MapPost(CreateLaudo)
             .MapPut(UpdateLaudo, "{id}")
+            .MapPut(UpdateLaudoEducacional, "{id}/Educacional")
             .MapPut(UpdateModalidadeLaudo, "Modalidade/{alunoId}")
             .MapPut(UpdateEncaminhamentoTalentoEsportivo, "Encaminhamento/TalentoEsportivo/{alunoId}")
             .MapPut(UpdateEncaminhamentoTalentoEsportivoV1, "v1/Encaminhamento/TalentoEsportivo/{alunoId}")
@@ -77,6 +79,19 @@ public class Laudos : EndpointGroupBase
     /// <param name="command">Objeto de alteração de Laudos</param>
     /// <returns>Retorna true ou false</returns>
     public async Task<bool> UpdateLaudo(ISender sender, int id, UpdateLaudoCommand command)
+    {
+        if (id != command.Id) return false;
+        var result = await sender.Send(command);
+        return result;
+    }
+    /// <summary>
+    /// Endpoint para alteração de do Educacional de um Laudo
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="id">Id de alteração de Laudos</param>
+    /// <param name="command">Objeto de alteração de Laudos</param>
+    /// <returns>Retorna true ou false</returns>
+    public async Task<bool> UpdateLaudoEducacional(ISender sender, int id, UpdateLaudoEducacionalCommand command)
     {
         if (id != command.Id) return false;
         var result = await sender.Send(command);
