@@ -1,4 +1,6 @@
-﻿namespace DnaBrasilApi.Application.Laudos.Commands.CreateVocacional;
+﻿using DnaBrasilApi.Application.Laudos.Commands.CreateVocacional;
+
+namespace DnaBrasilApi.Application.Laudos.Commands.CreateEducacional;
 
 public class CreateVocacionalCommandValidator : AbstractValidator<CreateVocacionalCommand>
 {

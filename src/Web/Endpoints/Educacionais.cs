@@ -1,4 +1,5 @@
-﻿using DnaBrasilApi.Application.Laudos.Commands.UpdateEducacional;
+﻿using DnaBrasilApi.Application.Laudos.Commands.CreateEducacional;
+using DnaBrasilApi.Application.Laudos.Commands.UpdateEducacional;
 using DnaBrasilApi.Application.Laudos.Queries;
 using DnaBrasilApi.Application.Laudos.Queries.GetEducacionaisAll;
 using DnaBrasilApi.Application.Laudos.Queries.GetEducacionalById;

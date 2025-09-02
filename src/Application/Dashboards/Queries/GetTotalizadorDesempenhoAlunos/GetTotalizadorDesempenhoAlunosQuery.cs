@@ -146,10 +146,15 @@ public class GetTotalizadorDesempenhoAlunosQueryHandler : IRequestHandler<GetTot
             {
                 textoLaudo = _context.TextosLaudos.Where(x =>
                     x.Status &&
-                    x.Classificacao!.Equals(desempenho) &&
+                    x.Classificacao == desempenho &&
                     x.Idade == idade &&
-                    (x.Aviso!.Trim() == "Excelente" || x.Aviso!.Trim() == "Muito Bom" || x.Aviso!.Trim() == "Bom") &&
-                    x.Sexo == (idade == 99 ? "G" : aluno.Aluno.Sexo)).ToList();
+                    x.Sexo == aluno.Aluno.Sexo).ToList();
+
+                textoLaudo = textoLaudo.Where(x =>
+                    {
+                        return x.Aviso == "Excelente" || x.Aviso == "Muito Bom" || x.Aviso == "Bom";
+                    })
+                    .ToList();
 
                 foreach (var item in textoLaudo)
                 {

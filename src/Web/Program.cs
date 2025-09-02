@@ -1,5 +1,8 @@
 using System.Net.Http.Headers;
+using DnaBrasilApi.Application;
+using DnaBrasilApi.Infrastructure;
 using DnaBrasilApi.Infrastructure.Data;
+using DnaBrasilApi.Web;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -80,4 +83,7 @@ app.MapEndpoints();
 
 app.Run();
 
-public partial class Program { }
+namespace DnaBrasilApi.Web
+{
+    public partial class Program { }
+}

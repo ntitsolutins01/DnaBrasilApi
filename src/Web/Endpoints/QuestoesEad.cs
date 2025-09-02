@@ -5,7 +5,7 @@ using DnaBrasilApi.Application.QuestoesEad.Queries;
 using DnaBrasilApi.Application.QuestoesEad.Queries.GetQuestaoEadById;
 using DnaBrasilApi.Application.QuestoesEad.Queries.GetQuestoesEadAll;
 using DnaBrasilApi.Application.RespostasEad.Commands.CreateRespostaEad;
-using DnaBrasilApi.Application.TextosQuestoes.Commands.CreateTextoImagemQuestao;
+using DnaBrasilApi.Application.TextosImagensQuestoes.Commands.CreateTextoImagemQuestao;
 
 namespace DnaBrasilApi.Web.Endpoints;
 

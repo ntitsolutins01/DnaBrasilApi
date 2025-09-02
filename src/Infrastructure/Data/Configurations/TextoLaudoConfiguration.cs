@@ -7,8 +7,10 @@ public class TextoLaudoConfiguration : IEntityTypeConfiguration<TextoLaudo>
 {
     public void Configure(EntityTypeBuilder<TextoLaudo> builder)
     {
+        builder.Property(t => t.Sexo).HasMaxLength(1);
         builder.Property(t => t.Aviso).HasMaxLength(100);
-        builder.Property(t => t.Classificacao).HasMaxLength(300);
+        builder.Property(t => t.Texto).HasMaxLength(500);
+        builder.Property(t => t.Classificacao).HasMaxLength(25);
         builder.Property(t => t.PontoInicial).HasPrecision(10, 2);
         builder.Property(t => t.PontoFinal).HasPrecision(10, 2);
     }

@@ -1,7 +1,7 @@
 ﻿using DnaBrasilApi.Application.Common.Interfaces;
 using DnaBrasilApi.Domain.Entities;
 
-namespace DnaBrasilApi.Application.TextosQuestoes.Commands.CreateTextoImagemQuestao;
+namespace DnaBrasilApi.Application.TextosImagensQuestoes.Commands.CreateTextoImagemQuestao;
 
 public record CreateTextoImagemQuestaoCommand : IRequest<int>
 {

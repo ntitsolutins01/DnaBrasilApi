@@ -2,9 +2,9 @@
 using DnaBrasilApi.Application.ModelosCarteirinhas.Commands.DeleteModeloCarteirinha;
 using DnaBrasilApi.Application.ModelosCarteirinhas.Commands.UpdateModeloCarteirinha;
 using DnaBrasilApi.Application.ModelosCarteirinhas.Queries;
-using DnaBrasilApi.Application.ModelosCarteirinhas.Queries.GetModeloCarteirinhaAll;
+using DnaBrasilApi.Application.ModelosCarteirinhas.Queries.GetModeloCarteirinhaByFomentoId;
 using DnaBrasilApi.Application.ModelosCarteirinhas.Queries.GetModeloCarteirinhaById;
-using DnaBrasilApi.Application.ModelosCarteirinhas.Queries.GetModeloCarteirinhaByQuestionario;
+using DnaBrasilApi.Application.ModelosCarteirinhas.Queries.GetModelosCarteirinhasAll;
 
 namespace DnaBrasilApi.Web.Endpoints;
 /// <summary>
