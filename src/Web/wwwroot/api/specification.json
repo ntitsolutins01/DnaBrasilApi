@@ -6768,6 +6768,50 @@
         }
       }
     },
+    "/api/Laudos/{id}/Educacional": {
+      "put": {
+        "tags": [
+          "Laudos"
+        ],
+        "operationId": "UpdateLaudoEducacional",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateLaudoEducacionalCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Laudos/Modalidade/{alunoId}": {
       "put": {
         "tags": [
@@ -16610,7 +16654,15 @@
                   }
                 ]
               },
-              "educacional": {
+              "educacionalMatematica": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Educacional"
+                  }
+                ]
+              },
+              "educacionalPortugues": {
                 "nullable": true,
                 "oneOf": [
                   {
@@ -19970,7 +20022,12 @@
             "type": "integer",
             "format": "int32"
           },
-          "educacionalId": {
+          "educacionalMatematicaId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "educacionalPortuguesId": {
             "type": "integer",
             "format": "int32",
             "nullable": true
@@ -20025,7 +20082,12 @@
             "format": "int32",
             "nullable": true
           },
-          "encaminhamentoEducacionalId": {
+          "encaminhamentoMatematicaId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "encaminhamentoPortuguesId": {
             "type": "integer",
             "format": "int32",
             "nullable": true
@@ -20251,6 +20313,27 @@
           }
         }
       },
+      "UpdateLaudoEducacionalCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "alunoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "educacionalId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "materia": {
+            "type": "string"
+          }
+        }
+      },
       "UpdateEncaminhamentoTalentoEsportivoV1Command": {
         "type": "object",
         "additionalProperties": false
@@ -20357,7 +20440,11 @@
             "type": "integer",
             "format": "int32"
           },
-          "scoreEducacional": {
+          "scoreMatematica": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "scorePortugues": {
             "type": "integer",
             "format": "int32"
           },
@@ -20451,7 +20538,12 @@
             "format": "date-time",
             "nullable": true
           },
-          "dataEducacional": {
+          "dataMatematica": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "dataPortugues": {
             "type": "string",
             "format": "date-time",
             "nullable": true
@@ -20516,7 +20608,11 @@
             "type": "string",
             "nullable": true
           },
-          "textoEducacional": {
+          "textoMatematica": {
+            "type": "string",
+            "nullable": true
+          },
+          "textoPortugues": {
             "type": "string",
             "nullable": true
           }

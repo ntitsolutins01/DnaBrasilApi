@@ -160,8 +160,12 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
             .Include(a => a.Aluno)
             .AsNoTracking();
 
-        var laudoEducacional = _context.Laudos.Where(x => verificaAluno.Contains(x.Aluno.Id)).Include(i => i.Educacional).Where(x => x.Educacional != null)
-            .Include(a => a.Aluno)
+        var laudoEducacional = _context.Laudos
+            .Where(x => verificaAluno.Contains(x.Aluno.Id) &&
+                        (x.EducacionalMatematica != null || x.EducacionalPortugues != null))
+            .Include(x => x.EducacionalMatematica)
+            .Include(x => x.EducacionalPortugues)
+            .Include(x => x.Aluno)
             .AsNoTracking();
 
         //var contador = 0;
@@ -186,7 +190,8 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
         DateTimeOffset? dataVocacional = null;
         DateTimeOffset? dataConsumoAlimentar = null;
         DateTimeOffset? dataSaudeBucal = null;
-        DateTimeOffset? dataEducacional = null;
+        DateTimeOffset? dataMatematica = null;
+        DateTimeOffset? dataPortugues = null;
 
         string avisoVelocidade = "";
         string avisoImpulsao = "";
@@ -228,7 +233,8 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
 
         string textoConsumoAlimentar = "";
 
-        string textoEducacional = "";
+        string textoMatematica = "";
+        string textoPortugues = "";
 
         // -------------------------------------------------- Talento Espotivo ------------------------------------
         var alunoEportivo = laudoEsportivo.FirstOrDefault();
@@ -1022,81 +1028,45 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
         }
 
         // -------------------------------------------------- Educacional ------------------------------------
-        var scoreEducacional = 0;
-        var alunoEducacional = laudoConsumoAlimentar.FirstOrDefault();
-        if (laudo.Any(x => x.Educacional != null))
+        var alunoEducacional = laudoEducacional.FirstOrDefault();
+
+        int scoreMatematica = 0, scorePortugues = 0;
+
+        if (alunoEducacional != null &&
+            (alunoEducacional.EducacionalMatematica != null || alunoEducacional.EducacionalPortugues != null))
         {
-            switch (alunoEducacional!.Educacional!.Id)
+            var educacionalMT = alunoEducacional.EducacionalMatematica;
+            var educacionalLP = alunoEducacional.EducacionalPortugues;
+
+            if (educacionalMT != null)
             {
-                case 96:
-                    {
-                        scoreEducacional = 0;
-                        break;
-                    }
-                case 97:
-                    {
-                        scoreEducacional = 50;
-                        break;
-                    }
-                case 98:
-                    {
-                        scoreEducacional = 100;
-                        break;
-                    }
-                default:
-                    {
-                        scoreEducacional = 0;
-                        break;
-                    }
+                var encMT = educacionalMT.Encaminhamento
+                            ?? (educacionalMT.Encaminhamento != null
+                                ? _context.Encaminhamentos.AsNoTracking()
+                                    .FirstOrDefault(e => e.Id == educacionalMT.Encaminhamento.Id)
+                                : null);
+
+                if (encMT != null)
+                {
+                    scoreMatematica = encMT.Id switch { 96 => 0, 97 => 50, 98 => 100, _ => 0 };
+                    textoMatematica = encMT.Descricao!;
+                    dataMatematica = encMT.Created;
+                }
             }
-        }
 
-        if (alunoEducacional?.Educacional != null)
-        {
-            var desempenho = desempenhoEducacional.FirstOrDefault();
-            if (desempenho != null)
+            if (educacionalLP != null)
             {
-                textoLaudo = _context.TextosLaudos
-                    .Where(x =>
-                        x.Classificacao!.Equals(desempenho) &&
-                        (x.Aviso!.Trim().Equals("Defasagem.Defasagem") ||
-                         x.Aviso.Trim().Equals("Intermediario.Intermediário") ||
-                         x.Aviso.Trim().Equals("Adequado.Adequado")))
-                    .ToList();
+                var encLP = educacionalLP.Encaminhamento
+                            ?? (educacionalLP.Encaminhamento != null
+                                ? _context.Encaminhamentos.AsNoTracking()
+                                    .FirstOrDefault(e => e.Id == educacionalLP.Encaminhamento.Id)
+                                : null);
 
-                dataEducacional = textoLaudo.FirstOrDefault()?.Created;
-
-                var param = laudo.FirstOrDefault()?.Educacional?.Encaminhamento?.Parametro?.Trim();
-
-                var paramNormalized = param switch
+                if (encLP != null)
                 {
-                    "Defasagem" => "Defasagem.Defasagem",
-                    "Intermediario" => "Intermediario.Intermediário",
-                    "Adequado" => "Adequado.Adequado",
-                    _ => param
-                };
-
-                if (textoLaudo.Any())
-                {
-                    foreach (var laudoItem in textoLaudo)
-                    {
-                        var avisoLaudo = laudoItem.Aviso?.Trim();
-
-                        if (avisoLaudo!.Equals(paramNormalized))
-                        {
-                            var nota = laudoItem.Aviso;
-
-                            textoEducacional = nota switch
-                            {
-                                "Defasagem.Defasagem" => textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Defasagem.Defasagem")?.Texto ?? "",
-                                "Intermediario.Intermediário" => textoLaudo.FirstOrDefault(t => t.Aviso.Trim() == "Intermediario.Intermediário")?.Texto ?? "",
-                                "Adequado.Adequado" => textoLaudo.FirstOrDefault(t => t.Aviso == "Adequado.Adequado")?.Texto ?? "",
-                                _ => ""
-                            };
-
-                            break;
-                        }
-                    }
+                    scorePortugues = encLP.Id switch { 96 => 0, 97 => 50, 98 => 100, _ => 0 };
+                    textoPortugues = encLP.Descricao!;
+                    dataPortugues = encLP.Created;
                 }
             }
         }
@@ -1115,8 +1085,9 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
             ScoreVocacional = scoreVocacional,
             ScoreSaudeBucal = saudeBucal,
             ScoreConsumoAlimentar = consumoAlimentar,
-            ScoreEducacional = scoreEducacional,
-            ScoreDna = Round(scoreTalentoEsportivo + scoreSaude + scoreVocacional + saudeBucal + consumoAlimentar + scoreQualidadeVida + scoreEducacional),
+            ScoreMatematica = scoreMatematica,
+            ScorePortugues = scorePortugues,
+            ScoreDna = Round(scoreTalentoEsportivo + scoreSaude + scoreVocacional + saudeBucal + consumoAlimentar + scoreQualidadeVida + scoreMatematica + scorePortugues),
             AvisoVelocidade = avisoVelocidade,
             AvisoImpulsao = avisoImpulsao,
             AvisoShuttleRun = avisoShutlleRun,
@@ -1137,7 +1108,8 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
             DataVocacional = dataVocacional,
             DataSaudeBucal = dataSaudeBucal,
             DataConsumoAlimentar = dataConsumoAlimentar,
-            DataEducacional = dataEducacional,
+            DataMatematica = dataMatematica,
+            DataPortugues = dataPortugues,
             TextoVelocidade = textoVelocidade,
             TextoImpulsao = textoImpulsao,
             TextoShuttleRun = textoShuttleRun,
@@ -1153,7 +1125,8 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
             TextoContexto = textoContexto,
             TextoConsumoAlimentar = textoConsumoAlimentar,
             TextoSaudeBucal = textoSaudeBucal,
-            TextoEducacional = textoEducacional
+            TextoMatematica = textoMatematica,
+            TextoPortugues = textoPortugues
         };
     }
 
