@@ -223,20 +223,20 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
 
         #endregion
 
-        //#region multi column index
+        #region multi column index
 
-        //builder.Entity<TextoLaudo>()
-        //    .HasIndex(p => new { p.Classificacao, p.Idade, p.Sexo })
-        //    .IsUnique();
+        builder.Entity<TextoLaudo>()
+            .HasIndex(p => new { p.Classificacao, p.Idade, p.Sexo })
+            .IsUnique(false);
 
-        //#endregion
+        #endregion
 
-        //#region column index
+        #region column index
 
-        //builder.Entity<TextoLaudo>()
-        //    .HasIndex(p => p.Aviso)
-        //    .IsUnique();
+        builder.Entity<TextoLaudo>()
+            .HasIndex(p => p.Aviso)
+            .IsUnique(false);
 
-        //#endregion
+        #endregion
     }
 }
