@@ -235,7 +235,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
 
         builder.Entity<TextoLaudo>()
             .HasIndex(p => p.Aviso)
-            .IsUnique(false);
+            .IsUnique(false)
+            .IsClustered(false);
 
         #endregion
     }
