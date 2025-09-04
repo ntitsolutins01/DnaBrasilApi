@@ -234,6 +234,41 @@
         }
       }
     },
+    "/api/Alunos/NomeAlunos/Serie/{id}": {
+      "get": {
+        "tags": [
+          "Alunos"
+        ],
+        "operationId": "GetNomeAlunosBySerieId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SelectListDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Alunos": {
       "get": {
         "tags": [
