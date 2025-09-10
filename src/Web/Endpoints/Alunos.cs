@@ -25,6 +25,7 @@ using DnaBrasilApi.Application.Alunos.Queries.GetAlunosCursosByCursoId;
 using DnaBrasilApi.Application.Alunos.Queries.GetNomeAlunosAll;
 using DnaBrasilApi.Application.Alunos.Queries.GetNomeAlunosByLocalidadeId;
 using DnaBrasilApi.Application.Alunos.Queries.GetNomeAlunosByProfissionalId;
+using DnaBrasilApi.Application.Alunos.Queries.GetNomeAlunosBySerieId;
 using DnaBrasilApi.Application.Alunos.Queries.GetPresencasByAlunoId;
 using DnaBrasilApi.Application.Alunos.Queries.GetPresencasByDataAtividadeId;
 using DnaBrasilApi.Application.Atividades.Queries;
@@ -47,6 +48,7 @@ public class Alunos : EndpointGroupBase
             .MapGet(GetAlunosByLocalidade, "/Localidade/{id}")
             .MapGet(GetNomeAlunosAll, "/NomeAlunos")
             .MapGet(GetNomeAlunosByLocalidadeId, "/NomeAlunos/Localidade/{id}")
+            .MapGet(GetNomeAlunosBySerieId, "/NomeAlunos/Serie/{id}")
             .MapGet(GetAlunosAll)
             .MapPost(CreateAluno)
             //.MapPost(CreateAlunoCertificados, "Certificados")
@@ -316,6 +318,17 @@ public class Alunos : EndpointGroupBase
     public async Task<List<SelectListDto>> GetNomeAlunosByLocalidadeId(ISender sender, int id)
     {
         return await sender.Send(new GetNomeAlunosByLocalidadeIdQuery() { LocalidadeId = id });
+    }
+
+    /// <summary>
+    /// Endpoint que busca Todos Nomes de Alunos
+    /// </summary>
+    /// <param name="sender">sender</param>
+    /// <param name="id">Id da série dos alunos</param>
+    /// <returns>Retorna todos os nomes dos alunos para uma combo</returns>
+    public async Task<List<SelectListDto>> GetNomeAlunosBySerieId(ISender sender, int id)
+    {
+        return await sender.Send(new GetNomeAlunosBySerieIdQuery() { SerieId = id });
     }
 
     /// <summary>
