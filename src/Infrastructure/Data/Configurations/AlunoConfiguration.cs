@@ -35,7 +35,7 @@ internal class AlunoConfiguration : IEntityTypeConfiguration<Aluno>
         builder.Property(t => t.Bairro)
             .HasMaxLength(50);
         builder.Property(t => t.Etnia)
-            .HasMaxLength(10)
+            .HasMaxLength(12)
             .IsRequired();
         builder.Property(t => t.NomeResponsavel)
             .HasMaxLength(150);
