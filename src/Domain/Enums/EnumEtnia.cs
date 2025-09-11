@@ -2,11 +2,10 @@
 
 public enum EnumEtnia
 {
-    Brancos = 1,
-    Pretos = 2,
-    Indígenas = 3,
-    Pardos = 4,
-    Mulatos = 5,
-    Caboclos = 6,
-    Cafuzos = 7
+    BRANCAS = 1,
+    PRETAS = 2,
+    INDIGENAS = 3,
+    PARDAS = 4,
+    AMARELA = 5,
+    NAODECLARADA = 6,
 }

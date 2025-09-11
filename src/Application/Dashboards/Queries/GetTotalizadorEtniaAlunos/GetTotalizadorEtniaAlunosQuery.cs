@@ -75,15 +75,15 @@ public class GetTotalizadorEtniaAlunosQueryHandler : IRequestHandler<GetTotaliza
 
         Dictionary<string, decimal> dict = new()
         {
-            { "PARDO", 0 }, { "BRANCO", 0 }, { "PRETO", 0 }, { "INDIGENA", 0 },{ "AMARELO", 0 }
+            { "PARDA", 0 }, { "BRANCA", 0 }, { "PRETA", 0 }, { "INDIGENA", 0 },{ "AMARELA", 0 },{ "NAODECLARADA", 0 }
         };
         Dictionary<string, decimal> dictTotalizadorEtniaMasculino = new()
         {
-            { "PARDO", 0 }, { "BRANCO", 0 }, { "PRETO", 0 }, { "INDIGENA", 0 },{ "AMARELO", 0 }
+            { "PARDA", 0 }, { "BRANCA", 0 }, { "PRETA", 0 }, { "INDIGENA", 0 },{ "AMARELA", 0 },{ "NAODECLARADA", 0 }
         };
         Dictionary<string, decimal> dictTotalizadorEtniaFeminino = new()
         {
-            { "PARDO", 0 }, { "BRANCO", 0 }, { "PRETO", 0 }, { "INDIGENA", 0 },{ "AMARELO", 0 }
+            { "PARDA", 0 }, { "BRANCA", 0 }, { "PRETA", 0 }, { "INDIGENA", 0 },{ "AMARELA", 0 },{ "NAODECLARADA", 0 }
         };
 
         foreach (Aluno aluno in alunos)
@@ -96,47 +96,47 @@ public class GetTotalizadorEtniaAlunosQueryHandler : IRequestHandler<GetTotaliza
 
             switch (aluno.Etnia)
             {
-                case "PARDO":
+                case "PARDA":
                     if (aluno.Sexo.Equals("M"))
                     {
-                        var pardoMasc = dictTotalizadorEtniaMasculino["PARDO"];
-                        pardoMasc += 1;
-                        dictTotalizadorEtniaMasculino["PARDO"] = pardoMasc;
+                        var PARDAMasc = dictTotalizadorEtniaMasculino["PARDA"];
+                        PARDAMasc += 1;
+                        dictTotalizadorEtniaMasculino["PARDA"] = PARDAMasc;
                     }
                     else
                     {
-                        var pardoFem = dictTotalizadorEtniaFeminino["PARDO"];
-                        pardoFem += 1;
-                        dictTotalizadorEtniaFeminino["PARDO"] = pardoFem;
+                        var PARDAFem = dictTotalizadorEtniaFeminino["PARDA"];
+                        PARDAFem += 1;
+                        dictTotalizadorEtniaFeminino["PARDA"] = PARDAFem;
                     }
 
                     break;
-                case "BRANCO":
+                case "BRANCA":
                     if (aluno.Sexo.Equals("M"))
                     {
-                        var brancoMasc = dictTotalizadorEtniaMasculino["BRANCO"];
-                        brancoMasc += 1;
-                        dictTotalizadorEtniaMasculino["BRANCO"] = brancoMasc;
+                        var BRANCAMasc = dictTotalizadorEtniaMasculino["BRANCA"];
+                        BRANCAMasc += 1;
+                        dictTotalizadorEtniaMasculino["BRANCA"] = BRANCAMasc;
                     }
                     else
                     {
-                        var brancoFem = dictTotalizadorEtniaFeminino["BRANCO"];
-                        brancoFem += 1;
-                        dictTotalizadorEtniaFeminino["BRANCO"] = brancoFem;
+                        var BRANCAFem = dictTotalizadorEtniaFeminino["BRANCA"];
+                        BRANCAFem += 1;
+                        dictTotalizadorEtniaFeminino["BRANCA"] = BRANCAFem;
                     }
                     break;
-                case "PRETO":
+                case "PRETA":
                     if (aluno.Sexo.Equals("M"))
                     {
-                        var pretoMasc = dictTotalizadorEtniaMasculino["PRETO"];
-                        pretoMasc += 1;
-                        dictTotalizadorEtniaMasculino["PRETO"] = pretoMasc;
+                        var PRETAMasc = dictTotalizadorEtniaMasculino["PRETA"];
+                        PRETAMasc += 1;
+                        dictTotalizadorEtniaMasculino["PRETA"] = PRETAMasc;
                     }
                     else
                     {
-                        var pretoFem = dictTotalizadorEtniaFeminino["PRETO"];
-                        pretoFem += 1;
-                        dictTotalizadorEtniaFeminino["PRETO"] = pretoFem;
+                        var PRETAFem = dictTotalizadorEtniaFeminino["PRETA"];
+                        PRETAFem += 1;
+                        dictTotalizadorEtniaFeminino["PRETA"] = PRETAFem;
                     }
                     break;
                 case "INDIGENA":
@@ -153,18 +153,32 @@ public class GetTotalizadorEtniaAlunosQueryHandler : IRequestHandler<GetTotaliza
                         dictTotalizadorEtniaFeminino["INDIGENA"] = indigenaFem;
                     }
                     break;
-                case "AMARELO":
+                case "AMARELA":
                     if (aluno.Sexo.Equals("M"))
                     {
-                        var amareloMasc = dictTotalizadorEtniaMasculino["AMARELO"];
-                        amareloMasc += 1;
-                        dictTotalizadorEtniaMasculino["AMARELO"] = amareloMasc;
+                        var AMARELAMasc = dictTotalizadorEtniaMasculino["AMARELA"];
+                        AMARELAMasc += 1;
+                        dictTotalizadorEtniaMasculino["AMARELA"] = AMARELAMasc;
                     }
                     else
                     {
-                        var amareloFem = dictTotalizadorEtniaFeminino["AMARELO"];
-                        amareloFem += 1;
-                        dictTotalizadorEtniaFeminino["AMARELO"] = amareloFem;
+                        var AMARELAFem = dictTotalizadorEtniaFeminino["AMARELA"];
+                        AMARELAFem += 1;
+                        dictTotalizadorEtniaFeminino["AMARELA"] = AMARELAFem;
+                    }
+                    break;
+                case "NAODECLARADA":
+                    if (aluno.Sexo.Equals("M"))
+                    {
+                        var NAODECLARADAMasc = dictTotalizadorEtniaMasculino["NAODECLARADA"];
+                        NAODECLARADAMasc += 1;
+                        dictTotalizadorEtniaMasculino["NAODECLARADA"] = NAODECLARADAMasc;
+                    }
+                    else
+                    {
+                        var NAODECLARADAFem = dictTotalizadorEtniaFeminino["NAODECLARADA"];
+                        NAODECLARADAFem += 1;
+                        dictTotalizadorEtniaFeminino["NAODECLARADA"] = NAODECLARADAFem;
                     }
                     break;
             }
