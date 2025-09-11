@@ -6238,6 +6238,164 @@
         }
       }
     },
+    "/api/GrauParentescos": {
+      "get": {
+        "tags": [
+          "GrauParentescos"
+        ],
+        "operationId": "GetGrauParentescosAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GrauParentescoDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "GrauParentescos"
+        ],
+        "operationId": "CreateGrauParentesco",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateGrauParentescoCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/GrauParentescos/{id}": {
+      "put": {
+        "tags": [
+          "GrauParentescos"
+        ],
+        "operationId": "UpdateGrauParentesco",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateGrauParentescoCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "GrauParentescos"
+        ],
+        "operationId": "DeleteGrauParentesco",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "GrauParentescos"
+        ],
+        "operationId": "GetGrauParentescoById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GrauParentescoDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/GruposMateriais": {
       "get": {
         "tags": [
@@ -13706,6 +13864,19 @@
             "items": {
               "$ref": "#/components/schemas/LaudoOrdemDto"
             }
+          },
+          "nomeResponsavel": {
+            "type": "string",
+            "nullable": true
+          },
+          "grauParentescoId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "nomeGrauParentesco": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -13833,6 +14004,19 @@
           },
           "habilitado": {
             "type": "boolean"
+          },
+          "nomeResponsavel": {
+            "type": "string",
+            "nullable": true
+          },
+          "grauParentescoId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "nomeGrauParentesco": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -16190,6 +16374,14 @@
                 "items": {
                   "$ref": "#/components/schemas/DocumentoAluno"
                 }
+              },
+              "grauParentesco": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/GrauParentesco"
+                  }
+                ]
               }
             }
           }
@@ -17409,6 +17601,25 @@
                 "type": "string"
               },
               "url": {
+                "type": "string"
+              },
+              "status": {
+                "type": "boolean"
+              }
+            }
+          }
+        ]
+      },
+      "GrauParentesco": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "nome": {
                 "type": "string"
               },
               "status": {
@@ -19875,6 +20086,50 @@
           },
           "url": {
             "type": "string"
+          }
+        }
+      },
+      "GrauParentescoDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "status": {
+            "type": "boolean"
+          }
+        }
+      },
+      "CreateGrauParentescoCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "status": {
+            "type": "boolean"
+          }
+        }
+      },
+      "UpdateGrauParentescoCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "status": {
+            "type": "boolean"
           }
         }
       },

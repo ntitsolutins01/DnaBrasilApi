@@ -78,5 +78,6 @@ public interface IApplicationDbContext
     DbSet<Educacional> Educacionais { get; }
     DbSet<DocumentoAluno> DocumentosAluno { get; }
     DbSet<ControleFrequenciaEscolar> ControlesFrequenciasEscolares { get; }
+    DbSet<GrauParentesco> GrauParentescos { get; }
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }
