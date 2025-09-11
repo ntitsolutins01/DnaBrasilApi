@@ -49,6 +49,9 @@ public class AlunoDto
     public string? EtapaId { get; init; }
     public string? SerieNome { get; init; }
     public List<LaudoOrdemDto>? Laudos { get; init; }
+    public string? NomeResponsavel { get; init; }
+    public int? GrauParentescoId { get; init; }
+    public string? NomeGrauParentesco { get; init; }
     private class Mapping : Profile
     {
         public Mapping()
@@ -87,6 +90,8 @@ public class AlunoDto
                 .ForMember(dest => dest.SerieTurma, opt => opt.MapFrom(src => src.Serie!.Nome + " - " + src.Serie!.Turma))
                 .ForMember(dest => dest.SerieId, opt => opt.MapFrom(src => src.Serie!.Id))
                 .ForMember(dest => dest.SerieNome, opt => opt.MapFrom(src => src.Serie!.Nome))
+                .ForMember(dest => dest.GrauParentescoId, opt => opt.MapFrom(src => src.GrauParentesco!.Id))
+                .ForMember(dest => dest.NomeGrauParentesco, opt => opt.MapFrom(src => src.GrauParentesco!.Nome))
                 .ForMember(dest => dest.EtapaId, opt => opt.MapFrom(src => src.Serie!.EtapaEnsino.Id));
         }
     }

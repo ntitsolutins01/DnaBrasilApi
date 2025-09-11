@@ -4,6 +4,7 @@ using DnaBrasilApi.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DnaBrasilApi.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250911200101_DnaCreateGrauParentesco")]
+    partial class DnaCreateGrauParentesco
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -91,9 +94,6 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                         .HasColumnType("nvarchar(12)");
 
                     b.Property<int>("FomentoId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("GrauParentescoId")
                         .HasColumnType("int");
 
                     b.Property<bool>("Habilitado")
@@ -175,8 +175,6 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.HasIndex("DeficienciaId");
 
                     b.HasIndex("FomentoId");
-
-                    b.HasIndex("GrauParentescoId");
 
                     b.HasIndex("LinhaAcaoId");
 
@@ -3791,10 +3789,6 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DnaBrasilApi.Domain.Entities.GrauParentesco", "GrauParentesco")
-                        .WithMany()
-                        .HasForeignKey("GrauParentescoId");
-
                     b.HasOne("DnaBrasilApi.Domain.Entities.LinhaAcao", "LinhaAcao")
                         .WithMany()
                         .HasForeignKey("LinhaAcaoId");
@@ -3827,8 +3821,6 @@ namespace DnaBrasilApi.Infrastructure.Data.Migrations
                     b.Navigation("Deficiencia");
 
                     b.Navigation("Fomento");
-
-                    b.Navigation("GrauParentesco");
 
                     b.Navigation("LinhaAcao");
 
