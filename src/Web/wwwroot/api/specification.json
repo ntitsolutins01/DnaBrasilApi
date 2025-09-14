@@ -19484,6 +19484,11 @@
           "nomeImagem": {
             "type": "string",
             "nullable": true
+          },
+          "dataCriacao": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
           }
         }
       },
