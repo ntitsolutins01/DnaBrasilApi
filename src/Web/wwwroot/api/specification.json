@@ -7605,6 +7605,38 @@
         }
       }
     },
+    "/api/Laudos/Alternativas/Educacional/{id}": {
+      "get": {
+        "tags": [
+          "Laudos"
+        ],
+        "operationId": "GetAlternativasByEducacionalId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AlternativasDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/LinhasAcoes": {
       "get": {
         "tags": [
@@ -21236,6 +21268,19 @@
           "encaminhamentoTexo": {
             "type": "string",
             "nullable": true
+          }
+        }
+      },
+      "AlternativasDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "educacionalId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "alternativas": {
+            "type": "string"
           }
         }
       },
