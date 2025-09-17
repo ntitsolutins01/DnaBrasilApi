@@ -11,6 +11,7 @@ using DnaBrasilApi.Application.Laudos.Commands.UpdateLaudo;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateLaudoEducacional;
 using DnaBrasilApi.Application.Laudos.Commands.UpdateModalidadeLaudo;
 using DnaBrasilApi.Application.Laudos.Queries;
+using DnaBrasilApi.Application.Laudos.Queries.GetAlternativasByEducacionalId;
 using DnaBrasilApi.Application.Laudos.Queries.GetDesempenhoByAluno;
 using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoByConsumoAlimentarId;
 using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoByQualidadeDeVidaId;
@@ -55,7 +56,8 @@ public class Laudos : EndpointGroupBase
             .MapGet(GetDesempenhoByAluno, "Desempenho/{id}")
             .MapPost(GetLaudosByFilter, "Filter")
             .MapPost(GetLaudosResumidosByFilter, "ResumidosFilter")
-            .MapPost(ProcessarGabarito, "ProcessarGabarito");
+            .MapPost(ProcessarGabarito, "ProcessarGabarito")
+            .MapGet(GetAlternativasByEducacionalId, "Alternativas/Educacional/{id}");
     }
     #endregion
 
@@ -333,10 +335,27 @@ public class Laudos : EndpointGroupBase
         return search;
     }
 
+    /// <summary>
+    /// Endpoint que busca envia imagem para processamento do gabarito
+    /// </summary>
+    /// <param name="sender">sender</param>
+    /// <param name="bytes"> imagem em bytes</param>
+    /// <returns>retorna a resposta da ApiPyhton</returns>
     public async Task<Dictionary<string, object>> ProcessarGabarito(ISender sender, byte[] bytes)
     {
         var result = await sender.Send(new ProcessarGabaritoCommand() { ByteImage = bytes });
         return result;
+    }
+
+    /// <summary>
+    /// Endpoint que busca Alternativas do Educacional
+    /// </summary>
+    /// <param name="sender">sender</param>
+    /// <param name="id">Id do Educacional</param>
+    /// <returns>retorna lista de Alternativas por Educacional</returns>
+    public async Task<AlternativasDto> GetAlternativasByEducacionalId(ISender sender, int id)
+    {
+        return await sender.Send(new GetAlternativasByEducacionalIdQuery { EducacionalId = id });
     }
 
     #endregion

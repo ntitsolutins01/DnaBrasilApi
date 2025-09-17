@@ -15,11 +15,13 @@ public class EducacionalDto
     public string? StatusEducacional { get; init; }
     public string? Imagem { get; init; }
     public string? NomeImagem { get; init; }
+    public DateTimeOffset? DataCriacao { get; init; }
     private class Mapping : Profile
     {
         public Mapping()
         {
-            CreateMap<Educacional, EducacionalDto>();
+            CreateMap<Educacional, EducacionalDto>()
+                .ForMember(dest => dest.DataCriacao, opt => opt.MapFrom(src => src.Created));
         }
     }
 }
