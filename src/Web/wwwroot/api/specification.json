@@ -19520,11 +19520,11 @@
             "type": "integer",
             "format": "int32"
           },
-          "profissional": {
-            "$ref": "#/components/schemas/ProfissionalDto"
+          "profissionalId": {
+            "type": "string"
           },
-          "aluno": {
-            "$ref": "#/components/schemas/AlunoDto"
+          "alunoId": {
+            "type": "string"
           },
           "gabarito": {
             "type": "string"
@@ -19532,13 +19532,9 @@
           "respostas": {
             "type": "string"
           },
-          "encaminhamento": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/EncaminhamentoDto"
-              }
-            ]
+          "encaminhamentoId": {
+            "type": "string",
+            "nullable": true
           },
           "statusEducacional": {
             "type": "string",

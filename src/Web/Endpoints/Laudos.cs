@@ -382,11 +382,11 @@ public class Laudos : EndpointGroupBase
     }
 
     /// <summary>
-    /// Endpoint que busca Desempenho do Aluno
+    /// Endpoint que os Educacionais do Aluno
     /// </summary>
     /// <param name="sender">sender</param>
     /// <param name="id">Id do Aluno</param>
-    /// <returns>retorna lista de Desempenho por Aluno</returns>
+    /// <returns>retorna lista de Educacionais de um Aluno</returns>
     public async Task<List<EducacionalDto>> GetEducacionaisByAluno(ISender sender, int id)
     {
         return await sender.Send(new GetEducacionaisByAlunoQuery { AlunoId = id });
