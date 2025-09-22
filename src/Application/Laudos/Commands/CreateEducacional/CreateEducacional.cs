@@ -31,28 +31,38 @@ public class CreateEducacionalCommandHandler : IRequestHandler<CreateEducacional
         var profissional = await _context.Profissionais.FindAsync([request.ProfissionalId], cancellationToken);
         Guard.Against.NotFound(request.ProfissionalId, profissional);
 
-        var respostaIds = request.Respostas
+        var idsNaOrdem = request.Respostas
             .Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
             .Select(s => int.TryParse(s, out var id) ? id : 0)
-            .Where(id => id > 0)
-            .Distinct()
             .ToList();
 
-        var respostas = await _context.Respostas
-            .Where(r => respostaIds.Contains(r.Id))
-            .ToListAsync(cancellationToken);
+        var idsValidos = idsNaOrdem.Where(id => id > 0).Distinct().ToList();
 
-        static int PointsFor(Resposta r) => r.ValorPesoResposta switch
+        var respostasPorId = await _context.Respostas
+            .Where(r => idsValidos.Contains(r.Id))
+            .ToDictionaryAsync(r => r.Id, cancellationToken);
+
+        var respostas = idsNaOrdem
+            .Select(id => id == 0
+                ? null
+                : (respostasPorId.TryGetValue(id, out var r) ? r : null))
+            .ToList();
+
+        var respostasIdsNormalizados = idsNaOrdem
+            .Select(id => id == 0 ? 0 : (respostasPorId.ContainsKey(id) ? id : 0))
+            .ToList();
+
+        static int PointsFor(Resposta? r) => r?.ValorPesoResposta switch
         {
             1 => 10,   // Nível 1
             2 => 30,   // Nível 2
             3 => 50,   // Nível 3
-            _ => 0     // Errada
+            _ => 0     // Errada ou null
         };
 
-        var n1 = respostas.Count(r => r.ValorPesoResposta == 1);
-        var n2 = respostas.Count(r => r.ValorPesoResposta == 2);
-        var n3 = respostas.Count(r => r.ValorPesoResposta == 3);
+        var n1 = respostas.Count(r => r?.ValorPesoResposta == 1);
+        var n2 = respostas.Count(r => r?.ValorPesoResposta == 2);
+        var n3 = respostas.Count(r => r?.ValorPesoResposta == 3);
 
         var totalScore = respostas.Sum(PointsFor);
 
@@ -86,7 +96,7 @@ public class CreateEducacionalCommandHandler : IRequestHandler<CreateEducacional
         {
             Profissional = profissional,
             Aluno = aluno,
-            Respostas = string.Join(",", respostas.Select(r => r.Id)),
+            Respostas = string.Join(",", respostasIdsNormalizados),
             StatusEducacional = request.StatusEducacional,
             Gabarito = request.Gabarito.Contains("Educacional")
                 ? request.Gabarito.Split("Educacional", StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).LastOrDefault() ?? request.Gabarito

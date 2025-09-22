@@ -7637,6 +7637,41 @@
         }
       }
     },
+    "/api/Laudos/Educacional/Aluno/{id}": {
+      "get": {
+        "tags": [
+          "Laudos"
+        ],
+        "operationId": "GetEducacionaisByAluno",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EducacionalDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/LinhasAcoes": {
       "get": {
         "tags": [
@@ -19485,11 +19520,11 @@
             "type": "integer",
             "format": "int32"
           },
-          "profissional": {
-            "$ref": "#/components/schemas/ProfissionalDto"
+          "profissionalId": {
+            "type": "string"
           },
-          "aluno": {
-            "$ref": "#/components/schemas/AlunoDto"
+          "alunoId": {
+            "type": "string"
           },
           "gabarito": {
             "type": "string"
@@ -19497,13 +19532,9 @@
           "respostas": {
             "type": "string"
           },
-          "encaminhamento": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/EncaminhamentoDto"
-              }
-            ]
+          "encaminhamentoId": {
+            "type": "string",
+            "nullable": true
           },
           "statusEducacional": {
             "type": "string",

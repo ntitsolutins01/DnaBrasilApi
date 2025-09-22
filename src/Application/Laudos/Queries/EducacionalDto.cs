@@ -7,11 +7,11 @@ namespace DnaBrasilApi.Application.Laudos.Queries;
 public class EducacionalDto
 {
     public int Id { get; init; }
-    public required ProfissionalDto Profissional { get; init; }
-    public required AlunoDto Aluno { get; init; }
+    public required string ProfissionalId { get; init; }
+    public required string AlunoId { get; init; }
     public required string Gabarito { get; init; }
     public required string Respostas { get; init; }
-    public EncaminhamentoDto? Encaminhamento { get; init; }
+    public string? EncaminhamentoId { get; init; }
     public string? StatusEducacional { get; init; }
     public string? Imagem { get; init; }
     public string? NomeImagem { get; init; }
