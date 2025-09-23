@@ -13,6 +13,7 @@ using DnaBrasilApi.Application.Laudos.Commands.UpdateModalidadeLaudo;
 using DnaBrasilApi.Application.Laudos.Queries;
 using DnaBrasilApi.Application.Laudos.Queries.GetAlternativasByEducacionalId;
 using DnaBrasilApi.Application.Laudos.Queries.GetDesempenhoByAluno;
+using DnaBrasilApi.Application.Laudos.Queries.GetEducacionaisByAluno;
 using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoByConsumoAlimentarId;
 using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoByQualidadeDeVidaId;
 using DnaBrasilApi.Application.Laudos.Queries.GetEncaminhamentoBySaudeBucalId;
@@ -31,6 +32,7 @@ namespace DnaBrasilApi.Web.Endpoints;
 public class Laudos : EndpointGroupBase
 {
     #region MapEndpoints
+
     public override void Map(WebApplication app)
     {
         app.MapGroup(this)
@@ -57,8 +59,10 @@ public class Laudos : EndpointGroupBase
             .MapPost(GetLaudosByFilter, "Filter")
             .MapPost(GetLaudosResumidosByFilter, "ResumidosFilter")
             .MapPost(ProcessarGabarito, "ProcessarGabarito")
-            .MapGet(GetAlternativasByEducacionalId, "Alternativas/Educacional/{id}");
+            .MapGet(GetAlternativasByEducacionalId, "Alternativas/Educacional/{id}")
+            .MapGet(GetEducacionaisByAluno, "Educacional/Aluno/{id}");
     }
+
     #endregion
 
     #region Main Methods
@@ -73,6 +77,7 @@ public class Laudos : EndpointGroupBase
     {
         return await sender.Send(command);
     }
+
     /// <summary>
     /// Endpoint para alteração de Laudos
     /// </summary>
@@ -86,6 +91,7 @@ public class Laudos : EndpointGroupBase
         var result = await sender.Send(command);
         return result;
     }
+
     /// <summary>
     /// Endpoint para alteração de do Educacional de um Laudo
     /// </summary>
@@ -99,6 +105,7 @@ public class Laudos : EndpointGroupBase
         var result = await sender.Send(command);
         return result;
     }
+
     /// <summary>
     /// Endpoint para alteração de Encaminhamento Talanto Esportivo
     /// </summary>
@@ -117,6 +124,7 @@ public class Laudos : EndpointGroupBase
         var result = await sender.Send(new UpdateModalidadeLaudoCommand(alunoId));
         return result;
     }
+
     /// <summary>
     /// Endpoint para alteração de Encaminhamento Talento Esportivo V1
     /// </summary>
@@ -124,7 +132,8 @@ public class Laudos : EndpointGroupBase
     /// <param name="id">Id de alteração de Encaminhamento Talento Esportivo V1</param>
     /// <param name="command">Objeto de alteração de Encaminhamento Talento Esportivo V1</param>
     /// <returns>Retorna true ou false</returns>
-    public async Task<bool> UpdateEncaminhamentoTalentoEsportivoV1(ISender sender, int alunoId, UpdateEncaminhamentoTalentoEsportivoV1Command command)
+    public async Task<bool> UpdateEncaminhamentoTalentoEsportivoV1(ISender sender, int alunoId,
+        UpdateEncaminhamentoTalentoEsportivoV1Command command)
     {
         var result = await sender.Send(command);
         return result;
@@ -137,7 +146,8 @@ public class Laudos : EndpointGroupBase
     /// <param name="id">Id de alteração de Encaminhamento Vocacional</param>
     /// <param name="command">Objeto de alteração de Encaminhamento Vocacional</param>
     /// <returns>Retorna true ou false</returns>
-    public async Task<bool> UpdateEncaminhamentoVocacional(ISender sender, int alunoId, UpdateEncaminhamentoVocacionalCommand command)
+    public async Task<bool> UpdateEncaminhamentoVocacional(ISender sender, int alunoId,
+        UpdateEncaminhamentoVocacionalCommand command)
     {
         if (alunoId != command.AlunoId) return false;
         var result = await sender.Send(command);
@@ -151,7 +161,8 @@ public class Laudos : EndpointGroupBase
     /// <param name="id">Id de alteração de Emcaminhamneto Qualidade de Vida</param>
     /// <param name="command">Objeto de alteração da Aula</param>
     /// <returns>Retorna true ou false</returns>
-    public async Task<bool> UpdateEncaminhamentoQualidadeDeVida(ISender sender, int alunoId, UpdateEncaminhamentoQualidadeDeVidaCommand command)
+    public async Task<bool> UpdateEncaminhamentoQualidadeDeVida(ISender sender, int alunoId,
+        UpdateEncaminhamentoQualidadeDeVidaCommand command)
     {
         if (alunoId != command.AlunoId) return false;
         var result = await sender.Send(command);
@@ -165,7 +176,8 @@ public class Laudos : EndpointGroupBase
     /// <param name="id">Id de alteração de Encaminhamento de Consumo de Alimentos</param>
     /// <param name="command">Objeto de alteração da Encaminhamento de Consumo de Alimentos</param>
     /// <returns>Retorna true ou false</returns>
-    public async Task<bool> UpdateEncaminhamentoConsumoAlimentar(ISender sender, int alunoId, UpdateEncaminhamentoConsumoAlimentarCommand command)
+    public async Task<bool> UpdateEncaminhamentoConsumoAlimentar(ISender sender, int alunoId,
+        UpdateEncaminhamentoConsumoAlimentarCommand command)
     {
         if (alunoId != command.AlunoId) return false;
         var result = await sender.Send(command);
@@ -179,12 +191,14 @@ public class Laudos : EndpointGroupBase
     /// <param name="id">Id de alteração de Encaminhamento de Saúde Bucal</param>
     /// <param name="command">Objeto de alteração de Encaminhamento de Saúde Bucal</param>
     /// <returns>Retorna true ou false</returns>
-    public async Task<bool> UpdateEncaminhamentoSaudeBucal(ISender sender, int alunoId, UpdateEncaminhamentoSaudeBucalCommand command)
+    public async Task<bool> UpdateEncaminhamentoSaudeBucal(ISender sender, int alunoId,
+        UpdateEncaminhamentoSaudeBucalCommand command)
     {
         if (alunoId != command.AlunoId) return false;
         var result = await sender.Send(command);
         return result;
     }
+
     #endregion
 
     #region Get Methods
@@ -198,6 +212,7 @@ public class Laudos : EndpointGroupBase
     {
         return await sender.Send(query);
     }
+
     /// <summary>
     /// Endpoint que busca todos os Laudos por Aluno
     /// </summary>
@@ -209,6 +224,7 @@ public class Laudos : EndpointGroupBase
         var laudo = await sender.Send(new GetLaudoByAlunoQuery(id));
         return laudo;
     }
+
     /// <summary>
     /// Endpoint que busca Laudos por Id
     /// </summary>
@@ -231,6 +247,7 @@ public class Laudos : EndpointGroupBase
     {
         return await sender.Send(new GetEncaminhamentoBySaudeIdQuery(id));
     }
+
     /// <summary>
     /// Endpoint que busca Encaminhamento Qualidade de Vida por id
     /// </summary>
@@ -241,6 +258,7 @@ public class Laudos : EndpointGroupBase
     {
         return await sender.Send(new GetEncaminhamentoByQualidadeDeVidaIdQuery(id));
     }
+
     /// <summary>
     /// Endpoint que busca Encaminhamento por Vocacional
     /// </summary>
@@ -261,6 +279,7 @@ public class Laudos : EndpointGroupBase
     {
         return await sender.Send(new GetEncaminhamentoByConsumoAlimentarIdQuery(id));
     }
+
     /// <summary>
     /// Endpoint que busca Encaminhamento Saúde Bucal por id
     /// </summary>
@@ -271,6 +290,7 @@ public class Laudos : EndpointGroupBase
     {
         return await sender.Send(new GetEncaminhamentoBySaudeBucalIdQuery(id));
     }
+
     /// <summary>
     /// Endpoint que busca Desempenho do Aluno
     /// </summary>
@@ -282,6 +302,7 @@ public class Laudos : EndpointGroupBase
         return await sender.Send(new GetDesempenhoByAlunoQuery(id));
 
     }
+
     /// <summary>
     /// Endpoint que busca Laudos por Filtro
     /// </summary>
@@ -301,13 +322,15 @@ public class Laudos : EndpointGroupBase
 
         return search;
     }
+
     /// <summary>
     /// Endpoint que busca Laudos Resumidos por Filtro
     /// </summary>
     /// <param name="sender">sender</param>
     /// <param name="search">filtro para pesquisa de Laudos Resumidos</param>
     /// <returns>retorna a lista de laudos resumidos por Filtro</returns>
-    public async Task<LaudosResumidosFilterDto> GetLaudosResumidosByFilter(ISender sender, [FromBody] LaudosResumidosFilterDto search)
+    public async Task<LaudosResumidosFilterDto> GetLaudosResumidosByFilter(ISender sender,
+        [FromBody] LaudosResumidosFilterDto search)
     {
         //var usuario = await sender.Send(new GetUsuarioByEmailQuery() { Email = search.UsuarioEmail! });
 
@@ -356,6 +379,17 @@ public class Laudos : EndpointGroupBase
     public async Task<AlternativasDto> GetAlternativasByEducacionalId(ISender sender, int id)
     {
         return await sender.Send(new GetAlternativasByEducacionalIdQuery { EducacionalId = id });
+    }
+
+    /// <summary>
+    /// Endpoint que os Educacionais do Aluno
+    /// </summary>
+    /// <param name="sender">sender</param>
+    /// <param name="id">Id do Aluno</param>
+    /// <returns>retorna lista de Educacionais de um Aluno</returns>
+    public async Task<List<EducacionalDto>> GetEducacionaisByAluno(ISender sender, int id)
+    {
+        return await sender.Send(new GetEducacionaisByAlunoQuery { AlunoId = id });
     }
 
     #endregion
