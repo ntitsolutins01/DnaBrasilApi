@@ -39,9 +39,14 @@ public class UpdateLaudoCommandHandler : IRequestHandler<UpdateLaudoCommand, boo
 
         Guard.Against.NotFound((int)request.AlunoId, aluno);
 
-        var modalidade = await _context.Modalidades.FindAsync([request.ModalidadeId], cancellationToken);
+        Modalidade? modalidade = null;
 
-        Guard.Against.NotFound((int)request.ModalidadeId!, modalidade);
+        if (request.ModalidadeId != null)
+        {
+            modalidade = await _context.Modalidades.FindAsync([request.ModalidadeId], cancellationToken);
+
+            Guard.Against.NotFound((int)request.ModalidadeId!, modalidade);
+        }
 
         Saude? saude;
         Vocacional? vocacional = null;
@@ -149,7 +154,6 @@ public class UpdateLaudoCommandHandler : IRequestHandler<UpdateLaudoCommand, boo
         entity.TalentoEsportivo = talentoEsportivo;
         entity.StatusLaudo = request.StatusLaudo;
         entity.Modalidade = modalidade;
-        entity.Ordem = request.Ordem;
 
         var result = await _context.SaveChangesAsync(cancellationToken);
 
