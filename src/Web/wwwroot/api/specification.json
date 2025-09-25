@@ -110,6 +110,38 @@
         }
       }
     },
+    "/api/Alunos/AlunoTurma/{id}": {
+      "get": {
+        "tags": [
+          "Alunos"
+        ],
+        "operationId": "GetAlunoTurmaById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AlunoTurmaDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Alunos/Email/{email}": {
       "get": {
         "tags": [
@@ -14000,6 +14032,42 @@
             "nullable": true
           },
           "sexo": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "AlunoTurmaDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "boolean"
+          },
+          "habilitado": {
+            "type": "boolean"
+          },
+          "serieTurma": {
+            "type": "string",
+            "nullable": true
+          },
+          "serieId": {
+            "type": "string",
+            "nullable": true
+          },
+          "etapaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "serieNome": {
             "type": "string",
             "nullable": true
           }
