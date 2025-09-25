@@ -16242,6 +16242,10 @@
               "nome": {
                 "type": "string"
               },
+              "apelido": {
+                "type": "string",
+                "nullable": true
+              },
               "email": {
                 "type": "string"
               },

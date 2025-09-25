@@ -3,6 +3,7 @@ public class Aluno : BaseAuditableEntity
 {
     public string? AspNetUserId { get; set; }
     public required string Nome { get; set; }
+    public string? Apelido { get; set; }
     public required string Email { get; set; }
     public required string Sexo { get; set; }
     public required DateTime DtNascimento { get; set; }

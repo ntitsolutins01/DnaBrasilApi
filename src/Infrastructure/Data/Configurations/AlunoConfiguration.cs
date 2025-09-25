@@ -10,6 +10,8 @@ internal class AlunoConfiguration : IEntityTypeConfiguration<Aluno>
         builder.Property(t => t.Nome)
             .HasMaxLength(150)
             .IsRequired();
+        builder.Property(t => t.Apelido)
+            .HasMaxLength(50);
         builder.Property(t => t.Email)
             .HasMaxLength(100)
             .IsRequired();
