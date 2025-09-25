@@ -17,6 +17,7 @@ using DnaBrasilApi.Application.Alunos.Queries;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunoAulasByAlunoId;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunoByEmail;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunoById;
+using DnaBrasilApi.Application.Alunos.Queries.GetAlunoTurmaById;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunoCursosByAlunoId;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunosAll;
 using DnaBrasilApi.Application.Alunos.Queries.GetAlunosByFilter;
@@ -44,6 +45,7 @@ public class Alunos : EndpointGroupBase
         app.MapGroup(this)
             //.RequireAuthorization()
             .MapGet(GetAlunoById, "{id}")
+            .MapGet(GetAlunoTurmaById, "AlunoTurma/{id}")
             .MapGet(GetAlunoByEmail, "/Email/{email}")
             .MapGet(GetAlunosByLocalidade, "/Localidade/{id}")
             .MapGet(GetNomeAlunosAll, "/NomeAlunos")
@@ -268,6 +270,18 @@ public class Alunos : EndpointGroupBase
     {
         return await sender.Send(new GetAlunoByIdQuery() { Id = id });
     }
+
+    /// <summary>
+    /// Endpoint que busca um único Aluno
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="id">Id de Aluno a ser buscado</param>
+    /// <returns>Retorna o objeto de Aluno</returns>
+    public async Task<AlunoTurmaDto> GetAlunoTurmaById(ISender sender, int id)
+    {
+        return await sender.Send(new GetAlunoTurmaByIdQuery() { Id = id });
+    }
+
     /// <summary>
     /// Endpoint que busca Alunos por Email
     /// </summary>
