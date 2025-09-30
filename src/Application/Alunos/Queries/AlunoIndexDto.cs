@@ -20,9 +20,6 @@ public class AlunoIndexDto
     public string? SerieTurma { get; init; }
     public List<DocumentoAlunoDto>? Documentos { get; set; }
     public bool Habilitado { get; init; }
-    public string? NomeResponsavel { get; init; }
-    public int? GrauParentescoId { get; init; }
-    public string? NomeGrauParentesco { get; init; }
     private class Mapping : Profile
     {
         public Mapping()
@@ -46,9 +43,7 @@ public class AlunoIndexDto
                 .ForMember(dest => dest.SerieTurma,
                     opt => opt.MapFrom(src =>
                         src.Serie!.Nome.ToString() + "  " + src.Serie!.Turma))
-                .ForMember(dest => dest.NomeLocalidade, opt => opt.MapFrom(src => src.Localidade!.Nome))
-                .ForMember(dest => dest.GrauParentescoId, opt => opt.MapFrom(src => src.GrauParentesco!.Id))
-                .ForMember(dest => dest.NomeGrauParentesco, opt => opt.MapFrom(src => src.GrauParentesco!.Nome));
+                .ForMember(dest => dest.NomeLocalidade, opt => opt.MapFrom(src => src.Localidade!.Nome));
         }
     }
 }

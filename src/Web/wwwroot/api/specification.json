@@ -10895,6 +10895,164 @@
         }
       }
     },
+    "/api/Responsaveis": {
+      "get": {
+        "tags": [
+          "Responsaveis"
+        ],
+        "operationId": "GetResponsaveisAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResponsavelDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Responsaveis"
+        ],
+        "operationId": "CreateResponsavel",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateResponsavelCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Responsaveis/{id}": {
+      "put": {
+        "tags": [
+          "Responsaveis"
+        ],
+        "operationId": "UpdateResponsavel",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateResponsavelCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Responsaveis"
+        ],
+        "operationId": "DeleteResponsavel",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Responsaveis"
+        ],
+        "operationId": "GetResponsavelById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponsavelDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Respostas": {
       "get": {
         "tags": [
@@ -13963,19 +14121,6 @@
             "items": {
               "$ref": "#/components/schemas/LaudoOrdemDto"
             }
-          },
-          "nomeResponsavel": {
-            "type": "string",
-            "nullable": true
-          },
-          "grauParentescoId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "nomeGrauParentesco": {
-            "type": "string",
-            "nullable": true
           }
         }
       },
@@ -14139,19 +14284,6 @@
           },
           "habilitado": {
             "type": "boolean"
-          },
-          "nomeResponsavel": {
-            "type": "string",
-            "nullable": true
-          },
-          "grauParentescoId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "nomeGrauParentesco": {
-            "type": "string",
-            "nullable": true
           }
         }
       },
@@ -16422,10 +16554,6 @@
                   }
                 ]
               },
-              "nomeResponsavel": {
-                "type": "string",
-                "nullable": true
-              },
               "linhaAcao": {
                 "nullable": true,
                 "oneOf": [
@@ -16513,14 +16641,6 @@
                 "items": {
                   "$ref": "#/components/schemas/DocumentoAluno"
                 }
-              },
-              "grauParentesco": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/GrauParentesco"
-                  }
-                ]
               }
             }
           }
@@ -17740,25 +17860,6 @@
                 "type": "string"
               },
               "url": {
-                "type": "string"
-              },
-              "status": {
-                "type": "boolean"
-              }
-            }
-          }
-        ]
-      },
-      "GrauParentesco": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/BaseAuditableEntity"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "nome": {
                 "type": "string"
               },
               "status": {
@@ -23373,6 +23474,97 @@
           "questao": {
             "type": "integer",
             "format": "int32"
+          }
+        }
+      },
+      "ResponsavelDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "cpf": {
+            "type": "string"
+          },
+          "telefone": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "boolean"
+          },
+          "grauParentescoId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "nomeGrauParentesco": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "CreateResponsavelCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "cpf": {
+            "type": "string"
+          },
+          "telefone": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "grauParentescoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "status": {
+            "type": "boolean"
+          }
+        }
+      },
+      "UpdateResponsavelCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "cpf": {
+            "type": "string"
+          },
+          "telefone": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "grauParentescoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "status": {
+            "type": "boolean"
           }
         }
       },

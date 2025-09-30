@@ -29,7 +29,6 @@ public class Aluno : BaseAuditableEntity
     public Deficiencia? Deficiencia { get; set; }
     public Parceiro? Parceiro { get; set; }
     public Profissional? Profissional { get; set; }
-    public string? NomeResponsavel { get; set; }
     public LinhaAcao? LinhaAcao { get; set; }
     public List<Laudo>? Laudos { get; set; }
     public bool? AutorizacaoSaida { get; set; } = false;
@@ -40,11 +39,9 @@ public class Aluno : BaseAuditableEntity
     public bool Convidado { get; set; } = false;
     public IList<AlunoModalidade>? AlunoModalidades { get; set; }
     public IList<AtividadeAluno>? AtividadeAlunos { get; set; }
-    //public IList<AlunoCurso>? AlunoCursos { get; set; }
     public IList<AlunoPresenca>? AlunoPresencas { get; set; }
     public Serie? Serie { get; set; }
     public IList<AlunoAula>? AlunoAulas { get; set; }
     public IList<AlunoCursoCertificado>? AlunoCursosCertificados { get; set; }
     public List<DocumentoAluno>? Documentos { get; set; }
-    public GrauParentesco? GrauParentesco { get; set; }
 }

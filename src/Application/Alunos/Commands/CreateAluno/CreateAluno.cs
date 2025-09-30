@@ -138,7 +138,6 @@ public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int
             Localidade = localidade,
             Deficiencia = deficiencia,
             LinhaAcao = linhaAcao,
-            NomeResponsavel = request.NomeResponsavel,
             Profissional = profissional,
             Fomento = fomento,
             AutorizacaoSaida = request.AutorizacaoSaida,
