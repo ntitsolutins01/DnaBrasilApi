@@ -1035,20 +1035,26 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
         if (alunoEducacional != null &&
             (alunoEducacional.EducacionalMatematica != null || alunoEducacional.EducacionalPortugues != null))
         {
-            var educacionalMT = alunoEducacional.EducacionalMatematica;
-            var educacionalLP = alunoEducacional.EducacionalPortugues;
+            var educacionalMT = _context.Educacionais
+                .Where(x => x.Id == alunoEducacional.EducacionalMatematica!.Id)
+                .Include(x => x.Encaminhamento)
+                .FirstOrDefault();
+            var educacionalLP = _context.Educacionais
+                .Where(x => x.Id == alunoEducacional.EducacionalPortugues!.Id)
+                .Include(x => x.Encaminhamento)
+                .FirstOrDefault(); ;
 
             if (educacionalMT != null)
             {
                 var encMT = educacionalMT.Encaminhamento
                             ?? (educacionalMT.Encaminhamento != null
                                 ? _context.Encaminhamentos.AsNoTracking()
-                                    .FirstOrDefault(e => e.Id == educacionalMT.Encaminhamento.Id)
+                                    .FirstOrDefault(e => e.Id == educacionalMT.Encaminhamento!.Id)
                                 : null);
 
                 if (encMT != null)
                 {
-                    scoreMatematica = encMT.Id switch { 96 => 0, 97 => 50, 98 => 100, _ => 0 };
+                    scoreMatematica = encMT.Id switch { 96 => 20, 97 => 35, 98 => 50, _ => 20 };
                     textoMatematica = encMT.Descricao!;
                     dataMatematica = encMT.Created;
                 }
@@ -1059,12 +1065,12 @@ public class GetDesempenhoByAlunoQueryHandler : IRequestHandler<GetDesempenhoByA
                 var encLP = educacionalLP.Encaminhamento
                             ?? (educacionalLP.Encaminhamento != null
                                 ? _context.Encaminhamentos.AsNoTracking()
-                                    .FirstOrDefault(e => e.Id == educacionalLP.Encaminhamento.Id)
+                                    .FirstOrDefault(e => e.Id == educacionalLP.Encaminhamento!.Id)
                                 : null);
 
                 if (encLP != null)
                 {
-                    scorePortugues = encLP.Id switch { 96 => 0, 97 => 50, 98 => 100, _ => 0 };
+                    scorePortugues = encLP.Id switch { 96 => 20, 97 => 35, 98 => 50, _ => 20 };
                     textoPortugues = encLP.Descricao!;
                     dataPortugues = encLP.Created;
                 }
