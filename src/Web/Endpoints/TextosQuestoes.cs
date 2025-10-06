@@ -1,9 +1,12 @@
-﻿using DnaBrasilApi.Application.TextosImagensQuestoes.Commands.CreateTextoImagemQuestao;
+﻿using DnaBrasilApi.Application.QuestoesEad.Queries.GetQuestoesEadByAulaId;
+using DnaBrasilApi.Application.QuestoesEad.Queries;
+using DnaBrasilApi.Application.TextosImagensQuestoes.Commands.CreateTextoImagemQuestao;
 using DnaBrasilApi.Application.TextosImagensQuestoes.Commands.DeleteTextoImagemQuestao;
 using DnaBrasilApi.Application.TextosImagensQuestoes.Commands.UpdateTextoImagemQuestao;
 using DnaBrasilApi.Application.TextosImagensQuestoes.Queries;
 using DnaBrasilApi.Application.TextosImagensQuestoes.Queries.GetTextoImagemQuestaoById;
 using DnaBrasilApi.Application.TextosImagensQuestoes.Queries.GetTextosImagensQuestoesAll;
+using DnaBrasilApi.Application.TextosImagensQuestoes.Queries.GetTextosImagensQuestoesByModuloEadId;
 
 namespace DnaBrasilApi.Web.Endpoints;
 /// <summary>
@@ -25,7 +28,8 @@ public class TextosQuestoes : EndpointGroupBase
             .MapPost(CreateTextoQuestao)
             .MapPut(UpdateTextoQuestao, "{id}")
             .MapDelete(DeleteTextoQuestao, "{id}")
-            .MapGet(GetTextoImagemQuestaoById, "{id}");
+            .MapGet(GetTextoImagemQuestaoById, "{id}")
+            .MapGet(GetTextosImagensQuestoesByQuestaoEadId, "/QuestaoEad/{questaoEadId}");
     }
     #endregion
 
@@ -89,6 +93,17 @@ public class TextosQuestoes : EndpointGroupBase
     public async Task<TextoImagemQuestaoDto> GetTextoImagemQuestaoById(ISender sender, int id)
     {
         return await sender.Send(new GetTextoImagemQuestaoByIdQuery() { Id = id });
+    }
+
+    /// <summary>
+    /// Endpoint que busca uma lista de Textos/Imagens
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="questaoEadId">Id de questao a ser buscada</param>
+    /// <returns>Retorna o objeto de Textos/Imagens</returns>
+    public async Task<List<TextoImagemQuestaoDto>> GetTextosImagensQuestoesByQuestaoEadId(ISender sender, int questaoEadId)
+    {
+        return await sender.Send(new GetTextosImagensQuestoesByQuestaoEadIdQuery() { QuestaoEadId = questaoEadId });
     }
     #endregion
 }
