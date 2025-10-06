@@ -20266,19 +20266,18 @@
           "status": {
             "type": "boolean"
           },
-          "totalConvidado": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "totalAluno": {
-            "type": "integer",
-            "format": "int32"
-          },
           "fotos": {
             "type": "array",
             "nullable": true,
             "items": {
               "$ref": "#/components/schemas/FotoEventoDto"
+            }
+          },
+          "controlesPresencas": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ControlePresencaDto"
             }
           }
         }

@@ -25,7 +25,6 @@ public class GetEventosByFilterQueryHandler : IRequestHandler<GetEventosByFilter
     public async Task<PaginatedList<EventoDto>> Handle(GetEventosByFilterQuery request, CancellationToken cancellationToken)
     {
         var Eventos = _context.Eventos
-            .Include(i => i.ControlesPresencas)
             .AsNoTracking();
 
         var result = FilterEventos(Eventos, request.SearchFilter!, cancellationToken)
@@ -38,15 +37,6 @@ public class GetEventosByFilterQueryHandler : IRequestHandler<GetEventosByFilter
 
     private IQueryable<Evento> FilterEventos(IQueryable<Evento> Eventos, EventosFilterDto search, CancellationToken cancellationToken)
     {
-        if (!string.IsNullOrWhiteSpace(search.FomentoId))
-        {
-            var fomento = Convert.ToInt32(search.FomentoId);
-
-            var fomentos = Eventos.Select(s => s.Localidade.FomentoLocalidades).FirstOrDefault()!.ToList().Select(s=>s.FomentoId).ToList();
-
-            //Eventos = Eventos.Where(x=>fomentos.Contains(x.Localidade.FomentoLocalidades!.Select(s=>s.FomentoId)));
-        }
-
         if (!string.IsNullOrWhiteSpace(search.Estado))
         {
             Eventos = Eventos.Where(u => u.Localidade.Municipio!.Estado!.Sigla!.Contains(search.Estado));
