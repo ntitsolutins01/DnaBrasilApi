@@ -14279,6 +14279,9 @@
             "items": {
               "$ref": "#/components/schemas/LaudoOrdemDto"
             }
+          },
+          "responsavel": {
+            "$ref": "#/components/schemas/ResponsavelDto"
           }
         }
       },
@@ -14335,6 +14338,41 @@
             "nullable": true
           },
           "sexo": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "ResponsavelDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "cpf": {
+            "type": "string"
+          },
+          "telefone": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "boolean"
+          },
+          "grauParentescoId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "nomeGrauParentesco": {
             "type": "string",
             "nullable": true
           }
@@ -14573,10 +14611,6 @@
             "format": "int32",
             "nullable": true
           },
-          "nomeResponsavel": {
-            "type": "string",
-            "nullable": true
-          },
           "nomeFoto": {
             "type": "string",
             "nullable": true
@@ -14623,6 +14657,19 @@
             "type": "integer",
             "format": "int32",
             "nullable": true
+          },
+          "nomeResponsavel": {
+            "type": "string"
+          },
+          "grauParentescoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cpfResponsavel": {
+            "type": "string"
+          },
+          "telefoneResponsavel": {
+            "type": "string"
           }
         }
       },
@@ -14792,6 +14839,19 @@
             "type": "integer",
             "format": "int32",
             "nullable": true
+          },
+          "nomeResponsavel": {
+            "type": "string"
+          },
+          "grauParentescoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cpfResponsavel": {
+            "type": "string"
+          },
+          "telefoneResponsavel": {
+            "type": "string"
           }
         }
       },
@@ -16799,6 +16859,9 @@
                 "items": {
                   "$ref": "#/components/schemas/DocumentoAluno"
                 }
+              },
+              "responsavel": {
+                "$ref": "#/components/schemas/Responsavel"
               }
             }
           }
@@ -18018,6 +18081,64 @@
                 "type": "string"
               },
               "url": {
+                "type": "string"
+              },
+              "status": {
+                "type": "boolean"
+              }
+            }
+          }
+        ]
+      },
+      "Responsavel": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "nome": {
+                "type": "string"
+              },
+              "cpf": {
+                "type": "string"
+              },
+              "telefone": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string",
+                "nullable": true
+              },
+              "grauParentesco": {
+                "$ref": "#/components/schemas/GrauParentesco"
+              },
+              "status": {
+                "type": "boolean"
+              },
+              "alunos": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "$ref": "#/components/schemas/Aluno"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "GrauParentesco": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "nome": {
                 "type": "string"
               },
               "status": {
@@ -23735,41 +23856,6 @@
           "questao": {
             "type": "integer",
             "format": "int32"
-          }
-        }
-      },
-      "ResponsavelDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nome": {
-            "type": "string"
-          },
-          "cpf": {
-            "type": "string"
-          },
-          "telefone": {
-            "type": "string"
-          },
-          "email": {
-            "type": "string",
-            "nullable": true
-          },
-          "status": {
-            "type": "boolean"
-          },
-          "grauParentescoId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "nomeGrauParentesco": {
-            "type": "string",
-            "nullable": true
           }
         }
       },

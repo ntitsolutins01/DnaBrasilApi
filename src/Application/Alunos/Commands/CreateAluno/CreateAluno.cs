@@ -29,7 +29,6 @@ public record CreateAlunoCommand : IRequest<int>
     public int? DeficienciaId { get; init; }
     public required string Etnia { get; init; }
     public int? LinhaAcaoId { get; init; }
-    public string? NomeResponsavel { get; init; }
     public string? NomeFoto { get; init; }
     public byte[]? ByteImage { get; init; }
     public byte[]? QrCode { get; init; }
@@ -41,6 +40,10 @@ public record CreateAlunoCommand : IRequest<int>
     public bool? Convidado { get; init; } = false;
     public string? ModalidadesIds { get; init; }
     public int? SerieId { get; init; }
+    public required string NomeResponsavel { get; init; }
+    public required int GrauParentescoId { get; init; }
+    public required string CpfResponsavel { get; init; }
+    public required string TelefoneResponsavel { get; init; }
 }
 
 public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int>
@@ -54,25 +57,17 @@ public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int
 
     public async Task<int> Handle(CreateAlunoCommand request, CancellationToken cancellationToken)
     {
-        //var emailExiste = _context.Alunos.Any(x => x != null && x.Email == request.Email );
-
-        //Guard.Against.AlunoExiste(emailExiste);
-
-        //var cpfExiste = _context.Alunos.Any(x => x != null && x.Cpf != null && x.Cpf == request.Cpf);
-
-        //Guard.Against.AlunoExiste(cpfExiste);
-
-        var municipio = await _context.Municipios.FindAsync(new object[] { request.MunicipioId }, cancellationToken);
+        var municipio = await _context.Municipios.FindAsync([request.MunicipioId], cancellationToken);
 
         Guard.Against.NotFound((int)request.MunicipioId, municipio);
 
 
-        var localidade = await _context.Localidades.FindAsync(new object[] { request.LocalidadeId }, cancellationToken);
+        var localidade = await _context.Localidades.FindAsync([request.LocalidadeId], cancellationToken);
 
         Guard.Against.NotFound((int)request.LocalidadeId, localidade);
 
 
-        var fomento = await _context.Fomentos.FindAsync(new object[] { request.FomentoId }, cancellationToken);
+        var fomento = await _context.Fomentos.FindAsync([request.FomentoId], cancellationToken);
 
         Guard.Against.NotFound((int)request.FomentoId, fomento);
 
@@ -80,7 +75,7 @@ public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int
 
         if (request.DeficienciaId != null)
         {
-            deficiencia = await _context.Deficiencias.FindAsync(new object[] { request.DeficienciaId }, cancellationToken);
+            deficiencia = await _context.Deficiencias.FindAsync([request.DeficienciaId], cancellationToken);
 
             Guard.Against.NotFound((int)request.DeficienciaId, deficiencia);
         }
@@ -89,7 +84,7 @@ public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int
 
         if (request.ProfissionalId != null)
         {
-            profissional = await _context.Profissionais.FindAsync(new object[] { request.ProfissionalId }, cancellationToken);
+            profissional = await _context.Profissionais.FindAsync([request.ProfissionalId], cancellationToken);
 
             Guard.Against.NotFound((int)request.ProfissionalId, profissional);
         }
@@ -98,7 +93,7 @@ public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int
 
         if (request.LinhaAcaoId != null)
         {
-            linhaAcao = await _context.LinhasAcoes.FindAsync(new object[] { request.LinhaAcaoId }, cancellationToken);
+            linhaAcao = await _context.LinhasAcoes.FindAsync([request.LinhaAcaoId], cancellationToken);
 
             Guard.Against.NotFound((int)request.LinhaAcaoId, profissional);
         }
@@ -107,10 +102,23 @@ public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int
 
         if (request.SerieId != null)
         {
-            serie = await _context.Series.FindAsync(new object[] { request.SerieId }, cancellationToken);
+            serie = await _context.Series.FindAsync([request.SerieId], cancellationToken);
 
             Guard.Against.NotFound((int)request.SerieId, serie);
         }
+
+        var grauParentesco = await _context.GrauParentescos.FindAsync([request.GrauParentescoId], cancellationToken);
+
+        Guard.Against.NotFound(request.GrauParentescoId, grauParentesco);
+
+        Responsavel responsavel = new()
+        {
+            Nome = request.NomeResponsavel,
+            Cpf = request.CpfResponsavel,
+            Telefone = request.TelefoneResponsavel,
+            GrauParentesco = grauParentesco,
+        };
+
 
         var entity = new Aluno
         {
@@ -118,7 +126,9 @@ public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int
             Nome = request.Nome,
             Email = request.Email,
             Sexo = request.Sexo,
-            DtNascimento = DateTime.ParseExact(request.DtNascimento, "dd/MM/yyyy", CultureInfo.CreateSpecificCulture("pt-BR")),
+            DtNascimento = DateTime.ParseExact(request.DtNascimento,
+                "dd/MM/yyyy",
+                CultureInfo.CreateSpecificCulture("pt-BR")),
             Etnia = request.Etnia,
             NomeMae = request.NomeMae,
             NomePai = request.NomePai,
@@ -146,7 +156,8 @@ public class CreateAlunoCommandHandler : IRequestHandler<CreateAlunoCommand, int
             UtilizacaoImagem = request.UtilizacaoImagem,
             CopiaDocAlunoResponsavel = request.CopiaDocAlunoResponsavel,
             Convidado = (bool)request.Convidado!,
-            Serie = serie
+            Serie = serie,
+            Responsavel = responsavel
         };
 
         _context.Alunos.Add(entity);

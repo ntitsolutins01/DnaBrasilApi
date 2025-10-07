@@ -23,13 +23,22 @@ public class DeleteAlunoCommandHandler : IRequestHandler<DeleteAlunoCommand, boo
         var possuiLaudos = _context.Laudos.Any(x => x.Aluno.Id == request.Id);
 
         Guard.Against.PossuiLaudos(possuiLaudos);
-
+        
         _context.Alunos.Remove(entity);
+
+        var responsavel = await _context.Responsaveis
+            .Where(x => x.Id == entity.Responsavel.Id)
+            .AsNoTracking()
+            .FirstOrDefaultAsync(cancellationToken);
+
+        if (responsavel != null && responsavel.Alunos != null && responsavel.Alunos.Count == 0)
+        {
+            _context.Responsaveis.Remove(responsavel);
+        }
 
         var result = await _context.SaveChangesAsync(cancellationToken);
         return result == 1;
     }
-
 }
 
 
