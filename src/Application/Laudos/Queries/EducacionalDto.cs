@@ -16,6 +16,7 @@ public class EducacionalDto
     public string? Imagem { get; init; }
     public string? NomeImagem { get; init; }
     public DateTimeOffset? DataCriacao { get; init; }
+    public EncaminhamentoDto? Encaminhamento { get; init; }
     private class Mapping : Profile
     {
         public Mapping()

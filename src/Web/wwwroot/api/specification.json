@@ -19883,6 +19883,14 @@
             "type": "string",
             "format": "date-time",
             "nullable": true
+          },
+          "encaminhamento": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/EncaminhamentoDto"
+              }
+            ]
           }
         }
       },
