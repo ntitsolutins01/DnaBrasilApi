@@ -50,7 +50,7 @@ public class AlunoDto
     public string? EtapaId { get; init; }
     public string? SerieNome { get; init; }
     public List<LaudoOrdemDto>? Laudos { get; init; }
-    public required ResponsavelDto Responsavel { get; set; }
+    public ResponsavelDto? Responsavel { get; set; }
     private class Mapping : Profile
     {
         public Mapping()

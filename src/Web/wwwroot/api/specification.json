@@ -14281,7 +14281,12 @@
             }
           },
           "responsavel": {
-            "$ref": "#/components/schemas/ResponsavelDto"
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/ResponsavelDto"
+              }
+            ]
           }
         }
       },
@@ -16861,7 +16866,12 @@
                 }
               },
               "responsavel": {
-                "$ref": "#/components/schemas/Responsavel"
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Responsavel"
+                  }
+                ]
               }
             }
           }

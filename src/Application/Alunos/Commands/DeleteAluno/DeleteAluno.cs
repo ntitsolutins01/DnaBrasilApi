@@ -27,7 +27,7 @@ public class DeleteAlunoCommandHandler : IRequestHandler<DeleteAlunoCommand, boo
         _context.Alunos.Remove(entity);
 
         var responsavel = await _context.Responsaveis
-            .Where(x => x.Id == entity.Responsavel.Id)
+            .Where(x => entity.Responsavel != null && x.Id == entity.Responsavel.Id)
             .AsNoTracking()
             .FirstOrDefaultAsync(cancellationToken);
 
@@ -40,57 +40,3 @@ public class DeleteAlunoCommandHandler : IRequestHandler<DeleteAlunoCommand, boo
         return result == 1;
     }
 }
-
-
-//delete from Saudes where AlunoId = 51270
-//delete from TalentosEsportivos where AlunoId = 51270
-//delete from ConsumoAlimentares where AlunoId = 51270
-//delete from QualidadeDeVidas where AlunoId = 51270
-//delete from Vocacionais where AlunoId = 51270
-
-//delete from Alunos where Id = 51270
-
-//delete from Laudos Where  AlunoId in (45477)
-//delete from Saudes where AlunoId = 45477
-//delete from TalentosEsportivos where AlunoId = 45477
-//delete from ConsumoAlimentares where AlunoId = 45477
-//delete from QualidadeDeVidas where AlunoId = 45477
-//delete from Vocacionais where AlunoId = 45477
-
-//delete from Alunos where Id = 45477
-
-//delete from Alunos where Id = 51269
-
-//delete from Laudos Where  AlunoId in (45515)
-//delete from Saudes where AlunoId = 45515
-//delete from TalentosEsportivos where AlunoId = 45515
-//delete from ConsumoAlimentares where AlunoId = 45515
-//delete from QualidadeDeVidas where AlunoId = 45515
-//delete from Vocacionais where AlunoId = 45515
-//delete from Alunos where Id = 45515
-//delete from Alunos where Id = 51225
-
-//delete from Laudos Where  AlunoId in (51242)
-//delete from Saudes where AlunoId = 51242
-//delete from TalentosEsportivos where AlunoId = 51242
-//delete from ConsumoAlimentares where AlunoId = 51242
-//delete from QualidadeDeVidas where AlunoId = 51242
-
-//delete from Laudos where VocacionalId = 2152
-//delete from Vocacionais where Id = 2152
-//delete from Alunos where Id = 51242
-
-//delete from Laudos Where  AlunoId in (51272)
-//delete from Saudes where AlunoId = 51272
-//delete from TalentosEsportivos where AlunoId = 51272
-//delete from ConsumoAlimentares where AlunoId = 51272
-//delete from QualidadeDeVidas where AlunoId = 51272
-//delete from Vocacionais where AlunoId = 51272
-
-//delete from Alunos where Id = 51272
-
-//SELECT nome, COUNT(nome) 
-//    FROM Alunos
-//where LocalidadeId = 49
-//GROUP BY nome
-//    HAVING COUNT(nome) > 1
