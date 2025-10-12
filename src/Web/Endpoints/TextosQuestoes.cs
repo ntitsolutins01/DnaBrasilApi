@@ -6,7 +6,7 @@ using DnaBrasilApi.Application.TextosImagensQuestoes.Commands.UpdateTextoImagemQ
 using DnaBrasilApi.Application.TextosImagensQuestoes.Queries;
 using DnaBrasilApi.Application.TextosImagensQuestoes.Queries.GetTextoImagemQuestaoById;
 using DnaBrasilApi.Application.TextosImagensQuestoes.Queries.GetTextosImagensQuestoesAll;
-using DnaBrasilApi.Application.TextosImagensQuestoes.Queries.GetTextosImagensQuestoesByModuloEadId;
+using DnaBrasilApi.Application.TextosImagensQuestoes.Queries.GetTextosImagensQuestoesByQuestaoEadId;
 
 namespace DnaBrasilApi.Web.Endpoints;
 /// <summary>

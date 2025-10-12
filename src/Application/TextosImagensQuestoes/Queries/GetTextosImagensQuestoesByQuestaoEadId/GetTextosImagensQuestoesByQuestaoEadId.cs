@@ -1,7 +1,7 @@
 ﻿using System.Reflection.Metadata.Ecma335;
 using DnaBrasilApi.Application.Common.Interfaces;
 
-namespace DnaBrasilApi.Application.TextosImagensQuestoes.Queries.GetTextosImagensQuestoesByModuloEadId;
+namespace DnaBrasilApi.Application.TextosImagensQuestoes.Queries.GetTextosImagensQuestoesByQuestaoEadId;
 
 public record GetTextosImagensQuestoesByQuestaoEadIdQuery : IRequest<List<TextoImagemQuestaoDto>>
 {

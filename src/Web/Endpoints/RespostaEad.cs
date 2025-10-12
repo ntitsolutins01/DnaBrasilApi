@@ -1,9 +1,12 @@
-﻿using DnaBrasilApi.Application.RespostasEad.Commands.CreateRespostaEad;
+﻿using DnaBrasilApi.Application.Cursos.Queries.GetCursosByAlunoId;
+using DnaBrasilApi.Application.Cursos.Queries;
+using DnaBrasilApi.Application.RespostasEad.Commands.CreateRespostaEad;
 using DnaBrasilApi.Application.RespostasEad.Commands.DeleteRespostaEad;
 using DnaBrasilApi.Application.RespostasEad.Commands.UpdateRespostaEad;
 using DnaBrasilApi.Application.RespostasEad.Queries;
 using DnaBrasilApi.Application.RespostasEad.Queries.GetRespostaEadById;
 using DnaBrasilApi.Application.RespostasEad.Queries.GetRespostasEadAll;
+using DnaBrasilApi.Application.RespostasEad.Queries.GetRespostasEadsByQuestaoEadId;
 
 namespace DnaBrasilApi.Web.Endpoints;
 /// <summary>
@@ -25,7 +28,8 @@ public class RespostasEad : EndpointGroupBase
             .MapPost(CreateRespostaEad)
             .MapPut(UpdateRespostaEad, "{id}")
             .MapDelete(DeleteRespostaEad, "{id}")
-            .MapGet(GetRespostaEadById, "{id}");
+            .MapGet(GetRespostaEadById, "{id}")
+            .MapGet(GetRespostasEadsByQuestaoEadId, "/QuestaoEad/{questaoEadId}");
     }
     #endregion
 
@@ -90,5 +94,17 @@ public class RespostasEad : EndpointGroupBase
     {
         return await sender.Send(new GetRespostaEadByIdQuery() { Id = id });
     }
+
+    /// <summary>
+    /// Endpoint que busca uma lista de respostas
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="questaoEadId">Id da questão</param>
+    /// <returns>Retorna uma lista de Respostas</returns>
+    public async Task<List<RespostaEadDto>> GetRespostasEadsByQuestaoEadId(ISender sender, int questaoEadId)
+    {
+        return await sender.Send(new GetRespostasEadByQuestaoEadIdQuery() { QuestaoEadId = questaoEadId });
+    }
+
     #endregion
 }
