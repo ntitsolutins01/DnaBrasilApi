@@ -25,5 +25,9 @@ public enum EnumPerfil
     [Description("Administrador Ead")]
     AdministradorEad = 17,
     [Description("Administrador Consulta")]
-    AdministradorConsulta = 18
+    AdministradorConsulta = 18,
+    [Description("Coordenador Geral")]
+    CoordenadorGeral = 19,
+    [Description("Equipe Itinerante")]
+    EquipeItinerante = 20
 }

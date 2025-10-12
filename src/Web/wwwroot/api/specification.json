@@ -5640,9 +5640,135 @@
             }
           }
         }
+      },
+      "post": {
+        "tags": [
+          "EtapasEnsino"
+        ],
+        "operationId": "CreateEtapaEnsino",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateEtapaEnsinoCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/EtapasEnsino/Ativas": {
+      "get": {
+        "tags": [
+          "EtapasEnsino"
+        ],
+        "operationId": "GetEtapasEnsinoAtivas",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EtapaEnsinoDto"
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/api/EtapasEnsino/{id}": {
+      "put": {
+        "tags": [
+          "EtapasEnsino"
+        ],
+        "operationId": "UpdateEtapaEnsino",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEtapaEnsinoCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "EtapasEnsino"
+        ],
+        "operationId": "DeleteEtapaEnsino",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
       "get": {
         "tags": [
           "EtapasEnsino"
@@ -5870,6 +5996,38 @@
                   "items": {
                     "$ref": "#/components/schemas/EventoDto"
                   }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Eventos/Filter": {
+      "post": {
+        "tags": [
+          "Eventos"
+        ],
+        "operationId": "GetEventosByFilter",
+        "requestBody": {
+          "x-name": "search",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EventosFilterDto"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventosFilterDto"
                 }
               }
             }
@@ -14226,6 +14384,14 @@
             "items": {
               "$ref": "#/components/schemas/LaudoOrdemDto"
             }
+          },
+          "responsavel": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/ResponsavelDto"
+              }
+            ]
           }
         }
       },
@@ -14282,6 +14448,41 @@
             "nullable": true
           },
           "sexo": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "ResponsavelDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "cpf": {
+            "type": "string"
+          },
+          "telefone": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "boolean"
+          },
+          "grauParentescoId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "nomeGrauParentesco": {
             "type": "string",
             "nullable": true
           }
@@ -14520,10 +14721,6 @@
             "format": "int32",
             "nullable": true
           },
-          "nomeResponsavel": {
-            "type": "string",
-            "nullable": true
-          },
           "nomeFoto": {
             "type": "string",
             "nullable": true
@@ -14570,6 +14767,19 @@
             "type": "integer",
             "format": "int32",
             "nullable": true
+          },
+          "nomeResponsavel": {
+            "type": "string"
+          },
+          "grauParentescoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cpfResponsavel": {
+            "type": "string"
+          },
+          "telefoneResponsavel": {
+            "type": "string"
           }
         }
       },
@@ -14739,6 +14949,19 @@
             "type": "integer",
             "format": "int32",
             "nullable": true
+          },
+          "nomeResponsavel": {
+            "type": "string"
+          },
+          "grauParentescoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cpfResponsavel": {
+            "type": "string"
+          },
+          "telefoneResponsavel": {
+            "type": "string"
           }
         }
       },
@@ -16746,6 +16969,14 @@
                 "items": {
                   "$ref": "#/components/schemas/DocumentoAluno"
                 }
+              },
+              "responsavel": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Responsavel"
+                  }
+                ]
               }
             }
           }
@@ -17965,6 +18196,64 @@
                 "type": "string"
               },
               "url": {
+                "type": "string"
+              },
+              "status": {
+                "type": "boolean"
+              }
+            }
+          }
+        ]
+      },
+      "Responsavel": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "nome": {
+                "type": "string"
+              },
+              "cpf": {
+                "type": "string"
+              },
+              "telefone": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string",
+                "nullable": true
+              },
+              "grauParentesco": {
+                "$ref": "#/components/schemas/GrauParentesco"
+              },
+              "status": {
+                "type": "boolean"
+              },
+              "alunos": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "$ref": "#/components/schemas/Aluno"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "GrauParentesco": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "nome": {
                 "type": "string"
               },
               "status": {
@@ -19830,6 +20119,14 @@
             "type": "string",
             "format": "date-time",
             "nullable": true
+          },
+          "encaminhamento": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/EncaminhamentoDto"
+              }
+            ]
           }
         }
       },
@@ -20146,6 +20443,34 @@
           }
         }
       },
+      "CreateEtapaEnsinoCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "status": {
+            "type": "boolean"
+          }
+        }
+      },
+      "UpdateEtapaEnsinoCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "status": {
+            "type": "boolean"
+          }
+        }
+      },
       "EventoDto": {
         "type": "object",
         "additionalProperties": false,
@@ -20185,19 +20510,18 @@
           "status": {
             "type": "boolean"
           },
-          "totalConvidado": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "totalAluno": {
-            "type": "integer",
-            "format": "int32"
-          },
           "fotos": {
             "type": "array",
             "nullable": true,
             "items": {
               "$ref": "#/components/schemas/FotoEventoDto"
+            }
+          },
+          "controlesPresencas": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ControlePresencaDto"
             }
           }
         }
@@ -20266,6 +20590,74 @@
             "type": "string"
           },
           "status": {
+            "type": "boolean"
+          }
+        }
+      },
+      "EventosFilterDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "pageNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fomentoId": {
+            "type": "string",
+            "nullable": true
+          },
+          "estado": {
+            "type": "string",
+            "nullable": true
+          },
+          "municipioId": {
+            "type": "string",
+            "nullable": true
+          },
+          "localidadeId": {
+            "type": "string",
+            "nullable": true
+          },
+          "eventos": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/PaginatedListOfEventoDto"
+              }
+            ]
+          }
+        }
+      },
+      "PaginatedListOfEventoDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EventoDto"
+            }
+          },
+          "pageNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "hasPreviousPage": {
+            "type": "boolean"
+          },
+          "hasNextPage": {
             "type": "boolean"
           }
         }
@@ -23579,41 +23971,6 @@
           "questao": {
             "type": "integer",
             "format": "int32"
-          }
-        }
-      },
-      "ResponsavelDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nome": {
-            "type": "string"
-          },
-          "cpf": {
-            "type": "string"
-          },
-          "telefone": {
-            "type": "string"
-          },
-          "email": {
-            "type": "string",
-            "nullable": true
-          },
-          "status": {
-            "type": "boolean"
-          },
-          "grauParentescoId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "nomeGrauParentesco": {
-            "type": "string",
-            "nullable": true
           }
         }
       },

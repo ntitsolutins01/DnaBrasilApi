@@ -5,6 +5,8 @@ using DnaBrasilApi.Application.Eventos.Queries;
 using DnaBrasilApi.Application.Eventos.Queries.GetEventoById;
 using DnaBrasilApi.Application.Eventos.Queries.GetEventosAll;
 using DnaBrasilApi.Application.Eventos.Queries.GetEventosByMesAno;
+using DnaBrasilApi.Application.Eventos.Queries.GetEventosByFilter;
+using Microsoft.AspNetCore.Mvc;
 
 namespace DnaBrasilApi.Web.Endpoints;
 
@@ -24,7 +26,8 @@ public class Eventos : EndpointGroupBase
             .MapPut(UpdateEvento, "{id}")
             .MapDelete(DeleteEvento, "{id}")
             .MapGet(GetEventoById, "{id}")
-            .MapGet(GetEventosByMesAno, "Mes/{mes}/Ano/{ano}");
+            .MapGet(GetEventosByMesAno, "Mes/{mes}/Ano/{ano}")
+            .MapPost(GetEventosByFilter, "Filter");
     }
     #endregion
 
@@ -100,6 +103,21 @@ public class Eventos : EndpointGroupBase
     public async Task<List<EventoDto>> GetEventosByMesAno(ISender sender, int mes, int ano)
     {
         return await sender.Send(new GetEventosByMesAnoQuery() { Mes = mes, Ano = ano });
+    }
+
+    /// <summary>
+    /// Endpoint que busca Eventos por Filtro
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="search">Filtro para pesquisa de Eventos</param>
+    /// <returns>Retorna a lista de Eventos por Filtro</returns>
+    public async Task<EventosFilterDto> GetEventosByFilter(ISender sender, [FromBody] EventosFilterDto search)
+    {
+        var result = await sender.Send(new GetEventosByFilterQuery() { SearchFilter = search });
+
+        search.Eventos = result;
+
+        return search;
     }
     #endregion
 }

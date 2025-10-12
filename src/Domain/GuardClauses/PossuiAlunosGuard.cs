@@ -14,4 +14,11 @@ public static class PossuiAlunosGuard
         if (input)
             throw new ArgumentException("Esta localidade não pode ser excluída pois possui alunos vinculados, para excluílo.");
     }
+    public static void PossuiAlunosEtapasEnsino(this IGuardClause guardClause, bool input)
+    {
+        if (input)
+            throw new ArgumentException("Esta etapa de ensino não pode ser excluída pois possui alunos vinculados às suas séries.");
+    }
+
+
 }

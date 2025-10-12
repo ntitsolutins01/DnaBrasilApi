@@ -8,4 +8,5 @@ public class Responsavel : BaseAuditableEntity
     public string? Email { get; set; }
     public required GrauParentesco GrauParentesco { get; set; }
     public bool Status { get; set; } = true;
+    public IList<Aluno>? Alunos { get; set; }
 }

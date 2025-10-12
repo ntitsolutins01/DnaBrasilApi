@@ -36,6 +36,10 @@ public record UpdateAlunoCommand : IRequest<bool>
     public int? ProfissionalId { get; set; }
     public string? ModalidadesIds { get; init; }
     public int? SerieId { get; init; }
+    public required string NomeResponsavel { get; init; }
+    public required int GrauParentescoId { get; init; }
+    public required string CpfResponsavel { get; init; }
+    public required string TelefoneResponsavel { get; init; }
 }
 
 public class UpdateAlunoCommandHandler : IRequestHandler<UpdateAlunoCommand, bool>
@@ -58,7 +62,7 @@ public class UpdateAlunoCommandHandler : IRequestHandler<UpdateAlunoCommand, boo
 
         if (request.DeficienciaId.HasValue && request.DeficienciaId.Value > 0)
         {
-            deficiencia = await _context.Deficiencias.FindAsync(new object[] { request.DeficienciaId }, cancellationToken);
+            deficiencia = await _context.Deficiencias.FindAsync([request.DeficienciaId], cancellationToken);
             Guard.Against.NotFound(request.DeficienciaId.Value, deficiencia);
         }
 
@@ -66,7 +70,7 @@ public class UpdateAlunoCommandHandler : IRequestHandler<UpdateAlunoCommand, boo
 
         if (request.MunicipioId != null)
         {
-            municipio = await _context.Municipios.FindAsync(new object[] { request.MunicipioId }, cancellationToken);
+            municipio = await _context.Municipios.FindAsync([request.MunicipioId], cancellationToken);
 
             Guard.Against.NotFound((int)request.MunicipioId, municipio);
         }
@@ -75,7 +79,7 @@ public class UpdateAlunoCommandHandler : IRequestHandler<UpdateAlunoCommand, boo
 
         if (request.LocalidadeId != null)
         {
-            localidade = await _context.Localidades.FindAsync(new object[] { request.LocalidadeId }, cancellationToken);
+            localidade = await _context.Localidades.FindAsync([request.LocalidadeId], cancellationToken);
 
             Guard.Against.NotFound((int)request.LocalidadeId, localidade);
         }
@@ -84,7 +88,7 @@ public class UpdateAlunoCommandHandler : IRequestHandler<UpdateAlunoCommand, boo
 
         if (request.ProfissionalId != null)
         {
-            profissional = await _context.Profissionais.FindAsync(new object[] { request.ProfissionalId }, cancellationToken);
+            profissional = await _context.Profissionais.FindAsync([request.ProfissionalId], cancellationToken);
 
             Guard.Against.NotFound((int)request.ProfissionalId, profissional);
         }
@@ -93,7 +97,7 @@ public class UpdateAlunoCommandHandler : IRequestHandler<UpdateAlunoCommand, boo
 
         if (request.LinhaAcaoId != null)
         {
-            linhaAcao = await _context.LinhasAcoes.FindAsync(new object[] { request.LinhaAcaoId }, cancellationToken);
+            linhaAcao = await _context.LinhasAcoes.FindAsync([request.LinhaAcaoId], cancellationToken);
 
             Guard.Against.NotFound((int)request.LinhaAcaoId, profissional);
         }
@@ -102,10 +106,22 @@ public class UpdateAlunoCommandHandler : IRequestHandler<UpdateAlunoCommand, boo
 
         if (request.SerieId != null)
         {
-            serie = await _context.Series.FindAsync(new object[] { request.SerieId }, cancellationToken);
+            serie = await _context.Series.FindAsync([request.SerieId], cancellationToken);
 
             Guard.Against.NotFound((int)request.SerieId, serie);
         }
+
+        var grauParentesco = await _context.GrauParentescos.FindAsync([request.GrauParentescoId], cancellationToken);
+
+        Guard.Against.NotFound(request.GrauParentescoId, grauParentesco);
+
+        Responsavel responsavel = new()
+        {
+            Nome = request.NomeResponsavel,
+            Cpf = request.CpfResponsavel,
+            Telefone = request.TelefoneResponsavel,
+            GrauParentesco = grauParentesco
+        };
 
         entity.AspNetUserId = request.AspNetUserId;
         entity.Nome = request.Nome!;
@@ -144,6 +160,7 @@ public class UpdateAlunoCommandHandler : IRequestHandler<UpdateAlunoCommand, boo
 
         entity.AlunoModalidades = listAlunoModalidades;
         entity.Serie = serie;
+        entity.Responsavel = responsavel;
 
         var result = await _context.SaveChangesAsync(cancellationToken);
 

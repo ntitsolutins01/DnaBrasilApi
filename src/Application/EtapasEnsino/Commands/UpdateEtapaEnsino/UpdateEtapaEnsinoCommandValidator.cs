@@ -9,6 +9,6 @@ public class UpdateEtapaEnsinoCommandValidator : AbstractValidator<UpdateEtapaEn
             .NotEmpty();
 
         RuleFor(v => v.Status)
-            .NotNull().NotEmpty();
+            .NotNull();
     }
 }
