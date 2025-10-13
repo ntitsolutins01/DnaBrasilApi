@@ -12,7 +12,7 @@ public class TipoLaudoConfiguration : IEntityTypeConfiguration<TipoLaudo>
             .HasMaxLength(100)
             .IsRequired();
         builder.Property(t => t.Descricao)
-            .HasMaxLength(300);
+            .HasMaxLength(650);
         builder.Property(t => t.IdadeMinima)
             .IsRequired();
     }
