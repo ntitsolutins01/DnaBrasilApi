@@ -6,7 +6,7 @@ using DnaBrasilApi.Application.RespostasEad.Commands.UpdateRespostaEad;
 using DnaBrasilApi.Application.RespostasEad.Queries;
 using DnaBrasilApi.Application.RespostasEad.Queries.GetRespostaEadById;
 using DnaBrasilApi.Application.RespostasEad.Queries.GetRespostasEadAll;
-using DnaBrasilApi.Application.RespostasEad.Queries.GetRespostasEadsByQuestaoEadId;
+using DnaBrasilApi.Application.RespostasEad.Queries.GetRespostasEadByQuestaoEadId;
 
 namespace DnaBrasilApi.Web.Endpoints;
 /// <summary>
@@ -29,7 +29,7 @@ public class RespostasEad : EndpointGroupBase
             .MapPut(UpdateRespostaEad, "{id}")
             .MapDelete(DeleteRespostaEad, "{id}")
             .MapGet(GetRespostaEadById, "{id}")
-            .MapGet(GetRespostasEadsByQuestaoEadId, "/QuestaoEad/{questaoEadId}");
+            .MapGet(GetRespostasEadByQuestaoEadId, "/QuestaoEad/{questaoEadId}");
     }
     #endregion
 
@@ -101,7 +101,7 @@ public class RespostasEad : EndpointGroupBase
     /// <param name="sender">Sender</param>
     /// <param name="questaoEadId">Id da questão</param>
     /// <returns>Retorna uma lista de Respostas</returns>
-    public async Task<List<RespostaEadDto>> GetRespostasEadsByQuestaoEadId(ISender sender, int questaoEadId)
+    public async Task<List<RespostaEadDto>> GetRespostasEadByQuestaoEadId(ISender sender, int questaoEadId)
     {
         return await sender.Send(new GetRespostasEadByQuestaoEadIdQuery() { QuestaoEadId = questaoEadId });
     }

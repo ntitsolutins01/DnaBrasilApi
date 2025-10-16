@@ -11567,7 +11567,7 @@
         "tags": [
           "RespostasEad"
         ],
-        "operationId": "GetRespostasEadsByQuestaoEadId",
+        "operationId": "GetRespostasEadByQuestaoEadId",
         "parameters": [
           {
             "name": "questaoEadId",
